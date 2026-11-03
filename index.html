@@ -133,7 +133,7 @@
       <div class="formgrid">
         <label>Date<input type="date" id="fDate" required></label>
         <label>Type<select id="fType"><option>Lesson</option><option>Fuel</option><option>Other Expense</option><option>Note</option><option>Insurance</option><option>Repair</option></select></label>
-        <label class="lessonfield">Student<input id="fStudent" list="studentOptions" placeholder="Student name"><datalist id="studentOptions"></datalist></label>
+        <label class="lessonfield">Student name or number<input id="fStudent" list="studentOptions" placeholder="Name or phone number" autocomplete="off"><datalist id="studentOptions"></datalist></label>
         <label class="lessonfield">Start time<input type="time" id="fStart" value="10:00"></label>
         <label class="lessonfield">End time<input type="time" id="fEnd" value="11:00"></label>
         <label class="lessonfield">Hourly rate (€)<input type="number" id="fRate" min="0" step=".01" value="20"></label>
@@ -176,7 +176,7 @@
     </form>
   </dialog>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.9</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.10</span></footer>
   <script src="prayer-times.js"></script>
   <script src="app.js"></script>
 </body>
