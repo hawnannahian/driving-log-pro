@@ -6,6 +6,7 @@
 - Student add/edit/delete
 - Calendar: মাসের ক্যালেন্ডার, দিনের বুক করা সময় ও আসন্ন লেসন
 - ছাত্রের হিসাব পেজ, এক চাপে Paid, backup রিমাইন্ডার এবং Overview-তে আজকের লেসন
+- সাপ্তাহিক লেসন, অগ্রিম প্যাকেজ, মাসিক চার্ট, রিপোর্ট PDF এবং প্রতি কিলোমিটারে জ্বালানি খরচ
 - Income, expense, profit, unpaid এবং lesson hours report
 - This month / This year / All time filter
 - Log CSV ও Students CSV import (duplicate skip)

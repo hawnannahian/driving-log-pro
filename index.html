@@ -106,6 +106,17 @@
         <article class="report"><span>Unpaid</span><strong id="rUnpaid">€0.00</strong></article>
         <article class="report"><span>Lesson hours</span><strong id="rHours">0.00</strong></article>
         <article class="report"><span>Number of records</span><strong id="rCount">0</strong></article>
+        <article class="report"><span>Distance (odometer)</span><strong id="rKm">–</strong></article>
+        <article class="report"><span>Fuel cost per km</span><strong id="rFuelKm">–</strong></article>
+        <article class="report"><span>Prepaid, not yet used</span><strong id="rPrepaid">€0.00</strong></article>
+      </div>
+      <button class="btn secondary reportpdf" id="exportPdf">Download report PDF</button>
+      <div class="chartbox hidden" id="chartBox">
+        <h3>Last 12 months</h3>
+        <div class="chartlegend"><span><i class="swatch barincome"></i>Income</span><span><i class="swatch barexpense"></i>Expenses</span></div>
+        <svg id="chartSvg" viewBox="0 0 360 170" role="img" aria-label="Monthly income and expenses"></svg>
+        <p class="chartreadout" id="chartReadout"></p>
+        <details><summary>Show as table</summary><table class="charttable" id="chartTable"></table></details>
       </div>
       <div class="dataactions">
         <div class="data-card"><h3>Import workbook data</h3><p>Import Log and Students CSV files separately. Duplicate records are skipped.</p>
@@ -138,8 +149,10 @@
         <label class="lessonfield">End time<input type="time" id="fEnd" value="11:00"></label>
         <label class="lessonfield">Hourly rate (€)<input type="number" id="fRate" min="0" step=".01" value="20"></label>
         <label>Cost (€)<input type="number" id="fCost" min="0" step=".01" value="0"></label>
-        <label>Kilometres<input type="number" id="fKm" min="0" step=".1" value="0"></label>
+        <label>Odometer (km)<input type="number" id="fKm" min="0" step=".1" value="0"></label>
         <label class="lessonfield checklabel"><input type="checkbox" id="fPaid"> Paid</label>
+        <label class="lessonfield checklabel wide hidden" id="fPackageRow"><input type="checkbox" id="fPackage"> <span id="fPackageText">Use package</span></label>
+        <label class="hidden" id="fRepeatRow">Repeat every week<select id="fRepeat"><option value="1">No repeat</option><option value="2">2 weeks</option><option value="4">4 weeks</option><option value="8">8 weeks</option><option value="12">12 weeks</option></select></label>
         <label class="wide">Comment<textarea id="fComment" rows="2"></textarea></label>
       </div>
       <p id="recordError" class="formerror" role="alert"></p>
@@ -158,9 +171,23 @@
       </div>
       <div class="dialogactions profileactions"><button type="button" class="btn ghost" id="profileEdit">Edit student</button><button type="button" class="btn primary" id="profileAdd">＋ Add lesson</button></div>
       <div class="dialogactions profileactions"><a class="btn secondary hidden" id="waLesson" target="_blank" rel="noopener">WhatsApp: lesson</a><a class="btn secondary hidden" id="waPay" target="_blank" rel="noopener">WhatsApp: payment</a></div>
+      <div class="pkghead"><h3>Packages</h3><button type="button" class="btn ghost" id="profilePkgAdd">＋ Add package</button></div>
+      <div id="profilePkgs" class="recordlist"></div>
       <h3 class="caltitle">Lesson history</h3>
       <div id="profileList" class="recordlist empty"></div>
     </div>
+  </dialog>
+
+  <dialog id="packageDialog">
+    <form method="dialog" id="packageForm">
+      <div class="dialoghead"><div><p class="eyebrow">PREPAID PACKAGE</p><h2>Add package</h2></div><button type="button" class="iconbtn" data-close aria-label="Close">×</button></div>
+      <div class="formgrid">
+        <label class="wide">Date paid<input type="date" id="pkgDate" required></label>
+        <label>Hours<input type="number" id="pkgHours" min="0.5" step="0.5" required></label>
+        <label>Amount paid (€)<input type="number" id="pkgAmount" min="0" step=".01" required></label>
+      </div>
+      <div class="dialogactions"><span></span><button type="button" class="btn ghost" data-close>Cancel</button><button type="submit" class="btn primary" id="pkgSave">Save package</button></div>
+    </form>
   </dialog>
 
   <dialog id="studentDialog">
@@ -176,7 +203,7 @@
     </form>
   </dialog>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.10</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.11</span></footer>
   <script src="prayer-times.js"></script>
   <script src="app.js"></script>
 </body>
