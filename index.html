@@ -25,6 +25,7 @@
       <div><p class="eyebrow">YOUR BUSINESS, ORGANIZED</p><h1>Dashboard</h1><p class="muted">Track lessons, students and money in one place.</p></div>
       <button class="btn primary" id="newLessonBtn">＋ New record</button>
     </section>
+    <section class="backupbanner hidden" id="backupBanner"><span id="backupText"></span><button class="btn primary" id="backupNowBtn">Back up now</button></section>
     <section class="stats" id="stats">
       <article class="stat"><span>Income this month</span><strong id="incomeStat">€0.00</strong><small>Up to today</small></article>
       <article class="stat"><span>Expenses this month</span><strong id="expenseStat">€0.00</strong><small>Business costs</small></article>
@@ -41,6 +42,9 @@
     </nav>
 
     <section class="panel tabpanel" id="overview">
+      <h2 class="todayhead" id="todayTitle">Today</h2>
+      <div id="todayList" class="recordlist empty">No lessons today.</div>
+      <div class="todaygap"></div>
       <div class="sectionhead"><div><h2>Recent activity</h2><p class="muted">Your latest business records</p></div><button class="btn ghost" data-goto="log">View all →</button></div>
       <div id="recentList" class="recordlist empty">No records yet. Add a lesson or import your workbook data.</div>
     </section>
@@ -118,6 +122,21 @@
     </form>
   </dialog>
 
+  <dialog id="profileDialog">
+    <div class="dialogbody">
+      <div class="dialoghead"><div><p class="eyebrow">STUDENT</p><h2 id="profileName"></h2><p class="muted" id="profilePhone"></p></div><button type="button" class="iconbtn" data-close aria-label="Close">×</button></div>
+      <div class="profilestats">
+        <article class="report"><span>Total hours</span><strong id="pHours">0.0</strong></article>
+        <article class="report"><span>Total income</span><strong id="pIncome">€0.00</strong></article>
+        <article class="report"><span>Unpaid</span><strong id="pUnpaid">€0.00</strong></article>
+        <article class="report"><span>Lessons</span><strong id="pCount">0</strong></article>
+      </div>
+      <div class="dialogactions profileactions"><button type="button" class="btn ghost" id="profileEdit">Edit student</button><button type="button" class="btn primary" id="profileAdd">＋ Add lesson</button></div>
+      <h3 class="caltitle">Lesson history</h3>
+      <div id="profileList" class="recordlist empty"></div>
+    </div>
+  </dialog>
+
   <dialog id="studentDialog">
     <form method="dialog" id="studentForm">
       <div class="dialoghead"><div><p class="eyebrow">STUDENT DIRECTORY</p><h2 id="studentTitle">Add student</h2></div><button type="button" class="iconbtn" data-close aria-label="Close">×</button></div>
@@ -131,7 +150,7 @@
     </form>
   </dialog>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.2</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.3</span></footer>
   <script src="app.js"></script>
 </body>
 </html>

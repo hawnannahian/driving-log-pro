@@ -5,6 +5,7 @@
 - Lesson, Fuel, Other Expense, Note, Insurance, Repair record add/edit/delete
 - Student add/edit/delete
 - Calendar: মাসের ক্যালেন্ডার, দিনের বুক করা সময় ও আসন্ন লেসন
+- ছাত্রের হিসাব পেজ, এক চাপে Paid, backup রিমাইন্ডার এবং Overview-তে আজকের লেসন
 - Income, expense, profit, unpaid এবং lesson hours report
 - This month / This year / All time filter
 - Log CSV ও Students CSV import (duplicate skip)
