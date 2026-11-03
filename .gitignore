@@ -1,0 +1,10 @@
+# Private business data must never be committed to this public repository.
+migration/
+*.csv
+*.xlsx
+*.xls
+*.ods
+*.zip
+*Backup*.json
+*backup*.json
+.DS_Store

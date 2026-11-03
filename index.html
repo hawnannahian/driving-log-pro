@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#101c33">
+  <meta name="description" content="Driving Log Pro — personal driving school management">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Driving Log Pro">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
+  <title>Driving Log Pro</title>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><div class="brandmark">DL</div><div><b>Driving Log Pro</b><small>Driving school manager</small></div></div>
+    <button id="installBtn" class="btn ghost hidden">Install app</button>
+  </header>
+  <main>
+    <section class="welcome">
+      <div><p class="eyebrow">YOUR BUSINESS, ORGANIZED</p><h1>Dashboard</h1><p class="muted">Track lessons, students and money in one place.</p></div>
+      <button class="btn primary" id="newLessonBtn">＋ New record</button>
+    </section>
+    <section class="stats" id="stats">
+      <article class="stat"><span>Income this month</span><strong id="incomeStat">€0.00</strong><small>Completed lessons</small></article>
+      <article class="stat"><span>Expenses this month</span><strong id="expenseStat">€0.00</strong><small>Business costs</small></article>
+      <article class="stat"><span>Unpaid lessons</span><strong id="unpaidStat">€0.00</strong><small>This month</small></article>
+      <article class="stat"><span>Lesson hours</span><strong id="hoursStat">0.0</strong><small>This month</small></article>
+    </section>
+
+    <nav class="tabs" aria-label="Main navigation">
+      <button class="tab active" data-tab="overview">Overview</button>
+      <button class="tab" data-tab="log">Driving log</button>
+      <button class="tab" data-tab="students">Students</button>
+      <button class="tab" data-tab="reports">Reports & data</button>
+    </nav>
+
+    <section class="panel tabpanel" id="overview">
+      <div class="sectionhead"><div><h2>Recent activity</h2><p class="muted">Your latest business records</p></div><button class="btn ghost" data-goto="log">View all →</button></div>
+      <div id="recentList" class="recordlist empty">No records yet. Add a lesson or import your workbook data.</div>
+    </section>
+
+    <section class="panel tabpanel hidden" id="log">
+      <div class="sectionhead wrap"><div><h2>Driving log</h2><p class="muted">Lessons, fuel and other expenses</p></div><button class="btn primary" id="addRecordBtn">＋ Add record</button></div>
+      <div class="toolbar"><input id="logSearch" type="search" placeholder="Search student, type or comment"><select id="logFilter"><option value="all">All records</option><option value="Lesson">Lessons</option><option value="expense">Expenses</option><option value="unpaid">Unpaid lessons</option></select></div>
+      <div id="logList" class="recordlist empty">No records yet.</div>
+    </section>
+
+    <section class="panel tabpanel hidden" id="students">
+      <div class="sectionhead"><div><h2>Students</h2><p class="muted">Your student directory</p></div><button class="btn primary" id="addStudentBtn">＋ Add student</button></div>
+      <div class="toolbar"><input id="studentSearch" type="search" placeholder="Search students"></div>
+      <div id="studentList" class="studentgrid empty">No students yet.</div>
+    </section>
+
+    <section class="panel tabpanel hidden" id="reports">
+      <div class="sectionhead"><div><h2>Reports & data</h2><p class="muted">Review results and manage backups</p></div></div>
+      <div class="toolbar"><select id="period" aria-label="Report type"><option value="month">Monthly</option><option value="year">Yearly</option><option value="all">All time</option></select><select id="periodValue" aria-label="Report period"></select></div>
+      <div class="reportgrid">
+        <article class="report"><span>Income</span><strong id="rIncome">€0.00</strong></article>
+        <article class="report"><span>Expenses</span><strong id="rExpenses">€0.00</strong></article>
+        <article class="report"><span>Profit</span><strong id="rProfit">€0.00</strong></article>
+        <article class="report"><span>Unpaid</span><strong id="rUnpaid">€0.00</strong></article>
+        <article class="report"><span>Lesson hours</span><strong id="rHours">0.00</strong></article>
+        <article class="report"><span>Number of records</span><strong id="rCount">0</strong></article>
+      </div>
+      <div class="dataactions">
+        <div class="data-card"><h3>Import workbook data</h3><p>Import Log and Students CSV files separately. Duplicate records are skipped.</p>
+          <label class="btn secondary">Import Log CSV<input type="file" id="importLog" accept=".csv,text/csv"></label>
+          <label class="btn secondary">Import Students CSV<input type="file" id="importStudents" accept=".csv,text/csv"></label>
+          <p class="hint">Files stay on this device. Nothing is uploaded. Use only Log_Import.csv and Students_Import.csv, not the old archive.</p>
+        </div>
+        <div class="data-card"><h3>Backup & restore</h3><p>Download backups regularly. Records are stored in this browser on this device.</p>
+          <button class="btn secondary" id="exportAll">Export full backup (JSON)</button>
+          <label class="btn secondary">Restore backup<input type="file" id="restoreBackup" accept=".json,application/json"></label>
+          <button class="btn secondary" id="exportLog">Export Log CSV</button>
+          <button class="btn secondary" id="exportStudents">Export Students CSV</button>
+          <button class="btn danger" id="clearData">Delete all app data</button>
+        </div>
+      </div>
+      <p class="notice"><b>Privacy note:</b> This version stores data locally in your browser. It does not automatically sync between your iPhone and PC. Export a backup before changing or clearing browser data.</p>
+    </section>
+  </main>
+
+  <dialog id="recordDialog">
+    <form method="dialog" id="recordForm">
+      <div class="dialoghead"><div><p class="eyebrow">DRIVING LOG</p><h2 id="recordTitle">New record</h2></div><button type="button" class="iconbtn" data-close aria-label="Close">×</button></div>
+      <input type="hidden" id="recordId">
+      <div class="formgrid">
+        <label>Date<input type="date" id="fDate" required></label>
+        <label>Type<select id="fType"><option>Lesson</option><option>Fuel</option><option>Other Expense</option><option>Note</option><option>Insurance</option><option>Repair</option></select></label>
+        <label class="lessonfield">Student<input id="fStudent" list="studentOptions" placeholder="Student name"><datalist id="studentOptions"></datalist></label>
+        <label class="lessonfield">Start time<input type="time" id="fStart" value="10:00"></label>
+        <label class="lessonfield">End time<input type="time" id="fEnd" value="11:00"></label>
+        <label class="lessonfield">Hourly rate (€)<input type="number" id="fRate" min="0" step=".01" value="20"></label>
+        <label>Cost (€)<input type="number" id="fCost" min="0" step=".01" value="0"></label>
+        <label>Kilometres<input type="number" id="fKm" min="0" step=".1" value="0"></label>
+        <label class="lessonfield checklabel"><input type="checkbox" id="fPaid"> Paid</label>
+        <label class="wide">Comment<textarea id="fComment" rows="2"></textarea></label>
+      </div>
+      <p id="recordError" class="formerror" role="alert"></p>
+      <div class="dialogactions"><button type="button" class="btn danger hidden" id="deleteRecord">Delete</button><span></span><button type="button" class="btn ghost" data-close>Cancel</button><button type="submit" class="btn primary" id="saveRecord">Save record</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="studentDialog">
+    <form method="dialog" id="studentForm">
+      <div class="dialoghead"><div><p class="eyebrow">STUDENT DIRECTORY</p><h2 id="studentTitle">Add student</h2></div><button type="button" class="iconbtn" data-close aria-label="Close">×</button></div>
+      <input type="hidden" id="studentId">
+      <div class="formgrid">
+        <label class="wide">Name<input id="sName" required></label>
+        <label class="wide">Phone<input id="sPhone" type="tel"></label>
+        <label class="wide">Notes<textarea id="sNotes" rows="3"></textarea></label>
+      </div>
+      <div class="dialogactions"><button type="button" class="btn danger hidden" id="deleteStudent">Delete</button><span></span><button type="button" class="btn ghost" data-close>Cancel</button><button type="submit" class="btn primary">Save student</button></div>
+    </form>
+  </dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.1</span></footer>
+  <script src="app.js"></script>
+</body>
+</html>
