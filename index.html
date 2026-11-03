@@ -26,7 +26,7 @@
       <button class="btn primary" id="newLessonBtn">＋ New record</button>
     </section>
     <section class="stats" id="stats">
-      <article class="stat"><span>Income this month</span><strong id="incomeStat">€0.00</strong><small>Completed lessons</small></article>
+      <article class="stat"><span>Income this month</span><strong id="incomeStat">€0.00</strong><small>Up to today</small></article>
       <article class="stat"><span>Expenses this month</span><strong id="expenseStat">€0.00</strong><small>Business costs</small></article>
       <article class="stat"><span>Unpaid lessons</span><strong id="unpaidStat">€0.00</strong><small>This month</small></article>
       <article class="stat"><span>Lesson hours</span><strong id="hoursStat">0.0</strong><small>This month</small></article>
@@ -34,6 +34,7 @@
 
     <nav class="tabs" aria-label="Main navigation">
       <button class="tab active" data-tab="overview">Overview</button>
+      <button class="tab" data-tab="calendar">Calendar</button>
       <button class="tab" data-tab="log">Driving log</button>
       <button class="tab" data-tab="students">Students</button>
       <button class="tab" data-tab="reports">Reports & data</button>
@@ -42,6 +43,17 @@
     <section class="panel tabpanel" id="overview">
       <div class="sectionhead"><div><h2>Recent activity</h2><p class="muted">Your latest business records</p></div><button class="btn ghost" data-goto="log">View all →</button></div>
       <div id="recentList" class="recordlist empty">No records yet. Add a lesson or import your workbook data.</div>
+    </section>
+
+    <section class="panel tabpanel hidden" id="calendar">
+      <div class="sectionhead"><div><h2>Calendar</h2><p class="muted">Tap a day to see its booked hours</p></div></div>
+      <div class="calhead"><button class="iconbtn" id="calPrev" aria-label="Previous month">‹</button><b id="calTitle"></b><button class="iconbtn" id="calNext" aria-label="Next month">›</button></div>
+      <div class="calweek"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
+      <div class="calgrid" id="calGrid"></div>
+      <div class="sectionhead caltitle"><h3 id="calDayTitle"></h3><button class="btn primary" id="calAddBtn">＋ Add lesson</button></div>
+      <div id="calDayList" class="recordlist empty"></div>
+      <h3 class="caltitle">Upcoming lessons</h3>
+      <div id="upcomingList" class="recordlist empty"></div>
     </section>
 
     <section class="panel tabpanel hidden" id="log">
@@ -119,7 +131,7 @@
     </form>
   </dialog>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.1</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.2</span></footer>
   <script src="app.js"></script>
 </body>
 </html>
