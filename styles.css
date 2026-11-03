@@ -9,3 +9,5 @@
 .prayerrow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 13px;border-radius:12px;background:#f1eefb;color:#4b3a8f;font-size:13px}.prayerrow span{font-weight:700;white-space:nowrap}.prayerbox{margin-top:22px;padding:13px;border:1px solid var(--line);border-radius:12px}.prayerbox summary{cursor:pointer;font-weight:700;font-size:14px;min-height:24px}.prayerbox .formgrid{margin-top:14px}.prayerbox .hint{margin:12px 0 0;color:var(--muted)}
 
 .freegrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.freeslot{display:flex;flex-direction:column;gap:3px;align-items:flex-start;padding:10px 12px;min-height:50px;border:1px solid #cfe9dc;border-radius:12px;background:#ecf8f2;color:var(--green);font:inherit;cursor:pointer}.freeslot b{font-size:13px}.freeslot small{font-size:11px;font-weight:600}
+
+.profileactions:not(:has(.btn:not(.hidden))){display:none}
