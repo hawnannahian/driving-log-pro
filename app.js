@@ -29,14 +29,14 @@ async function backupNow(){const done=await download("DrivingLogPro_Backup.json"
 let profileId=null;
 function renderProfile(){const s=state.students.find(x=>x.id===profileId);if(!s){$("profileDialog").close();return;}const list=state.entries.filter(e=>e.type==="Lesson"&&sameName(e.student,s.name)).sort((a,b)=>(b.date+(b.start||"")).localeCompare(a.date+(a.start||""))),t=totals(list);$("profileName").textContent=s.name;$("profilePhone").textContent=s.phone||"No phone number";$("pHours").textContent=t.hours.toFixed(1);$("pIncome").textContent=euro(t.income);$("pUnpaid").textContent=euro(t.unpaid);$("pCount").textContent=list.length;$("profileList").className="recordlist"+(list.length?"":" empty");$("profileList").innerHTML=list.map(e=>bookingHTML(e,true)).join("")||"No lessons yet.";}
 function openProfile(id){profileId=id;renderProfile();if(!$("profileDialog").open)$("profileDialog").showModal();bindRecords();}
-const PRAYER_DEFAULT={on:true,minutes:30,fajr:"06:15",duhr:"13:15",jumua:"14:00",asr:"16:15",maghrib:"17:42",isha:"21:00"};
+const PRAYER_DEFAULT={on:true,auto:true,minutes:30,fajr:"06:00",duhr:"14:00",jumua:"13:45",asr:"16:15",maghrib:"17:46",isha:"19:15"};
 const prayerCfg=()=>({...PRAYER_DEFAULT,...(state.prayer||{})});
 const toMin=t=>{const[a,b]=t.split(":").map(Number);return a*60+b;};
 const fromMin=m=>`${String(Math.floor(m/60)%24).padStart(2,"0")}:${String(m%60).padStart(2,"0")}`;
-function prayerBlocks(iso){const p=prayerCfg();if(!p.on)return[];const friday=new Date(iso+"T12:00:00").getDay()===5,len=Number(p.minutes)||30;return[["Fajr",p.fajr],friday?["Jum'a",p.jumua]:["Duhr",p.duhr],["Asr",p.asr],["Maghrib",p.maghrib],["Isha",p.isha]].filter(x=>x[1]).map(([name,start])=>({name,start,end:fromMin(toMin(start)+len)}));}
+function prayerBlocks(iso){const p=prayerCfg();if(!p.on)return[];const friday=new Date(iso+"T12:00:00").getDay()===5,len=Number(p.minutes)||30,row=p.auto?PRAYER_YEAR[+iso.slice(5,7)-1]?.[+iso.slice(8,10)-1]?.split(" "):null,[f,u,a,m,i]=row||[p.fajr,p.duhr,p.asr,p.maghrib,p.isha];return[["Fajr",f],friday?["Jum'a",p.jumua]:["Duhr",u],["Asr",a],["Maghrib",m],["Isha",i]].filter(x=>x[1]).map(([name,start])=>({name,start,end:fromMin(toMin(start)+len)}));}
 function agendaHTML(iso,lessons){const items=[...lessons.map(e=>({t:e.start||"",h:bookingHTML(e,false)})),...prayerBlocks(iso).map(b=>({t:b.start,h:`<div class="prayerrow"><b>${esc(b.name)}</b><span>${b.start}–${b.end}</span></div>`}))];return items.sort((a,b)=>a.t.localeCompare(b.t)).map(x=>x.h).join("");}
-function fillPrayerForm(){const p=prayerCfg();$("pOn").checked=!!p.on;$("pMinutes").value=p.minutes;["fajr","duhr","jumua","asr","maghrib","isha"].forEach(k=>$("p_"+k).value=p[k]||"");}
-function savePrayer(){const p={on:$("pOn").checked,minutes:num($("pMinutes").value)||30};["fajr","duhr","jumua","asr","maghrib","isha"].forEach(k=>p[k]=$("p_"+k).value);state.prayer=p;save();toast("Prayer times saved");}
+function fillPrayerForm(){const p=prayerCfg();$("pOn").checked=!!p.on;$("pAuto").checked=!!p.auto;document.querySelectorAll(".manualprayer").forEach(el=>el.classList.toggle("hidden",!!p.auto));$("pMinutes").value=p.minutes;["fajr","duhr","jumua","asr","maghrib","isha"].forEach(k=>$("p_"+k).value=p[k]||"");}
+function savePrayer(){const p={on:$("pOn").checked,auto:$("pAuto").checked,minutes:num($("pMinutes").value)||30};["fajr","duhr","jumua","asr","maghrib","isha"].forEach(k=>p[k]=$("p_"+k).value);state.prayer=p;save();fillPrayerForm();toast("Prayer times saved");}
 const cal={y:new Date().getFullYear(),m:new Date().getMonth(),day:dateISO(new Date())};
 const timeText = e => e.start&&e.end?`${e.start}–${e.end}`:"No time set";
 const dayName = iso => new Date(iso+"T12:00:00").toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"});
@@ -96,7 +96,7 @@ document.querySelectorAll("[data-goto]").forEach(b=>b.onclick=()=>switchTab(b.da
 function moveMonth(n){const d=new Date(cal.y,cal.m+n,1);cal.y=d.getFullYear();cal.m=d.getMonth();renderCalendar();bindRecords();}
 function switchTab(id){document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===id));document.querySelectorAll(".tabpanel").forEach(p=>p.classList.toggle("hidden",p.id!==id));}
 document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>b.closest("dialog").close());
-["pOn","pMinutes","p_fajr","p_duhr","p_jumua","p_asr","p_maghrib","p_isha"].forEach(id=>$(id).addEventListener("change",savePrayer));
+["pOn","pAuto","pMinutes","p_fajr","p_duhr","p_jumua","p_asr","p_maghrib","p_isha"].forEach(id=>$(id).addEventListener("change",savePrayer));
 $("newLessonBtn").onclick=newRecord;$("addRecordBtn").onclick=newRecord;$("calAddBtn").onclick=()=>newRecord(cal.day);$("calPrev").onclick=()=>moveMonth(-1);$("calNext").onclick=()=>moveMonth(1);$("addStudentBtn").onclick=newStudent;$("fType").onchange=toggleLessonFields;
 ["logSearch","logFilter","studentSearch","period","periodValue"].forEach(id=>$(id).addEventListener("input",render));
 let installPrompt;$("installBtn").onclick=async()=>{if(installPrompt){installPrompt.prompt();installPrompt=null;}};

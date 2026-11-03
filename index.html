@@ -62,15 +62,16 @@
         <summary>Prayer time settings</summary>
         <div class="formgrid">
           <label class="checklabel wide"><input type="checkbox" id="pOn"> Show and protect prayer times</label>
+          <label class="checklabel wide"><input type="checkbox" id="pAuto"> Use the yearly timetable (changes every day)</label>
           <label>Minutes for each prayer<input type="number" id="pMinutes" min="5" max="120" step="5"></label>
-          <label>Fajr<input type="time" id="p_fajr"></label>
-          <label>Duhr<input type="time" id="p_duhr"></label>
           <label>Jum'a (Friday)<input type="time" id="p_jumua"></label>
-          <label>Asr<input type="time" id="p_asr"></label>
-          <label>Maghrib<input type="time" id="p_maghrib"></label>
-          <label>Isha<input type="time" id="p_isha"></label>
+          <label class="manualprayer">Fajr<input type="time" id="p_fajr"></label>
+          <label class="manualprayer">Duhr<input type="time" id="p_duhr"></label>
+          <label class="manualprayer">Asr<input type="time" id="p_asr"></label>
+          <label class="manualprayer">Maghrib<input type="time" id="p_maghrib"></label>
+          <label class="manualprayer">Isha<input type="time" id="p_isha"></label>
         </div>
-        <p class="hint">Saved on this device. Update these when the times change.</p>
+        <p class="hint">Blocks start at the jamaat time. To enter your own times, turn off the yearly timetable.</p>
       </details>
     </section>
 
@@ -164,7 +165,8 @@
     </form>
   </dialog>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.4</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.5</span></footer>
+  <script src="prayer-times.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
