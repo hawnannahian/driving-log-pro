@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; object-src 'none'; base-uri 'self'; form-action 'self'">
   <meta name="theme-color" content="#101c33">
   <meta name="description" content="Driving Log Pro — personal driving school management">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -21,6 +22,9 @@
     <button id="installBtn" class="btn ghost hidden">Install app</button>
   </header>
   <main>
+    <section class="backupbanner savebanner hidden" id="saveBanner" role="alert"><span>Your last change could not be saved on this device (storage is full or blocked). Download a backup now so nothing is lost.</span><button class="btn danger" id="saveBannerBtn">Download backup</button></section>
+    <section class="backupbanner updatebanner hidden" id="updateBanner"><span>A new version of the app is ready.</span><button class="btn primary" id="updateBtn">Reload</button></section>
+    <section class="backupbanner overviewonly hidden" id="iosBanner"><span>On iPhone, add this app to the Home Screen (Share → Add to Home Screen). Otherwise Safari may erase your records if you do not open the app for 7 days.</span><button class="btn ghost" id="iosBannerClose">OK</button></section>
     <section class="welcome overviewonly"><h1>Dashboard</h1></section>
     <section class="backupbanner overviewonly hidden" id="backupBanner"><span id="backupText"></span><button class="btn primary" id="backupNowBtn">Back up now</button></section>
     <section class="stats overviewonly" id="stats">
@@ -128,14 +132,17 @@
           <button class="btn secondary" id="exportLog">Export Log CSV</button>
           <button class="btn secondary" id="exportStudents">Export Students CSV</button>
           <button class="btn danger" id="clearData">Delete all app data</button>
+          <p class="hint" id="storageNote"></p>
         </div>
+        <div class="data-card hidden" id="recoveryBox"><h3>Safety copies</h3><p>Copies the app kept automatically before a restore or the first cloud sync.</p><div id="recoveryList" class="recoverylist"></div></div>
       </div>
       <div class="data-card cloudcard">
         <h3>Cloud sync</h3>
         <p id="cloudStatus">Not connected.</p>
         <div id="cloudForm" class="cloudform">
-          <label>Private repository<input id="cloudRepo" value="hawnannahian/driving-log-data" autocomplete="off" autocapitalize="off" spellcheck="false"></label>
+          <label>Private repository<input id="cloudRepo" placeholder="your-name/driving-log-data" autocomplete="off" autocapitalize="off" spellcheck="false"></label>
           <label>GitHub token<input id="cloudToken" type="password" autocomplete="off" autocapitalize="off" spellcheck="false"></label>
+          <p class="hint">Use a fine-grained token that can only reach this one private repository, with "Contents: Read and write" and nothing else. The token is kept in this browser.</p>
           <button class="btn primary" id="cloudConnect">Connect</button>
         </div>
         <div id="cloudOn" class="cloudform hidden"><button class="btn secondary" id="cloudNow">Sync now</button><button class="btn ghost" id="cloudDisconnect">Disconnect this device</button></div>
@@ -208,6 +215,7 @@
         <label class="wide">Phone<input id="sPhone" type="tel"></label>
         <label class="wide">Notes<textarea id="sNotes" rows="3"></textarea></label>
       </div>
+      <p id="studentError" class="formerror" role="alert"></p>
       <div class="dialogactions"><button type="button" class="btn danger hidden" id="deleteStudent">Delete</button><span></span><button type="button" class="btn ghost" data-close>Cancel</button><button type="submit" class="btn primary">Save student</button></div>
     </form>
   </dialog>
@@ -222,7 +230,7 @@
     <button class="tab" data-tab="reports"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20v-7M12 20V5M19 20v-10"/></svg><span>Reports</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.13</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.14</span></footer>
   <script src="prayer-times.js"></script>
   <script src="app.js"></script>
 </body>
