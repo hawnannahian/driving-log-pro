@@ -29,7 +29,7 @@ async function backupNow(){const done=await download("DrivingLogPro_Backup.json"
 let profileId=null;
 function renderProfile(){const s=state.students.find(x=>x.id===profileId);if(!s){$("profileDialog").close();return;}const list=state.entries.filter(e=>e.type==="Lesson"&&sameName(e.student,s.name)).sort((a,b)=>(b.date+(b.start||"")).localeCompare(a.date+(a.start||""))),t=totals(list);$("profileName").textContent=s.name;$("profilePhone").textContent=s.phone||"No phone number";$("pHours").textContent=t.hours.toFixed(1);$("pIncome").textContent=euro(t.income);$("pUnpaid").textContent=euro(t.unpaid);$("pCount").textContent=list.length;$("profileList").className="recordlist"+(list.length?"":" empty");$("profileList").innerHTML=list.map(e=>bookingHTML(e,true)).join("")||"No lessons yet.";}
 function openProfile(id){profileId=id;renderProfile();if(!$("profileDialog").open)$("profileDialog").showModal();bindRecords();}
-const PRAYER_DEFAULT={on:true,auto:true,minutes:30,fajr:"06:00",duhr:"14:00",jumua:"13:45",asr:"16:15",maghrib:"17:46",isha:"19:15"};
+const PRAYER_DEFAULT={on:true,auto:true,minutes:30,fajr:"06:15",duhr:"13:15",jumua:"14:00",asr:"16:15",maghrib:"17:42",isha:"21:00"};
 const prayerCfg=()=>({...PRAYER_DEFAULT,...(state.prayer||{})});
 const toMin=t=>{const[a,b]=t.split(":").map(Number);return a*60+b;};
 const fromMin=m=>`${String(Math.floor(m/60)%24).padStart(2,"0")}:${String(m%60).padStart(2,"0")}`;
