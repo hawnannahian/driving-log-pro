@@ -37,6 +37,13 @@ function prayerBlocks(iso){const p=prayerCfg();if(!p.on)return[];const friday=ne
 function agendaHTML(iso,lessons){const items=[...lessons.map(e=>({t:e.start||"",h:bookingHTML(e,false)})),...prayerBlocks(iso).map(b=>({t:b.start,h:`<div class="prayerrow"><b>${esc(b.name)}</b><span>${b.start}–${b.end}</span></div>`}))];return items.sort((a,b)=>a.t.localeCompare(b.t)).map(x=>x.h).join("");}
 function fillPrayerForm(){const p=prayerCfg();$("pOn").checked=!!p.on;$("pAuto").checked=!!p.auto;document.querySelectorAll(".manualprayer").forEach(el=>el.classList.toggle("hidden",!!p.auto));$("pMinutes").value=p.minutes;["fajr","duhr","jumua","asr","maghrib","isha"].forEach(k=>$("p_"+k).value=p[k]||"");}
 function savePrayer(){const p={on:$("pOn").checked,auto:$("pAuto").checked,minutes:num($("pMinutes").value)||30};["fajr","duhr","jumua","asr","maghrib","isha"].forEach(k=>p[k]=$("p_"+k).value);state.prayer=p;save();fillPrayerForm();toast("Prayer times saved");}
+const WORK_DEFAULT={start:"08:00",end:"22:00"},MIN_FREE=30;
+const workCfg=()=>({...WORK_DEFAULT,...(state.work||{})});
+function freeSlots(iso){const w=workCfg(),now=new Date();let from=toMin(w.start);const to=toMin(w.end);if(iso===dateISO(now))from=Math.max(from,now.getHours()*60+now.getMinutes());const busy=[...lessonsOn(iso).filter(e=>e.start&&e.end).map(e=>[toMin(e.start),toMin(e.end)<=toMin(e.start)?1440:toMin(e.end)]),...prayerBlocks(iso).map(b=>[toMin(b.start),toMin(b.end)])].sort((a,b)=>a[0]-b[0]),out=[];let at=from;for(const[s,e]of busy){if(s-at>=MIN_FREE&&s<=to)out.push([at,s]);else if(s>to&&to-at>=MIN_FREE){out.push([at,to]);at=to;break;}at=Math.max(at,e);}if(to-at>=MIN_FREE&&at<to&&(!out.length||out.at(-1)[1]<=at))out.push([at,to]);return out.filter(([a,b])=>b-a>=MIN_FREE);}
+const lengthText=m=>`${Math.floor(m/60)?Math.floor(m/60)+"h ":""}${m%60?m%60+"m":""}`.trim();
+function renderFree(){const past=cal.day<dateISO(new Date());$("calFreeWrap").classList.toggle("hidden",past);if(past)return;const slots=freeSlots(cal.day);$("calFree").innerHTML=slots.map(([a,b])=>`<button class="freeslot" data-free="${a}-${b}"><b>${fromMin(a)}–${fromMin(b)}</b><small>${lengthText(b-a)}</small></button>`).join("")||`<p class="muted">No free time left on this day.</p>`;document.querySelectorAll("[data-free]").forEach(x=>x.onclick=()=>{const[a,b]=x.dataset.free.split("-").map(Number);newRecord(cal.day);$("fStart").value=fromMin(a);$("fEnd").value=fromMin(Math.min(a+60,b));});}
+function fillWorkForm(){const w=workCfg();$("wStart").value=w.start;$("wEnd").value=w.end;}
+function saveWork(){if(!$("wStart").value||!$("wEnd").value)return;state.work={start:$("wStart").value,end:$("wEnd").value};save();toast("Working hours saved");}
 const cal={y:new Date().getFullYear(),m:new Date().getMonth(),day:dateISO(new Date())};
 const timeText = e => e.start&&e.end?`${e.start}–${e.end}`:"No time set";
 const dayName = iso => new Date(iso+"T12:00:00").toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"});
@@ -45,7 +52,7 @@ function bookingHTML(e,withDate){return payWrap(e,`<button class="record" data-r
 function renderCalendar(){const first=new Date(cal.y,cal.m,1),count=new Date(cal.y,cal.m+1,0).getDate(),pad=(first.getDay()+6)%7,today=dateISO(new Date());$("calTitle").textContent=first.toLocaleDateString("en-GB",{month:"long",year:"numeric"});
  const hrs={};state.entries.forEach(e=>{if(e.type==="Lesson")hrs[e.date]=(hrs[e.date]||0)+Math.max(hours(e),.01);});
  let html="<span></span>".repeat(pad);for(let d=1;d<=count;d++){const iso=dateISO(new Date(cal.y,cal.m,d)),n=lessonsOn(iso).length;html+=`<button class="calday${iso===today?" today":""}${iso===cal.day?" selected":""}${n?" busy":""}" data-day="${iso}" aria-label="${esc(dayName(iso))}: ${n} lessons"><b>${d}</b><small>${n?`${n} · ${(hrs[iso]||0).toFixed(1)}h`:""}</small></button>`;}
- $("calGrid").innerHTML=html;$("calDayTitle").textContent=dayName(cal.day);const list=lessonsOn(cal.day);const agenda=agendaHTML(cal.day,list);$("calDayList").className="recordlist"+(agenda?"":" empty");$("calDayList").innerHTML=agenda||"No lessons booked. This day is free.";
+ $("calGrid").innerHTML=html;$("calDayTitle").textContent=dayName(cal.day);renderFree();const list=lessonsOn(cal.day);const agenda=agendaHTML(cal.day,list);$("calDayList").className="recordlist"+(agenda?"":" empty");$("calDayList").innerHTML=agenda||"No lessons booked. This day is free.";
  const up=state.entries.filter(e=>e.type==="Lesson"&&e.date>=today).sort((a,b)=>(a.date+(a.start||"")).localeCompare(b.date+(b.start||"")));$("upcomingList").className="recordlist"+(up.length?"":" empty");$("upcomingList").innerHTML=up.slice(0,30).map(e=>bookingHTML(e,true)).join("")||"No upcoming lessons.";
  document.querySelectorAll("[data-day]").forEach(b=>b.onclick=()=>{cal.day=b.dataset.day;renderCalendar();bindRecords();});}
 function bindRecords(){document.querySelectorAll("[data-record]").forEach(b=>b.onclick=()=>openRecord(b.dataset.record));document.querySelectorAll("[data-pay]").forEach(b=>b.onclick=()=>markPaid(b.dataset.pay));}
@@ -89,7 +96,7 @@ $("exportAll").onclick=backupNow;$("backupNowBtn").onclick=backupNow;
 $("profileEdit").onclick=()=>{const id=profileId;$("profileDialog").close();openStudent(id);};
 $("profileAdd").onclick=()=>{const s=state.students.find(x=>x.id===profileId);newRecord(undefined,s?.name);};
 $("exportLog").onclick=exportLog;$("exportStudents").onclick=exportStudents;
-$("restoreBackup").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(!Array.isArray(d.entries)||!Array.isArray(d.students)||!d.entries.every(x=>x&&x.id&&/^\d{4}-\d{2}-\d{2}$/.test(x.date)&&typeof x.type==="string")||!d.students.every(x=>x&&x.id&&typeof x.name==="string"))throw Error("Invalid backup");if(confirm("Replace current app data with this backup?")){state={entries:d.entries,students:d.students};if(d.prayer)state.prayer=d.prayer;fillPrayerForm();save();toast("Backup restored");}}catch(err){toast("Could not restore backup: "+err.message);}e.target.value="";};
+$("restoreBackup").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(!Array.isArray(d.entries)||!Array.isArray(d.students)||!d.entries.every(x=>x&&x.id&&/^\d{4}-\d{2}-\d{2}$/.test(x.date)&&typeof x.type==="string")||!d.students.every(x=>x&&x.id&&typeof x.name==="string"))throw Error("Invalid backup");if(confirm("Replace current app data with this backup?")){state={entries:d.entries,students:d.students};if(d.prayer)state.prayer=d.prayer;if(d.work)state.work=d.work;fillPrayerForm();fillWorkForm();save();toast("Backup restored");}}catch(err){toast("Could not restore backup: "+err.message);}e.target.value="";};
 $("clearData").onclick=()=>{if(confirm("Permanently delete all Driving Log Pro data from this browser? Export a backup first.")){state={entries:[],students:[]};save();toast("All local data deleted");}};
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>switchTab(b.dataset.tab));
 document.querySelectorAll("[data-goto]").forEach(b=>b.onclick=()=>switchTab(b.dataset.goto));
@@ -97,9 +104,10 @@ function moveMonth(n){const d=new Date(cal.y,cal.m+n,1);cal.y=d.getFullYear();ca
 function switchTab(id){document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===id));document.querySelectorAll(".tabpanel").forEach(p=>p.classList.toggle("hidden",p.id!==id));}
 document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>b.closest("dialog").close());
 ["pOn","pAuto","pMinutes","p_fajr","p_duhr","p_jumua","p_asr","p_maghrib","p_isha"].forEach(id=>$(id).addEventListener("change",savePrayer));
+["wStart","wEnd"].forEach(id=>$(id).addEventListener("change",saveWork));
 $("newLessonBtn").onclick=newRecord;$("addRecordBtn").onclick=newRecord;$("calAddBtn").onclick=()=>newRecord(cal.day);$("calPrev").onclick=()=>moveMonth(-1);$("calNext").onclick=()=>moveMonth(1);$("addStudentBtn").onclick=newStudent;$("fType").onchange=toggleLessonFields;
 ["logSearch","logFilter","studentSearch","period","periodValue"].forEach(id=>$(id).addEventListener("input",render));
 let installPrompt;$("installBtn").onclick=async()=>{if(installPrompt){installPrompt.prompt();installPrompt=null;}};
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();installPrompt=e;$("installBtn").classList.remove("hidden");});
 if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
-load();fillPrayerForm();
+load();fillPrayerForm();fillWorkForm();

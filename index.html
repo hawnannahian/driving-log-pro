@@ -56,8 +56,17 @@
       <div class="calgrid" id="calGrid"></div>
       <div class="sectionhead caltitle"><h3 id="calDayTitle"></h3><button class="btn primary" id="calAddBtn">＋ Add lesson</button></div>
       <div id="calDayList" class="recordlist empty"></div>
+      <div id="calFreeWrap"><h3 class="caltitle">Free time</h3><div id="calFree" class="freegrid"></div></div>
       <h3 class="caltitle">Upcoming lessons</h3>
       <div id="upcomingList" class="recordlist empty"></div>
+      <details class="prayerbox">
+        <summary>Working hours</summary>
+        <div class="formgrid">
+          <label>Start<input type="time" id="wStart"></label>
+          <label>End<input type="time" id="wEnd"></label>
+        </div>
+        <p class="hint">Free time is shown inside these hours. Gaps under 30 minutes are hidden.</p>
+      </details>
       <details class="prayerbox">
         <summary>Prayer time settings</summary>
         <div class="formgrid">
@@ -165,7 +174,7 @@
     </form>
   </dialog>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.6</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.7</span></footer>
   <script src="prayer-times.js"></script>
   <script src="app.js"></script>
 </body>
