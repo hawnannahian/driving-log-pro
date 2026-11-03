@@ -18,6 +18,9 @@
 - iPhone-এর Safari-তে তৈরি ডেটা Windows PC-তে নিজে থেকে আসবে না।
 - Browser data clear করলে data হারাতে পারে।
 - নিয়মিত Reports & data থেকে JSON backup ডাউনলোড করুন।
+- Restore করার আগে এবং প্রথম Cloud sync-এর আগে অ্যাপ নিজে থেকে একটি safety copy রাখে। Reports & data → Safety copies থেকে সেটা ডাউনলোড বা ফেরত আনা যায়।
+- iPhone-এ অবশ্যই Home Screen-এ যোগ করে ব্যবহার করুন। শুধু Safari-তে খুললে ৭ দিন ব্যবহার না করলে Safari ডেটা মুছে দিতে পারে।
+- Cloud sync-এর জন্য fine-grained token ব্যবহার করুন, যেটা শুধু data repository-তে "Contents: Read and write" অনুমতি পায়।
 - Reports & data-র Cloud sync চালু করলে ডেটার কপি আপনার private GitHub repository-তে থাকে। Token কোডে রাখবেন না, শুধু অ্যাপের ঘরে লিখবেন।
 
 ## Windows PC-তে চালানো
