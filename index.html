@@ -133,7 +133,17 @@
           <button class="btn danger" id="clearData">Delete all app data</button>
         </div>
       </div>
-      <p class="notice"><b>Privacy note:</b> This version stores data locally in your browser. It does not automatically sync between your iPhone and PC. Export a backup before changing or clearing browser data.</p>
+      <div class="data-card cloudcard">
+        <h3>Cloud sync</h3>
+        <p id="cloudStatus">Not connected.</p>
+        <div id="cloudForm" class="cloudform">
+          <label>Private repository<input id="cloudRepo" value="hawnannahian/driving-log-data" autocomplete="off" autocapitalize="off" spellcheck="false"></label>
+          <label>GitHub token<input id="cloudToken" type="password" autocomplete="off" autocapitalize="off" spellcheck="false"></label>
+          <button class="btn primary" id="cloudConnect">Connect</button>
+        </div>
+        <div id="cloudOn" class="cloudform hidden"><button class="btn secondary" id="cloudNow">Sync now</button><button class="btn ghost" id="cloudDisconnect">Disconnect this device</button></div>
+      </div>
+      <p class="notice"><b>Privacy note:</b> Records are stored in this browser. With Cloud sync on, a copy is also kept in your private GitHub repository. Keep exporting backups.</p>
     </section>
   </main>
 
@@ -203,7 +213,7 @@
     </form>
   </dialog>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.11</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.12</span></footer>
   <script src="prayer-times.js"></script>
   <script src="app.js"></script>
 </body>

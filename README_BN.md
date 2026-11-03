@@ -18,7 +18,7 @@
 - iPhone-এর Safari-তে তৈরি ডেটা Windows PC-তে নিজে থেকে আসবে না।
 - Browser data clear করলে data হারাতে পারে।
 - নিয়মিত Reports & data থেকে JSON backup ডাউনলোড করুন।
-- এই সংস্করণে online database, login, automatic cloud sync নেই।
+- Reports & data-র Cloud sync চালু করলে ডেটার কপি আপনার private GitHub repository-তে থাকে। Token কোডে রাখবেন না, শুধু অ্যাপের ঘরে লিখবেন।
 
 ## Windows PC-তে চালানো
 সাধারণভাবে `index.html` ডাবল-ক্লিক করে UI দেখা যায়, তবে PWA/offline service worker কাজ করতে HTTPS বা localhost লাগে। সহজ local test:
