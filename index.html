@@ -58,6 +58,20 @@
       <div id="calDayList" class="recordlist empty"></div>
       <h3 class="caltitle">Upcoming lessons</h3>
       <div id="upcomingList" class="recordlist empty"></div>
+      <details class="prayerbox">
+        <summary>Prayer time settings</summary>
+        <div class="formgrid">
+          <label class="checklabel wide"><input type="checkbox" id="pOn"> Show and protect prayer times</label>
+          <label>Minutes for each prayer<input type="number" id="pMinutes" min="5" max="120" step="5"></label>
+          <label>Fajr<input type="time" id="p_fajr"></label>
+          <label>Duhr<input type="time" id="p_duhr"></label>
+          <label>Jum'a (Friday)<input type="time" id="p_jumua"></label>
+          <label>Asr<input type="time" id="p_asr"></label>
+          <label>Maghrib<input type="time" id="p_maghrib"></label>
+          <label>Isha<input type="time" id="p_isha"></label>
+        </div>
+        <p class="hint">Saved on this device. Update these when the times change.</p>
+      </details>
     </section>
 
     <section class="panel tabpanel hidden" id="log">
@@ -150,7 +164,7 @@
     </form>
   </dialog>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.3</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.4</span></footer>
   <script src="app.js"></script>
 </body>
 </html>
