@@ -54,7 +54,6 @@ const WORK_DEFAULT={start:"08:00",end:"22:00"},MIN_FREE=30;
 const workCfg=()=>{const w={...WORK_DEFAULT,...(state.work&&typeof state.work==="object"?state.work:{})};return{start:cleanTime(w.start)||WORK_DEFAULT.start,end:cleanTime(w.end)||WORK_DEFAULT.end};};
 function freeSlots(iso){const w=workCfg(),now=new Date();let from=toMin(w.start);const to=toMin(w.end);if(iso===dateISO(now))from=Math.max(from,now.getHours()*60+now.getMinutes());const busy=[...lessonsOn(iso).filter(e=>e.start&&e.end).map(e=>[toMin(e.start),toMin(e.end)<=toMin(e.start)?1440:toMin(e.end)]),...prayerBlocks(iso).map(b=>[toMin(b.start),toMin(b.end)])].sort((a,b)=>a[0]-b[0]),out=[];let at=from;for(const[s,e]of busy){if(s-at>=MIN_FREE&&s<=to)out.push([at,s]);else if(s>to&&to-at>=MIN_FREE){out.push([at,to]);at=to;break;}at=Math.max(at,e);}if(to-at>=MIN_FREE&&at<to&&(!out.length||out.at(-1)[1]<=at))out.push([at,to]);return out.filter(([a,b])=>b-a>=MIN_FREE);}
 const lengthText=m=>`${Math.floor(m/60)?Math.floor(m/60)+"h ":""}${m%60?m%60+"m":""}`.trim();
-function renderFree(){const past=cal.day<dateISO(new Date());$("calFreeWrap").classList.toggle("hidden",past);if(past)return;const slots=freeSlots(cal.day);$("calFree").innerHTML=slots.map(([a,b])=>`<button class="freeslot" data-free="${a}-${b}"><b>${fromMin(a)}–${fromMin(b)}</b><small>${lengthText(b-a)}</small></button>`).join("")||`<p class="muted">No free time left on this day.</p>`;document.querySelectorAll("[data-free]").forEach(x=>x.onclick=()=>{const[a,b]=x.dataset.free.split("-").map(Number);newRecord(cal.day);$("fStart").value=fromMin(a);$("fEnd").value=fromMin(Math.min(a+60,b));});}
 function fillWorkForm(){const w=workCfg();$("wStart").value=w.start;$("wEnd").value=w.end;}
 function saveWork(){if(!$("wStart").value||!$("wEnd").value)return;state.work={start:$("wStart").value,end:$("wEnd").value};save();toast("Working hours saved");}
 function applyCleanup(d){if(d?.type!=="driving-log-pro-cleanup"||!Array.isArray(d.merge)||!d.merge.every(g=>typeof g.into==="string"&&g.into.trim()&&Array.isArray(g.from)))throw Error("not a clean-up file");let lessons=0,merged=0,removed=0,phones=0;
@@ -117,17 +116,75 @@ function startTimer(min,label){try{audioCtx=audioCtx||new AudioContext();audioCt
 function timerPauseToggle(){if(!timer)return;if(timer.paused!=null){timer.endAt=Date.now()+timer.paused;timer.paused=null;keepAwake();}else{timer.paused=timerLeft();dropAwake();}timerSave();renderTimer();}
 function timerAdd(){if(!timer)return;const m=3e5;if(timer.done){timer.endAt=Date.now()+m;timer.total=m;timer.done=false;keepAwake();}else{timer.total+=m;if(timer.paused!=null)timer.paused+=m;else timer.endAt+=m;}timerSave();renderTimer();}
 function timerStop(){if(timer&&!timer.done&&!confirm("Stop the timer?"))return;timer=null;timerSave();dropAwake();renderTimer();}
-const cal={y:new Date().getFullYear(),m:new Date().getMonth(),day:dateISO(new Date())};
+const cal={y:new Date().getFullYear(),m:new Date().getMonth(),day:dateISO(new Date()),view:"month"};
+try{cal.view=["month","week","day"].includes(localStorage.getItem(DB_KEY+"-calview"))?localStorage.getItem(DB_KEY+"-calview"):"month";}catch{}
 const timeText = e => e.start&&e.end?`${e.start}–${e.end}`:"No time set";
 const dayName = iso => new Date(iso+"T12:00:00").toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"});
 const lessonsOn = iso => state.entries.filter(e=>e.type==="Lesson"&&e.date===iso).sort((a,b)=>(a.start||"").localeCompare(b.start||""));
 function bookingHTML(e,withDate){return payWrap(e,`<button class="record" data-record="${esc(e.id)}"><span class="recordicon booktime">${esc(e.start||"–")}</span><span class="recordmain"><b>${esc(e.student||"Lesson")}</b><small>${withDate?esc(dayName(e.date))+" · ":""}${esc(timeText(e))} · ${hours(e).toFixed(2)} hours</small></span><span class="recordvalue">${euro(income(e))}<small class="${e.paid?"paid":"unpaid"}">${e.paid?"Paid":"Unpaid"}</small></span></button>`);}
-function renderCalendar(){const first=new Date(cal.y,cal.m,1),count=new Date(cal.y,cal.m+1,0).getDate(),pad=(first.getDay()+6)%7,today=dateISO(new Date());$("calTitle").textContent=first.toLocaleDateString("en-GB",{month:"long",year:"numeric"});
- $("calToday").classList.toggle("hidden",cal.y===new Date().getFullYear()&&cal.m===new Date().getMonth());
- let html="<span></span>".repeat(pad);for(let d=1;d<=count;d++){const iso=dateISO(new Date(cal.y,cal.m,d)),n=lessonsOn(iso).length;html+=`<button class="calday${iso===today?" today":""}${iso===cal.day?" selected":""}${n?" busy":""}${iso<today?" past":""}" data-day="${iso}" aria-label="${esc(dayName(iso))}: ${n} lessons"><b>${d}</b><i class="studs">${"<em></em>".repeat(Math.min(n,4))}</i></button>`;}
- $("calGrid").innerHTML=html;$("calDayTitle").textContent=dayName(cal.day);renderFree();const list=lessonsOn(cal.day);const agenda=agendaHTML(cal.day,list);$("calDayList").className="recordlist"+(agenda?"":" empty");$("calDayList").innerHTML=agenda||"No lessons booked. This day is free.";
- const up=state.entries.filter(e=>e.type==="Lesson"&&e.date>=today).sort((a,b)=>(a.date+(a.start||"")).localeCompare(b.date+(b.start||"")));$("upcomingList").className="recordlist"+(up.length?"":" empty");$("upcomingList").innerHTML=up.slice(0,30).map(e=>bookingHTML(e,true)).join("")||"No upcoming lessons.";
- document.querySelectorAll("[data-day]").forEach(b=>b.onclick=()=>{cal.day=b.dataset.day;renderCalendar();bindRecords();});}
+// Portuguese public holidays, plus Santo António for Lisbon. Easter by the Gregorian computus.
+function easter(y){const a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),n=h+l-7*m+114;return new Date(y,Math.floor(n/31)-1,n%31+1);}
+const holidayCache={};
+function holidays(y){if(holidayCache[y])return holidayCache[y];const e=easter(y),ea=n=>dateISO(new Date(e.getFullYear(),e.getMonth(),e.getDate()+n)),f=(m,d)=>`${y}-${String(m).padStart(2,"0")}-${String(d).padStart(2,"0")}`;return holidayCache[y]={[f(1,1)]:"New Year's Day",[ea(-2)]:"Good Friday",[ea(0)]:"Easter",[f(4,25)]:"Freedom Day",[f(5,1)]:"Labour Day",[ea(60)]:"Corpus Christi",[f(6,10)]:"Portugal Day",[f(6,13)]:"Santo António (Lisbon)",[f(8,15)]:"Assumption Day",[f(10,5)]:"Republic Day",[f(11,1)]:"All Saints' Day",[f(12,1)]:"Independence Day",[f(12,8)]:"Immaculate Conception",[f(12,25)]:"Christmas Day"};}
+const holidayOn=iso=>holidays(+iso.slice(0,4))[iso]||"";
+const endMin=e=>toMin(e.end)<=toMin(e.start)?1440:toMin(e.end);
+const hText=h=>(Math.round(h*10)/10).toFixed(1).replace(/\.0$/,"")+" h";
+const relDay=iso=>{const t=new Date(),d0=dateISO(t),d1=dateISO(new Date(t.getFullYear(),t.getMonth(),t.getDate()+1));return iso===d0?"Today · "+dayName(iso):iso===d1?"Tomorrow · "+dayName(iso):dayName(iso);};
+function lessonStats(list){return{n:list.length,h:list.reduce((a,e)=>a+hours(e),0),inc:list.reduce((a,e)=>a+income(e),0),un:list.filter(e=>!e.paid&&!isBooking(e)).length};}
+const statText=s=>s.n?`${s.n} lesson${s.n>1?"s":""} · ${hText(s.h)} · ${euro(s.inc)}${s.un?` · ${s.un} unpaid`:""}`:"No lessons";
+function weekDays(iso){const d=new Date(iso+"T12:00:00"),k=(d.getDay()+6)%7;return[...Array(7)].map((_,i)=>dateISO(new Date(d.getFullYear(),d.getMonth(),d.getDate()-k+i)));}
+function timeRange(isos){const w=workCfg();let a=toMin(w.start),b=toMin(w.end);for(const iso of isos)for(const e of lessonsOn(iso))if(e.start&&e.end){a=Math.min(a,toMin(e.start));b=Math.max(b,endMin(e));}return[Math.floor(a/60)*60,Math.min(1440,Math.ceil(b/60)*60)];}
+// Lessons that overlap share the width side by side.
+function lanes(list){const out=[];let group=[],ends=[],until=-1;const flush=()=>{group.forEach(x=>x.of=ends.length);out.push(...group);group=[];ends=[];};for(const e of [...list].sort((x,y)=>toMin(x.start)-toMin(y.start))){const a=toMin(e.start);if(a>=until)flush();let i=ends.findIndex(x=>x<=a);if(i<0){i=ends.length;ends.push(0);}ends[i]=endMin(e);until=Math.max(until,endMin(e));group.push({e,lane:i,of:1});}flush();return out;}
+const nowMin=()=>{const n=new Date();return n.getHours()*60+n.getMinutes();};
+// Blocks are positioned from data-pos ("top,height[,left,width]") because the page's security policy blocks inline styles.
+function placeBlocks(root){root.querySelectorAll("[data-pos]").forEach(el=>{const[t,h,l,w]=el.dataset.pos.split("|");el.style.top=t+"px";if(h)el.style.height=h+"px";if(l)el.style.left=l;if(w)el.style.width=w;});root.querySelectorAll("[data-tall]").forEach(el=>el.style.height=el.dataset.tall+"px");root.querySelectorAll("[data-rows]").forEach(el=>el.style.backgroundSize=`100% ${el.dataset.rows}px`);}
+function dayTimeline(iso){const px=.9,[a,b]=timeRange([iso]),today=dateISO(new Date()),y=m=>((m-a)*px).toFixed(1),hgt=m=>Math.max(18,m*px-2).toFixed(1);let h="";
+ for(let m=a;m<b;m+=60)h+=`<span class="tlhour" data-pos="${y(m)}">${fromMin(m)}</span>`;
+ for(const p of prayerBlocks(iso))if(toMin(p.end)>a&&toMin(p.start)<b)h+=`<div class="tlpray" data-pos="${y(toMin(p.start))}|${hgt(toMin(p.end)-toMin(p.start))}"><span>🕌 ${esc(p.name)} ${p.start}</span></div>`;
+ if(iso>=today)for(const[s,e]of freeSlots(iso))h+=`<button type="button" class="tlfree" data-free="${s}-${e}" data-pos="${y(s)}|${hgt(e-s)}"><span>Free ${fromMin(s)}–${fromMin(e)} · ${lengthText(e-s)}</span><b>＋ Book</b></button>`;
+ for(const{e,lane,of}of lanes(lessonsOn(iso).filter(x=>x.start&&x.end)))h+=`<button type="button" class="tlles ${e.pkg?"pkg":e.paid?"paid":"unpaid"}${iso<today?" past":""}" data-record="${esc(e.id)}" data-pos="${y(toMin(e.start))}|${hgt(endMin(e)-toMin(e.start))}|calc(54px + (100% - 58px) * ${lane}/${of})|calc((100% - 58px) / ${of} - 4px)"><span class="tlrow"><b>${esc(e.start)}–${esc(e.end)}</b><span>${esc(e.student||"Lesson")}</span></span><small>${e.pkg?"Package":e.paid?"Paid":"Unpaid"} · ${euro(income(e))}</small></button>`;
+ if(iso===today&&nowMin()>=a&&nowMin()<=b)h+=`<div class="tlnow" data-pos="${y(nowMin())}"><i></i></div>`;
+ return `<div class="tl" data-tall="${((b-a)*px).toFixed(0)}">${h}</div>`;}
+function weekGrid(days){const px=.55,[a,b]=timeRange(days),today=dateISO(new Date()),y=m=>((m-a)*px).toFixed(1),hgt=m=>Math.max(14,m*px-2).toFixed(1);
+ let head='<span></span>'+days.map(iso=>{const d=new Date(iso+"T12:00:00"),L=lessonsOn(iso);return `<button type="button" class="wkday${iso===cal.day?" sel":""}${iso===today?" today":""}${holidayOn(iso)?" hol":""}" data-wkday="${iso}" aria-label="${esc(dayName(iso))}"><small>${d.toLocaleDateString("en-GB",{weekday:"short"})}</small><b>${d.getDate()}</b><em>${L.length?hText(lessonStats(L).h):"–"}</em></button>`;}).join("");
+ let gut="";for(let m=a;m<b;m+=60)gut+=`<span data-pos="${y(m)}">${fromMin(m).slice(0,2)}</span>`;
+ const cols=days.map(iso=>{let c="";for(const p of prayerBlocks(iso))if(toMin(p.end)>a&&toMin(p.start)<b)c+=`<i class="wkpray" data-pos="${y(toMin(p.start))}|${hgt(toMin(p.end)-toMin(p.start))}"></i>`;for(const{e,lane,of}of lanes(lessonsOn(iso).filter(x=>x.start&&x.end)))c+=`<button type="button" class="wkles ${e.pkg?"pkg":e.paid?"paid":"unpaid"}${iso<today?" past":""}" data-record="${esc(e.id)}" data-pos="${y(toMin(e.start))}|${hgt(endMin(e)-toMin(e.start))}|calc(100% * ${lane}/${of})|calc(100% / ${of} - 2px)"><b>${esc(e.start)}</b><span>${esc((e.student||"").split(" ")[0])}</span></button>`;if(iso===today&&nowMin()>=a&&nowMin()<=b)c+=`<i class="wknow" data-pos="${y(nowMin())}"></i>`;return `<div class="wkcol${iso===cal.day?" sel":""}${holidayOn(iso)?" hol":""}" data-wkcol="${iso}" data-rows="${(60*px).toFixed(1)}">${c}</div>`;}).join("");
+ return `<div class="wkhead">${head}</div><div class="wkbody" data-tall="${((b-a)*px).toFixed(0)}"><div class="wkgut">${gut}</div>${cols}</div>`;}
+let reminded=new Set();
+function renderRemind(){const iso=cal.day,today=dateISO(new Date()),box=$("calRemind"),list=iso<today?[]:lessonsOn(iso).filter(e=>e.start&&(iso>today||toMin(e.start)>nowMin())).map(e=>{const s=state.students.find(x=>sameName(x.name,e.student));return{e,n:s?waNumber(s):null};}).filter(x=>x.n);box.classList.toggle("hidden",!list.length);if(!list.length){box.innerHTML="";return;}
+ box.innerHTML=`<p><b>📲 WhatsApp reminders</b><small>Tap each student to send the lesson message.</small></p><div class="remindlist">${list.map(({e,n})=>`<a class="remindchip${reminded.has(e.id)?" sent":""}" data-remind="${esc(e.id)}" href="${esc(waLink(n,lessonMsg(e)))}" target="_blank" rel="noopener">${reminded.has(e.id)?"✓ ":""}${esc(e.student)} · ${esc(e.start)}</a>`).join("")}</div>`;
+ box.querySelectorAll("[data-remind]").forEach(a=>a.addEventListener("click",()=>{reminded.add(a.dataset.remind);setTimeout(renderRemind,400);}));}
+function renderCalendar(){const today=dateISO(new Date()),v=cal.view,days=weekDays(cal.day),first=new Date(cal.y,cal.m,1);
+ document.querySelectorAll("[data-view]").forEach(b=>b.classList.toggle("active",b.dataset.view===v));
+ $("calMonth").classList.toggle("hidden",v!=="month");$("calWeek").classList.toggle("hidden",v!=="week");$("calDaySum").classList.toggle("hidden",v==="day");$("calDayHead").classList.toggle("dayview",v==="day");
+ const fmt=(iso,o)=>new Date(iso+"T12:00:00").toLocaleDateString("en-GB",o);
+ let period,title,atToday;
+ if(v==="month"){const key=dateISO(first).slice(0,7);period=state.entries.filter(e=>e.type==="Lesson"&&e.date.startsWith(key));title=first.toLocaleDateString("en-GB",{month:"long",year:"numeric"});atToday=today.startsWith(key);}
+ else if(v==="week"){period=state.entries.filter(e=>e.type==="Lesson"&&days.includes(e.date));title=`${fmt(days[0],{day:"numeric",month:"short"})} – ${fmt(days[6],{day:"numeric",month:"short",year:"numeric"})}`;atToday=days.includes(today);}
+ else{period=lessonsOn(cal.day);title=fmt(cal.day,{weekday:"long",day:"numeric",month:"long"});atToday=cal.day===today;}
+ $("calTitle").textContent=title;$("calToday").classList.toggle("hidden",atToday);
+ const hol=v==="day"?holidayOn(cal.day):"";$("calSum").textContent=(v==="month"?"This month: ":v==="week"?"This week: ":"")+statText(lessonStats(period))+(hol?" · 🎉 "+hol:"");
+ if(v==="month"){const count=new Date(cal.y,cal.m+1,0).getDate(),pad=(first.getDay()+6)%7;let html="<span></span>".repeat(pad);
+  for(let d=1;d<=count;d++){const iso=dateISO(new Date(cal.y,cal.m,d)),L=lessonsOn(iso),st=lessonStats(L),heat=!st.h?0:st.h<=1?1:st.h<=2.5?2:st.h<=4?3:4,hd=holidayOn(iso);
+   html+=`<button class="calday heat${heat}${iso===today?" today":""}${iso===cal.day?" selected":""}${iso<today?" past":""}${hd?" hol":""}" data-day="${iso}" aria-label="${esc(dayName(iso))}: ${st.n} lessons${hd?", "+esc(hd):""}"${hd?` title="${esc(hd)}"`:""}><b>${d}</b><span class="calcount">${st.n?st.n:""}</span><span class="caldots">${st.un?'<i class="due"></i>':""}${hd?'<i class="hol"></i>':""}</span></button>`;}
+  $("calGrid").innerHTML=html;}
+ if(v==="week"){$("calWeek").innerHTML=weekGrid(days);placeBlocks($("calWeek"));}
+ // selected day: title, summary, reminders, timeline, list
+ const L=lessonsOn(cal.day),hd=holidayOn(cal.day),free=cal.day>=today?freeSlots(cal.day).reduce((a,[x,y])=>a+y-x,0):0;
+ $("calDayTitle").textContent=relDay(cal.day);
+ $("calDaySum").textContent=statText(lessonStats(L))+(free?` · ${lengthText(free)} free`:"")+(hd?" · 🎉 "+hd:"");
+ renderRemind();
+ $("calTimeline").innerHTML=dayTimeline(cal.day);placeBlocks($("calTimeline"));
+ $("calListHead").classList.toggle("hidden",!L.length);$("calDayList").className="recordlist"+(L.length?"":" hidden");$("calDayList").innerHTML=L.map(e=>bookingHTML(e,false)).join("");
+ const up=state.entries.filter(e=>e.type==="Lesson"&&(e.date>today||(e.date===today&&(!e.end||toMin(e.end)>nowMin())))).sort((a,b)=>(a.date+(a.start||"")).localeCompare(b.date+(b.start||""))).slice(0,30);let last="";
+ $("upcomingList").className="recordlist"+(up.length?"":" empty");$("upcomingList").innerHTML=up.map(e=>{const h=e.date!==last?`<p class="uphead">${esc(relDay(e.date))}</p>`:"";last=e.date;return h+bookingHTML(e,false);}).join("")||"No upcoming lessons.";
+ document.querySelectorAll("[data-day]").forEach(b=>b.onclick=()=>{cal.day=b.dataset.day;renderCalendar();bindRecords();});
+ document.querySelectorAll("[data-wkday]").forEach(b=>b.onclick=()=>{cal.day=b.dataset.wkday;renderCalendar();bindRecords();});
+ document.querySelectorAll("[data-wkcol]").forEach(c=>c.onclick=ev=>{if(ev.target.closest("[data-record]"))return;cal.day=c.dataset.wkcol;renderCalendar();bindRecords();});
+ document.querySelectorAll("#calTimeline [data-free]").forEach(x=>x.onclick=()=>{const[a,b]=x.dataset.free.split("-").map(Number);newRecord(cal.day);$("fStart").value=fromMin(a);$("fEnd").value=fromMin(Math.min(a+60,b));syncDur();});}
+function setCalView(v){cal.view=v;try{localStorage.setItem(DB_KEY+"-calview",v);}catch{}renderCalendar();bindRecords();}
+function calMove(n){if(cal.view==="month"){moveMonth(n);return;}const d=new Date(cal.day+"T12:00:00");d.setDate(d.getDate()+(cal.view==="week"?7:1)*n);cal.day=dateISO(d);cal.y=d.getFullYear();cal.m=d.getMonth();renderCalendar();bindRecords();}
 // Next lesson that has not finished yet.
 function nextLesson(){const now=new Date(),t=dateISO(now),m=now.getHours()*60+now.getMinutes();return state.entries.filter(e=>e.type==="Lesson"&&e.start&&e.end&&(e.date>t||(e.date===t&&toMin(e.end)>m))).sort((a,b)=>(a.date+a.start).localeCompare(b.date+b.start))[0];}
 function renderNext(){const box=$("nextCard"),e=nextLesson();if(!e){box.innerHTML=`<div class="nextempty"><span><b>No upcoming lessons</b><small>Book the next lesson to see it here.</small></span><button type="button" class="btn primary" id="nextAdd">＋ Add lesson</button></div>`;$("nextAdd").onclick=()=>newRecord();return;}
@@ -140,9 +197,9 @@ function render(){const month=state.entries.filter(e=>inPeriod(e,"month")),t=tot
  const sorted=[...state.entries].sort((a,b)=>(b.date+(b.start||"")).localeCompare(a.date+(a.start||"")));
  const todayISO=dateISO(new Date()),todays=lessonsOn(todayISO);$("todayTitle").textContent="Today · "+dayName(todayISO);const todayHTML=todays.map(e=>`<div class="agendalesson">${bookingHTML(e,false)}<button type="button" class="lessontimer" data-timer="${esc(e.id)}">⏱ Start 60-minute timer</button></div>`).join("");$("todayList").className="recordlist"+(todayHTML?"":" empty");$("todayList").innerHTML=todayHTML||"No lessons today.";renderPrayerLine(todayISO);renderNext();
  $("recentList").className="recordlist"+(sorted.length?"":" empty");$("recentList").innerHTML=sorted.slice(0,5).map(recordHTML).join("")||"No records yet. Add a lesson or import your workbook data.";
- const search=($("logSearch")?.value||"").toLowerCase(),filter=$("logFilter")?.value||"all";
- const shown=sorted.filter(e=>(!search||[e.student,e.type,e.comment].join(" ").toLowerCase().includes(search))&&(filter==="all"||(filter==="expense"?e.type!=="Lesson"&&e.type!=="Note":filter==="unpaid"?e.type==="Lesson"&&!e.paid:e.type===filter)));
- $("logList").className="recordlist"+(shown.length?"":" empty");$("logList").innerHTML=shown.map(recordHTML).join("")||"No matching records.";
+ const search=($("logSearch")?.value||"").toLowerCase(),filter=search&&$("logFilter")?.value==="today"?"all":$("logFilter")?.value||"today";
+ const shown=sorted.filter(e=>(!search||[e.student,e.type,e.comment].join(" ").toLowerCase().includes(search))&&(filter==="all"||(filter==="today"?e.type==="Lesson"&&e.date===todayISO:filter==="expense"?e.type!=="Lesson"&&e.type!=="Note":filter==="unpaid"?e.type==="Lesson"&&!e.paid:e.type===filter)));
+ $("logList").className="recordlist"+(shown.length?"":" empty");$("logList").innerHTML=shown.map(recordHTML).join("")||(filter==="today"?"No lessons today. Choose All records to see older ones.":"No matching records.");
  const ss=($("studentSearch")?.value||"").toLowerCase();const students=state.students.filter(s=>[s.name,s.phone,s.notes].join(" ").toLowerCase().includes(ss));
  const due={};state.entries.forEach(e=>{if(e.type!=="Lesson"||!e.student)return;const k=e.student.trim().toLowerCase(),d=due[k]||={n:0,u:0,last:""};d.n++;if(!e.paid&&!isBooking(e))d.u+=income(e);if(e.date>d.last)d.last=e.date;});
  const dueOf=s=>due[s.name.trim().toLowerCase()]||{n:0,u:0,last:""},sort=$("studentSort")?.value||"name";
@@ -197,7 +254,7 @@ function renderRecentChips(show){const box=$("recentStudents"),names=show?recent
 $("timerStart").onclick=()=>startTimer(timerMin,"");$("timerPause").onclick=timerPauseToggle;$("timerAdd").onclick=timerAdd;$("timerStop").onclick=timerStop;
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"){renderTimer();keepAwake();}});
 $("calToday").onclick=()=>{const n=new Date();cal.y=n.getFullYear();cal.m=n.getMonth();cal.day=dateISO(n);renderCalendar();bindRecords();};
-{let sx=null;const box=$("calBoard");box.addEventListener("touchstart",e=>{sx=e.touches[0].clientX;},{passive:true});box.addEventListener("touchend",e=>{if(sx==null)return;const dx=e.changedTouches[0].clientX-sx;sx=null;if(Math.abs(dx)>60)moveMonth(dx<0?1:-1);});}
+{let sx=null;const box=$("calBoard");box.addEventListener("touchstart",e=>{sx=e.touches[0].clientX;},{passive:true});box.addEventListener("touchend",e=>{if(sx==null)return;const dx=e.changedTouches[0].clientX-sx;sx=null;if(Math.abs(dx)>60)calMove(dx<0?1:-1);});}
 $("profilePkgAdd").onclick=()=>{$("packageForm").reset();$("pkgDate").value=dateISO(new Date());$("packageDialog").showModal();};
 $("packageForm").addEventListener("submit",ev=>{ev.preventDefault();const s=state.students.find(x=>x.id===profileId),h=num($("pkgHours").value);if(!s||h<=0)return;state.packages=[...pkgs(),{id:uid(),student:s.name,date:$("pkgDate").value,hours:h,amount:num($("pkgAmount").value)}];save();$("packageDialog").close();toast("Package added");});
 $("cloudConnect").onclick=cloudConnect;$("cloudNow").onclick=()=>cloudSync();$("cloudDisconnect").onclick=()=>{if(confirm("Stop syncing on this device? Your records stay here and in the cloud."))cloudOff();};
@@ -226,7 +283,7 @@ function switchTab(id){const tabs=[...document.querySelectorAll(".tab")];tabs.fo
 document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>b.closest("dialog").close());
 ["pOn","pAuto","pMinutes","p_fajr","p_duhr","p_jumua","p_asr","p_maghrib","p_isha"].forEach(id=>$(id).addEventListener("change",savePrayer));
 ["wStart","wEnd"].forEach(id=>$(id).addEventListener("change",saveWork));
-$("newLessonBtn").onclick=newRecord;$("addRecordBtn").onclick=newRecord;$("calAddBtn").onclick=()=>newRecord(cal.day);$("calPrev").onclick=()=>moveMonth(-1);$("calNext").onclick=()=>moveMonth(1);$("addStudentBtn").onclick=newStudent;$("fType").onchange=toggleLessonFields;
+$("newLessonBtn").onclick=newRecord;$("addRecordBtn").onclick=newRecord;$("calAddBtn").onclick=()=>newRecord(cal.day);$("calPrev").onclick=()=>calMove(-1);$("calNext").onclick=()=>calMove(1);document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>setCalView(b.dataset.view));$("addStudentBtn").onclick=newStudent;$("fType").onchange=toggleLessonFields;
 ["logSearch","logFilter","studentSearch","studentSort","period","periodValue"].forEach(id=>$(id).addEventListener("input",render));
 let installPrompt;$("installBtn").onclick=async()=>{if(installPrompt){installPrompt.prompt();installPrompt=null;}};
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();installPrompt=e;$("installBtn").classList.remove("hidden");});

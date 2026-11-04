@@ -46,14 +46,23 @@
     </section>
 
     <section class="panel tabpanel hidden" id="calendar">
+      <div class="calviews" role="group" aria-label="Calendar view"><button type="button" data-view="month">Month</button><button type="button" data-view="week">Week</button><button type="button" data-view="day">Day</button></div>
       <div class="calboard" id="calBoard">
-        <div class="calhead"><button class="iconbtn" id="calPrev" aria-label="Previous month">‹</button><div class="caltitlebox"><b id="calTitle"></b><button type="button" class="caltoday hidden" id="calToday">Back to today</button></div><button class="iconbtn" id="calNext" aria-label="Next month">›</button></div>
-        <div class="calweek"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
-        <div class="calgrid" id="calGrid"></div>
+        <div class="calhead"><button class="iconbtn" id="calPrev" aria-label="Previous">‹</button><div class="caltitlebox"><b id="calTitle"></b><button type="button" class="caltoday hidden" id="calToday">Back to today</button></div><button class="iconbtn" id="calNext" aria-label="Next">›</button></div>
+        <p class="calsum" id="calSum"></p>
+        <div id="calMonth">
+          <div class="calweek"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
+          <div class="calgrid" id="calGrid"></div>
+          <div class="callegend"><span><i class="lg heat"></i>Busier day</span><span><i class="lg due"></i>Unpaid</span><span><i class="lg hol"></i>Holiday</span></div>
+        </div>
       </div>
-      <div class="sectionhead caltitle"><h3 id="calDayTitle"></h3><button class="btn primary" id="calAddBtn">＋ Add lesson</button></div>
+      <div id="calWeek" class="weekview hidden"></div>
+      <div class="sectionhead caltitle" id="calDayHead"><h3 id="calDayTitle"></h3><button class="btn primary" id="calAddBtn">＋ Add lesson</button></div>
+      <p class="daysum" id="calDaySum"></p>
+      <div class="remindbox hidden" id="calRemind"></div>
+      <div id="calTimeline" class="timeline"></div>
+      <h3 class="caltitle" id="calListHead">Lessons</h3>
       <div id="calDayList" class="recordlist empty"></div>
-      <div id="calFreeWrap"><h3 class="caltitle">Free time</h3><div id="calFree" class="freegrid"></div></div>
       <h3 class="caltitle">Upcoming lessons</h3>
       <div id="upcomingList" class="recordlist empty"></div>
       <details class="prayerbox">
@@ -83,7 +92,7 @@
 
     <section class="panel tabpanel hidden" id="log">
       <div class="sectionhead wrap"><div><h2>Driving log</h2><p class="muted">Lessons, fuel and other expenses</p></div><button class="btn primary" id="addRecordBtn">＋ Add record</button></div>
-      <div class="toolbar"><input id="logSearch" type="search" placeholder="Search student, type or comment"><select id="logFilter"><option value="all">All records</option><option value="Lesson">Lessons</option><option value="expense">Expenses</option><option value="unpaid">Unpaid lessons</option></select></div>
+      <div class="toolbar"><input id="logSearch" type="search" placeholder="Search student, type or comment"><select id="logFilter"><option value="today">Today's lessons</option><option value="all">All records</option><option value="Lesson">Lessons</option><option value="expense">Expenses</option><option value="unpaid">Unpaid lessons</option></select></div>
       <div id="logList" class="recordlist empty">No records yet.</div>
     </section>
 
@@ -231,7 +240,7 @@
     <button class="tab" data-tab="reports"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20v-7M12 20V5M19 20v-10"/></svg><span>Reports</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.16</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.17</span></footer>
   <script src="prayer-times.js"></script>
   <script src="app.js"></script>
 </body>
