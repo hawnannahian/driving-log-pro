@@ -50,3 +50,10 @@ Hours ও Income app নিজে Start/End ও Rate থেকে হিসা�
 
 ## সতর্কতা
 এটি একটি functional starter version, production-grade cloud service নয়। Multi-device sync, user authentication, server database, secure remote backup, Portuguese VAT/tax invoice, payments এবং multi-user access এখনো নেই।
+
+## v1.19: প্যাকেজ, টাইমার ও লেসন সম্পন্ন
+- **লেসন সম্পন্ন:** টাইমারে "End lesson" চাপলে আসল সময় সেভ হয়। আজকের তালিকায় "Done" চাপলে, বা লেসন ফর্মে "Lesson completed" টিক দিলেও সম্পন্ন হয়। শেষ সময় পার হলে লেসন নিজে থেকেই সম্পন্ন ধরা হয়।
+- **প্রিপেইড প্যাকেজ:** Students → ছাত্র → Packages → Add package। সম্পন্ন প্রতিটা প্যাকেজ-লেসনের ঘণ্টা সবচেয়ে পুরোনো প্যাকেজ থেকে কাটা হয়। প্যাকেজের চেয়ে বেশি চালালে বাড়তি ঘণ্টা সাধারণ (বাকি) ঘণ্টা হিসেবে দেখায়।
+- লেসন বদলালে বা মুছলে হিসাব নিজে থেকে ঠিক হয়ে যায়। একই লেসন কখনো দুবার কাটা হয় না।
+- **WhatsApp:** লেসন সম্পন্ন হলে বাংলা বার্তা তৈরি হয়, সাথে ছাত্রের মোট সম্পন্ন ঘণ্টা। পাঠানোর আগে বার্তাটা দেখে বদলানো যায়। অ্যাপ নিজে থেকে কিছু পাঠায় না।
+- v1.19 প্রথমবার খোলার আগে অ্যাপ নিজে থেকে একটা safety copy রাখে (Reports → Safety copies → "Before the v1.19 upgrade")।
