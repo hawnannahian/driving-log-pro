@@ -91,3 +91,15 @@ main{padding-bottom:150px}body.timing main{padding-bottom:220px}footer{padding-b
 #calDayHead.dayview h3{display:none}
 .tlles{padding:4px 8px;gap:2px}.tlrow{display:flex;align-items:baseline;gap:6px;min-width:0;max-width:100%}.tlrow b{flex:none;font-size:11.5px}.tlrow span{font-size:13px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
 .tlfree{border-width:1px;background:#f6fcf8;font-size:11px}
+.todayrow{display:flex;align-items:center;gap:8px;padding:8px 8px 8px 10px;border:1px solid var(--line);border-radius:14px;background:#fff;min-width:0}
+.tnum{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--navy);color:#fff;font-size:12px;font-weight:800}
+.tmain{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:1px;border:0;background:none;padding:2px 0;font:inherit;color:inherit;text-align:left;cursor:pointer}.tmain b{font-size:13px;font-variant-numeric:tabular-nums}.tmain span{font-size:14px;font-weight:700;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tstat{flex:none;font-size:11px;font-weight:800}.tstat.paid{color:var(--green)}.tstat.unpaid{color:var(--orange)}
+.tpay{flex:none;min-height:40px;padding:0 10px;border:1px solid #cfe9dc;border-radius:12px;background:#ecf8f2;color:var(--green);font:inherit;font-size:12px;font-weight:800;cursor:pointer}
+.todayrow .actbtn{width:40px;height:40px}
+.todayrow.done{opacity:.55}.todayrow.done .tnum{background:#9aa4b4}
+.calday.hol b{color:#ff7aa8;font-weight:800}
+.qwa{width:100%;min-height:48px;margin:4px 0 6px;background:#1fa855;color:#fff}
+.qhead{margin:16px 0 0;font-size:15px}
+#qPkg:empty{display:none}#qPkg{color:var(--blue)}
+@media(max-width:380px){.tstat{display:none}}
