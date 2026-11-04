@@ -53,7 +53,6 @@
         <div id="calMonth">
           <div class="calweek"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
           <div class="calgrid" id="calGrid"></div>
-          <div class="callegend"><span><i class="lg heat"></i>Busier day</span><span><i class="lg due"></i>Unpaid</span><span><i class="lg hol"></i>Holiday</span></div>
         </div>
       </div>
       <div id="calWeek" class="weekview hidden"></div>
@@ -170,7 +169,7 @@
         <p class="lessonfield formhint">Name or phone: one is enough.</p>
         <label class="lessonfield">Start time<input type="time" id="fStart" value="10:00"></label>
         <label class="lessonfield">End time<input type="time" id="fEnd" value="11:00"></label>
-        <div class="chiprow durchips lessonfield wide" id="durChips" role="group" aria-label="Lesson length"><button type="button" data-dur="60">1 h</button><button type="button" data-dur="90">1.5 h</button><button type="button" data-dur="120">2 h</button><button type="button" data-dur="180">3 h</button></div>
+        <div class="chiprow durchips lessonfield wide" id="durChips" role="group" aria-label="Lesson length"><button type="button" data-dur="30">30 m</button><button type="button" data-dur="60">1 h</button><button type="button" data-dur="90">1.5 h</button><button type="button" data-dur="120">2 h</button><button type="button" data-dur="180">3 h</button></div>
         <label class="lessonfield">Hourly rate (€)<input type="number" id="fRate" min="0" step=".01" value="20"></label>
         <label class="costfield">Cost (€)<input type="number" id="fCost" min="0" step=".01" value="0"></label>
         <label class="kmfield">Odometer (km)<input type="number" id="fKm" min="0" step=".1" value="0"></label>
@@ -216,6 +215,24 @@
     </form>
   </dialog>
 
+  <dialog id="quickDialog">
+    <form method="dialog" id="quickForm">
+      <div class="dialoghead"><div><p class="eyebrow">LESSON</p><h2 id="qName"></h2><p class="muted" id="qInfo"></p></div><button type="button" class="iconbtn" data-close aria-label="Close">×</button></div>
+      <a class="btn qwa hidden" id="qWa" target="_blank" rel="noopener">WhatsApp</a>
+      <p class="hint hidden" id="qNoPhone">No phone number saved for this student.</p>
+      <h3 class="qhead">Book another lesson</h3>
+      <div class="formgrid">
+        <label class="wide">Date<input type="date" id="qDate" required></label>
+        <label>Start time<input type="time" id="qStart" required></label>
+        <label>End time<input type="time" id="qEnd" required></label>
+        <div class="chiprow durchips wide" id="qDur" role="group" aria-label="Lesson length"><button type="button" data-qdur="30">30 m</button><button type="button" data-qdur="60">1 h</button><button type="button" data-qdur="90">1.5 h</button><button type="button" data-qdur="120">2 h</button></div>
+      </div>
+      <p class="hint" id="qPkg"></p>
+      <p id="qError" class="formerror" role="alert"></p>
+      <div class="dialogactions"><button type="button" class="btn ghost" id="qEdit">Edit this lesson</button><span></span><button type="submit" class="btn primary">Book lesson</button></div>
+    </form>
+  </dialog>
+
   <dialog id="studentDialog">
     <form method="dialog" id="studentForm">
       <div class="dialoghead"><div><p class="eyebrow">STUDENT DIRECTORY</p><h2 id="studentTitle">Add student</h2></div><button type="button" class="iconbtn" data-close aria-label="Close">×</button></div>
@@ -240,7 +257,7 @@
     <button class="tab" data-tab="reports"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20v-7M12 20V5M19 20v-10"/></svg><span>Reports</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.17</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.18</span></footer>
   <script src="prayer-times.js"></script>
   <script src="app.js"></script>
 </body>
