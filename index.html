@@ -26,17 +26,9 @@
     <section class="backupbanner updatebanner hidden" id="updateBanner"><span>A new version of the app is ready.</span><button class="btn primary" id="updateBtn">Reload</button></section>
     <section class="backupbanner overviewonly hidden" id="iosBanner"><span>On iPhone, add this app to the Home Screen (Share → Add to Home Screen). Otherwise Safari may erase your records if you do not open the app for 7 days.</span><button class="btn ghost" id="iosBannerClose">OK</button></section>
     <section class="backupbanner overviewonly hidden" id="backupBanner"><span id="backupText"></span><button class="btn primary" id="backupNowBtn">Back up now</button></section>
-    <section class="statstrip overviewonly" id="stats" aria-label="This month">
-      <div><span>Income</span><strong id="incomeStat">€0.00</strong></div>
-      <div><span>Expenses</span><strong id="expenseStat">€0.00</strong></div>
-      <div><span>Unpaid</span><strong id="unpaidStat">€0.00</strong></div>
-      <div><span>Hours</span><strong id="hoursStat">0.0</strong></div>
-      <small>This month</small>
-    </section>
 
     <section class="panel tabpanel" id="overview">
       <div id="nextCard" class="nextcard"></div>
-      <button type="button" class="btn ghost timerquick" id="timerStart">⏱ Start 60-minute timer</button>
       <h2 class="todayhead" id="todayTitle">Today</h2>
       <div id="todayList" class="recordlist empty">No lessons today.</div>
       <details class="prayerline hidden" id="prayerLine"><summary id="prayerNext"></summary><div id="prayerAll" class="recordlist"></div></details>
@@ -91,31 +83,32 @@
 
     <section class="panel tabpanel hidden" id="log">
       <div class="sectionhead wrap"><div><h2>Driving log</h2><p class="muted">Lessons, fuel and other expenses</p></div><button class="btn primary" id="addRecordBtn">＋ Add record</button></div>
-      <div class="toolbar"><input id="logSearch" type="search" placeholder="Search student, type or comment"><select id="logFilter"><option value="today">Today's lessons</option><option value="all">All records</option><option value="Lesson">Lessons</option><option value="expense">Expenses</option><option value="unpaid">Unpaid lessons</option></select></div>
+      <div class="toolbar"><input id="logSearch" type="search" placeholder="Search student, type or comment"><select id="logFilter" aria-label="Filter records"><option value="today">Today's lessons</option><option value="all">All records</option><option value="Lesson">Lessons</option><option value="expense">Expenses</option><option value="paid">Paid</option><option value="unpaid">Unpaid</option><option value="prepaid">Prepaid</option></select></div>
       <div id="logList" class="recordlist empty">No records yet.</div>
     </section>
 
     <section class="panel tabpanel hidden" id="students">
       <div class="sectionhead"><div><h2>Students</h2><p class="muted">Your student directory</p></div><button class="btn primary" id="addStudentBtn">＋ Add student</button></div>
-      <div class="toolbar"><input id="studentSearch" type="search" placeholder="Search students"><select id="studentSort" aria-label="Sort students"><option value="name">Name A–Z</option><option value="unpaid">Most unpaid</option><option value="recent">Recent lessons</option></select></div>
+      <div class="toolbar"><input id="studentSearch" type="search" placeholder="Search students"><select id="studentSort" aria-label="Sort students"><option value="joined">Recently joined</option><option value="name">Name A–Z</option><option value="lessons">Most lessons</option><option value="hours">Most completed hours</option><option value="unpaid">Outstanding balance</option></select></div>
       <div id="studentList" class="studentgrid empty">No students yet.</div>
     </section>
 
     <section class="panel tabpanel hidden" id="reports">
       <div class="sectionhead"><div><h2>Reports & data</h2><p class="muted">Review results and manage backups</p></div></div>
-      <div class="toolbar"><select id="period" aria-label="Report type"><option value="month">Monthly</option><option value="year">Yearly</option><option value="all">All time</option></select><select id="periodValue" aria-label="Report period"></select></div>
+      <div class="toolbar"><select id="period" aria-label="Report type"><option value="week">Weekly</option><option value="month" selected>Monthly</option><option value="year">Yearly</option><option value="all">All time</option></select><select id="periodValue" aria-label="Report period"></select></div>
       <div class="reportgrid">
-        <article class="report"><span>Income</span><strong id="rIncome">€0.00</strong></article>
-        <article class="report"><span>Expenses</span><strong id="rExpenses">€0.00</strong></article>
-        <article class="report"><span>Profit</span><strong id="rProfit">€0.00</strong></article>
-        <article class="report"><span>Unpaid</span><strong id="rUnpaid">€0.00</strong></article>
+        <article class="report"><span>Total income</span><strong id="rIncome">€0.00</strong></article>
+        <article class="report"><span>Total expenses</span><strong id="rExpenses">€0.00</strong></article>
+        <article class="report"><span>Net profit</span><strong id="rProfit">€0.00</strong></article>
+        <article class="report"><span>Outstanding</span><strong id="rUnpaid">€0.00</strong></article>
         <article class="report"><span>Lesson hours</span><strong id="rHours">0.00</strong></article>
         <article class="report"><span>Number of records</span><strong id="rCount">0</strong></article>
         <article class="report"><span>Distance (odometer)</span><strong id="rKm">–</strong></article>
         <article class="report"><span>Fuel cost per km</span><strong id="rFuelKm">–</strong></article>
-        <article class="report"><span>Prepaid, not yet used</span><strong id="rPrepaid">€0.00</strong></article>
+        <article class="report"><span>Prepaid balance</span><strong id="rPrepaid">€0.00</strong></article>
       </div>
-      <button class="btn secondary reportpdf" id="exportPdf">Download report PDF</button>
+      <div class="comparebox" id="compareBox"></div>
+      <button class="btn primary reportpdf" id="exportPdf">Download report PDF</button>
       <div class="chartbox hidden" id="chartBox">
         <h3>Last 12 months</h3>
         <div class="chartlegend"><span><i class="swatch barincome"></i>Income</span><span><i class="swatch barexpense"></i>Expenses</span></div>
@@ -123,6 +116,8 @@
         <p class="chartreadout" id="chartReadout"></p>
         <details><summary>Show as table</summary><table class="charttable" id="chartTable"></table></details>
       </div>
+      <div class="chartbox hidden" id="hoursBox"><h3>Lesson hours · last 12 months</h3><svg id="hoursSvg" viewBox="0 0 360 150" role="img" aria-label="Monthly lesson hours"></svg><p class="chartreadout" id="hoursReadout"></p></div>
+      <div class="chartbox hidden" id="payBox"><h3>Student payments</h3><div class="chartlegend"><span><i class="swatch barpaid"></i>Paid</span><span><i class="swatch barowed"></i>Outstanding</span></div><div id="payBars" class="paybars"></div></div>
       <div class="dataactions">
         <div class="data-card"><h3>Import workbook data</h3><p>Import Log and Students CSV files separately. Duplicate records are skipped.</p>
           <label class="btn secondary">Import Log CSV<input type="file" id="importLog" accept=".csv,text/csv"></label>
@@ -160,8 +155,8 @@
       <div class="dialoghead"><div><p class="eyebrow">DRIVING LOG</p><h2 id="recordTitle">New record</h2></div><button type="button" class="iconbtn" data-close aria-label="Close">×</button></div>
       <input type="hidden" id="recordId">
       <div class="formgrid">
-        <div class="typechips wide" id="typeChips" role="group" aria-label="Record type"><button type="button" data-type="Lesson">Lesson</button><button type="button" data-type="Fuel">Fuel</button><button type="button" data-type="Other Expense">Expense</button><button type="button" data-type="Note">Note</button><button type="button" data-type="Insurance">Insurance</button><button type="button" data-type="Repair">Repair</button></div>
-        <label class="hidden">Type<select id="fType"><option>Lesson</option><option>Fuel</option><option>Other Expense</option><option>Note</option><option>Insurance</option><option>Repair</option></select></label>
+        <div class="typechips wide" id="typeChips" role="group" aria-label="Record type"><button type="button" data-type="Lesson">Lesson</button><button type="button" data-type="Fuel">Fuel</button><button type="button" data-type="Other Expense">Expense</button><button type="button" data-type="Note">Note</button><button type="button" data-type="Insurance">Insurance</button><button type="button" data-type="Repair">Maintenance</button><button type="button" data-type="Refund">Refund</button></div>
+        <label class="hidden">Type<select id="fType"><option>Lesson</option><option>Fuel</option><option>Other Expense</option><option>Note</option><option>Insurance</option><option>Repair</option><option>Refund</option></select></label>
         <label class="wide">Date<input type="date" id="fDate" required></label>
         <div class="chiprow wide hidden" id="recentStudents" aria-label="Recent students"></div>
         <label class="lessonfield">Student name<input id="fStudent" list="studentOptions" autocomplete="off"><datalist id="studentOptions"></datalist></label>
@@ -174,6 +169,7 @@
         <label class="costfield">Cost (€)<input type="number" id="fCost" min="0" step=".01" value="0"></label>
         <label class="kmfield">Odometer (km)<input type="number" id="fKm" min="0" step=".1" value="0"></label>
         <label class="lessonfield checklabel"><input type="checkbox" id="fPaid"> Paid</label>
+        <div class="lessonfield wide donebox"><label class="checklabel"><input type="checkbox" id="fDone"> Lesson completed</label><label class="donemin">Actual length (minutes)<input type="number" id="fActual" min="1" max="720" step="1" inputmode="numeric"></label><p class="hint">Finished lessons count automatically. Tick this to finish a lesson early or to record a different length.</p></div>
         <label class="lessonfield checklabel wide hidden" id="fPackageRow"><input type="checkbox" id="fPackage"> <span id="fPackageText">Use package</span></label>
         <details class="wide moreopts" id="moreOpts"><summary>More options</summary><div class="moregrid">
           <label class="hidden" id="fRepeatRow">Repeat every week<select id="fRepeat"><option value="1">No repeat</option><option value="2">2 weeks</option><option value="4">4 weeks</option><option value="8">8 weeks</option><option value="12">12 weeks</option></select></label>
@@ -185,21 +181,24 @@
     </form>
   </dialog>
 
-  <dialog id="profileDialog">
+  <dialog id="profileDialog" class="widedialog">
     <div class="dialogbody">
       <div class="dialoghead"><div><p class="eyebrow">STUDENT</p><h2 id="profileName"></h2><p class="muted" id="profilePhone"></p></div><button type="button" class="iconbtn" data-close aria-label="Close">×</button></div>
       <div class="profilestats">
-        <article class="report"><span>Total hours</span><strong id="pHours">0.0</strong></article>
-        <article class="report"><span>Total income</span><strong id="pIncome">€0.00</strong></article>
-        <article class="report"><span>Unpaid</span><strong id="pUnpaid">€0.00</strong></article>
-        <article class="report"><span>Lessons</span><strong id="pCount">0</strong></article>
+        <article class="report"><span>Completed hours</span><strong id="pHours">0</strong></article>
+        <article class="report"><span>Package hours left</span><strong id="pLeft">–</strong></article>
+        <article class="report"><span>Outstanding</span><strong id="pUnpaid">€0.00</strong></article>
+        <article class="report"><span>Completed lessons</span><strong id="pCount">0</strong></article>
       </div>
-      <div class="dialogactions profileactions"><button type="button" class="btn ghost" id="profileEdit">Edit student</button><button type="button" class="btn primary" id="profileAdd">＋ Add lesson</button></div>
-      <div class="dialogactions profileactions"><a class="btn secondary hidden" id="waLesson" target="_blank" rel="noopener">WhatsApp: lesson</a><a class="btn secondary hidden" id="waPay" target="_blank" rel="noopener">WhatsApp: payment</a></div>
-      <div class="pkghead"><h3>Packages</h3><button type="button" class="btn ghost" id="profilePkgAdd">＋ Add package</button></div>
-      <div id="profilePkgs" class="recordlist"></div>
-      <h3 class="caltitle">Lesson history</h3>
-      <div id="profileList" class="recordlist empty"></div>
+      <div class="profileactions"><button type="button" class="btn primary" id="profileAdd">＋ Add lesson</button><a class="btn wa hidden" id="waLesson" target="_blank" rel="noopener">WhatsApp: lesson</a><a class="btn wa hidden" id="waPay" target="_blank" rel="noopener">WhatsApp: payment</a><a class="btn ghost hidden" id="pCall">Call</a><button type="button" class="btn ghost" id="profileEdit">Edit student</button></div>
+      <div class="ptabs" role="tablist"><button type="button" data-ptab="overview">Overview</button><button type="button" data-ptab="upcoming">Upcoming</button><button type="button" data-ptab="completed">Completed</button><button type="button" data-ptab="payments">Payments</button><button type="button" data-ptab="packages">Packages</button><button type="button" data-ptab="attendance">Attendance</button><button type="button" data-ptab="notes">Notes</button></div>
+      <div class="ptab" id="ptab-overview"></div>
+      <div class="ptab recordlist" id="ptab-upcoming"></div>
+      <div class="ptab recordlist" id="ptab-completed"></div>
+      <div class="ptab" id="ptab-payments"></div>
+      <div class="ptab" id="ptab-packages"><div class="pkghead"><h3>Prepaid packages</h3><button type="button" class="btn primary" id="profilePkgAdd">＋ Add package</button></div><div id="profilePkgs" class="recordlist"></div></div>
+      <div class="ptab" id="ptab-attendance"></div>
+      <div class="ptab" id="ptab-notes"><label class="notesbox">Notes about this student<textarea id="pNotes" rows="6"></textarea></label><button type="button" class="btn primary" id="pNotesSave">Save notes</button></div>
     </div>
   </dialog>
 
@@ -207,9 +206,13 @@
     <form method="dialog" id="packageForm">
       <div class="dialoghead"><div><p class="eyebrow">PREPAID PACKAGE</p><h2>Add package</h2></div><button type="button" class="iconbtn" data-close aria-label="Close">×</button></div>
       <div class="formgrid">
-        <label class="wide">Date paid<input type="date" id="pkgDate" required></label>
-        <label>Hours<input type="number" id="pkgHours" min="0.5" step="0.5" required></label>
-        <label>Amount paid (€)<input type="number" id="pkgAmount" min="0" step=".01" required></label>
+        <label class="wide">Package name<input id="pkgName" placeholder="For example: 17-hour package" maxlength="60"></label>
+        <label>Total hours<input type="number" id="pkgHours" min="0.5" step="0.5" required inputmode="decimal"></label>
+        <label>Total price (€)<input type="number" id="pkgAmount" min="0" step=".01" required inputmode="decimal"></label>
+        <p class="wide pkgrate" id="pkgRateText"></p>
+        <label>Purchase date<input type="date" id="pkgDate" required></label>
+        <label class="checklabel"><input type="checkbox" id="pkgPaid" checked> Paid</label>
+        <label class="wide">Notes (optional)<textarea id="pkgNotes" rows="2"></textarea></label>
       </div>
       <div class="dialogactions"><span></span><button type="button" class="btn ghost" data-close>Cancel</button><button type="submit" class="btn primary" id="pkgSave">Save package</button></div>
     </form>
@@ -218,6 +221,7 @@
   <dialog id="quickDialog">
     <form method="dialog" id="quickForm">
       <div class="dialoghead"><div><p class="eyebrow">LESSON</p><h2 id="qName"></h2><p class="muted" id="qInfo"></p></div><button type="button" class="iconbtn" data-close aria-label="Close">×</button></div>
+      <div class="qdetails" id="qDetails"></div>
       <a class="btn qwa hidden" id="qWa" target="_blank" rel="noopener">WhatsApp</a>
       <p class="hint hidden" id="qNoPhone">No phone number saved for this student.</p>
       <h3 class="qhead">Book another lesson</h3>
@@ -229,7 +233,8 @@
       </div>
       <p class="hint" id="qPkg"></p>
       <p id="qError" class="formerror" role="alert"></p>
-      <div class="dialogactions"><button type="button" class="btn ghost" id="qEdit">Edit this lesson</button><span></span><button type="submit" class="btn primary">Book lesson</button></div>
+      <div class="dialogactions"><span></span><button type="submit" class="btn primary">Book lesson</button></div>
+      <div class="qactions"><button type="button" class="btn ghost" id="qEdit">Edit</button><button type="button" class="btn ghost" id="qPaid">Mark paid</button><button type="button" class="btn danger" id="qDelete">Delete</button></div>
     </form>
   </dialog>
 
@@ -239,14 +244,27 @@
       <input type="hidden" id="studentId">
       <div class="formgrid">
         <label class="wide">Name<input id="sName" required></label>
-        <label class="wide">Phone<input id="sPhone" type="tel"></label>
+        <label>Phone<input id="sPhone" type="tel"></label>
+        <label>WhatsApp (if different)<input id="sWhats" type="tel" placeholder="+351…"></label>
+        <label>Email (optional)<input id="sEmail" type="email" autocomplete="off"></label>
+        <label>Hourly rate (€)<input id="sRate" type="number" min="0" step=".01" inputmode="decimal" placeholder="20"></label>
+        <label class="wide">Address (optional)<input id="sAddress" autocomplete="off"></label>
         <label class="wide">Notes<textarea id="sNotes" rows="3"></textarea></label>
       </div>
       <p id="studentError" class="formerror" role="alert"></p>
       <div class="dialogactions"><button type="button" class="btn danger hidden" id="deleteStudent">Delete</button><span></span><button type="button" class="btn ghost" data-close>Cancel</button><button type="submit" class="btn primary">Save student</button></div>
     </form>
   </dialog>
-  <div class="timerbar hidden" id="timerBar" role="timer"><div class="timerfill" id="timerFill"></div><div class="timertext"><small id="timerLabel"></small><b id="timerDigits">60:00</b></div><button type="button" class="timerbtn" id="timerPause">Pause</button><button type="button" class="timerbtn" id="timerAdd">+5</button><button type="button" class="timerbtn" id="timerStop">Stop</button></div>
+  <dialog id="doneDialog">
+    <div class="dialogbody">
+      <div class="dialoghead"><div><p class="eyebrow">LESSON COMPLETED</p><h2 id="doneName"></h2><p class="muted" id="doneInfo"></p></div><button type="button" class="iconbtn" data-close aria-label="Close">×</button></div>
+      <div class="donestats" id="doneStats"></div>
+      <label class="notesbox">WhatsApp message (you can edit it)<textarea id="doneMsg" rows="11"></textarea></label>
+      <p class="formerror" id="doneNoPhone"></p>
+      <div class="dialogactions"><button type="button" class="btn ghost" data-close>Close</button><span></span><button type="button" class="btn ghost hidden" id="doneCopy">Copy message</button><a class="btn wa" id="doneWa" target="_blank" rel="noopener">Open WhatsApp</a></div>
+    </div>
+  </dialog>
+  <div class="timerbar hidden" id="timerBar" role="timer"><div class="timerfill" id="timerFill"></div><div class="timertext"><small id="timerLabel"></small><b id="timerDigits">00:00</b><small id="timerSub"></small></div><button type="button" class="timerbtn" id="timerPause">Pause</button><button type="button" class="timerbtn timerend" id="timerEnd">End lesson</button><button type="button" class="timerbtn" id="timerCancel" aria-label="Cancel timer">×</button></div>
   <button class="fab" id="newLessonBtn" aria-label="New record">＋</button>
   <nav class="tabbar" aria-label="Main navigation">
     <span class="navpill" id="navPill"></span>
@@ -257,7 +275,7 @@
     <button class="tab" data-tab="reports"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20v-7M12 20V5M19 20v-10"/></svg><span>Reports</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.18</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.19</span></footer>
   <script src="prayer-times.js"></script>
   <script src="app.js"></script>
 </body>
