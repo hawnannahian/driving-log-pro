@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; media-src 'self' https://www.hisnmuslim.com; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; object-src 'none'; base-uri 'self'; form-action 'self'">
   <meta name="theme-color" content="#101c33">
   <meta name="description" content="Driving Log Pro — personal driving school management">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -268,11 +268,11 @@
     <div class="traveldua-inner">
       <div class="dialoghead"><div><p class="eyebrow">BEFORE YOU DRIVE</p><h2>Travel Dua · সফরের দোয়া</h2></div><button type="button" class="iconbtn" id="duaClose" aria-label="Close">×</button></div>
       <p class="traveldua-intro">গাড়ি চালানো বা সফর শুরু করার আগে পড়ুন। আল্লাহ আপনার যাত্রা নিরাপদ ও বরকতময় করুন।</p>
-      <div class="dua-arabic" lang="ar" dir="rtl">سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ ۝ وَإِنَّا إِلَىٰ رَبِّنَا لَمُنْقَلِبُونَ</div>
-      <div class="dua-voice-row"><button type="button" class="btn secondary" id="duaArabicVoice">🔊 আরবি শুনুন</button><button type="button" class="btn secondary" id="duaBanglaVoice">🔊 বাংলা উচ্চারণ শুনুন</button></div>
-      <div class="dua-section"><b>বাংলা উচ্চারণ</b><p>সুবহানাল্লাযী সাখখারা লানা হাযা, ওয়া মা কুন্না লাহু মুকরিনীন। ওয়া ইন্না ইলা রব্বিনা লামুনকালিবূন।</p></div>
-      <div class="dua-section"><b>অর্থ</b><p>পবিত্র তিনি, যিনি এই বাহনকে আমাদের অধীন করে দিয়েছেন; অথচ আমরা একে বশীভূত করতে সক্ষম ছিলাম না। আর নিশ্চয়ই আমরা আমাদের প্রতিপালকের কাছেই ফিরে যাব।</p></div>
-      <small class="dua-source">সূরা আয-যুখরুফ ৪৩:১৩–১৪ · অডিও ডিভাইসের Text-to-Speech কণ্ঠে; এটি কুরআন তিলাওয়াতের রেকর্ডিং নয়।</small>
+      <div class="dua-arabic dua-arabic-full" lang="ar" dir="rtl">اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ. سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ، وَإِنَّا إِلَى رَبِّنَا لَمُنقَلِبُونَ. اللَّهُمَّ إِنَّا نَسْأَلُكَ فِي سَفَرِنَا هَذَا الْبِرَّ وَالتَّقْوَى، وَمِنَ الْعَمَلِ مَا تَرْضَى. اللَّهُمَّ هَوِّنْ عَلَيْنَا سَفَرَنَا هَذَا وَاطْوِ عَنَّا بُعْدَهُ. اللَّهُمَّ أَنْتَ الصَّاحِبُ فِي السَّفَرِ، وَالْخَلِيفَةُ فِي الْأَهْلِ. اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ وَعْثَاءِ السَّفَرِ، وَكَآبَةِ الْمَنْظَرِ، وَسُوءِ الْمُنْقَلَبِ فِي الْمَالِ وَالْأَهْلِ.</div>
+      <div class="dua-audio-card"><b>🎧 সম্পূর্ণ দোয়া — আসল আরবি রেকর্ডিং</b><audio id="travelDuaAudio" controls preload="none" playsinline src="https://www.hisnmuslim.com/audio/ar/207.mp3">আপনার ব্রাউজার অডিও চালাতে পারে না।</audio><small>ইন্টারনেট সংযোগ প্রয়োজন। অডিও: Hisnul Muslim · সফরের দোয়া (MP3)</small></div>
+      <div class="dua-section"><b>বাংলা উচ্চারণ (কুরআনের অংশ)</b><p>সুবহানাল্লাযী সাখখারা লানা হাযা, ওয়া মা কুন্না লাহু মুকরিনীন। ওয়া ইন্না ইলা রব্বিনা লামুনকালিবূন।</p></div>
+      <div class="dua-section"><b>অর্থ</b><p>আল্লাহ সর্বশ্রেষ্ঠ—তিনবার। পবিত্র তিনি, যিনি এই বাহনকে আমাদের অধীন করেছেন; আমরা নিজেরা একে বশীভূত করতে পারতাম না। নিশ্চয়ই আমরা আমাদের প্রতিপালকের কাছেই ফিরে যাব। হে আল্লাহ, এই সফরে আমরা আপনার কাছে নেকি, তাকওয়া এবং আপনার পছন্দনীয় আমল চাই। আমাদের সফর সহজ করে দিন এবং এর দূরত্ব সংক্ষিপ্ত করে দিন। সফরে আপনিই আমাদের সঙ্গী এবং পরিবারে আমাদের স্থলাভিষিক্ত। সফরের কষ্ট, দুঃখজনক দৃশ্য এবং সম্পদ ও পরিবারের কাছে খারাপ অবস্থায় ফিরে আসা থেকে আপনার আশ্রয় চাই।</p><p>ফিরে আসার সময় অতিরিক্ত: আমরা প্রত্যাবর্তনকারী, তওবাকারী, ইবাদতকারী এবং আমাদের প্রতিপালকের প্রশংসাকারী।</p></div>
+      <small class="dua-source">সূত্র: সহিহ মুসলিম ১৩৪২ · কুরআনের অংশ: সূরা আয-যুখরুফ ৪৩:১৩–১৪ · অডিও উৎস: <a href="https://www.hisnmuslim.com/audio/ar/207.mp3" target="_blank" rel="noopener">Hisnul Muslim MP3</a> · <a href="https://e-quran.com/pages/hisnmuslim/daaa%27_alsfr.html" target="_blank" rel="noopener">উৎস পৃষ্ঠা</a></small>
       <div class="dialogactions dua-actions"><button type="button" class="btn ghost" id="duaSkip">Skip</button><span></span><button type="button" class="btn primary" id="duaStart">দোয়া পড়ে শুরু করুন · Start</button></div>
     </div>
   </dialog>
