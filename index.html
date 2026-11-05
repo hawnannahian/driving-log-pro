@@ -244,8 +244,8 @@
       <input type="hidden" id="studentId">
       <div class="formgrid">
         <label class="wide">Name<input id="sName" required></label>
-        <label>Phone<input id="sPhone" type="tel"></label>
-        <label>WhatsApp (if different)<input id="sWhats" type="tel" placeholder="+351…"></label>
+        <label>Phone<div class="phoneinputrow"><input id="sPhone" type="text" inputmode="tel" autocomplete="tel" autocapitalize="off" spellcheck="false"><button type="button" class="btn secondary pastephone" id="pasteSPhoneBtn">Paste</button></div></label>
+        <label>WhatsApp (if different)<div class="phoneinputrow"><input id="sWhats" type="text" inputmode="tel" autocomplete="tel" autocapitalize="off" spellcheck="false" placeholder="+351…"><button type="button" class="btn secondary pastephone" id="pasteSWhatsBtn">Paste</button></div></label>
         <label>Email (optional)<input id="sEmail" type="email" autocomplete="off"></label>
         <label>Hourly rate (€)<input id="sRate" type="number" min="0" step=".01" inputmode="decimal" placeholder="20"></label>
         <label class="wide">Address (optional)<input id="sAddress" autocomplete="off"></label>
