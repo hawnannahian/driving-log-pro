@@ -224,7 +224,8 @@ function openDone(id){const e=state.entries.find(x=>x.id===id);if(!e)return;done
  $("doneName").textContent=e.student||"Lesson";$("doneInfo").textContent=`${dayName(e.date)} · ${e.actualStart&&e.actualEnd?e.actualStart+"–"+e.actualEnd:timeText(e)} · Actual timer duration: ${lengthText(Number(e.actualMin)||Math.round(hours(e)*60))}`;
  $("doneStats").innerHTML=`${Number(e.businessHours)>0?`<div><span>Business lesson credit</span><b>1 Hour</b></div><div><span>Actual timer duration</span><b>${lengthText(Number(e.actualMin)||55)}</b></div>`:""}<div><span>Total completed</span><b>${fmtH(st.hours)} h</b></div>${st.hasPkg?`<div><span>Package hours left</span><b>${fmtH(st.pkgLeft)} h</b></div>`:""}${e.extraH>0?`<div><span>Not on package</span><b>${fmtH(e.extraH)} h</b></div>`:""}<div><span>Payment</span><b class="${lessonStatus(e)}">${STATUS_TEXT[lessonStatus(e)]}</b></div>`;
  $("doneMsg").value=doneMsg(st.hours);$("doneNoPhone").textContent=doneNumber?"":"No WhatsApp number is saved for this student. Add one under Students → Edit student, or copy the message.";$("doneWa").classList.toggle("hidden",!doneNumber);$("doneCopy").classList.toggle("hidden",!!doneNumber);syncDoneLink();$("doneDialog").showModal();}
-$("undoDone").onclick=()=>undoLessonCompletion(doneEntryId);\nfunction syncDoneLink(){if(doneNumber)$("doneWa").href=waLink(doneNumber,$("doneMsg").value);}
+$("undoDone").onclick=()=>undoLessonCompletion(doneEntryId);
+function syncDoneLink(){if(doneNumber)$("doneWa").href=waLink(doneNumber,$("doneMsg").value);}
 const cal={y:new Date().getFullYear(),m:new Date().getMonth(),day:dateISO(new Date()),view:"month"};
 try{cal.view=["month","week","day"].includes(localStorage.getItem(DB_KEY+"-calview"))?localStorage.getItem(DB_KEY+"-calview"):"month";}catch{}
 const timeText = e => e.start&&e.end?`${e.start}–${e.end}`:"No time set";
