@@ -354,7 +354,7 @@ function render(){recomputeAlloc();doneByName={};state.entries.forEach(e=>{if(is
  const logToday=state.entries.filter(e=>e.type==="Lesson"&&e.date===dateISO(new Date()));
  const logCompleted=logToday.filter(isDone);
  const logRevenue=logToday.reduce((sum,e)=>sum+income(e),0);
- const logCollected=logCompleted.reduce((sum,e)=>sum+(lessonStatus(e)==="unpaid"?0:income(e)-unpaidAmt(e)),0);
+ const logCollected=logCompleted.reduce((sum,e)=>sum+(lessonStatus(e)==="paid"?income(e):0),0);
  const logOutstanding=logCompleted.reduce((sum,e)=>sum+unpaidAmt(e),0);
  $("logTodayDate").textContent=new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"});
  $("logRecordsToday").textContent=logToday.length;
