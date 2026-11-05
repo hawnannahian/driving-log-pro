@@ -47,16 +47,21 @@ const BACKUP_KEY=DB_KEY+"-last-backup",SYNC_KEY=DB_KEY+"-students-synced";
 const sameName=(a,b)=>(a||"").trim().toLowerCase()===(b||"").trim().toLowerCase();
 // WhatsApp copy may wrap phone numbers in invisible bidi/zero-width formatting marks.
 const cleanPhone=s=>String(s??"").replace(/[\u200B-\u200F\u202A-\u202E\u2066-\u2069\uFEFF]/g,"").trim();
-/* Clipboard fallback for iOS Safari and installed PWAs. */
+/* iOS-safe copy: use the native Clipboard API; if iOS denies it, select the
+   actual visible message field so the user can choose Copy from the native menu. */
 async function copyText(value){
  const text=String(value??"");
- try{if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(text);return true;}}catch{}
- const field=document.createElement("textarea");
- field.value=text;field.setAttribute("readonly","");
- field.style.cssText="position:fixed;left:-9999px;top:0;opacity:0;font-size:16px";
- document.body.appendChild(field);field.focus();field.select();field.setSelectionRange(0,field.value.length);
- let copied=false;try{copied=document.execCommand("copy");}catch{}
- field.remove();if(!copied)throw new Error("Copy is not available in this browser");return true;
+ if(!text)throw new Error("There is no text to copy");
+ if(navigator.clipboard?.writeText){
+  try{await navigator.clipboard.writeText(text);return true;}catch{}
+ }
+ const field=$("doneMsg");
+ if(field){
+  field.focus();
+  field.setSelectionRange(0,field.value.length);
+  throw new Error("The message is selected. Choose Copy from the iPhone selection menu.");
+ }
+ throw new Error("Clipboard access is blocked. Select the text and use the iPhone Copy menu.");
 }
 const isPhone=n=>/^[+\d][\d\s()-]{6,}$/.test(cleanPhone(n));
 const last9=n=>{const d=String(n||"").replace(/\D/g,"");return d.length>=9?d.slice(-9):"";};
@@ -398,7 +403,7 @@ $("importStudents").onchange=async e=>{const f=e.target.files[0];if(f)importStud
 $("exportAll").onclick=backupNow;$("backupNowBtn").onclick=backupNow;
 $("exportPdf").onclick=exportPdf;
 $("fStudent").addEventListener("input",()=>syncContactBoxes("name"));$("fPhone").addEventListener("input",()=>syncContactBoxes("phone"));
-$("pastePhoneBtn").addEventListener("click",async()=>{const field=$("fPhone");try{if(!navigator.clipboard?.readText)throw new Error("Clipboard access unavailable");const value=await navigator.clipboard.readText();if(!value){toast("Clipboard is empty. Copy the number again.");return;}field.value=cleanPhone(value);field.dispatchEvent(new Event("input",{bubbles:true}));toast("Phone number pasted");}catch{field.focus();toast("Clipboard access was blocked. Tap and hold the Phone field, then choose Paste.");}});
+$("pastePhoneBtn").addEventListener("click",()=>{const field=$("fPhone");field.focus();field.setSelectionRange(field.value.length,field.value.length);toast("Phone field ready. Touch and hold here, then choose Paste from the iPhone menu.");});
 let lessonLen=60,doneDirty=false;
 function syncDoneBox(){$("fActual").closest("label").classList.toggle("hidden",!$("fDone").checked);}
 $("fDone").addEventListener("change",()=>{doneDirty=true;if($("fDone").checked&&!$("fActual").value)$("fActual").value=schedMin({type:"Lesson",start:$("fStart").value,end:$("fEnd").value})||60;syncDoneBox();});
