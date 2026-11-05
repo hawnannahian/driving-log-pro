@@ -14,7 +14,7 @@ const cleanTime = s => { const m=String(s??"").trim().match(/^(\d{1,2}):(\d{2})/
 // Scheduled length in minutes, from the start and end times.
 const schedMin = e => { if(e.type!=="Lesson"||!e.start||!e.end)return 0; const [sh,sm]=e.start.split(":").map(Number),[eh,em]=e.end.split(":").map(Number);let mins=eh*60+em-sh*60-sm;if(isNaN(mins))return 0;if(mins<0)mins+=1440;return mins; };
 // Lesson length in hours: the actual length when the lesson was completed with a recorded length, otherwise the scheduled length.
-const hours = e => e.type!=="Lesson"?0:Number(e.actualMin)>0?Number(e.actualMin)/60:schedMin(e)/60;
+const hours = e => e.type!=="Lesson"?0:Number(e.businessHours)>0?Number(e.businessHours):Number(e.actualMin)>0?Number(e.actualMin)/60:schedMin(e)/60;
 const round2=x=>Math.round(x*100)/100,round4=x=>Math.round(x*1e4)/1e4;
 const fmtH=h=>String(Math.round(h*100)/100);
 // Value of a lesson. Package hours are valued at the package's hourly rate, extra hours at the lesson rate.
@@ -195,19 +195,19 @@ if("speechSynthesis" in window){try{speechSynthesis.onvoiceschanged=()=>{bnVoice
 function speakBn(text){try{if(!("speechSynthesis" in window))return;if(!bnVoice)bnVoice=pickBnVoice();if(!bnVoice)return;const u=new SpeechSynthesisUtterance(text);u.voice=bnVoice;u.lang=bnVoice.lang;speechSynthesis.speak(u);}catch{}}
 async function keepAwake(){try{if(timer&&timer.runFrom&&"wakeLock" in navigator&&!wake){wake=await navigator.wakeLock.request("screen");wake.addEventListener("release",()=>{wake=null;});}}catch{}}
 function dropAwake(){try{wake?.release();}catch{}wake=null;}
+function finishTimerAt55(){if(!timer||timer.completed)return;const t=timer;t.completed=true;t.elapsed=55*60000;t.runFrom=null;t.spoken55=true;timerSave();speakBn("আপনার লেসনের সময় শেষ হয়েছে।");timer=null;timerSave();dropAwake();renderTimer();const e=state.entries.find(x=>x.id===t.lessonId);if(!e){toast("Lesson not found. Timer stopped; no record was changed.");return;}e.businessHours=1;completeLesson(t.lessonId,{min:55,start:t.startText,end:hhmm(new Date()),session:t.session});}
 function renderTimer(){const on=!!timer;$("timerBar").classList.toggle("hidden",!on);document.body.classList.toggle("timing",on);if(!on){clearInterval(timerTick);timerTick=null;return;}
- const el=elapsedMs(),left=timer.sched-el;if(!timer.beeped&&left<=0){timer.beeped=true;timerSave();if(-left<5000)timerBeep();}
- if(!timer.spoken55&&el>=55*6e4){timer.spoken55=true;timerSave();speakBn("আপনার লেসনের সময় শেষ।");}
- $("timerBar").classList.toggle("timerdone",left<=0);$("timerBar").classList.toggle("timerpaused",!timer.runFrom);
- $("timerLabel").textContent=`${timer.label} · started ${timer.startText}${timer.runFrom?"":" · paused"}`;$("timerDigits").textContent=clock(el);
- $("timerSub").textContent=left>0?`${clock(left)} left of ${lengthText(Math.round(timer.sched/6e4))}`:`${clock(-left)} over ${lengthText(Math.round(timer.sched/6e4))}`;
- $("timerFill").style.transform=`scaleX(${Math.min(1,el/timer.sched)})`;$("timerPause").textContent=timer.runFrom?"Pause":"Resume";
- if(timer.runFrom&&!timerTick)timerTick=setInterval(renderTimer,500);if(!timer.runFrom&&timerTick){clearInterval(timerTick);timerTick=null;}}
+ let el=Math.min(55*60000,elapsedMs());if(timer.runFrom&&el>=55*60000){finishTimerAt55();return;}const left=Math.max(0,55*60000-el),pct=Math.min(100,el/(55*60000)*100);
+ $("timerBar").classList.toggle("timerdone",false);$("timerBar").classList.toggle("timerpaused",!timer.runFrom);
+ $("timerLabel").textContent=timer.label;$("timerDigits").textContent=clock(left);$("timerSub").textContent=`${clock(el)} elapsed · ${timer.runFrom?"LIVE":"PAUSED"}`;
+ $("timerFill").style.transform=`scaleX(${pct/100})`;const ring=$("timerRing");if(ring)ring.style.setProperty("--progress",`${pct*3.6}deg`);
+ $("timerPause").textContent=timer.runFrom?"Pause":"Resume";$("timerStatus").textContent=timer.runFrom?"LIVE":"PAUSED";$("timerStatus").className=timer.runFrom?"timerstatus live":"timerstatus paused";
+ if(timer.runFrom&&!timerTick)timerTick=setInterval(renderTimer,250);if(!timer.runFrom&&timerTick){clearInterval(timerTick);timerTick=null;}}
 function startLessonTimer(id){const e=state.entries.find(x=>x.id===id);if(!e)return;if(timer&&timer.lessonId===id){renderTimer();return;}if(timer&&!confirm(`A timer is running for ${timer.label}. Cancel it and start ${e.student||"this"} lesson? The other lesson is not recorded.`))return;
- try{audioCtx=audioCtx||new AudioContext();audioCtx.resume?.();}catch{}const now=Date.now();timer={lessonId:id,session:uid(),label:e.student||"Lesson",sched:Math.max(1,schedMin(e)||60)*6e4,elapsed:0,runFrom:now,startedAt:now,startText:hhmm(new Date(now)),beeped:false,spoken55:false};timerSave();renderTimer();keepAwake();renderNext();bindRecords();speakBn("আপনার লেসনের সময় শুরু হলো।");}
+ try{audioCtx=audioCtx||new AudioContext();audioCtx.resume?.();}catch{}const now=Date.now();timer={lessonId:id,session:uid(),label:e.student||"Lesson",sched:55*6e4,elapsed:0,runFrom:now,startedAt:now,startText:hhmm(new Date(now)),beeped:false,spoken55:false};timerSave();renderTimer();keepAwake();renderNext();bindRecords();speakBn("আপনার লেসনের সময় শুরু হলো।");}
 function timerPauseToggle(){if(!timer)return;if(timer.runFrom){timer.elapsed+=Date.now()-timer.runFrom;timer.runFrom=null;dropAwake();}else{timer.runFrom=Date.now();keepAwake();}timerSave();renderTimer();}
 // End lesson: the timer is cleared first, so a second tap cannot save the lesson again.
-function timerEnd(){if(!timer)return;const t=timer,min=Math.max(1,Math.round(elapsedMs()/6e4));timer=null;timerSave();dropAwake();renderTimer();if(!state.entries.some(e=>e.id===t.lessonId)){toast("That lesson no longer exists, so nothing was recorded.");return;}completeLesson(t.lessonId,{min,start:t.startText,end:hhmm(new Date()),session:t.session});}
+function timerEnd(){if(!timer)return;if(!confirm("End this lesson now? The actual elapsed time will be saved; the lesson will not receive the full 1-hour credit unless 55 active minutes were completed."))return;const t=timer,min=Math.max(1,Math.round(elapsedMs()/6e4));timer=null;timerSave();dropAwake();renderTimer();if(!state.entries.some(e=>e.id===t.lessonId)){toast("That lesson no longer exists, so nothing was recorded.");return;}completeLesson(t.lessonId,{min,start:t.startText,end:hhmm(new Date()),session:t.session});}
 function timerCancel(){if(!timer)return;if(!confirm("Cancel the timer? Nothing is recorded for this lesson."))return;timer=null;timerSave();dropAwake();renderTimer();renderNext();bindRecords();}
 // Mark a lesson completed with its actual length. A timer session can complete its lesson only once.
 function completeLesson(id,o){const e=state.entries.find(x=>x.id===id);if(!e||e.type!=="Lesson")return false;if(o.session&&e.timerSession===o.session)return false;
@@ -216,8 +216,8 @@ const doneMsg=h=>`আসসালামু আলাইকুম স্যার
 let doneNumber=null;
 // After a lesson is completed: show the totals and a prepared WhatsApp message to review, edit and send.
 function openDone(id){const e=state.entries.find(x=>x.id===id);if(!e)return;const s=state.students.find(x=>sameName(x.name,e.student)),st=s?studentStats(s):{hours:lessonsOf(e.student).filter(isDone).reduce((a,x)=>a+hours(x),0),hasPkg:false};doneNumber=s?waNumber(s):null;
- $("doneName").textContent=e.student||"Lesson";$("doneInfo").textContent=`${dayName(e.date)} · ${e.actualStart&&e.actualEnd?e.actualStart+"–"+e.actualEnd:timeText(e)} · ${lengthText(Math.round(hours(e)*60))}`;
- $("doneStats").innerHTML=`<div><span>Total completed</span><b>${fmtH(st.hours)} h</b></div>${st.hasPkg?`<div><span>Package hours left</span><b>${fmtH(st.pkgLeft)} h</b></div>`:""}${e.extraH>0?`<div><span>Not on package</span><b>${fmtH(e.extraH)} h</b></div>`:""}<div><span>Payment</span><b class="${lessonStatus(e)}">${STATUS_TEXT[lessonStatus(e)]}</b></div>`;
+ $("doneName").textContent=e.student||"Lesson";$("doneInfo").textContent=`${dayName(e.date)} · ${e.actualStart&&e.actualEnd?e.actualStart+"–"+e.actualEnd:timeText(e)} · Actual timer duration: ${lengthText(Number(e.actualMin)||Math.round(hours(e)*60))}`;
+ $("doneStats").innerHTML=`${Number(e.businessHours)>0?`<div><span>Business lesson credit</span><b>1 Hour</b></div><div><span>Actual timer duration</span><b>${lengthText(Number(e.actualMin)||55)}</b></div>`:""}<div><span>Total completed</span><b>${fmtH(st.hours)} h</b></div>${st.hasPkg?`<div><span>Package hours left</span><b>${fmtH(st.pkgLeft)} h</b></div>`:""}${e.extraH>0?`<div><span>Not on package</span><b>${fmtH(e.extraH)} h</b></div>`:""}<div><span>Payment</span><b class="${lessonStatus(e)}">${STATUS_TEXT[lessonStatus(e)]}</b></div>`;
  $("doneMsg").value=doneMsg(st.hours);$("doneNoPhone").textContent=doneNumber?"":"No WhatsApp number is saved for this student. Add one under Students → Edit student, or copy the message.";$("doneWa").classList.toggle("hidden",!doneNumber);$("doneCopy").classList.toggle("hidden",!!doneNumber);syncDoneLink();$("doneDialog").showModal();}
 function syncDoneLink(){if(doneNumber)$("doneWa").href=waLink(doneNumber,$("doneMsg").value);}
 const cal={y:new Date().getFullYear(),m:new Date().getMonth(),day:dateISO(new Date()),view:"month"};
