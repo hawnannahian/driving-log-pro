@@ -264,6 +264,17 @@
       <div class="dialogactions"><button type="button" class="btn danger" id="undoDone">Undo completion</button><button type="button" class="btn ghost" data-close>Close</button><span></span><button type="button" class="btn ghost hidden" id="doneCopy">Copy message</button><a class="btn wa" id="doneWa" target="_blank" rel="noopener">Open WhatsApp</a></div>
     </div>
   </dialog>
+  <dialog id="travelDuaDialog" class="traveldua">
+    <div class="traveldua-inner">
+      <div class="dialoghead"><div><p class="eyebrow">BEFORE YOU DRIVE</p><h2>Travel Dua · সফরের দোয়া</h2></div><button type="button" class="iconbtn" id="duaClose" aria-label="Close">×</button></div>
+      <p class="traveldua-intro">গাড়ি চালানো বা সফর শুরু করার আগে পড়ুন। আল্লাহ আপনার যাত্রা নিরাপদ ও বরকতময় করুন।</p>
+      <div class="dua-arabic" lang="ar" dir="rtl">سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ ۝ وَإِنَّا إِلَىٰ رَبِّنَا لَمُنْقَلِبُونَ</div>
+      <div class="dua-section"><b>বাংলা উচ্চারণ</b><p>সুবহানাল্লাযী সাখখারা লানা হাযা, ওয়া মা কুন্না লাহু মুকরিনীন। ওয়া ইন্না ইলা রব্বিনা লামুনকালিবূন।</p></div>
+      <div class="dua-section"><b>অর্থ</b><p>পবিত্র তিনি, যিনি এই বাহনকে আমাদের অধীন করে দিয়েছেন; অথচ আমরা একে বশীভূত করতে সক্ষম ছিলাম না। আর নিশ্চয়ই আমরা আমাদের প্রতিপালকের কাছেই ফিরে যাব।</p></div>
+      <small class="dua-source">সূরা আয-যুখরুফ ৪৩:১৩–১৪</small>
+      <div class="dialogactions dua-actions"><button type="button" class="btn ghost" id="duaSkip">Skip</button><span></span><button type="button" class="btn primary" id="duaStart">দোয়া পড়ে শুরু করুন · Start</button></div>
+    </div>
+  </dialog>
   <section class="timerbar hidden" id="timerBar" role="timer" aria-live="off"><div class="timerfill" id="timerFill"></div><div class="timerhead"><div><small class="timerkicker">DRIVING LESSON</small><b id="timerLabel">Student</b></div><span id="timerStatus" class="timerstatus live">LIVE</span></div><div class="timercenter"><div class="timerring" id="timerRing"><div class="timerringinner"><small>TIME REMAINING</small><b id="timerDigits">55:00</b><small id="timerSub">00:00 elapsed</small></div></div></div><div class="timeractions"><button type="button" class="timerbtn" id="timerPause">Pause</button><button type="button" class="timerbtn timerend" id="timerEnd">End lesson</button></div></section>
   <button class="fab" id="newLessonBtn" aria-label="New record">＋</button>
   <nav class="tabbar" aria-label="Main navigation">
