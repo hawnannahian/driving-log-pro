@@ -207,3 +207,83 @@ dialog.widedialog{width:min(640px,calc(100% - 20px))}
 /* Keep native iOS text selection, long-press menus and paste available in every editable control. */
 input,textarea,select,[contenteditable="true"]{-webkit-user-select:text!important;user-select:text!important;-webkit-touch-callout:default}
 input,textarea,[contenteditable="true"]{-webkit-tap-highlight-color:transparent}
+
+
+/* Premium Log screen refresh — scoped to #log to leave every other tab untouched. */
+#log.logpanel{padding:clamp(16px,3vw,28px);border-radius:22px;background:#fff;box-shadow:0 8px 28px #1823380a}
+#log .log-heading{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 22px}
+#log .log-eyebrow{margin:0 0 6px;color:var(--blue);font-size:10px;font-weight:800;letter-spacing:1.4px}
+#log .log-heading h2{margin:0 0 5px;font-size:clamp(23px,3vw,30px);letter-spacing:-.8px}
+#log .log-heading .muted{font-size:13px}
+#log .log-date-pill{display:flex;align-items:center;gap:10px;flex:none;padding:10px 14px;border:1px solid #dfe6f2;border-radius:15px;background:#fbfcff}
+#log .log-calendar{display:grid;place-items:center;width:38px;height:38px;border-radius:11px;background:#edf2ff;color:var(--blue);font-size:25px}
+#log .log-date-pill b,#log .log-date-pill small{display:block}
+#log .log-date-pill b{font-size:13px}
+#log .log-date-pill small{margin-top:3px;color:var(--muted);font-size:11px}
+#log .log-action-row{display:flex;gap:10px;margin-bottom:15px}
+#log .log-add{min-height:46px;padding-inline:20px;border-radius:13px;font-size:14px}
+#log .log-export{min-height:46px;border-radius:13px;font-size:13px}
+#log .log-toolbar{display:grid;grid-template-columns:minmax(180px,1fr) minmax(145px,.42fr) minmax(145px,.42fr);gap:9px;margin:0 0 16px}
+#log .log-toolbar input,#log .log-toolbar select{width:100%;min-width:0;min-height:46px;border-radius:13px;border-color:#dfe6f0;padding:11px 13px;font-size:13px}
+#log .log-summary{margin:0 0 21px;padding:14px;border:1px solid #e5ebf6;border-radius:17px;background:linear-gradient(135deg,#f7f9ff,#f0f4ff)}
+#log .log-summary-main{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+#log .log-kpi{display:flex;align-items:center;justify-content:center;gap:10px;min-width:0;padding:5px 8px;border-right:1px solid #dce4f2}
+#log .log-kpi:last-child{border-right:0}
+#log .log-kpi-icon{display:grid;place-items:center;flex:none;width:34px;height:34px;border-radius:11px;background:#e6edff;color:var(--blue);font-size:22px;font-weight:700}
+#log .log-kpi b,#log .log-kpi small{display:block}
+#log .log-kpi b{font-size:clamp(16px,2vw,22px);letter-spacing:-.4px;white-space:nowrap}
+#log .log-kpi small{margin-top:3px;color:var(--muted);font-size:10px;white-space:nowrap}
+#log .log-payment-summary{display:flex;justify-content:flex-end;gap:22px;margin-top:12px;padding-top:11px;border-top:1px solid #dce4f2}
+#log .log-payment-summary div{display:flex;align-items:center;gap:8px}
+#log .log-payment-summary span{color:var(--muted);font-size:11px}
+#log .log-payment-summary b{font-size:13px}
+#log .log-payment-summary .collected{color:var(--green)}
+#log .log-payment-summary .outstanding{color:var(--orange)}
+#log .log-list-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 11px}
+#log .log-list-heading h3{margin:0;font-size:16px}
+#log .log-list-heading span{color:var(--muted);font-size:11px}
+#log .recordlist{gap:11px}
+#log .record{min-height:82px;padding:14px;border-radius:15px;border-color:#e2e8f1;gap:12px}
+#log .recordicon{width:46px;height:46px;border-radius:14px;font-size:16px;flex:none}
+#log .recordmain b{font-size:14px}
+#log .recordmain small{font-size:11px;line-height:1.4}
+#log .recordmain .cum{color:var(--blue);font-weight:700}
+#log .recordvalue{font-size:14px;white-space:nowrap}
+#log .recordvalue small{font-size:11px;font-weight:700}
+#log .payrow{gap:9px;align-items:stretch}
+#log .payrow .record{flex:1;min-width:0}
+#log .markpaid{width:auto;min-width:104px;padding:8px 12px;border-radius:14px;font-size:12px}
+#log .markpaid:hover{background:#dff4e9}
+@media(max-width:720px){
+ #log.logpanel{padding:17px 14px 20px;border-radius:20px}
+ #log .log-heading{align-items:flex-start;margin-bottom:17px}
+ #log .log-heading h2{font-size:25px}
+ #log .log-date-pill{padding:8px 10px;gap:7px}
+ #log .log-calendar{width:32px;height:32px}
+ #log .log-action-row{display:grid;grid-template-columns:1fr auto}
+ #log .log-add{min-width:0}
+ #log .log-export{padding-inline:12px}
+ #log .log-toolbar{grid-template-columns:1fr 1fr}
+ #log .log-toolbar input{grid-column:1/-1}
+ #log .log-summary{padding:11px 8px;margin-bottom:18px}
+ #log .log-kpi{flex-direction:column;gap:5px;padding:5px 3px;text-align:center}
+ #log .log-kpi-icon{width:30px;height:30px;font-size:19px}
+ #log .log-kpi b{font-size:16px}
+ #log .log-kpi small{font-size:9px}
+ #log .log-payment-summary{justify-content:space-around;gap:8px}
+ #log .log-payment-summary div{flex-direction:column;gap:2px}
+ #log .log-payment-summary b{font-size:12px}
+ #log .record{padding:11px;gap:9px}
+ #log .recordicon{width:38px;height:38px;border-radius:12px}
+ #log .recordmain b{font-size:13px}
+ #log .recordmain small{font-size:10px}
+ #log .recordvalue{font-size:12px}
+ #log .markpaid{min-width:72px;max-width:78px;padding:7px 6px;font-size:10px}
+}
+@media(max-width:380px){
+ #log .log-date-pill{padding:7px}
+ #log .log-date-pill small{font-size:10px}
+ #log .log-kpi b{font-size:14px}
+ #log .log-toolbar select{font-size:14px}
+ #log .markpaid{min-width:64px;max-width:68px}
+}
