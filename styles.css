@@ -193,3 +193,7 @@ dialog.widedialog{width:min(640px,calc(100% - 20px))}
 @media(max-width:520px){.traveldua-inner{padding:17px}.dua-arabic{font-size:21px;padding:13px 10px}.dua-actions .btn{font-size:12px;padding:10px}}
 
 .dua-voice-row{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0}.dua-voice-row .btn{flex:1;min-width:140px;justify-content:center}
+
+/* v1.26: complete recorded travel dua player */
+.dua-arabic-full{font-size:22px;line-height:2.15;text-align:right}.dua-audio-card{display:flex;flex-direction:column;gap:9px;padding:14px;border:1px solid #dce5f7;border-radius:14px;background:#f5f8ff;margin:14px 0}.dua-audio-card b{font-size:13px;color:#1d3766}.dua-audio-card audio{display:block;width:100%;height:44px}.dua-audio-card small{font-size:11px;line-height:1.5;color:var(--muted)}.dua-source a{color:var(--blue);text-decoration:underline}
+@media(max-width:520px){.dua-arabic-full{font-size:19px;line-height:2.1}}
