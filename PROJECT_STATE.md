@@ -17,7 +17,7 @@
 - Full-Time historical register key: `driving-log-pro-full-time-v1`; records keyed by `legacy_student_id`, isolated from normal lesson accounting.
 - Main app exposes a narrow `window.DrivingLogFullTime` bridge (getAll/replace/clear) so full-time data can participate in backup/sync without mixing into lesson accounting.
 - Cloud sync stores `driving-log.json` in the user's own private GitHub data repository; token remains in that browser's localStorage.
-- Current service-worker cache: `nahians-schedule-cache-v36`.
+- Current service-worker cache: `nahians-schedule-cache-v38`.
 - App footer version: `v1.20`. CSS comments such as v1.26 may refer to feature revision, not app release.
 
 ## Business rules
@@ -54,6 +54,7 @@ Lesson/expense log, student CRM, packages/prepaid accounting, reports, CSV impor
 - Current main is the source of truth.
 
 ## Recent work
+- Course payments (branch `claude/course-payments`): packages can hold `payments:[{id,date,amount}]` (partial advance payments; Due = price − paid). Old packages without `payments` keep the old Paid/Unpaid meaning. New package dialog: "Paid now (€)" and optional "Count earlier lessons" — *Hours only* stores `p.prior` (lesson ids; those lessons keep their own money, course rate = price ÷ remaining hours) or *Hours and money* links them with `e.pkg` and clears `e.paid`.
 - PR #19: premium responsive Log screen with live KPIs and sorting.
 - PR #17: clipboard paste button implementation; later the user requested removing custom Paste buttons, and the related buttons/logic were removed from main.
 - Latest data-protection update: Full-Time historical register now participates in JSON backup/restore, cloud sync three-way merge, and Delete All. README updated; footer version v1.20; service-worker cache v36.

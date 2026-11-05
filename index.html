@@ -227,14 +227,16 @@
 
   <dialog id="packageDialog">
     <form method="dialog" id="packageForm">
-      <div class="dialoghead"><div><p class="eyebrow">PREPAID PACKAGE</p><h2>Add package</h2></div><button type="button" class="iconbtn" data-close aria-label="Close">×</button></div>
+      <div class="dialoghead"><div><p class="eyebrow">PREPAID PACKAGE / COURSE</p><h2>Add package</h2></div><button type="button" class="iconbtn" data-close aria-label="Close">×</button></div>
       <div class="formgrid">
         <label class="wide">Package name<input id="pkgName" placeholder="For example: 17-hour package" maxlength="60"></label>
         <label>Total hours<input type="number" id="pkgHours" min="0.5" step="0.5" required inputmode="decimal"></label>
         <label>Total price (€)<input type="number" id="pkgAmount" min="0" step=".01" required inputmode="decimal"></label>
         <p class="wide pkgrate" id="pkgRateText"></p>
         <label>Purchase date<input type="date" id="pkgDate" required></label>
-        <label class="checklabel"><input type="checkbox" id="pkgPaid" checked> Paid</label>
+        <label>Paid now (€)<input type="number" id="pkgPaidNow" min="0" step=".01" inputmode="decimal" placeholder="0"></label>
+        <div class="wide hidden" id="pkgPriorBox"><label class="checklabel"><input type="checkbox" id="pkgPrior"> <span id="pkgPriorText">Count earlier lessons in this course</span></label>
+          <div id="pkgPriorMode"><label class="checklabel"><input type="radio" name="pkgPriorMode" id="pkgPriorHours" checked> Hours only — their money stays on those lessons</label><label class="checklabel"><input type="radio" name="pkgPriorMode" id="pkgPriorMoney"> Hours and money — they are paid by this course</label></div></div>
         <label class="wide">Notes (optional)<textarea id="pkgNotes" rows="2"></textarea></label>
       </div>
       <div class="dialogactions"><span></span><button type="button" class="btn ghost" data-close>Cancel</button><button type="submit" class="btn primary" id="pkgSave">Save package</button></div>
