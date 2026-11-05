@@ -1,4 +1,4 @@
-const CACHE="nahians-schedule-cache-v34";
+const CACHE="nahians-schedule-cache-v35";
 const FILES=["./","./index.html","./styles.css","./app.js","./full-time-students.js","./prayer-times.js","./manifest.webmanifest","./icon.svg","./icon-192.png","./icon-512.png","./icon-maskable-512.png","./apple-touch-icon.png"];
 
 self.addEventListener("install",event=>{
