@@ -197,7 +197,7 @@ async function keepAwake(){try{if(timer&&timer.runFrom&&"wakeLock" in navigator&
 function dropAwake(){try{wake?.release();}catch{}wake=null;}
 function finishTimerAt55(){if(!timer||timer.completed)return;const t=timer;t.completed=true;t.elapsed=55*60000;t.runFrom=null;t.spoken55=true;timerSave();speakBn("আপনার লেসনের সময় শেষ হয়েছে।");timer=null;timerSave();dropAwake();renderTimer();const e=state.entries.find(x=>x.id===t.lessonId);if(!e){toast("Lesson not found. Timer stopped; no record was changed.");return;}e.businessHours=1;completeLesson(t.lessonId,{min:55,start:t.startText,end:hhmm(new Date()),session:t.session});}
 function renderTimer(){const on=!!timer;$("timerBar").classList.toggle("hidden",!on);document.body.classList.toggle("timing",on);if(!on){clearInterval(timerTick);timerTick=null;return;}
- let el=Math.min(55*60000,elapsedMs());if(timer.runFrom&&el>=55*60000){finishTimerAt55();return;}const left=Math.max(0,55*60000-el),pct=Math.min(100,el/(55*60000)*100);
+ let el=Math.min(55*60000,elapsedMs());if(timer.runFrom&&el>=55*60000){finishTimerAt55();return;}if(el>=50*60000&&!timer.spoken50){timer.spoken50=true;timerSave();speakBn("আপনার লেসনের আর ৫ মিনিট বাকি।");}const left=Math.max(0,55*60000-el),pct=Math.min(100,el/(55*60000)*100);
  $("timerBar").classList.toggle("timerdone",false);$("timerBar").classList.toggle("timerpaused",!timer.runFrom);
  $("timerLabel").textContent=timer.label;$("timerDigits").textContent=clock(left);$("timerSub").textContent=`${clock(el)} elapsed · ${timer.runFrom?"LIVE":"PAUSED"}`;
  $("timerFill").style.transform=`scaleX(${pct/100})`;const ring=$("timerRing");if(ring)ring.style.setProperty("--progress",`${pct*3.6}deg`);
