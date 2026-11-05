@@ -187,17 +187,24 @@ const elapsedMs=()=>timer?Math.max(0,timer.elapsed+(timer.runFrom?Date.now()-tim
 const clock=ms=>{const s=Math.max(0,Math.floor(ms/1000)),h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return (h?h+":"+String(m).padStart(2,"0"):String(m).padStart(2,"0"))+":"+String(x).padStart(2,"0");};
 const hhmm=d=>fromMin(d.getHours()*60+d.getMinutes());
 function timerBeep(){try{audioCtx=audioCtx||new AudioContext();audioCtx.resume?.();[0,.45,.9].forEach(t=>{const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.frequency.value=880;g.gain.value=.25;o.connect(g).connect(audioCtx.destination);o.start(audioCtx.currentTime+t);o.stop(audioCtx.currentTime+t+.28);});}catch{}if(navigator.userActivation?.hasBeenActive)navigator.vibrate?.([300,150,300]);}
+// Bengali voice announcements for the lesson timer. Best-effort only: if no Bengali voice is installed on the
+// device, speakBn() does nothing. The timer's own countdown logic never depends on this working.
+let bnVoice=null;
+function pickBnVoice(){try{const voices=speechSynthesis.getVoices(),bn=voices.filter(v=>/^bn/i.test(v.lang));if(!bn.length)return null;return bn.find(v=>/male/i.test(v.name))||bn[0];}catch{return null;}}
+if("speechSynthesis" in window){try{speechSynthesis.onvoiceschanged=()=>{bnVoice=pickBnVoice();};bnVoice=pickBnVoice();}catch{}}
+function speakBn(text){try{if(!("speechSynthesis" in window))return;if(!bnVoice)bnVoice=pickBnVoice();if(!bnVoice)return;const u=new SpeechSynthesisUtterance(text);u.voice=bnVoice;u.lang=bnVoice.lang;speechSynthesis.speak(u);}catch{}}
 async function keepAwake(){try{if(timer&&timer.runFrom&&"wakeLock" in navigator&&!wake){wake=await navigator.wakeLock.request("screen");wake.addEventListener("release",()=>{wake=null;});}}catch{}}
 function dropAwake(){try{wake?.release();}catch{}wake=null;}
 function renderTimer(){const on=!!timer;$("timerBar").classList.toggle("hidden",!on);document.body.classList.toggle("timing",on);if(!on){clearInterval(timerTick);timerTick=null;return;}
  const el=elapsedMs(),left=timer.sched-el;if(!timer.beeped&&left<=0){timer.beeped=true;timerSave();if(-left<5000)timerBeep();}
+ if(!timer.spoken55&&el>=55*6e4){timer.spoken55=true;timerSave();speakBn("আপনার লেসনের সময় শেষ।");}
  $("timerBar").classList.toggle("timerdone",left<=0);$("timerBar").classList.toggle("timerpaused",!timer.runFrom);
  $("timerLabel").textContent=`${timer.label} · started ${timer.startText}${timer.runFrom?"":" · paused"}`;$("timerDigits").textContent=clock(el);
  $("timerSub").textContent=left>0?`${clock(left)} left of ${lengthText(Math.round(timer.sched/6e4))}`:`${clock(-left)} over ${lengthText(Math.round(timer.sched/6e4))}`;
  $("timerFill").style.transform=`scaleX(${Math.min(1,el/timer.sched)})`;$("timerPause").textContent=timer.runFrom?"Pause":"Resume";
  if(timer.runFrom&&!timerTick)timerTick=setInterval(renderTimer,500);if(!timer.runFrom&&timerTick){clearInterval(timerTick);timerTick=null;}}
 function startLessonTimer(id){const e=state.entries.find(x=>x.id===id);if(!e)return;if(timer&&timer.lessonId===id){renderTimer();return;}if(timer&&!confirm(`A timer is running for ${timer.label}. Cancel it and start ${e.student||"this"} lesson? The other lesson is not recorded.`))return;
- try{audioCtx=audioCtx||new AudioContext();audioCtx.resume?.();}catch{}const now=Date.now();timer={lessonId:id,session:uid(),label:e.student||"Lesson",sched:Math.max(1,schedMin(e)||60)*6e4,elapsed:0,runFrom:now,startedAt:now,startText:hhmm(new Date(now)),beeped:false};timerSave();renderTimer();keepAwake();renderNext();bindRecords();}
+ try{audioCtx=audioCtx||new AudioContext();audioCtx.resume?.();}catch{}const now=Date.now();timer={lessonId:id,session:uid(),label:e.student||"Lesson",sched:Math.max(1,schedMin(e)||60)*6e4,elapsed:0,runFrom:now,startedAt:now,startText:hhmm(new Date(now)),beeped:false,spoken55:false};timerSave();renderTimer();keepAwake();renderNext();bindRecords();speakBn("আপনার লেসনের সময় শুরু হলো।");}
 function timerPauseToggle(){if(!timer)return;if(timer.runFrom){timer.elapsed+=Date.now()-timer.runFrom;timer.runFrom=null;dropAwake();}else{timer.runFrom=Date.now();keepAwake();}timerSave();renderTimer();}
 // End lesson: the timer is cleared first, so a second tap cannot save the lesson again.
 function timerEnd(){if(!timer)return;const t=timer,min=Math.max(1,Math.round(elapsedMs()/6e4));timer=null;timerSave();dropAwake();renderTimer();if(!state.entries.some(e=>e.id===t.lessonId)){toast("That lesson no longer exists, so nothing was recorded.");return;}completeLesson(t.lessonId,{min,start:t.startText,end:hhmm(new Date()),session:t.session});}
