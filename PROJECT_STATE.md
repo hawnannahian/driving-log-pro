@@ -44,7 +44,7 @@ Lesson/expense log, student CRM, packages/prepaid accounting, reports, CSV impor
 1. Real iPhone Safari and Home Screen PWA testing is still required for timer audio, Bengali voice availability, screen wake, update prompt, clipboard/native paste and offline startup.
 2. Cloud sync is optional and uses the user's private GitHub repository/token; it is not a managed database or guaranteed real-time service.
 3. Cloud sync should be enabled only after a fresh JSON backup and confirmation that the chosen private data repository is private and token scope is limited.
-4. The Full-Time bridge assumes `full-time-students.js` is loaded before the user triggers backup/restore/sync; index.html loads it after app.js but before interaction and initial `load()`/sync.
+4. Script order is verified in `index.html`: `prayer-times.js`, then `full-time-students.js`, then `app.js`. The Full-Time bridge is therefore defined before the main app initializes and calls `load()` / initial sync.
 5. Test upgrade/restore scenarios using: current backup with Full-Time rows, legacy backup without Full-Time rows, empty Full-Time list, and simultaneous edits/deletions on two devices.
 6. Never claim iPhone runtime verified solely from successful GitHub Pages deployment.
 
@@ -58,7 +58,13 @@ Lesson/expense log, student CRM, packages/prepaid accounting, reports, CSV impor
 - PR #17: clipboard paste button implementation; later the user requested removing custom Paste buttons, and the related buttons/logic were removed from main.
 - Latest data-protection update: Full-Time historical register now participates in JSON backup/restore, cloud sync three-way merge, and Delete All. README updated; footer version v1.20; service-worker cache v36.
 
+## Verification record — 2026-11-05
+- Source reviewed on `main`: Full-Time bridge, JSON backup/restore validation, combined safety snapshot, Cloud Sync merge key, Delete All behavior, timer 50/55-minute announcements, service-worker registration and cache asset list.
+- `index.html` script order confirmed: `prayer-times.js` → `full-time-students.js` → `app.js`.
+- GitHub Pages workflow run #68 for commit `5b8db6f0a6586951fdfa8b8fb094cbaea0df477e`: build, artifact upload and deploy jobs all succeeded.
+- This is source review plus Pages deployment verification, not a browser/device end-to-end test. No claim of JavaScript runtime, iPhone audio, offline, or two-device sync verification is made.
+
 ## Handover
-- Current work committed directly to main in sequential commits; check latest GitHub Pages Actions run before claiming deployment.
+- This audit is being prepared on `maintenance/source-audit-2026-11-05`; merge only after reviewing the resulting pull request.
 - No student data or tokens were accessed or changed during source maintenance.
-- Next task: validate latest main source, deployment and then test real iPhone behavior.
+- Remaining acceptance tests require a browser/device with the app's local data and, for Cloud Sync, the user's separately configured private repository.
