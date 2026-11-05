@@ -178,3 +178,13 @@ dialog.widedialog{width:min(640px,calc(100% - 20px))}
 .reportpdf{width:100%;min-height:48px;margin:4px 0 14px}
 @media(max-width:720px){.comparebox{grid-template-columns:1fr}.pkggrid{grid-template-columns:repeat(2,minmax(0,1fr))}.pblock{grid-template-columns:1fr 1fr}}
 @media(max-width:380px){.tpay,.tdone{padding:0 7px}.payrowbar{grid-template-columns:70px 1fr auto}}
+
+/* Premium 55-minute lesson timer */
+.timerbar{left:50%;right:auto;transform:translateX(-50%);width:min(430px,calc(100vw - 24px));bottom:calc(78px + env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:stretch;gap:14px;padding:17px 18px 18px;border:1px solid #34435e;border-radius:22px;background:linear-gradient(155deg,#172641 0%,#0c172b 100%);box-shadow:0 18px 48px #07132655;overflow:hidden}
+.timerhead{display:flex;align-items:center;justify-content:space-between;gap:12px}.timerhead>div{min-width:0}.timerkicker{display:block;color:#9eacc3;font-size:9px;font-weight:800;letter-spacing:1.8px;margin-bottom:4px}.timerhead b{display:block;color:#fff;font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.timerstatus{border-radius:99px;padding:6px 10px;font-size:10px;font-weight:800;letter-spacing:1px}.timerstatus.live{background:#123d35;color:#63e0ad}.timerstatus.paused{background:#49351b;color:#ffc66e}
+.timercenter{display:grid;place-items:center;padding:2px 0}.timerring{--progress:0deg;width:190px;height:190px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#4e80ff var(--progress),#34425b var(--progress));position:relative;box-shadow:0 0 28px #315ee822}
+.timerring:before{content:"";position:absolute;inset:8px;border-radius:50%;background:#101c33}.timerringinner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:7px}.timerringinner small{font-size:9px;color:#9eacc3;letter-spacing:1.1px}.timerringinner b{font-size:36px;line-height:1;color:#fff;font-variant-numeric:tabular-nums;letter-spacing:-1.5px}
+.timeractions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.timerbtn{min-height:46px;border-radius:13px;background:#263754;color:#fff;font-size:13px}.timerbtn.timerend{background:#315ee8;color:#fff}
+.timerbar .timerfill{height:3px;background:#5a8aff;opacity:.45;transition:transform .25s linear}
+@media(max-width:720px){.timerbar{bottom:calc(76px + env(safe-area-inset-bottom));width:calc(100vw - 20px);padding:14px 15px 15px;gap:11px}.timerring{width:164px;height:164px}.timerringinner b{font-size:32px}.timeractions .timerbtn{min-height:44px}}
