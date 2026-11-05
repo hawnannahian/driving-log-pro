@@ -66,10 +66,6 @@ async function copyText(value){
 /* iOS-safe paste: read the clipboard directly (works on a real tap, including inside an
    installed Home Screen app, where the native long-press "Paste" menu is often unreliable).
    If the browser blocks programmatic reading, fall back to focusing the field for a manual paste. */
-let lastLessonContactField="fPhone";
-$("fStudent").addEventListener("focus",()=>{lastLessonContactField="fStudent";});
-$("fPhone").addEventListener("focus",()=>{lastLessonContactField="fPhone";});
-async function pasteInto(id){const field=$(id);if(!field)return;try{if(!navigator.clipboard?.readText)throw new Error("unsupported");const text=await navigator.clipboard.readText();if(!text)throw new Error("empty");field.value=text;field.dispatchEvent(new Event("input",{bubbles:true}));field.focus();toast("Pasted");}catch{field.focus();try{field.setSelectionRange(field.value.length,field.value.length);}catch{}toast("Automatic paste is blocked by iPhone. Touch and hold inside this field, then tap Paste.");}}
 const isPhone=n=>/^[+\d][\d\s()-]{6,}$/.test(cleanPhone(n));
 const last9=n=>{const d=String(n||"").replace(/\D/g,"");return d.length>=9?d.slice(-9):"";};
 function matchPhone(typed){if(!isPhone(typed))return typed;const k=last9(typed),hit=k&&state.students.find(s=>last9(s.phone)===k||(isPhone(s.name)&&last9(s.name)===k));return hit?hit.name:typed;}
@@ -424,9 +420,6 @@ $("importStudents").onchange=async e=>{const f=e.target.files[0];if(f)importStud
 $("exportAll").onclick=backupNow;$("backupNowBtn").onclick=backupNow;$("logExportBtn").onclick=exportLog;
 $("exportPdf").onclick=exportPdf;
 $("fStudent").addEventListener("input",()=>syncContactBoxes("name"));$("fPhone").addEventListener("input",()=>syncContactBoxes("phone"));
-$("pastePhoneBtn").addEventListener("click",()=>pasteInto(lastLessonContactField));
-$("pasteSPhoneBtn").addEventListener("click",()=>pasteInto("sPhone"));
-$("pasteSWhatsBtn").addEventListener("click",()=>pasteInto("sWhats"));
 let lessonLen=60,doneDirty=false;
 function syncDoneBox(){$("fActual").closest("label").classList.toggle("hidden",!$("fDone").checked);}
 $("fDone").addEventListener("change",()=>{doneDirty=true;if($("fDone").checked&&!$("fActual").value)$("fActual").value=schedMin({type:"Lesson",start:$("fStart").value,end:$("fEnd").value})||60;syncDoneBox();});
