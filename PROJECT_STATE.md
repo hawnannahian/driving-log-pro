@@ -1,59 +1,64 @@
 # PROJECT_STATE — Driving Log Pro
 
-শেষ আপডেট: 2026-11-05 (Claude) · ভিত্তি: `main` @ `26a3d1c`
-এই repo public: এখানে ছাত্রের নাম/ফোন, আর্থিক হিসাব, token বা Excel/CSV/backup ডেটা লিখবেন না।
+শেষ যাচাই: 2026-11-05 · ভিত্তি: `main` (Full-Time data protection update)
 
 ## কাজের নিয়ম
-- প্রতিটি session এই ফাইল পড়ে শুরু; পুরো repo নয়, দরকারি অংশ `grep`/নির্দিষ্ট লাইন দিয়ে পড়া। `app.js` ও `prayer-times.js`-এর লাইন খুব লম্বা, তাই পুরো ফাইল `cat` নয়।
-- বড় ডকুমেন্ট বা tool output বারবার লোড নয়। শেষ করা কাজের ব্যাখ্যা পুনরাবৃত্তি নয়, এখানে সারাংশ।
-- Session লম্বা হলে (context ~70%-এর আগে) নিচের "Handover" অংশ পূরণ করে নতুন session।
-- Context কমানোর জন্য কাজ করা কোড মুছবেন/বদলাবেন না। Context-এর চেয়ে সঠিকতা ও ধারাবাহিকতা আগে।
-- প্রতিটি কোড পরিবর্তনের পর `sw.js`-এর `CACHE` নম্বর বাড়াতে হবে, না হলে পুরনো ফাইল চলতে থাকবে।
+- কাজ শুরুর আগে বর্তমান `main` এবং এই ফাইল পড়ুন।
+- Claude/ChatGPT—কেউই পুরোনো divergent branch-এ push বা merge করবেন না। প্রতিটি নতুন কাজ `main` থেকে নতুন branch-এ শুরু করুন।
+- প্রতিটি app asset পরিবর্তনের পর `sw.js` cache version বাড়ান।
+- Public repository-তে কখনো student data, CSV/JSON backup, token বা private data commit করবেন না।
+- Source update, Pages deployment success এবং real iPhone runtime test—তিনটি আলাদা verification status হিসেবে রিপোর্ট করুন।
 
 ## Architecture
-- Vanilla JS PWA, build step নেই। GitHub Pages: `main`, `/` (root)।
-- ফাইল: `index.html`, `styles.css`, `app.js` (মূল অ্যাপ), `prayer-times.js`, `full-time-students.js`, `sw.js`, `manifest.webmanifest`, icons।
-- ট্যাব: Overview, Calendar, Log, Students, Reports।
-- ডেটা: `localStorage` key `driving-log-pro-v1` (`state = {entries, students}`), সহায়ক key `DB_KEY-*`।
-- Full-time register আলাদা: key `driving-log-pro-full-time-v1`, নিজস্ব export/import, সাধারণ লেসনের হিসাবের বাইরে।
-- Cloud sync: GitHub API, private repo `driving-log-data`, ফাইল `driving-log.json`। ডিভাইসে রাখা fine-grained token ব্যবহার করে।
-- Service worker: cache-first, navigate network-first; বর্তমান cache `nahians-schedule-cache-v32` (`sw.js` দেখে প্রতিবার নিশ্চিত করুন, এই সংখ্যা ঘন ঘন বদলায়)।
-- Travel dua অডিও বাইরের URL (hisnmuslim.com) থেকে আসে।
+- Vanilla JavaScript PWA; build step নেই; GitHub Pages: `main`, root.
+- Main files: `index.html`, `styles.css`, `app.js`, `prayer-times.js`, `full-time-students.js`, `sw.js`, `manifest.webmanifest`.
+- Tabs: Overview, Calendar, Log, Students, Reports.
+- Main data localStorage key: `driving-log-pro-v1` (`entries`, `students`, packages, prayer/work settings).
+- Full-Time historical register key: `driving-log-pro-full-time-v1`; records keyed by `legacy_student_id`, isolated from normal lesson accounting.
+- Main app exposes a narrow `window.DrivingLogFullTime` bridge (getAll/replace/clear) so full-time data can participate in backup/sync without mixing into lesson accounting.
+- Cloud sync stores `driving-log.json` in the user's own private GitHub data repository; token remains in that browser's localStorage.
+- Current service-worker cache: `nahians-schedule-cache-v36`.
+- App footer version: `v1.20`. CSS comments such as v1.26 may refer to feature revision, not app release.
 
-## গুরুত্বপূর্ণ সিদ্ধান্ত
-- Default rate €20/ঘণ্টা। Income = সময় × rate। Profit = income − expenses। Expense কখনো income নয়। Unpaid আলাদা হিসাব।
-- Lesson timer নির্দিষ্ট 55 মিনিট: 1 ঘণ্টা business credit, আসল সময় আলাদা রাখা হয়।
-- Lesson ফর্মে Cost/Odometer নেই; এগুলো শুধু expense type-এ। লেসনে নাম বা ফোন যেকোনো একটা যথেষ্ট।
-- Sync: একই রেকর্ডে শেষে sync করা ডিভাইসের পরিবর্তন থাকে। মুছলে সব ডিভাইসে মোছে। "Delete all app data" শুধু ওই ডিভাইসে।
-- Private ডেটা public repo-তে নয় (`.gitignore` দিয়ে সুরক্ষিত)। পেইড সার্ভিস নয়।
-- ভবিষ্যতে native iPhone অ্যাপ চাই; Mac নেই।
+## Business rules
+- Default lesson rate €20/hour.
+- Income = lesson value; profit = income minus expenses; expenses are not income.
+- Timer target: 55 minutes; completed timer lesson receives 1 hour business credit, actual time is stored separately.
+- Full-Time register is historical only and must not affect current lessons, packages, revenue or reports.
+- Full-Time records use unique `legacy_student_id`; do not merge by name.
 
-## বর্তমান অবস্থা
-কাজ করা বৈশিষ্ট্য (কোডে আছে): লেসন/খরচ লগ, ছাত্র, রিপোর্ট, CSV import/export, JSON backup ও safety copies, cloud sync, ক্যালেন্ডার, 55-মিনিট টাইমার, Done/End lesson, prepaid package, WhatsApp বার্তা, নামাজের সময়, travel dua অডিও, Full-time register (PR #12)।
+## Data protection — current implementation
+- JSON export now includes `fullTime` alongside main app state.
+- JSON restore validates optional `fullTime` records and restores them when present.
+- Legacy backups without `fullTime` preserve the device's existing Full-Time register; they do not silently erase it.
+- Automatic safety copies use the same combined snapshot.
+- Cloud snapshot, three-way merge and restore include Full-Time records, using `legacy_student_id` as the merge key.
+- Delete All explicitly clears the local Full-Time register as well as main app data; cloud copy remains untouched after this device disconnects.
+- Full-Time CSV export/import remains available as an additional independent safety option.
+- Public app repo contains code only; actual records and token must remain outside this repo.
 
-## যাচাই বাকি
-1. **Version লেবেল মিলছে না:** UI দেখায় `v1.19`, CSS মন্তব্যে `v1.26`, cache `v28`।
-2. **Full-time backup:** `app.js`-এ এই key-এর উল্লেখ নেই, তাই JSON backup ও cloud sync-এ সম্ভবত এই ডেটা যায় না। আচরণ পরীক্ষা করে নিশ্চিত করতে হবে।
-3. **Offline precache:** `full-time-students.js` `sw.js`-এর `FILES` তালিকায় নেই। প্রথম online লোডে cache হয়, install-এ নয়।
-4. **Branch:** নিচের কোনোটা merge হয়নি। এগুলো `main`-এর পুরনো ভিত্তি থেকে আলাদা হয়েছে, তাই সরাসরি merge করলে নতুন কাজ হারাতে পারে; দরকারি commit আলাদা করে দেখতে হবে।
-   - `claude/intelligent-gates-shiyps`: পুরনো, আর ব্যবহার হবে না। এর কাজ (`31e566d`) squash হয়ে `main`-এ মার্জ হয়ে গেছে, কিন্তু SHA আলাদা থাকায় এই branch ref নিজে `main`-এর ancestor নয় — তাই এতে আর নতুন commit push করবেন না (সবসময় reject হবে, আর force-push নিষেধ)। নতুন কাজ সবসময় `main` থেকে একটা তাজা branch নামে শুরু করুন।
-   - `feature/student-crm-course-ledger-spec`: Student CRM ও Course Ledger spec। `main`-এ নেই, এর বাস্তবায়নও নিশ্চিত নয়।
-   - `feature/premium-55-minute-lesson-timer`, `feature/driving-log-pro-upgrade`, `fix/service-worker-cache-refresh`: সম্ভবত আগেই অন্যভাবে `main`-এ এসেছে, নিশ্চিত করতে হবে।
-5. **আসল iPhone টেস্ট:** টাইমারের শব্দ, screen wake, swipe, বাংলা voice।
-6. `README_BN.md`-এর "multi-device sync নেই" সতর্কতা পুরনো কি না মিলিয়ে দেখা।
+## Current features
+Lesson/expense log, student CRM, packages/prepaid accounting, reports, CSV import/export, JSON backup/restore, safety copies, optional private GitHub cloud sync, calendar, 55-minute timer, Bengali voice announcements (device voice availability dependent), travel dua audio, and separate Full-Time Students historical register.
 
-## সাম্প্রতিক ফিক্স (Claude, 2026-11-05)
-ব্যবহারকারীর রিপোর্ট: WhatsApp থেকে copy করা ফোন নম্বর (`+351 920 449 837`) paste করা যাচ্ছিল না।
-- **আসল কারণ ১:** WhatsApp-এর copy নম্বরের আগে-পরে invisible Unicode bidi mark (U+202A/U+202C) জুড়ে দেয়। `isPhone()`-এর regex আর `waNumber()`-এর `startsWith("+")` চেক এই mark-এর কারণে ব্যর্থ হতো — নম্বর ঠিকই সেভ হতো, কিন্তু WhatsApp বোতাম দেখাত না। **ফিক্স (PR #13, merged):** `cleanPhone()` helper যোগ, `isPhone`/`waNumber`/`resolveStudent`/student form/CSV import-এ প্রয়োগ করা হয়েছে। আগে থেকে save হওয়া ছাত্রও নতুন করে না লিখেই ঠিক হয়ে যায় (`waNumber()`-এ read-time clean)।
-- **আসল কারণ ২:** `fPhone`-এর পাশে যোগ করা "Paste" বোতাম (এই session-এর বাইরে করা) আসলে clipboard থেকে কিছুই পড়ত না — শুধু field-এ focus করে instruction দেখাত। **ফিক্স (PR #17, merged):** `pasteInto(id)` যোগ, যেটা `navigator.clipboard.readText()` দিয়ে সত্যিই paste করে; Student profile-এর Phone/WhatsApp field-েও একই বোতাম যোগ হয়েছে (existing `.phoneinputrow` CSS পুনর্ব্যবহার, নতুন CSS নেই)। Clipboard API না থাকলে আগের fallback বার্তাই দেখায়।
-- দুটোই Chromium-এ real clipboard permission দিয়ে paste simulate করে, আর ৭০+ regression check চালিয়ে যাচাই করা হয়েছে। **iOS Safari-তে সরাসরি test করা যায়নি** (এই sandbox-এ শুধু Chromium আছে) — ব্যবহারকারীর ফোনে বাস্তবে কাজ করছে কি না এখনো নিশ্চিত হওয়া বাকি।
+## Known limitations / verification still needed
+1. Real iPhone Safari and Home Screen PWA testing is still required for timer audio, Bengali voice availability, screen wake, update prompt, clipboard/native paste and offline startup.
+2. Cloud sync is optional and uses the user's private GitHub repository/token; it is not a managed database or guaranteed real-time service.
+3. Cloud sync should be enabled only after a fresh JSON backup and confirmation that the chosen private data repository is private and token scope is limited.
+4. The Full-Time bridge assumes `full-time-students.js` is loaded before the user triggers backup/restore/sync; index.html loads it after app.js but before interaction and initial `load()`/sync.
+5. Test upgrade/restore scenarios using: current backup with Full-Time rows, legacy backup without Full-Time rows, empty Full-Time list, and simultaneous edits/deletions on two devices.
+6. Never claim iPhone runtime verified solely from successful GitHub Pages deployment.
 
-এ ছাড়া ৫টা tab navigation নিয়ে আগে যে রিপোর্ট ছিল, তার root cause verify করা হয়েছে: একটা পুরনো commit-এ literal `\n` (escape সিকোয়েন্স টেক্সট, actual newline না) ঢুকে গিয়ে `app.js`-এ SyntaxError হয়েছিল, যা পরে অন্য কেউ ঠিক করে দিয়েছে (`7a13cc9`)। `main`-এর বর্তমান কোডে এই syntax ঠিক আছে, এখন ৫টা tab-ই ঠিকভাবে কাজ করে (verified)।
+## Branch hygiene
+- `claude/intelligent-gates-shiyps` is permanently divergent (32 commits behind main, one unique commit); do not push, merge or force-push it.
+- Previous feature branches may contain work already merged by PR; inspect diffs before reusing.
+- Current main is the source of truth.
 
-## পরবর্তী কাজ
-ব্যবহারকারী এখনো কোনো নতুন feature বলেননি। পরের কাজ এখানে লেখা হবে।
+## Recent work
+- PR #19: premium responsive Log screen with live KPIs and sorting.
+- PR #17: clipboard paste button implementation; later the user requested removing custom Paste buttons, and the related buttons/logic were removed from main.
+- Latest data-protection update: Full-Time historical register now participates in JSON backup/restore, cloud sync three-way merge, and Delete All. README updated; footer version v1.20; service-worker cache v36.
 
-## Handover (নতুন session-এর জন্য)
-- শেষ কাজ (Claude): WhatsApp copy-paste bug fix (উপরে "সাম্প্রতিক ফিক্স" দেখুন), PR #13 ও #17, দুটোই merged। এই ফাইলও আপডেট করা হয়েছে।
-- চলমান কাজ: নেই।
-- পরের ধাপ: উপরের "যাচাই বাকি" বা ব্যবহারকারীর নতুন নির্দেশ। ব্যবহারকারী ফোনে paste বোতাম বাস্তবে test করে জানাবেন কি না, সেটা এখনো বাকি।
+## Handover
+- Current work committed directly to main in sequential commits; check latest GitHub Pages Actions run before claiming deployment.
+- No student data or tokens were accessed or changed during source maintenance.
+- Next task: validate latest main source, deployment and then test real iPhone behavior.
