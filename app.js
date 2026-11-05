@@ -208,9 +208,6 @@ function startLessonTimer(id){const e=state.entries.find(x=>x.id===id);if(!e)ret
 function beginLessonTimer(id){const e=state.entries.find(x=>x.id===id);if(!e)return;try{audioCtx=audioCtx||new AudioContext();audioCtx.resume?.();}catch{}const now=Date.now();timer={lessonId:id,session:uid(),label:e.student||"Lesson",sched:55*6e4,elapsed:0,runFrom:now,startedAt:now,startText:hhmm(new Date(now)),beeped:false,spoken55:false};timerSave();renderTimer();keepAwake();renderNext();bindRecords();speakBn("আপনার লেসনের সময় শুরু হলো।");}
 let pendingTimerLessonId=null;
 function closeDuaAndStart(){if(!pendingTimerLessonId)return;const id=pendingTimerLessonId;pendingTimerLessonId=null;$("travelDuaDialog").close();beginLessonTimer(id);}
-function speakTravelDuaArabic(){try{if(!("speechSynthesis" in window)){toast("Arabic voice is not available on this device");return;}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance("سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَىٰ رَبِّنَا لَمُنْقَلِبُونَ");const v=speechSynthesis.getVoices().find(x=>/^ar/i.test(x.lang));if(v)u.voice=v;u.lang=v?.lang||"ar";u.rate=.82;speechSynthesis.speak(u);}catch{toast("Could not play Arabic voice");}}
-function speakTravelDuaBangla(){speakBn("সুবহানাল্লাযী সাখখারা লানা হাযা, ওয়া মা কুন্না লাহু মুকরিনীন। ওয়া ইন্না ইলা রব্বিনা লামুনকালিবূন।");}
-$("duaArabicVoice").onclick=speakTravelDuaArabic;$("duaBanglaVoice").onclick=speakTravelDuaBangla;
 $("duaStart").onclick=closeDuaAndStart;$("duaSkip").onclick=closeDuaAndStart;$("duaClose").onclick=()=>{pendingTimerLessonId=null;$("travelDuaDialog").close();};
 function timerPauseToggle(){if(!timer)return;if(timer.runFrom){timer.elapsed+=Date.now()-timer.runFrom;timer.runFrom=null;dropAwake();}else{timer.runFrom=Date.now();keepAwake();}timerSave();renderTimer();}
 // End lesson: the timer is cleared first, so a second tap cannot save the lesson again.
