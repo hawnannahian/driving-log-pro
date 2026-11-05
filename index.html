@@ -81,9 +81,32 @@
       </details>
     </section>
 
-    <section class="panel tabpanel hidden" id="log">
-      <div class="sectionhead wrap"><div><h2>Driving log</h2><p class="muted">Lessons, fuel and other expenses</p></div><button class="btn primary" id="addRecordBtn">＋ Add record</button></div>
-      <div class="toolbar"><input id="logSearch" type="search" placeholder="Search student, type or comment"><select id="logFilter" aria-label="Filter records"><option value="today">Today's lessons</option><option value="all">All records</option><option value="Lesson">Lessons</option><option value="expense">Expenses</option><option value="paid">Paid</option><option value="unpaid">Unpaid</option><option value="prepaid">Prepaid</option></select></div>
+    <section class="panel tabpanel hidden logpanel" id="log">
+      <div class="log-heading">
+        <div><p class="log-eyebrow">YOUR BUSINESS ACTIVITY</p><h2>Driving Log</h2><p class="muted">Lessons, fuel and other expenses</p></div>
+        <div class="log-date-pill"><span class="log-calendar" aria-hidden="true">▦</span><span><b>Today</b><small id="logTodayDate"></small></span></div>
+      </div>
+      <div class="log-action-row">
+        <button class="btn primary log-add" id="addRecordBtn"><span aria-hidden="true">＋</span> Add record</button>
+        <button class="btn ghost log-export" id="logExportBtn" type="button"><span aria-hidden="true">⇩</span> Export CSV</button>
+      </div>
+      <div class="toolbar log-toolbar">
+        <input id="logSearch" type="search" placeholder="Search student, type or note" aria-label="Search log records">
+        <select id="logFilter" aria-label="Filter records"><option value="today">Today's lessons</option><option value="all">All records</option><option value="Lesson">Lessons</option><option value="expense">Expenses</option><option value="paid">Paid</option><option value="unpaid">Unpaid</option><option value="prepaid">Prepaid</option></select>
+        <select id="logSort" aria-label="Sort records"><option value="latest">Latest first</option><option value="oldest">Oldest first</option><option value="amount">Highest amount</option><option value="outstanding">Highest outstanding</option></select>
+      </div>
+      <section class="log-summary" aria-label="Today's summary">
+        <div class="log-summary-main">
+          <article class="log-kpi"><span class="log-kpi-icon">▤</span><div><b id="logRecordsToday">0</b><small>Records today</small></div></article>
+          <article class="log-kpi"><span class="log-kpi-icon">◷</span><div><b id="logHoursToday">0 h</b><small>Total lesson hours</small></div></article>
+          <article class="log-kpi"><span class="log-kpi-icon">€</span><div><b id="logRevenueToday">€0,00</b><small>Lesson value</small></div></article>
+        </div>
+        <div class="log-payment-summary">
+          <div><span>Collected</span><b class="collected" id="logCollectedToday">€0,00</b></div>
+          <div><span>Outstanding</span><b class="outstanding" id="logOutstandingToday">€0,00</b></div>
+        </div>
+      </section>
+      <div class="log-list-heading"><h3>Lesson records</h3><span id="logResultCount">0 records</span></div>
       <div id="logList" class="recordlist empty">No records yet.</div>
     </section>
 
