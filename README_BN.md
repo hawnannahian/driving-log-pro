@@ -15,13 +15,14 @@
 
 ## গুরুত্বপূর্ণ: ডেটা কোথায় থাকে
 এই সংস্করণে ডেটা browser-এর localStorage-এ থাকে। অর্থাৎ:
-- iPhone-এর Safari-তে তৈরি ডেটা Windows PC-তে নিজে থেকে আসবে না।
+- Cloud sync চালু না করলে iPhone Safari-এর ডেটা Windows PC বা অন্য ডিভাইসে নিজে থেকে আসবে না।
 - Browser data clear করলে data হারাতে পারে।
 - নিয়মিত Reports & data থেকে JSON backup ডাউনলোড করুন।
 - Restore করার আগে এবং প্রথম Cloud sync-এর আগে অ্যাপ নিজে থেকে একটি safety copy রাখে। Reports & data → Safety copies থেকে সেটা ডাউনলোড বা ফেরত আনা যায়।
 - iPhone-এ অবশ্যই Home Screen-এ যোগ করে ব্যবহার করুন। শুধু Safari-তে খুললে ৭ দিন ব্যবহার না করলে Safari ডেটা মুছে দিতে পারে।
 - Cloud sync-এর জন্য fine-grained token ব্যবহার করুন, যেটা শুধু data repository-তে "Contents: Read and write" অনুমতি পায়।
-- Reports & data-র Cloud sync চালু করলে ডেটার কপি আপনার private GitHub repository-তে থাকে। Token কোডে রাখবেন না, শুধু অ্যাপের ঘরে লিখবেন।
+- Reports & data-র Cloud sync চালু করলে মূল lesson/student/package/prayer/work data এবং Full-Time Students historical register—দুটোরই কপি আপনার private GitHub repository-তে রাখা ও merge করা হয়। Token কোডে রাখবেন না, শুধু অ্যাপের ঘরে লিখবেন।
+- Full-Time Students register এখন JSON backup/restore ও Cloud sync-এর অন্তর্ভুক্ত। আগের version-এর backup-এ এই field না থাকলে restore করার সময় বর্তমান Full-Time register অক্ষত রাখা হয়। Full-Time register CSV export-ও আলাদা ভাবে রাখা হয়েছে অতিরিক্ত safety copy হিসেবে।
 
 ## Windows PC-তে চালানো
 সাধারণভাবে `index.html` ডাবল-ক্লিক করে UI দেখা যায়, তবে PWA/offline service worker কাজ করতে HTTPS বা localhost লাগে। সহজ local test:
@@ -49,7 +50,7 @@ CSV import-এর Log columns: Date, Type, Student, Start, End, Hours, Rate, Inc
 Hours ও Income app নিজে Start/End ও Rate থেকে হিসাব করে; expense income হিসেবে গণনা হয় না।
 
 ## সতর্কতা
-এটি একটি functional starter version, production-grade cloud service নয়। Multi-device sync, user authentication, server database, secure remote backup, Portuguese VAT/tax invoice, payments এবং multi-user access এখনো নেই।
+এটি একটি functional personal-business PWA, production-grade cloud service নয়। Multi-device sync কেবল ব্যবহারকারী নিজে private GitHub repository ও fine-grained token দিয়ে Cloud sync চালু করলে কাজ করে; এটি hosted database, managed authentication বা guaranteed real-time service নয়। Portuguese VAT/tax invoice, payment processing এবং multi-user access এখনো নেই।
 
 ## v1.19: প্যাকেজ, টাইমার ও লেসন সম্পন্ন
 - **লেসন সম্পন্ন:** টাইমারে "End lesson" চাপলে আসল সময় সেভ হয়। আজকের তালিকায় "Done" চাপলে, বা লেসন ফর্মে "Lesson completed" টিক দিলেও সম্পন্ন হয়। শেষ সময় পার হলে লেসন নিজে থেকেই সম্পন্ন ধরা হয়।
