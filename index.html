@@ -160,7 +160,7 @@
         <label class="wide">Date<input type="date" id="fDate" required></label>
         <div class="chiprow wide hidden" id="recentStudents" aria-label="Recent students"></div>
         <label class="lessonfield">Student name<input id="fStudent" list="studentOptions" autocomplete="off"><datalist id="studentOptions"></datalist></label>
-        <label class="lessonfield">Phone<input id="fPhone" type="tel" autocomplete="off"></label>
+        <label class="lessonfield">Phone<div class="phoneinputrow"><input id="fPhone" type="text" inputmode="tel" autocomplete="tel" autocapitalize="off" spellcheck="false"><button type="button" class="btn secondary pastephone" id="pastePhoneBtn">Paste</button></div></label>
         <p class="lessonfield formhint">Name or phone: one is enough.</p>
         <label class="lessonfield">Start time<input type="time" id="fStart" value="10:00"></label>
         <label class="lessonfield">End time<input type="time" id="fEnd" value="11:00"></label>
