@@ -387,6 +387,7 @@ $("importStudents").onchange=async e=>{const f=e.target.files[0];if(f)importStud
 $("exportAll").onclick=backupNow;$("backupNowBtn").onclick=backupNow;
 $("exportPdf").onclick=exportPdf;
 $("fStudent").addEventListener("input",()=>syncContactBoxes("name"));$("fPhone").addEventListener("input",()=>syncContactBoxes("phone"));
+$("pastePhoneBtn").addEventListener("click",async()=>{const field=$("fPhone");try{if(!navigator.clipboard?.readText)throw new Error("Clipboard access unavailable");const value=await navigator.clipboard.readText();if(!value){toast("Clipboard is empty. Copy the number again.");return;}field.value=cleanPhone(value);field.dispatchEvent(new Event("input",{bubbles:true}));toast("Phone number pasted");}catch{field.focus();toast("Clipboard access was blocked. Tap and hold the Phone field, then choose Paste.");}});
 let lessonLen=60,doneDirty=false;
 function syncDoneBox(){$("fActual").closest("label").classList.toggle("hidden",!$("fDone").checked);}
 $("fDone").addEventListener("change",()=>{doneDirty=true;if($("fDone").checked&&!$("fActual").value)$("fActual").value=schedMin({type:"Lesson",start:$("fStart").value,end:$("fEnd").value})||60;syncDoneBox();});
