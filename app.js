@@ -47,6 +47,17 @@ const BACKUP_KEY=DB_KEY+"-last-backup",SYNC_KEY=DB_KEY+"-students-synced";
 const sameName=(a,b)=>(a||"").trim().toLowerCase()===(b||"").trim().toLowerCase();
 // WhatsApp copy may wrap phone numbers in invisible bidi/zero-width formatting marks.
 const cleanPhone=s=>String(s??"").replace(/[\u200B-\u200F\u202A-\u202E\u2066-\u2069\uFEFF]/g,"").trim();
+/* Clipboard fallback for iOS Safari and installed PWAs. */
+async function copyText(value){
+ const text=String(value??"");
+ try{if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(text);return true;}}catch{}
+ const field=document.createElement("textarea");
+ field.value=text;field.setAttribute("readonly","");
+ field.style.cssText="position:fixed;left:-9999px;top:0;opacity:0;font-size:16px";
+ document.body.appendChild(field);field.focus();field.select();field.setSelectionRange(0,field.value.length);
+ let copied=false;try{copied=document.execCommand("copy");}catch{}
+ field.remove();if(!copied)throw new Error("Copy is not available in this browser");return true;
+}
 const isPhone=n=>/^[+\d][\d\s()-]{6,}$/.test(cleanPhone(n));
 const last9=n=>{const d=String(n||"").replace(/\D/g,"");return d.length>=9?d.slice(-9):"";};
 function matchPhone(typed){if(!isPhone(typed))return typed;const k=last9(typed),hit=k&&state.students.find(s=>last9(s.phone)===k||(isPhone(s.name)&&last9(s.name)===k));return hit?hit.name:typed;}
@@ -400,7 +411,7 @@ document.querySelectorAll("[data-type]").forEach(b=>b.onclick=()=>{$("fType").va
 // Up to six students from the latest lessons, as one-tap chips on a new lesson.
 function recentNames(){const seen=new Set(),out=[];for(const e of [...state.entries].filter(e=>e.type==="Lesson"&&e.student).sort((a,b)=>b.date.localeCompare(a.date))){const k=e.student.trim().toLowerCase();if(seen.has(k)||!state.students.some(s=>sameName(s.name,e.student)))continue;seen.add(k);out.push(e.student.trim());if(out.length===6)break;}return out;}
 function renderRecentChips(show){const box=$("recentStudents"),names=show?recentNames():[];box.classList.toggle("hidden",!names.length);box.innerHTML=names.map(n=>`<button type="button" data-pick="${esc(n)}"${sameName(n,$("fStudent").value)?' class="active"':""}>${esc(n)}</button>`).join("");box.querySelectorAll("[data-pick]").forEach(b=>b.onclick=()=>{$("fStudent").value=b.dataset.pick;$("fPhone").value="";syncContactBoxes("name");box.querySelectorAll("[data-pick]").forEach(x=>x.classList.toggle("active",x===b));});}
-$("timerPause").onclick=timerPauseToggle;$("timerEnd").onclick=timerEnd;$("doneMsg").addEventListener("input",syncDoneLink);$("doneCopy").onclick=async()=>{try{await navigator.clipboard.writeText($("doneMsg").value);toast("Message copied");}catch{$("doneMsg").select();toast("Select the text and copy it");}};
+$("timerPause").onclick=timerPauseToggle;$("timerEnd").onclick=timerEnd;$("doneMsg").addEventListener("input",syncDoneLink);$("doneCopy").onclick=async()=>{try{await copyText($("doneMsg").value);toast("Message copied");}catch{$("doneMsg").select();toast("Select the text and copy it");}};
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"){renderTimer();keepAwake();}});
 $("calToday").onclick=()=>{const n=new Date();cal.y=n.getFullYear();cal.m=n.getMonth();cal.day=dateISO(n);renderCalendar();bindRecords();};
 {let sx=null;const box=$("calBoard");box.addEventListener("touchstart",e=>{sx=e.touches[0].clientX;},{passive:true});box.addEventListener("touchend",e=>{if(sx==null)return;const dx=e.changedTouches[0].clientX-sx;sx=null;if(Math.abs(dx)>60)calMove(dx<0?1:-1);});}
