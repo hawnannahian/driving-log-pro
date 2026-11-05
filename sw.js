@@ -1,4 +1,4 @@
-const CACHE="nahians-schedule-cache-v36";
+const CACHE="nahians-schedule-cache-v37";
 const FILES=["./","./index.html","./styles.css","./app.js","./full-time-students.js","./prayer-times.js","./manifest.webmanifest","./icon.svg","./icon-192.png","./icon-512.png","./icon-maskable-512.png","./apple-touch-icon.png"];
 
 self.addEventListener("install",event=>{
@@ -41,13 +41,23 @@ self.addEventListener("fetch",event=>{
     return;
   }
 
+  // Network-first for the app shell too (not just navigations), so a fixed app.js/styles.css
+  // is picked up on the very next successful load instead of waiting for the old cached copy
+  // to expire on its own. Falls back to the cache when offline.
   event.respondWith(
-    caches.open(CACHE).then(async cache=>{
-      const cached=await cache.match(request);
-      if(cached)return cached;
-      const response=await fetch(request);
-      if(response.ok)await cache.put(request,response.clone());
-      return response;
-    })
+    fetch(request)
+      .then(response=>{
+        if(response.ok){
+          const copy=response.clone();
+          event.waitUntil(caches.open(CACHE).then(cache=>cache.put(request,copy)));
+        }
+        return response;
+      })
+      .catch(async()=>{
+        const cache=await caches.open(CACHE);
+        const cached=await cache.match(request);
+        if(cached)return cached;
+        throw new Error("offline and not cached: "+request.url);
+      })
   );
 });
