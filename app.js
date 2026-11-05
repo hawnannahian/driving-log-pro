@@ -351,10 +351,24 @@ function bindRecords(){document.querySelectorAll("[data-record]").forEach(b=>b.o
 let doneByName={};
 function render(){recomputeAlloc();doneByName={};state.entries.forEach(e=>{if(isDone(e)&&e.student){const k=e.student.trim().toLowerCase();doneByName[k]=(doneByName[k]||0)+hours(e);}});
  const sorted=[...state.entries].sort((a,b)=>(b.date+(b.start||"")).localeCompare(a.date+(a.start||"")));
+ const logToday=state.entries.filter(e=>e.type==="Lesson"&&e.date===dateISO(new Date()));
+ const logCompleted=logToday.filter(isDone);
+ const logRevenue=logToday.reduce((sum,e)=>sum+income(e),0);
+ const logCollected=logCompleted.reduce((sum,e)=>sum+(lessonStatus(e)==="unpaid"?0:income(e)-unpaidAmt(e)),0);
+ const logOutstanding=logCompleted.reduce((sum,e)=>sum+unpaidAmt(e),0);
+ $("logTodayDate").textContent=new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"});
+ $("logRecordsToday").textContent=logToday.length;
+ $("logHoursToday").textContent=fmtH(logToday.reduce((sum,e)=>sum+hours(e),0))+" h";
+ $("logRevenueToday").textContent=euro(logRevenue);
+ $("logCollectedToday").textContent=euro(logCollected);
+ $("logOutstandingToday").textContent=euro(logOutstanding);
  const todayISO=dateISO(new Date()),todays=lessonsOn(todayISO);$("todayTitle").textContent="Today · "+dayName(todayISO)+(todays.length?` · ${todays.length} lesson${todays.length>1?"s":""}`:"");const nowM=nowMin(),todayHTML=todays.map((e,i)=>{const st=state.students.find(x=>sameName(x.name,e.student)),n=st?waNumber(st):null;const ls=lessonStatus(e),fin=isDone(e);return `<div class="todayrow${fin?" done":""}"><span class="tnum">${i+1}</span><button type="button" class="tmain" data-record="${esc(e.id)}"><b>${esc(timeText(e))}</b><span>${esc(e.student||"Lesson")}</span></button><span class="tstat ${ls}">${ls==="paid"?"✓ Paid":STATUS_TEXT[ls]}</span>${n?`<a class="actbtn wa" href="${esc(waLink(n,lessonMsg(e)))}" target="_blank" rel="noopener" aria-label="WhatsApp ${esc(e.student)}">${ICON_WA}</a>`:""}${ls==="unpaid"?`<button type="button" class="tpay" data-pay="${esc(e.id)}">Paid</button>`:""}${fin?"":`<button type="button" class="tdone" data-done="${esc(e.id)}" aria-label="Mark ${esc(e.student)} lesson completed">Done</button>`}</div>`;}).join("");$("todayList").className="recordlist"+(todayHTML?"":" empty");$("todayList").innerHTML=todayHTML||"No lessons today.";renderPrayerLine(todayISO);renderNext();
  const now_=new Date(),tomorrowISO=dateISO(new Date(now_.getFullYear(),now_.getMonth(),now_.getDate()+1)),tomorrows=lessonsOn(tomorrowISO),nextDayHTML=tomorrows.map((e,i)=>{const st=state.students.find(x=>sameName(x.name,e.student)),n=st?waNumber(st):null,ls=lessonStatus(e);return `<div class="todayrow"><span class="tnum">${i+1}</span><button type="button" class="tmain" data-record="${esc(e.id)}"><b>${esc(timeText(e))}</b><span>${esc(e.student||"Lesson")}</span></button><span class="tstat ${ls}">${ls==="paid"?"✓ Paid":STATUS_TEXT[ls]}</span>${n?`<a class="actbtn wa" href="${esc(waLink(n,lessonMsg(e)))}" target="_blank" rel="noopener" aria-label="WhatsApp ${esc(e.student)}">${ICON_WA}</a>`:""}</div>`;}).join("");$("nextDayList").className="recordlist"+(nextDayHTML?"":" empty");$("nextDayList").innerHTML=nextDayHTML||"No lessons tomorrow.";
  const search=($("logSearch")?.value||"").toLowerCase(),filter=search&&$("logFilter")?.value==="today"?"all":$("logFilter")?.value||"today";
- const shown=sorted.filter(e=>(!search||[e.student,e.type,typeLabel(e.type),e.comment].join(" ").toLowerCase().includes(search))&&(filter==="all"||(filter==="today"?e.type==="Lesson"&&e.date===todayISO:filter==="expense"?e.type!=="Lesson"&&e.type!=="Note":filter==="unpaid"?e.type==="Lesson"&&lessonStatus(e)==="unpaid":filter==="paid"?e.type==="Lesson"&&lessonStatus(e)==="paid":filter==="prepaid"?e.type==="Lesson"&&!!e.pkg:e.type===filter)));
+ const shownBase=sorted.filter(e=>(!search||[e.student,e.type,typeLabel(e.type),e.comment].join(" ").toLowerCase().includes(search))&&(filter==="all"||(filter==="today"?e.type==="Lesson"&&e.date===todayISO:filter==="expense"?e.type!=="Lesson"&&e.type!=="Note":filter==="unpaid"?e.type==="Lesson"&&lessonStatus(e)==="unpaid":filter==="paid"?e.type==="Lesson"&&lessonStatus(e)==="paid":filter==="prepaid"?e.type==="Lesson"&&!!e.pkg:e.type===filter)));
+ const sortMode=$("logSort")?.value||"latest";
+ const shown=[...shownBase].sort((a,b)=>sortMode==="oldest"?(a.date+(a.start||"")).localeCompare(b.date+(b.start||"")):sortMode==="amount"?income(b)-income(a):sortMode==="outstanding"?unpaidAmt(b)-unpaidAmt(a):(b.date+(b.start||"")).localeCompare(a.date+(a.start||"")));
+ $("logResultCount").textContent=shown.length+(shown.length===1?" record":" records");
  const pkgRows=filter==="prepaid"?[...pkgs()].filter(p=>!search||[p.student,p.name].join(" ").toLowerCase().includes(search)).sort((a,b)=>(b.date||"").localeCompare(a.date||"")).map(packageRowHTML).join(""):"";
  $("logList").className="recordlist"+(shown.length||pkgRows?"":" empty");$("logList").innerHTML=pkgRows+shown.map(e=>recordHTML(e,true)).join("")||(filter==="today"?"No lessons today. Choose All records to see older ones.":"No matching records.");
  const ss=($("studentSearch")?.value||"").toLowerCase();const students=state.students.filter(s=>[s.name,s.phone,s.whatsapp,s.email,s.notes].join(" ").toLowerCase().includes(ss)),stats=new Map(students.map(s=>[s.id,studentStats(s)])),sort=$("studentSort")?.value||"joined",jd=s=>joinDate(s,stats.get(s.id));
@@ -407,7 +421,7 @@ function exportLog(){const lines=[["Date","Type","Student","Start","End","Hours"
 function exportStudents(){const lines=["Name,Phone,Notes"];state.students.forEach(s=>lines.push([s.name,s.phone,s.notes].map(csvCell).join(",")));download("DrivingLogPro_Students.csv","\uFEFF"+lines.join("\r\n"),"text/csv");}
 $("importLog").onchange=async e=>{const f=e.target.files[0];if(f)importLog(await f.text());e.target.value="";};
 $("importStudents").onchange=async e=>{const f=e.target.files[0];if(f)importStudents(await f.text());e.target.value="";};
-$("exportAll").onclick=backupNow;$("backupNowBtn").onclick=backupNow;
+$("exportAll").onclick=backupNow;$("backupNowBtn").onclick=backupNow;$("logExportBtn").onclick=exportLog;
 $("exportPdf").onclick=exportPdf;
 $("fStudent").addEventListener("input",()=>syncContactBoxes("name"));$("fPhone").addEventListener("input",()=>syncContactBoxes("phone"));
 $("pastePhoneBtn").addEventListener("click",()=>pasteInto(lastLessonContactField));
@@ -462,7 +476,7 @@ document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>b.closest("di
 ["pOn","pAuto","pMinutes","p_fajr","p_duhr","p_jumua","p_asr","p_maghrib","p_isha"].forEach(id=>$(id).addEventListener("change",savePrayer));
 ["wStart","wEnd"].forEach(id=>$(id).addEventListener("change",saveWork));
 $("newLessonBtn").onclick=newRecord;$("addRecordBtn").onclick=newRecord;$("calAddBtn").onclick=()=>newRecord(cal.day);$("calPrev").onclick=()=>calMove(-1);$("calNext").onclick=()=>calMove(1);document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>setCalView(b.dataset.view));$("addStudentBtn").onclick=newStudent;$("fType").onchange=toggleLessonFields;
-["logSearch","logFilter","studentSearch","studentSort","period","periodValue"].forEach(id=>$(id).addEventListener("input",render));
+["logSearch","logFilter","logSort","studentSearch","studentSort","period","periodValue"].forEach(id=>$(id).addEventListener("input",render));
 let installPrompt;$("installBtn").onclick=async()=>{if(installPrompt){installPrompt.prompt();installPrompt=null;}};
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();installPrompt=e;$("installBtn").classList.remove("hidden");});
 // When a new version of the app has been installed in the background, offer a reload.
