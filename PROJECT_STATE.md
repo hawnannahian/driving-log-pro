@@ -17,7 +17,7 @@
 - Full-Time historical register key: `driving-log-pro-full-time-v1`; records keyed by `legacy_student_id`, isolated from normal lesson accounting.
 - Main app exposes a narrow `window.DrivingLogFullTime` bridge (getAll/replace/clear) so full-time data can participate in backup/sync without mixing into lesson accounting.
 - Cloud sync stores `driving-log.json` in the user's own private GitHub data repository; token remains in that browser's localStorage.
-- Current service-worker cache: `nahians-schedule-cache-v41`.
+- Current service-worker cache: `nahians-schedule-cache-v42`.
 - App footer version: `v1.20`. CSS comments such as v1.26 may refer to feature revision, not app release.
 
 ## Business rules
@@ -54,6 +54,7 @@ Lesson/expense log, student CRM, packages/prepaid accounting, reports, CSV impor
 - Current main is the source of truth.
 
 ## Recent work
+- Overview (Phase 3): the lesson timer card now sits on Overview under the Next lesson card (same timer logic, same ids; still stops at 55 min with 1 h credit); other tabs show a small "⏱ … left" pill that opens Overview. Below Next Day: Voice announcements (on/off per device in `DB_KEY+"-voice"`, Test voice, voice status) and a Travel Dua player using the local `travel-dua.mp3` (12 s recitation of 43:13–14 supplied by the owner; cached by the service worker, range requests answered from cache for offline playback). Only one audio plays at a time; a voice announcement pauses audio. The pre-timer Travel Dua popup (full dua, remote Hisnul Muslim audio) is unchanged.
 - Log (Phase 2): the floating ＋ button is removed; Log's button is "＋ Add expense" (record dialog without the Lesson type). Lessons are created from the Calendar (＋ in Calendar, tapping a day/slot) and from the student profile/quick booking. Log summary: lessons done today, hours, lesson value, collected, outstanding, expenses.
 - Profile cleanup (Phase 1 of the master plan): profile tabs are Overview, Completed, Packages, Attendance. Overview shows only name + WhatsApp, the next 3 upcoming lessons and read-only notes (notes are edited in Edit student). Course payment history + Total paid moved under Packages. Lessons are marked paid with "Mark paid" in Completed. Contact fields are still stored.
 - Decision (owner): the timer keeps the current rule — it stops at 55 minutes and credits 1 hour.

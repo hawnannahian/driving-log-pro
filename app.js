@@ -231,11 +231,15 @@ function timerBeep(){try{audioCtx=audioCtx||new AudioContext();audioCtx.resume?.
 let bnVoice=null;
 function pickBnVoice(){try{const voices=speechSynthesis.getVoices(),bn=voices.filter(v=>/^bn/i.test(v.lang));if(!bn.length)return null;return bn.find(v=>/male/i.test(v.name))||bn[0];}catch{return null;}}
 if("speechSynthesis" in window){try{speechSynthesis.onvoiceschanged=()=>{bnVoice=pickBnVoice();};bnVoice=pickBnVoice();}catch{}}
-function speakBn(text){try{if(!("speechSynthesis" in window))return;if(!bnVoice)bnVoice=pickBnVoice();if(!bnVoice)return;const u=new SpeechSynthesisUtterance(text);u.voice=bnVoice;u.lang=bnVoice.lang;speechSynthesis.speak(u);}catch{}}
+const VOICE_KEY=DB_KEY+"-voice";
+const voiceOn=()=>{try{return localStorage.getItem(VOICE_KEY)!=="off";}catch{return true;}};
+function renderVoice(){const v=bnVoice||pickBnVoice();if(v)bnVoice=v;$("voiceOn").checked=voiceOn();$("voiceStatus").textContent=!("speechSynthesis" in window)?"This browser cannot speak. The timer still works, silently.":v?`Bengali voice: ${v.name}${voiceOn()?"":" · turned off"}`:"No Bengali voice found on this device. The timer still works, silently.";}
+function speakBn(text){try{if(!voiceOn()||!("speechSynthesis" in window))return;if(!bnVoice)bnVoice=pickBnVoice();if(!bnVoice)return;document.querySelectorAll("audio").forEach(a=>{try{a.pause();}catch{}});const u=new SpeechSynthesisUtterance(text);u.voice=bnVoice;u.lang=bnVoice.lang;speechSynthesis.speak(u);}catch{}}
 async function keepAwake(){try{if(timer&&timer.runFrom&&"wakeLock" in navigator&&!wake){wake=await navigator.wakeLock.request("screen");wake.addEventListener("release",()=>{wake=null;});}}catch{}}
 function dropAwake(){try{wake?.release();}catch{}wake=null;}
 function finishTimerAt55(){if(!timer||timer.completed)return;const t=timer;t.completed=true;t.elapsed=55*60000;t.runFrom=null;t.spoken55=true;timerSave();speakBn("আপনার লেসনের সময় শেষ হয়েছে।");timer=null;timerSave();dropAwake();renderTimer();const e=state.entries.find(x=>x.id===t.lessonId);if(!e){toast("Lesson not found. Timer stopped; no record was changed.");return;}e.businessHours=1;completeLesson(t.lessonId,{min:55,start:t.startText,end:hhmm(new Date()),session:t.session});}
-function renderTimer(){const on=!!timer;$("timerBar").classList.toggle("hidden",!on);document.body.classList.toggle("timing",on);if(!on){clearInterval(timerTick);timerTick=null;return;}
+function renderTimerMini(){const m=$("timerMini"),cur=document.querySelector(".tab.active")?.dataset.tab,show=!!timer&&cur!=="overview";m.classList.toggle("hidden",!show);if(show)m.textContent=`⏱ ${timer.label} · ${clock(Math.max(0,55*60000-Math.min(55*60000,elapsedMs())))} left${timer.runFrom?"":" · paused"}`;}
+function renderTimer(){const on=!!timer;$("timerBar").classList.toggle("hidden",!on);document.body.classList.toggle("timing",on);renderTimerMini();if(!on){clearInterval(timerTick);timerTick=null;return;}
  let el=Math.min(55*60000,elapsedMs());if(el>=50*60000&&!timer.spoken50){timer.spoken50=true;timerSave();speakBn("আপনার লেসনের আর ৫ মিনিট বাকি।");}if(el>=55*60000){finishTimerAt55();return;}const left=Math.max(0,55*60000-el),pct=Math.min(100,el/(55*60000)*100);
  $("timerBar").classList.toggle("timerdone",false);$("timerBar").classList.toggle("timerpaused",!timer.runFrom);
  $("timerLabel").textContent=timer.label;$("timerDigits").textContent=clock(left);$("timerSub").textContent=`${clock(el)} elapsed · ${timer.runFrom?"LIVE":"PAUSED"}`;
@@ -491,7 +495,7 @@ $("clearData").onclick=()=>{if(confirm("Permanently delete ALL Driving Log Pro d
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>switchTab(b.dataset.tab));
 document.querySelectorAll("[data-goto]").forEach(b=>b.onclick=()=>switchTab(b.dataset.goto));
 function moveMonth(n){const d=new Date(cal.y,cal.m+n,1);cal.y=d.getFullYear();cal.m=d.getMonth();renderCalendar();bindRecords();}
-function switchTab(id){const tabs=[...document.querySelectorAll(".tab")];tabs.forEach(b=>{const on=b.dataset.tab===id;b.classList.toggle("active",on);if(on)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current");});$("navPill").style.transform=`translateX(${tabs.findIndex(b=>b.dataset.tab===id)*100}%)`;document.querySelectorAll(".tabpanel").forEach(p=>p.classList.toggle("hidden",p.id!==id));document.querySelectorAll(".overviewonly").forEach(el=>el.classList.toggle("offtab",id!=="overview"));window.scrollTo(0,0);if(id==="reports")renderRecovery();}
+function switchTab(id){setTimeout(renderTimerMini);const tabs=[...document.querySelectorAll(".tab")];tabs.forEach(b=>{const on=b.dataset.tab===id;b.classList.toggle("active",on);if(on)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current");});$("navPill").style.transform=`translateX(${tabs.findIndex(b=>b.dataset.tab===id)*100}%)`;document.querySelectorAll(".tabpanel").forEach(p=>p.classList.toggle("hidden",p.id!==id));document.querySelectorAll(".overviewonly").forEach(el=>el.classList.toggle("offtab",id!=="overview"));window.scrollTo(0,0);if(id==="reports")renderRecovery();}
 document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>b.closest("dialog").close());
 ["pOn","pAuto","pMinutes","p_fajr","p_duhr","p_jumua","p_asr","p_maghrib","p_isha"].forEach(id=>$(id).addEventListener("change",savePrayer));
 ["wStart","wEnd"].forEach(id=>$(id).addEventListener("change",saveWork));
@@ -511,3 +515,17 @@ async function askPersist(){try{if(!navigator.storage?.persist)return;let ok=awa
 let shownDay=dateISO(new Date());function checkDay(){const t=dateISO(new Date());if(t===shownDay){renderNext();renderPrayerLine(t);bindRecords();return;}if(cal.day===shownDay){const n=new Date();cal.y=n.getFullYear();cal.m=n.getMonth();cal.day=t;}shownDay=t;render();}
 setInterval(checkDay,60000);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")checkDay();});
 load();fillPrayerForm();fillWorkForm();renderCloud();renderTimer();keepAwake();renderRecovery();askPersist();cloudSync();
+// Overview: voice settings, the timer pill and the Travel Dua player.
+$("voiceOn").onchange=()=>{try{localStorage.setItem(VOICE_KEY,$("voiceOn").checked?"on":"off");}catch{}renderVoice();};
+$("voiceTest").onclick=()=>{if(!voiceOn()){toast("Voice announcements are turned off");return;}if(!(bnVoice||pickBnVoice())){toast("No Bengali voice on this device");return;}speakBn("আপনার লেসনের সময় শুরু হলো।");};
+try{speechSynthesis.addEventListener("voiceschanged",renderVoice);}catch{}renderVoice();
+$("timerMini").onclick=()=>{switchTab("overview");setTimeout(()=>$("timerBar").scrollIntoView({block:"center",behavior:"smooth"}),50);};
+{const a=$("duaAudio"),fmt=s=>{s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+":"+String(s%60).padStart(2,"0");},
+ sync=()=>{const d=isFinite(a.duration)&&a.duration>0?a.duration:Number(a.dataset.len)||0;$("duaSeek").value=d?String(a.currentTime/d*100):"0";$("duaTime").textContent=fmt(a.currentTime)+" / "+fmt(d);$("duaPlay").textContent=a.paused?"▶":"❚❚";$("duaPlay").setAttribute("aria-label",a.paused?"Play":"Pause");};
+ ["timeupdate","loadedmetadata","play","pause","ended"].forEach(ev=>a.addEventListener(ev,sync));
+ a.addEventListener("error",()=>{$("duaState").textContent="The recitation could not be loaded on this device.";});
+ $("duaPlay").onclick=()=>{if(a.paused)a.play().catch(()=>{});else a.pause();};
+ $("duaReplay").onclick=()=>{try{a.currentTime=0;}catch{}a.play().catch(()=>{});};
+ $("duaSeek").addEventListener("input",()=>{if(isFinite(a.duration)&&a.duration>0)a.currentTime=Number($("duaSeek").value)/100*a.duration;});}
+// Only one recording plays at a time.
+document.addEventListener("play",ev=>{document.querySelectorAll("audio").forEach(x=>{if(x!==ev.target)try{x.pause();}catch{}});},true);

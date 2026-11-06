@@ -1,5 +1,5 @@
-const CACHE="nahians-schedule-cache-v41";
-const FILES=["./","./index.html","./styles.css","./app.js","./full-time-students.js","./prayer-times.js","./manifest.webmanifest","./icon.svg","./icon-192.png","./icon-512.png","./icon-maskable-512.png","./apple-touch-icon.png"];
+const CACHE="nahians-schedule-cache-v42";
+const FILES=["./","./index.html","./styles.css","./app.js","./full-time-students.js","./prayer-times.js","./manifest.webmanifest","./icon.svg","./icon-192.png","./icon-512.png","./icon-maskable-512.png","./apple-touch-icon.png","./travel-dua.mp3"];
 
 self.addEventListener("install",event=>{
   event.waitUntil(
@@ -38,6 +38,21 @@ self.addEventListener("fetch",event=>{
           return (await cache.match(request,{ignoreSearch:true}))||cache.match("./index.html");
         })
     );
+    return;
+  }
+
+  // Audio players ask for byte ranges (Safari requires 206 answers). Serve those from the cached file so the
+  // Travel Dua plays offline; fall back to the network when the file is not cached yet.
+  if(request.headers.has("range")){
+    event.respondWith((async()=>{
+      const cache=await caches.open(CACHE),full=await cache.match(request.url,{ignoreSearch:true});
+      if(!full)return fetch(request);
+      const buf=await full.arrayBuffer(),size=buf.byteLength,m=/bytes=(\d*)-(\d*)/.exec(request.headers.get("range")||"");
+      let start=0,end=size-1;
+      if(m&&m[1]){start=Number(m[1]);if(m[2])end=Math.min(Number(m[2]),size-1);}else if(m&&m[2]){start=Math.max(0,size-Number(m[2]));}
+      if(start>=size)return new Response(null,{status:416,headers:{"Content-Range":`bytes */${size}`}});
+      return new Response(buf.slice(start,end+1),{status:206,headers:{"Content-Type":full.headers.get("Content-Type")||"audio/mpeg","Content-Range":`bytes ${start}-${end}/${size}`,"Content-Length":String(end-start+1),"Accept-Ranges":"bytes"}});
+    })());
     return;
   }
 
