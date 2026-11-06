@@ -46,7 +46,7 @@
         <div class="dua-arabic" lang="ar" dir="rtl">سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ، وَإِنَّا إِلَى رَبِّنَا لَمُنقَلِبُونَ</div>
         <audio id="duaAudio" preload="none" playsinline src="travel-dua.mp3" data-len="12"></audio>
         <div class="dpctl"><button type="button" class="dpbtn" id="duaPlay" aria-label="Play">▶</button><button type="button" class="dpbtn ghost" id="duaReplay" aria-label="Play again from the start">↺</button><input type="range" id="duaSeek" min="0" max="100" step="0.1" value="0" aria-label="Playback position"><span class="dptime" id="duaTime">0:00 / 0:12</span></div>
-        <small class="muted" id="duaState">Arabic recitation · saved in the app, works offline</small>
+        <small class="muted" id="duaState">Arabic recitation · saved in the app, works offline</small><button type="button" class="linkbtn duaopen" id="duaOpen">Open in Islamic tab ›</button>
         <details class="duamore"><summary>উচ্চারণ ও অর্থ · Pronunciation &amp; meaning</summary>
           <div class="dua-section"><b>বাংলা উচ্চারণ</b><p>সুবহানাল্লাযী সাখখারা লানা হাযা, ওয়া মা কুন্না লাহু মুকরিনীন। ওয়া ইন্না ইলা রব্বিনা লামুনকালিবূন।</p></div>
           <div class="dua-section"><b>বাংলা অর্থ (ভাবানুবাদ)</b><p>পবিত্র ও মহান তিনি, যিনি এ বাহনকে আমাদের অধীন করে দিয়েছেন; অথচ আমরা নিজেরা একে বশীভূত করতে সক্ষম ছিলাম না। আর নিশ্চয়ই আমরা আমাদের প্রতিপালকের কাছেই ফিরে যাব।</p></div>
@@ -200,6 +200,30 @@
       </div>
       <p class="notice"><b>Privacy note:</b> Records are stored in this browser. With Cloud sync on, a copy is also kept in your private GitHub repository. Keep exporting backups.</p>
     </section>
+    <section class="panel tabpanel hidden islamicpanel" id="islamic" aria-label="Islamic Companion">
+      <div class="isbanner">
+        <svg viewBox="0 0 390 150" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="isSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8a45a" stop-opacity="0"/><stop offset="1" stop-color="#e8a45a" stop-opacity=".45"/></linearGradient></defs>
+          <rect x="0" y="80" width="390" height="70" fill="url(#isSky)"/><path d="M8 150V30Q8 8 30 8H360Q382 8 382 30V150" fill="none" stroke="#d8b35a" stroke-width="1.4" opacity=".75"/><path d="M16 150V34Q16 16 34 16H356Q374 16 374 34V150" fill="none" stroke="#d8b35a" stroke-width=".6" opacity=".5"/>
+          <circle cx="318" cy="40" r="15" fill="#f4dc9a"/><circle cx="325" cy="35" r="13" fill="#162a52"/>
+          <g fill="#0b1428"><rect x="228" y="70" width="7" height="80"/><path d="M226 72h11l-5.5-14z"/><rect x="350" y="62" width="7" height="88"/><path d="M348 64h11l-5.5-15z"/><path d="M250 150v-38q40-48 80 0v38z"/><rect x="246" y="110" width="88" height="40"/><path d="M196 150v-22q16-20 32 0v22z"/><path d="M334 150v-20q12-16 24 0v20z"/><rect x="0" y="138" width="390" height="12"/></g></svg>
+        <h2>Islamic Companion</h2><p>Duas &amp; Dhikr for Drivers</p>
+      </div>
+      <div class="isseg" role="tablist" aria-label="Islamic Companion sections"><button type="button" role="tab" data-isview="duas" class="active">Duas</button><button type="button" role="tab" data-isview="tasbih">Tasbih</button></div>
+      <div id="isDuas">
+        <div class="ischips" role="group" aria-label="Dua categories">
+          <button type="button" data-iscat="all" class="active"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5"/><rect x="14" y="14" width="6" height="6" rx="1.5"/></svg>All Duas</button>
+          <button type="button" data-iscat="driving"><svg viewBox="0 0 24 24" aria-hidden="true" class="c-blue"><path d="M5 16v-4l2-5h10l2 5v4"/><path d="M4 16h16v2H4z"/></svg>Driving</button>
+          <button type="button" data-iscat="protection"><svg viewBox="0 0 24 24" aria-hidden="true" class="c-green"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Protection</button>
+          <button type="button" data-iscat="dhikr"><svg viewBox="0 0 24 24" aria-hidden="true" class="c-green"><circle cx="12" cy="5" r="1.6"/><circle cx="18" cy="9" r="1.6"/><circle cx="18" cy="16" r="1.6"/><circle cx="12" cy="20" r="1.6"/><circle cx="6" cy="16" r="1.6"/><circle cx="6" cy="9" r="1.6"/></svg>Daily Dhikr</button>
+          <button type="button" data-iscat="fav"><svg viewBox="0 0 24 24" aria-hidden="true" class="c-red"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>Favorites</button>
+        </div>
+        <div class="islist" id="isList"></div>
+        <p class="isnote">Every dua shows its Quran or hadith reference. “সহিহ” is shown only for Sahih al-Bukhari and Sahih Muslim.</p>
+      </div>
+      <div id="isDetail" class="hidden"></div>
+      <div id="isTasbih" class="hidden"></div>
+      <div class="ismini hidden" id="isMini"><button type="button" class="isminimain" id="isMiniOpen"><span class="isico" aria-hidden="true">🚗</span><span class="istxt"><b id="isMiniTitle"></b><small id="isMiniTime"></small><span class="isminibar"><i id="isMiniBar"></i></span></span></button><button type="button" class="isplay big" id="isMiniPlay" aria-label="Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M8 5.5v13l10.5-6.5z"/><path class="i-pause" d="M7.5 5h3v14h-3zM13.5 5h3v14h-3z"/></svg></button></div>
+    </section>
   </main>
 
   <dialog id="recordDialog">
@@ -336,6 +360,7 @@
     <button class="tab" data-tab="log"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6.5h11M9 12h11M9 17.5h11"/><path d="M4.5 6.5h.01M4.5 12h.01M4.5 17.5h.01"/></svg><span>Log</span></button>
     <button class="tab" data-tab="students"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="8.5" r="3.5"/><path d="M3.5 19.5c.6-3.4 3-5.2 6-5.2s5.400 1.800 6 5.200"/><path d="M16 5.400a3.300 3.300 0 0 1 0 6.200M18 14.800c1.500.8 2.300 2.300 2.600 4.300"/></svg><span>Students</span></button>
     <button class="tab" data-tab="reports"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20v-7M12 20V5M19 20v-10"/></svg><span>Reports</span></button>
+    <button class="tab" data-tab="islamic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M6.5 20v-6.5c0-3 2.5-5 5.5-6.5 3 1.5 5.5 3.5 5.5 6.5V20"/><path d="M12 4.5v2.5"/><path d="M10 20v-3a2 2 0 0 1 4 0v3"/><path d="M3.5 20v-8M20.5 20v-8"/></svg><span>Islamic</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
   <footer><span>Driving Log Pro</span><span>Personal business manager · v1.20</span></footer>
@@ -343,5 +368,7 @@
   <script src="full-time-students.js"></script>
   <script src="app.js"></script>
   <script src="reports-dashboard.js"></script>
+  <script src="islamic-content.js"></script>
+  <script src="islamic.js"></script>
 </body>
 </html>
