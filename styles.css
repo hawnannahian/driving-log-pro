@@ -356,3 +356,4 @@ body.is-mini-on .timermini{bottom:calc(160px + env(safe-area-inset-bottom))}
 .tzar{font-family:var(--isar);font-size:22px;color:#f4dc9a}.tzinner b{font-size:56px;line-height:1;font-variant-numeric:tabular-nums}.tzinner small{font-size:12px;color:#aebbd6}.tzcount:active .tzinner{transform:scale(.985)}
 .tzdone{text-align:center;font-weight:800;color:var(--green);margin:0 0 8px}.tztargets{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:6px 0 12px}.tztargets button{min-height:36px;padding:0 14px;border:1px solid var(--line);border-radius:99px;background:#fff;font:inherit;font-size:12.5px;font-weight:800;color:#34425b;cursor:pointer}.tztargets button.active{background:var(--blue);border-color:var(--blue);color:#fff}
 .tzreset{width:100%}.duaopen{display:block;margin-top:8px;font-weight:800}
+.isaudionote{margin:8px 0 0;font-size:11.5px;color:#aebbd6;line-height:1.45}
