@@ -1,5 +1,5 @@
-const CACHE="nahians-schedule-cache-v43";
-const FILES=["./","./index.html","./styles.css","./app.js","./reports-dashboard.js","./full-time-students.js","./prayer-times.js","./manifest.webmanifest","./icon.svg","./icon-192.png","./icon-512.png","./icon-maskable-512.png","./apple-touch-icon.png","./travel-dua.mp3"];
+const CACHE="nahians-schedule-cache-v44";
+const FILES=["./","./index.html","./styles.css","./app.js","./reports-dashboard.js","./islamic-content.js","./islamic.js","./full-time-students.js","./prayer-times.js","./manifest.webmanifest","./icon.svg","./icon-192.png","./icon-512.png","./icon-maskable-512.png","./apple-touch-icon.png","./travel-dua.mp3"];
 
 self.addEventListener("install",event=>{
   event.waitUntil(
