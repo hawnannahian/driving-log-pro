@@ -137,30 +137,39 @@
     </section>
 
     <section class="panel tabpanel hidden" id="reports">
-      <div class="sectionhead"><div><h2>Reports & data</h2><p class="muted">Review results and manage backups</p></div></div>
+      <div class="sectionhead"><div><h2>Business dashboard</h2><p class="muted">From your completed lessons, payments and expenses</p></div></div>
       <div class="toolbar"><select id="period" aria-label="Report type"><option value="week">Weekly</option><option value="month" selected>Monthly</option><option value="year">Yearly</option><option value="all">All time</option></select><select id="periodValue" aria-label="Report period"></select></div>
-      <div class="reportgrid">
-        <article class="report"><span>Total income</span><strong id="rIncome">€0.00</strong></article>
-        <article class="report"><span>Total expenses</span><strong id="rExpenses">€0.00</strong></article>
-        <article class="report"><span>Net profit</span><strong id="rProfit">€0.00</strong></article>
-        <article class="report"><span>Outstanding</span><strong id="rUnpaid">€0.00</strong></article>
-        <article class="report"><span>Lesson hours</span><strong id="rHours">0.00</strong></article>
-        <article class="report"><span>Number of records</span><strong id="rCount">0</strong></article>
+      <div class="dashactions"><button type="button" class="chipbtn" id="exportPdf">⇩ PDF</button><button type="button" class="chipbtn" id="dashCsv">⇩ CSV</button><button type="button" class="chipbtn" id="dashShare">↗ Share</button><button type="button" class="chipbtn" id="dashPrint">⎙ Print</button></div>
+      <section class="dashhero" aria-label="Business results">
+        <div class="herorev"><span>Revenue (earned)</span><strong id="rIncome">€0.00</strong><small>Value of completed lessons. Advance payments count when lessons are driven.</small></div>
+        <div class="herogrid"><div><span>Expenses</span><b id="rExpenses" class="exp">€0.00</b></div><div><span>Net profit</span><b id="rProfit">€0.00</b></div><div><span>Collected</span><b id="rCollected">€0.00</b></div><div><span>Outstanding</span><b id="rUnpaid" class="owe">€0.00</b></div></div>
+      </section>
+      <div class="reportgrid dashmini">
+        <article class="report"><span>Driving hours</span><strong id="rHours">0 h</strong></article>
+        <article class="report"><span>Completed lessons</span><strong id="rCount">0</strong></article>
+        <article class="report"><span>Active students</span><strong id="rStudents">0</strong></article>
+        <article class="report"><span>Avg value / hour</span><strong id="rAvg">–</strong></article>
+        <article class="report"><span>Prepaid balance</span><strong id="rPrepaid">€0.00</strong></article>
         <article class="report"><span>Distance (odometer)</span><strong id="rKm">–</strong></article>
         <article class="report"><span>Fuel cost per km</span><strong id="rFuelKm">–</strong></article>
-        <article class="report"><span>Prepaid balance</span><strong id="rPrepaid">€0.00</strong></article>
       </div>
-      <div class="comparebox" id="compareBox"></div>
-      <button class="btn primary reportpdf" id="exportPdf">Download report PDF</button>
+      <section class="chartbox dashcard" id="insightBox"><h3>Insights</h3><ul class="insightlist" id="insightList"></ul></section>
       <div class="chartbox hidden" id="chartBox">
-        <h3>Last 12 months</h3>
-        <div class="chartlegend"><span><i class="swatch barincome"></i>Income</span><span><i class="swatch barexpense"></i>Expenses</span></div>
+        <div class="dashcardhead"><h3>Revenue &amp; expenses</h3><div class="rangechips" role="group" aria-label="Chart range"><button type="button" data-range="6">6M</button><button type="button" data-range="12" class="active">12M</button><button type="button" data-range="all">All</button></div></div>
+        <div class="chartlegend"><span><i class="swatch barincome"></i>Revenue</span><span><i class="swatch barexpense"></i>Expenses</span></div>
         <svg id="chartSvg" viewBox="0 0 360 170" role="img" aria-label="Monthly income and expenses"></svg>
         <p class="chartreadout" id="chartReadout"></p>
         <details><summary>Show as table</summary><table class="charttable" id="chartTable"></table></details>
       </div>
+      <section class="chartbox dashcard hidden" id="donutBox"><h3>Expenses by category</h3><div class="donutwrap"><div class="donutchart"><svg id="donutSvg" viewBox="0 0 42 42" role="img" aria-label="Expenses by category"></svg><div class="donutcenter" id="donutCenter"></div></div><div class="donutlegend" id="donutLegend"></div></div></section>
       <div class="chartbox hidden" id="hoursBox"><h3>Lesson hours · last 12 months</h3><svg id="hoursSvg" viewBox="0 0 360 150" role="img" aria-label="Monthly lesson hours"></svg><p class="chartreadout" id="hoursReadout"></p></div>
+      <section class="chartbox dashcard hidden" id="weekBox"><h3>Weekly activity · last 8 weeks</h3><svg id="weekSvg" viewBox="0 0 360 130" role="img" aria-label="Completed lesson hours per week"></svg><p class="chartreadout" id="weekReadout"></p></section>
+      <section class="chartbox dashcard" id="healthBox"><h3>Business health</h3><div class="healthgrid" id="healthGrid"></div></section>
+      <section class="chartbox dashcard" id="heatBox"><div class="dashcardhead"><h3>Financial calendar · <span id="heatTitle"></span></h3><div class="rangechips"><button type="button" id="heatPrev" aria-label="Previous month">‹</button><button type="button" id="heatNext" aria-label="Next month">›</button></div></div>
+        <div class="heatlegend"><span><i class="swatch h2"></i>Lesson hours</span><span><em class="hrev"></em>Revenue</span><span><em class="hexp"></em>Expenses</span></div>
+        <div class="heatgrid" id="heatGrid"></div><div class="heatdetail" id="heatDetail"></div></section>
       <div class="chartbox hidden" id="payBox"><h3>Student payments</h3><div class="chartlegend"><span><i class="swatch barpaid"></i>Paid</span><span><i class="swatch barowed"></i>Outstanding</span></div><div id="payBars" class="paybars"></div></div>
+      <div class="comparebox" id="compareBox"></div>
       <div class="dataactions">
         <div class="data-card"><h3>Import workbook data</h3><p>Import Log and Students CSV files separately. Duplicate records are skipped.</p>
           <label class="btn secondary">Import Log CSV<input type="file" id="importLog" accept=".csv,text/csv"></label>
@@ -333,5 +342,6 @@
   <script src="prayer-times.js"></script>
   <script src="full-time-students.js"></script>
   <script src="app.js"></script>
+  <script src="reports-dashboard.js"></script>
 </body>
 </html>
