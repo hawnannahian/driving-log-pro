@@ -123,3 +123,7 @@ document.querySelectorAll("[data-range]").forEach(b=>b.onclick=()=>{dashRange=b.
 // Opening Reports counts the main figures up from zero.
 document.querySelector('.tab[data-tab="reports"]')?.addEventListener("click",()=>{["rIncome","rExpenses","rProfit","rCollected","rUnpaid"].forEach(id=>{$(id).dataset.v="0";});setTimeout(renderDashboard,30);});
 renderDashboard();
+// Financial Reports: collapsed by default (also each time Reports is opened); the summary above stays visible.
+function finSet(open){$("finBody").classList.toggle("open",open);$("finToggle").setAttribute("aria-expanded",String(open));$("finBody").inert=!open;}
+$("finToggle").onclick=()=>finSet($("finToggle").getAttribute("aria-expanded")!=="true");
+document.querySelector('.tab[data-tab="reports"]')?.addEventListener("click",()=>finSet(false));

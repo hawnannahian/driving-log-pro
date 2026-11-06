@@ -154,6 +154,9 @@
         <article class="report"><span>Fuel cost per km</span><strong id="rFuelKm">–</strong></article>
       </div>
       <section class="chartbox dashcard" id="insightBox"><h3>Insights</h3><ul class="insightlist" id="insightList"></ul></section>
+      <section class="finreports" id="finReports">
+        <button type="button" class="finhead" id="finToggle" aria-expanded="false" aria-controls="finBody"><span class="fintitle"><b>Financial Reports</b><small>Charts, student payments, comparisons, calendar</small></span><svg class="finchev" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="finbody" id="finBody" inert><div class="fininner">
       <div class="chartbox hidden" id="chartBox">
         <div class="dashcardhead"><h3>Revenue &amp; expenses</h3><div class="rangechips" role="group" aria-label="Chart range"><button type="button" data-range="6">6M</button><button type="button" data-range="12" class="active">12M</button><button type="button" data-range="all">All</button></div></div>
         <div class="chartlegend"><span><i class="swatch barincome"></i>Revenue</span><span><i class="swatch barexpense"></i>Expenses</span></div>
@@ -170,6 +173,8 @@
         <div class="heatgrid" id="heatGrid"></div><div class="heatdetail" id="heatDetail"></div></section>
       <div class="chartbox hidden" id="payBox"><h3>Student payments</h3><div class="chartlegend"><span><i class="swatch barpaid"></i>Paid</span><span><i class="swatch barowed"></i>Outstanding</span></div><div id="payBars" class="paybars"></div></div>
       <div class="comparebox" id="compareBox"></div>
+        </div></div>
+      </section>
       <div class="dataactions">
         <div class="data-card"><h3>Import workbook data</h3><p>Import Log and Students CSV files separately. Duplicate records are skipped.</p>
           <label class="btn secondary">Import Log CSV<input type="file" id="importLog" accept=".csv,text/csv"></label>
