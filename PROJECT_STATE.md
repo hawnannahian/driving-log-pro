@@ -49,6 +49,33 @@ Lesson/expense log, student CRM, packages/prepaid accounting, reports, CSV impor
 5. Test upgrade/restore scenarios using: current backup with Full-Time rows, legacy backup without Full-Time rows, empty Full-Time list, and simultaneous edits/deletions on two devices.
 6. Never claim iPhone runtime verified solely from successful GitHub Pages deployment.
 
+## Master scope vs current app (owner's handover document, checked 2026-11-06)
+The owner's "Master Project Handover" lists the full business scope. It is a requirements list, not a description of the app. Source code on `main` (v1.20) was checked against it; the app is **not** feature-complete and real iPhone testing is still pending (see Known limitations).
+
+| Area | Status in code |
+|---|---|
+| Students: name, contact, lesson history, completed lessons, payment history | Done |
+| Remaining lessons | Done through packages/courses (hours left, paid, due) |
+| Lesson scheduling, duration, calendar, completed lessons | Done |
+| Payments, financial records, business reports, analytics | Done |
+| Search | Done (Log and Students) |
+| Cloud sync, backup, offline, data export | Done (private GitHub repo sync, JSON/CSV, safety copies, PWA) |
+| Cancelled / missed lessons | Partial: lessons can be "Marked not completed" (count in Attendance); no reason or cancellation history |
+| Notifications | Partial: timer and voice announcements only; no push notifications |
+| Multilingual | Partial: English UI with Bangla content and messages; no language switch |
+| Driving progress | Partial: hours and attendance only; no skills/progress record |
+| Instructor management | Not built |
+| Vehicle management | Not built |
+| Driving examination tracking | Not built |
+| Personal documents and document expiry | Not built (sensitive data: device and private sync only, never the public repo) |
+| Secure authentication, access control | Not built (single-user app, no login) |
+| Error monitoring | Not built |
+| GDPR compliance | Not formally addressed; data stays on the owner's devices and private data repo |
+
+Owner's development rules (same intent as the rules above): never delete working features without permission; no unnecessary redesign; keep the current UI/UX; inspect code before changing it; avoid unnecessary data migrations; protect student and business records; test before completion; stay backward compatible with existing data and backups; keep the app stable and secure; document every significant change here; finish with a GitHub commit/PR. Never assume a listed feature exists: check the source.
+
+Suggested next features (owner to choose): exam tracking and document expiry first, then cancellation history.
+
 ## Branch hygiene
 - `claude/intelligent-gates-shiyps` is permanently divergent (32 commits behind main, one unique commit); do not push, merge or force-push it.
 - Previous feature branches may contain work already merged by PR; inspect diffs before reusing.
