@@ -83,11 +83,11 @@
 
     <section class="panel tabpanel hidden logpanel" id="log">
       <div class="log-heading">
-        <div><p class="log-eyebrow">YOUR BUSINESS ACTIVITY</p><h2>Driving Log</h2><p class="muted">Lessons, fuel and other expenses</p></div>
+        <div><p class="log-eyebrow">YOUR BUSINESS ACTIVITY</p><h2>Driving Log</h2><p class="muted">Lessons come from the Calendar automatically. Add fuel and other expenses here.</p></div>
         <div class="log-date-pill"><span class="log-calendar" aria-hidden="true">▦</span><span><b>Today</b><small id="logTodayDate"></small></span></div>
       </div>
       <div class="log-action-row">
-        <button class="btn primary log-add" id="addRecordBtn"><span aria-hidden="true">＋</span> Add record</button>
+        <button class="btn primary log-add" id="addRecordBtn"><span aria-hidden="true">＋</span> Add expense</button>
         <button class="btn ghost log-export" id="logExportBtn" type="button"><span aria-hidden="true">⇩</span> Export CSV</button>
       </div>
       <div class="toolbar log-toolbar">
@@ -97,13 +97,14 @@
       </div>
       <section class="log-summary" aria-label="Today's summary">
         <div class="log-summary-main">
-          <article class="log-kpi"><span class="log-kpi-icon">▤</span><div><b id="logRecordsToday">0</b><small>Records today</small></div></article>
+          <article class="log-kpi"><span class="log-kpi-icon">▤</span><div><b id="logRecordsToday">0</b><small>Lessons done today</small></div></article>
           <article class="log-kpi"><span class="log-kpi-icon">◷</span><div><b id="logHoursToday">0 h</b><small>Total lesson hours</small></div></article>
           <article class="log-kpi"><span class="log-kpi-icon">€</span><div><b id="logRevenueToday">€0,00</b><small>Lesson value</small></div></article>
         </div>
         <div class="log-payment-summary">
           <div><span>Collected</span><b class="collected" id="logCollectedToday">€0,00</b></div>
           <div><span>Outstanding</span><b class="outstanding" id="logOutstandingToday">€0,00</b></div>
+          <div><span>Expenses</span><b class="outstanding" id="logExpensesToday">€0,00</b></div>
         </div>
       </section>
       <div class="log-list-heading"><h3>Lesson records</h3><span id="logResultCount">0 records</span></div>
@@ -300,7 +301,6 @@
     </div>
   </dialog>
   <section class="timerbar hidden" id="timerBar" role="timer" aria-live="off"><div class="timerfill" id="timerFill"></div><div class="timerhead"><div><small class="timerkicker">DRIVING LESSON</small><b id="timerLabel">Student</b></div><span id="timerStatus" class="timerstatus live">LIVE</span></div><div class="timercenter"><div class="timerring" id="timerRing"><div class="timerringinner"><small>TIME REMAINING</small><b id="timerDigits">55:00</b><small id="timerSub">00:00 elapsed</small></div></div></div><div class="timeractions"><button type="button" class="timerbtn" id="timerPause">Pause</button><button type="button" class="timerbtn timerend" id="timerEnd">End lesson</button></div></section>
-  <button class="fab" id="newLessonBtn" aria-label="New record">＋</button>
   <nav class="tabbar" aria-label="Main navigation">
     <span class="navpill" id="navPill"></span>
     <button class="tab active" data-tab="overview"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5"/><path d="M6 10v9h12v-9"/><path d="M10 19v-5h4v5"/></svg><span>Overview</span></button>

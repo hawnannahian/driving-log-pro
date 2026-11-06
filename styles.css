@@ -289,3 +289,4 @@ input,textarea,[contenteditable="true"]{-webkit-tap-highlight-color:transparent}
 
 #courseCard{display:grid;gap:8px;margin:0 0 12px}#courseCard:empty{display:none}.coursecard{padding:14px;border:1px solid #c9d6fb;border-radius:16px;background:#f5f8ff}.coursetop{display:flex;justify-content:space-between;gap:10px;align-items:center}.coursetop b{font-size:15px}.coursetop span{flex:none;font-weight:800;font-size:13px;color:var(--muted)}.coursecard .pkgbar{margin:10px 0}.courseline{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;margin-bottom:10px}.courseline .unpaid{color:var(--orange)}.courseline .paid{color:var(--green)}.coursecard .btn{width:100%}
 .payhead{font-size:15px;margin:18px 0 8px}#ptab-overview .pblock .recordlist{margin-top:6px}
+#recordDialog[data-mode="expense"] [data-type="Lesson"]{display:none}
