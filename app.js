@@ -523,11 +523,12 @@ $("voiceTest").onclick=()=>{if(!voiceOn()){toast("Voice announcements are turned
 try{speechSynthesis.addEventListener("voiceschanged",renderVoice);}catch{}renderVoice();
 $("timerMini").onclick=()=>{switchTab("overview");setTimeout(()=>$("timerBar").scrollIntoView({block:"center",behavior:"smooth"}),50);};
 {const a=$("duaAudio"),fmt=s=>{s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+":"+String(s%60).padStart(2,"0");},
- sync=()=>{const d=isFinite(a.duration)&&a.duration>0?a.duration:Number(a.dataset.len)||0;$("duaSeek").value=d?String(a.currentTime/d*100):"0";$("duaTime").textContent=fmt(a.currentTime)+" / "+fmt(d);$("duaPlay").textContent=a.paused?"▶":"❚❚";$("duaPlay").setAttribute("aria-label",a.paused?"Play":"Pause");};
+ own=()=>!a.dataset.dua||a.dataset.dua==="vehicle",mine=()=>{if(!own()){a.dataset.dua="vehicle";a.src="travel-dua.mp3";}},
+ sync=()=>{const o=own(),d=o&&isFinite(a.duration)&&a.duration>0?a.duration:Number(a.dataset.len)||0,t=o?a.currentTime:0,p=!o||a.paused;$("duaSeek").value=d?String(t/d*100):"0";$("duaTime").textContent=fmt(t)+" / "+fmt(d);$("duaPlay").textContent=p?"▶":"❚❚";$("duaPlay").setAttribute("aria-label",p?"Play":"Pause");};
  ["timeupdate","loadedmetadata","play","pause","ended"].forEach(ev=>a.addEventListener(ev,sync));
- a.addEventListener("error",()=>{$("duaState").textContent="The recitation could not be loaded on this device.";});
- $("duaPlay").onclick=()=>{if(a.paused)a.play().catch(()=>{});else a.pause();};
- $("duaReplay").onclick=()=>{try{a.currentTime=0;}catch{}a.play().catch(()=>{});};
- $("duaSeek").addEventListener("input",()=>{if(isFinite(a.duration)&&a.duration>0)a.currentTime=Number($("duaSeek").value)/100*a.duration;});}
+a.addEventListener("error",()=>{if(own())$("duaState").textContent="The recitation could not be loaded on this device.";});
+ $("duaPlay").onclick=()=>{if(!own()){mine();a.play().catch(()=>{});return;}if(a.paused)a.play().catch(()=>{});else a.pause();};
+ $("duaReplay").onclick=()=>{mine();try{a.currentTime=0;}catch{}a.play().catch(()=>{});};
+ $("duaSeek").addEventListener("input",()=>{if(own()&&isFinite(a.duration)&&a.duration>0)a.currentTime=Number($("duaSeek").value)/100*a.duration;});}
 // Only one recording plays at a time.
 document.addEventListener("play",ev=>{document.querySelectorAll("audio").forEach(x=>{if(x!==ev.target)try{x.pause();}catch{}});},true);

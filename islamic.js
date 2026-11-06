@@ -70,7 +70,7 @@ function isSyncAudio(){const a=$("duaAudio");if(!a)return;const id=a.dataset.dua
  document.querySelectorAll("[data-isseek]").forEach(r=>{if(document.activeElement!==r)r.value=dur?String(a.currentTime/dur*100):"0";});document.querySelectorAll("[data-iscur]").forEach(s=>{s.textContent=isClock(a.currentTime);});
  const show=!!x&&!$("islamic").classList.contains("hidden")&&(playing||a.currentTime>0&&!a.ended)&&!(isOpenId===id&&isView==="duas");
  $("isMini").classList.toggle("hidden",!show);document.body.classList.toggle("is-mini-on",show);
- if(show){$("isMiniTitle").textContent=x.bn;$("isMiniTime").textContent=`${isClock(a.currentTime)} / ${isClock(dur)}`;$("isMiniBar").style.width=(dur?a.currentTime/dur*100:0)+"%";$("isMiniPlay").dataset.isplay=id;$("isMiniOpen").dataset.isopen=id;}}
+ if(show){$("isMiniOpen").querySelector(".isico").textContent=x.icon;$("isMiniTitle").textContent=x.bn;$("isMiniTime").textContent=`${isClock(a.currentTime)} / ${isClock(dur)}`;$("isMiniBar").style.width=(dur?a.currentTime/dur*100:0)+"%";$("isMiniPlay").dataset.isplay=id;$("isMiniOpen").dataset.isopen=id;}}
 
 // One click handler for the whole tab.
 $("islamic").addEventListener("click",ev=>{const t=ev.target.closest("button");if(!t)return;const ds=t.dataset;
