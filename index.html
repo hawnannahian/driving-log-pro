@@ -29,12 +29,31 @@
 
     <section class="panel tabpanel" id="overview">
       <div id="nextCard" class="nextcard"></div>
+      <section class="timerbar hidden" id="timerBar" role="timer" aria-live="off"><div class="timerfill" id="timerFill"></div><div class="timerhead"><div><small class="timerkicker">DRIVING LESSON</small><b id="timerLabel">Student</b></div><span id="timerStatus" class="timerstatus live">LIVE</span></div><div class="timercenter"><div class="timerring" id="timerRing"><div class="timerringinner"><small>TIME REMAINING</small><b id="timerDigits">55:00</b><small id="timerSub">00:00 elapsed</small></div></div></div><div class="timeractions"><button type="button" class="timerbtn" id="timerPause">Pause</button><button type="button" class="timerbtn timerend" id="timerEnd">End lesson</button></div></section>
       <h2 class="todayhead" id="todayTitle">Today</h2>
       <div id="todayList" class="recordlist empty">No lessons today.</div>
       <details class="prayerline hidden" id="prayerLine"><summary id="prayerNext"></summary><div id="prayerAll" class="recordlist"></div></details>
       <div class="todaygap"></div>
       <div class="sectionhead"><div><h2>Next Day</h2><p class="muted">Tomorrow's lessons</p></div></div>
       <div id="nextDayList" class="recordlist empty">No lessons tomorrow.</div>
+      <section class="ovbox" id="voiceBox" aria-labelledby="voiceTitle">
+        <div class="ovhead"><div><h2 id="voiceTitle">Voice announcements</h2><p class="muted" id="voiceStatus"></p></div><label class="checklabel voiceswitch"><input type="checkbox" id="voiceOn"> On</label></div>
+        <ul class="voicelist"><li>Start: “আপনার লেসনের সময় শুরু হলো।”</li><li>50 min: “আপনার লেসনের আর ৫ মিনিট বাকি।”</li><li>55 min: “আপনার লেসনের সময় শেষ হয়েছে।”</li></ul>
+        <button type="button" class="btn ghost" id="voiceTest">▶ Test voice</button>
+      </section>
+      <section class="ovbox duaplayer" id="duaPlayer" aria-labelledby="duaTitle">
+        <p class="eyebrow">BEFORE YOU DRIVE</p><h2 id="duaTitle">Travel Dua · সফরের দোয়া</h2>
+        <div class="dua-arabic" lang="ar" dir="rtl">سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ، وَإِنَّا إِلَى رَبِّنَا لَمُنقَلِبُونَ</div>
+        <audio id="duaAudio" preload="none" playsinline src="travel-dua.mp3" data-len="12"></audio>
+        <div class="dpctl"><button type="button" class="dpbtn" id="duaPlay" aria-label="Play">▶</button><button type="button" class="dpbtn ghost" id="duaReplay" aria-label="Play again from the start">↺</button><input type="range" id="duaSeek" min="0" max="100" step="0.1" value="0" aria-label="Playback position"><span class="dptime" id="duaTime">0:00 / 0:12</span></div>
+        <small class="muted" id="duaState">Arabic recitation · saved in the app, works offline</small>
+        <details class="duamore"><summary>উচ্চারণ ও অর্থ · Pronunciation &amp; meaning</summary>
+          <div class="dua-section"><b>বাংলা উচ্চারণ</b><p>সুবহানাল্লাযী সাখখারা লানা হাযা, ওয়া মা কুন্না লাহু মুকরিনীন। ওয়া ইন্না ইলা রব্বিনা লামুনকালিবূন।</p></div>
+          <div class="dua-section"><b>বাংলা অর্থ (ভাবানুবাদ)</b><p>পবিত্র ও মহান তিনি, যিনি এ বাহনকে আমাদের অধীন করে দিয়েছেন; অথচ আমরা নিজেরা একে বশীভূত করতে সক্ষম ছিলাম না। আর নিশ্চয়ই আমরা আমাদের প্রতিপালকের কাছেই ফিরে যাব।</p></div>
+          <div class="dua-section"><b>English meaning</b><p>Glory be to the One who has placed this under our control, though we could never have done so on our own. And surely to our Lord we will return.</p></div>
+        </details>
+        <small class="dua-source">সূত্র: সূরা আয-যুখরুফ ৪৩:১৩–১৪</small>
+      </section>
     </section>
 
     <section class="panel tabpanel hidden" id="calendar">
@@ -300,7 +319,7 @@
       <div class="dialogactions dua-actions"><button type="button" class="btn ghost" id="duaSkip">Skip</button><span></span><button type="button" class="btn primary" id="duaStart">দোয়া পড়ে শুরু করুন · Start</button></div>
     </div>
   </dialog>
-  <section class="timerbar hidden" id="timerBar" role="timer" aria-live="off"><div class="timerfill" id="timerFill"></div><div class="timerhead"><div><small class="timerkicker">DRIVING LESSON</small><b id="timerLabel">Student</b></div><span id="timerStatus" class="timerstatus live">LIVE</span></div><div class="timercenter"><div class="timerring" id="timerRing"><div class="timerringinner"><small>TIME REMAINING</small><b id="timerDigits">55:00</b><small id="timerSub">00:00 elapsed</small></div></div></div><div class="timeractions"><button type="button" class="timerbtn" id="timerPause">Pause</button><button type="button" class="timerbtn timerend" id="timerEnd">End lesson</button></div></section>
+  <button type="button" class="timermini hidden" id="timerMini" aria-label="Lesson timer running – open Overview"></button>
   <nav class="tabbar" aria-label="Main navigation">
     <span class="navpill" id="navPill"></span>
     <button class="tab active" data-tab="overview"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5"/><path d="M6 10v9h12v-9"/><path d="M10 19v-5h4v5"/></svg><span>Overview</span></button>
