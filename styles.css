@@ -1321,3 +1321,132 @@ dialog:not([open]){display:none!important}
 @media(prefers-reduced-motion:reduce){
   #calendar .calviews button,#calendar .calday,#calendar .calhead .iconbtn{transition:none}
 }
+
+
+/* Student Profile — mobile-first containment and premium hierarchy */
+#profileDialog.widedialog{
+  width:min(680px,calc(100vw - 24px));
+  max-width:calc(100vw - 24px);
+  max-height:calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  margin:auto;
+  overflow:hidden;
+}
+#profileDialog .dialogbody{
+  width:100%;max-width:100%;min-width:0;max-height:inherit;
+  padding:clamp(15px,2.8vw,24px);
+  overflow-x:hidden;overflow-y:auto;
+  overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+}
+#profileDialog .dialoghead,
+#profileDialog .profilestats,
+#profileDialog .profileactions,
+#profileDialog #courseCard,
+#profileDialog .ptabs,
+#profileDialog .ptab{min-width:0;max-width:100%}
+#profileDialog .dialoghead{align-items:flex-start}
+#profileDialog .dialoghead>div{min-width:0;flex:1}
+#profileDialog #profileName{overflow-wrap:anywhere}
+#profileDialog #profilePhone{line-height:1.5;overflow-wrap:anywhere}
+#profileDialog .profilestats{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}
+#profileDialog .profilestats .report{
+  min-width:0;padding:14px;border:1px solid #e5ebf5;border-radius:16px;
+  background:linear-gradient(145deg,#fff,#f7f9fd);
+}
+#profileDialog .profilestats .report span{font-size:11px;line-height:1.35}
+#profileDialog .profilestats .report strong{
+  margin-top:7px;font-size:clamp(18px,3vw,23px);line-height:1.2;
+  overflow-wrap:anywhere;font-variant-numeric:tabular-nums;
+}
+#profileDialog .profileactions{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;margin:14px 0 16px;
+}
+#profileDialog .profileactions .btn{
+  display:flex;align-items:center;justify-content:center;
+  min-width:0;min-height:46px;padding:10px 11px;border-radius:13px;
+  white-space:normal;text-align:center;line-height:1.25;font-size:12.5px;
+}
+#profileDialog #profileAdd{grid-column:1/-1;min-height:50px;font-size:14px}
+#profileDialog #courseCard{display:grid;gap:10px;margin:0 0 16px}
+#profileDialog .coursecard{
+  min-width:0;max-width:100%;padding:15px;border:1px solid #dce5fb;
+  border-radius:17px;background:linear-gradient(145deg,#f8faff,#f0f5ff);
+}
+#profileDialog .coursetop{align-items:flex-start;flex-wrap:wrap;min-width:0}
+#profileDialog .coursetop b{min-width:0;overflow-wrap:anywhere;line-height:1.35}
+#profileDialog .coursetop span{white-space:normal;text-align:right}
+#profileDialog .courseline{min-width:0;gap:8px 12px;line-height:1.45;overflow-wrap:anywhere}
+#profileDialog .coursecard .pkgbar{max-width:100%;overflow:hidden}
+#profileDialog .coursecard .btn{min-height:46px;border-radius:13px}
+#profileDialog .ptabs{
+  display:flex;gap:6px;margin:4px 0 14px;padding:6px;
+  overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;
+  border:1px solid #e7ecf4;border-radius:14px;background:#f5f7fb;
+  -webkit-overflow-scrolling:touch;
+}
+#profileDialog .ptabs::-webkit-scrollbar{display:none}
+#profileDialog .ptabs button{
+  flex:0 0 auto;min-height:39px;padding:0 13px;border:0;border-radius:10px;
+  background:transparent;color:#64728a;font-size:12px;font-weight:750;white-space:nowrap;
+}
+#profileDialog .ptabs button.active{
+  background:#1b315a;color:#fff;box-shadow:0 2px 7px #172d5725;
+}
+#profileDialog .ptab{min-width:0;overflow-wrap:anywhere}
+#profileDialog .pblock{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+#profileDialog .pblock>div,
+#profileDialog .paysum>div{
+  min-width:0;padding:11px 12px;border:1px solid #edf0f5;border-radius:12px;background:#f8faff;
+}
+#profileDialog .pblock span,
+#profileDialog .paysum span{line-height:1.35}
+#profileDialog .pblock b,
+#profileDialog .paysum b{overflow-wrap:anywhere;line-height:1.35}
+#profileDialog .pblock .recordlist{grid-column:1/-1;min-width:0}
+#profileDialog .record{min-width:0;max-width:100%;gap:9px;padding:11px}
+#profileDialog .recordmain{min-width:0;flex:1}
+#profileDialog .recordvalue{max-width:38%;overflow-wrap:anywhere}
+#profileDialog .payline{min-width:0;flex-wrap:wrap;gap:8px}
+#profileDialog .payline>span:first-child{flex:1 1 140px}
+#profileDialog .payline .amt{flex:0 1 auto;overflow-wrap:anywhere}
+#profileDialog .payline .paytoggle{flex:0 0 auto}
+#profileDialog .charttable{display:block;max-width:100%;overflow-x:auto;white-space:nowrap}
+#profileDialog .ptab .coursecard,
+#profileDialog .ptab .pkgcard{min-width:0;max-width:100%;overflow-wrap:anywhere}
+#profileDialog .ptab .pkggrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:520px){
+  #profileDialog.widedialog{
+    width:calc(100vw - 16px);max-width:calc(100vw - 16px);
+    max-height:calc(100dvh - 16px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    border-radius:20px;
+  }
+  #profileDialog .dialogbody{padding:14px}
+  #profileDialog .dialoghead{gap:8px;padding-bottom:12px;margin-bottom:12px}
+  #profileDialog .dialoghead h2{font-size:24px}
+  #profileDialog .profilestats{gap:8px;margin:12px 0}
+  #profileDialog .profilestats .report{padding:11px;border-radius:14px}
+  #profileDialog .profilestats .report strong{font-size:19px}
+  #profileDialog .profileactions{gap:8px;margin:12px 0}
+  #profileDialog .profileactions .btn{min-height:44px;padding:9px 8px;font-size:11.5px}
+  #profileDialog #profileAdd{min-height:48px;font-size:13px}
+  #profileDialog .coursecard{padding:12px;border-radius:15px}
+  #profileDialog .courseline{font-size:12px;gap:7px 10px}
+  #profileDialog .ptabs{margin-inline:0;padding:5px}
+  #profileDialog .ptabs button{min-height:37px;padding-inline:11px;font-size:11.5px}
+  #profileDialog .pblock{grid-template-columns:minmax(0,1fr)}
+  #profileDialog .pblock h4{margin-top:5px}
+  #profileDialog .pblock>div{padding:10px 11px}
+  #profileDialog .paysum{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #profileDialog .record{padding:9px;gap:7px}
+  #profileDialog .recordvalue{max-width:34%;font-size:12px}
+}
+@media(max-width:360px){
+  #profileDialog .dialogbody{padding:11px}
+  #profileDialog .profilestats .report strong{font-size:17px}
+  #profileDialog .profileactions .btn{font-size:10.5px}
+  #profileDialog .ptabs button{padding-inline:9px}
+  #profileDialog .recordicon{width:32px;height:32px;flex:0 0 32px}
+}
+@media(prefers-reduced-motion:reduce){
+  #profileDialog *{scroll-behavior:auto!important;transition:none!important}
+}
