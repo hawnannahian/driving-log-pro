@@ -1936,3 +1936,15 @@ dialog:not([open]){display:none!important}
 #recordDialog #fPackageRow{display:none!important}
 #recordDialog #paymentMethodRow.hidden{display:none!important}
 #recordDialog #paymentMethodRow:not(.hidden){display:grid!important}
+
+/* Live student autocomplete for Calendar lesson entry (native datalist is inconsistent on iOS). */
+#recordDialog .record-student-panel{position:relative}
+#recordDialog .student-suggestions{grid-column:1/-1;display:grid;gap:4px;max-height:220px;overflow:auto;padding:5px;background:#fff;border:1px solid #dce3ef;border-radius:12px;box-shadow:0 12px 28px #14213b1c;z-index:8}
+#recordDialog .student-suggestions.hidden{display:none!important}
+#recordDialog .student-suggestion{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;border:0;border-radius:8px;background:#fff;color:var(--ink);text-align:left;cursor:pointer;font:inherit}
+#recordDialog .student-suggestion:hover,#recordDialog .student-suggestion.active{background:#edf1ff}
+#recordDialog .student-suggestion b,#recordDialog .student-suggestion small{display:block}
+#recordDialog .student-suggestion b{font-size:13px}
+#recordDialog .student-suggestion small,#recordDialog .student-suggest-arrow,#recordDialog .student-suggest-empty{font-size:11px;color:var(--muted)}
+#recordDialog .student-suggestion small{margin-top:3px}
+#recordDialog .student-suggest-empty{padding:10px 12px}
