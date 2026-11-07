@@ -260,3 +260,13 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Templates use a separate device-local storage key; no student, lesson, payment, backup, or cloud-sync records/schema are changed.
 - Bumped service-worker cache from v76 to v77.
 - Verification: source-level checks only. Browser/Playwright and real iPhone Safari interaction tests have not been run.
+
+
+## Hotfix — allow completed individual lessons to switch to prepaid course hours — 2026-11-07
+- Root cause: updateCourseField() only looked up an active course when the lesson was not completed, or already had a course, or was unpaid. A completed individual lesson marked Paid therefore resolved no active course, so tapping Course hours immediately reverted to Individual lesson.
+- Removed that completed/paid exclusion. When editing a lesson, the app now resolves the student's own linked course or active course regardless of completion/payment state, then applies the existing prepaid-hours availability check.
+- If no active course exists for the selected student, Course hours is now visibly disabled with a clear explanation instead of appearing selectable and silently reverting.
+- Existing save validation remains authoritative: switching to Course hours still requires enough prepaid/free hours; on save the lesson is linked to the course and marked not individually paid. Existing completion timestamp/duration are preserved.
+- No student, course, lesson, payment, or accounting records are bulk-modified. Change applies when the user edits and saves the specific lesson.
+- Bumped service-worker cache from v77 to v79.
+- Source-level checks only; automated browser and real iPhone Safari tests have not been run.
