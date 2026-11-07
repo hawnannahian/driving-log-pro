@@ -260,3 +260,11 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Templates use a separate device-local storage key; no student, lesson, payment, backup, or cloud-sync records/schema are changed.
 - Bumped service-worker cache from v76 to v77.
 - Verification: source-level checks only. Browser/Playwright and real iPhone Safari interaction tests have not been run.
+
+
+## Driving Log Settings sub-tab — 2026-11-07
+- Moved Working hours and Prayer time settings out of Calendar and into a dedicated Settings sub-tab inside Driving Log.
+- Grouped WhatsApp Message Settings alongside them. Driving Log now has Records and Settings sub-tabs; Records remains the default view.
+- Existing setting element IDs, save handlers, working-hours/prayer calculations, and WhatsApp template storage remain unchanged. No student, lesson, payment, or accounting records are modified.
+- Bumped service-worker cache from v77 to v78.
+- Verification: source-level review only; browser/Playwright and real iPhone Safari tests have not been run.
