@@ -685,3 +685,43 @@ html:has(dialog[open]),body:has(dialog[open]){overflow:hidden;overscroll-behavio
   touch-action:pan-y;
  }
 }
+
+
+/* iOS safe-area fix: keep dialog close controls below the status-bar hit area. */
+@media(max-width:720px){
+ dialog[open]{
+  position:fixed;
+  top:calc(env(safe-area-inset-top) + 8px);
+  bottom:calc(env(safe-area-inset-bottom) + 8px);
+  margin-block:0;
+  max-height:none;
+ }
+ #recordDialog{
+  max-height:none;
+  overflow:hidden;
+ }
+ #recordDialog form{
+  height:100%;
+  max-height:none;
+  padding-top:14px;
+ }
+ dialog:not(#recordDialog) .dialoghead{
+  position:sticky;
+  top:0;
+  z-index:30;
+  background:#fff;
+ }
+ .dialoghead .iconbtn,
+ #recordDialog .dialoghead .iconbtn{
+  position:relative;
+  z-index:31;
+  flex:0 0 48px;
+  width:48px;
+  min-width:48px;
+  height:48px;
+  min-height:48px;
+  pointer-events:auto;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+ }
+}
