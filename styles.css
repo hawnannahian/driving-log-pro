@@ -1502,3 +1502,80 @@ dialog:not([open]){display:none!important}
 .payment-more .paytoggle{width:100%;border-radius:0 0 9px 9px}
 @media(max-width:390px){.payment-metrics{gap:6px}.payment-metrics .metric{padding:10px 8px}.payment-course{padding:11px}.payment-filters button{padding:6px 7px}.payment-heading h3{font-size:16px}.payment-add{padding:0 10px}}
 @media(prefers-reduced-motion:no-preference){.payment-card,.payment-add,.payment-edit{transition:box-shadow .18s ease,transform .18s ease}.payment-edit:active,.payment-add:active{transform:scale(.98)}}
+
+
+/* Payments tab refinement — presentation only; existing payment actions and calculations are unchanged. */
+#profileDialog #ptab-payments{min-width:0;max-width:100%;overflow-x:clip}
+#profileDialog .payment-dashboard{gap:18px}
+#profileDialog .payment-heading{align-items:center;padding:2px 0 4px}
+#profileDialog .payment-heading h3{font-size:20px;letter-spacing:-.04em}
+#profileDialog .payment-heading p{font-size:12px;line-height:1.45}
+#profileDialog .payment-add{min-height:44px;padding:0 15px;border-radius:13px;font-size:12px;white-space:nowrap;box-shadow:0 7px 18px #315fe52b}
+#profileDialog .payment-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+#profileDialog .payment-metrics .metric{min-height:82px;justify-content:center;padding:13px 14px;border:1px solid var(--line);border-radius:16px;box-shadow:0 4px 14px #172b4d08}
+#profileDialog .payment-metrics .metric span{font-size:11px;letter-spacing:.01em}
+#profileDialog .payment-metrics .metric b{font-size:clamp(17px,4.8vw,21px);line-height:1.15;letter-spacing:-.04em}
+#profileDialog .payment-metrics .course-metric{grid-column:1/-1;min-height:58px;flex-direction:row;align-items:center;justify-content:space-between;padding:11px 14px;background:#f5f6ff;border-color:#e5e7fb}
+#profileDialog .payment-metrics .course-metric b{font-size:18px}
+#profileDialog .payment-course{padding:16px;border:1px solid #dbe4f8;border-radius:18px;background:linear-gradient(150deg,#f8faff 0%,#f0f4ff 100%);box-shadow:0 7px 20px #1d355f0b}
+#profileDialog .payment-course-head{align-items:flex-start;gap:8px}
+#profileDialog .payment-course-head b{font-size:15px;line-height:1.35}
+#profileDialog .payment-course-head strong{flex:none;font-size:12px;font-variant-numeric:tabular-nums}
+#profileDialog .payment-progress{height:9px;margin:13px 0 14px;background:#e1e8f5}
+#profileDialog .payment-course-stats{gap:8px}
+#profileDialog .payment-course-stats span{font-size:10px;line-height:1.35}
+#profileDialog .payment-course-stats b{font-size:13px}
+#profileDialog .payment-course-foot{align-items:center;margin-top:13px;padding-top:12px;font-size:11px;line-height:1.4}
+#profileDialog .payment-course-foot span{color:var(--muted)}
+#profileDialog .payment-course-foot b{font-size:12px}
+#profileDialog .payment-history-head{display:flex;flex-direction:column;align-items:stretch;gap:10px;margin-top:3px}
+#profileDialog .payment-history-head h3{font-size:18px;letter-spacing:-.03em}
+#profileDialog .payment-history-head small{font-size:11px}
+#profileDialog .payment-filters{width:max-content;max-width:100%;overflow-x:auto;gap:4px;padding:4px;border:1px solid var(--line);border-radius:12px;background:#f6f8fc;scrollbar-width:none}
+#profileDialog .payment-filters::-webkit-scrollbar{display:none}
+#profileDialog .payment-filters button{min-height:34px;min-width:62px;padding:7px 12px;border-radius:9px;font-size:11px;white-space:nowrap}
+#profileDialog .payment-history{gap:10px}
+#profileDialog .payment-item{grid-template-columns:12px minmax(0,1fr);gap:8px}
+#profileDialog .payment-rail:after{top:12px;bottom:-19px;background:#dce7e1}
+#profileDialog .payment-rail i{width:10px;height:10px;margin-top:15px;border:2px solid #20a36a;box-shadow:0 0 0 3px #eaf8f0}
+#profileDialog .payment-card{padding:13px;border:1px solid #e4e9f2;border-radius:15px;background:#fff;box-shadow:0 4px 15px #172b4d09}
+#profileDialog .payment-cardtop{align-items:flex-start;gap:10px}
+#profileDialog .payment-copy{gap:5px}
+#profileDialog .payment-copy b{font-size:13px;line-height:1.35}
+#profileDialog .payment-copy small{font-size:11px;line-height:1.4}
+#profileDialog .payment-amount{font-size:15px;font-weight:850;font-variant-numeric:tabular-nums}
+#profileDialog .payment-meta{margin-top:9px}
+#profileDialog .payment-status{padding:4px 9px;font-size:10px;letter-spacing:.01em}
+#profileDialog .payment-actions{gap:8px;margin-top:11px}
+#profileDialog .payment-edit,#profileDialog .payment-more summary{min-height:40px;border-radius:10px;font-size:11px}
+#profileDialog .payment-more .paytoggle{min-height:40px;font-size:11px}
+#profileDialog .payment-more[open] summary{border-radius:10px 10px 0 0}
+#profileDialog .payment-more .paytoggle{border-radius:0 0 10px 10px}
+#profileDialog .payment-edit:focus-visible,#profileDialog .payment-more summary:focus-visible,#profileDialog .payment-filters button:focus-visible,#profileDialog .payment-add:focus-visible{outline:3px solid #7da2ff;outline-offset:2px}
+@media(max-width:390px){
+  #profileDialog .payment-heading{align-items:flex-start}
+  #profileDialog .payment-heading h3{font-size:18px}
+  #profileDialog .payment-add{min-height:42px;padding-inline:11px;font-size:11px}
+  #profileDialog .payment-metrics{gap:7px}
+  #profileDialog .payment-metrics .metric{min-height:76px;padding:11px}
+  #profileDialog .payment-metrics .metric b{font-size:17px}
+  #profileDialog .payment-course{padding:13px}
+  #profileDialog .payment-course-stats{gap:5px}
+  #profileDialog .payment-course-stats span{font-size:9px}
+  #profileDialog .payment-course-stats b{font-size:12px}
+  #profileDialog .payment-card{padding:11px}
+  #profileDialog .payment-amount{font-size:14px}
+}
+@media(max-width:340px){
+  #profileDialog .payment-heading{flex-wrap:wrap}
+  #profileDialog .payment-add{width:100%}
+  #profileDialog .payment-metrics .metric{padding:9px}
+  #profileDialog .payment-course-head{flex-wrap:wrap}
+  #profileDialog .payment-course-foot{flex-wrap:wrap}
+  #profileDialog .payment-actions{flex-wrap:wrap}
+  #profileDialog .payment-edit,#profileDialog .payment-more{flex:1 1 100%}
+}
+@media(prefers-reduced-motion:no-preference){
+  #profileDialog .payment-card{transition:border-color .18s ease,box-shadow .18s ease}
+  #profileDialog .payment-card:focus-within{border-color:#c7d6f5;box-shadow:0 7px 18px #1d355f12}
+}
