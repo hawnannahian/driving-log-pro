@@ -227,3 +227,11 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - No payment, course allocation, student, lesson schema, or persistence logic changed.
 - Bumped service-worker cache from v72 to v73.
 - Validation: source-level review only. Browser/Playwright and real iPhone Safari checks remain pending at 390×844 and 320×568.
+
+
+## Separate Use course hours option — 2026-11-07
+- Per owner's clarification, moved course-hour selection back to a standalone checkbox outside the Payment card.
+- The checkbox appears only for lesson records with an eligible active course and remaining prepaid hours; otherwise it remains hidden.
+- Payment method tile UI is hidden. Existing checkbox-driven course allocation and paid-status behavior are retained.
+- Bumped service-worker cache from v73 to v74.
+- Source-level review only; browser/Playwright and real iPhone Safari verification pending.
