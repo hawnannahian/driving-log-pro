@@ -107,3 +107,11 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - This audit is being prepared on `maintenance/source-audit-2026-11-05`; merge only after reviewing the resulting pull request.
 - No student data or tokens were accessed or changed during source maintenance.
 - Remaining acceptance tests require a browser/device with the app's local data and, for Cloud Sync, the user's separately configured private repository.
+
+
+## UI update — 2026-11-07
+- Removed the Export CSV action from the Driving Log toolbar (other report exports and full backup remain available).
+- Removed the Today-only filter; Driving Log now defaults to All records.
+- Kept the today KPI summary and all record, payment, expense, and backup data unchanged.
+- Bumped the service-worker cache to v51.
+- Validation: source-level checks only; browser/iPhone runtime verification remains pending.
