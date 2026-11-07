@@ -75,35 +75,19 @@
       <div id="calDayList" class="recordlist empty"></div>
       <h3 class="caltitle">Upcoming lessons</h3>
       <div id="upcomingList" class="recordlist empty"></div>
-      <details class="prayerbox">
-        <summary>Working hours</summary>
-        <div class="formgrid">
-          <label>Start<input type="time" id="wStart"></label>
-          <label>End<input type="time" id="wEnd"></label>
-        </div>
-        <p class="hint">Free time is shown inside these hours. Gaps under 30 minutes are hidden.</p>
-      </details>
-      <details class="prayerbox">
-        <summary>Prayer time settings</summary>
-        <div class="formgrid">
-          <label class="checklabel wide"><input type="checkbox" id="pOn"> Show and protect prayer times</label>
-          <label class="checklabel wide"><input type="checkbox" id="pAuto"> Use the yearly timetable (changes every day)</label>
-          <label>Minutes for each prayer<input type="number" id="pMinutes" min="5" max="120" step="5"></label>
-          <label>Jum'a (Friday)<input type="time" id="p_jumua"></label>
-          <label class="manualprayer">Fajr<input type="time" id="p_fajr"></label>
-          <label class="manualprayer">Duhr<input type="time" id="p_duhr"></label>
-          <label class="manualprayer">Asr<input type="time" id="p_asr"></label>
-          <label class="manualprayer">Maghrib<input type="time" id="p_maghrib"></label>
-          <label class="manualprayer">Isha<input type="time" id="p_isha"></label>
-        </div>
-        <p class="hint">Blocks start at the jamaat time. To enter your own times, turn off the yearly timetable.</p>
-      </details>
+
     </section>
 
     <section class="panel tabpanel hidden logpanel" id="log">
       <div class="log-heading">
         <div><p class="log-eyebrow">YOUR BUSINESS ACTIVITY</p><h2>Driving Log</h2><p class="muted">Lessons come from the Calendar automatically. Add fuel and other expenses here.</p></div>
       </div>
+      <div class="log-subtabs" role="tablist" aria-label="Driving Log sections">
+        <button type="button" class="log-subtab active" id="logRecordsTab" role="tab" aria-selected="true" aria-controls="logRecordsPanel">Records</button>
+        <button type="button" class="log-subtab" id="logSettingsTab" role="tab" aria-selected="false" aria-controls="logSettingsPanel">Settings</button>
+      </div>
+      <div id="logRecordsPanel" class="log-subpanel">
+
       <div class="log-action-row">
         <button class="btn primary log-add" id="addRecordBtn"><span aria-hidden="true">＋</span> Add expense</button>
       </div>
@@ -126,7 +110,35 @@
       </section>
       <div class="log-list-heading"><h3>Lesson records</h3><span id="logResultCount">0 records</span></div>
       <div id="logList" class="recordlist empty">No records yet.</div>
-      <details class="wa-template-settings" id="waTemplateSettings">
+
+
+      </div>
+      <div id="logSettingsPanel" class="log-subpanel hidden" role="tabpanel" aria-labelledby="logSettingsTab">
+        <div class="log-settings-intro"><b>App settings</b><p>Manage your working schedule, prayer times and WhatsApp messages here.</p></div>
+        <details class="prayerbox log-setting-card">
+          <summary>Working hours</summary>
+          <div class="formgrid">
+            <label>Start<input type="time" id="wStart"></label>
+            <label>End<input type="time" id="wEnd"></label>
+          </div>
+          <p class="hint">Free time is shown inside these hours. Gaps under 30 minutes are hidden.</p>
+        </details>
+        <details class="prayerbox log-setting-card">
+          <summary>Prayer time settings</summary>
+          <div class="formgrid">
+            <label class="checklabel wide"><input type="checkbox" id="pOn"> Show and protect prayer times</label>
+            <label class="checklabel wide"><input type="checkbox" id="pAuto"> Use the yearly timetable (changes every day)</label>
+            <label>Minutes for each prayer<input type="number" id="pMinutes" min="5" max="120" step="5"></label>
+            <label>Jum'a (Friday)<input type="time" id="p_jumua"></label>
+            <label class="manualprayer">Fajr<input type="time" id="p_fajr"></label>
+            <label class="manualprayer">Duhr<input type="time" id="p_duhr"></label>
+            <label class="manualprayer">Asr<input type="time" id="p_asr"></label>
+            <label class="manualprayer">Maghrib<input type="time" id="p_maghrib"></label>
+            <label class="manualprayer">Isha<input type="time" id="p_isha"></label>
+          </div>
+          <p class="hint">Blocks start at the jamaat time. To enter your own times, turn off the yearly timetable.</p>
+        </details>
+              <details class="wa-template-settings" id="waTemplateSettings">
         <summary><span>WhatsApp Message Settings</span><small>Edit your lesson and payment reminder messages</small></summary>
         <div class="wa-template-body">
           <label for="waLessonTemplate">Lesson Reminder</label>
@@ -144,6 +156,7 @@
           <p class="wa-template-footnote">Saved on this device. Existing student and payment records are not changed.</p>
         </div>
       </details>
+      </div>
     </section>
 
     <section class="panel tabpanel hidden" id="students">
