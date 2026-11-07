@@ -191,3 +191,10 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Kept both controls and their underlying IDs/logic in the markup; existing comment values and record data are not deleted or migrated. Repeat defaults and save behavior remain unchanged.
 - Bumped service-worker cache from v68 to v69.
 - Validation status: source-level change only; browser/Playwright and real iPhone Safari verification remain pending.
+
+
+## Hotfix — repeat control hidden class — 2026-11-07
+- Corrected the New Record repeat row markup: merged PR #63 accidentally left two class attributes, so the browser could ignore the `hidden` class.
+- Consolidated the classes into one `class="lessonfield wide hidden"`; no repeat scheduling logic or saved data changed.
+- Bumped service-worker cache to v70.
+- Validation: source-level inspection only; browser/iPhone runtime verification remains pending.
