@@ -270,3 +270,11 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - No student, course, lesson, payment, or accounting records are bulk-modified. Change applies when the user edits and saves the specific lesson.
 - Bumped service-worker cache from v77 to v79.
 - Source-level checks only; automated browser and real iPhone Safari tests have not been run.
+
+
+## Accounting safeguard — preserve individual payment history on course conversion — 2026-11-07
+- When a previously paid individual lesson is reassigned to prepaid course hours, preserve its original collected amount and date as a separate historical payment marker on the lesson.
+- Student paid totals and Payment History include the retained receipt. It is not added to coursePayments, does not increase prepaid course hours, and is not double-counted as a course payment.
+- If the lesson is later changed back from course to individual, restore its Paid state and remove the separate transfer marker.
+- No existing records are bulk-migrated; this applies only when a user edits and saves a lesson after the update.
+- Source-level checks only; browser/Playwright and real iPhone Safari testing remain outstanding.
