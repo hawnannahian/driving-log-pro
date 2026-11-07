@@ -789,3 +789,94 @@ html:has(dialog[open]),body:has(dialog[open]){overflow:hidden;overscroll-behavio
   -webkit-tap-highlight-color:transparent;
  }
 }
+
+
+/* ── Premium design foundation · shared across every tab and dialog ── */
+:root{
+ --navy:#101a30;
+ --blue:#315ee8;
+ --royal:#315ee8;
+ --ink:#172238;
+ --muted:#66748b;
+ --line:#e3e9f2;
+ --bg:#f3f6fb;
+ --card-shadow:0 1px 2px #101c3308,0 8px 24px #101c330b;
+ --surface:#fff;
+ --surface-soft:#f7f9fd;
+ --radius-card:18px;
+ --radius-control:12px;
+ --space-page:clamp(12px,2.2vw,24px);
+ color-scheme:light;
+}
+body{
+ background:var(--bg);
+ color:var(--ink);
+ -webkit-font-smoothing:antialiased;
+ text-rendering:optimizeLegibility;
+}
+button,input,select,textarea{font:inherit}
+button{ -webkit-tap-highlight-color:transparent; }
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+ outline:3px solid #315ee855;
+ outline-offset:2px;
+}
+.panel,.stat,.report,.data-card,.record,.backupbanner,.student-card,.calendar-card{
+ border-color:var(--line);
+ box-shadow:var(--card-shadow);
+}
+.panel{
+ border-radius:var(--radius-card);
+ background:var(--surface);
+}
+.sectionhead{align-items:center}
+.sectionhead h2{letter-spacing:-.025em}
+.welcome h1{letter-spacing:-.04em;line-height:1.08}
+.muted,.hint,.sectionhead p{color:var(--muted)}
+.btn{
+ min-height:42px;
+ border-radius:12px;
+ font-weight:650;
+ letter-spacing:-.01em;
+ transition:transform .16s ease,background-color .16s ease,box-shadow .16s ease;
+}
+.btn:active{transform:scale(.98)}
+.btn.primary,.btn:not(.ghost):not(.danger):not(.secondary){
+ box-shadow:0 5px 14px #315ee826;
+}
+input:not([type=checkbox]):not([type=radio]),select,textarea{
+ border-color:var(--line);
+ border-radius:var(--radius-control);
+ background:#fff;
+ color:var(--ink);
+}
+input:not([type=checkbox]):not([type=radio]):focus,select:focus,textarea:focus{
+ border-color:#7895f5;
+ box-shadow:0 0 0 3px #315ee81a;
+}
+.tab,.ptab,[data-isview]{
+ transition:color .16s ease,background-color .16s ease,box-shadow .16s ease;
+}
+.tab.active,.ptab.active,[data-isview].active{
+ box-shadow:0 2px 8px #17223812;
+}
+.record,.report,.stat,.data-card{
+ border-radius:15px;
+}
+dialog{
+ border-radius:22px;
+ box-shadow:0 24px 80px #101a3040;
+}
+dialog::backdrop{background:#101a30a6;backdrop-filter:blur(5px)}
+#toast{border-radius:14px;box-shadow:0 12px 36px #101a3030}
+@media(max-width:720px){
+ :root{--space-page:12px;--radius-card:15px}
+ main{padding-left:var(--space-page);padding-right:var(--space-page)}
+ .panel{padding:13px}
+ .sectionhead{gap:8px;margin-bottom:11px}
+ .sectionhead h2{font-size:18px}
+ .btn{min-height:44px}
+ .tabbar{box-shadow:0 8px 28px #101a3030}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
