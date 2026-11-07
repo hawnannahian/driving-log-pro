@@ -1450,3 +1450,9 @@ dialog:not([open]){display:none!important}
 @media(prefers-reduced-motion:reduce){
   #profileDialog *{scroll-behavior:auto!important;transition:none!important}
 }
+/* iOS Safari zooms the page when a text field smaller than 16px gets focus and can stay zoomed (a dialog then looks cut off on the right).
+   Touch devices therefore get 16px form controls; double-tap zoom is also switched off on buttons and tabs. */
+@media (hover:none) and (pointer:coarse){
+  input,select,textarea{font-size:16px!important}
+  button,a,label,summary,.tab{touch-action:manipulation}
+}
