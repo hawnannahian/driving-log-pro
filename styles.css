@@ -880,3 +880,226 @@ dialog::backdrop{background:#101a30a6;backdrop-filter:blur(5px)}
 @media(prefers-reduced-motion:reduce){
  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+
+
+/* ==========================================================
+   PREMIUM REDESIGN · ALL MAIN TABS + PROFILE SUB-PAGES
+   Visual-only layer: keeps existing IDs, data flow and actions.
+   ========================================================== */
+:root{
+ --premium-ink:#17243b;
+ --premium-muted:#687790;
+ --premium-line:#e4eaf3;
+ --premium-bg:#f4f7fc;
+ --premium-blue:#315ee8;
+ --premium-navy:#101c33;
+ --premium-radius:20px;
+ --premium-shadow:0 2px 5px #17243b08,0 12px 30px #17243b0c;
+}
+body{background:var(--premium-bg);color:var(--premium-ink)}
+.topbar{
+ background:linear-gradient(112deg,#101a30 0%,#172b50 72%,#203d78 100%);
+ box-shadow:0 5px 20px #101a3017;
+}
+.brand b{letter-spacing:-.025em}
+.brand small{opacity:.78}
+main{max-width:1160px}
+.tabpanel{
+ border:1px solid #e8edf5;
+ border-radius:24px;
+ background:#fff;
+ box-shadow:var(--premium-shadow);
+ padding:clamp(16px,2.5vw,26px);
+}
+.tabpanel>.sectionhead:first-child{margin-bottom:18px}
+.tabpanel .sectionhead h2{font-size:clamp(20px,2.5vw,25px);letter-spacing:-.04em}
+.tabpanel .sectionhead p{font-size:12.5px;line-height:1.5}
+.panel,.ovbox,.chartbox,.data-card,.record,.report,.stat{
+ border-color:var(--premium-line);
+}
+.btn{font-weight:750;letter-spacing:-.015em}
+.btn.primary{box-shadow:0 6px 16px #315ee82a}
+.btn:active,.chipbtn:active,.tabbar .tab:active{transform:scale(.975)}
+.toolbar{gap:9px;margin:14px 0 16px}
+.toolbar input,.toolbar select{
+ min-height:44px;border:1px solid var(--premium-line);border-radius:13px;
+ background:#fbfcff;padding:10px 13px;font-size:13px;
+}
+.toolbar input:focus,.toolbar select:focus{background:#fff;border-color:#8da6f8;box-shadow:0 0 0 3px #315ee817}
+
+/* Overview — priority card, schedule and personal tools */
+#overview{background:linear-gradient(180deg,#fff 0%,#fbfcff 100%)}
+#overview .nextcard{
+ padding:clamp(18px,3vw,26px);border:1px solid #263e701c;border-radius:22px;
+ background:radial-gradient(circle at 100% 0%,#4569bd 0,transparent 42%),linear-gradient(125deg,#101c33,#1b3568 72%,#294c9d);
+ box-shadow:0 14px 32px #132b5a24;
+}
+#overview .nextlabel{font-size:10px;letter-spacing:1.1px}
+#overview .nexttime{font-size:clamp(30px,5vw,42px);font-weight:850;letter-spacing:-1.3px}
+#overview .nextname{font-size:clamp(17px,2.5vw,21px);margin-top:2px}
+#overview .nextactions{gap:9px}
+#overview .nextbtn{border-radius:13px;font-weight:800}
+#overview .todayhead,#overview>.sectionhead h2{font-size:19px;letter-spacing:-.035em}
+#overview .recordlist{gap:8px}
+#overview .record{border-radius:15px;padding:12px 13px;background:#fff;box-shadow:0 2px 10px #17243b08}
+#overview .ovbox{
+ margin-top:15px;padding:18px;border-radius:19px;
+ background:linear-gradient(145deg,#fff,#f9fbff);box-shadow:0 4px 16px #17243b08;
+}
+#overview .ovbox h2{font-size:16px;letter-spacing:-.025em}
+#overview .duaplayer{background:linear-gradient(145deg,#fff,#f2f6ff);border-color:#dfe7fb}
+#overview .dpbtn{box-shadow:0 5px 12px #315ee82c}
+
+/* Calendar — clearer controls, month grid and agenda cards */
+#calendar .calviews{padding:5px;background:#eef2f9;border:1px solid #e5eaf3;border-radius:15px}
+#calendar .calviews button{min-height:42px;border-radius:11px}
+#calendar .calviews button.active{background:#fff;color:var(--premium-blue);box-shadow:0 3px 10px #17243b12}
+#calendar .calboard{
+ padding:17px 15px 18px;border-radius:22px;
+ background:radial-gradient(circle at 100% 0%,#294b91 0,transparent 46%),linear-gradient(135deg,#101c33,#172d57);
+ box-shadow:0 12px 28px #101c3326;
+}
+#calendar .calhead{align-items:center;padding-bottom:14px}
+#calendar .calhead .iconbtn{width:40px;height:40px;border:1px solid #ffffff24;border-radius:13px;background:#ffffff14;font-size:25px}
+#calendar .caltitlebox b{font-size:19px;letter-spacing:-.04em}
+#calendar .calweek{font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:#aab9d4}
+#calendar .calday{min-height:54px;border-radius:13px}
+#calendar .calday b{width:32px;height:32px}
+#calendar .calday.selected b{background:#fff;color:#1b3470;box-shadow:0 3px 10px #0002}
+#calendar .calday.today:not(.selected) b{outline:1px solid #ffffff70}
+#calendar .calsum{font-size:11px;color:#c9d6ef}
+#calendar .timeline{border-radius:18px;padding:12px 10px;background:#fbfcff}
+#calendar .recordlist{gap:8px}
+#calendar .record{border-radius:15px;padding:12px;background:#fff}
+#calendar .prayerbox{margin-top:12px;border:1px solid var(--premium-line);border-radius:15px;background:#fbfcff}
+#calendar .prayerbox summary{padding:13px 15px;font-weight:750;color:#34435d}
+#calendar .prayerbox .formgrid{padding:0 14px 14px}
+
+/* Log — hierarchy between daily KPIs, filters and transaction list */
+#log.logpanel{padding:clamp(15px,2.5vw,26px);border-radius:22px;background:#fff}
+#log .log-heading{margin-bottom:14px}
+#log .log-heading h2{font-size:clamp(24px,3vw,31px);letter-spacing:-1px}
+#log .log-add{min-height:46px;padding-inline:18px;border-radius:14px}
+#log .log-summary{
+ padding:15px;border-radius:19px;border-color:#e2e9f6;
+ background:linear-gradient(135deg,#f7f9ff,#edf3ff);
+}
+#log .log-kpi{justify-content:flex-start;padding:7px 10px}
+#log .log-kpi-icon{width:38px;height:38px;border-radius:12px}
+#log .log-kpi b{font-size:clamp(17px,2vw,23px);letter-spacing:-.6px}
+#log .log-kpi small{font-size:10px;white-space:normal}
+#log .log-payment-details{margin-top:10px}
+#log .log-payment-details summary{font-weight:750;color:#40516d}
+#log .log-list-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:20px 0 10px}
+#log .log-list-heading h3{font-size:16px;letter-spacing:-.3px}
+#log .recordlist{gap:8px}
+#log .record{border-radius:15px;padding:12px;background:#fff;box-shadow:0 2px 10px #17243b08}
+
+/* Students — searchable directory and student tiles */
+#students .sectionhead{align-items:center}
+#students #addStudentBtn{min-height:44px;border-radius:13px;padding-inline:15px}
+#students .toolbar input{flex:1 1 220px}
+#students .studentgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+#students .student{
+ position:relative;min-height:94px;padding:16px 15px;border:1px solid #e5eaf3;border-radius:17px;
+ background:linear-gradient(145deg,#fff,#fbfcff);box-shadow:0 3px 12px #17243b08;
+ transition:transform .16s,border-color .16s,box-shadow .16s;
+}
+#students .student:active{transform:scale(.985)}
+#students .student b{font-size:15px;letter-spacing:-.02em}
+#students .student small{font-size:11.5px;line-height:1.5}
+#students .student:focus-visible{outline:3px solid #315ee844;outline-offset:2px}
+
+/* Reports — premium financial summary and legible analytics cards */
+#reports .dashactions{gap:8px;margin:12px 0 15px}
+#reports .chipbtn{min-height:39px;padding-inline:14px;border-radius:12px;background:#f8faff}
+#reports .dashhero{
+ padding:clamp(18px,3vw,25px);border-radius:22px;
+ background:radial-gradient(circle at 100% 0%,#3159b2 0,transparent 48%),linear-gradient(125deg,#101c33,#1b3568 72%,#24488f);
+ box-shadow:0 14px 32px #101c3326;
+}
+#reports .herorev strong{font-size:clamp(31px,5vw,42px);letter-spacing:-1.4px}
+#reports .herogrid{gap:9px}
+#reports .herogrid div{border:1px solid #ffffff12;background:#ffffff13;border-radius:14px}
+#reports .reportgrid{gap:10px}
+#reports .report{
+ min-height:94px;padding:15px;border-radius:17px;
+ background:linear-gradient(145deg,#fff,#f9fbff);box-shadow:0 3px 12px #17243b08;
+}
+#reports .report span{font-size:11px;font-weight:700;color:#718099}
+#reports .report strong{font-size:clamp(18px,2.2vw,23px);letter-spacing:-.5px}
+#reports .chartbox,#reports .dashcard,#reports .finreports{border:1px solid var(--premium-line);border-radius:18px;background:#fff;box-shadow:0 3px 14px #17243b08}
+#reports .finhead{padding:16px 17px}
+#reports .fintitle b{font-size:16px;letter-spacing:-.02em}
+
+/* Islamic Companion — reading-first layout and calm devotional palette */
+#islamic.islamicpanel{background:linear-gradient(180deg,#fff,#fbfcff)}
+#islamic .isbanner{height:clamp(150px,22vw,190px);border-radius:22px;box-shadow:0 12px 26px #101c3326}
+#islamic .isbanner h2{font-size:clamp(22px,3vw,28px);letter-spacing:-.04em}
+#islamic .isseg{padding:5px;border:1px solid #e6ebf3;background:#f1f4f9;border-radius:15px}
+#islamic .isseg button{min-height:42px;border-radius:11px}
+#islamic .isseg button.active{background:#172d57;box-shadow:0 4px 10px #172d572b}
+#islamic .ischips{gap:7px}
+#islamic .ischips button{min-height:38px;border-radius:12px}
+#islamic .isrow{gap:9px;padding:12px 10px;border-bottom-color:#edf1f6}
+#islamic .isrowmain{gap:12px}
+#islamic .isico{width:46px;height:46px;border:1px solid #e4eaf4;background:#f3f6fc;border-radius:14px}
+#islamic .istxt b{font-size:14px;letter-spacing:-.01em}
+#islamic .istxt small{margin-top:3px;font-size:10.5px}
+#islamic .isdcard{border:1px solid #e8edf4;border-radius:19px;background:#fff;box-shadow:0 4px 18px #17243b08}
+#islamic .isarabic{line-height:2.15}
+#islamic .isplayer{border:1px solid #e5eaf3;border-radius:17px;background:#f8faff}
+
+/* Student profile sub-pages and every dialog */
+#profileDialog .dialogbody{padding:clamp(16px,3vw,25px)}
+#profileDialog .profilestats{gap:9px}
+#profileDialog .report{border-radius:15px;background:#f9fbff}
+#profileDialog .profileactions{gap:8px}
+#profileDialog .profileactions .btn{border-radius:12px}
+#profileDialog .ptabs{
+ position:sticky;top:0;z-index:8;padding:7px 2px;background:#ffffffed;
+ border-bottom:1px solid #e9edf4;backdrop-filter:blur(12px);
+}
+#profileDialog .ptabs button{min-height:40px;border-radius:12px;padding-inline:14px}
+#profileDialog .ptabs button.active{background:#172d57;border-color:#172d57;box-shadow:0 4px 10px #172d5726}
+#profileDialog .ptab{padding-top:5px}
+dialog{border:1px solid #e5eaf2;border-radius:22px;box-shadow:0 24px 80px #101a3040}
+dialog::backdrop{background:#101a30a8;backdrop-filter:blur(5px)}
+dialog form,dialog .dialogbody{padding:clamp(16px,3vw,24px)}
+dialog .dialoghead{align-items:center;gap:12px;padding-bottom:13px;border-bottom:1px solid #edf0f5;margin-bottom:15px}
+dialog .dialoghead h2{font-size:21px;letter-spacing:-.04em}
+dialog .dialoghead .iconbtn{width:44px;height:44px;min-width:44px;border:1px solid #e5eaf2;background:#f4f6fb;font-size:25px}
+dialog .dialogactions{gap:8px;padding-top:12px;border-top:1px solid #edf0f5}
+dialog .dialogactions .btn{min-height:44px;border-radius:12px}
+
+@media(max-width:720px){
+ .tabpanel{padding:13px;border-radius:18px}
+ #overview .nextcard{padding:17px;border-radius:18px}
+ #overview .ovbox{padding:14px;border-radius:16px}
+ #calendar .calboard{padding:13px 10px 14px;border-radius:18px}
+ #calendar .calday{min-height:47px;border-radius:11px}
+ #calendar .calday b{width:29px;height:29px}
+ #log .log-summary{padding:10px;border-radius:15px}
+ #log .log-kpi{display:block;text-align:center;padding:5px 3px}
+ #log .log-kpi-icon{margin:0 auto 6px;width:32px;height:32px}
+ #log .log-kpi small{font-size:9px}
+ #students .studentgrid{grid-template-columns:1fr;gap:8px}
+ #students .student{min-height:76px;padding:13px}
+ #reports .reportgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ #reports .report{min-height:82px;padding:12px}
+ #reports .herogrid{gap:7px}
+ #reports .herogrid div{padding:10px}
+ #islamic .isbanner{height:150px}
+ #islamic .isrow{padding:10px 6px}
+ #profileDialog .ptabs{margin-inline:-3px;top:0}
+ dialog .dialogactions{flex-wrap:wrap}
+}
+@media(max-width:390px){
+ #log .log-kpi b{font-size:16px}
+ #reports .report strong{font-size:17px}
+ #reports .report span{font-size:10px}
+ #calendar .calday{min-height:43px}
+}
+@media(prefers-reduced-motion:reduce){
+ #students .student:active,.btn:active{transform:none}
+}
