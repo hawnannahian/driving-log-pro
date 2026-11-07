@@ -165,3 +165,10 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 
 ## iOS input zoom (2026-11-07)
 - Owner screenshot: the student profile dialog looked zoomed in and cut off on the right on a real iPhone, while Chromium at the same width shows it fitting. Most likely cause (not verifiable without iOS WebKit): focusing a field with font-size < 16px makes iOS Safari zoom the page, and with body overflow hidden it stays zoomed. Touch devices now use 16px form controls and `touch-action:manipulation`. Needs confirmation on a real iPhone.
+
+
+## Release versioning — 2026-11-07
+- Adopt semantic app versioning in the visible footer. Current release before this change: v1.21; proposed release: v1.22 for the premium Student Payments dashboard update (PR #59).
+- Patch increments (x.y.Z) for bug fixes, minor increments (x.Y.0) for backward-compatible features/UI updates, and major increments (X.0.0) only for breaking changes.
+- Each app update must update the footer version, increment the service-worker cache name, and record release notes here. A proposed version is not released until its version PR is merged and GitHub Pages deployment succeeds.
+- Proposed v1.22: premium Payments dashboard, course progress summary, payment history timeline, and All/Course/Lesson filters. This version metadata update is separate from the already-merged UI PR #59.
