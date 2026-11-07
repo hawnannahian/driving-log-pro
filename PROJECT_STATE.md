@@ -184,3 +184,10 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - CSS-only change to the Payments tab. No changes to payment calculations, student/course records, event handlers, storage keys, or data schema.
 - Bumped service-worker cache from v67 to v68.
 - Verification status: source review only. No real browser/Playwright session or real iPhone Safari session was available in this work session; do not treat the visual change as runtime-verified. PR must be tested at 390×844 and 320×568, including all six tabs, payment actions, overflow, closed dialogs, and console errors before merge.
+
+
+## New Record form simplification — 2026-11-07
+- At the owner's request, hid the Repeat every week control and Comment field in the Calendar New Record form for now.
+- Kept both controls and their underlying IDs/logic in the markup; existing comment values and record data are not deleted or migrated. Repeat defaults and save behavior remain unchanged.
+- Bumped service-worker cache from v68 to v69.
+- Validation status: source-level change only; browser/Playwright and real iPhone Safari verification remain pending.
