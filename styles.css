@@ -1967,3 +1967,16 @@ dialog:not([open]){display:none!important}
 .wa-template-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:5px}
 .wa-template-actions .btn{min-height:44px}
 @media(max-width:390px){.wa-template-settings>summary{padding:14px}.wa-template-body{padding:0 12px 13px}.wa-template-actions .btn{flex:1}}
+
+
+/* Driving Log Records / Settings sub-navigation */
+.log-subtabs{display:flex;gap:7px;padding:5px;margin:0 0 17px;border:1px solid var(--line,#e3e9f2);border-radius:14px;background:var(--soft,#f5f7fb)}
+.log-subtab{flex:1;min-height:43px;border:0;border-radius:10px;background:transparent;color:var(--muted);font:inherit;font-size:13px;font-weight:850;cursor:pointer}
+.log-subtab.active{background:var(--card,#fff);color:var(--ink);box-shadow:0 2px 8px #172b4d12}
+.log-subtab:focus-visible{outline:3px solid #7da2ff;outline-offset:2px}
+.log-subpanel.hidden{display:none!important}
+.log-settings-intro{margin:2px 0 14px}
+.log-settings-intro b{font-size:16px;font-weight:850}
+.log-settings-intro p{margin:4px 0 0;color:var(--muted);font-size:12px;line-height:1.5}
+.log-setting-card{margin:0 0 12px}
+@media(max-width:390px){.log-subtabs{margin-bottom:13px}.log-subtab{min-height:41px}}
