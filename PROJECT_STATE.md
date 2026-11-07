@@ -198,3 +198,10 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Consolidated the classes into one `class="lessonfield wide hidden"`; no repeat scheduling logic or saved data changed.
 - Bumped service-worker cache to v70.
 - Validation: source-level inspection only; browser/iPhone runtime verification remains pending.
+
+
+## Premium New Record visual refinement — 2026-11-07
+- Added a CSS-only visual refinement to the Calendar New Record form: clearer blue Lesson Time panel, green Payment panel, lavender Lesson Completion panel, refined duration chips/summary, payment selector cards, and stronger sticky Save action.
+- Preserved existing HTML structure, form IDs, event handlers, validation, payment/course calculations, and data schema. Repeat and Comment remain hidden from the prior approved change.
+- Bumped service-worker cache from v70 to v71.
+- Verification status: source/CSS review only; no browser/Playwright or real iPhone Safari runtime test has been performed. Check at 390×844 and 320×568 before merge.
