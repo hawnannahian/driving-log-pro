@@ -248,6 +248,17 @@
         <label class="lessonfield">Hourly rate (€)<input type="number" id="fRate" min="0" step=".01" value="20"></label>
         <label class="costfield">Cost (€)<input type="number" id="fCost" min="0" step=".01" value="0"></label>
         <label class="kmfield">Odometer (km)<input type="number" id="fKm" min="0" step=".1" value="0"></label>
+        <section class="lessonfield wide payment-method hidden" id="paymentMethodRow" aria-label="Payment method">
+          <div><b>Payment method</b><small>Choose how this lesson is paid.</small></div>
+          <div class="payment-method-options">
+            <button type="button" class="payment-option" id="paymentIndividual" aria-pressed="true">
+              <span class="payment-icon" aria-hidden="true">€</span><span class="payment-option-copy"><b>Individual lesson</b><small id="individualRateText">€20 per hour</small></span><span class="payment-check" aria-hidden="true">✓</span>
+            </button>
+            <button type="button" class="payment-option" id="paymentCourse" aria-pressed="false">
+              <span class="payment-icon" aria-hidden="true">▣</span><span class="payment-option-copy"><b>Course hours</b><small id="courseOptionMeta">Prepaid hours available</small></span><span class="payment-check" aria-hidden="true">✓</span>
+            </button>
+          </div>
+        </section>
         <label class="lessonfield checklabel" id="fPaidRow"><input type="checkbox" id="fPaid"> Paid</label>
         <div class="lessonfield wide donebox"><label class="checklabel"><input type="checkbox" id="fDone"> Lesson completed</label><label class="donemin">Actual length (minutes)<input type="number" id="fActual" min="1" max="720" step="1" inputmode="numeric"></label><p class="hint">Finished lessons count automatically. Tick this to finish a lesson early or to record a different length.</p></div>
         <label class="lessonfield checklabel wide hidden" id="fPackageRow"><input type="checkbox" id="fPackage"> <span id="fPackageText">Use course hours</span></label>

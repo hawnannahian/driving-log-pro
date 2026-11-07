@@ -405,3 +405,20 @@ b.course{color:var(--royal)}
 .legacynote{margin:2px 0 12px;padding:10px 12px;border-radius:12px;background:#f5f7fb;color:#59677d;font-size:12.5px;line-height:1.5}
 #ptab-course .pkgcard{margin-bottom:10px}
 .ptabs{overflow-x:auto;-webkit-overflow-scrolling:touch}.ptabs button{flex:none;white-space:nowrap}
+
+/* Lesson payment method selector */
+.payment-method{display:grid;gap:9px;padding-top:3px}
+.payment-method>div:first-child{display:grid;gap:3px;color:var(--ink);font-size:14px}
+.payment-method>div:first-child small{color:var(--muted,#718096);font-size:12px;font-weight:500}
+.payment-method-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.payment-option{position:relative;display:flex;align-items:center;gap:9px;min-width:0;min-height:76px;padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);font:inherit;text-align:left;cursor:pointer;transition:border-color .15s,background .15s,box-shadow .15s}
+.payment-option[aria-pressed="true"]{border:2px solid #315eea;padding:11px;background:#eff4ff;box-shadow:0 0 0 1px #315eea0d}
+.payment-option:disabled{opacity:.52;cursor:not-allowed}
+.payment-icon{display:grid;place-items:center;flex:0 0 34px;width:34px;height:34px;border-radius:11px;background:#edf2ff;color:#315eea;font-size:19px;font-weight:800}
+.payment-option-copy{display:grid;gap:3px;min-width:0}
+.payment-option-copy b{font-size:13px;line-height:1.25}
+.payment-option-copy small{color:#718096;font-size:11px;line-height:1.3}
+.payment-check{display:none;margin-left:auto;color:#315eea;font-weight:900}
+.payment-option[aria-pressed="true"] .payment-check{display:block}
+#fPackageRow{display:none!important}
+@media(max-width:390px){.payment-method-options{gap:7px}.payment-option{gap:7px;padding:9px;min-height:72px}.payment-option[aria-pressed="true"]{padding:8px}.payment-icon{flex-basis:29px;width:29px;height:29px}.payment-option-copy b{font-size:12px}.payment-option-copy small{font-size:10px}}
