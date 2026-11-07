@@ -149,3 +149,13 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Existing saved lesson rates and legacy accounting fallback remain unchanged; no student records, historical entries, or payment calculations are migrated.
 - Service-worker cache bumped to v56.
 - Validation status: source-level checks pending; GitHub Pages deployment and real iPhone runtime testing not yet performed.
+
+
+## Premium Edit Record UI — 2026-11-07
+- Updated the Calendar record dialog to a cleaner lesson-first mobile layout inspired by the approved visual direction.
+- Removed the record-category chip bar from Edit Lesson mode; category controls remain available in the expense-entry flow so Fuel, Expense, Insurance, Maintenance, and Refund types remain selectable.
+- Reorganized date, student, lesson time/duration, hourly rate/payment, completion, and comment into clearer sections; comment is now visible without a More options disclosure.
+- Added a live duration summary and a sticky bottom action bar for Delete, Cancel, and Save.
+- Kept existing form IDs and record save/payment/course calculations to preserve compatibility.
+- Bumped service-worker cache to v57.
+- Source-level checks performed after commit; live deployment and real-device testing pending.
