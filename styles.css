@@ -1200,3 +1200,124 @@ body:has(dialog[open]) .timerbar{visibility:hidden;pointer-events:none}
 }
 /* A closed dialog must never be shown: an ID rule such as #recordDialog{display:flex} would otherwise override the browser's dialog:not([open]){display:none}. */
 dialog:not([open]){display:none!important}
+
+
+/* Professional calendar refresh — focused, light, high-contrast, responsive */
+#calendar{--cal-ink:#17243b;--cal-muted:#71809a;--cal-line:#e5eaf2;--cal-accent:#315ee8}
+#calendar>.calviews{
+  display:flex;align-items:center;justify-content:center;gap:4px;
+  width:max-content;max-width:100%;margin:0 auto 16px;padding:4px;
+  border:1px solid #e3e8f1;border-radius:13px;background:#f2f5fa;
+}
+#calendar .calviews button{
+  min-width:76px;min-height:38px;padding:0 16px;border:0;border-radius:9px;
+  background:transparent;color:#64728a;font-size:13px;font-weight:750;
+  letter-spacing:-.01em;transition:background .16s ease,color .16s ease,box-shadow .16s ease;
+}
+#calendar .calviews button.active{
+  background:#fff;color:#234bc5;box-shadow:0 1px 4px #15233b18,0 3px 9px #15233b0b;
+}
+#calendar .calboard{
+  padding:18px 18px 16px;border:1px solid #e4e9f1;border-radius:20px;
+  background:#fff;color:var(--cal-ink);box-shadow:0 5px 22px #17243b0a;
+}
+#calendar .calhead{
+  display:grid;grid-template-columns:42px minmax(0,1fr) 42px;align-items:center;
+  gap:8px;margin:0;padding:0 0 14px;border:0;background:none;
+}
+#calendar .calhead .iconbtn{
+  display:grid;place-items:center;width:40px;height:40px;padding:0;
+  border:1px solid #e5eaf2;border-radius:12px;background:#f7f9fc;
+  color:#34435d;font-size:24px;line-height:1;transition:background .15s,border-color .15s;
+}
+#calendar .calhead .iconbtn:hover{background:#edf2ff;border-color:#cbd7fa}
+#calendar .caltitlebox{gap:4px}
+#calendar .caltitlebox b{color:#17243b;font-size:20px;font-weight:800;letter-spacing:-.65px}
+#calendar .caltoday{padding:2px 8px;color:#315ee8;font-size:12px;font-weight:750}
+#calendar .calsum{
+  margin:0 0 12px;padding:9px 11px;border:1px solid #e8edf5;border-radius:10px;
+  background:#f8faff;color:#687790;font-size:11.5px;font-weight:650;line-height:1.45;
+}
+#calendar .calweek{
+  margin:0 0 8px;padding:0 0 8px;border-bottom:1px solid #edf0f5;
+  color:#8290a5;font-size:10px;font-weight:800;letter-spacing:.08em;
+}
+#calendar .calgrid{gap:4px}
+#calendar .calday{
+  position:relative;min-width:0;min-height:61px;padding:6px 1px 5px;
+  display:flex;align-items:center;gap:3px;border:1px solid transparent;border-radius:12px;
+  background:#fff;color:#34435d;overflow:hidden;transition:background .14s,border-color .14s,transform .14s;
+}
+#calendar .calday:hover{background:#f5f7fc;border-color:#e8edf5}
+#calendar .calday b{
+  width:30px;height:30px;display:grid;place-items:center;border-radius:50%;
+  color:#34435d;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;
+}
+#calendar .calday.past b{color:#a4adbc}
+#calendar .calday.today:not(.selected) b{
+  color:#234bc5;background:#edf2ff;box-shadow:inset 0 0 0 1px #cbd8ff;
+}
+#calendar .calday.selected{
+  border-color:#cbd8ff;background:#f1f5ff;box-shadow:inset 0 0 0 1px #e0e8ff;
+}
+#calendar .calday.selected b{background:#315ee8;color:#fff;box-shadow:0 2px 6px #315ee833}
+#calendar .calday .calcount{
+  min-width:17px;height:17px;padding:0 4px;border-radius:6px;
+  background:#edf2ff;color:#3154c7;font-size:9px;font-weight:800;line-height:17px;
+}
+#calendar .calday.selected .calcount{background:#dce6ff;color:#2345b5}
+#calendar .calday.hol b{color:#c13b68}
+#calendar .calday.hol.selected b{color:#fff}
+#calendar .calday:focus-visible,#calendar .calviews button:focus-visible{
+  outline:2px solid #315ee8;outline-offset:2px;
+}
+#calendar .sectionhead.caltitle{align-items:center;gap:12px;margin:20px 0 8px}
+#calendar .sectionhead.caltitle h3{color:#17243b;font-size:18px;font-weight:800;letter-spacing:-.4px}
+#calendar #calAddBtn{min-height:42px;padding:0 15px;border-radius:12px;font-size:12.5px;font-weight:800}
+#calendar .daysum{margin:0 0 12px;color:#71809a;font-size:12px;font-weight:650}
+#calendar .timeline{
+  padding:12px;border:1px solid #e7ecf3;border-radius:16px;background:#f8faff;
+}
+#calendar .recordlist{gap:9px}
+#calendar .record{
+  border:1px solid #e8edf4;border-radius:13px;padding:12px 13px;
+  background:#fff;box-shadow:0 2px 7px #17243b07;
+}
+#calendar .record:active{transform:scale(.995)}
+#calendar .weekview{
+  padding:10px 7px 12px;border:1px solid #e5eaf2;border-radius:16px;background:#fff;
+}
+#calendar .wkday{min-width:0;padding:7px 1px;border-radius:10px}
+#calendar .wkday small{font-size:9px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+#calendar .wkday b{font-size:14px}
+#calendar .wkday.sel{background:#eef3ff;color:#244bc4}
+#calendar .wkday.sel small{color:#315ee8}
+#calendar .wkcol{border-color:#edf0f5;background-image:linear-gradient(#edf0f5 1px,transparent 1px)}
+#calendar .wkcol.sel{background-color:#f5f7ff}
+#calendar .wkles{border-radius:6px;box-shadow:0 1px 3px #17243b12}
+#calendar .remindbox{border-radius:14px}
+#calendar .prayerbox{box-shadow:0 2px 8px #17243b06}
+@media(max-width:420px){
+  #calendar>.calviews{margin-bottom:12px}
+  #calendar .calviews button{min-width:68px;min-height:36px;padding:0 12px;font-size:12px}
+  #calendar .calboard{padding:13px 9px 12px;border-radius:16px}
+  #calendar .calhead{grid-template-columns:36px minmax(0,1fr) 36px;gap:5px;padding-bottom:10px}
+  #calendar .calhead .iconbtn{width:35px;height:35px;border-radius:10px}
+  #calendar .caltitlebox b{font-size:17px}
+  #calendar .calweek{font-size:9px;letter-spacing:.04em}
+  #calendar .calgrid{gap:2px}
+  #calendar .calday{min-height:49px;border-radius:9px;padding:4px 0}
+  #calendar .calday b{width:27px;height:27px;font-size:12px}
+  #calendar .calday .calcount{min-width:15px;height:15px;padding:0 3px;font-size:8px;line-height:15px}
+  #calendar .sectionhead.caltitle{align-items:flex-start}
+  #calendar #calAddBtn{min-height:39px;padding:0 11px;font-size:11.5px}
+}
+@media(max-width:350px){
+  #calendar .calboard{padding-inline:7px}
+  #calendar .calday{min-height:45px}
+  #calendar .calday b{width:25px;height:25px;font-size:11px}
+  #calendar .calviews button{min-width:61px;padding-inline:9px}
+}
+@media(prefers-reduced-motion:reduce){
+  #calendar .calviews button,#calendar .calday,#calendar .calhead .iconbtn{transition:none}
+}
