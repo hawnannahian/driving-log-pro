@@ -422,3 +422,44 @@ b.course{color:var(--royal)}
 .payment-option[aria-pressed="true"] .payment-check{display:block}
 #fPackageRow{display:none!important}
 @media(max-width:390px){.payment-method-options{gap:7px}.payment-option{gap:7px;padding:9px;min-height:72px}.payment-option[aria-pressed="true"]{padding:8px}.payment-icon{flex-basis:29px;width:29px;height:29px}.payment-option-copy b{font-size:12px}.payment-option-copy small{font-size:10px}}
+
+
+/* Calendar → New Record: clearer mobile form hierarchy and safe sticky actions. */
+#recordDialog{max-height:calc(100dvh - 24px);overflow-y:auto;overscroll-behavior:contain}
+#recordDialog form{padding:clamp(16px,3vw,24px)}
+#recordDialog .dialoghead{align-items:center;position:sticky;top:-1px;z-index:4;padding:4px 0 12px;background:#fff}
+#recordDialog .dialoghead h2{letter-spacing:-.45px}
+#recordDialog .typechips{display:flex;flex-wrap:wrap;gap:7px}
+#recordDialog .typechips button{min-height:42px;padding:9px 15px;border:1px solid var(--line);border-radius:999px;background:#fff;color:#34425b;font:inherit;font-size:13px;font-weight:750}
+#recordDialog .typechips button.active{background:var(--blue);border-color:var(--blue);color:#fff}
+#recordDialog .formgrid{row-gap:13px;column-gap:12px}
+#recordDialog .formgrid label{gap:7px;font-size:12px}
+#recordDialog .formgrid input:not([type=checkbox]),#recordDialog .formgrid select,#recordDialog .formgrid textarea{min-height:48px;border-radius:12px;padding:11px 13px;font-size:16px}
+#recordDialog .rate-field small{font-size:11px;font-weight:500;color:var(--muted);line-height:1.35}
+#recordDialog .rate-field input:focus{border-color:var(--blue);outline:3px solid #315ee81a}
+#recordDialog #recentStudents{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:7px;padding:2px 0 5px;scrollbar-width:none}
+#recordDialog #recentStudents::-webkit-scrollbar{display:none}
+#recordDialog #recentStudents button{flex:none;max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border:1px solid var(--line);border-radius:999px;background:#fff;padding:9px 13px;color:#34425b;font:inherit;font-size:12px;font-weight:700}
+#recordDialog #recentStudents button.active{background:#edf1ff;border-color:#b9c9ff;color:#244bd0}
+#recordDialog .durchips{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:7px;padding-bottom:2px}
+#recordDialog .durchips button{flex:1 0 auto;min-height:44px;border:1px solid var(--line);border-radius:999px;background:#fff;color:#34425b;font:inherit;font-size:13px;font-weight:750}
+#recordDialog .durchips button.active{background:var(--blue);border-color:var(--blue);color:#fff}
+#recordDialog .donebox{display:grid;gap:12px;padding:14px;border:1px solid var(--line);border-radius:15px;background:#f7f9fd}
+#recordDialog .donebox .hint{margin:0;color:var(--muted);line-height:1.45}
+#recordDialog .moreopts{border-top:1px solid var(--line);padding-top:12px}
+#recordDialog .moreopts summary{min-height:34px;color:var(--blue);font-weight:750}
+#recordDialog .dialogactions{position:sticky;bottom:-1px;z-index:4;padding:12px 0 max(2px,env(safe-area-inset-bottom));margin:14px 0 0;background:linear-gradient(180deg,#ffffffed,#fff 24%);border-top:1px solid var(--line)}
+@media(max-width:720px){
+ #recordDialog{width:calc(100% - 16px);max-height:calc(100dvh - 16px);border-radius:22px}
+ #recordDialog form{padding:16px 14px max(12px,env(safe-area-inset-bottom))}
+ #recordDialog .dialoghead{margin-bottom:12px}
+ #recordDialog .formgrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px 10px}
+ #recordDialog .formgrid .wide{grid-column:1/-1}
+ #recordDialog .formgrid input:not([type=checkbox]),#recordDialog .formgrid select{min-width:0}
+ #recordDialog .dialogactions .btn{min-height:46px}
+}
+@media(max-width:380px){
+ #recordDialog .typechips{gap:6px}
+ #recordDialog .typechips button{padding:8px 11px;font-size:12px}
+ #recordDialog .formgrid{gap:10px 8px}
+}
