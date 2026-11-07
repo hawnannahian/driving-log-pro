@@ -124,3 +124,11 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Kept the today KPI summary and all record, payment, expense, and backup data unchanged.
 - Bumped the service-worker cache to v51.
 - Validation: source-level checks only; browser/iPhone runtime verification remains pending.
+
+
+## Course lesson selection and payment UI — 2026-11-07
+- New lesson records for a student with an active course now default to using prepaid course hours when enough prepaid hours are available.
+- The course-hours choice remains optional: users can untick it to create an independent individual lesson.
+- When a lesson is linked to course hours, the individual Paid checkbox is hidden and forced off; the lesson is accounted for through the course payment ledger only.
+- Editing an existing individual lesson does not silently convert it to a course lesson.
+- Service-worker cache bumped to v54. Static source review only; iPhone/browser runtime verification remains pending.
