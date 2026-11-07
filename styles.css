@@ -624,3 +624,64 @@ html:has(dialog[open]),body:has(dialog[open]){overflow:hidden;overscroll-behavio
  #recordDialog .dialogactions{gap:6px;padding:8px 0 max(3px,env(safe-area-inset-bottom));margin-top:8px}
  #recordDialog .dialogactions .btn{min-height:42px;font-size:12px;border-radius:11px}
 }
+
+
+/* v2 mobile scroll system: one stable vertical viewport shared by every main tab. */
+@media(max-width:720px){
+ html,body{height:100%;min-height:0}
+ body{
+  height:100dvh;
+  min-height:0;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  overscroll-behavior:none;
+ }
+ .topbar{
+  position:relative;
+  top:auto;
+  flex:0 0 calc(50px + env(safe-area-inset-top));
+ }
+ main{
+  flex:1 1 auto;
+  min-height:0;
+  height:auto;
+  width:100%;
+  margin:0 auto;
+  overflow-x:hidden;
+  overflow-y:auto;
+  overscroll-behavior-y:contain;
+  -webkit-overflow-scrolling:touch;
+  touch-action:pan-y pinch-zoom;
+  scroll-padding-top:10px;
+  scrollbar-gutter:stable;
+ }
+ body.timing main{min-height:0}
+ footer{display:none}
+ /* Keep horizontal controls independent from the page's vertical scroll. */
+ .tabs,.ptabs,.ischips,.rangechips,.durchips{
+  max-width:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+  overscroll-behavior-x:contain;
+  -webkit-overflow-scrolling:touch;
+  touch-action:pan-x pan-y;
+ }
+ /* Every non-record dialog gets a bounded, independently scrollable surface. */
+ dialog:not(#recordDialog){
+  max-height:calc(100dvh - 16px);
+  overflow-x:hidden;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  touch-action:pan-y;
+ }
+ dialog:not(#recordDialog) form,
+ dialog:not(#recordDialog) .dialogbody,
+ dialog:not(#recordDialog) .traveldua-inner{
+  min-height:0;
+  overscroll-behavior-y:contain;
+  -webkit-overflow-scrolling:touch;
+  touch-action:pan-y;
+ }
+}
