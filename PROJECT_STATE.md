@@ -18,7 +18,7 @@
 - Full-Time historical register key: `driving-log-pro-full-time-v1`; records keyed by `legacy_student_id`, isolated from normal lesson accounting.
 - Main app exposes a narrow `window.DrivingLogFullTime` bridge (getAll/replace/clear) so full-time data can participate in backup/sync without mixing into lesson accounting.
 - Cloud sync stores `driving-log.json` in the user's own private GitHub data repository; token remains in that browser's localStorage.
-- Current service-worker cache: `nahians-schedule-cache-v53`.
+- Current service-worker cache: `nahians-schedule-cache-v64`.
 - App footer version: `v1.21`. CSS comments such as v1.26 may refer to feature revision, not app release.
 
 ## Fresh Course system + Legacy Archive (branch `feature/fresh-course-management`)
@@ -159,3 +159,6 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Kept existing form IDs and record save/payment/course calculations to preserve compatibility.
 - Bumped service-worker cache to v57.
 - Source-level checks performed after commit; live deployment and real-device testing pending.
+
+## Hotfix — closed record dialog was visible (2026-11-07)
+- `#recordDialog{display:flex}` (commit 752d094, PR #50) overrode the browser rule that hides a closed dialog, so the whole Edit Record form was drawn over every tab and swallowed taps. Added `dialog:not([open]){display:none!important}`. Rule for the future: never set `display` on a `dialog` element without `:not([open])` handling.
