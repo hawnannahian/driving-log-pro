@@ -14,12 +14,20 @@
 - Vanilla JavaScript PWA; build step নেই; GitHub Pages: `main`, root.
 - Main files: `index.html`, `styles.css`, `app.js`, `reports-dashboard.js` (Reports dashboard, loaded after app.js), `islamic-content.js` (dua/tasbih text only) + `islamic.js` (Islamic tab), `prayer-times.js`, `full-time-students.js`, `sw.js`, `manifest.webmanifest`.
 - Tabs: Overview, Calendar, Log, Students, Reports, Islamic.
-- Main data localStorage key: `driving-log-pro-v1` (`entries`, `students`, packages, prayer/work settings).
+- Main data localStorage key: `driving-log-pro-v1` (`entries`, `students`, `courses`, `coursePayments`, `legacy`, `islamic`, prayer/work settings; `packages` only as an input that is archived on load).
 - Full-Time historical register key: `driving-log-pro-full-time-v1`; records keyed by `legacy_student_id`, isolated from normal lesson accounting.
 - Main app exposes a narrow `window.DrivingLogFullTime` bridge (getAll/replace/clear) so full-time data can participate in backup/sync without mixing into lesson accounting.
 - Cloud sync stores `driving-log.json` in the user's own private GitHub data repository; token remains in that browser's localStorage.
-- Current service-worker cache: `nahians-schedule-cache-v48`.
-- App footer version: `v1.20`. CSS comments such as v1.26 may refer to feature revision, not app release.
+- Current service-worker cache: `nahians-schedule-cache-v52`.
+- App footer version: `v1.21`. CSS comments such as v1.26 may refer to feature revision, not app release.
+
+## Fresh Course system + Legacy Archive (branch `feature/fresh-course-management`)
+- **Legacy Archive (read-only):** old prepaid packages are moved once into `state.legacy.packages` (original objects verbatim + `archive:{at,v,lessonIds}`) by `migrateLegacy()` on load, restore and cloud merge. Idempotent: an archived id is never copied again or overwritten. A recoverable copy is kept first in `driving-log-pro-v1-before-legacy` (Reports → Safety copies); if it cannot be saved nothing is moved and `pkgs()` still reads leftover `state.packages`, so figures never change. `pkgs()` = archive + leftovers; the old engine (`recomputeAlloc`, `income`, `studentStats` legacy parts) keeps reading it, so historical revenue/hours/payments are identical (verified against `main` with a synthetic seed). Lessons keep `e.pkg` (history). Archived records are never edited; only the student label follows renames/merges.
+- **Courses (new):** `state.courses=[{id,student,date,hours:17,price:340,createdAt,v}]`, payments are separate rows `state.coursePayments=[{id,course,date,amount}]` (counted once per id). Lessons link explicitly with `e.course` (never `e.pkg`). Used/remaining/prepaid/free hours are derived on every render from linked lessons (done = actual hours, booked = scheduled). Rate = price/hours = 20 €/h. A lesson can only be linked if (linked hours except itself + its hours) <= min(17, paid/20); payments cannot exceed the price; a payment cannot be removed if that would leave linked lessons unpaid; only an empty course can be deleted. Course lessons: income = hours × course rate, never "unpaid", `e.paid` ignored. One open course per student.
+- **Money rules:** Revenue = value of completed lessons (course lessons at the course rate); Collected = paid individual lessons + course payments (by payment date) + historical package payments; Outstanding = unpaid completed individual lessons + legacy package dues + course price − paid; Course prepaid balance = course paid − value of completed course hours. Legacy remaining hours/balances are no longer shown anywhere active.
+- **Sync/backup:** snapshot adds `legacy`, `courses`, `coursePayments` and keeps `packages` (= archive, for older devices). `mergeAll`: missing keys from an older remote mean "unchanged" (never wipe), payments merge as separate rows, archive merges by union. Backup restore: old backups (top-level `packages`) are archived without duplicates; a backup without `courses` replaces courses with none (safety copy is kept first); the archive is always unioned, never dropped.
+- **Known decisions to confirm:** (1) upcoming lessons that were already linked to an old package stay linked (they will use that package's remaining hours when completed); (2) legacy amounts still *due* (e.g. an unpaid old package) stay in Outstanding but cannot be paid because the archive is read-only; (3) the old "count earlier lessons in the course" feature is gone (a new course never takes old hours).
+- Also fixed: `render()` threw on every call on `main` because `#logTodayDate` was removed from the HTML but app.js still set it (now guarded).
 
 ## Business rules
 - Default lesson rate €20/hour.

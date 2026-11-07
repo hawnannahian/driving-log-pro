@@ -395,3 +395,13 @@ body.is-mini-on .timermini{bottom:calc(160px + env(safe-area-inset-bottom))}
  #log .log-extra-filter[open] select{position:static;width:100%;margin-top:6px}
  #log .log-payment-summary{margin-top:8px}
 }
+/* Courses (new) and the Legacy Archive */
+.tlles.course,.wkles.course{background:#e8eeff;border-color:#315ee8;color:#1f3f9e}
+.tstat.course,.recordvalue small.course,.nextmain em.course{color:var(--royal)}
+b.course{color:var(--royal)}
+.coursecard.finished{background:#f3faf6;border-color:#cfe9dc}
+.pkgcard.legacy{background:#f7f8fb;border-style:dashed;box-shadow:none;margin-bottom:10px}
+.pkgcard.legacy .pkgstate{background:#eef0f4;color:#59677d}
+.legacynote{margin:2px 0 12px;padding:10px 12px;border-radius:12px;background:#f5f7fb;color:#59677d;font-size:12.5px;line-height:1.5}
+#ptab-course .pkgcard{margin-bottom:10px}
+.ptabs{overflow-x:auto;-webkit-overflow-scrolling:touch}.ptabs button{flex:none;white-space:nowrap}
