@@ -18,7 +18,7 @@
 - Full-Time historical register key: `driving-log-pro-full-time-v1`; records keyed by `legacy_student_id`, isolated from normal lesson accounting.
 - Main app exposes a narrow `window.DrivingLogFullTime` bridge (getAll/replace/clear) so full-time data can participate in backup/sync without mixing into lesson accounting.
 - Cloud sync stores `driving-log.json` in the user's own private GitHub data repository; token remains in that browser's localStorage.
-- Current service-worker cache: `nahians-schedule-cache-v65`.
+- Current service-worker cache: `nahians-schedule-cache-v67`.
 - App footer version: `v1.21`. CSS comments such as v1.26 may refer to feature revision, not app release.
 
 ## Fresh Course system + Legacy Archive (branch `feature/fresh-course-management`)
@@ -172,3 +172,7 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Patch increments (x.y.Z) for bug fixes, minor increments (x.Y.0) for backward-compatible features/UI updates, and major increments (X.0.0) only for breaking changes.
 - Each app update must update the footer version, increment the service-worker cache name, and record release notes here. A proposed version is not released until its version PR is merged and GitHub Pages deployment succeeds.
 - Proposed v1.22: premium Payments dashboard, course progress summary, payment history timeline, and All/Course/Lesson filters. This version metadata update is separate from the already-merged UI PR #59.
+
+## Hotfix — app.js syntax error (2026-11-07)
+- Commit ebc6398 (PR #59, student payments dashboard) left one extra `)` at the end of the `pays` array in `renderProfile` (app.js line ~99). A syntax error stops the whole file: no tab or button works, and islamic.js / reports-dashboard.js fail too (`$`/`DB_KEY` undefined). No data is touched in that state. Removed the extra parenthesis. Always run `node --check` on every JS file and load the page in a browser before merging.
+- Also in the same commit: the payment progress bar used `style="width:..%"`, which the Content-Security-Policy (`style-src 'self'`) blocks (console error, bar not drawn). It now uses `data-w`, applied by script like every other progress bar. Rule: never write `style="..."` in generated HTML.
