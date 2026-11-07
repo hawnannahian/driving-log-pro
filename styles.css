@@ -1579,3 +1579,116 @@ dialog:not([open]){display:none!important}
   #profileDialog .payment-card{transition:border-color .18s ease,box-shadow .18s ease}
   #profileDialog .payment-card:focus-within{border-color:#c7d6f5;box-shadow:0 7px 18px #1d355f12}
 }
+/* Premium New Record visual pass — CSS only; preserve all existing form IDs and behavior. */
+#recordDialog .record-time-panel{
+  padding:16px;border-color:#dce6fb;
+  background:linear-gradient(145deg,#f5f8ff 0%,#fbfcff 78%);
+  box-shadow:0 7px 22px #234b9410
+}
+#recordDialog .record-panel-title{
+  display:flex;align-items:center;gap:9px;
+  margin:-16px -16px 14px;padding:13px 16px;
+  border-radius:18px 18px 0 0;background:#eaf0ff;
+  color:#183d9b;font-size:15px;letter-spacing:-.01em
+}
+#recordDialog .record-panel-title:before{
+  content:"◷";display:grid;place-items:center;width:27px;height:27px;
+  border-radius:9px;background:#fff;color:#315eea;font-size:19px
+}
+#recordDialog .record-time-grid label,
+#recordDialog .record-rate-panel .rate-field{gap:7px}
+#recordDialog .record-time-grid input{
+  min-height:54px;border-radius:15px;background:#fff;
+  font-variant-numeric:tabular-nums
+}
+#recordDialog .record-subtitle{margin:14px 0 8px;font-size:13px}
+#recordDialog .durchips{gap:8px}
+#recordDialog .durchips button{min-height:47px;border-radius:14px;transition:background .15s,border-color .15s,transform .15s}
+#recordDialog .durchips button.active{box-shadow:0 5px 12px #315eea2b}
+#recordDialog .record-duration-summary{
+  display:flex;align-items:center;gap:8px;margin-top:13px;
+  padding:12px 14px;border:1px solid #e1eaff;border-radius:14px;
+  background:#eaf1ff;color:#2452d5;font-size:13px
+}
+#recordDialog .record-rate-panel{
+  padding:15px;border-color:#d8eee3;border-radius:18px;
+  background:linear-gradient(145deg,#f1faf5 0%,#fff 90%);
+  box-shadow:0 6px 18px #1684510b
+}
+#recordDialog .record-rate-panel:before{
+  content:"Payment";grid-column:1/-1;display:flex;align-items:center;
+  min-height:30px;margin:-15px -15px 1px;padding:10px 15px;
+  border-radius:17px 17px 0 0;background:#e4f5ec;color:#126344;
+  font-size:15px;font-weight:850;letter-spacing:-.01em
+}
+#recordDialog .record-rate-panel .rate-field small{font-size:11px;line-height:1.45}
+#recordDialog .record-rate-panel #fRate{
+  min-height:54px;border-radius:14px;background:#fff
+}
+#recordDialog .record-rate-panel #fPaidRow{
+  min-height:50px;padding:0 4px 0 12px;border-left:1px solid #d8e9df;
+  color:#24513c!important
+}
+#recordDialog .record-rate-panel #fPaidRow input{width:22px;height:22px;min-width:22px;min-height:22px}
+#recordDialog .donebox{
+  gap:14px;padding:0 15px 15px;border-color:#e4e1fb;border-radius:18px;
+  background:linear-gradient(145deg,#f7f5ff 0%,#fff 92%);
+  box-shadow:0 6px 18px #5140a10a
+}
+#recordDialog .donebox:before{
+  content:"Lesson completion";display:flex;align-items:center;min-height:46px;
+  margin:0 -15px 0;padding:0 15px;border-radius:17px 17px 0 0;
+  background:#efedff;color:#4635a5;font-size:15px;font-weight:850
+}
+#recordDialog .donebox .checklabel{min-height:34px}
+#recordDialog .donebox .checklabel input{width:23px;height:23px;min-width:23px;min-height:23px}
+#recordDialog .donebox .checklabel b{font-size:14px}
+#recordDialog .donebox .checklabel small{font-size:11.5px}
+#recordDialog .donebox .donemin{gap:7px}
+#recordDialog .donebox .donemin input{min-height:52px;border-radius:14px}
+#recordDialog .payment-method{
+  padding:14px;border:1px solid #dce6fb;border-radius:17px;
+  background:#f7f9ff
+}
+#recordDialog .payment-method>div:first-child b{font-size:14px}
+#recordDialog .payment-option{min-height:70px;border-radius:14px}
+#recordDialog .payment-option[aria-pressed="true"]{
+  border-color:#315eea;background:#edf3ff;
+  box-shadow:0 5px 14px #315eea18
+}
+#recordDialog .dialogactions{
+  gap:9px;padding-top:14px;border-color:#e4eaf4
+}
+#recordDialog .dialogactions .btn{
+  min-height:54px;border-radius:15px;font-size:14px;
+  transition:transform .15s,box-shadow .15s
+}
+#recordDialog .dialogactions #saveRecord{
+  box-shadow:0 8px 18px #315eea2b
+}
+#recordDialog .dialogactions .btn:active{transform:scale(.985)}
+#recordDialog .dialoghead h2{font-size:25px;letter-spacing:-.055em}
+#recordDialog .dialoghead .iconbtn{
+  width:46px;height:46px;border:1px solid #e2e9f6;
+  box-shadow:0 3px 10px #172b4d08
+}
+@media(max-width:720px){
+  #recordDialog .record-time-panel{padding:13px}
+  #recordDialog .record-panel-title{margin:-13px -13px 12px;padding:11px 13px}
+  #recordDialog .record-rate-panel{padding:13px}
+  #recordDialog .record-rate-panel:before{margin:-13px -13px 1px;padding:9px 13px}
+  #recordDialog .donebox{padding:0 13px 13px}
+  #recordDialog .donebox:before{margin:0 -13px;padding:0 13px}
+}
+@media(max-width:390px){
+  #recordDialog .record-time-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+  #recordDialog .record-time-grid input{padding:10px 7px;font-size:17px}
+  #recordDialog .durchips{gap:6px}
+  #recordDialog .durchips button{min-height:43px;padding-inline:7px;font-size:12px}
+  #recordDialog .record-rate-panel{grid-template-columns:minmax(0,1fr) auto;gap:7px}
+  #recordDialog .record-rate-panel #fPaidRow{padding-left:8px;font-size:12px!important}
+  #recordDialog .dialogactions .btn{min-height:50px;font-size:13px}
+}
+@media(prefers-reduced-motion:reduce){
+  #recordDialog .durchips button,#recordDialog .dialogactions .btn{transition:none}
+}
