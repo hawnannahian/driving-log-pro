@@ -1103,3 +1103,98 @@ dialog .dialogactions .btn{min-height:44px;border-radius:12px}
 @media(prefers-reduced-motion:reduce){
  #students .student:active,.btn:active{transform:none}
 }
+
+
+/* RESPONSIVE AUDIT FIX · horizontal containment, iOS viewport and modal layers */
+html{width:100%;max-width:100%;overflow-x:clip}
+body{width:100%;max-width:100%;overflow-x:clip}
+main,.tabpanel,.panel,.sectionhead,.toolbar,.recordlist,.record,.studentgrid,.student,
+.reportgrid,.dataactions,.data-card,.chartbox,.ovbox,.timeline,.calboard{min-width:0;max-width:100%}
+img,svg,video,canvas{max-width:100%}
+button,input,select,textarea{max-width:100%;min-width:0}
+.toolbar>*{min-width:0;max-width:100%}
+.toolbar input{flex:1 1 180px}
+.toolbar select{flex:1 1 150px}
+.record,.payrow,.student,.studentmain,.studentacts,.sectionhead{min-width:0}
+.recordvalue{flex:none;max-width:42%;overflow-wrap:anywhere}
+.recordmain,.studenttext{min-width:0;overflow-wrap:anywhere}
+.reportgrid,.studentgrid,.dataactions{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}
+.calboard{overflow:hidden}
+.calweek,.calgrid{grid-template-columns:repeat(7,minmax(0,1fr));width:100%}
+.calday{min-width:0;overflow:hidden}
+.calday small{max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.tabbar{max-width:calc(100vw - 16px)}
+.tabbar .tab{min-width:0;overflow:hidden}
+.tabbar .tab span,.tabbar .tab small{max-width:100%;overflow:hidden;text-overflow:ellipsis}
+:where(.tabpanel,dialog,.profile-content,.dialogbody){overscroll-behavior:contain}
+dialog{
+  box-sizing:border-box;
+  max-width:calc(100vw - 24px);
+  max-height:calc(100vh - 24px);
+  max-height:calc(100dvh - 24px);
+  overflow:auto;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+}
+dialog form{min-width:0;max-width:100%}
+dialog .dialoghead{position:sticky;top:-1px;z-index:3;background:#fff;padding:2px 0 10px}
+dialog .dialogactions{position:sticky;bottom:-1px;z-index:3;background:#fff;padding:12px 0 max(4px,env(safe-area-inset-bottom));}
+dialog::backdrop{background:#101c33b8;backdrop-filter:blur(5px)}
+body:has(dialog[open]){overflow:hidden}
+body:has(dialog[open]) .tabbar,
+body:has(dialog[open]) .fab,
+body:has(dialog[open]) .timerbar{visibility:hidden;pointer-events:none}
+@media(max-width:720px){
+  main{width:100%;max-width:100%;padding-left:12px;padding-right:12px}
+  .tabpanel{width:100%;padding:12px;border-radius:18px}
+  .sectionhead{flex-wrap:wrap}
+  .toolbar{width:100%}
+  .toolbar input,.toolbar select{flex:1 1 100%;width:100%}
+  .formgrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .formgrid>*{min-width:0}
+  .formgrid input,.formgrid select,.formgrid textarea{min-width:0}
+  .tabbar{bottom:max(6px,env(safe-area-inset-bottom));}
+  dialog{
+    position:fixed;
+    inset:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+    width:100%;
+    height:auto;
+    max-width:none;
+    max-height:none;
+    margin:0;
+    border-radius:0;
+    padding:0;
+  }
+  dialog form,dialog>.dialogbody{
+    min-height:0;
+    max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+    padding:16px 14px max(16px,env(safe-area-inset-bottom));
+  }
+  dialog .dialoghead{top:-16px;padding-top:16px}
+  dialog .dialogactions{bottom:-16px;margin-top:14px}
+}
+@media(max-width:390px){
+  .calday b{width:27px;height:27px;font-size:12px}
+  .calday{min-height:48px}
+  .calweek{font-size:9px}
+  .statstrip{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .statstrip div:nth-child(2){border-right:0}
+  .statstrip div:nth-child(3),.statstrip div:nth-child(4){border-top:1px solid var(--line)}
+  .nextactions{flex-wrap:wrap}
+  .nextbtn{min-width:0}
+  .tabbar .tab{font-size:9px}
+}
+@media(orientation:landscape) and (max-height:500px){
+  dialog{
+    inset:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+    width:100%;max-width:none;height:auto;max-height:none;margin:0;border-radius:0;
+  }
+  dialog form,dialog>.dialogbody{
+    max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    overflow-y:auto;-webkit-overflow-scrolling:touch;
+  }
+  .tabbar{bottom:max(4px,env(safe-area-inset-bottom));}
+}
