@@ -540,7 +540,7 @@ $("exportAll").onclick=backupNow;$("backupNowBtn").onclick=backupNow;
 $("exportPdf").onclick=exportPdf;
 $("fStudent").addEventListener("input",()=>syncContactBoxes("name"));$("fPhone").addEventListener("input",()=>syncContactBoxes("phone"));
 let lessonLen=60,doneDirty=false;
-function syncDoneBox(){$("fActual").closest("label").classList.toggle("hidden",!$("fDone").checked);}
+function syncDoneBox(){$("fActual").closest("label").classList.add("hidden");}
 $("fDone").addEventListener("change",()=>{doneDirty=true;if($("fDone").checked&&!$("fActual").value)$("fActual").value=schedMin({type:"Lesson",start:$("fStart").value,end:$("fEnd").value})||60;syncDoneBox();});
 $("fActual").addEventListener("input",()=>{doneDirty=true;});
 function updateRecordDurationSummary(){const box=$("recordDurationSummary");if(!box)return;const start=$("fStart").value,end=$("fEnd").value;if(!start||!end||toMin(end)<=toMin(start)){box.textContent="";box.classList.add("hidden");return;}const mins=toMin(end)-toMin(start),label=mins%60?`${Math.floor(mins/60)} h ${mins%60} min`:`${mins/60} hour${mins===60?"":"s"}`;box.textContent=`Duration: ${label} · ${timeText({start,end})}`;box.classList.remove("hidden");}
