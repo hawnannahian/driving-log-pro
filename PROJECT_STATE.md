@@ -251,3 +251,12 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Supports keyboard navigation (up/down, Enter, Escape), touch selection and a no-match state. Uses an in-app suggestion list rather than relying on iOS native datalist behavior.
 - Existing student records, course allocation, payment/accounting calculations and save logic are unchanged. Service-worker cache bumped to v76.
 - Source-level checks only; Playwright/Chromium and real iPhone Safari interaction tests remain required before claiming runtime verification.
+
+
+## WhatsApp message editor on Driving Log — 2026-11-07
+- Added an expandable WhatsApp Message Settings section at the bottom of the Driving Log page.
+- Users can edit Lesson Reminder and Payment Reminder templates, preview dynamic values, save on the current device, or reset the editor to defaults.
+- Supported placeholders: {{day}} and {{time}} in lesson reminders; {{amount}} in payment reminders. Existing quick WhatsApp actions now use the saved templates.
+- Templates use a separate device-local storage key; no student, lesson, payment, backup, or cloud-sync records/schema are changed.
+- Bumped service-worker cache from v76 to v77.
+- Verification: source-level checks only. Browser/Playwright and real iPhone Safari interaction tests have not been run.
