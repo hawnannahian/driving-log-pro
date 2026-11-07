@@ -132,3 +132,10 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - When a lesson is linked to course hours, the individual Paid checkbox is hidden and forced off; the lesson is accounted for through the course payment ledger only.
 - Editing an existing individual lesson does not silently convert it to a course lesson.
 - Service-worker cache bumped to v54. Static source review only; iPhone/browser runtime verification remains pending.
+
+
+## Payment method selector — 2026-11-07
+- Replaced the visible course-hours checkbox with mutually exclusive Individual lesson and Course hours selection cards in the Edit Record lesson form.
+- Individual lesson retains the existing Paid/Unpaid checkbox; course-linked lessons hide and clear lesson-level Paid status and continue to use the separate course ledger.
+- Existing lesson/course linking, prepaid-hour validation and financial calculations are preserved; the original course checkbox remains as a hidden compatibility control for the existing save logic.
+- Service-worker cache bumped to v55. Source-level validation only; GitHub Pages and real iPhone runtime verification remain pending.
