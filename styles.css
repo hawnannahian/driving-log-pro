@@ -1198,3 +1198,5 @@ body:has(dialog[open]) .timerbar{visibility:hidden;pointer-events:none}
   }
   .tabbar{bottom:max(4px,env(safe-area-inset-bottom));}
 }
+/* A closed dialog must never be shown: an ID rule such as #recordDialog{display:flex} would otherwise override the browser's dialog:not([open]){display:none}. */
+dialog:not([open]){display:none!important}
