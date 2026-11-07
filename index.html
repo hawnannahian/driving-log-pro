@@ -245,7 +245,7 @@
         <label class="lessonfield">Start time<input type="time" id="fStart" value="10:00"></label>
         <label class="lessonfield">End time<input type="time" id="fEnd" value="11:00"></label>
         <div class="chiprow durchips lessonfield wide" id="durChips" role="group" aria-label="Lesson length"><button type="button" data-dur="30">30 m</button><button type="button" data-dur="60">1 h</button><button type="button" data-dur="90">1.5 h</button><button type="button" data-dur="120">2 h</button><button type="button" data-dur="180">3 h</button></div>
-        <label class="lessonfield">Hourly rate (€)<input type="number" id="fRate" min="0" step=".01" value="20"></label>
+        <label class="lessonfield rate-field">Hourly rate (€)<input type="number" id="fRate" min="0" step=".01" inputmode="decimal" placeholder="Enter amount"><small>Set the rate for this lesson. No default amount is applied.</small></label>
         <label class="costfield">Cost (€)<input type="number" id="fCost" min="0" step=".01" value="0"></label>
         <label class="kmfield">Odometer (km)<input type="number" id="fKm" min="0" step=".1" value="0"></label>
         <section class="lessonfield wide payment-method hidden" id="paymentMethodRow" aria-label="Payment method">
