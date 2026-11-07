@@ -1913,3 +1913,19 @@ dialog:not([open]){display:none!important}
 @media(prefers-reduced-motion:reduce){
   #recordDialog *{scroll-behavior:auto!important;transition:none!important}
 }
+
+
+/* Keep Use course hours as its own option, separate from the Payment card. */
+#recordDialog #fPackageRow{
+  display:flex;align-items:center;gap:11px;
+  min-height:49px;margin:0;padding:0 13px;
+  border:1px solid #dce5f6;border-radius:15px;
+  background:#f7f9ff;color:#34435f;
+  font-size:13px;font-weight:850;
+}
+#recordDialog #fPackageRow.hidden{display:none!important}
+#recordDialog #fPackageRow input{
+  width:21px;height:21px;min-width:21px;min-height:21px;
+  accent-color:#315ee8;
+}
+#recordDialog #paymentMethodRow{display:none!important}
