@@ -1692,3 +1692,224 @@ dialog:not([open]){display:none!important}
 @media(prefers-reduced-motion:reduce){
   #recordDialog .durchips button,#recordDialog .dialogactions .btn{transition:none}
 }
+
+
+/* Final Premium New Record UI — compact, touch-first, with a contained scroll area. */
+#recordDialog{
+  width:min(610px,calc(100% - 20px));
+  max-height:min(92dvh,900px);
+  overflow:hidden;
+  border:1px solid #e3eaf6;
+  border-radius:24px;
+  box-shadow:0 24px 70px #101c3340;
+}
+#recordDialog form{
+  display:flex;
+  flex-direction:column;
+  max-height:min(92dvh,900px);
+  min-height:0;
+  padding:15px 16px 12px;
+  gap:0;
+}
+#recordDialog .dialoghead{
+  flex:none;
+  align-items:center;
+  margin:0;
+  padding:2px 0 13px;
+  background:#fff;
+  z-index:2;
+}
+#recordDialog .dialoghead .eyebrow{display:none}
+#recordDialog .dialoghead h2{
+  font-size:23px;
+  font-weight:850;
+  letter-spacing:-.045em;
+}
+#recordDialog .dialoghead .iconbtn{
+  width:43px;height:43px;
+  border:1px solid #e2e9f6;
+  background:#f0f4ff;color:#315ee8;
+  font-size:25px;
+}
+#recordDialog .formgrid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:10px;
+  min-height:0;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  scrollbar-width:thin;
+  padding:1px 2px 12px;
+}
+#recordDialog .formgrid>.wide{grid-column:1/-1}
+#recordDialog .record-date-panel{margin-bottom:0}
+#recordDialog .record-panel{
+  padding:13px;
+  border-radius:18px;
+  box-shadow:none;
+}
+#recordDialog .record-time-panel{
+  border-color:#d7e3ff;
+  background:#f7f9ff;
+}
+#recordDialog .record-panel-title{
+  display:flex;align-items:center;gap:8px;
+  margin:-13px -13px 12px;
+  padding:10px 13px;
+  border-radius:17px 17px 0 0;
+  background:#eaf0ff;color:#2449b5;
+  font-size:15px;font-weight:850;
+}
+#recordDialog .record-panel-title:before{
+  content:"◷";display:grid;place-items:center;
+  width:25px;height:25px;border-radius:8px;
+  background:#fff;color:#315ee8;font-size:16px;
+}
+#recordDialog .record-time-grid{gap:9px}
+#recordDialog .record-time-grid label{gap:5px}
+#recordDialog .record-time-grid input{
+  min-height:51px;padding:10px 11px;
+  border-radius:14px;background:#fff;
+  font-size:17px;font-weight:800;
+  font-variant-numeric:tabular-nums;
+}
+#recordDialog .record-subtitle{
+  margin:11px 0 7px;
+  color:#64738e;font-size:12px;font-weight:850;
+}
+#recordDialog .durchips{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+#recordDialog .durchips button{
+  min-width:0;min-height:43px;padding:0 5px;
+  border:1px solid #dce5f5;border-radius:13px;
+  background:#fff;color:#34435f;
+  font-size:12px;font-weight:850;
+}
+#recordDialog .durchips button.active{
+  border-color:#315ee8;background:#315ee8;color:#fff;
+  box-shadow:0 4px 10px #315ee82b;
+}
+#recordDialog .record-duration-summary{
+  display:flex;align-items:center;gap:8px;
+  min-height:42px;margin-top:10px;padding:9px 11px;
+  border:1px solid #dce7ff;border-radius:13px;
+  background:#eaf1ff;color:#2852d5;
+  font-size:12px;font-weight:850;
+}
+#recordDialog .record-rate-panel{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;
+  align-items:end;gap:9px 12px;
+  border-color:#d5ecdf;border-radius:18px;
+  background:#f7fcf9;box-shadow:none;
+  padding:13px;
+}
+#recordDialog .record-rate-panel:before{
+  content:"Payment";
+  grid-column:1/-1;display:flex;align-items:center;
+  min-height:37px;margin:-13px -13px 0;padding:0 13px;
+  border-radius:17px 17px 0 0;
+  background:#e5f5ec;color:#176344;
+  font-size:15px;font-weight:850;
+}
+#recordDialog .record-rate-panel .rate-field{
+  min-width:0;gap:6px;font-size:12px;
+}
+#recordDialog .record-rate-panel #fRate{
+  min-height:51px;border-radius:14px;background:#fff;
+}
+#recordDialog .record-rate-panel .rate-field small{
+  grid-column:1/-1;margin-top:1px;
+  color:#77869d;font-size:11px;line-height:1.4;font-weight:500;
+}
+#recordDialog .record-rate-panel #fPaidRow{
+  align-self:center;min-height:48px;
+  margin:0;padding:0 2px 0 11px;
+  border-left:1px solid #d5e9dd;
+  color:#28533e!important;font-size:12px!important;
+  white-space:nowrap;
+}
+#recordDialog .record-rate-panel #fPaidRow input{
+  width:21px;height:21px;min-width:21px;min-height:21px;
+}
+#recordDialog .donebox{
+  display:grid;gap:0;
+  padding:0 13px 12px;
+  border:1px solid #e1dcff;border-radius:18px;
+  background:#fbfaff;box-shadow:none;
+}
+#recordDialog .donebox:before{
+  content:"Lesson completion";
+  display:flex;align-items:center;min-height:39px;
+  margin:0 -13px 9px;padding:0 13px;
+  border-radius:17px 17px 0 0;
+  background:#f0edff;color:#4d3eaa;
+  font-size:15px;font-weight:850;
+}
+#recordDialog .donebox .checklabel{
+  display:flex;align-items:flex-start;gap:11px;
+  min-height:44px;padding:2px 1px;
+}
+#recordDialog .donebox .checklabel input{
+  width:21px;height:21px;min-width:21px;min-height:21px;margin-top:2px;
+}
+#recordDialog .donebox .checklabel b{font-size:14px}
+#recordDialog .donebox .checklabel small{
+  margin-top:3px;color:#7b879d;
+  font-size:11px;line-height:1.4;font-weight:500;
+}
+#recordDialog .donebox .donemin{display:none!important}
+#recordDialog #fPackageRow{
+  display:flex!important;align-items:center;gap:10px;
+  min-height:48px;margin:0;padding:0 12px;
+  border:1px solid #dce5f6;border-radius:15px;
+  background:#f7f9ff;color:#34435f;
+  font-size:13px;font-weight:850;
+}
+#recordDialog #fPackageRow.hidden{display:none!important}
+#recordDialog #fPackageRow input{
+  width:21px;height:21px;min-width:21px;min-height:21px;
+}
+#recordDialog #fRepeatRow,
+#recordDialog .record-comment-field,
+#recordDialog .donemin{display:none!important}
+#recordDialog #recordError{flex:none;margin:0}
+#recordDialog .dialogactions{
+  flex:none;display:flex;align-items:center;gap:9px;
+  margin:0;padding:11px 0 0;
+  border-top:1px solid #e7edf6;
+  background:#fff;
+}
+#recordDialog .dialogactions span{display:none}
+#recordDialog .dialogactions .btn{
+  flex:1;min-height:51px;margin:0;
+  border-radius:15px;font-size:14px;font-weight:850;
+}
+#recordDialog .dialogactions #saveRecord{
+  box-shadow:0 7px 16px #315ee82b;
+}
+#recordDialog .dialogactions #deleteRecord{flex:0 0 auto}
+@media(max-width:390px){
+  #recordDialog{width:calc(100% - 14px);max-height:94dvh;border-radius:21px}
+  #recordDialog form{max-height:94dvh;padding:12px 12px 10px}
+  #recordDialog .dialoghead{padding-bottom:10px}
+  #recordDialog .dialoghead h2{font-size:21px}
+  #recordDialog .formgrid{gap:8px;padding-bottom:9px}
+  #recordDialog .record-panel{padding:11px}
+  #recordDialog .record-panel-title{margin:-11px -11px 10px;padding:9px 11px}
+  #recordDialog .record-rate-panel{padding:11px;gap:8px}
+  #recordDialog .record-rate-panel:before{margin:-11px -11px 0;padding:0 11px}
+  #recordDialog .donebox{padding:0 11px 10px}
+  #recordDialog .donebox:before{margin:0 -11px 7px;padding:0 11px}
+  #recordDialog .durchips{gap:5px}
+  #recordDialog .durchips button{min-height:40px;font-size:11px}
+  #recordDialog .dialogactions .btn{min-height:48px;font-size:13px}
+}
+@media(max-width:340px){
+  #recordDialog .record-time-grid{gap:6px}
+  #recordDialog .record-time-grid input{font-size:15px;padding:9px 6px}
+  #recordDialog .record-rate-panel{grid-template-columns:minmax(0,1fr) auto;gap:6px}
+  #recordDialog .record-rate-panel #fPaidRow{padding-left:7px;font-size:11px!important}
+  #recordDialog .record-rate-panel #fPaidRow input{width:19px;height:19px;min-width:19px;min-height:19px}
+}
+@media(prefers-reduced-motion:reduce){
+  #recordDialog *{scroll-behavior:auto!important;transition:none!important}
+}
