@@ -211,12 +211,19 @@ function studentStats(s){const L=lessonsOf(s.name),D=L.filter(isDone),P=pkgs().f
 const joinDate=(s,st)=>(s.createdAt||"").slice(0,10)||st.first||"";
 // Same student, same day, same start time: an accidental double booking.
 const dupLesson=(student,date,start,id)=>!!student&&!!start&&state.entries.some(x=>x.type==="Lesson"&&x.id!==id&&x.date===date&&x.start===start&&sameName(x.student,student));
-function updateCourseField(){const box=$("fPackage"),row=$("fPackageRow"),paidRow=$("fPaidRow"),lesson=$("fType").value==="Lesson",typed=$("fStudent").value.trim(),byPhone=findPhone($("fPhone").value||(isPhone(typed)?typed:"")),name=typed&&!isPhone(typed)?typed:byPhone?.name||typed,rid=$("recordId").value,old=rid?state.entries.find(x=>x.id===rid):null,legacyLinked=!!(old&&old.pkg),own=old&&old.course?courseById(old.course):null,c=name&&!legacyLinked&&(!old||!isDone(old)||own||!$("fPaid").checked)?(own||activeCourse(name)):null;
- row.classList.toggle("hidden",!lesson||!c);box.dataset.id=c?c.id:"";
- if(c){const free=courseFreeH(c,rid),keep=!!own&&own.id===c.id;box.disabled=free<=.001&&!keep;$("fPackageText").textContent=free>.001||keep?`Use course hours (${fmtH(free)} h prepaid and free)`:"Course hours: none prepaid and free. Add a payment on the student's Course tab first.";if(box.disabled)box.checked=false;}else{box.disabled=false;}
- const courseSelected=lesson&&!!c&&box.checked&&!box.disabled;paidRow.classList.toggle("hidden",courseSelected);if(courseSelected)$("fPaid").checked=false;
+function updateCourseField(){const box=$("fPackage"),row=$("fPackageRow"),paidRow=$("fPaidRow"),methodRow=$("paymentMethodRow"),individualBtn=$("paymentIndividual"),courseBtn=$("paymentCourse"),lesson=$("fType").value==="Lesson",typed=$("fStudent").value.trim(),byPhone=findPhone($("fPhone").value||(isPhone(typed)?typed:"")),name=typed&&!isPhone(typed)?typed:byPhone?.name||typed,rid=$("recordId").value,old=rid?state.entries.find(x=>x.id===rid):null,legacyLinked=!!(old&&old.pkg),own=old&&old.course?courseById(old.course):null,c=name&&!legacyLinked&&(!old||!isDone(old)||own||!$("fPaid").checked)?(own||activeCourse(name)):null;
+ row.classList.add("hidden");box.dataset.id=c?c.id:"";
+ if(c){const free=courseFreeH(c,rid),keep=!!own&&own.id===c.id;box.disabled=free<=.001&&!keep;if(box.disabled)box.checked=false;$("courseOptionMeta").textContent=free>.001||keep?`${fmtH(free)} h prepaid available`:"No prepaid hours available";}else{box.disabled=false;}
+ const courseSelected=lesson&&!!c&&box.checked&&!box.disabled;
+ methodRow.classList.toggle("hidden",!lesson||!c);
+ individualBtn.setAttribute("aria-pressed",String(!courseSelected));courseBtn.setAttribute("aria-pressed",String(courseSelected));courseBtn.disabled=!!box.disabled;
+ $("individualRateText").textContent=`${euro(num($("fRate").value||DEFAULT_RATE))} per hour`;
+ paidRow.classList.toggle("hidden",courseSelected);if(courseSelected)$("fPaid").checked=false;
 }
+$("paymentIndividual").addEventListener("click",()=>{$("fPackage").checked=false;$("fPackage").dataset.courseChoiceTouched="1";updateCourseField();});
+$("paymentCourse").addEventListener("click",()=>{if($("paymentCourse").disabled)return;$("fPackage").checked=true;$("fPackage").dataset.courseChoiceTouched="1";updateCourseField();});
 $("fPackage").addEventListener("change",()=>{$("fPackage").dataset.courseChoiceTouched="1";updateCourseField();});
+$("fRate").addEventListener("input",updateCourseField);
 function conflictOn(date,start,end,id){const a=toMin(start),b=toMin(end),l=lessonsOn(date).find(x=>x.id!==id&&x.start&&x.end&&a<toMin(x.end)&&toMin(x.start)<b);return l||prayerBlocks(date).find(p=>a<toMin(p.end)&&toMin(p.start)<b);}
 // One course: progress, money and hours. full=false is the short card at the top of the profile.
 function courseCardHTML(c,full){const paid=coursePaid(c),due=courseDue(c),done=courseDoneH(c),left=courseLeftH(c),pct=Math.min(100,done/Number(c.hours)*100),finished=left<=.001,lessons=courseLessons(c).sort((a,b)=>(b.date+(b.start||"")).localeCompare(a.date+(a.start||"")));
