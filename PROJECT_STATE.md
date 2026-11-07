@@ -212,3 +212,9 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Kept the Lesson completed checkbox visible and preserved the `fActual` input element/ID in the DOM so existing JavaScript behavior and stored data remain compatible; no data migration or calculation changes.
 - Bumped service-worker cache from v71 to v72.
 - Validation: source-level only; browser/Playwright and real iPhone Safari verification pending.
+
+
+## Deep-check fix — Actual length remains hidden — 2026-11-07
+- Deep review found `syncDoneBox()` removed the `hidden` class whenever Lesson completed was checked, which could reveal Actual length despite the markup change.
+- Updated `syncDoneBox()` to keep the input row hidden in every state. Existing `fActual` value initialization and completion-duration calculation remain intact; completed lessons still default to scheduled duration when no actual value is supplied.
+- Source-level review only; browser/Playwright and iPhone Safari verification pending.
