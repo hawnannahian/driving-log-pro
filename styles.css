@@ -1929,3 +1929,10 @@ dialog:not([open]){display:none!important}
   accent-color:#315ee8;
 }
 #recordDialog #paymentMethodRow{display:none!important}
+
+
+/* Restore PR #68 course-hours presentation: payment method tiles inside Payment card;
+   standalone legacy checkbox remains hidden. */
+#recordDialog #fPackageRow{display:none!important}
+#recordDialog #paymentMethodRow.hidden{display:none!important}
+#recordDialog #paymentMethodRow:not(.hidden){display:grid!important}

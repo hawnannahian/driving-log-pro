@@ -235,3 +235,12 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Payment method tile UI is hidden. Existing checkbox-driven course allocation and paid-status behavior are retained.
 - Bumped service-worker cache from v73 to v74.
 - Source-level review only; browser/Playwright and real iPhone Safari verification pending.
+
+
+## Revert PR #69 — restore PR #68 course-hours UI — 2026-11-07
+- Owner preferred the PR #68 design. Reverted PR #69's separate standalone Use course hours checkbox presentation.
+- Restored the PR #68 behavior: the Payment section contains Individual lesson and Course hours selection tiles; the separate legacy checkbox remains hidden.
+- Restored course-selection checks in save and student-contact flows to use `paymentMethodRow`.
+- No student/lesson/payment records or accounting calculations were modified.
+- Bumped service-worker cache from v74 to v75.
+- Source-level checks only; browser/Playwright and real iPhone Safari verification pending.
