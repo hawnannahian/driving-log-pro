@@ -369,3 +369,29 @@ body.is-mini-on .timermini{bottom:calc(160px + env(safe-area-inset-bottom))}
 .finreports .chartbox{margin-top:0;margin-bottom:12px}.finreports .fininner>:first-child{margin-top:2px}
 @media(prefers-reduced-motion:reduce){.finbody,.finbody.open,.finchev{transition:none}}
 @media print{.finbody{grid-template-rows:1fr!important;visibility:visible!important}.finhead{display:none}}
+
+/* Simplified Log and lesson flows — preserve all existing controls and calculations. */
+#log .log-toolbar{grid-template-columns:minmax(0,1fr) minmax(140px,.48fr) auto}
+#log .log-extra-filter{position:relative;min-width:0}
+#log .log-extra-filter summary,#log .log-payment-details summary{list-style:none;cursor:pointer;color:var(--blue);font-size:12px;font-weight:700;padding:12px 4px;white-space:nowrap}
+#log .log-extra-filter summary::-webkit-details-marker,#log .log-payment-details summary::-webkit-details-marker,.qbooking summary::-webkit-details-marker{display:none}
+#log .log-extra-filter[open] select{position:absolute;z-index:3;right:0;top:38px;width:190px;min-height:44px;padding:9px 11px;border:1px solid var(--line);border-radius:12px;background:#fff;box-shadow:0 8px 24px #101c3320;font:inherit}
+#log .log-payment-details{margin-top:10px;border-top:1px solid #dce4f2}
+#log .log-payment-details summary{padding:10px 2px 0}
+#log .log-payment-summary{margin-top:8px;padding-top:8px}
+.qbooking{margin:16px 0 4px;border:1px solid var(--line);border-radius:14px;background:#fbfcff}
+.qbooking summary{list-style:none;cursor:pointer;padding:13px 15px;color:var(--blue);font-weight:750}
+.qbooking summary:after{content:"＋";float:right}
+.qbooking[open] summary:after{content:"−"}
+.qbooking-body{padding:0 14px 14px}
+#quickDialog .qdetails{margin-bottom:12px}
+#quickDialog .qactions{margin-top:14px}
+#recordDialog .typechips button.hidden{display:none}
+#recordDialog .donebox{padding:12px;border-radius:14px}
+@media(max-width:720px){
+ #log .log-toolbar{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ #log .log-extra-filter{grid-column:1/-1}
+ #log .log-extra-filter summary{padding:3px 2px}
+ #log .log-extra-filter[open] select{position:static;width:100%;margin-top:6px}
+ #log .log-payment-summary{margin-top:8px}
+}

@@ -112,7 +112,7 @@
       <div class="toolbar log-toolbar">
         <input id="logSearch" type="search" placeholder="Search student, type or note" aria-label="Search log records">
         <select id="logFilter" aria-label="Filter records"><option value="today">Today's lessons</option><option value="all">All records</option><option value="Lesson">Lessons</option><option value="expense">Expenses</option><option value="paid">Paid</option><option value="unpaid">Unpaid</option><option value="prepaid">Prepaid</option></select>
-        <select id="logSort" aria-label="Sort records"><option value="latest">Latest first</option><option value="oldest">Oldest first</option><option value="amount">Highest amount</option><option value="outstanding">Highest outstanding</option></select>
+        <details class="log-extra-filter"><summary>Sort &amp; more</summary><select id="logSort" aria-label="Sort records"><option value="latest">Latest first</option><option value="oldest">Oldest first</option><option value="amount">Highest amount</option><option value="outstanding">Highest outstanding</option></select></details>
       </div>
       <section class="log-summary" aria-label="Today's summary">
         <div class="log-summary-main">
@@ -120,11 +120,11 @@
           <article class="log-kpi"><span class="log-kpi-icon">◷</span><div><b id="logHoursToday">0 h</b><small>Total lesson hours</small></div></article>
           <article class="log-kpi"><span class="log-kpi-icon">€</span><div><b id="logRevenueToday">€0,00</b><small>Lesson value</small></div></article>
         </div>
-        <div class="log-payment-summary">
+        <details class="log-payment-details"><summary>Payment &amp; expense totals</summary><div class="log-payment-summary">
           <div><span>Collected</span><b class="collected" id="logCollectedToday">€0,00</b></div>
           <div><span>Outstanding</span><b class="outstanding" id="logOutstandingToday">€0,00</b></div>
           <div><span>Expenses</span><b class="outstanding" id="logExpensesToday">€0,00</b></div>
-        </div>
+        </div></details>
       </section>
       <div class="log-list-heading"><h3>Lesson records</h3><span id="logResultCount">0 records</span></div>
       <div id="logList" class="recordlist empty">No records yet.</div>
@@ -305,17 +305,20 @@
       <div class="qdetails" id="qDetails"></div>
       <a class="btn qwa hidden" id="qWa" target="_blank" rel="noopener">WhatsApp</a>
       <p class="hint hidden" id="qNoPhone">No phone number saved for this student.</p>
-      <h3 class="qhead">Book another lesson</h3>
-      <div class="formgrid">
-        <label class="wide">Date<input type="date" id="qDate" required></label>
-        <label>Start time<input type="time" id="qStart" required></label>
-        <label>End time<input type="time" id="qEnd" required></label>
-        <div class="chiprow durchips wide" id="qDur" role="group" aria-label="Lesson length"><button type="button" data-qdur="30">30 m</button><button type="button" data-qdur="60">1 h</button><button type="button" data-qdur="90">1.5 h</button><button type="button" data-qdur="120">2 h</button></div>
-      </div>
-      <p class="hint" id="qPkg"></p>
-      <p id="qError" class="formerror" role="alert"></p>
-      <div class="dialogactions"><span></span><button type="submit" class="btn primary">Book lesson</button></div>
-      <div class="qactions"><button type="button" class="btn ghost" id="qEdit">Edit</button><button type="button" class="btn ghost" id="qPaid">Mark paid</button><button type="button" class="btn danger" id="qDelete">Delete</button></div>
+      <details class="qbooking"><summary>＋ Book another lesson</summary>
+        <div class="qbooking-body">
+          <div class="formgrid">
+            <label class="wide">Date<input type="date" id="qDate" required></label>
+            <label>Start time<input type="time" id="qStart" required></label>
+            <label>End time<input type="time" id="qEnd" required></label>
+            <div class="chiprow durchips wide" id="qDur" role="group" aria-label="Lesson length"><button type="button" data-qdur="30">30 m</button><button type="button" data-qdur="60">1 h</button><button type="button" data-qdur="90">1.5 h</button><button type="button" data-qdur="120">2 h</button></div>
+          </div>
+          <p class="hint" id="qPkg"></p>
+          <p id="qError" class="formerror" role="alert"></p>
+          <div class="dialogactions"><span></span><button type="submit" class="btn primary">Book lesson</button></div>
+        </div>
+      </details>
+      <div class="qactions"><button type="button" class="btn ghost" id="qEdit">Edit lesson</button><button type="button" class="btn ghost" id="qPaid">Mark paid</button><button type="button" class="btn danger" id="qDelete">Delete</button></div>
     </form>
   </dialog>
 
