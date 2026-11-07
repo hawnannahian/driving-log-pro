@@ -618,6 +618,17 @@ function switchTab(id){if(document.querySelector("dialog[open]"))return false;se
 document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>b.closest("dialog").close());
 ["pOn","pAuto","pMinutes","p_fajr","p_duhr","p_jumua","p_asr","p_maghrib","p_isha"].forEach(id=>$(id).addEventListener("change",savePrayer));
 ["wStart","wEnd"].forEach(id=>$(id).addEventListener("change",saveWork));
+function setLogSubtab(which){
+ const settings=which==="settings";
+ $("logRecordsPanel").classList.toggle("hidden",settings);
+ $("logSettingsPanel").classList.toggle("hidden",!settings);
+ $("logRecordsTab").classList.toggle("active",!settings);
+ $("logSettingsTab").classList.toggle("active",settings);
+ $("logRecordsTab").setAttribute("aria-selected",String(!settings));
+ $("logSettingsTab").setAttribute("aria-selected",String(settings));
+}
+$("logRecordsTab").onclick=()=>setLogSubtab("records");
+$("logSettingsTab").onclick=()=>setLogSubtab("settings");
 initWaTemplateSettings();$("addRecordBtn").onclick=newExpense;$("calAddBtn").onclick=()=>newRecord(cal.day);$("calPrev").onclick=()=>calMove(-1);$("calNext").onclick=()=>calMove(1);document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>setCalView(b.dataset.view));$("addStudentBtn").onclick=newStudent;$("fType").onchange=toggleLessonFields;
 ["logSearch","logFilter","logSort","studentSearch","studentSort","period","periodValue"].forEach(id=>$(id).addEventListener("input",render));
 let installPrompt;$("installBtn").onclick=async()=>{if(installPrompt){installPrompt.prompt();installPrompt=null;}};
