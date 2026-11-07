@@ -1456,3 +1456,49 @@ dialog:not([open]){display:none!important}
   input,select,textarea{font-size:16px!important}
   button,a,label,summary,.tab{touch-action:manipulation}
 }
+
+
+/* Premium student payment dashboard */
+.payment-dashboard{display:flex;flex-direction:column;gap:14px;min-width:0}
+.payment-heading,.payment-history-head,.payment-course-head,.payment-cardtop{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.payment-heading h3,.payment-history-head h3{margin:0;font-size:17px;font-weight:850;letter-spacing:-.02em}
+.payment-heading p,.payment-history-head small{margin:3px 0 0;color:var(--muted);font-size:12px}
+.payment-add{flex:none;min-height:40px;padding:0 13px;border:0;border-radius:12px;background:var(--royal);color:#fff;font:inherit;font-size:12px;font-weight:800;box-shadow:0 5px 14px #315fe52b}
+.payment-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.payment-metrics .metric{min-width:0;display:flex;flex-direction:column;gap:7px;padding:12px;border-radius:15px;border:1px solid transparent}
+.payment-metrics .metric span{font-size:11px;font-weight:700;color:var(--muted)}
+.payment-metrics .metric b{font-size:clamp(15px,4vw,19px);letter-spacing:-.03em;overflow-wrap:anywhere}
+.payment-metrics .paid-metric{background:#eaf8f0;border-color:#d5efdf}.payment-metrics .paid-metric b{color:#167344}
+.payment-metrics .due-metric{background:#fff5e9;border-color:#f6e4ca}.payment-metrics .due-metric b{color:#a85c0b}
+.payment-metrics .course-metric{background:#f1efff;border-color:#e2ddff}.payment-metrics .course-metric b{color:#5140a6}
+.payment-course{padding:14px;border:1px solid #dce5fa;border-radius:16px;background:linear-gradient(145deg,#f8faff,#f0f4ff)}
+.payment-course-head b{font-size:14px}.payment-course-head strong{font-size:12px;color:var(--muted)}
+.payment-progress{height:8px;margin:11px 0;border-radius:9px;background:#e3e9f4;overflow:hidden}.payment-progress i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,#315fe5,#6484f4)}
+.payment-course-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+.payment-course-stats span{display:flex;flex-direction:column;gap:3px;color:var(--muted);font-size:10px;min-width:0}
+.payment-course-stats b{font-size:13px;color:var(--ink)}
+.payment-course-foot{display:flex;justify-content:space-between;gap:8px;margin-top:11px;padding-top:10px;border-top:1px solid #dce5fa;font-size:11px}
+.payment-course-foot b{color:#a85c0b}
+.payment-history-head{align-items:flex-end;margin-top:3px}.payment-history-head h3{font-size:16px}
+.payment-filters{display:flex;gap:4px;padding:3px;border-radius:11px;background:#f0f3f9}
+.payment-filters button{border:0;background:transparent;border-radius:8px;padding:6px 9px;color:var(--muted);font:inherit;font-size:10px;font-weight:800}
+.payment-filters button.active{background:#1d355f;color:#fff;box-shadow:0 2px 7px #1d355f26}
+.payment-history{display:flex;flex-direction:column;gap:9px}
+.payment-item{display:grid;grid-template-columns:13px minmax(0,1fr);gap:7px;min-width:0}
+.payment-item[hidden]{display:none}
+.payment-rail{position:relative;display:flex;justify-content:center}
+.payment-rail:after{content:"";position:absolute;top:13px;bottom:-17px;width:2px;background:#dceee4}
+.payment-item:last-child .payment-rail:after{display:none}
+.payment-rail i{z-index:1;width:10px;height:10px;margin-top:15px;border:2px solid #21a467;border-radius:50%;background:#fff}
+.payment-card{min-width:0;padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff;box-shadow:0 3px 12px #1b31500b}
+.payment-copy{min-width:0;display:flex;flex-direction:column;gap:4px}.payment-copy b{font-size:13px}.payment-copy small{font-size:11px;color:var(--muted)}
+.payment-amount{flex:none;font-size:14px;white-space:nowrap}
+.payment-meta{margin-top:7px}.payment-status{display:inline-flex;padding:3px 8px;border-radius:20px;font-size:10px;font-weight:800}
+.payment-status.paid{background:#eaf8f0;color:#167344}.payment-status.due{background:#fff5e9;color:#a85c0b}
+.payment-actions{display:flex;gap:7px;margin-top:9px}
+.payment-edit,.payment-more summary{flex:1;min-width:0;min-height:34px;display:flex;align-items:center;justify-content:center;border:1px solid #dce6fb;border-radius:9px;background:#eef4ff;color:#244da8;font:inherit;font-size:11px;font-weight:800;cursor:pointer;list-style:none}
+.payment-more{position:relative;flex:1;min-width:0}.payment-more summary{background:#fff;color:var(--muted);border-color:var(--line)}
+.payment-more[open] summary{border-radius:9px 9px 0 0}
+.payment-more .paytoggle{width:100%;border-radius:0 0 9px 9px}
+@media(max-width:390px){.payment-metrics{gap:6px}.payment-metrics .metric{padding:10px 8px}.payment-course{padding:11px}.payment-filters button{padding:6px 7px}.payment-heading h3{font-size:16px}.payment-add{padding:0 10px}}
+@media(prefers-reduced-motion:no-preference){.payment-card,.payment-add,.payment-edit{transition:box-shadow .18s ease,transform .18s ease}.payment-edit:active,.payment-add:active{transform:scale(.98)}}
