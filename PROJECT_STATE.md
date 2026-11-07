@@ -18,7 +18,7 @@
 - Full-Time historical register key: `driving-log-pro-full-time-v1`; records keyed by `legacy_student_id`, isolated from normal lesson accounting.
 - Main app exposes a narrow `window.DrivingLogFullTime` bridge (getAll/replace/clear) so full-time data can participate in backup/sync without mixing into lesson accounting.
 - Cloud sync stores `driving-log.json` in the user's own private GitHub data repository; token remains in that browser's localStorage.
-- Current service-worker cache: `nahians-schedule-cache-v53`.
+- Current service-worker cache: `nahians-schedule-cache-v55`.
 - App footer version: `v1.21`. CSS comments such as v1.26 may refer to feature revision, not app release.
 
 ## Fresh Course system + Legacy Archive (branch `feature/fresh-course-management`)
@@ -132,3 +132,9 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - When a lesson is linked to course hours, the individual Paid checkbox is hidden and forced off; the lesson is accounted for through the course payment ledger only.
 - Editing an existing individual lesson does not silently convert it to a course lesson.
 - Service-worker cache bumped to v54. Static source review only; iPhone/browser runtime verification remains pending.
+
+## Course lesson display and defaults — fix branch `fix/course-lesson-display-and-defaults`
+- A course lesson shows only "Course": no amount, no Paid/Unpaid, no Mark paid (lists, Log rows, calendar blocks, quick dialog). Individual lessons keep amount + Paid/Unpaid.
+- New lessons (form and quick booking) select "Use course hours" only when the student has an active course with enough prepaid hours for the chosen length (re-checked when the times change); unticking it gives an individual lesson; editing an existing lesson never changes its link by itself. An existing lesson shows the course ticked only if its link points to a real course.
+- Delete Legacy Archive no longer marks upcoming lessons Paid: only completed lessons covered by money actually received (package payments / rate, in allocation order) become Paid; everything else stays unpaid. (Lessons already changed by the earlier version are not touched automatically.)
+- New lessons are always unpaid by default; completing a lesson (form, timer, quick Done) never sets Paid.
