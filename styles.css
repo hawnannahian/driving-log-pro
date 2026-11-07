@@ -532,3 +532,9 @@ b.course{color:var(--royal)}
  #recordDialog .formgrid input:not([type=checkbox]),#recordDialog .formgrid select{padding:10px;font-size:15px}
  #recordDialog .durchips button{font-size:12px}
 }
+
+@media(min-width:721px){#recordDialog .record-student-panel{grid-column:1/-1}}
+#recordDialog[data-mode="expense"] .record-student-panel,#recordDialog[data-mode="expense"] .record-time-panel{display:none}
+#recordDialog[data-mode="expense"] .record-rate-panel{grid-template-columns:minmax(0,1fr)}
+#recordDialog[data-mode="expense"] .record-rate-panel .costfield,#recordDialog[data-mode="expense"] .record-rate-panel .kmfield{grid-column:1/-1}
+#recordDialog[data-mode="expense"] .record-comment-field{grid-column:1/-1}
