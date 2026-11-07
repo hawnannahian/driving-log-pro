@@ -135,6 +135,6 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 
 ## Course lesson display and defaults — fix branch `fix/course-lesson-display-and-defaults`
 - A course lesson shows only "Course": no amount, no Paid/Unpaid, no Mark paid (lists, Log rows, calendar blocks, quick dialog). Individual lessons keep amount + Paid/Unpaid.
-- New lessons (form and quick booking) select "Use course hours" only when the student has an active course with enough prepaid hours for the chosen length (re-checked when the times change); unticking it gives an individual lesson; editing an existing lesson never changes its link by itself. An existing lesson shows the course ticked only if its link points to a real course.
+- New lessons (form and quick booking) select "Use course hours" only when the student has an active course with enough prepaid hours for the chosen length (re-checked when the times change); unticking it gives an individual lesson; editing an existing lesson never changes its link by itself.
 - Delete Legacy Archive no longer marks upcoming lessons Paid: only completed lessons covered by money actually received (package payments / rate, in allocation order) become Paid; everything else stays unpaid. (Lessons already changed by the earlier version are not touched automatically.)
 - New lessons are always unpaid by default; completing a lesson (form, timer, quick Done) never sets Paid.
