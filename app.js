@@ -75,8 +75,37 @@ function markPaid(id){const e=state.entries.find(x=>x.id===id);if(!e)return;e.pa
 function renderBackup(){let last=0;try{last=Number(localStorage.getItem(BACKUP_KEY))||0;}catch{}const days=last?Math.floor((Date.now()-last)/864e5):null,show=state.entries.length>0&&(days===null||days>=7);$("backupBanner").classList.toggle("hidden",!show);if(show)$("backupText").textContent=days===null?"You have no backup yet.":`Your last backup was ${days} days ago.`;}
 async function backupNow(){const done=await download("DrivingLogPro_Backup.json",JSON.stringify({...state,fullTime:window.DrivingLogFullTime?.getAll()||[],backupCreated:new Date().toISOString()},null,2),"application/json");if(done){try{localStorage.setItem(BACKUP_KEY,String(Date.now()));}catch{}renderBackup();toast("Backup created");}}
 const waNumber=s=>{const raw=cleanPhone(s.whatsapp||s.phone||s.name||""),d=raw.replace(/\D/g,"");if(raw.startsWith("+")&&d.length>=9)return d;if(/^9\d{8}$/.test(d))return "351"+d;return null;};
-const lessonMsg=e=>`আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ ভাই।\nআপনার পরবর্তী ড্রাইভিং লেসন ${dayName(e.date)}, ${timeText(e)}। অনুগ্রহ করে নির্ধারিত সময়ের কয়েক মিনিট আগে উপস্থিত থাকবেন।\nধন্যবাদ।`;
-const payMsg=amount=>`আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ ভাই।\nআপনার ড্রাইভিং লেসন বাবদ ${euro(amount)} পরিশোধ বাকি রয়েছে। অনুগ্রহ করে আপনার সুবিধামতো সময়ে পরিশোধ করবেন।\nধন্যবাদ।`;
+const WA_TEMPLATE_KEY=DB_KEY+"-whatsapp-templates";
+const WA_DEFAULTS={
+ lesson:"আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ ভাই।\nআপনার পরবর্তী ড্রাইভিং লেসন {{day}}, {{time}}। অনুগ্রহ করে নির্ধারিত সময়ের কয়েক মিনিট আগে উপস্থিত থাকবেন।\nধন্যবাদ।",
+ payment:"আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ ভাই।\nআপনার ড্রাইভিং লেসন বাবদ {{amount}} পরিশোধ বাকি রয়েছে। অনুগ্রহ করে আপনার সুবিধামতো সময়ে পরিশোধ করবেন।\nধন্যবাদ।"
+};
+function getWaTemplates(){try{const x=JSON.parse(localStorage.getItem(WA_TEMPLATE_KEY)||"{}");return{lesson:typeof x.lesson==="string"?x.lesson:WA_DEFAULTS.lesson,payment:typeof x.payment==="string"?x.payment:WA_DEFAULTS.payment};}catch{return{...WA_DEFAULTS};}}
+let waTemplates=getWaTemplates();
+const fillWaTemplate=(template,vars)=>String(template||"").replace(/{{\s*(day|time|amount)\s*}}/g,(_,k)=>vars[k]??"");
+const lessonMsg=e=>fillWaTemplate(waTemplates.lesson,{day:dayName(e.date),time:timeText(e)});
+const payMsg=amount=>fillWaTemplate(waTemplates.payment,{amount:euro(amount)});
+function renderWaTemplatePreviews(){
+ const lesson= $("waLessonTemplate"),payment=$("waPaymentTemplate");
+ if(!lesson||!payment)return;
+ $("waLessonPreview").textContent=fillWaTemplate(lesson.value,{day:"Monday, 10 November",time:"10:00–11:00"});
+ $("waPaymentPreview").textContent=fillWaTemplate(payment.value,{amount:"€40,00"});
+}
+function initWaTemplateSettings(){
+ const lesson=$("waLessonTemplate"),payment=$("waPaymentTemplate");
+ if(!lesson||!payment)return;
+ lesson.value=waTemplates.lesson;payment.value=waTemplates.payment;
+ [lesson,payment].forEach(el=>el.addEventListener("input",renderWaTemplatePreviews));
+ $("waTemplateSave").onclick=()=>{
+  const next={lesson:lesson.value,payment:payment.value};
+  try{localStorage.setItem(WA_TEMPLATE_KEY,JSON.stringify(next));waTemplates=next;toast("WhatsApp messages saved on this device.");}
+  catch{toast("Could not save WhatsApp messages. Check device storage.");}
+ };
+ $("waTemplateReset").onclick=()=>{
+  lesson.value=WA_DEFAULTS.lesson;payment.value=WA_DEFAULTS.payment;renderWaTemplatePreviews();
+ };
+ renderWaTemplatePreviews();
+}
 const waLink=(n,text)=>`https://wa.me/${n}?text=${encodeURIComponent(text)}`;
 let profileId=null;
 let profileTab="overview";
@@ -589,7 +618,7 @@ function switchTab(id){if(document.querySelector("dialog[open]"))return false;se
 document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>b.closest("dialog").close());
 ["pOn","pAuto","pMinutes","p_fajr","p_duhr","p_jumua","p_asr","p_maghrib","p_isha"].forEach(id=>$(id).addEventListener("change",savePrayer));
 ["wStart","wEnd"].forEach(id=>$(id).addEventListener("change",saveWork));
-$("addRecordBtn").onclick=newExpense;$("calAddBtn").onclick=()=>newRecord(cal.day);$("calPrev").onclick=()=>calMove(-1);$("calNext").onclick=()=>calMove(1);document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>setCalView(b.dataset.view));$("addStudentBtn").onclick=newStudent;$("fType").onchange=toggleLessonFields;
+initWaTemplateSettings();$("addRecordBtn").onclick=newExpense;$("calAddBtn").onclick=()=>newRecord(cal.day);$("calPrev").onclick=()=>calMove(-1);$("calNext").onclick=()=>calMove(1);document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>setCalView(b.dataset.view));$("addStudentBtn").onclick=newStudent;$("fType").onchange=toggleLessonFields;
 ["logSearch","logFilter","logSort","studentSearch","studentSort","period","periodValue"].forEach(id=>$(id).addEventListener("input",render));
 let installPrompt;$("installBtn").onclick=async()=>{if(installPrompt){installPrompt.prompt();installPrompt=null;}};
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();installPrompt=e;$("installBtn").classList.remove("hidden");});
