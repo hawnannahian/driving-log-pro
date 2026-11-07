@@ -1,6 +1,6 @@
 # PROJECT_STATE — Driving Log Pro
 
-শেষ যাচাই: 2026-11-05 · ভিত্তি: `main` (Full-Time data protection update)
+শেষ যাচাই: 2026-11-07 · ভিত্তি: `main` (Payment dashboard redesign draft)
 
 ## কাজের নিয়ম
 - মালিককে উত্তর দিন বাংলায় এবং খুব সংক্ষেপে: কাজ শেষ হলে শুধু "হয়ে গেছে" + লিংক; না হলে অল্প কথায় কারণ।
@@ -165,3 +165,10 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 
 ## iOS input zoom (2026-11-07)
 - Owner screenshot: the student profile dialog looked zoomed in and cut off on the right on a real iPhone, while Chromium at the same width shows it fitting. Most likely cause (not verifiable without iOS WebKit): focusing a field with font-size < 16px makes iOS Safari zoom the page, and with body overflow hidden it stays zoomed. Touch devices now use 16px form controls and `touch-action:manipulation`. Needs confirmation on a real iPhone.
+
+
+## Release versioning — 2026-11-07
+- Adopted semantic app versioning in the visible footer: current main release was v1.21; the premium Student Payments dashboard update is proposed as v1.22.
+- Patch increments (x.y.Z) for bug fixes, minor increments (x.Y.0) for backward-compatible features/UI updates, and major increments (X.0.0) only for breaking changes.
+- Each app update must update the footer version, increment the service-worker cache name, and record the release notes here. A draft PR version is proposed until merged/deployed.
+- Proposed v1.22 includes the premium Payments dashboard and its All/Course/Lesson filters; it is not released until PR #59 is merged and deployment succeeds.
