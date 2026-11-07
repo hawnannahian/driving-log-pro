@@ -244,3 +244,10 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - No student/lesson/payment records or accounting calculations were modified.
 - Bumped service-worker cache from v74 to v75.
 - Source-level checks only; browser/Playwright and real iPhone Safari verification pending.
+
+
+## Recent work — Calendar student autocomplete (2026-11-07)
+- Added live autocomplete to Calendar → New Lesson student name and phone inputs. Suggestions match partial names, phone numbers and WhatsApp numbers; selecting a result fills the saved student name and phone, then refreshes the existing course/payment selection UI.
+- Supports keyboard navigation (up/down, Enter, Escape), touch selection and a no-match state. Uses an in-app suggestion list rather than relying on iOS native datalist behavior.
+- Existing student records, course allocation, payment/accounting calculations and save logic are unchanged. Service-worker cache bumped to v76.
+- Source-level checks only; Playwright/Chromium and real iPhone Safari interaction tests remain required before claiming runtime verification.
