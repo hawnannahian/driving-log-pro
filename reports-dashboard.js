@@ -14,14 +14,16 @@ let dashRange="12",dashMonth=null,dashDay=null,dashPrevTab=null;
 const dashReduce=(()=>{try{return matchMedia("(prefers-reduced-motion: reduce)").matches;}catch{return false;}})();
 
 function dashCollected(p,v){
- let c=state.entries.filter(e=>e.type==="Lesson"&&isDone(e)&&e.paid&&inSel(e.date,p,v)).reduce((a,e)=>a+(e.pkg?(e.extraH||0)*rateOf(e):income(e)),0);
+ let c=state.entries.filter(e=>e.type==="Lesson"&&isDone(e)&&e.paid&&!isCourseLesson(e)&&inSel(e.date,p,v)).reduce((a,e)=>a+(e.pkg?(e.extraH||0)*rateOf(e):income(e)),0);
+ // Course payments: each payment record is counted once, on its own date.
+ for(const k of courses())c+=coursePays(k).filter(x=>inSel(x.date||k.date||"",p,v)).reduce((a,x)=>a+(Number(x.amount)||0),0);
  for(const k of pkgs()){if(Array.isArray(k.payments))c+=k.payments.filter(x=>inSel(x.date||k.date||"",p,v)).reduce((a,x)=>a+(Number(x.amount)||0),0);else if(k.paid!==false&&inSel(k.date||"",p,v))c+=Number(k.amount||0);}
  return dashRound(c);}
 
 function dashStats(p,v){
  const rep=state.entries.filter(e=>inSel(e.date,p,v)),t=totals(rep),done=rep.filter(e=>e.type==="Lesson"&&isDone(e)),cats=[0,0,0,0];
  rep.filter(e=>e.type!=="Lesson"&&!isBooking(e)).forEach(e=>{cats[dashCatOf(e)]+=Number(e.cost||0);});
- const owedPk=pkgs().filter(x=>inSel(x.date||"",p,v)).reduce((a,x)=>a+pkgDue(x),0);
+ const owedPk=dueInPeriod(p,v);
  return {rev:dashRound(t.income),exp:dashRound(t.expenses),net:dashRound(t.income-t.expenses),col:dashCollected(p,v),out:dashRound(t.unpaid+owedPk),hours:t.hours,lessons:done.length,
   students:new Set(done.map(e=>(e.student||"").trim().toLowerCase()).filter(Boolean)).size,cats:cats.map(dashRound)};}
 
