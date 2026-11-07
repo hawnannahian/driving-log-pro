@@ -31,7 +31,7 @@
 - Also fixed: `render()` threw on every call on `main` because `#logTodayDate` was removed from the HTML but app.js still set it (now guarded).
 
 ## Business rules
-- Default lesson rate €20/hour.
+- Legacy/quick-booking and blank imported-rate fallback remains €20/hour for compatibility. Calendar → New Record individual lessons require a manually entered per-lesson rate; student profile rates are not auto-applied there.
 - Income = lesson value; profit = income minus expenses; expenses are not income.
 - Timer target: 55 minutes; completed timer lesson receives 1 hour business credit, actual time is stored separately.
 - Full-Time register is historical only and must not affect current lessons, packages, revenue or reports.
