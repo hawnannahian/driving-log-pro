@@ -201,16 +201,35 @@ function migrateLegacy(){
  state.legacy={...prev,packages:[...(Array.isArray(prev.packages)?prev.packages:[]),...add].sort((a,b)=>String(a.id).localeCompare(String(b.id)))};
  delete state.packages;return true;}
 const hasLegacy=()=>pkgs().length>0;
-// Deletes the whole Legacy Archive. Only after two confirmations and a safety copy. Lessons that used old packages become normal
-// lessons marked Paid (the money was received through the package); a lesson whose extra hours were still unpaid stays unpaid.
+// Deletes the whole Legacy Archive. Only after two confirmations and a safety copy.
+// Package-funded lessons are converted to ordinary lessons; only completed lessons fully covered by
+// money actually received are automatically marked Paid. Existing explicit Paid states are preserved.
 // legacyDeletedAt makes the deletion win over copies still held by other devices / the cloud.
+function legacyPackageCoverage(e,budget){
+ if(!isDone(e)||!Array.isArray(e.alloc)||!e.alloc.length)return false;
+ let fullyCovered=true;
+ // Consume each completed lesson's allocated package hours in chronological order, even when the
+ // lesson has extra hours or is only partly funded. Otherwise later lessons could reuse the same cash.
+ for(const x of e.alloc){
+  const need=Math.max(0,Number(x.h)||0),available=Math.max(0,Number(budget[x.p])||0);
+  if(available+1e-6<need)fullyCovered=false;
+  budget[x.p]=Math.max(0,available-need);
+ }
+ return fullyCovered&&!(Number(e.extraH)>0);
+}
 function deleteLegacyArchive(){const P=pkgs();if(!P.length){toast("There is no Legacy Archive");return;}
  const linked=state.entries.filter(e=>e.type==="Lesson"&&e.pkg),paid=round2(P.reduce((a,p)=>a+pkgPaidSoFar(p),0)),by={};P.forEach(p=>{const k=(p.student||"").trim()||"?",x=by[k]||={bal:0,due:0};x.bal+=pkgBalance(p);x.due+=pkgDue(p);});
  const who=Object.entries(by).filter(([,x])=>x.bal>.004||x.due>.004).slice(0,8).map(([k,x])=>`   ${k}: ${x.bal>.004?"prepaid, not yet driven "+euro(x.bal):""}${x.bal>.004&&x.due>.004?" · ":""}${x.due>.004?"still due "+euro(x.due):""}`).join("\n");
- if(!confirm(`Delete the Legacy Archive completely?\n\n• ${P.length} old package(s) and ${euro(paid)} of old package payments are removed from this app and from cloud sync.\n• ${linked.length} lesson(s) that used them become normal lessons, marked Paid.\n• Totals that included the old packages will change.${who?"\n\nThese amounts are NOT carried over; record them again as course payments if they still apply:\n"+who:""}\n\nA safety copy is kept first (Reports → Safety copies). Download a backup before you continue.`))return;
+ if(!confirm(`Delete the Legacy Archive completely?\n\n• ${P.length} old package(s) and ${euro(paid)} of old package payments are removed from this app and from cloud sync.\n• ${linked.length} lesson(s) that used them become normal lessons. Only completed lessons fully covered by money actually received are automatically marked Paid; upcoming, partly funded and uncovered lessons stay unpaid unless already explicitly marked Paid.\n• Totals that included the old packages will change.${who?"\n\nThese amounts are NOT carried over; record them again as course payments if they still apply:\n"+who:""}\n\nA safety copy is kept first (Reports → Safety copies). Download a backup before you continue.`))return;
  if(!confirm("Last check: delete the Legacy Archive now? It can only be brought back from the safety copy or a backup."))return;
  if(!keepCopy("legacy-delete")){toast("No room for a safety copy, so nothing was deleted. Download a backup first.");return;}
- state.entries.forEach(e=>{if(e.type==="Lesson"&&e.pkg){const partlyUnpaid=e.extraH>0&&!e.paid;delete e.pkg;delete e.alloc;delete e.extraH;if(!partlyUnpaid)e.paid=true;}});
+ // Rebuild derived FIFO allocations immediately before conversion; never trust stale cached alloc fields.
+ recomputeAlloc();
+ const budget={};P.forEach(p=>{const r=pkgRate(p),bill=pkgBill(p);budget[p.id]=r>0?Math.min(bill,pkgPaidSoFar(p)/r):0;});
+ state.entries.filter(e=>e.type==="Lesson"&&e.pkg).sort((a,b)=>(a.date+(a.start||"")+a.id).localeCompare(b.date+(b.start||"")+b.id)).forEach(e=>{
+  if(legacyPackageCoverage(e,budget))e.paid=true;
+  delete e.pkg;delete e.alloc;delete e.extraH;
+ });
  delete state.legacy;delete state.packages;state.legacyDeletedAt=new Date().toISOString();save();toast("Legacy Archive deleted");}
 // Union of two archives (cloud merge, restore). Never drops or overwrites an archived package.
 function mergeLegacy(a,b){const A=a&&Array.isArray(a.packages)?a:null,B=b&&Array.isArray(b.packages)?b:null;if(!A&&!B)return null;if(!B)return A;if(!A)return B;const ids=new Set(A.packages.map(p=>p.id));return {...A,archivedAt:[A.archivedAt,B.archivedAt].filter(Boolean).sort()[0]||A.archivedAt,packages:[...A.packages,...B.packages.filter(p=>p&&p.id&&!ids.has(p.id))].sort((x,y)=>String(x.id).localeCompare(String(y.id)))};}
