@@ -1,5 +1,7 @@
 name: Multiple Booking regression
 on:
+  push:
+    branches: [feat/multiple-booking-atomic-batch-v1-38]
   pull_request:
     branches: [main]
     paths:
