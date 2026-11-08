@@ -314,3 +314,12 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Not yet included in Phase 1: package templates/custom package editor, explicit per-lesson package selector when multiple packages exist, manual hour adjustments/audit log. These are later implementation steps.
 - Verification: app.js parses with new Function; source review only. No browser/Playwright, real iPhone, backup/restore, cloud-sync, Pages deployment, or live data test performed.
 - Service-worker cache bumped to v83.
+
+
+## Custom Course Entry Sheet — 2026-11-08
+- Replaced the fixed 17-hour / €340 prompt flow with a custom Add Course sheet: optional name, 1–100 hours in 0.5-hour steps, price from €0, start date, optional first payment, and live hourly-rate preview.
+- Active course UI now says “Course” and displays an optional custom course name. Existing course records remain valid; missing names use the hours-based fallback label.
+- “Use course hours” now defaults on only when the selected course has enough available hours for the lesson duration; an explicit user choice is preserved while editing the form.
+- No existing student, course, lesson or payment records were migrated or rewritten. New course name is an optional additive field; existing hours/price/date/payment structure remains unchanged.
+- Service-worker cache bumped to v84; footer version updated to v1.23.
+- Verification: source-level checks pending; browser/device and GitHub Pages deployment are not claimed.
