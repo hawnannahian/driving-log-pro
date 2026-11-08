@@ -45,7 +45,7 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 |---|---|---|
 | Packages / courses UI + accounting | `app.js` (course/package functions), profile/payments markup | Phases 1–4 are merged (#79, #82–#87). **Change-controlled: see "Course allocation code — change control".** Legacy Archive deletion fix #98 is merged. PR #99 only exposes the existing Repeat selector; allocation helpers were not changed. |
 | Overview dashboard | `index.html`, `styles.css`, `app.js`, `sw.js` | ChatGPT PR #94 draft: owner-approved Overview visual refresh; no earnings; voice/push remain in Log Settings | (merged with main e97cc72; v1.33/v95)
-| Calendar / Log / record form | `app.js`, `index.html`, `styles.css` | PRs #90–#92 and #99 merged; weekly Repeat selector is visible for new Lesson records only. No accounting helper changed. |
+| Calendar / Log / record form | `app.js`, `index.html`, `styles.css` | Multiple Booking v1.38 in progress on `feat/multiple-booking-atomic-batch-v1-38`; Single Booking path must remain unchanged. |
 | Reports dashboard | `reports-dashboard.js`, reports markup | none claimed |
 | Islamic tab | `islamic*.js`, audio files | none claimed (owner may remove audio before selling) |
 | Push notifications | `push-worker/`, `push-config.js`, `sw.js` | PR #99 adds `push-config.js` to precache; Cloudflare Worker remains not deployed/configured and push API URL is empty. |
@@ -197,3 +197,11 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Push remains inactive: API URL empty; Cloudflare Worker/VAPID/private secrets/contact URI/deployment still need owner-authorized setup. Do not claim push notifications work.
 - Open PRs #73 and #13 remain untouched; review stale base/overlap before action. Previously mis-marked Legacy Archive Paid lessons are not auto-repaired.
 - Docs-only handover refresh; no app source/data/cache/footer change.
+
+
+### 2026-11-08 — ChatGPT → Claude / owner (Multiple Booking v1.38 started)
+- Latest main verified: `7108022d17710eff74a8b80fe695cdcd9b403291`; footer v1.37/cache v99. Branch `feat/multiple-booking-atomic-batch-v1-38` is identical to that main commit at task start.
+- Scope: new Multiple Booking mode for one student with independent session dates/times and per-session Individual Payment or Course Hours. Single Booking is not to be refactored.
+- Atomic-save design: stage on a cloned state, preflight every session and course-hour allocation, write once only after all rows pass, restore in-memory state if validation/storage fails, and sync only after successful persistence.
+- Protected accounting/course allocation helpers and `courses`, `coursePayments`, `lesson.courseAlloc` shapes are not to be edited. Each session remains a normal Lesson record; no batch schema.
+- Active work only. No PR, merge, deployment, rendered browser test, real iPhone test or live sync test is claimed yet. Use synthetic tests only; never use live student data.

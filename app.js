@@ -1,5 +1,6 @@
 const DB_KEY = "driving-log-pro-v1";
 let state = { entries: [], students: [] };
+let multiSessions = [];
 const $ = id => document.getElementById(id);
 const euro = n => new Intl.NumberFormat("pt-PT",{style:"currency",currency:"EUR"}).format(Number(n)||0);
 const dateISO = d => { const x=new Date(d); return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,"0")}-${String(x.getDate()).padStart(2,"0")}`; };
@@ -304,8 +305,8 @@ function updateCourseField(){const box=$("fPackage"),row=$("fPackageRow"),paidRo
  const courseSelected=lesson&&!!c&&box.checked&&!box.disabled;
 
  individualBtn.setAttribute("aria-pressed",String(!courseSelected));courseBtn.setAttribute("aria-pressed",String(courseSelected));courseBtn.disabled=!!box.disabled;
- $("individualRateText").textContent=$("fRate").value.trim()?`${euro(num($("fRate").value))} per hour`:"Enter a rate for this lesson";$("fRate").required=lesson&&!courseSelected;
- paidRow.classList.toggle("hidden",courseSelected);if(courseSelected)$("fPaid").checked=false;
+ $("individualRateText").textContent=$("fRate").value.trim()?`${euro(num($("fRate").value))} per hour`:"Enter a rate for this lesson";$("fRate").required=lesson&&!courseSelected&&$("recordDialog").dataset.bookingMode!=="multiple";
+ paidRow.classList.toggle("hidden",courseSelected||$("recordDialog").dataset.bookingMode==="multiple");if(courseSelected)$("fPaid").checked=false;
 }
 $("paymentIndividual").addEventListener("click",()=>{$("fPackage").checked=false;$("fPackage").dataset.courseChoiceTouched="1";updateCourseField();});
 $("paymentCourse").addEventListener("click",()=>{if($("paymentCourse").disabled)return;$("fPackage").checked=true;$("fPackage").dataset.courseChoiceTouched="1";updateCourseField();});
@@ -325,7 +326,7 @@ function suggestLessonTimes(date,start,end,exceptId){const[a,b]=lessonSpan(start
 const prayerNames=hits=>hits.map(h=>`${h.name} (${h.start}–${h.end})`).join(" and ");
 function prayerMessage(hits,sugg){return `Your lesson overlaps with ${prayerNames(hits)}. `+(sugg.length?`Suggested alternative: ${sugg[0].start}–${sugg[0].end}.`:"No free slot of this length is left on this day. Choose another date or a shorter lesson.");}
 // Inline warning in the record form + disabled Save while a NEW or MOVED lesson overlaps prayer time. An already saved lesson whose time is unchanged is never locked out.
-function refreshPrayerGuard(){const box=$("prayerWarn"),save=$("saveRecord");if(!box||!save)return;const lesson=$("fType").value==="Lesson",date=$("fDate").value,start=$("fStart").value,end=$("fEnd").value,id=$("recordId").value,old=id?state.entries.find(x=>x.id===id):null,hits=lesson?prayerConflict(date,start,end):[],same=!!old&&old.type==="Lesson"&&old.date===date&&old.start===start&&old.end===end,blocked=hits.length>0&&!same;
+function refreshPrayerGuard(){const box=$("prayerWarn"),save=$("saveRecord");if(!box||!save)return;if($("recordDialog").dataset.bookingMode==="multiple"){save.disabled=false;save.title="";box.classList.add("hidden");box.replaceChildren();return;}const lesson=$("fType").value==="Lesson",date=$("fDate").value,start=$("fStart").value,end=$("fEnd").value,id=$("recordId").value,old=id?state.entries.find(x=>x.id===id):null,hits=lesson?prayerConflict(date,start,end):[],same=!!old&&old.type==="Lesson"&&old.date===date&&old.start===start&&old.end===end,blocked=hits.length>0&&!same;
  const wasHidden=box.classList.contains("hidden");save.disabled=blocked;save.title=blocked?"Resolve the prayer-time conflict to save":"";box.classList.toggle("hidden",!hits.length);box.replaceChildren();if(!hits.length)return;
  const t=document.createElement("b"),p=document.createElement("p");t.textContent=blocked?"Prayer time conflict":"Existing lesson overlaps prayer time";box.append(t,p);if(wasHidden&&blocked)box.scrollIntoView({block:"center",behavior:"smooth"});
  if(!blocked){p.textContent=`This saved lesson already overlaps ${prayerNames(hits)}. You can still save other changes; a changed time is checked again.`;return;}
@@ -665,13 +666,94 @@ function recordHTML(e,quick){const attr=quick===true&&e.type==="Lesson"?"data-qu
  const st=lessonStatus(e),fin=isDone(e),tot=doneByName[(e.student||"").trim().toLowerCase()]||0;
  return payWrap(e,`<button class="record lessonrec" ${attr}="${esc(e.id)}"><span class="recordicon">${esc(initial(e.student))}</span><span class="recordmain"><b>${esc(e.student||"Lesson")}</b><small>${esc(fmtDate(e.date))} · ${esc(lessonDurationText(e)||"–")} · ${euro(lessonRate(e))}/h${fin?"":" · upcoming"}</small><small class="cum">Student total: ${fmtH(tot)} h completed</small></span><span class="recordvalue">${euro(income(e))}<small class="${st}">${STATUS_TEXT[st]}</small></span></button>`);}
 function courseRowHTML(c){const due=courseDue(c);return `<button class="record pkgrec" data-pkgstudent="${esc(c.student)}"><span class="recordicon pkg">C</span><span class="recordmain"><b>${esc(c.student)} · ${fmtH(c.hours)}-hour course</b><small>${esc(fmtDate(c.date||dateISO(new Date())))} · ${fmtH(courseDoneH(c))} h done · ${fmtH(courseLeftH(c))} h left</small></span><span class="recordvalue">${euro(c.price)}<small class="${due>0?"unpaid":"paid"}">${due>0?"Due "+euro(due):"Paid"}</small></span></button>`;}
-function openRecord(id){const e=state.entries.find(x=>x.id===id);if(!e)return;$("fPackage").dataset.courseChoiceTouched="";$("recordDialog").dataset.editingLesson=e.type==="Lesson"?"true":"false";$("recordError").textContent="";$("recordTitle").textContent="Edit record";$("recordId").value=e.id;$("fDate").value=e.date;$("fType").value=e.type;$("fStudent").value=e.student||"";{const s=state.students.find(x=>sameName(x.name,e.student));$("fPhone").value=s&&s.phone&&s.phone!==s.name?s.phone:"";}$("fStart").value=e.start||"";$("fEnd").value=e.end||"";$("fRate").value=rateOf(e);$("fCost").value=e.cost??0;$("fKm").value=e.km??0;$("fPackage").dataset.entry=e.course||"none";$("fPackage").checked=!!e.course;$("fPaid").checked=!!e.paid;$("fComment").value=e.comment||"";doneDirty=false;$("fDone").checked=isDone(e);$("fActual").value=Number(e.actualMin)>0?e.actualMin:schedMin(e)||"";syncDoneBox();$("deleteRecord").classList.remove("hidden");toggleLessonFields();$("recordDialog").showModal();}
-function newRecord(day,student){$("recordDialog").dataset.editingLesson="false";$("recordForm").reset();$("fPackage").dataset.entry="";$("fPackage").dataset.courseChoiceTouched="";if(typeof student==="string"){$("fStudent").value=student;const s=state.students.find(x=>sameName(x.name,student));if(s&&s.phone&&s.phone!==s.name)$("fPhone").value=s.phone;} $("fRate").value="";$("recordError").textContent="";$("recordTitle").textContent="New record";$("recordId").value="";$("fDate").value=typeof day==="string"?day:dateISO(new Date());doneDirty=false;$("fDone").checked=false;$("fActual").value="";$("fStart").value="10:00";$("fEnd").value="11:00";$("fCost").value=0;$("fKm").value=0;$("deleteRecord").classList.add("hidden");toggleLessonFields();updateCourseField();$("recordDialog").showModal();}
+function openRecord(id){const e=state.entries.find(x=>x.id===id);if(!e)return;$("recordDialog").dataset.bookingMode="single";multiSessions=[];$("fPackage").dataset.courseChoiceTouched="";$("recordDialog").dataset.editingLesson=e.type==="Lesson"?"true":"false";$("recordError").textContent="";$("recordTitle").textContent="Edit record";$("recordId").value=e.id;$("fDate").value=e.date;$("fType").value=e.type;$("fStudent").value=e.student||"";{const s=state.students.find(x=>sameName(x.name,e.student));$("fPhone").value=s&&s.phone&&s.phone!==s.name?s.phone:"";}$("fStart").value=e.start||"";$("fEnd").value=e.end||"";$("fRate").value=rateOf(e);$("fCost").value=e.cost??0;$("fKm").value=e.km??0;$("fPackage").dataset.entry=e.course||"none";$("fPackage").checked=!!e.course;$("fPaid").checked=!!e.paid;$("fComment").value=e.comment||"";doneDirty=false;$("fDone").checked=isDone(e);$("fActual").value=Number(e.actualMin)>0?e.actualMin:schedMin(e)||"";syncDoneBox();$("deleteRecord").classList.remove("hidden");toggleLessonFields();$("recordDialog").showModal();}
+function newRecord(day,student){$("recordDialog").dataset.editingLesson="false";$("recordDialog").dataset.bookingMode="single";multiSessions=[];$("recordForm").reset();$("fPackage").dataset.entry="";$("fPackage").dataset.courseChoiceTouched="";if(typeof student==="string"){$("fStudent").value=student;const s=state.students.find(x=>sameName(x.name,student));if(s&&s.phone&&s.phone!==s.name)$("fPhone").value=s.phone;} $("fRate").value="";$("recordError").textContent="";$("recordTitle").textContent="New record";$("recordId").value="";$("fDate").value=typeof day==="string"?day:dateISO(new Date());doneDirty=false;$("fDone").checked=false;$("fActual").value="";$("fStart").value="10:00";$("fEnd").value="11:00";$("fCost").value=0;$("fKm").value=0;$("deleteRecord").classList.add("hidden");toggleLessonFields();updateCourseField();$("recordDialog").showModal();}
 // Lessons are created from the Calendar (and the student profile); the Log only adds expenses.
 function newExpense(){newRecord();$("recordDialog").dataset.editingLesson="false";$("recordDialog").dataset.mode="expense";$("recordTitle").textContent="New expense";$("fType").value="Fuel";toggleLessonFields();}
 $("recordDialog").addEventListener("close",()=>{delete $("recordDialog").dataset.mode;});
-function toggleLessonFields(){const on=$("fType").value==="Lesson",expenseMode=$("recordDialog").dataset.mode==="expense";$("recordDialog").dataset.editingLesson=$("recordId").value&&on?"true":"false";document.querySelectorAll("[data-type]").forEach(b=>{b.classList.toggle("active",b.dataset.type===$("fType").value);b.classList.toggle("hidden",expenseMode&&(b.dataset.type==="Lesson"||b.dataset.type==="Note"));});renderRecentChips(on&&!$("recordId").value);syncDur();document.querySelectorAll(".lessonfield").forEach(el=>el.classList.toggle("hidden",!on));$("fRepeatRow").classList.toggle("hidden",!on||!!$("recordId").value);const type=$("fType").value;document.querySelectorAll(".costfield").forEach(el=>el.classList.toggle("hidden",on||type==="Note"));document.querySelectorAll(".kmfield").forEach(el=>el.classList.toggle("hidden",type!=="Fuel"));updateCourseField();}
-$("recordForm").addEventListener("submit",ev=>{ev.preventDefault();const type=$("fType").value,lesson=type==="Lesson",editing=!!$("recordId").value,id=$("recordId").value||uid();const old=state.entries.find(x=>x.id===id),keep=f=>old&&old.type===type?(old[f]??0):0;// hidden boxes: keep the old value only if the type did not change
+function toggleLessonFields(){const on=$("fType").value==="Lesson",expenseMode=$("recordDialog").dataset.mode==="expense";if(!on)$("recordDialog").dataset.bookingMode="single";$("recordDialog").dataset.editingLesson=$("recordId").value&&on?"true":"false";document.querySelectorAll("[data-type]").forEach(b=>{b.classList.toggle("active",b.dataset.type===$("fType").value);b.classList.toggle("hidden",expenseMode&&(b.dataset.type==="Lesson"||b.dataset.type==="Note"));});renderRecentChips(on&&!$("recordId").value);syncDur();document.querySelectorAll(".lessonfield").forEach(el=>el.classList.toggle("hidden",!on));$("fRepeatRow").classList.toggle("hidden",!on||!!$("recordId").value||$("recordDialog").dataset.bookingMode==="multiple");const type=$("fType").value;document.querySelectorAll(".costfield").forEach(el=>el.classList.toggle("hidden",on||type==="Note"));document.querySelectorAll(".kmfield").forEach(el=>el.classList.toggle("hidden",type!=="Fuel"));updateCourseField();syncBookingModeUI();}
+
+function saveMultipleBooking(){
+ const error=$("recordError");error.textContent="";
+ const rawName=$("fStudent").value.trim(),rawPhone=$("fPhone").value.trim();
+ if(!rawName&&!rawPhone){error.textContent="Add the student's name or phone number.";return;}
+ if(!Array.isArray(multiSessions)||multiSessions.length<2){error.textContent="Add at least two sessions.";return;}
+ const rateText=$("fRate").value.trim(),rate=rateText===""?0:num(rateText);
+ if(rateText!==""&&(!Number.isFinite(rate)||rate<0)){error.textContent="Enter a valid hourly rate.";return;}
+ if(multiSessions.some(x=>x.payment==="individual")&&rateText===""){error.textContent="Enter the hourly rate for the individual-payment sessions.";return;}
+ const original=state;let count=0;
+ try{
+  state=JSON.parse(JSON.stringify(original));
+  const student=resolveStudent(rawName,rawPhone);
+  if(!student)throw new Error("Add the student's name or phone number.");
+  for(let i=0;i<multiSessions.length;i++){
+   const row=multiSessions[i],label=`Session ${i+1}`,date=String(row.date||""),start=cleanTime(row.start),end=cleanTime(row.end);
+   if(!/^\d{4}-\d{2}-\d{2}$/.test(date)||dateISO(new Date(date+"T12:00:00"))!==date)throw new Error(`${label}: choose a valid date.`);
+   if(!start||start!==row.start||!end||end!==row.end)throw new Error(`${label}: enter a valid start and end time.`);
+   const a=toMin(start),b=toMin(end),duration=b-a;
+   if(duration<=0)throw new Error(`${label}: end time must be later than start time.`);
+   if(duration>720)throw new Error(`${label}: a lesson cannot be longer than 12 hours.`);
+   if(row.payment!=="individual"&&row.payment!=="course")throw new Error(`${label}: choose a payment method.`);
+   const hits=prayerConflict(date,start,end);
+   if(hits.length)throw new Error(`${label}: lesson overlaps ${prayerNames(hits)}.`);
+   const work=workCfg();
+   if(a<toMin(work.start)||b>toMin(work.end))throw new Error(`${label}: bookings are available only between ${work.start} and ${work.end}.`);
+   const overlaps=lessonsOn(date).filter(x=>x.start&&x.end&&(()=>{const span=lessonSpan(x.start,x.end);return a<span[1]&&span[0]<b;})());
+   const studentClash=overlaps.find(x=>sameName(x.student,student));
+   if(studentClash){const duplicate=studentClash.start===start&&studentClash.end===end;throw new Error(`${label}: ${duplicate?"duplicate session — this student already has the same time booked.":"this student already has an overlapping lesson."}`);}
+   if(overlaps.length)throw new Error(`${label}: instructor is already booked from ${overlaps[0].start} to ${overlaps[0].end}.`);
+   const e={id:uid(),date,type:"Lesson",student,start,end,rate:row.payment==="individual"?rate:0,cost:0,paid:row.payment==="individual"&&!!row.paid,km:0,comment:""};
+   if(row.payment==="course"){const plan=planCourseAlloc(student,hours(e),"");if(!plan)throw new Error(`${label}: insufficient Course Hours. Only ${fmtH(pooledFreeH(student))} h remain for this student.`);applyAlloc(e,plan);e.paid=false;}
+   state.entries.push(e);count++;
+  }
+ }catch(err){state=original;error.textContent=err&&err.message?err.message:"Nothing was saved. Please check the session details.";return;}
+ let saved=false;try{saved=writeState();}catch(err){state=original;error.textContent="Nothing was saved because the device could not store this booking batch.";return;}
+ if(!saved){state=original;error.textContent="Nothing was saved. Device storage is full or unavailable; no sessions were added.";return;}
+ render();scheduleSync();$("recordDialog").close();toast(`${count} lessons booked successfully.`);
+}
+function updateMultiSummary(){
+ const rows=Array.isArray(multiSessions)?multiSessions:[],valid=rows.map(x=>x.start&&x.end&&toMin(x.end)>toMin(x.start)?toMin(x.end)-toMin(x.start):0),total=valid.reduce((a,b)=>a+b,0),course=rows.reduce((a,x,i)=>a+(x.payment==="course"?valid[i]:0),0),individual=rows.filter(x=>x.payment==="individual").length;
+ $("multiBookingCount").textContent=`${rows.length} sessions`;
+ $("multiBookingSummary").textContent=`${rows.length} sessions · ${fmtH(total/60)} h total · ${fmtH(course/60)} h from Course Hours · ${individual} individual payment${individual===1?"":"s"}`;
+}
+function renderMultiSessions(){
+ const box=$("multiSessionsList"),typed=$("fStudent").value.trim(),matched=findPhone($("fPhone").value||(isPhone(typed)?typed:"")),student=typed&&!isPhone(typed)?typed:matched?.name||typed;let reserved=0;
+ box.innerHTML=multiSessions.map((row,i)=>{
+  const duration=row.start&&row.end&&toMin(row.end)>toMin(row.start)?(toMin(row.end)-toMin(row.start))/60:0,available=student?Math.max(0,pooledFreeH(student)-reserved):0,hasCourse=!!student&&courses().some(c=>sameName(c.student,student));
+  if(row.payment==="course")reserved+=duration;
+  return `<article class="multi-session-card"><div class="multi-session-card-head"><b>Session ${i+1}</b><button type="button" class="multi-remove" data-multi-remove="${i}" ${multiSessions.length<=2?"disabled":""}>Remove</button></div>
+   <div class="multi-session-fields"><label>Date<input type="date" data-multi-field="date" data-index="${i}" value="${esc(row.date||"")}"></label><label>Start<input type="time" data-multi-field="start" data-index="${i}" value="${esc(row.start||"")}"></label><label>End<input type="time" data-multi-field="end" data-index="${i}" value="${esc(row.end||"")}"></label></div>
+   <div class="multi-payment-options" role="group" aria-label="Session ${i+1} payment method">
+    <button type="button" class="multi-payment-option ${row.payment==="individual"?"active":""}" data-multi-payment="individual" data-index="${i}" aria-pressed="${row.payment==="individual"}">Individual payment</button>
+    <button type="button" class="multi-payment-option ${row.payment==="course"?"active":""}" data-multi-payment="course" data-index="${i}" aria-pressed="${row.payment==="course"}" ${hasCourse?"":"disabled"}>Course hours</button>
+   </div><div class="multi-session-foot">${row.payment==="individual"?`<label class="multi-paid"><input type="checkbox" data-multi-paid="${i}" ${row.paid?"checked":""}> Mark as paid</label>`:`<span class="multi-course-note">${hasCourse?`${fmtH(available)} h available before this session`:"No Course found for this student"}</span>`}</div></article>`;
+ }).join("");updateMultiSummary();
+}
+function setBookingMode(mode){
+ const multiple=mode==="multiple";
+ if(multiple&&!multiSessions.length){const date=$("fDate").value||dateISO(new Date()),parsed=new Date(date+"T12:00:00"),next=dateISO(new Date(parsed.getFullYear(),parsed.getMonth(),parsed.getDate()+1)),start=$("fStart").value||"10:00",end=$("fEnd").value||"11:00";multiSessions=[{date,start,end,payment:"individual",paid:!!$("fPaid").checked},{date:next,start,end,payment:"individual",paid:false}];}
+ if(!multiple&&multiSessions.length){const first=multiSessions[0];$("fDate").value=first.date;$("fStart").value=first.start;$("fEnd").value=first.end;$("fPackage").checked=first.payment==="course";$("fPackage").dataset.courseChoiceTouched="1";$("fPaid").checked=!!first.paid;}
+ $("recordDialog").dataset.bookingMode=multiple?"multiple":"single";syncBookingModeUI();refreshPrayerGuard();
+ if(multiple)renderMultiSessions();else{updateCourseField();syncDur();refreshPrayerGuard();}
+}
+function syncBookingModeUI(){
+ const lesson=$("fType").value==="Lesson",editing=!!$("recordId").value,multiple=lesson&&!editing&&$("recordDialog").dataset.bookingMode==="multiple";
+ $("bookingModeRow").classList.toggle("hidden",!lesson||editing);$("multiBookingPanel").classList.toggle("hidden",!multiple);
+ document.querySelector("#recordDialog .record-date-panel").classList.toggle("hidden",multiple);document.querySelector("#recordDialog .record-time-panel").classList.toggle("hidden",multiple);
+ $("fDate").required=!multiple;$("bookingSingle").classList.toggle("active",!multiple);$("bookingSingle").setAttribute("aria-pressed",String(!multiple));$("bookingMultiple").classList.toggle("active",multiple);$("bookingMultiple").setAttribute("aria-pressed",String(multiple));
+ $("paymentMethodRow").classList.toggle("hidden",!lesson||multiple);
+ if(multiple){$("fPaidRow").classList.add("hidden");$("fDone").closest(".donebox").classList.add("hidden");$("fRepeatRow").classList.add("hidden");$("fRate").required=false;}
+ else{$("fDone").closest(".donebox").classList.toggle("hidden",!lesson);$("fRepeatRow").classList.toggle("hidden",!lesson||editing);}
+}
+$("bookingSingle").addEventListener("click",()=>setBookingMode("single"));$("bookingMultiple").addEventListener("click",()=>setBookingMode("multiple"));
+$("multiSessionsList").addEventListener("input",ev=>{const field=ev.target.closest("[data-multi-field]");if(!field)return;const i=Number(field.dataset.index);if(!multiSessions[i])return;multiSessions[i][field.dataset.multiField]=field.value;updateMultiSummary();});
+$("multiSessionsList").addEventListener("change",ev=>{const field=ev.target.closest("[data-multi-field]");if(field){const i=Number(field.dataset.index);if(multiSessions[i]){multiSessions[i][field.dataset.multiField]=field.value;renderMultiSessions();}return;}const paid=ev.target.closest("[data-multi-paid]");if(paid){const i=Number(paid.dataset.multiPaid);if(multiSessions[i])multiSessions[i].paid=paid.checked;}});
+$("multiSessionsList").addEventListener("click",ev=>{const payment=ev.target.closest("[data-multi-payment]");if(payment){const i=Number(payment.dataset.index);if(!multiSessions[i])return;multiSessions[i].payment=payment.dataset.multiPayment;if(payment.dataset.multiPayment==="course")multiSessions[i].paid=false;renderMultiSessions();return;}const remove=ev.target.closest("[data-multi-remove]");if(remove&&multiSessions.length>2){multiSessions.splice(Number(remove.dataset.multiRemove),1);renderMultiSessions();}});
+$("addMultiSession").addEventListener("click",()=>{const last=multiSessions[multiSessions.length-1]||{date:dateISO(new Date()),start:"10:00",end:"11:00"},parsed=new Date((last.date||dateISO(new Date()))+"T12:00:00"),next=dateISO(new Date(parsed.getFullYear(),parsed.getMonth(),parsed.getDate()+1));multiSessions.push({date:next,start:last.start||"10:00",end:last.end||"11:00",payment:"individual",paid:false});renderMultiSessions();});
+$("fStudent").addEventListener("input",()=>{if($("recordDialog").dataset.bookingMode==="multiple")renderMultiSessions();});
+$("fPhone").addEventListener("input",()=>{if($("recordDialog").dataset.bookingMode==="multiple")renderMultiSessions();});
+
+$("recordForm").addEventListener("submit",ev=>{ev.preventDefault();if($("recordDialog").dataset.bookingMode==="multiple"){saveMultipleBooking();return;}const type=$("fType").value,lesson=type==="Lesson",editing=!!$("recordId").value,id=$("recordId").value||uid();const old=state.entries.find(x=>x.id===id),keep=f=>old&&old.type===type?(old[f]??0):0;// hidden boxes: keep the old value only if the type did not change
 const e={id,date:$("fDate").value,type,student:$("fStudent").value.trim(),start:lesson?$("fStart").value:"",end:lesson?$("fEnd").value:"",rate:$("fRate").value.trim()===""?(old&&old.rate!=null?Number(old.rate):0):num($("fRate").value),cost:!lesson&&type!=="Note"?num($("fCost").value):keep("cost"),paid:lesson?$("fPaid").checked:true,km:type==="Fuel"?num($("fKm").value):keep("km"),comment:$("fComment").value.trim()};const baseRate=e.rate,box=$("fPackage"),cs=lesson&&box.checked&&!box.disabled&&!$("paymentMethodRow").classList.contains("hidden")?courseById(box.dataset.id):null;if(lesson&&old&&old.type==="Lesson"&&old.pkg)e.pkg=old.pkg;
  // Preserve a previously collected individual payment when the lesson is reassigned to course hours.
  if(lesson&&old&&old.type==="Lesson"){if(Number(old.courseTransferPaid)>0){e.courseTransferPaid=Number(old.courseTransferPaid);e.courseTransferDate=old.courseTransferDate||old.date;}else if(cs&&!old.course&&old.paid){e.courseTransferPaid=round2(income(old));e.courseTransferDate=old.date;}if(!cs&&old.courseTransferPaid){e.paid=true;delete e.courseTransferPaid;delete e.courseTransferDate;}}

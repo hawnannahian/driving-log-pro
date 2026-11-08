@@ -1,6 +1,6 @@
 # PROJECT_STATE — Driving Log Pro
 
-শেষ যাচাই: 2026-11-08 · সর্বশেষ যাচাইকৃত `main`: `0cd6ad143590a0450d61244facbadb8ed51a71a1` (PR #99 merged; footer v1.37/cache v99; GitHub Pages run #150 succeeded). PR #98 এবং #99—দুটিই merged. PR #99-এর পর app source ও deployment যাচাই হয়েছে; real iPhone/live sync/push delivery আলাদা করে এখনো যাচাই হয়নি। পুরনো তারিখের অংশগুলো ইতিহাস; বর্তমান আচরণের জন্য live source on `main`-ই authoritative.
+শেষ যাচাই: 2026-11-08 · সর্বশেষ যাচাইকৃত `main`: `7108022d17710eff74a8b80fe695cdcd9b403291` (PR #99-এর পর docs-only handover commit; footer v1.37/cache v99). Multiple Booking v1.38 কাজ আলাদা feature branch-এ; merge/deployment হয়নি।
 
 ## কাজের নিয়ম
 - মালিককে উত্তর দিন বাংলায় এবং খুব সংক্ষেপে: কাজ শেষ হলে শুধু "হয়ে গেছে" + লিংক; না হলে অল্প কথায় কারণ।
@@ -10,7 +10,7 @@
 - Public repository-তে কখনো student data, CSV/JSON backup, token বা private data commit করবেন না।
 - Source update, Pages deployment success এবং real iPhone runtime test—তিনটি আলাদা verification status হিসেবে রিপোর্ট করুন।
 
-## Current verified state (main 0cd6ad1, checked 2026-11-08)
+## Current verified state (main 7108022, checked 2026-11-08)
 
 **Release:** footer `v1.37` (`index.html`), Service Worker cache `nahians-schedule-cache-v99` (`sw.js`). Both verified on current `main` at `0cd6ad143590a0450d61244facbadb8ed51a71a1`.
 **Latest change:** PR #99 merged at `0cd6ad1`. The existing weekly Repeat selector is visible for new Lesson records only (hidden for edits and non-lessons); `push-config.js` is included in the Service Worker precache. No storage schema, accounting, course allocation, backup/restore or sync merge logic changed.
@@ -496,3 +496,12 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Push remains inactive: `push-config.js` API URL is empty and Cloudflare Worker is not deployed/configured. Precache alone does not enable Web Push.
 - Open PRs #73 and #13 remain untouched; inspect their base/overlap before any future merge. Previously mis-marked Paid historical lessons from the Legacy Archive are not automatically repaired.
 - This documentation refresh changes no app code, data, cache version or footer.
+
+
+## Multiple Booking v1.38 — implementation in progress (2026-11-08)
+- Owner approved a separate Multiple Booking mode for new Lesson records. Single Booking remains the default; its existing submit path is preserved.
+- Work branch: `feat/multiple-booking-atomic-batch-v1-38`, based on main `7108022d17710eff74a8b80fe695cdcd9b403291`. This entry describes proposed source only; it is not merged or deployed.
+- One student per batch; add/remove an arbitrary number of individual session cards; each session has its own date, start/end and Individual Payment or Course Hours choice. Individual rows have their own Paid checkbox; hourly rate is shared across individual sessions in the batch.
+- Atomicity: build against a JSON-cloned staged state; validate every row (date/time/duration, student overlap, instructor overlap, working hours, prayer blocks, duplicate rows and FIFO pooled Course Hours); write once only after all rows pass; restore original in-memory state on preflight or storage failure; render/schedule sync only after successful persistence.
+- Each successful session is a normal Lesson record. No batch record, storage-key change, schema change, accounting-helper change, backup/restore change or sync merge change is intended. Existing course allocation helpers are reused without edits.
+- Proposed release: footer v1.38 / Service Worker cache v100. Not released until PR merge and Pages workflow success.
