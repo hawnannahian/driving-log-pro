@@ -285,3 +285,14 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Lesson timer remains an alarm/countdown and its elapsed minutes are informational only; timer completion no longer grants a separate 1-hour accounting credit.
 - Existing `actualMin` and legacy `businessHours` values are retained for compatibility/history but are ignored by hour and course accounting.
 - Service-worker cache bumped to v80. Source-level verification only; browser/iPhone runtime and Pages deployment still need verification.
+
+
+## iPhone lock-screen lesson notifications — 2026-11-08
+- Added a separate Web Push implementation for the installed iOS Home Screen app: a visible reminder at 50 active timer minutes and a final notification at 55 active timer minutes.
+- The browser client subscribes only after a direct user tap, sends a random device ID and PushSubscription to the backend, and syncs schedule/pause/resume/cancel actions.
+- The Service Worker displays push payloads immediately and opens the app when a notification is tapped.
+- Added `push-worker/` Cloudflare Worker + Durable Object scheduler, VAPID key generation script, deployment instructions, and `push-config.js` placeholder.
+- Push backend is NOT deployed/configured yet. `push-config.js` intentionally has an empty API URL. Cloudflare account deployment, VAPID secrets, exact app origin, API URL configuration, and real iPhone lock-screen testing are still required before notifications can work.
+- Push requests contain no student name or lesson/payment/course data. The backend stores only a subscription, random device ID, timer session and reminder timestamps.
+- App service-worker cache bumped to v81.
+- Accounting remains independent of timer elapsed duration; notifications do not alter lesson or course hours.
