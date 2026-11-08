@@ -14,10 +14,10 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Full release history and current source details: `PROJECT_STATE.md`.
 
 ## Where we stopped and what comes next (handover, 2026-11-08)
-**Done and merged:** #82 custom Add course sheet + default-tick fix; #83 delete course (if no linked lessons, even with payments); #84 Add course sheet styling; #85 UI/UX review rule; #86 multi-course profile summary + Add payment sheet; #87 pooled course hours (`courseAlloc`); #90 moved Voice Announcements and Lock-screen Notifications from Overview to Log Settings; #91 compact three-dot overflow; #92 direct-open Settings on first tap. Latest main: `d1d9377`, footer v1.30, cache v92.
+**Done and merged:** #82 custom Add course sheet + default-tick fix; #83 delete course (if no linked lessons, even with payments); #84 Add course sheet styling; #85 UI/UX review rule; #86 multi-course profile summary + Add payment sheet; #87 pooled course hours (`courseAlloc`); #90 moved Voice Announcements and Lock-screen Notifications from Overview to Log Settings; #91 compact three-dot overflow; #92 direct-open Settings on first tap; #94 Overview redesign; #95 prayer-time guard; #96 GitHub handover rule; #97 New Record smart booking and scroll stability. Latest main: `b3caa4e`, footer v1.35, cache v97; Pages workflow #42525401396 succeeded.
 **Owner decisions in force:** custom courses only (hours + price per student), UI word "Course"; hours pooled across a student's courses, money per course; Claude replies in Bangla and concise; never merge/deploy without explicit owner approval; no student data in the repo; owner performs real-iPhone checks.
 **Current verified follow-ups / known issues:**
-1. Delete Legacy Archive still marks package-linked lessons Paid unless `extraH>0 && !paid`; this means future/unpaid package lessons with no extra hours can be marked Paid when the archive is deleted. This is a known accounting-risk bug. Do not alter without a focused owner-approved task and regression tests.
+1. Legacy Archive deletion bug is being fixed in owner-approved Draft PR #98: `https://github.com/hawnannahian/driving-log-pro/pull/98`. The branch rebuilds FIFO allocations, consumes actual paid-hour budgets chronologically (including partial/extra-hour lessons), and only auto-marks fully funded completed lessons Paid. Until PR #98 is merged, current main still has the old behavior.
 2. `push-config.js` is loaded but absent from service-worker cache `FILES`; push API URL is empty and backend is not deployed. Do not deploy/configure without explicit approval.
 3. Real iPhone/Home Screen PWA test for the new Log Settings flow and notifications is still pending.
 4. Two-device cloud sync of `courseAlloc` and broader live-data checks remain unverified.
@@ -45,7 +45,7 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 ## Areas (who is working where) — update when it changes
 | Area | Files | Active work |
 |---|---|---|
-| Packages / courses UI + accounting | `app.js` (course/package functions), profile/payments markup | Phases 1–4 are merged (#79, #82–#87). **Change-controlled: see "Course allocation code — change control".** No open course PR. |
+| Packages / courses UI + accounting | `app.js` (course/package functions), profile/payments markup | Phases 1–4 are merged (#79, #82–#87). **Change-controlled: see "Course allocation code — change control".** ChatGPT Draft PR #98 fixes Legacy Archive deletion payment status; do not overlap this branch. |
 | Overview dashboard | `index.html`, `styles.css`, `app.js`, `sw.js` | ChatGPT PR #94 draft: owner-approved Overview visual refresh; no earnings; voice/push remain in Log Settings | (merged with main e97cc72; v1.33/v95)
 | Calendar / Log / record form | `app.js`, `index.html`, `styles.css` | PRs #90–#92 merged: Voice/Push moved into Log Settings; three-dot control opens Settings directly. No active Log UI task claimed |
 | Reports dashboard | `reports-dashboard.js`, reports markup | none claimed |
@@ -71,7 +71,7 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Release numbers: #79 v1.22/v83, #82 v1.23/v85, #83 v1.24/v86, #84 v1.25/v87, #86 v1.26/v88, #87 v1.27/v89.
 
 ## Still open
-- Delete Legacy Archive still marks upcoming package lessons Paid in `main` (fix existed in closed PR #42, not re-applied) — re-verified in source at 5bbb485.
+- Delete Legacy Archive payment-status fix is proposed in PR #98. Main `b3caa4e` still has the old behavior until PR #98 is merged; earlier PR #42 was not merged.
 - `push-config.js` is not in `sw.js` `FILES` although `index.html` loads it (not changed; owner decision).
 - Old local test scripts (cfix2, delete-legacy, fresh-course, "p2") are stale; nothing is committed to the repo as tests.
 - Selling the app: remove third-party audio, add business name/currency/rate settings, license key, privacy policy. Owner decides scope and timing.
