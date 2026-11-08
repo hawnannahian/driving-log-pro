@@ -12,7 +12,7 @@
 
 ## Current verified state (main 7108022, checked 2026-11-08)
 
-**Release:** footer `v1.37` (`index.html`), Service Worker cache `nahians-schedule-cache-v99` (`sw.js`). Both verified on current `main` at `0cd6ad143590a0450d61244facbadb8ed51a71a1`.
+**Release:** footer `v1.37` (`index.html`), Service Worker cache `nahians-schedule-cache-v99` (`sw.js`). The v1.37/cache v99 assets were last changed at `0cd6ad143590a0450d61244facbadb8ed51a71a1`; current `main` `7108022` carries the same app assets forward in a docs-only commit.
 **Latest change:** PR #99 merged at `0cd6ad1`. The existing weekly Repeat selector is visible for new Lesson records only (hidden for edits and non-lessons); `push-config.js` is included in the Service Worker precache. No storage schema, accounting, course allocation, backup/restore or sync merge logic changed.
 **Deployment:** GitHub Pages workflow run #150 / #42530331667 for `0cd6ad1` completed successfully. This proves Pages workflow success only; it does not verify real iPhone behavior.
 **PR #99 checks:** all eight JS files parsed; 307 HTML IDs / 0 duplicates; seven local script refs resolve; CSS braces balanced; focused Repeat visibility checks passed; synthetic pooled-repeat allocation and synthetic two-device merge checks passed. No rendered browser/Playwright, real iPhone, live two-device sync or push-delivery test was run.
