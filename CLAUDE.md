@@ -100,6 +100,15 @@ These are critical business rules. Verify current implementation and tests befor
 - Do not remove or rename hidden compatibility inputs/IDs just because their controls are not currently visible.
 - Preserve existing content and behavior during CSS-only work.
 
+## 7a. Professional UI/UX review — standing owner instruction (2026-11-08)
+
+The owner should not have to ask for polish. For every UI change, work as a senior (5+ years) UI/UX designer and developer:
+
+- Look at the real rendered result (screenshot at 390×844 and 320×568), not only computed numbers. Ask: is this the best, most professional way to do it?
+- Check: solid backgrounds (no undefined CSS variables), consistent spacing/typography, aligned fields, clear hierarchy, comfortable touch targets, no clipped or overflowing controls (especially iOS date/time inputs), sticky actions reachable, clear empty/error states, plain wording.
+- Fix any unprofessional detail found in the touched screen in the same PR (within scope), and say honestly what could not be verified (e.g. real iPhone).
+- After every change, run the regression tests again and report the result.
+
 ## 8. Service worker and release versioning
 
 - Every change to an app asset served/cached by the service worker must increment the cache name in `sw.js` to the next unused version.
