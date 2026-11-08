@@ -4,9 +4,9 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no merge without the owner, no student data in the repo).
 
 ## Latest verified project state (update on every release)
-- **Latest `main` = `3bdc6ad339be72323a90c7dfbf58982799003df8`** (PR #94 Overview redesign merged, 2026-11-08). Footer **v1.33**, service-worker cache **`nahians-schedule-cache-v95`**. Before it: PR #95 prayer-time guard (v1.32/v94) at `e97cc72`.
+- **Latest `main` = `63042c6e38ce4198e53d8f238764267e2dad63dc`** (PR #94 Overview redesign merged, 2026-11-08). Footer **v1.33**, service-worker cache **`nahians-schedule-cache-v95`**. Before it: PR #95 prayer-time guard (v1.32/v94) at `e97cc72`.
 - **PR #92 merged:** https://github.com/hawnannahian/driving-log-pro/pull/92. Three-dot control on the Log heading opens Settings directly on the first tap; no dropdown/intermediate menu. Settings remains inside Log; Back to Records returns to the records panel. Existing Voice, Push, Working Hours, Prayer Time and WhatsApp settings/IDs/handlers are preserved.
-- **Deployment:** Pages workflow run #145 for `e97cc72` (PR #95) = success (build/deploy evidence only; no iPhone/device test). For `3bdc6ad` (PR #94) the Pages result was not checked yet when this was written.
+- **Deployment:** Pages workflow run #145 for `e97cc72` (PR #95) = success (build/deploy evidence only; no iPhone/device test). For current `main` `63042c6` (PR #94) the Pages result was not checked in this task.
 - **PR #92 source checks (from its merged PR description):** seven JS files parsed with V8 `new Function`; no duplicate HTML IDs; obsolete dropdown markup/styles/handlers removed; direct click and Back handlers confirmed. Current source inspection also found 304 HTML IDs with no duplicates, seven local script references, cache v92. **No Playwright/browser screenshots, real iPhone, two-device cloud-sync, live-data or live push-delivery test was performed for #92.** The repository has no committed test suite.
 - `push-config.js` is loaded by `index.html`, but is still absent from `sw.js` `FILES`; its API URL is empty. Push backend remains unconfigured/not deployed.
 - Open PRs: #73 (Calendar/WhatsApp controls in Log Settings; old, check for overlap before touching) and #13 (WhatsApp pasted-number fix; old branch, inspect before touching). Do not edit either without owner direction.
@@ -154,3 +154,17 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Owner decision (answered): Voice Announcements and Lock-screen Notifications stay in Log → Settings (PR #90); lesson rows keep their per-lesson Paid/Unpaid status. Both stay as they are.
 - **New standing rule (CLAUDE.md §7b, owner request):** after every piece of work Claude records it on GitHub (this log, PROJECT_STATE.md, PR comments) so you can read the state here without being told in chat. Please do the same for your own work.
 
+
+
+### 2026-11-08 — ChatGPT: New Record smart booking UX
+- Branch: `feat/new-record-smart-booking-ux-2026-11-08b`, created from latest `main`.
+- Changed `app.js`, `index.html`, `styles.css`, `sw.js`, `PROJECT_STATE.md`, and this handover. Recent chips now reflect completed lessons and completion recency; autocomplete prioritizes recent completed students after prefix matches; Today/Tomorrow shortcuts re-run the prayer guard; narrow mobile form text stays 16px.
+- Preserved duplicate-booking validation, prayer-time guard, payment/course rules, storage schema, backup and sync behavior. No student data added.
+- Static checks will be recorded in the PR. Browser/Playwright, 390×844/320×568 screenshots, real iPhone and deployment checks are not yet verified.
+
+
+### 2026-11-08 — ChatGPT: New Record scroll stability (PR #97 follow-up)
+- Updated the existing New Record smart-booking Draft PR #97 branch; no separate overlapping branch was created.
+- Root layout issue identified in source: both the native dialog and its form could scroll. The dialog is now viewport-constrained and non-scrolling; only `.formgrid` scrolls. Heading, error area and Save/Cancel/Delete actions remain fixed outside the scrolling field area. Background page overflow stays locked while the dialog is open.
+- No JavaScript, booking/prayer validation, student, course, payment, storage or sync logic changed in this follow-up.
+- Release proposal updated from v1.34/cache v96 to v1.35/cache v97. V8 syntax parse passed for all eight JS files; 307 HTML IDs have 0 duplicates; all seven local script references resolve; CSS braces balance; cache v97/footer v1.35 verified. No rendered browser screenshots at 390×844 or 320×568, real iPhone Safari or Pages deployment were performed.

@@ -2103,3 +2103,77 @@ dialog.course-dialog{height:fit-content;max-height:min(90dvh,760px)}
 @media(max-width:360px){#fStart,#fEnd{padding-left:8px;padding-right:4px;letter-spacing:-.3px}#fStart::-webkit-calendar-picker-indicator,#fEnd::-webkit-calendar-picker-indicator{display:none}}
 /* Overview: comfortable tap area for the Travel Dua "Open in Islamic tab" link */
 #overview #duaOpen{display:inline-flex;align-items:center;min-height:44px}
+
+
+/* New Record: quick date actions and a clear recent-completions cue. */
+#recordDialog .record-date-shortcuts{display:flex;gap:8px;margin-top:8px}
+#recordDialog .record-date-shortcuts button{min-height:38px;padding:7px 13px;border:1px solid #dce5f6;border-radius:999px;background:#f7f9ff;color:#3156b5;font:inherit;font-size:12px;font-weight:800}
+#recordDialog .record-date-shortcuts button:active{background:#eaf1ff;border-color:#a9bdf2}
+#recordDialog .recent-students-label{margin:0 0 -3px;color:#718096;font-size:11px;font-weight:800;letter-spacing:.02em}
+#recordDialog .recent-students-label.hidden{display:none!important}
+@media(max-width:390px){#recordDialog .formgrid input:not([type=checkbox]),#recordDialog .formgrid select,#recordDialog .formgrid textarea{font-size:16px}}
+
+
+/* New Record modal stability: lock the dialog shell; scroll fields only. */
+#recordDialog{
+  position:fixed;
+  inset:max(12px,env(safe-area-inset-top)) 12px max(12px,env(safe-area-inset-bottom));
+  width:min(620px,calc(100vw - 24px));
+  max-width:calc(100vw - 24px);
+  max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 24px);
+  margin:auto;
+  overflow:hidden;
+  overscroll-behavior:none;
+  touch-action:pan-y;
+  box-sizing:border-box;
+}
+#recordDialog form{
+  display:flex;
+  flex-direction:column;
+  min-height:0;
+  max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 24px);
+  overflow:hidden;
+  box-sizing:border-box;
+}
+#recordDialog .dialoghead{
+  position:relative;
+  top:auto;
+  flex:0 0 auto;
+}
+#recordDialog .formgrid{
+  flex:1 1 auto;
+  min-height:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  overscroll-behavior-y:contain;
+  overscroll-behavior-x:none;
+  -webkit-overflow-scrolling:touch;
+  touch-action:pan-y;
+  scrollbar-gutter:stable;
+}
+#recordDialog #recordError{
+  flex:0 0 auto;
+  max-height:72px;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+}
+#recordDialog .dialogactions{
+  position:relative;
+  bottom:auto;
+  flex:0 0 auto;
+  margin-top:12px;
+  padding-top:12px;
+  border-top:1px solid #e8edf5;
+  background:#fff;
+}
+html:has(#recordDialog[open]),
+body:has(#recordDialog[open]){
+  overflow:hidden;
+  overscroll-behavior:none;
+}
+@media(max-width:720px){
+  #recordDialog{width:calc(100vw - 20px);max-width:calc(100vw - 20px)}
+  #recordDialog form{padding:clamp(14px,4vw,20px)}
+  #recordDialog .dialogactions{gap:7px}
+  #recordDialog .dialogactions .btn{min-height:44px}
+}
