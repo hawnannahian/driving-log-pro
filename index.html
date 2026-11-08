@@ -80,32 +80,12 @@
       <div id="calDayList" class="recordlist empty"></div>
       <h3 class="caltitle">Upcoming lessons</h3>
       <div id="upcomingList" class="recordlist empty"></div>
-      <details class="prayerbox">
-        <summary>Working hours</summary>
-        <div class="formgrid">
-          <label>Start<input type="time" id="wStart"></label>
-          <label>End<input type="time" id="wEnd"></label>
-        </div>
-        <p class="hint">Free time is shown inside these hours. Gaps under 30 minutes are hidden.</p>
-      </details>
-      <details class="prayerbox">
-        <summary>Prayer time settings</summary>
-        <div class="formgrid">
-          <label class="checklabel wide"><input type="checkbox" id="pOn"> Show and protect prayer times</label>
-          <label class="checklabel wide"><input type="checkbox" id="pAuto"> Use the yearly timetable (changes every day)</label>
-          <label>Minutes for each prayer<input type="number" id="pMinutes" min="5" max="120" step="5"></label>
-          <label>Jum'a (Friday)<input type="time" id="p_jumua"></label>
-          <label class="manualprayer">Fajr<input type="time" id="p_fajr"></label>
-          <label class="manualprayer">Duhr<input type="time" id="p_duhr"></label>
-          <label class="manualprayer">Asr<input type="time" id="p_asr"></label>
-          <label class="manualprayer">Maghrib<input type="time" id="p_maghrib"></label>
-          <label class="manualprayer">Isha<input type="time" id="p_isha"></label>
-        </div>
-        <p class="hint">Blocks start at the jamaat time. To enter your own times, turn off the yearly timetable.</p>
-      </details>
+
     </section>
 
     <section class="panel tabpanel hidden logpanel" id="log">
+      <div class="log-subtabs" role="tablist" aria-label="Driving Log sections"><button type="button" class="active" data-logview="records" role="tab" aria-selected="true">Records</button><button type="button" data-logview="settings" role="tab" aria-selected="false">Settings</button></div>
+      <div id="logRecordsPanel">
       <div class="log-heading">
         <div><p class="log-eyebrow">YOUR BUSINESS ACTIVITY</p><h2>Driving Log</h2><p class="muted">Lessons come from the Calendar automatically. Add fuel and other expenses here.</p></div>
       </div>
@@ -149,6 +129,28 @@
           <p class="wa-template-footnote">Saved on this device. Existing student and payment records are not changed.</p>
         </div>
       </details>
+      </div>
+      <section id="logSettingsPanel" class="log-settings hidden" role="tabpanel">
+        <header class="log-settings-head"><h2>Settings</h2><p>Set your teaching hours and automatic prayer-time protection.</p></header>
+        <section class="settings-card">
+          <div class="settings-card-head"><div><h3>Working Hours</h3><p>Set the hours when students can book lessons.</p></div><span class="settings-icon">◷</span></div>
+          <div class="formgrid"><label>Start<input type="time" id="wStart"></label><label>End<input type="time" id="wEnd"></label></div>
+          <p class="hint">New lessons outside these hours are blocked. Existing lessons remain unchanged.</p>
+        </section>
+        <section class="settings-card">
+          <div class="settings-card-head"><div><h3>Prayer Time</h3><p>Calculated automatically for Lisbon, Portugal.</p></div><span class="settings-icon">🕌</span></div>
+          <label class="checklabel settings-toggle"><input type="checkbox" id="pOn"> Enable prayer-time booking protection</label>
+          <div class="formgrid prayer-config">
+            <label>Location<select id="pLocation"><option value="lisbon">Lisbon / Amadora, Portugal</option><option value="porto">Porto, Portugal</option><option value="faro">Faro, Portugal</option></select></label>
+            <label>Calculation method<select id="pMethod"><option value="mwl">Muslim World League</option><option value="isna">ISNA</option><option value="umm">Umm al-Qura</option></select></label>
+            <label>Booking block before prayer<input type="number" id="pMinutes" min="5" max="60" step="5"></label>
+            <label>Jum'a (Friday)<input type="time" id="p_jumua"></label>
+          </div>
+          <p class="hint">Prayer times update daily using the selected city and calculation method. A 15-minute booking block is placed immediately before each prayer. Friday uses your Jum'a time.</p>
+          <div id="prayerPreview" class="prayer-preview" aria-live="polite"></div>
+        </section>
+        <p class="settings-note">These settings are saved with your app data and included in backup and sync. Lesson timer and completed-hour accounting are not affected.</p>
+      </section>
     </section>
 
     <section class="panel tabpanel hidden" id="students">

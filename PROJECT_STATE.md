@@ -296,3 +296,12 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Push requests contain no student name or lesson/payment/course data. The backend stores only a subscription, random device ID, timer session and reminder timestamps.
 - App service-worker cache bumped to v81.
 - Accounting remains independent of timer elapsed duration; notifications do not alter lesson or course hours.
+
+
+## Log Settings — Working Hours and Prayer Time (2026-11-08)
+- Added a Records / Settings sub-navigation inside the existing Log tab; settings are not a new top-level tab.
+- Working Hours remain manually configured (default 08:00–22:00). New lesson bookings outside this window are blocked; edits to existing lessons outside the window require confirmation. Existing records are not automatically changed.
+- Prayer Time uses local astronomical calculation for Lisbon/Amadora by default, with Lisbon, Porto and Faro city choices and Muslim World League, ISNA and Umm al-Qura methods. Friday uses the manually configured Jum'a time (default 14:00).
+- Default prayer booking protection is enabled with a 15-minute block immediately before each prayer. New bookings overlapping a prayer block are blocked; existing lessons remain stored and are not silently changed.
+- Timer behavior and lesson-hour/accounting calculations are untouched. Prayer/work settings remain inside the existing main app state and therefore follow current backup/sync behavior.
+- Service-worker cache bumped to v82. Source-level validation only; no browser, iPhone, Pages deployment or astronomical timetable comparison test claimed.
