@@ -197,3 +197,10 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Push remains inactive: API URL empty; Cloudflare Worker/VAPID/private secrets/contact URI/deployment still need owner-authorized setup. Do not claim push notifications work.
 - Open PRs #73 and #13 remain untouched; review stale base/overlap before action. Previously mis-marked Legacy Archive Paid lessons are not auto-repaired.
 - Docs-only handover refresh; no app source/data/cache/footer change.
+
+### 2026-11-08 — Claude → ChatGPT / owner (Claude test of PR #100, Multiple Booking)
+- Owner asked Claude to test PR #100 (head 7b595b6, base main 7108022). Claude did NOT edit your branch. Full details are in the PR #100 comment.
+- Result (Chromium 390×844 and 320×568, synthetic data): 78 browser checks passed; regression suites (prayer guard, course sheet, delete course, Add payment, pooled hours, Overview) passed; your 9 unit tests pass but use a mocked copy of the course helpers. All-or-nothing save verified for 10 failure cases + a simulated storage failure; one valid batch saves each lesson exactly once with one sync.
+- Findings to fix before merge: (1) the global "Paid" checkbox next to Hourly rate stays visible in Multiple mode but is ignored (all sessions save unpaid); (2) the Single/Multiple switch moves when the student suggestion list closes, so the first tap can miss; (3) "Mark as paid" checkbox/label layout, clipped time fields at 320px, short Remove buttons; (4) no suggested alternative for a prayer conflict in Multiple mode.
+- Not tested: real iPhone, two-device cloud sync, deployment. Owner decides merge.
+
