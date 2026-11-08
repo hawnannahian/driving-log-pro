@@ -461,7 +461,7 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Source changes only. Browser screenshots, Chromium interaction tests, real iPhone tests and GitHub Pages deployment are not verified by this entry.
 
 
-## New Record scroll stability — Draft PR #97 update (2026-11-08)
+## New Record scroll stability — PR #97 merged update (2026-11-08)
 - The New Record dialog shell is constrained to the visible viewport and does not scroll. The form is a flex column: its field grid is the only vertical scroll surface; the heading, validation message and Save/Cancel/Delete action row remain outside that scroller.
 - Removed the nested-scroll arrangement in which the dialog/form could both scroll. Horizontal overflow is clipped in the modal; vertical overscroll is contained in the field grid. The page behind the native modal remains overflow-locked while it is open.
 - Existing field markup, IDs, event handlers, prayer-time guard, duplicate protection, student selection, course/payment rules and stored data are unchanged.
@@ -469,14 +469,14 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Static checks on the updated branch: V8 syntax parse passed for all eight JavaScript files (`app.js`, `reports-dashboard.js`, `islamic-content.js`, `islamic.js`, `full-time-students.js`, `prayer-times.js`, `push-config.js`, `sw.js`); 307 HTML IDs with 0 duplicates; all seven local script references resolve; CSS braces balance; cache v97 and footer v1.35 verified. These are static checks, not rendered-browser verification.
 
 
-## Proposed Legacy Archive deletion fix — PR #98 (2026-11-08)
+## Merged Legacy Archive deletion fix — PR #98 (2026-11-08)
 - Branch: `fix/legacy-archive-delete-payment-status-2026-11-08`, based on main `b3caa4e`.
 - `deleteLegacyArchive()` now calls `recomputeAlloc()` immediately before conversion, then builds a per-package paid-hour budget from money received divided by the existing package rate (capped at billable package hours).
 - Completed package lessons are processed in the same chronological order as FIFO allocation. Each lesson consumes its allocated hours from each package budget even if it contains extra hours or is only partly funded; only a fully funded completed lesson with no extra hours is automatically marked Paid. Upcoming/uncovered/partly funded lessons are not auto-paid. Existing explicit Paid states are preserved.
 - The existing two confirmations, safety-copy gate, archive deletion marker, and save/cloud deletion semantics are unchanged. No student records, package records, lesson records, storage keys, schema, backup format or sync rules are migrated or bulk-edited by this code change; the normal user-initiated deletion still performs its existing conversion.
-- Proposed footer v1.36 / service-worker cache v98.
+- Merged release footer v1.36 / service-worker cache v98; GitHub Pages workflow run #149 / #42529356204 succeeded after merge.
 - Checks run on the branch: V8 syntax parse for all eight JS files passed; six targeted helper scenarios passed (upcoming, fully funded, insufficient funds, extra-hour budget consumption, multi-package partial coverage, preservation of existing Paid status); an integration harness verified completed covered lessons become Paid while an upcoming lesson and an extra-hour lesson remain unpaid. No live student data used.
-- Not run: browser/Playwright, iPhone Safari/Home Screen, two-device sync, live-data test. GitHub Pages deployment is pending PR merge.
+- Not run: browser/Playwright, iPhone Safari/Home Screen, two-device sync or live-data test. Pages workflow success is not proof of real-device behavior.
 
 
 ### 2026-11-08 — v1.37 proposal (cache v99), Draft PR #99
