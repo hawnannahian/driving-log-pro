@@ -227,7 +227,8 @@ const coursePaid=c=>round2(coursePays(c).reduce((a,x)=>a+(Number(x.amount)||0),0
 const courseDue=c=>round2(Math.max(0,Number(c.price)-coursePaid(c)));
 const courseLessons=c=>state.entries.filter(e=>e.type==="Lesson"&&e.course===c.id);
 const courseDoneH=c=>round4(courseLessons(c).filter(isDone).reduce((a,e)=>a+hours(e),0));
-const courseUsedH=(c,exceptId)=>round4(courseLessons(c).filter(e=>e.id!==exceptId).reduce((a,e)=>a+hours(e),0));
+// Scheduled and completed lessons reserve package hours; explicitly not-completed/cancelled lessons do not.
+const courseUsedH=(c,exceptId)=>round4(courseLessons(c).filter(e=>e.id!==exceptId&&e.done!==false).reduce((a,e)=>a+hours(e),0));
 const courseLeftH=c=>round4(Math.max(0,Number(c.hours)-courseDoneH(c)));
 // Purchased hours are an entitlement; payment progress never restricts lesson usage.
 const coursePaidH=c=>round4(Math.max(0,Number(c.hours)||0));
