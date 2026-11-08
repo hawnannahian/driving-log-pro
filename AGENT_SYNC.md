@@ -4,7 +4,7 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no merge without the owner, no student data in the repo).
 
 ## Latest verified project state (update on every release)
-- **Latest `main` = `0cd6ad143590a0450d61244facbadb8ed51a71a1`** (PR #99 merged, 2026-11-08). Footer **v1.37**, service-worker cache **`nahians-schedule-cache-v99`**.
+- **Latest `main` = `7108022d17710eff74a8b80fe695cdcd9b403291`** (docs-only handover commit after PR #99, 2026-11-08). Footer **v1.37**, service-worker cache **`nahians-schedule-cache-v99`**; the app assets were last changed in `0cd6ad1`.
 - **Latest deployment evidence:** GitHub Pages workflow run #150 / #42530331667 for `0cd6ad1` completed successfully. This does not verify real iPhone behavior.
 - **PR #98 merged:** https://github.com/hawnannahian/driving-log-pro/pull/98. Legacy Archive deletion rebuilds FIFO allocations, budgets package hours from actual receipts, consumes allocations chronologically (including partial/extra-hour lessons), and only auto-marks fully funded completed lessons Paid. Six focused scenarios, an integration harness and all eight JS syntax checks passed before merge.
 - **PR #99 merged:** https://github.com/hawnannahian/driving-log-pro/pull/99. Weekly Repeat is visible for new Lesson records only (hidden for edits/non-lessons); `push-config.js` is in the Service Worker precache. Eight JS syntax parses, 307 HTML IDs / 0 duplicates, seven script refs, CSS brace balance, Repeat visibility checks, synthetic pooled-repeat allocation and synthetic merge checks passed. No rendered browser, real iPhone or live sync test.
@@ -45,7 +45,7 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 |---|---|---|
 | Packages / courses UI + accounting | `app.js` (course/package functions), profile/payments markup | Phases 1–4 are merged (#79, #82–#87). **Change-controlled: see "Course allocation code — change control".** Legacy Archive deletion fix #98 is merged. PR #99 only exposes the existing Repeat selector; allocation helpers were not changed. |
 | Overview dashboard | `index.html`, `styles.css`, `app.js`, `sw.js` | ChatGPT PR #94 draft: owner-approved Overview visual refresh; no earnings; voice/push remain in Log Settings | (merged with main e97cc72; v1.33/v95)
-| Calendar / Log / record form | `app.js`, `index.html`, `styles.css` | PRs #90–#92 and #99 merged; weekly Repeat selector is visible for new Lesson records only. No accounting helper changed. |
+| Calendar / Log / record form | `app.js`, `index.html`, `styles.css` | Multiple Booking v1.38 in progress on `feat/multiple-booking-atomic-batch-v1-38`; Single Booking path must remain unchanged. |
 | Reports dashboard | `reports-dashboard.js`, reports markup | none claimed |
 | Islamic tab | `islamic*.js`, audio files | none claimed (owner may remove audio before selling) |
 | Push notifications | `push-worker/`, `push-config.js`, `sw.js` | PR #99 adds `push-config.js` to precache; Cloudflare Worker remains not deployed/configured and push API URL is empty. |
@@ -198,9 +198,25 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Open PRs #73 and #13 remain untouched; review stale base/overlap before action. Previously mis-marked Legacy Archive Paid lessons are not auto-repaired.
 - Docs-only handover refresh; no app source/data/cache/footer change.
 
+
+### 2026-11-08 — ChatGPT → Claude / owner (Multiple Booking v1.38, Draft PR #100)
+- Draft PR: https://github.com/hawnannahian/driving-log-pro/pull/100. Current branch head is recorded by GitHub; base is main `7108022`.
+- Initial implementation and regression test workflow are in the PR. CI runs have not been confirmed by the GitHub connector; no automated pass is claimed.
+- Latest main verified: `7108022d17710eff74a8b80fe695cdcd9b403291`; footer v1.37/cache v99. Branch `feat/multiple-booking-atomic-batch-v1-38` is identical to that main commit at task start.
+- Scope: new Multiple Booking mode for one student with independent session dates/times and per-session Individual Payment or Course Hours. Single Booking is not to be refactored.
+- Atomic-save design: stage on a cloned state, preflight every session and course-hour allocation, write once only after all rows pass, restore in-memory state if validation/storage fails, and sync only after successful persistence.
+- Protected accounting/course allocation helpers and `courses`, `coursePayments`, `lesson.courseAlloc` shapes are not to be edited. Each session remains a normal Lesson record; no batch schema.
+- Draft PR #100: https://github.com/hawnannahahian/driving-log-pro/pull/100. Focused synthetic Node harness passed 9/9 scenarios, including a previous-day overnight conflict check. Syntax parse passed for all 7 app script references and the test file; 315 HTML IDs / 0 duplicates; CSS braces balanced 2076/2076.
+- A GitHub Actions regression workflow is included, but no workflow run has been confirmed. Not run: rendered browser/Playwright 390×844 or 320×568, real iPhone Safari/Home Screen, live two-device sync or deployment. Owner approval is required before merge.
+
 ### 2026-11-08 — Claude → ChatGPT / owner (Claude test of PR #100, Multiple Booking)
 - Owner asked Claude to test PR #100 (head 7b595b6, base main 7108022). Claude did NOT edit your branch. Full details are in the PR #100 comment.
 - Result (Chromium 390×844 and 320×568, synthetic data): 78 browser checks passed; regression suites (prayer guard, course sheet, delete course, Add payment, pooled hours, Overview) passed; your 9 unit tests pass but use a mocked copy of the course helpers. All-or-nothing save verified for 10 failure cases + a simulated storage failure; one valid batch saves each lesson exactly once with one sync.
 - Findings to fix before merge: (1) the global "Paid" checkbox next to Hourly rate stays visible in Multiple mode but is ignored (all sessions save unpaid); (2) the Single/Multiple switch moves when the student suggestion list closes, so the first tap can miss; (3) "Mark as paid" checkbox/label layout, clipped time fields at 320px, short Remove buttons; (4) no suggested alternative for a prayer conflict in Multiple mode.
 - Not tested: real iPhone, two-device cloud sync, deployment. Owner decides merge.
+
+### 2026-11-08 — Claude → ChatGPT / owner (PR #100 fixed at the owner's explicit request)
+- The owner said "Claude: fix PR #100". Claude merged `main` (79f2934, conflict only in AGENT_SYNC.md) into `feat/multiple-booking-atomic-batch-v1-38` and fixed the four findings from the test (details in PROJECT_STATE.md "Multiple Booking review fixes" and the PR comment). `saveMultipleBooking` changed in ONE line only (prayer message with a suggestion); no protected course helper or accounting logic was touched.
+- Test status: 10/10 node tests; 90 browser checks (Chromium, both viewports) + regression suites passed. Not tested: real iPhone, two-device sync, deployment. Footer v1.38 / cache v100 unchanged (still unreleased).
+- Please re-read the diff before the owner merges; tell the owner if you disagree with any change.
 

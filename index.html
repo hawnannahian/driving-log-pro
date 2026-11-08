@@ -269,12 +269,21 @@
       <div class="formgrid">
         <div class="typechips wide" id="typeChips" role="group" aria-label="Record type"><button type="button" data-type="Lesson">Lesson</button><button type="button" data-type="Fuel">Fuel</button><button type="button" data-type="Other Expense">Expense</button><button type="button" data-type="Note">Note</button><button type="button" data-type="Insurance">Insurance</button><button type="button" data-type="Repair">Maintenance</button><button type="button" data-type="Refund">Refund</button></div>
         <label class="hidden">Type<select id="fType"><option>Lesson</option><option>Fuel</option><option>Other Expense</option><option>Note</option><option>Insurance</option><option>Repair</option><option>Refund</option></select></label>
+        <section class="booking-mode-row wide hidden" id="bookingModeRow" aria-label="Booking mode">
+          <div class="booking-mode-options"><button type="button" class="booking-mode-option active" id="bookingSingle" aria-pressed="true">Single Booking</button><button type="button" class="booking-mode-option" id="bookingMultiple" aria-pressed="false">Multiple Booking</button></div>
+        </section>
         <section class="record-panel record-date-panel wide"><label class="wide">Date<input type="date" id="fDate" required></label><div class="record-date-shortcuts" role="group" aria-label="Quick date selection"><button type="button" data-date-shift="0">Today</button><button type="button" data-date-shift="1">Tomorrow</button></div></section>
         <section class="record-panel record-student-panel wide"><p class="recent-students-label hidden" id="recentStudentsLabel">Recently completed</p><div class="chiprow wide hidden" id="recentStudents" aria-label="Recently completed students"></div>
         <div class="record-student-grid"><label class="lessonfield">Student name<input id="fStudent" list="studentOptions" autocomplete="off"><datalist id="studentOptions"></datalist></label>
         <label class="lessonfield">Phone<input id="fPhone" type="text" inputmode="tel" autocomplete="tel" autocapitalize="off" spellcheck="false"></label></div>
         <div class="student-suggestions hidden" id="studentSuggestions" role="listbox" aria-label="Matching students"></div>
         <p class="lessonfield formhint">Name or phone: one is enough.</p></section>
+        <section class="multi-booking-panel wide hidden" id="multiBookingPanel" aria-label="Multiple lesson sessions">
+          <div class="multi-booking-head"><div><b>Booking sessions</b><small>Choose a separate date, time and payment method for each lesson.</small></div><span id="multiBookingCount">2 sessions</span></div>
+          <div class="multi-sessions-list" id="multiSessionsList"></div>
+          <button type="button" class="btn secondary add-multi-session" id="addMultiSession">＋ Add another session</button>
+          <p class="multi-booking-summary" id="multiBookingSummary" aria-live="polite"></p>
+        </section>
         <section class="record-panel record-time-panel wide"><div class="record-panel-title">Lesson time</div><div class="record-time-grid"><label class="lessonfield">Start time<input type="time" id="fStart" value="10:00"></label>
         <label class="lessonfield">End time<input type="time" id="fEnd" value="11:00"></label></div>
         <div class="record-subtitle">Duration</div><div class="chiprow durchips lessonfield wide" id="durChips" role="group" aria-label="Lesson length"><button type="button" data-dur="30">30 m</button><button type="button" data-dur="60">1 h</button><button type="button" data-dur="90">1.5 h</button><button type="button" data-dur="120">2 h</button><button type="button" data-dur="180">3 h</button></div><div class="record-duration-summary" id="recordDurationSummary" aria-live="polite"></div><div class="timewarn hidden" id="prayerWarn" role="alert" aria-live="polite"></div></section>
@@ -408,7 +417,7 @@
     <button class="tab" data-tab="islamic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M6.5 20v-6.5c0-3 2.5-5 5.5-6.5 3 1.5 5.5 3.5 5.5 6.5V20"/><path d="M12 4.5v2.5"/><path d="M10 20v-3a2 2 0 0 1 4 0v3"/><path d="M3.5 20v-8M20.5 20v-8"/></svg><span>Islamic</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.37</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.38</span></footer>
   <script src="push-config.js"></script>
   <script src="prayer-times.js"></script>
   <script src="full-time-students.js"></script>

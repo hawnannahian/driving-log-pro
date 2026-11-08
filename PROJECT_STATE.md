@@ -1,6 +1,6 @@
 # PROJECT_STATE — Driving Log Pro
 
-শেষ যাচাই: 2026-11-08 · সর্বশেষ যাচাইকৃত `main`: `0cd6ad143590a0450d61244facbadb8ed51a71a1` (PR #99 merged; footer v1.37/cache v99; GitHub Pages run #150 succeeded). PR #98 এবং #99—দুটিই merged. PR #99-এর পর app source ও deployment যাচাই হয়েছে; real iPhone/live sync/push delivery আলাদা করে এখনো যাচাই হয়নি। পুরনো তারিখের অংশগুলো ইতিহাস; বর্তমান আচরণের জন্য live source on `main`-ই authoritative.
+শেষ যাচাই: 2026-11-08 · সর্বশেষ যাচাইকৃত `main`: `7108022d17710eff74a8b80fe695cdcd9b403291` (PR #99-এর পর docs-only handover commit; footer v1.37/cache v99). Multiple Booking v1.38 কাজ আলাদা feature branch-এ; merge/deployment হয়নি।
 
 ## কাজের নিয়ম
 - মালিককে উত্তর দিন বাংলায় এবং খুব সংক্ষেপে: কাজ শেষ হলে শুধু "হয়ে গেছে" + লিংক; না হলে অল্প কথায় কারণ।
@@ -10,9 +10,9 @@
 - Public repository-তে কখনো student data, CSV/JSON backup, token বা private data commit করবেন না।
 - Source update, Pages deployment success এবং real iPhone runtime test—তিনটি আলাদা verification status হিসেবে রিপোর্ট করুন।
 
-## Current verified state (main 0cd6ad1, checked 2026-11-08)
+## Current verified state (main 7108022, checked 2026-11-08)
 
-**Release:** footer `v1.37` (`index.html`), Service Worker cache `nahians-schedule-cache-v99` (`sw.js`). Both verified on current `main` at `0cd6ad143590a0450d61244facbadb8ed51a71a1`.
+**Release:** footer `v1.37` (`index.html`), Service Worker cache `nahians-schedule-cache-v99` (`sw.js`). The v1.37/cache v99 assets were last changed at `0cd6ad143590a0450d61244facbadb8ed51a71a1`; current `main` `7108022` carries the same app assets forward in a docs-only commit.
 **Latest change:** PR #99 merged at `0cd6ad1`. The existing weekly Repeat selector is visible for new Lesson records only (hidden for edits and non-lessons); `push-config.js` is included in the Service Worker precache. No storage schema, accounting, course allocation, backup/restore or sync merge logic changed.
 **Deployment:** GitHub Pages workflow run #150 / #42530331667 for `0cd6ad1` completed successfully. This proves Pages workflow success only; it does not verify real iPhone behavior.
 **PR #99 checks:** all eight JS files parsed; 307 HTML IDs / 0 duplicates; seven local script refs resolve; CSS braces balanced; focused Repeat visibility checks passed; synthetic pooled-repeat allocation and synthetic two-device merge checks passed. No rendered browser/Playwright, real iPhone, live two-device sync or push-delivery test was run.
@@ -496,3 +496,23 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Push remains inactive: `push-config.js` API URL is empty and Cloudflare Worker is not deployed/configured. Precache alone does not enable Web Push.
 - Open PRs #73 and #13 remain untouched; inspect their base/overlap before any future merge. Previously mis-marked Paid historical lessons from the Legacy Archive are not automatically repaired.
 - This documentation refresh changes no app code, data, cache version or footer.
+
+
+## Multiple Booking v1.38 — implementation in progress (2026-11-08)
+- Owner approved a separate Multiple Booking mode for new Lesson records. Single Booking remains the default; its existing submit path is preserved.
+- Work branch: `feat/multiple-booking-atomic-batch-v1-38`, based on main `7108022d17710eff74a8b80fe695cdcd9b403291`. This entry describes proposed source only; it is not merged or deployed.
+- One student per batch; add/remove an arbitrary number of individual session cards; each session has its own date, start/end and Individual Payment or Course Hours choice. Individual rows have their own Paid checkbox; hourly rate is shared across individual sessions in the batch.
+- Atomicity: build against a JSON-cloned staged state; validate every row (date/time/duration, student overlap, instructor overlap, working hours, prayer blocks, duplicate rows and FIFO pooled Course Hours); write once only after all rows pass; restore original in-memory state on preflight or storage failure; render/schedule sync only after successful persistence.
+- Each successful session is a normal Lesson record. No batch record, storage-key change, schema change, accounting-helper change, backup/restore change or sync merge change is intended. Existing course allocation helpers are reused without edits.
+- Draft PR #100: https://github.com/hawnannahahian/driving-log-pro/pull/100. Proposed release: footer v1.38 / Service Worker cache v100. Not released until owner approval, merge and Pages workflow success.
+- Focused synthetic Node harness: 9/9 scenarios passed (2/3/4 sessions, mixed payment, all-or-nothing late failure, insufficient hours, student/instructor overlap, duplicates, invalid date/prayer/working hours, previous-day overnight overlap, pooled FIFO course allocation, storage rollback). Full syntax parse passed for all 7 script references and the test file; 315 HTML IDs with no duplicates; CSS braces balanced 2076/2076.
+- GitHub Actions workflow is present, but no workflow run was returned/confirmed yet. Not run: rendered browser/Playwright at 390×844 or 320×568, real iPhone Safari/Home Screen, live two-device sync, or deployment.
+
+### 2026-11-08 — Multiple Booking review fixes (Claude, at the owner's explicit request; PR #100 branch, v1.38 / cache v100 unchanged — unreleased)
+- Claude's browser test of PR #100 found four issues; fixed on the PR #100 branch (ChatGPT's atomic save logic and protected course helpers were NOT changed):
+  1. The global "Paid" checkbox stayed visible but ignored in Multiple mode: `#recordDialog .checklabel{display:flex!important}` overrode `.hidden`. Added `#recordDialog .checklabel.hidden{display:none!important}` (also makes the existing hide-when-Course-hours behaviour effective).
+  2. The Single/Multiple switch sat below the student field and jumped when the suggestion list closed (first finger tap missed). It is now the first control in the form. `newRecord()`/`openRecord()` now call `resetRecordScroll()` because `.formgrid` reopened at its old scroll position and could hide the switch.
+  3. "Mark as paid" is one inline 44px row; Remove buttons >= 40px; Start/End time fields no longer lose the picker icon space at <= 360px (no clipped "AM/PM").
+  4. A prayer overlap in Multiple mode now reports "Session N: Your lesson overlaps with <prayer> (a–b). Suggested alternative: x–y." using the PR #95 helpers (`prayerMessage`, `suggestLessonTimes`).
+- Tests: `tests/multiple-booking.test.js` harness got `suggestLessonTimes`/`prayerMessage` mocks and a new test (10/10 pass; still a mocked harness). Real-browser checks outside the repo (Chromium 390×844 and 320×568, synthetic data): 90 checks incl. all-or-nothing failures, FIFO course allocation, one sync per batch, first-tap mode switch, Paid hidden, layout; regression suites for prayer guard, course sheet, delete course, Add payment, pooled hours, Overview all pass. Not tested: real iPhone, two-device sync, deployment.
+
