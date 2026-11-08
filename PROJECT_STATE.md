@@ -30,6 +30,13 @@
 - **Known decisions to confirm:** (1) upcoming lessons that were already linked to an old package stay linked (they will use that package's remaining hours when completed); (2) legacy amounts still *due* (e.g. an unpaid old package) stay in Outstanding but cannot be paid because the archive is read-only; (3) the old "count earlier lessons in the course" feature is gone (a new course never takes old hours).
 - Also fixed: `render()` threw on every call on `main` because `#logTodayDate` was removed from the HTML but app.js still set it (now guarded).
 
+### 2026-11-08 — v1.27 (cache v89): Pooled course hours (owner-approved)
+- One lesson can use hours from more than one of the student's courses, counted as one total (oldest course first). Still ONE lesson record.
+- Data: optional additive field `courseAlloc:[{c:courseId,h:hours}]` on a lesson (same idea as the legacy `alloc`). `lesson.course` stays the first course, so lessons without `courseAlloc` behave exactly as before. Shares are scaled to the lesson's current length. It is written only when a new/edited lesson needs more hours than the oldest course has free; unchanged-hours edits keep the existing allocation. No migration; no existing lesson is rewritten.
+- Money stays per course: a split lesson's value = Σ share × that course's own hourly rate; payments and `courseDue` are untouched.
+- Functions: `allocParts`, `courseShareH`, `planCourseAlloc`, `pooledFreeH`, `applyAlloc`; `courseLessons/DoneH/UsedH` use shares. A course holding part of a split lesson cannot be deleted. Weekly repeats allocate each copy in turn; copies beyond the pool become individual lessons (existing behaviour).
+- Compatibility: a device still on an older cached version counts the whole split lesson on `lesson.course` (first course) and ignores the second share until it updates; update all devices.
+
 ### 2026-11-08 — v1.26 (cache v88): Courses phase 2 (UI only)
 - Profile: with 2+ active courses a compact summary (name, hours, due per course, total available, one Add payment) replaces stacked cards; one course still shows the single card.
 - `prompt()` for course payments replaced by an Add payment sheet (`#payDialog`): course picker (only courses with a balance, oldest first, hidden when only one), amount pre-filled with the outstanding, payment date. Payment rows keep the shape `{id,course,date,amount}`.
