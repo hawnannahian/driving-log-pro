@@ -7,7 +7,7 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - **Latest `main` = `e6b03e2c2c1478a36c64f6e6b39be097d63b5f37`** (PR #98 merged, 2026-11-08). Footer **v1.36**, service-worker cache **`nahians-schedule-cache-v98`**.
 - **Latest deployment evidence:** GitHub Pages workflow run #42529356204 for `e6b03e2` completed successfully. This does not verify real iPhone behavior.
 - **PR #98 merged:** https://github.com/hawnannahian/driving-log-pro/pull/98. Legacy Archive deletion rebuilds FIFO allocations, budgets package hours from actual receipts, consumes allocations chronologically (including partial/extra-hour lessons), and only auto-marks fully funded completed lessons Paid. Six focused scenarios, an integration harness and all eight JS syntax checks passed before merge.
-- **PR #99 draft:** https://github.com/hawnannahian/driving-log-pro/pull/99. Proposed v1.37/cache v99 exposes the existing weekly Repeat selector for new lessons only and adds `push-config.js` to Service Worker precache. Eight JS syntax checks, 307 HTML IDs / 0 duplicates, seven script refs, CSS brace balance, Repeat visibility checks and a synthetic merge test passed. No browser, real iPhone or live sync test.
+- **PR #99 draft:** https://github.com/hawnannahian/driving-log-pro/pull/99. Proposed v1.37/cache v99 exposes the existing weekly Repeat selector for new lessons only and adds `push-config.js` to Service Worker precache. Eight JS syntax checks, 307 HTML IDs / 0 duplicates, seven script refs, CSS brace balance, Repeat visibility checks, a synthetic pooled-repeat allocation test and a synthetic merge test passed. No browser, real iPhone or live sync test.
 - `push-config.js` remains configured with an empty API URL on `main`; the Cloudflare Worker is not deployed/configured. PR #99 only precaches the config file; it does not activate Web Push.
 - Other open PRs: #73 and #13; neither was changed.
 - Full release history and current source details: `PROJECT_STATE.md`.
@@ -181,7 +181,7 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 ### 2026-11-08 — ChatGPT → Claude / owner (PR #99)
 - Main verified at `e6b03e2c2c1478a36c64f6e6b39be097d63b5f37`, v1.36/cache v98; Pages run #149 / #42529356204 succeeded after PR #98.
 - Draft PR #99: https://github.com/hawnannahian/driving-log-pro/pull/99 — expose weekly Repeat for new Lesson records only; keep it hidden for edits/non-lessons; precache `push-config.js`; footer v1.37/cache v99.
-- Tests: all 8 JS syntax parses; 307 HTML IDs / 0 duplicates; 7 script refs; CSS braces balanced; focused Repeat visibility checks; synthetic cloud merge preserved pooled `courseAlloc`, courses, course payments and Full-Time rows.
+- Tests: all 8 JS syntax parses; 307 HTML IDs / 0 duplicates; 7 script refs; CSS braces balanced; focused Repeat visibility checks; synthetic repeat allocation consumed oldest-course hours in order and refused a third lesson after the pool was exhausted; synthetic cloud merge preserved pooled `courseAlloc`, courses, course payments and Full-Time rows.
 - Not run: rendered browser/Playwright, 390×844 / 320×568 screenshots, real iPhone Safari/Home Screen, live two-device sync, push delivery or Cloudflare deployment.
 - Push Worker remains undeployed; `push-config.js` API URL remains empty. No VAPID keys, secrets or live student data were accessed.
 - PR #99 is draft and not merged/deployed.
