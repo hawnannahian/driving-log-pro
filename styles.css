@@ -1973,3 +1973,27 @@ dialog:not([open]){display:none!important}
 
 /* Custom Add Course sheet */
 dialog.course-dialog{width:min(460px,calc(100% - 20px));max-height:min(90dvh,760px);padding:0;border:1px solid var(--line);border-radius:22px;background:var(--card);color:var(--ink);box-shadow:0 24px 70px #101c3340}.course-dialog form{display:grid;gap:13px;padding:20px;max-height:min(90dvh,760px);overflow-y:auto}.course-dialog .dialoghead{margin:0 0 2px}.course-dialog label{display:grid;gap:6px;font-size:13px;font-weight:750;color:var(--ink)}.course-dialog input{width:100%;min-width:0;min-height:48px;padding:11px 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface,#fff);color:var(--ink);font:inherit;font-size:16px}.course-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.course-rate-preview{margin:0;padding:12px;border:1px solid #d7e5ff;border-radius:12px;background:#f4f7ff;color:#53627b;font-size:13px}.course-rate-preview b{color:#2449b5}.course-dialog .dialogactions{margin-top:2px}@media(max-width:390px){.course-dialog form{padding:16px;gap:11px}.course-form-grid{gap:8px}}
+
+/* Add course sheet polish: solid card, iOS date field fit, sticky actions */
+dialog.course-dialog{background:#fff;overflow:hidden}
+dialog.course-dialog[open]{display:flex;flex-direction:column}
+.course-dialog form{display:flex;flex-direction:column;gap:14px;padding:0;overflow:hidden;max-height:inherit;min-height:0}
+.course-dialog .dialoghead{margin:0;padding:18px 20px 12px;background:transparent;border-bottom:1px solid var(--line);align-items:center}
+.course-dialog .dialoghead h2{font-size:22px;letter-spacing:-.4px}
+.course-dialog .dialoghead .muted{margin:2px 0 0;font-size:14px}
+.course-dialog form>label,.course-dialog form>.course-form-grid,.course-dialog form>.course-rate-preview,.course-dialog form>.formerror{margin-left:20px;margin-right:20px}
+.course-dialog label{color:#34425b;font-size:13px;font-weight:700}
+.course-dialog input{border-radius:14px;background:#fff;box-sizing:border-box}
+.course-dialog input[type=date]{-webkit-appearance:none;appearance:none;display:block;width:100%;max-width:100%;min-width:0;text-align:left;line-height:1.2}
+.course-dialog input[type=date]::-webkit-date-and-time-value{text-align:left;min-height:1.2em}
+.course-dialog input:focus{outline:2px solid var(--royal);outline-offset:1px}
+.course-dialog .formerror:empty{display:none}
+.course-dialog .dialogactions{margin:0;padding:12px 20px max(14px,env(safe-area-inset-bottom));background:#fff;border-top:1px solid var(--line)}
+.course-dialog .dialogactions .btn{min-height:48px;flex:1}
+.course-dialog .dialogactions span{display:none}
+.course-dialog form{overflow-y:auto}
+.course-dialog .dialoghead{position:sticky;top:0;z-index:2;background:#fff}
+.course-dialog .dialogactions{position:sticky;bottom:0;z-index:2;margin-top:auto}
+@media(max-width:390px){.course-dialog form{padding:0;gap:12px}.course-dialog .dialoghead{padding:14px 16px 10px}.course-dialog form>label,.course-dialog form>.course-form-grid,.course-dialog form>.course-rate-preview,.course-dialog form>.formerror{margin-left:16px;margin-right:16px}.course-dialog .dialogactions{padding-left:16px;padding-right:16px}}
+dialog.course-dialog{height:fit-content;max-height:min(90dvh,760px)}
+.course-dialog form{flex:0 1 auto;max-height:min(90dvh,760px)}
