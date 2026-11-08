@@ -326,6 +326,12 @@
 <label>Start date<input id="courseDate" type="date" required></label>
 <label>First payment (€) · optional<input id="courseFirstPayment" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Leave empty if unpaid"></label>
 <p id="courseError" class="formerror" role="alert"></p><div class="dialogactions"><button type="button" class="btn ghost" id="courseDialogCancel">Cancel</button><span></span><button type="submit" class="btn primary">Add course</button></div></form></dialog>
+<dialog id="payDialog" class="course-dialog"><form id="payForm" novalidate>
+<div class="dialoghead"><div><p class="eyebrow">COURSE PAYMENT</p><h2>Add payment</h2><p class="muted" id="payStudentName"></p></div><button type="button" class="iconbtn" id="payDialogClose" aria-label="Close">×</button></div>
+<label>Course<select id="payCourse"></select></label>
+<p class="course-rate-preview" id="payDueInfo"></p>
+<div class="course-form-grid pay-grid"><label>Amount (€)<input id="payAmount" type="number" min="0" step="0.01" inputmode="decimal" required></label><label>Date<input id="payDate" type="date" required></label></div>
+<p id="payError" class="formerror" role="alert"></p><div class="dialogactions"><button type="button" class="btn ghost" id="payDialogCancel">Cancel</button><span></span><button type="submit" class="btn primary">Save payment</button></div></form></dialog>
   <dialog id="quickDialog">
     <form method="dialog" id="quickForm">
       <div class="dialoghead"><div><p class="eyebrow">LESSON</p><h2 id="qName"></h2><p class="muted" id="qInfo"></p></div><button type="button" class="iconbtn" data-close aria-label="Close">×</button></div>

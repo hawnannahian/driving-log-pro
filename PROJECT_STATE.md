@@ -37,6 +37,12 @@
 - Functions: `allocParts`, `courseShareH`, `planCourseAlloc`, `pooledFreeH`, `applyAlloc`; `courseLessons/DoneH/UsedH` use shares. A course holding part of a split lesson cannot be deleted. Weekly repeats allocate each copy in turn; copies beyond the pool become individual lessons (existing behaviour).
 - Compatibility: a device still on an older cached version counts the whole split lesson on `lesson.course` (first course) and ignores the second share until it updates; update all devices.
 
+### 2026-11-08 — v1.26 (cache v88): Courses phase 2 (UI only)
+- Profile: with 2+ active courses a compact summary (name, hours, due per course, total available, one Add payment) replaces stacked cards; one course still shows the single card.
+- `prompt()` for course payments replaced by an Add payment sheet (`#payDialog`): course picker (only courses with a balance, oldest first, hidden when only one), amount pre-filled with the outstanding, payment date. Payment rows keep the shape `{id,course,date,amount}`.
+- Payments tab uses the course name; one Add payment button preselects the oldest course with a balance.
+- No accounting/booking change. Pooled hours across courses is a separate, not-yet-started PR (needs owner approval of the data shape).
+
 ### 2026-11-08 — v1.25 (cache v87): Add course sheet styling
 - CSS only: `.course-dialog` used an undefined `--card` variable (transparent background on iPhone). Now solid white card, sticky header/footer, iOS-safe date field (`appearance:none`, 100% width), sheet height fits content. No logic/data change.
 
