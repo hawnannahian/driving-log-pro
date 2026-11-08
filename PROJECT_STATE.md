@@ -30,6 +30,9 @@
 - **Known decisions to confirm:** (1) upcoming lessons that were already linked to an old package stay linked (they will use that package's remaining hours when completed); (2) legacy amounts still *due* (e.g. an unpaid old package) stay in Outstanding but cannot be paid because the archive is read-only; (3) the old "count earlier lessons in the course" feature is gone (a new course never takes old hours).
 - Also fixed: `render()` threw on every call on `main` because `#logTodayDate` was removed from the HTML but app.js still set it (now guarded).
 
+### 2026-11-08 — v1.25 (cache v87): Add course sheet styling
+- CSS only: `.course-dialog` used an undefined `--card` variable (transparent background on iPhone). Now solid white card, sticky header/footer, iOS-safe date field (`appearance:none`, 100% width), sheet height fits content. No logic/data change.
+
 ### 2026-11-08 — v1.24 (cache v86): Delete course
 - A course with no linked lessons can be deleted even if it has payment records; its own payment rows are removed with it (owner decision), after a confirm and an automatic safety copy (`before-course-delete`). Courses with linked lessons still cannot be deleted. Individual lessons and other courses are untouched. Sync deletion uses the existing three-way merge.
 
