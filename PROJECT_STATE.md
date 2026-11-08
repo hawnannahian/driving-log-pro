@@ -1,6 +1,6 @@
 # PROJECT_STATE — Driving Log Pro
 
-শেষ যাচাই: 2026-11-08 · ভিত্তি: `main` commit `777d4e90073204fa38f95533ad11fc019cce7c58` (PR #91, app v1.29, cache v91). এই ফাইলের পুরনো তারিখের অংশগুলো ইতিহাস; সন্দেহ হলে নিচের "Current verified state" এবং live source দেখুন।
+শেষ যাচাই: 2026-11-08 · ভিত্তি: `main` commit `d1d9377347f242929084220ff2c46cd29ce2f22a` (PR #92, app v1.30, cache v92). পুরনো তারিখের অংশগুলো ইতিহাস; বর্তমান আচরণের জন্য live source on `main`-ই authoritative.
 
 ## কাজের নিয়ম
 - মালিককে উত্তর দিন বাংলায় এবং খুব সংক্ষেপে: কাজ শেষ হলে শুধু "হয়ে গেছে" + লিংক; না হলে অল্প কথায় কারণ।
@@ -10,25 +10,30 @@
 - Public repository-তে কখনো student data, CSV/JSON backup, token বা private data commit করবেন না।
 - Source update, Pages deployment success এবং real iPhone runtime test—তিনটি আলাদা verification status হিসেবে রিপোর্ট করুন।
 
-## Current verified state (main 777d4e9, checked 2026-11-08)
+## Current verified state (main d1d9377, checked 2026-11-08)
 
-**Release:** footer `v1.29` (`index.html`), service-worker cache `nahians-schedule-cache-v91` (`sw.js`). Both read from the source of `main` at 777d4e9 (PR #91).
-**Deployment evidence:** PR #91 merged to main at 777d4e9. A Pages workflow result for this merge was not confirmed in the current check. This does NOT prove the live site behaves correctly, and it is not a device test.
-**Tested how:** PRs #82–#87 had Playwright/Chromium checks (390×844 and 320×568) with synthetic data only. PR #90 and PR #91 received source-level checks only. **No real iPhone / Home Screen PWA test, no two-device cloud-sync test and no live-data test was performed for PR #90.** Test scripts are run from a scratch folder and are NOT in the repository (the repo has no test suite).
-
+**Release:** footer `v1.30` (`index.html`), service-worker cache `nahians-schedule-cache-v92` (`sw.js`). Both verified in current `main` at `d1d9377`.
+**Latest change:** PR #92 is merged. The Log heading's three-dot control opens Settings immediately on the first tap; no dropdown or intermediate Settings tab. Settings stays inside Log; Back to Records returns to the records panel.
+**Deployment:** GitHub Pages deployment for `d1d9377` was not confirmed in this check. The available commit-workflow lookup returned no runs (it filters to PR-triggered runs), and combined commit statuses were empty. Do not claim the Pages site is updated until the Pages workflow is checked separately.
+**PR #92 checks (as recorded in its merged PR description):** all seven repository JavaScript files parsed with V8 `new Function`; no duplicate HTML IDs; dropdown markup/styles/handlers removed; direct three-dot click and Back to Records handlers confirmed; branch was 5 commits ahead and 0 behind before merge. These are source-level checks, not browser tests.
+**Additional source check in this handover:** current `index.html` has 304 IDs and no duplicate IDs; it loads seven local JS files. `sw.js` cache is v92. `push-config.js` is loaded by `index.html` but is not in the service-worker `FILES` list. No Playwright/browser screenshots, real iPhone Safari/Home Screen test, two-device cloud-sync test, live-data test, or push-delivery test was performed for PR #92. The repo has no committed test suite.
 **Tabs:** Overview, Calendar, Log, Students, Reports, Islamic. Student profile tabs (`PROFILE_TABS`): Overview, Lessons, Course, Payments, Legacy (only when an archive exists for the student), Attendance.
 
-**PRs #79–#87 (merged to main, in order)**
+**PRs #79–#92 (merged to main, in order)**
 | PR | What | Footer / cache at merge |
 |---|---|---|
-| #79 | Package/Course Phase 1: purchased hours are an entitlement independent of payments; several courses per student; FIFO default (oldest course with room); not-completed lessons release hours | v1.22 / v83 |
-| #80, #81 | CLAUDE.md guidelines; AGENT_SYNC.md | docs only |
-| #82 | Custom Add course sheet (`#courseDialog`; optional name, 1–100 h in 0.5 steps, price, date, optional first payment, live rate preview) replaces the fixed 17 h/€340 prompt; "Use course hours" default only when available hours ≥ lesson length (Claude fixed the root cause: `schedMin()` returns 0 unless `type==="Lesson"`, and removed a forced tick in `syncContactBoxes()`) | v1.23 / v85 |
-| #83 | Delete a course that has payments but no linked lessons (confirm + safety copy `before-course-delete`; removes that course and only its own `coursePayments`) | v1.24 / v86 |
-| #84 | CSS: Add course sheet was transparent (undefined `--card`); solid card, sticky header/footer, iOS-safe date input | v1.25 / v87 |
-| #85 | CLAUDE.md §7a: standing professional UI/UX review rule | docs only |
-| #86 | Profile summary for 2+ active courses; `prompt()` payment replaced by Add payment sheet (`#payDialog`: course picker, amount prefilled with outstanding, payment date); Payments tab shows course names | v1.26 / v88 |
-| #87 | Pooled course hours (see below) | v1.27 / v89 |\n| #90 | Move Voice Announcements and Lock-screen Notifications from Overview into Log → Settings; preserve IDs and handlers | v1.28 / v90 |\n| #91 | Replace Log Settings sub-tab with compact three-dot overflow menu and Back to Records | v1.29 / v91 |
+| #79 | Course Phase 1: purchased hours are an entitlement independent of payments; multiple courses per student; FIFO default; not-completed lessons release hours | v1.22 / v83 |
+| #80, #81 | Claude Code guidelines; shared AGENT_SYNC handover | docs only |
+| #82 | Custom Add course sheet; optional name, hours, price, date, optional first payment, rate preview; duration-aware default for "Use course hours" | v1.23 / v85 |
+| #83 | Delete a course with payments but no linked lessons; confirm + safety copy; remove only its own payment rows | v1.24 / v86 |
+| #84 | Add course sheet visual fix: solid card, sticky header/footer, iOS-safe date input | v1.25 / v87 |
+| #85 | Professional UI/UX review rule in CLAUDE.md §7a | docs only |
+| #86 | Multi-course profile summary and Add payment sheet; course name shown in Payments | v1.26 / v88 |
+| #87 | Pooled course hours using additive `courseAlloc`; one lesson can draw from multiple courses | v1.27 / v89 |
+| #88–#89 | Documentation handover/synchronization | docs only |
+| #90 | Move Voice Announcements and Lock-screen Notifications from Overview into Log → Settings | v1.28 / v90 |
+| #91 | Replace Log Settings sub-tab with compact three-dot overflow menu and Back to Records | v1.29 / v91 |
+| #92 | Remove the dropdown: first tap on the three-dot control opens Settings directly | v1.30 / v92 |
 
 **Course model (current source)**
 - `state.courses=[{id,student,date,hours,price,createdAt,v,name?}]` — hours and price are entered per student; there are no templates; `name` is optional/additive. UI word is "Course". Rate = price ÷ hours. Several courses per student are allowed.
@@ -409,10 +414,10 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Source-level checks: all seven repository JavaScript files parse. Playwright screenshots at 390×844 and 320×568, real iPhone testing and Pages deployment were not available in this workflow and are not claimed.
 
 
-## Log Settings direct-open control — proposed PR (2026-11-08)
-- The top-right vertical three-dot control on the Driving Log heading now opens the existing Settings panel immediately on the first tap. There is no dropdown, intermediate Settings menu, or separate Settings tab.
-- Settings remains inside the Log main tab. Its Back to Records control returns to the records view.
-- Existing Voice Announcements, Lock-screen Notifications, Working Hours, Prayer Time and WhatsApp Message Settings are unchanged; their IDs, storage keys, handlers and behavior are preserved.
+## Log Settings direct-open control — merged PR #92 (2026-11-08)
+- The top-right vertical three-dot control on the Driving Log heading opens the existing Settings panel immediately on the first tap.
+- There is no dropdown, intermediate Settings menu, or separate Settings tab. Settings remains inside the Log main tab; Back to Records returns to records.
+- Existing Voice Announcements, Lock-screen Notifications, Working Hours, Prayer Time and WhatsApp Message Settings remain in place. Existing IDs, storage keys, handlers and behavior are preserved.
 - No student, lesson, course, payment, expense, accounting, backup, sync or notification-backend data/logic changes.
-- Proposed footer v1.30 and service-worker cache v92.
-- Source-level verification is required before merge. Browser/Playwright screenshots at 390×844 and 320×568, real iPhone testing and Pages deployment are not claimed unless separately completed.
+- Footer is v1.30; service-worker cache is v92.
+- PR #92 merged as `d1d9377`. Source-level checks are recorded above. Browser/Playwright screenshots at 390×844 and 320×568, real iPhone testing and Pages deployment were not verified in this handover.

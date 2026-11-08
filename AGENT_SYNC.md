@@ -4,22 +4,26 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no merge without the owner, no student data in the repo).
 
 ## Latest verified project state (update on every release)
-- **`main` = `5bbb485fb46d859612acd0d3927e2a72eec1518b`** (PR #87, verified 2026-11-08 by fetching `origin/main`). Footer **v1.27**, service-worker cache **`nahians-schedule-cache-v89`** (both read from source).
-- GitHub Pages workflow "pages build and deployment" run #138 for this commit: **success**. That is the only deployment evidence. No real-iPhone, two-device cloud-sync or live-data test has been done for PRs #82–#87; Chromium tests (390×844, 320×568, synthetic data) only. The repo has no test suite; test scripts lived outside the repo.
-- Full details: `PROJECT_STATE.md` → "Current verified state". Open PRs seen: #73 (old, appears superseded by #78, unverified) and #13 (old WhatsApp-paste fix on a divergent branch). Do not touch them without the owner.
-- Open issues: Delete Legacy Archive still marks upcoming package lessons Paid (`deleteLegacyArchive()`); `push-config.js` is loaded but not in `sw.js` `FILES`; push backend not deployed; Repeat control hidden in the UI.
+- **`main` = `d1d9377347f242929084220ff2c46cd29ce2f22a`** (PR #92, checked 2026-11-08). Footer **v1.30**, service-worker cache **`nahians-schedule-cache-v92`**.
+- **PR #92 merged:** https://github.com/hawnannahian/driving-log-pro/pull/92. Three-dot control on the Log heading opens Settings directly on the first tap; no dropdown/intermediate menu. Settings remains inside Log; Back to Records returns to the records panel. Existing Voice, Push, Working Hours, Prayer Time and WhatsApp settings/IDs/handlers are preserved.
+- **Deployment is NOT verified for d1d9377.** The available commit-workflow lookup returned no runs because it filters to PR-triggered runs; combined commit statuses were empty. Check the GitHub Pages workflow separately before claiming deployment.
+- **PR #92 source checks (from its merged PR description):** seven JS files parsed with V8 `new Function`; no duplicate HTML IDs; obsolete dropdown markup/styles/handlers removed; direct click and Back handlers confirmed. Current source inspection also found 304 HTML IDs with no duplicates, seven local script references, cache v92. **No Playwright/browser screenshots, real iPhone, two-device cloud-sync, live-data or live push-delivery test was performed for #92.** The repository has no committed test suite.
+- `push-config.js` is loaded by `index.html`, but is still absent from `sw.js` `FILES`; its API URL is empty. Push backend remains unconfigured/not deployed.
+- Open PRs: #73 (Calendar/WhatsApp controls in Log Settings; old, check for overlap before touching) and #13 (WhatsApp pasted-number fix; old branch, inspect before touching). Do not edit either without owner direction.
+- Full release history and current source details: `PROJECT_STATE.md`. The old sections below are handover history; verify live source before relying on them.
 
-## Where we stopped and what comes next (handover, 2026-11-08 — read this first when a new chat starts)
-**Done today (all merged to `main`, Chromium-tested with synthetic data, not on a real iPhone):** #82 custom Add course sheet + default-tick fix; #83 delete a course (even with payments, if no lessons); #84 Add course sheet styling; #85 CLAUDE.md §7a (professional UI/UX review rule); #86 multi-course profile summary + Add payment sheet; #87 pooled hours across a student's courses (`courseAlloc`); #88 docs sync. State: footer v1.27, cache v89.
-**Owner decisions in force:** custom courses only (hours + price per student), word "Course"; hours pooled across a student's courses, money per course; Claude replies in Bangla, short; never merge/deploy without the owner's explicit word; no student data in the repo; iPhone checks are done by the owner.
-**Owner to check on the iPhone:** Add course sheet and Add payment sheet (date field fits, white card), "Use course hours" default tick, a booking that uses two courses. Report with screenshots if anything looks wrong.
-**Next work, owner chooses the order (nothing started):**
-1. Delete Legacy Archive marks upcoming package lessons Paid (small fix, was closed PR #42).
-2. Add `push-config.js` to `sw.js` `FILES` (tiny).
-3. Farhad's data issue: cause unknown; needs a JSON backup from the owner (never put it in the repo).
-4. **Selling the app** (owner is still thinking; decide first how to sell): (a) share the link and take payment outside the app, (b) licence-key service, (c) only prepare first. Preparation items, all safe: remove third-party audio (Islamic tab text-only), business name/currency/default rate/working hours as settings, empty first-run screen, privacy policy and terms page, then licence/price.
-5. Optional: confirm whether Calendar course-lesson blocks should show "Course · €value"; decide about the hidden Repeat control; review/close old PRs #73 and #13.
-**How to resume:** the owner writes e.g. "continue", "do 1" or the choice for 4. Claude then fetches latest `main`, reads CLAUDE.md, PROJECT_STATE.md and this file, and starts with a short plan.
+## Where we stopped and what comes next (handover, 2026-11-08)
+**Done and merged:** #82 custom Add course sheet + default-tick fix; #83 delete course (if no linked lessons, even with payments); #84 Add course sheet styling; #85 UI/UX review rule; #86 multi-course profile summary + Add payment sheet; #87 pooled course hours (`courseAlloc`); #90 moved Voice Announcements and Lock-screen Notifications from Overview to Log Settings; #91 compact three-dot overflow; #92 direct-open Settings on first tap. Latest main: `d1d9377`, footer v1.30, cache v92.
+**Owner decisions in force:** custom courses only (hours + price per student), UI word "Course"; hours pooled across a student's courses, money per course; Claude replies in Bangla and concise; never merge/deploy without explicit owner approval; no student data in the repo; owner performs real-iPhone checks.
+**Current verified follow-ups / known issues:**
+1. Delete Legacy Archive still marks package-linked lessons Paid unless `extraH>0 && !paid`; this means future/unpaid package lessons with no extra hours can be marked Paid when the archive is deleted. This is a known accounting-risk bug. Do not alter without a focused owner-approved task and regression tests.
+2. `push-config.js` is loaded but absent from service-worker cache `FILES`; push API URL is empty and backend is not deployed. Do not deploy/configure without explicit approval.
+3. Real iPhone/Home Screen PWA test for the new Log Settings flow and notifications is still pending.
+4. Two-device cloud sync of `courseAlloc` and broader live-data checks remain unverified.
+5. Old local test scripts (`cfix2`, `delete-legacy`, `fresh-course`, `p2`) are stale; nothing is committed as a test suite.
+6. Selling-app preparation (third-party audio, business name/currency/rate settings, first-run screen, privacy/terms, licensing) remains undecided by owner.
+7. Optional decisions still pending: Calendar course lesson labels, hidden Repeat control, and whether to review/close old PRs #73 and #13.
+**How to resume:** fetch latest main, read CLAUDE.md + PROJECT_STATE.md + AGENT_SYNC.md, check open PRs, then ask/act only on the owner's selected task.
 
 ## Course allocation code — change control (owner rule, 2026-11-08)
 **`courseAlloc`, `planCourseAlloc`, `allocParts`, `courseShareH`, `pooledFreeH`, `applyAlloc` and the related `course*` helpers (`courseLessons`, `courseDoneH`, `courseUsedH`, `courseFreeH`, `courseLeftH`, `courseBalance`, `courseDue`, `activeCourse`, `income()` course branch) must NOT be changed without first writing the proposed change in this file (Message log) and discussing it in the PR.** Money and hours bugs here affect real records. Do not change the shape of `courses`, `coursePayments` or `lesson.courseAlloc` without an approved compatibility plan.
@@ -41,7 +45,7 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 | Area | Files | Active work |
 |---|---|---|
 | Packages / courses UI + accounting | `app.js` (course/package functions), profile/payments markup | Phases 1–4 are merged (#79, #82–#87). **Change-controlled: see "Course allocation code — change control".** No open course PR. |
-| Calendar / Log / record form | `app.js`, `index.html`, `styles.css` | PR #90: Voice Announcements + Lock-screen Notifications moved from Overview to Log → Settings; awaiting owner review |
+| Calendar / Log / record form | `app.js`, `index.html`, `styles.css` | PRs #90–#92 merged: Voice/Push moved into Log Settings; three-dot control opens Settings directly. No active Log UI task claimed |
 | Reports dashboard | `reports-dashboard.js`, reports markup | none claimed |
 | Islamic tab | `islamic*.js`, audio files | none claimed (owner may remove audio before selling) |
 | Push notifications | `push-worker/`, `push-config.js`, `sw.js` | ChatGPT (not deployed) |
@@ -109,3 +113,13 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 
 - Completed as Draft PR #90: https://github.com/hawnannahian/driving-log-pro/pull/90
 - Source checks: all seven JS files parsed in V8; no duplicate IDs; moved controls each appear once under Log → Settings; Overview contains neither control group. No browser/device or live push test was run. Not merged or deployed.
+
+
+### 2026-11-08 — ChatGPT → Claude (PR #92 merged; handover refresh)
+- Verified latest `main`: `d1d9377347f242929084220ff2c46cd29ce2f22a`; PR #92 is merged. Footer v1.30 and service-worker cache v92.
+- Owner's exact UX requirement is now implemented: tapping the vertical three-dot control on the Log heading opens Settings immediately. No dropdown or intermediate Settings menu. Settings stays inside Log; Back to Records returns to the records list.
+- Existing Voice Announcements, Lock-screen Notifications, Working Hours, Prayer Time and WhatsApp Message Settings remain in the Settings panel. Existing IDs, handlers, storage keys and behavior were preserved.
+- PR #92 source-level checks recorded in its merged description: seven JS files parse with V8 `new Function`; no duplicate IDs; dropdown markup/styles/handlers removed; direct-open and Back handlers confirmed. Our current HTML scan: 304 IDs, no duplicates; seven local script references. No browser/Playwright, real iPhone, cloud-sync, live-data or push-delivery test was run for #92.
+- Pages deployment for `d1d9377` is not confirmed; the available commit workflow lookup returned no runs and combined statuses were empty. Do not claim deployed.
+- No app code changed in this documentation handover. Confirmed outstanding items: Delete Legacy Archive can mark future package lessons Paid; `push-config.js` is not in the SW cache list and API URL is empty; old PRs #73 and #13 remain open; real iPhone and two-device sync tests remain pending.
+- Documentation refresh is being proposed in a separate draft PR; no merge/deploy authorized.
