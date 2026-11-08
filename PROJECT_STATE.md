@@ -388,3 +388,12 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - No existing student, course, lesson or payment records were migrated or rewritten. New course name is an optional additive field; existing hours/price/date/payment structure remains unchanged.
 - Service-worker cache bumped to v84; footer version updated to v1.23.
 - Verification when written: source-level checks pending. Later (2026-11-08) Claude tested #82 in Chromium (390×844, 320×568, synthetic data): sheet, validation, rate preview, first payment, additive `name`; found and fixed the default-tick bug (see Current verified state). Real iPhone not tested.
+
+
+## Overview cleanup — Voice and lock-screen controls moved to Log Settings (2026-11-08)
+- Removed the Voice Announcements and Lock-screen Notifications cards from the Overview dashboard and moved them into the existing Log → Settings panel.
+- Preserved the existing control IDs (voiceOn, voiceStatus, voiceTest, pushStatus, pushEnable) so the existing speech preference, Bengali voice test, Web Push permission/status flow and timer reminder behavior remain connected to the same handlers.
+- Overview retains Today / Next Day lesson lists, active lesson timer, Travel Dua and existing navigation. No earnings, revenue, collected, expenses or profit metrics were added to Overview; financial reporting remains in Reports.
+- No localStorage keys, record schemas, student/course/lesson/payment data, timer rules or notification backend behavior changed.
+- Proposed release footer v1.28; service-worker cache v90.
+- Verification for this PR: source-level checks only. Browser/Playwright at 390×844 and 320×568, real iPhone Safari/Home Screen, notification permission flow and live push delivery must be checked separately; push backend remains not deployed/configured.
