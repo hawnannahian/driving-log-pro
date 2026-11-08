@@ -441,3 +441,12 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Claude (at the owner's request) enlarged the Travel Dua "Open in Islamic tab" link to a 44px tap area (CSS only).
 - Footer version proposed as v1.33; service-worker cache proposed as v95 (renumbered from v1.31/v93 after PR #95 merged as v1.32/v94). Main `e97cc72` was merged into this branch on 2026-11-08 at the owner's explicit direction; conflicts were only in `sw.js`, `index.html` footer and `styles.css` (both appended CSS blocks kept). The PR #95 prayer-guard code is unchanged.
 - Browser screenshots at 390×844 and 320×568, all-tab interaction checks, real iPhone testing and deployment have not yet been verified. Do not claim completion until actual checks are performed.
+
+
+### 2026-11-08 — v1.34 (cache v96): New Record smart booking UX
+- Recent-student chips now show the six most recently completed lessons only; explicitly not-completed lessons are excluded. Ordering uses `completedAt` when available, otherwise the scheduled lesson end. Selecting a chip keeps the existing student/contact resolution path.
+- Student autocomplete keeps prefix matches first, then ranks other matches by most recent completed lesson. Existing name/phone matching and selection behavior remain intact.
+- Added Today and Tomorrow date shortcuts to the New Record date panel. They update the date field and re-run the existing prayer-time guard.
+- Existing duplicate-lesson validation, prayer-time hard block, payment/course logic and data model were preserved. No stored data, accounting rules, backup format or sync semantics changed.
+- Narrow mobile form controls retain 16px text to avoid iOS Safari focus zoom. No broader layout/scroll architecture changes.
+- Source changes only. Browser screenshots, Chromium interaction tests, real iPhone tests and GitHub Pages deployment are not verified by this entry.
