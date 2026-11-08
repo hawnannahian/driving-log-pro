@@ -30,6 +30,12 @@
 - **Known decisions to confirm:** (1) upcoming lessons that were already linked to an old package stay linked (they will use that package's remaining hours when completed); (2) legacy amounts still *due* (e.g. an unpaid old package) stay in Outstanding but cannot be paid because the archive is read-only; (3) the old "count earlier lessons in the course" feature is gone (a new course never takes old hours).
 - Also fixed: `render()` threw on every call on `main` because `#logTodayDate` was removed from the HTML but app.js still set it (now guarded).
 
+### 2026-11-08 — v1.26 (cache v88): Courses phase 2 (UI only)
+- Profile: with 2+ active courses a compact summary (name, hours, due per course, total available, one Add payment) replaces stacked cards; one course still shows the single card.
+- `prompt()` for course payments replaced by an Add payment sheet (`#payDialog`): course picker (only courses with a balance, oldest first, hidden when only one), amount pre-filled with the outstanding, payment date. Payment rows keep the shape `{id,course,date,amount}`.
+- Payments tab uses the course name; one Add payment button preselects the oldest course with a balance.
+- No accounting/booking change. Pooled hours across courses is a separate, not-yet-started PR (needs owner approval of the data shape).
+
 ### 2026-11-08 — v1.25 (cache v87): Add course sheet styling
 - CSS only: `.course-dialog` used an undefined `--card` variable (transparent background on iPhone). Now solid white card, sticky header/footer, iOS-safe date field (`appearance:none`, 100% width), sheet height fits content. No logic/data change.
 
