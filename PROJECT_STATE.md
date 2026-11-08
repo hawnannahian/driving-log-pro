@@ -20,6 +20,30 @@
 **Push:** `push-config.js` API URL remains empty on `main`; Cloudflare Worker backend is not deployed/configured. PR #99 only precaches the config file; it does not activate Web Push. No Cloudflare secrets or VAPID keys were accessed.
 **Open PRs:** #73 (older Log-settings follow-up) and #13 (WhatsApp pasted-number fix on a divergent branch) remain open and untouched.
 **Tabs:** Overview, Calendar, Log, Students, Reports and Islamic. Student profile tabs (`PROFILE_TABS`): Overview, Lessons, Course, Payments, Legacy (only when an archive exists for the student), Attendance.
+**PRs #79–#98 (merged to main; release sequence)**
+| PR | What | Footer / cache at merge |
+|---|---|---|
+| #79 | Course Phase 1: purchased hours are an entitlement independent of payments; multiple courses per student; FIFO default; not-completed lessons release hours | v1.22 / v83 |
+| #80, #81 | Claude Code guidelines; shared AGENT_SYNC handover | docs only |
+| #82 | Custom Add course sheet; optional name, hours, price, date, optional first payment, rate preview; duration-aware default for "Use course hours" | v1.23 / v85 |
+| #83 | Delete a course with payments but no linked lessons; confirm + safety copy; remove only its own payment rows | v1.24 / v86 |
+| #84 | Add course sheet visual fix: solid card, sticky header/footer, iOS-safe date input | v1.25 / v87 |
+| #85 | Professional UI/UX review rule in CLAUDE.md §7a | docs only |
+| #86 | Multi-course profile summary and Add payment sheet; course name shown in Payments | v1.26 / v88 |
+| #87 | Pooled course hours using additive `courseAlloc`; one lesson can draw from multiple courses | v1.27 / v89 |
+| #88–#89 | Documentation handover/synchronization | docs only |
+| #90 | Move Voice Announcements and Lock-screen Notifications from Overview into Log → Settings | v1.28 / v90 |
+| #91 | Replace Log Settings sub-tab with compact three-dot overflow menu and Back to Records | v1.29 / v91 |
+| #92 | Remove the dropdown: first tap on the three-dot control opens Settings directly | v1.30 / v92 |
+| #93 | Handover documentation synchronization | docs only |
+| #94 | Overview dashboard redesign; no financial metrics on Overview | v1.33 / v95 |
+| #95 | Prayer-time conflict guard, timezone/Asr fixes and hard booking block | v1.32 / v94 |
+| #96 | Standing GitHub handover rule documentation | docs only |
+| #97 | New Record smart booking shortcuts and mobile modal scroll containment | v1.35 / v97 |
+| #98 | Legacy Archive deletion payment status: actual paid-hour budget and chronological FIFO coverage | v1.36 / v98 |
+
+**Draft PR #99 (not merged):** https://github.com/hawnannahian/driving-log-pro/pull/99 — exposes the existing weekly Repeat selector for new lessons and adds `push-config.js` to the Service Worker precache; proposed footer v1.37/cache v99.
+
 **Course model (current source)**
 - `state.courses=[{id,student,date,hours,price,createdAt,v,name?}]` — hours and price are entered per student; there are no templates; `name` is optional/additive. UI word is "Course". Rate = price ÷ hours. Several courses per student are allowed.
 - `state.coursePayments=[{id,course,date,amount}]`, counted once per id. Payments cannot exceed the outstanding amount (both Add payment sheet and first payment). Removing a payment changes money only (confirm dialog); it never affects hours.
