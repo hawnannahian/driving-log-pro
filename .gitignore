@@ -8,3 +8,7 @@ migration/
 *Backup*.json
 *backup*.json
 .DS_Store
+
+# Cloudflare Worker local secrets and dependencies
+push-worker/.dev.vars
+push-worker/node_modules/
