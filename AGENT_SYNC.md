@@ -4,13 +4,14 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no merge without the owner, no student data in the repo).
 
 ## Latest verified project state (update on every release)
-- **Latest `main` = `63042c6e38ce4198e53d8f238764267e2dad63dc`** (PR #94 Overview redesign merged, 2026-11-08). Footer **v1.33**, service-worker cache **`nahians-schedule-cache-v95`**. Before it: PR #95 prayer-time guard (v1.32/v94) at `e97cc72`.
-- **PR #92 merged:** https://github.com/hawnannahian/driving-log-pro/pull/92. Three-dot control on the Log heading opens Settings directly on the first tap; no dropdown/intermediate menu. Settings remains inside Log; Back to Records returns to the records panel. Existing Voice, Push, Working Hours, Prayer Time and WhatsApp settings/IDs/handlers are preserved.
-- **Deployment:** Pages workflow run #145 for `e97cc72` (PR #95) = success (build/deploy evidence only; no iPhone/device test). For current `main` `63042c6` (PR #94) the Pages result was not checked in this task.
-- **PR #92 source checks (from its merged PR description):** seven JS files parsed with V8 `new Function`; no duplicate HTML IDs; obsolete dropdown markup/styles/handlers removed; direct click and Back handlers confirmed. Current source inspection also found 304 HTML IDs with no duplicates, seven local script references, cache v92. **No Playwright/browser screenshots, real iPhone, two-device cloud-sync, live-data or live push-delivery test was performed for #92.** The repository has no committed test suite.
-- `push-config.js` is loaded by `index.html`, but is still absent from `sw.js` `FILES`; its API URL is empty. Push backend remains unconfigured/not deployed.
-- Open PRs: #73 (Calendar/WhatsApp controls in Log Settings; old, check for overlap before touching) and #13 (WhatsApp pasted-number fix; old branch, inspect before touching). Do not edit either without owner direction.
-- Full release history and current source details: `PROJECT_STATE.md`. The old sections below are handover history; verify live source before relying on them.
+- **Latest `main` = `b3caa4e026cc4369e4c3f6f7e025fc18dc36a932`** (PR #97 merged, 2026-11-08). Footer **v1.35**, service-worker cache **`nahians-schedule-cache-v97`**.
+- **Latest deployment evidence:** GitHub Pages workflow run #42525401396 for `b3caa4e` completed successfully. This does not verify real iPhone behavior.
+- **PR #97 merged:** https://github.com/hawnannahian/driving-log-pro/pull/97. New Record smart-booking UX: recently completed student chips, recency-ranked autocomplete, Today/Tomorrow date shortcuts and a modal with only the inner fields scrolling.
+- **PR #97 checks:** all eight JS files parsed; 307 HTML IDs / 0 duplicates; seven local script references resolve; CSS braces balanced; cache v97/footer v1.35 confirmed. No rendered browser/touch test, real iPhone Safari/Home Screen test or two-device cloud-sync test was run.
+- **PR #98 proposed on branch `fix/legacy-archive-delete-payment-status-2026-11-08`:** Legacy Archive deletion now rebuilds FIFO allocations, budgets paid hours per package from money received, consumes each completed lesson's allocation in chronological order (including partial/extra-hour cases), and only auto-marks fully cash-covered completed lessons Paid. Existing explicit Paid status is preserved. Six focused scenarios and a deletion integration harness passed; all eight JS syntax checks passed. Footer v1.36/cache v98 proposed. PR not yet merged or deployed; browser/iPhone/sync tests not run.
+- `push-config.js` is loaded by `index.html` but remains absent from `sw.js` `FILES`; its API URL is empty and the push backend is not deployed/configured.
+- Other open PRs: #73 and #13; neither overlaps this Legacy Archive fix and neither was modified.
+- Full release history and current source details: `PROJECT_STATE.md`.
 
 ## Where we stopped and what comes next (handover, 2026-11-08)
 **Done and merged:** #82 custom Add course sheet + default-tick fix; #83 delete course (if no linked lessons, even with payments); #84 Add course sheet styling; #85 UI/UX review rule; #86 multi-course profile summary + Add payment sheet; #87 pooled course hours (`courseAlloc`); #90 moved Voice Announcements and Lock-screen Notifications from Overview to Log Settings; #91 compact three-dot overflow; #92 direct-open Settings on first tap. Latest main: `d1d9377`, footer v1.30, cache v92.
@@ -168,3 +169,12 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Root layout issue identified in source: both the native dialog and its form could scroll. The dialog is now viewport-constrained and non-scrolling; only `.formgrid` scrolls. Heading, error area and Save/Cancel/Delete actions remain fixed outside the scrolling field area. Background page overflow stays locked while the dialog is open.
 - No JavaScript, booking/prayer validation, student, course, payment, storage or sync logic changed in this follow-up.
 - Release proposal updated from v1.34/cache v96 to v1.35/cache v97. V8 syntax parse passed for all eight JS files; 307 HTML IDs have 0 duplicates; all seven local script references resolve; CSS braces balance; cache v97/footer v1.35 verified. No rendered browser screenshots at 390×844 or 320×568, real iPhone Safari or Pages deployment were performed.
+
+
+### 2026-11-08 — ChatGPT → Claude / owner (Legacy Archive deletion fix, PR #98)
+- Latest main checked before work: `b3caa4e026cc4369e4c3f6f7e025fc18dc36a932`, footer v1.35/cache v97; PR #97 is merged and Pages workflow run #42525401396 succeeded.
+- Owner approved the recommended Legacy Archive deletion fix. Work is isolated on fresh branch `fix/legacy-archive-delete-payment-status-2026-11-08` from that exact main commit.
+- Changed `app.js`: immediately rebuild derived FIFO allocations; compute each package's paid-hour budget from actual receipts and its existing rate; process completed package lessons chronologically; consume allocated paid hours even for partially funded/extra-hour lessons; automatically mark Paid only fully funded completed lessons without extra hours. Preserve existing explicit Paid values. Upcoming and uncovered lessons are not auto-marked Paid.
+- Updated footer to v1.36 and service-worker cache to v98. Proposed PR #98: https://github.com/hawnannahian/driving-log-pro/pull/98
+- Targeted checks: all eight JS files parse; six helper scenarios pass; deletion integration harness passes for completed funded, upcoming and extra-hour lesson cases. Synthetic data only.
+- Not run: rendered browser/Playwright, real iPhone Safari/Home Screen, two-device cloud sync or live data. No deployment until merge and successful Pages workflow.
