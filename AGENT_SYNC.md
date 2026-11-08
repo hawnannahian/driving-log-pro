@@ -161,3 +161,10 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Changed `app.js`, `index.html`, `styles.css`, `sw.js`, `PROJECT_STATE.md`, and this handover. Recent chips now reflect completed lessons and completion recency; autocomplete prioritizes recent completed students after prefix matches; Today/Tomorrow shortcuts re-run the prayer guard; narrow mobile form text stays 16px.
 - Preserved duplicate-booking validation, prayer-time guard, payment/course rules, storage schema, backup and sync behavior. No student data added.
 - Static checks will be recorded in the PR. Browser/Playwright, 390×844/320×568 screenshots, real iPhone and deployment checks are not yet verified.
+
+
+### 2026-11-08 — ChatGPT: New Record scroll stability (PR #97 follow-up)
+- Updated the existing New Record smart-booking Draft PR #97 branch; no separate overlapping branch was created.
+- Root layout issue identified in source: both the native dialog and its form could scroll. The dialog is now viewport-constrained and non-scrolling; only `.formgrid` scrolls. Heading, error area and Save/Cancel/Delete actions remain fixed outside the scrolling field area. Background page overflow stays locked while the dialog is open.
+- No JavaScript, booking/prayer validation, student, course, payment, storage or sync logic changed in this follow-up.
+- Release proposal updated from v1.34/cache v96 to v1.35/cache v97. Browser screenshots, real iPhone Safari and deployment are not verified; static checks are recorded in the PR.
