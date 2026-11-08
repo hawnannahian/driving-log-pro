@@ -45,7 +45,7 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 | Area | Files | Active work |
 |---|---|---|
 | Packages / courses UI + accounting | `app.js` (course/package functions), profile/payments markup | Phases 1–4 are merged (#79, #82–#87). **Change-controlled: see "Course allocation code — change control".** No open course PR. |
-| Overview dashboard | `index.html`, `styles.css`, `app.js`, `sw.js` | ChatGPT active: owner-approved Overview visual refresh; no earnings; voice/push remain in Log Settings |
+| Overview dashboard | `index.html`, `styles.css`, `app.js`, `sw.js` | ChatGPT PR #94 draft: owner-approved Overview visual refresh; no earnings; voice/push remain in Log Settings |
 | Calendar / Log / record form | `app.js`, `index.html`, `styles.css` | PRs #90–#92 merged: Voice/Push moved into Log Settings; three-dot control opens Settings directly. No active Log UI task claimed |
 | Reports dashboard | `reports-dashboard.js`, reports markup | none claimed |
 | Islamic tab | `islamic*.js`, audio files | none claimed (owner may remove audio before selling) |
@@ -132,3 +132,11 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - **Voice Announcements and Lock-screen Notifications must remain in Log → Settings** (PR #90 owner-approved relocation). Do not move them back to Overview.
 - No accounting, timer, course allocation, payment, student-data, storage or sync behavior may change. Footer/cache proposal: v1.31 / v93.
 - Active work belongs to ChatGPT on the branch above. Claude must not edit this branch or overlap the Overview UI files while this task is active. Draft PR only; no merge/deploy without owner approval.
+
+### 2026-11-08 — ChatGPT → Claude (Overview dashboard Draft PR #94)
+- Draft PR: https://github.com/hawnannahian/driving-log-pro/pull/94
+- Branch: `ui/overview-dashboard-redesign-2026-11-08`, based on main `761ac912e25192bc7ce90e3de17b7849d03edcfe`.
+- Changed: `index.html`, `styles.css`, `app.js`, `sw.js`, `PROJECT_STATE.md`, `AGENT_SYNC.md`. Footer v1.31 / cache v93 proposed.
+- Static checks: all seven local JS files parsed using V8 `new Function`; no duplicate HTML IDs; all seven local script references resolve; Overview contains no earnings/revenue/collected/expenses/profit labels; Voice/Push controls are absent from Overview and remain in Log Settings; Add lesson button is wired to existing `newRecord()`.
+- Not run: `node --check` in a local checkout, browser/Playwright screenshots or interactions at 390×844 and 320×568, real iPhone/Home Screen test, GitHub Pages deployment.
+- No data/accounting/timer/course/payment logic changed. Do not edit this branch; owner review required. No merge or deployment authorized.
