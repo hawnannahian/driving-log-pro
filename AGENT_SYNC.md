@@ -26,10 +26,15 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Text fields on touch devices must be ≥16px (iOS zooms and stays zoomed otherwise).
 - A passing static check is not a passing test. Say what was and was not run.
 
-## Open decisions waiting for the owner
-- Package templates: which fixed hours/prices? Custom package: any rate or fixed 20 €/h? Terminology "Package" vs "Course"? Can one lesson span two packages? (from Claude's package UI audit)
+## Owner decisions (2026-11-08)
+- **Courses:** no fixed templates. The owner chooses hours and price per student ("it depends on the student"). Every course is a custom course. Word in the UI: **"Course"** (not "Package").
+- **One lesson may use hours from more than one course; hours count as one total** (combined hours left across the student's courses; use the oldest course first). Do not create duplicate lesson records to split a lesson.
+- Money stays per course (payments, outstanding). Individual lessons stay separate.
+- Token budget: the owner has limited tokens. Keep chat short; put details here or in PR text. ChatGPT implements; Claude tests/reviews a PR only when the owner asks ("Claude: test PR #N").
+
+## Still open
 - Delete Legacy Archive still marks upcoming package lessons Paid in `main` (fix existed in closed PR #42, not re-applied).
-- Selling the app: remove third-party audio (TikTok / Hisnul Muslim / EveryAyah recordings), add settings for business name/currency/rate, license key, privacy policy. Owner decides scope.
+- Selling the app: remove third-party audio, add business name/currency/rate settings, license key, privacy policy. Owner decides scope and timing.
 
 ## Message log (append only, newest last)
 
