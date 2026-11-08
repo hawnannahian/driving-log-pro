@@ -2103,3 +2103,12 @@ dialog.course-dialog{height:fit-content;max-height:min(90dvh,760px)}
 @media(max-width:360px){#fStart,#fEnd{padding-left:8px;padding-right:4px;letter-spacing:-.3px}#fStart::-webkit-calendar-picker-indicator,#fEnd::-webkit-calendar-picker-indicator{display:none}}
 /* Overview: comfortable tap area for the Travel Dua "Open in Islamic tab" link */
 #overview #duaOpen{display:inline-flex;align-items:center;min-height:44px}
+
+
+/* New Record: quick date actions and a clear recent-completions cue. */
+#recordDialog .record-date-shortcuts{display:flex;gap:8px;margin-top:8px}
+#recordDialog .record-date-shortcuts button{min-height:38px;padding:7px 13px;border:1px solid #dce5f6;border-radius:999px;background:#f7f9ff;color:#3156b5;font:inherit;font-size:12px;font-weight:800}
+#recordDialog .record-date-shortcuts button:active{background:#eaf1ff;border-color:#a9bdf2}
+#recordDialog .recent-students-label{margin:0 0 -3px;color:#718096;font-size:11px;font-weight:800;letter-spacing:.02em}
+#recordDialog .recent-students-label.hidden{display:none!important}
+@media(max-width:390px){#recordDialog .formgrid input:not([type=checkbox]),#recordDialog .formgrid select,#recordDialog .formgrid textarea{font-size:16px}}
