@@ -4,7 +4,7 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no merge without the owner, no student data in the repo).
 
 ## Latest verified project state (update on every release)
-- **Latest `main` = `0cd6ad143590a0450d61244facbadb8ed51a71a1`** (PR #99 merged, 2026-11-08). Footer **v1.37**, service-worker cache **`nahians-schedule-cache-v99`**.
+- **Latest `main` = `7108022d17710eff74a8b80fe695cdcd9b403291`** (docs-only handover commit after PR #99, 2026-11-08). Footer **v1.37**, service-worker cache **`nahians-schedule-cache-v99`**; the app assets were last changed in `0cd6ad1`.
 - **Latest deployment evidence:** GitHub Pages workflow run #150 / #42530331667 for `0cd6ad1` completed successfully. This does not verify real iPhone behavior.
 - **PR #98 merged:** https://github.com/hawnannahian/driving-log-pro/pull/98. Legacy Archive deletion rebuilds FIFO allocations, budgets package hours from actual receipts, consumes allocations chronologically (including partial/extra-hour lessons), and only auto-marks fully funded completed lessons Paid. Six focused scenarios, an integration harness and all eight JS syntax checks passed before merge.
 - **PR #99 merged:** https://github.com/hawnannahian/driving-log-pro/pull/99. Weekly Repeat is visible for new Lesson records only (hidden for edits/non-lessons); `push-config.js` is in the Service Worker precache. Eight JS syntax parses, 307 HTML IDs / 0 duplicates, seven script refs, CSS brace balance, Repeat visibility checks, synthetic pooled-repeat allocation and synthetic merge checks passed. No rendered browser, real iPhone or live sync test.
@@ -199,7 +199,9 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Docs-only handover refresh; no app source/data/cache/footer change.
 
 
-### 2026-11-08 — ChatGPT → Claude / owner (Multiple Booking v1.38 started)
+### 2026-11-08 — ChatGPT → Claude / owner (Multiple Booking v1.38, Draft PR #100)
+- Draft PR: https://github.com/hawnannahian/driving-log-pro/pull/100. Current branch head is recorded by GitHub; base is main `7108022`.
+- Initial implementation and regression test workflow are in the PR. CI runs have not been confirmed by the GitHub connector; no automated pass is claimed.
 - Latest main verified: `7108022d17710eff74a8b80fe695cdcd9b403291`; footer v1.37/cache v99. Branch `feat/multiple-booking-atomic-batch-v1-38` is identical to that main commit at task start.
 - Scope: new Multiple Booking mode for one student with independent session dates/times and per-session Individual Payment or Course Hours. Single Booking is not to be refactored.
 - Atomic-save design: stage on a cloned state, preflight every session and course-hour allocation, write once only after all rows pass, restore in-memory state if validation/storage fails, and sync only after successful persistence.
