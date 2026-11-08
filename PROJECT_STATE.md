@@ -14,7 +14,7 @@
 
 **Release:** footer `v1.30` (`index.html`), service-worker cache `nahians-schedule-cache-v92` (`sw.js`). Both verified in current `main` at `761ac91`.
 **Latest change:** PR #92 is merged. The Log heading's three-dot control opens Settings immediately on the first tap; no dropdown or intermediate Settings tab. Settings stays inside Log; Back to Records returns to the records panel.
-**Deployment:** GitHub Pages deployment for `d1d9377` was not confirmed in this check. The available commit-workflow lookup returned no runs (it filters to PR-triggered runs), and combined commit statuses were empty. Do not claim the Pages site is updated until the Pages workflow is checked separately.
+**Deployment:** GitHub Pages deployment for `761ac91` was not confirmed in this check. The available commit-workflow lookup returned no runs (it filters to PR-triggered runs), and combined commit statuses were empty. Do not claim the Pages site is updated until the Pages workflow is checked separately.
 **PR #92 checks (as recorded in its merged PR description):** all seven repository JavaScript files parsed with V8 `new Function`; no duplicate HTML IDs; dropdown markup/styles/handlers removed; direct three-dot click and Back to Records handlers confirmed; branch was 5 commits ahead and 0 behind before merge. These are source-level checks, not browser tests.
 **Additional source check in this handover:** current `index.html` has 304 IDs and no duplicate IDs; it loads seven local JS files. `sw.js` cache is v92. `push-config.js` is loaded by `index.html` but is not in the service-worker `FILES` list. No Playwright/browser screenshots, real iPhone Safari/Home Screen test, two-device cloud-sync test, live-data test, or push-delivery test was performed for PR #92. The repo has no committed test suite.
 **Tabs:** Overview, Calendar, Log, Students, Reports, Islamic. Student profile tabs (`PROFILE_TABS`): Overview, Lessons, Course, Payments, Legacy (only when an archive exists for the student), Attendance.
@@ -69,8 +69,8 @@
 - Full-Time historical register key: `driving-log-pro-full-time-v1`; records keyed by `legacy_student_id`, isolated from normal lesson accounting.
 - Main app exposes a narrow `window.DrivingLogFullTime` bridge (getAll/replace/clear) so full-time data can participate in backup/sync without mixing into lesson accounting.
 - Cloud sync stores `driving-log.json` in the user's own private GitHub data repository; token remains in that browser's localStorage.
-- Current service-worker cache: `nahians-schedule-cache-v89` (verified at 5bbb485).
-- App footer version: `v1.27` (verified at 5bbb485). CSS comments such as v1.26 may refer to feature revision, not app release.
+- Current `main` service-worker cache: `nahians-schedule-cache-v92` (verified at 761ac91). The Overview redesign branch proposes v93.
+- Current `main` footer version: `v1.30` (verified at 761ac91). The Overview redesign branch proposes v1.31. CSS comments may refer to feature revision, not app release.
 
 ## Fresh Course system + Legacy Archive (history; the Course bullet below is corrected for current main — see "Current verified state")
 - **Legacy Archive (read-only):** old prepaid packages are moved once into `state.legacy.packages` (original objects verbatim + `archive:{at,v,lessonIds}`) by `migrateLegacy()` on load, restore and cloud merge. Idempotent: an archived id is never copied again or overwritten. A recoverable copy is kept first in `driving-log-pro-v1-before-legacy` (Reports → Safety copies); if it cannot be saved nothing is moved and `pkgs()` still reads leftover `state.packages`, so figures never change. `pkgs()` = archive + leftovers; the old engine (`recomputeAlloc`, `income`, `studentStats` legacy parts) keeps reading it, so historical revenue/hours/payments are identical (verified against `main` with a synthetic seed). Lessons keep `e.pkg` (history). Archived records are never edited; only the student label follows renames/merges.
