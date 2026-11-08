@@ -450,3 +450,11 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Existing duplicate-lesson validation, prayer-time hard block, payment/course logic and data model were preserved. No stored data, accounting rules, backup format or sync semantics changed.
 - Narrow mobile form controls retain 16px text to avoid iOS Safari focus zoom. No broader layout/scroll architecture changes.
 - Source changes only. Browser screenshots, Chromium interaction tests, real iPhone tests and GitHub Pages deployment are not verified by this entry.
+
+
+## New Record scroll stability — Draft PR #97 update (2026-11-08)
+- The New Record dialog shell is constrained to the visible viewport and does not scroll. The form is a flex column: its field grid is the only vertical scroll surface; the heading, validation message and Save/Cancel/Delete action row remain outside that scroller.
+- Removed the nested-scroll arrangement in which the dialog/form could both scroll. Horizontal overflow is clipped in the modal; vertical overscroll is contained in the field grid. The page behind the native modal remains overflow-locked while it is open.
+- Existing field markup, IDs, event handlers, prayer-time guard, duplicate protection, student selection, course/payment rules and stored data are unchanged.
+- Footer version proposed v1.35; service-worker cache proposed v97. This supersedes the v1.34/cache v96 proposal in the earlier PR #97 entry.
+- Static checks: to be recorded in PR comment. Browser screenshots at 390×844 and 320×568, real iPhone Safari and Pages deployment are not verified in this workflow.
