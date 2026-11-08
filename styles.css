@@ -2016,3 +2016,23 @@ dialog.course-dialog{height:fit-content;max-height:min(90dvh,760px)}
 .coursesum-row span:nth-child(2){color:#53627b;font-variant-numeric:tabular-nums}
 .coursesum-row .unpaid,.coursesum-row .paid{font-weight:800;font-variant-numeric:tabular-nums}
 @media(max-width:360px){.pay-grid{grid-template-columns:1fr}}
+
+
+/* Compact Log overflow menu and settings return action */
+#log .log-heading{position:relative}
+#log .log-menu-wrap{position:relative;flex:none;align-self:flex-start}
+#log .log-menu-toggle{display:grid;place-items:center;width:42px;height:42px;border:1px solid var(--line,#e4e9f0);border-radius:12px;background:var(--card,#fff);color:var(--ink,#182338);font:700 25px/1 inherit;cursor:pointer;box-shadow:0 2px 8px #14233a0a}
+#log .log-menu-toggle:hover,#log .log-menu-toggle:focus-visible{border-color:#b9c9f5;background:#f7f9ff;outline:none}
+#log .log-menu-toggle:focus-visible{box-shadow:0 0 0 3px #315ee82a}
+#log .log-menu{position:absolute;z-index:8;top:48px;right:0;width:190px;padding:6px;border:1px solid var(--line,#e4e9f0);border-radius:13px;background:var(--card,#fff);box-shadow:0 12px 30px #101c3326}
+#log .log-menu button{display:flex;align-items:center;gap:10px;width:100%;min-height:44px;padding:9px 11px;border:0;border-radius:9px;background:transparent;color:var(--ink,#182338);font:600 14px inherit;text-align:left;cursor:pointer}
+#log .log-menu button:hover,#log .log-menu button:focus-visible{background:#f0f4ff;color:#244bd0;outline:none}
+#log .log-menu button span{width:20px;text-align:center;color:var(--blue,#315ee8)}
+#log .log-settings-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:2px}
+#log .log-settings-back{flex:none;min-height:42px}
+@media(max-width:420px){
+ #log .log-heading{gap:10px}
+ #log .log-menu-toggle{width:40px;height:40px}
+ #log .log-settings-head{align-items:flex-start;flex-wrap:wrap}
+ #log .log-settings-back{min-height:42px}
+}
