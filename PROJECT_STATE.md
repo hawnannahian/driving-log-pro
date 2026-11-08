@@ -1,6 +1,6 @@
 # PROJECT_STATE — Driving Log Pro
 
-শেষ যাচাই: 2026-11-08 · ভিত্তি: `main` commit `3019cd59cf3545f27a78a812bb3604d78f01e592` (PR #90, app v1.28, cache v90). এই ফাইলের পুরনো তারিখের অংশগুলো ইতিহাস; সন্দেহ হলে নিচের "Current verified state" এবং live source দেখুন।
+শেষ যাচাই: 2026-11-08 · ভিত্তি: `main` commit `777d4e90073204fa38f95533ad11fc019cce7c58` (PR #91, app v1.29, cache v91). এই ফাইলের পুরনো তারিখের অংশগুলো ইতিহাস; সন্দেহ হলে নিচের "Current verified state" এবং live source দেখুন।
 
 ## কাজের নিয়ম
 - মালিককে উত্তর দিন বাংলায় এবং খুব সংক্ষেপে: কাজ শেষ হলে শুধু "হয়ে গেছে" + লিংক; না হলে অল্প কথায় কারণ।
@@ -10,11 +10,11 @@
 - Public repository-তে কখনো student data, CSV/JSON backup, token বা private data commit করবেন না।
 - Source update, Pages deployment success এবং real iPhone runtime test—তিনটি আলাদা verification status হিসেবে রিপোর্ট করুন।
 
-## Current verified state (main 3019cd5, checked 2026-11-08)
+## Current verified state (main 777d4e9, checked 2026-11-08)
 
-**Release:** footer `v1.28` (`index.html`), service-worker cache `nahians-schedule-cache-v90` (`sw.js`). Both read from the source of `main` at 3019cd5 (PR #90).
-**Deployment evidence:** PR #90 merged to main at 3019cd5. A Pages workflow result for this merge was not confirmed in the current check. This does NOT prove the live site behaves correctly, and it is not a device test.
-**Tested how:** PRs #82–#87 had Playwright/Chromium checks (390×844 and 320×568) with synthetic data only. PR #90 received source-level checks only. **No real iPhone / Home Screen PWA test, no two-device cloud-sync test and no live-data test was performed for PR #90.** Test scripts are run from a scratch folder and are NOT in the repository (the repo has no test suite).
+**Release:** footer `v1.29` (`index.html`), service-worker cache `nahians-schedule-cache-v91` (`sw.js`). Both read from the source of `main` at 777d4e9 (PR #91).
+**Deployment evidence:** PR #91 merged to main at 777d4e9. A Pages workflow result for this merge was not confirmed in the current check. This does NOT prove the live site behaves correctly, and it is not a device test.
+**Tested how:** PRs #82–#87 had Playwright/Chromium checks (390×844 and 320×568) with synthetic data only. PR #90 and PR #91 received source-level checks only. **No real iPhone / Home Screen PWA test, no two-device cloud-sync test and no live-data test was performed for PR #90.** Test scripts are run from a scratch folder and are NOT in the repository (the repo has no test suite).
 
 **Tabs:** Overview, Calendar, Log, Students, Reports, Islamic. Student profile tabs (`PROFILE_TABS`): Overview, Lessons, Course, Payments, Legacy (only when an archive exists for the student), Attendance.
 
@@ -28,7 +28,7 @@
 | #84 | CSS: Add course sheet was transparent (undefined `--card`); solid card, sticky header/footer, iOS-safe date input | v1.25 / v87 |
 | #85 | CLAUDE.md §7a: standing professional UI/UX review rule | docs only |
 | #86 | Profile summary for 2+ active courses; `prompt()` payment replaced by Add payment sheet (`#payDialog`: course picker, amount prefilled with outstanding, payment date); Payments tab shows course names | v1.26 / v88 |
-| #87 | Pooled course hours (see below) | v1.27 / v89 |\n| #90 | Move Voice Announcements and Lock-screen Notifications from Overview into Log → Settings; preserve IDs and handlers | v1.28 / v90 |
+| #87 | Pooled course hours (see below) | v1.27 / v89 |\n| #90 | Move Voice Announcements and Lock-screen Notifications from Overview into Log → Settings; preserve IDs and handlers | v1.28 / v90 |\n| #91 | Replace Log Settings sub-tab with compact three-dot overflow menu and Back to Records | v1.29 / v91 |
 
 **Course model (current source)**
 - `state.courses=[{id,student,date,hours,price,createdAt,v,name?}]` — hours and price are entered per student; there are no templates; `name` is optional/additive. UI word is "Course". Rate = price ÷ hours. Several courses per student are allowed.
@@ -407,3 +407,12 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - No student, lesson, course, payment, expense, accounting, backup, sync or notification-backend data/logic changes.
 - Proposed footer v1.29 and service-worker cache v91.
 - Source-level checks: all seven repository JavaScript files parse. Playwright screenshots at 390×844 and 320×568, real iPhone testing and Pages deployment were not available in this workflow and are not claimed.
+
+
+## Log Settings direct-open control — proposed PR (2026-11-08)
+- The top-right vertical three-dot control on the Driving Log heading now opens the existing Settings panel immediately on the first tap. There is no dropdown, intermediate Settings menu, or separate Settings tab.
+- Settings remains inside the Log main tab. Its Back to Records control returns to the records view.
+- Existing Voice Announcements, Lock-screen Notifications, Working Hours, Prayer Time and WhatsApp Message Settings are unchanged; their IDs, storage keys, handlers and behavior are preserved.
+- No student, lesson, course, payment, expense, accounting, backup, sync or notification-backend data/logic changes.
+- Proposed footer v1.30 and service-worker cache v92.
+- Source-level verification is required before merge. Browser/Playwright screenshots at 390×844 and 320×568, real iPhone testing and Pages deployment are not claimed unless separately completed.
