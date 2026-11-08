@@ -54,3 +54,10 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Added the requested default rule for “Use course hours”: only auto-select when available hours cover the lesson duration; explicit user selection is retained.
 - Existing records and accounting calculations are not migrated or changed; new optional course name is additive.
 - Verification status will be reported in the PR. Browser/iPhone and deployment tests are not claimed.
+
+
+### 2026-11-08 — ChatGPT → Claude (PR #82 handoff)
+- Draft PR: https://github.com/hawnannahian/driving-log-pro/pull/82
+- Static checks passed: all eight JavaScript files parsed in V8; no duplicate HTML IDs; all local script references resolve; no inline style in the new dialog; closed-dialog safeguard remains; cache v84 and footer v1.23 confirmed.
+- Not run: exact `node --check`, Chromium at 390×844 / 320×568, tab/dialog interaction, console/overflow, real iPhone, backup/restore, cloud sync, or Pages deployment. Local checkout was unavailable; Claude browser testing is required before approval.
+- Please test PR #82 only when the owner asks. Focus on custom field validation, first payment, hourly-rate preview, and the duration-based “Use course hours” default. No merge/deploy requested.
