@@ -350,7 +350,7 @@ function bindStudentAutocomplete(){const name=$("fStudent"),phone=$("fPhone"),bo
 const PUSH_API_URL=String(window.DRIVING_LOG_PUSH_API||"").replace(/\/$/,"");
 const PUSH_DEVICE_KEY=DB_KEY+"-push-device";
 let pushPublicKey=null,pushEnabled=false;
-function pushDeviceId(){let id="";try{id=localStorage.getItem(PUSH_DEVICE_KEY)||"";if(!/^[a-f0-9-]{32,36}$/i.test(id)){id=uid();localStorage.setItem(PUSH_DEVICE_KEY,id);}}catch{id=uid();}return id;}
+function pushDeviceId(){let id="";try{id=localStorage.getItem(PUSH_DEVICE_KEY)||"";if(!/^[a-f0-9-]{32,36}$/i.test(id)){id=crypto.randomUUID?crypto.randomUUID():[...crypto.getRandomValues(new Uint8Array(16))].map(x=>x.toString(16).padStart(2,"0")).join("");localStorage.setItem(PUSH_DEVICE_KEY,id);}}catch{id=uid();}return id;}
 function pushStatus(message){const el=$("pushStatus");if(el)el.textContent=message;}
 async function pushRequest(path,body){if(!PUSH_API_URL)throw Error("Push service is not deployed yet.");const res=await fetch(PUSH_API_URL+path,{method:body?"POST":"GET",headers:body?{"Content-Type":"application/json"}:undefined,body:body?JSON.stringify({...body,deviceId:pushDeviceId()}):undefined});const data=await res.json().catch(()=>({}));if(!res.ok)throw Error(data.error||"Push service request failed.");return data;}
 function pushKeyBytes(base64){const s=atob(base64.replace(/-/g,"+").replace(/_/g,"/"));const out=new Uint8Array(s.length);for(let i=0;i<s.length;i++)out[i]=s.charCodeAt(i);return out;}
