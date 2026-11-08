@@ -1,6 +1,6 @@
 # PROJECT_STATE — Driving Log Pro
 
-শেষ যাচাই: 2026-11-05 · ভিত্তি: `main` (Full-Time data protection update)
+শেষ যাচাই: 2026-11-08 · ভিত্তি: `main` commit `5bbb485fb46d859612acd0d3927e2a72eec1518b` (PR #87, app v1.27, cache v89). এই ফাইলের পুরনো তারিখের অংশগুলো ইতিহাস; সন্দেহ হলে নিচের "Current verified state" এবং live source দেখুন।
 
 ## কাজের নিয়ম
 - মালিককে উত্তর দিন বাংলায় এবং খুব সংক্ষেপে: কাজ শেষ হলে শুধু "হয়ে গেছে" + লিংক; না হলে অল্প কথায় কারণ।
@@ -10,23 +10,69 @@
 - Public repository-তে কখনো student data, CSV/JSON backup, token বা private data commit করবেন না।
 - Source update, Pages deployment success এবং real iPhone runtime test—তিনটি আলাদা verification status হিসেবে রিপোর্ট করুন।
 
+## Current verified state (main 5bbb485, checked 2026-11-08)
+
+**Release:** footer `v1.27` (`index.html`), service-worker cache `nahians-schedule-cache-v89` (`sw.js`). Both read from the source of `main` at 5bbb485.
+**Deployment evidence:** GitHub Actions "pages build and deployment" run #138 for commit 5bbb485 finished `success` (run id 42494073192, 2026-11-08). This proves the Pages build/deploy job succeeded. It does NOT prove the live site behaves correctly, and it is not a device test.
+**Tested how:** PRs #82–#87 were tested by Claude in Playwright/Chromium (390×844 and 320×568) with synthetic data only. **No real iPhone / Home Screen PWA test, no two-device cloud-sync test and no live-data test was performed for any of them.** Test scripts were run from a scratch folder and are NOT in the repository (the repo has no test suite).
+
+**Tabs:** Overview, Calendar, Log, Students, Reports, Islamic. Student profile tabs (`PROFILE_TABS`): Overview, Lessons, Course, Payments, Legacy (only when an archive exists for the student), Attendance.
+
+**PRs #79–#87 (merged to main, in order)**
+| PR | What | Footer / cache at merge |
+|---|---|---|
+| #79 | Package/Course Phase 1: purchased hours are an entitlement independent of payments; several courses per student; FIFO default (oldest course with room); not-completed lessons release hours | v1.22 / v83 |
+| #80, #81 | CLAUDE.md guidelines; AGENT_SYNC.md | docs only |
+| #82 | Custom Add course sheet (`#courseDialog`; optional name, 1–100 h in 0.5 steps, price, date, optional first payment, live rate preview) replaces the fixed 17 h/€340 prompt; "Use course hours" default only when available hours ≥ lesson length (Claude fixed the root cause: `schedMin()` returns 0 unless `type==="Lesson"`, and removed a forced tick in `syncContactBoxes()`) | v1.23 / v85 |
+| #83 | Delete a course that has payments but no linked lessons (confirm + safety copy `before-course-delete`; removes that course and only its own `coursePayments`) | v1.24 / v86 |
+| #84 | CSS: Add course sheet was transparent (undefined `--card`); solid card, sticky header/footer, iOS-safe date input | v1.25 / v87 |
+| #85 | CLAUDE.md §7a: standing professional UI/UX review rule | docs only |
+| #86 | Profile summary for 2+ active courses; `prompt()` payment replaced by Add payment sheet (`#payDialog`: course picker, amount prefilled with outstanding, payment date); Payments tab shows course names | v1.26 / v88 |
+| #87 | Pooled course hours (see below) | v1.27 / v89 |
+
+**Course model (current source)**
+- `state.courses=[{id,student,date,hours,price,createdAt,v,name?}]` — hours and price are entered per student; there are no templates; `name` is optional/additive. UI word is "Course". Rate = price ÷ hours. Several courses per student are allowed.
+- `state.coursePayments=[{id,course,date,amount}]`, counted once per id. Payments cannot exceed the outstanding amount (both Add payment sheet and first payment). Removing a payment changes money only (confirm dialog); it never affects hours.
+- Hours are an entitlement: purchased hours are available regardless of how much is paid. Available = purchased − all linked lessons that are scheduled or completed (`done:false` lessons release their hours). Completed hours use the scheduled Start–End duration (`hours()`); timer elapsed minutes are informational.
+- A course can be deleted only when no lesson is linked to it (including a share of a split lesson). Deleting removes the course and its own payment rows after confirm + a safety copy.
+
+**Pooled course hours (PR #87) — `courseAlloc`**
+- One lesson (still ONE record) may draw hours from several courses of the same student, oldest course first. Optional additive lesson field `courseAlloc:[{c:courseId,h:hours}]`, same idea as the legacy `alloc`. `lesson.course` stays the first course; a lesson without `courseAlloc` behaves exactly as before.
+- Written only when a new/edited course lesson needs more hours than the oldest course has free; a single-course lesson stores no `courseAlloc`. An edit that keeps the same hours and student keeps the stored allocation; an edit that changes the length re-plans it (editing to a shorter time can drop the field).
+- Shares are scaled to the lesson's current length (`allocParts`). Helpers: `allocParts`, `courseShareH`, `planCourseAlloc`, `pooledFreeH`, `applyAlloc`; `courseLessons/courseDoneH/courseUsedH/courseFreeH` use per-course shares. Record form default tick and "X h available across N courses" use the pooled free hours; not enough pooled hours → the save is refused with the pooled total. Quick booking uses the pool.
+- Money stays per course: `income()` of a split lesson = Σ share × that course's own hourly rate; `coursePaid/courseDue/courseBalance` and payment rows are unchanged. Individual lessons stay separate. No existing lesson is migrated or rewritten.
+- Weekly repeat copies allocate in turn (leftovers become individual lessons). **The Repeat control is permanently hidden in the UI (`toggleLessonFields()` adds `hidden`), so this path is not reachable by a user today; it was only exercised by setting the hidden field in a test.**
+- Compatibility: a device still running an older cached version counts the whole split lesson on `lesson.course` (first course) and ignores the second share until it updates; update all devices. Backup/restore carries `courseAlloc` (tested by Claude with a snapshot round trip); cloud-sync merge of it between two devices was NOT tested.
+
+**Accounting invariants to keep** (see also CLAUDE.md §6): revenue, collected cash, outstanding, expenses and prepaid balances are different things; expenses are not income; a lesson linked to a course is never also counted as an individually paid lesson; a paid individual lesson converted to course hours keeps its original receipt separately (`courseTransferPaid/Date`), not as a course payment; the Legacy Archive and lessons linked by `e.pkg` stay read-only history.
+
+**Known unfinished / open (verified in source or GitHub on 2026-11-08)**
+1. **Delete Legacy Archive still marks every lesson that used an old package as Paid** (unless its extra hours were unpaid), including upcoming lessons (`deleteLegacyArchive()` in `app.js`). A fix existed in closed PR #42 and was not re-applied. Owner decision pending.
+2. `push-config.js` is loaded by `index.html` but is not listed in `sw.js` `FILES`, so it is not precached. Not changed here (docs-only task); owner/maintainer decision.
+3. Push notification backend (`push-worker/`) is not deployed; `push-config.js` has an empty API URL.
+4. Open PRs on GitHub: #73 (Log-settings follow-up from 2026-11-07, based on an old main, cache v78; it appears to be superseded by merged #78 — not verified; do not merge without review) and #13 (WhatsApp paste fix on `claude/intelligent-gates-shiyps`, based on an old main). Neither was touched.
+5. A split lesson is shown like any other course lesson (no per-course breakdown) except in the profile Course card ("0.5 h of 1 h"). In an old test run the Calendar day/week blocks of a course lesson showed "Course · €value"; whether showing the value there is intended was not confirmed (that old test expected no amount).
+6. Stale local test scripts (not in the repo): the older cfix2 check (4 failures that predate #82: it expects a hidden compatibility row/old calendar text), and the older delete-legacy, fresh-course and "p2" scripts fail on selectors from the replaced UI. They are known stale, not regressions of #82–#87.
+7. Real iPhone testing of everything above (date inputs in the Add course/Add payment sheets, default tick, pooled booking), two-device cloud sync, offline start and Pages behaviour on the phone remain unverified.
+8. Prayer-time timetable has not been compared with a trusted Portugal timetable. Third-party audio/recording licences are unconfirmed (see Islamic Companion notes below).
+
 ## Architecture
 - Vanilla JavaScript PWA; build step নেই; GitHub Pages: `main`, root.
 - Main files: `index.html`, `styles.css`, `app.js`, `reports-dashboard.js` (Reports dashboard, loaded after app.js), `islamic-content.js` (dua/tasbih text only) + `islamic.js` (Islamic tab), `prayer-times.js`, `full-time-students.js`, `sw.js`, `manifest.webmanifest`.
 - Tabs: Overview, Calendar, Log, Students, Reports, Islamic.
-- Main data localStorage key: `driving-log-pro-v1` (`entries`, `students`, `courses`, `coursePayments`, `legacy`, `islamic`, prayer/work settings; `packages` only as an input that is archived on load).
+- Main data localStorage key: `driving-log-pro-v1` (`entries`, `students`, `courses`, `coursePayments`, `legacy`, `islamic`, prayer/work settings; `packages` only as an input that is archived on load). Lesson records may carry the optional fields `course`, `courseAlloc`, `courseTransferPaid/Date`, `pkg`/`alloc`/`extraH` (legacy), `done`, `actualMin`.
 - Full-Time historical register key: `driving-log-pro-full-time-v1`; records keyed by `legacy_student_id`, isolated from normal lesson accounting.
 - Main app exposes a narrow `window.DrivingLogFullTime` bridge (getAll/replace/clear) so full-time data can participate in backup/sync without mixing into lesson accounting.
 - Cloud sync stores `driving-log.json` in the user's own private GitHub data repository; token remains in that browser's localStorage.
-- Current service-worker cache: `nahians-schedule-cache-v67`.
-- App footer version: `v1.21`. CSS comments such as v1.26 may refer to feature revision, not app release.
+- Current service-worker cache: `nahians-schedule-cache-v89` (verified at 5bbb485).
+- App footer version: `v1.27` (verified at 5bbb485). CSS comments such as v1.26 may refer to feature revision, not app release.
 
-## Fresh Course system + Legacy Archive (branch `feature/fresh-course-management`)
+## Fresh Course system + Legacy Archive (history; the Course bullet below is corrected for current main — see "Current verified state")
 - **Legacy Archive (read-only):** old prepaid packages are moved once into `state.legacy.packages` (original objects verbatim + `archive:{at,v,lessonIds}`) by `migrateLegacy()` on load, restore and cloud merge. Idempotent: an archived id is never copied again or overwritten. A recoverable copy is kept first in `driving-log-pro-v1-before-legacy` (Reports → Safety copies); if it cannot be saved nothing is moved and `pkgs()` still reads leftover `state.packages`, so figures never change. `pkgs()` = archive + leftovers; the old engine (`recomputeAlloc`, `income`, `studentStats` legacy parts) keeps reading it, so historical revenue/hours/payments are identical (verified against `main` with a synthetic seed). Lessons keep `e.pkg` (history). Archived records are never edited; only the student label follows renames/merges.
-- **Courses (new):** `state.courses=[{id,student,date,hours:17,price:340,createdAt,v}]`, payments are separate rows `state.coursePayments=[{id,course,date,amount}]` (counted once per id). Lessons link explicitly with `e.course` (never `e.pkg`). Used/remaining/prepaid/free hours are derived on every render from linked lessons (done = actual hours, booked = scheduled). Rate = price/hours = 20 €/h. A lesson can only be linked if (linked hours except itself + its hours) <= min(17, paid/20); payments cannot exceed the price; a payment cannot be removed if that would leave linked lessons unpaid; only an empty course can be deleted. Course lessons: income = hours × course rate, never "unpaid", `e.paid` ignored. One open course per student.
+- **Courses (current, corrected 2026-11-08):** `state.courses=[{id,student,date,hours,price,createdAt,v,name?}]` — custom hours and price per student (no fixed 17 h/€340 template any more); payments are separate rows `state.coursePayments=[{id,course,date,amount}]` (counted once per id). Lessons link with `e.course` (never `e.pkg`) and optionally `e.courseAlloc` for pooled hours (PR #87). Used/remaining/free hours are derived on every render from linked lessons. Purchased hours are an entitlement independent of payments; a lesson can be linked only if the student's pooled free hours cover it; a payment cannot exceed the outstanding amount; removing a payment changes money only; a course with no linked lessons can be deleted (with its own payments, after confirm + safety copy); several courses per student are allowed. Course lessons: income = share × that course's rate, never "unpaid", `e.paid` ignored. (The original text here described the 2026-11-06 design: single open course, 17 h/€340, linking limited by min(17, paid/20), only an empty course deletable — all superseded by #79, #82, #83, #87.)
 - **Money rules:** Revenue = value of completed lessons (course lessons at the course rate); Collected = paid individual lessons + course payments (by payment date) + historical package payments; Outstanding = unpaid completed individual lessons + legacy package dues + course price − paid; Course prepaid balance = course paid − value of completed course hours. Legacy remaining hours/balances are no longer shown anywhere active.
 - **Sync/backup:** snapshot adds `legacy`, `courses`, `coursePayments` and keeps `packages` (= archive, for older devices). `mergeAll`: missing keys from an older remote mean "unchanged" (never wipe), payments merge as separate rows, archive merges by union. Backup restore: old backups (top-level `packages`) are archived without duplicates; a backup without `courses` replaces courses with none (safety copy is kept first); the archive is always unioned, never dropped.
-- **Delete Legacy Archive** (Reports → Backup & restore, shown only while an archive exists): two confirmations + a safety copy (`before-legacy-delete`); removes `state.legacy`/`packages`, sets `state.legacyDeletedAt` (a deletion beats copies on other devices/cloud in `mergeAll`/`fromSnapshot`/`useBackup`); lessons that used old packages become normal lessons marked Paid (unless their extra hours were unpaid). Restoring a backup that has no deletion marker brings the archive back.
+- **Delete Legacy Archive** (Reports → Backup & restore, shown only while an archive exists): two confirmations + a safety copy (`before-legacy-delete`); removes `state.legacy`/`packages`, sets `state.legacyDeletedAt` (a deletion beats copies on other devices/cloud in `mergeAll`/`fromSnapshot`/`useBackup`); lessons that used old packages become normal lessons marked Paid (unless their extra hours were unpaid) — still true on main 5bbb485, including upcoming lessons (known open issue, see Current verified state). Restoring a backup that has no deletion marker brings the archive back.
 - **Known decisions to confirm:** (1) upcoming lessons that were already linked to an old package stay linked (they will use that package's remaining hours when completed); (2) legacy amounts still *due* (e.g. an unpaid old package) stay in Outstanding but cannot be paid because the archive is read-only; (3) the old "count earlier lessons in the course" feature is gone (a new course never takes old hours).
 - Also fixed: `render()` threw on every call on `main` because `#logTodayDate` was removed from the HTML but app.js still set it (now guarded).
 
@@ -41,7 +87,7 @@
 - Profile: with 2+ active courses a compact summary (name, hours, due per course, total available, one Add payment) replaces stacked cards; one course still shows the single card.
 - `prompt()` for course payments replaced by an Add payment sheet (`#payDialog`): course picker (only courses with a balance, oldest first, hidden when only one), amount pre-filled with the outstanding, payment date. Payment rows keep the shape `{id,course,date,amount}`.
 - Payments tab uses the course name; one Add payment button preselects the oldest course with a balance.
-- No accounting/booking change. Pooled hours across courses is a separate, not-yet-started PR (needs owner approval of the data shape).
+- No accounting/booking change. (Pooled hours across courses was done afterwards in PR #87, v1.27.)
 
 ### 2026-11-08 — v1.25 (cache v87): Add course sheet styling
 - CSS only: `.course-dialog` used an undefined `--card` variable (transparent background on iPhone). Now solid white card, sticky header/footer, iOS-safe date field (`appearance:none`, 100% width), sheet height fits content. No logic/data change.
@@ -52,7 +98,7 @@
 ## Business rules
 - Legacy/quick-booking and blank imported-rate fallback remains €20/hour for compatibility. Calendar → New Record individual lessons require a manually entered per-lesson rate; student profile rates are not auto-applied there.
 - Income = lesson value; profit = income minus expenses; expenses are not income.
-- Timer target: 55 minutes; completed timer lesson receives 1 hour business credit, actual time is stored separately.
+- Timer target: 55 minutes (the timer still stops at 55 min). Since 2026-11-08 (PR #76) completed hours and income use the scheduled Start–End duration only; timer elapsed minutes and old `actualMin`/`businessHours` values are informational/legacy and give no accounting credit (the 1-hour credit rule that used to be here is no longer true).
 - Full-Time register is historical only and must not affect current lessons, packages, revenue or reports.
 - Full-Time records use unique `legacy_student_id`; do not merge by name.
 
@@ -67,7 +113,7 @@
 - Public app repo contains code only; actual records and token must remain outside this repo.
 
 ## Current features
-Lesson/expense log, student CRM, packages/prepaid accounting, reports, CSV import/export, JSON backup/restore, safety copies, optional private GitHub cloud sync, calendar, 55-minute timer, Bengali voice announcements (device voice availability dependent), travel dua audio, and separate Full-Time Students historical register.
+Lesson/expense log, student CRM, custom courses with pooled hours and per-course payments, legacy package archive (read-only), reports, CSV import/export, JSON backup/restore, safety copies, optional private GitHub cloud sync, calendar, 55-minute timer, Bengali voice announcements (device voice availability dependent), travel dua audio, and separate Full-Time Students historical register.
 
 ## Known limitations / verification still needed
 1. Real iPhone Safari and Home Screen PWA testing is still required for timer audio, Bengali voice availability, screen wake, update prompt, clipboard/native paste and offline startup.
@@ -78,18 +124,18 @@ Lesson/expense log, student CRM, packages/prepaid accounting, reports, CSV impor
 6. Never claim iPhone runtime verified solely from successful GitHub Pages deployment.
 
 ## Master scope vs current app (owner's handover document, checked 2026-11-06)
-The owner's "Master Project Handover" lists the full business scope. It is a requirements list, not a description of the app. Source code on `main` (v1.20) was checked against it; the app is **not** feature-complete and real iPhone testing is still pending (see Known limitations).
+The owner's "Master Project Handover" lists the full business scope. It is a requirements list, not a description of the app. Source code on `main` (v1.20 at that time; rows below updated 2026-11-08 for v1.27 where noted) was checked against it; the app is **not** feature-complete and real iPhone testing is still pending (see Known limitations).
 
 | Area | Status in code |
 |---|---|
 | Students: name, contact, lesson history, completed lessons, payment history | Done |
-| Remaining lessons | Done through packages/courses (hours left, paid, due) |
+| Remaining lessons | Done through courses (hours left/available, paid, due; pooled across a student's courses since v1.27) |
 | Lesson scheduling, duration, calendar, completed lessons | Done |
 | Payments, financial records, business reports, analytics | Done |
 | Search | Done (Log and Students) |
 | Cloud sync, backup, offline, data export | Done (private GitHub repo sync, JSON/CSV, safety copies, PWA) |
 | Cancelled / missed lessons | Partial: lessons can be "Marked not completed" (count in Attendance); no reason or cancellation history |
-| Notifications | Partial: timer and voice announcements only; no push notifications |
+| Notifications | Partial: timer and voice announcements; Web Push source exists (`push-worker/`, SW push handler) but the backend is NOT deployed/configured (`push-config.js` API URL empty) |
 | Multilingual | Partial: English UI with Bangla content and messages; no language switch |
 | Driving progress | Partial: hours and attendance only; no skills/progress record |
 | Instructor management | Not built |
@@ -105,7 +151,7 @@ Owner's development rules (same intent as the rules above): never delete working
 Suggested next features (owner to choose): exam tracking and document expiry first, then cancellation history.
 
 ## Branch hygiene
-- `claude/intelligent-gates-shiyps` is permanently divergent (32 commits behind main, one unique commit); do not push, merge or force-push it.
+- `origin/claude/intelligent-gates-shiyps` is permanently divergent (260 commits behind main, 1 unique commit, open PR #13, measured 2026-11-08); do not push, merge or force-push it.
 - Previous feature branches may contain work already merged by PR; inspect diffs before reusing.
 - Current main is the source of truth.
 
@@ -117,10 +163,10 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Reports dashboard (Phase 4, `reports-dashboard.js`): hero KPIs with count-up (Revenue earned, Expenses, Net, Collected, Outstanding), mini stats, factual insights vs the previous period ("so far" for the running period), revenue/expense chart with 6M/12M/All, expense donut (Fuel, Maintenance=Repair, Insurance, Other incl. refunds), 8-week activity, Business health (profit margin, collection ratio, revenue trend, schedule utilisation from working hours — "Insufficient data" when the inputs are missing), monthly financial calendar with day details, CSV/Share/Print and extra PDF section. Definitions are written at the top of `reports-dashboard.js`. The Calendar tab is unchanged.
 - Overview (Phase 3): the lesson timer card now sits on Overview under the Next lesson card (same timer logic, same ids; still stops at 55 min with 1 h credit); other tabs show a small "⏱ … left" pill that opens Overview. Below Next Day: Voice announcements (on/off per device in `DB_KEY+"-voice"`, Test voice, voice status) and a Travel Dua player using the local `travel-dua.mp3` (12 s recitation of 43:13–14 supplied by the owner; cached by the service worker, range requests answered from cache for offline playback). Only one audio plays at a time; a voice announcement pauses audio. The pre-timer Travel Dua popup (full dua, remote Hisnul Muslim audio) is unchanged.
 - Log (Phase 2): the floating ＋ button is removed; Log's button is "＋ Add expense" (record dialog without the Lesson type). Lessons are created from the Calendar (＋ in Calendar, tapping a day/slot) and from the student profile/quick booking. Log summary: lessons done today, hours, lesson value, collected, outstanding, expenses.
-- Profile cleanup (Phase 1 of the master plan): profile tabs are Overview, Completed, Packages, Attendance. Overview shows only name + WhatsApp, the next 3 upcoming lessons and read-only notes (notes are edited in Edit student). Course payment history + Total paid moved under Packages. Lessons are marked paid with "Mark paid" in Completed. Contact fields are still stored.
+- (Superseded: profile tabs are now Overview, Lessons, Course, Payments, Legacy, Attendance.) Profile cleanup (Phase 1 of the master plan): profile tabs were Overview, Completed, Packages, Attendance. Overview shows only name + WhatsApp, the next 3 upcoming lessons and read-only notes (notes are edited in Edit student). Course payment history + Total paid moved under Packages. Lessons are marked paid with "Mark paid" in Completed. Contact fields are still stored.
 - Decision (owner): the timer keeps the current rule — it stops at 55 minutes and credits 1 hour.
-- Course payments (branch `claude/course-payments`): packages can hold `payments:[{id,date,amount}]` (partial advance payments; Due = price − paid). Old packages without `payments` keep the old Paid/Unpaid meaning. New package dialog: "Paid now (€)" and optional "Count earlier lessons" — *Hours only* stores `p.prior` (lesson ids; those lessons keep their own money, course rate = price ÷ remaining hours) or *Hours and money* links them with `e.pkg` and clears `e.paid`.
-- Student profile: "🎓 Start full course" (shown when no course is running) opens the same package dialog pre-filled (17 h, rate × 17, earlier lessons as hours only). A course card at the top of the profile shows hours done/left, paid/due and ＋ Add payment.
+- (Superseded by `state.courses`/`coursePayments`; package payments below apply only to the read-only Legacy Archive.) Course payments (branch `claude/course-payments`): packages can hold `payments:[{id,date,amount}]` (partial advance payments; Due = price − paid). Old packages without `payments` keep the old Paid/Unpaid meaning. New package dialog: "Paid now (€)" and optional "Count earlier lessons" — *Hours only* stores `p.prior` (lesson ids; those lessons keep their own money, course rate = price ÷ remaining hours) or *Hours and money* links them with `e.pkg` and clears `e.paid`.
+- (Superseded by the Add course sheet in #82/#86.) Student profile: "🎓 Start full course" (shown when no course is running) opens the same package dialog pre-filled (17 h, rate × 17, earlier lessons as hours only). A course card at the top of the profile shows hours done/left, paid/due and ＋ Add payment.
 - PR #19: premium responsive Log screen with live KPIs and sorting.
 - PR #17: clipboard paste button implementation; later the user requested removing custom Paste buttons, and the related buttons/logic were removed from main.
 - Latest data-protection update: Full-Time historical register now participates in JSON backup/restore, cloud sync three-way merge, and Delete All. README updated; footer version v1.20; service-worker cache v36.
@@ -132,7 +178,7 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - This is source review plus Pages deployment verification, not a browser/device end-to-end test. No claim of JavaScript runtime, iPhone audio, offline, or two-device sync verification is made.
 
 ## Handover
-- This audit is being prepared on `maintenance/source-audit-2026-11-05`; merge only after reviewing the resulting pull request.
+- (Historical, 2026-11-05.) That audit was prepared on `maintenance/source-audit-2026-11-05`.
 - No student data or tokens were accessed or changed during source maintenance.
 - Remaining acceptance tests require a browser/device with the app's local data and, for Cloud Sync, the user's separately configured private repository.
 
@@ -187,7 +233,7 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 
 
 ## Release versioning — 2026-11-07
-- Adopt semantic app versioning in the visible footer. Current release before this change: v1.21; proposed release: v1.22 for the premium Student Payments dashboard update (PR #59).
+- Adopt semantic app versioning in the visible footer. (Historical: v1.21 → proposed v1.22 for PR #59; footer v1.22 was on main by commit 6b040dc, v1.23 at #82, v1.27 at #87.)
 - Patch increments (x.y.Z) for bug fixes, minor increments (x.Y.0) for backward-compatible features/UI updates, and major increments (X.0.0) only for breaking changes.
 - Each app update must update the footer version, increment the service-worker cache name, and record release notes here. A proposed version is not released until its version PR is merged and GitHub Pages deployment succeeds.
 - Proposed v1.22: premium Payments dashboard, course progress summary, payment history timeline, and All/Course/Lesson filters. This version metadata update is separate from the already-merged UI PR #59.
@@ -330,7 +376,7 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Based on the owner's decisions: fixed + custom package model planned; no expiry; partial payment must not restrict purchased-hour usage; multiple packages per student; balances shown separately with a combined total.
 - Phase 1 code changes: course entitlement hours now equal purchased hours regardless of payment amount; booking capacity is purchased hours minus all linked scheduled/completed lessons; payment removal changes money due only and does not affect hour eligibility; multiple course records can be created for one student; FIFO selects the oldest course with booking capacity when a lesson is linked automatically; student profile's Course Hours Left is the combined remaining balance across courses.
 - Student payment view labels purchased/remaining hours rather than paid/prepaid hours. Legacy archived packages and lessons linked by the old package ID remain read-only/historical; no migration or record mutation performed.
-- Not yet included in Phase 1: package templates/custom package editor, explicit per-lesson package selector when multiple packages exist, manual hour adjustments/audit log. These are later implementation steps.
+- (Owner later decided there are no templates — every course is custom — and all of the following except the audit log were implemented in #82/#86/#87.) Not yet included in Phase 1: package templates/custom package editor, explicit per-lesson package selector when multiple packages exist, manual hour adjustments/audit log. These are later implementation steps.
 - Verification: app.js parses with new Function; source review only. No browser/Playwright, real iPhone, backup/restore, cloud-sync, Pages deployment, or live data test performed.
 - Service-worker cache bumped to v83.
 
@@ -341,4 +387,4 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - “Use course hours” now defaults on only when the selected course has enough available hours for the lesson duration; an explicit user choice is preserved while editing the form.
 - No existing student, course, lesson or payment records were migrated or rewritten. New course name is an optional additive field; existing hours/price/date/payment structure remains unchanged.
 - Service-worker cache bumped to v84; footer version updated to v1.23.
-- Verification: source-level checks pending; browser/device and GitHub Pages deployment are not claimed.
+- Verification when written: source-level checks pending. Later (2026-11-08) Claude tested #82 in Chromium (390×844, 320×568, synthetic data): sheet, validation, rate preview, first payment, additive `name`; found and fixed the default-tick bug (see Current verified state). Real iPhone not tested.

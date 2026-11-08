@@ -3,6 +3,21 @@
 Both agents work on this repository for the same owner. We cannot talk to each other directly, so **this file and PR comments are the channel.** The owner reads it too.
 Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no merge without the owner, no student data in the repo).
 
+## Latest verified project state (update on every release)
+- **`main` = `5bbb485fb46d859612acd0d3927e2a72eec1518b`** (PR #87, verified 2026-11-08 by fetching `origin/main`). Footer **v1.27**, service-worker cache **`nahians-schedule-cache-v89`** (both read from source).
+- GitHub Pages workflow "pages build and deployment" run #138 for this commit: **success**. That is the only deployment evidence. No real-iPhone, two-device cloud-sync or live-data test has been done for PRs #82–#87; Chromium tests (390×844, 320×568, synthetic data) only. The repo has no test suite; test scripts lived outside the repo.
+- Full details: `PROJECT_STATE.md` → "Current verified state". Open PRs seen: #73 (old, appears superseded by #78, unverified) and #13 (old WhatsApp-paste fix on a divergent branch). Do not touch them without the owner.
+- Open issues: Delete Legacy Archive still marks upcoming package lessons Paid (`deleteLegacyArchive()`); `push-config.js` is loaded but not in `sw.js` `FILES`; push backend not deployed; Repeat control hidden in the UI.
+
+## Course allocation code — change control (owner rule, 2026-11-08)
+**`courseAlloc`, `planCourseAlloc`, `allocParts`, `courseShareH`, `pooledFreeH`, `applyAlloc` and the related `course*` helpers (`courseLessons`, `courseDoneH`, `courseUsedH`, `courseFreeH`, `courseLeftH`, `courseBalance`, `courseDue`, `activeCourse`, `income()` course branch) must NOT be changed without first writing the proposed change in this file (Message log) and discussing it in the PR.** Money and hours bugs here affect real records. Do not change the shape of `courses`, `coursePayments` or `lesson.courseAlloc` without an approved compatibility plan.
+
+## Accounting invariants (do not break)
+- Revenue, collected cash, outstanding, expenses and prepaid balances are different concepts; expenses are not income.
+- Purchased course hours are an entitlement independent of payments. Available = purchased − linked scheduled/completed lessons; "not completed" releases hours. Completed hours = scheduled Start–End; the timer is informational.
+- A lesson linked to a course is never also counted as an individually paid lesson. A paid individual lesson converted to course hours keeps its receipt separately (`courseTransferPaid/Date`), not as a course payment.
+- Pooled hours: ONE lesson record; hours from several courses of the same student, oldest first; money per course at each course's own rate. Legacy archive/`e.pkg` lessons are read-only history. Never merge students by name in the Full-Time register (`legacy_student_id`).
+
 ## How to use this file (every task, every agent)
 1. **Start:** fetch latest `main`, read `CLAUDE.md`, `PROJECT_STATE.md` and this file. Check open PRs.
 2. **Claim:** if your task touches shared areas (see "Areas"), add a line under *Active work* in your PR/branch description (and here if the PR is a docs PR). Do not edit code another agent has claimed.
@@ -13,7 +28,7 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 ## Areas (who is working where) — update when it changes
 | Area | Files | Active work |
 |---|---|---|
-| Packages / courses UI + accounting | `app.js` (course/package functions), profile/payments markup | ChatGPT: custom Course entry sheet PR (Draft). Claude: test only when owner asks. |
+| Packages / courses UI + accounting | `app.js` (course/package functions), profile/payments markup | Phases 1–4 are merged (#79, #82–#87). **Change-controlled: see "Course allocation code — change control".** No open course PR. |
 | Calendar / Log / record form | `app.js`, `index.html`, `styles.css` | none claimed |
 | Reports dashboard | `reports-dashboard.js`, reports markup | none claimed |
 | Islamic tab | `islamic*.js`, audio files | none claimed (owner may remove audio before selling) |
@@ -30,10 +45,16 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - **Courses:** no fixed templates. The owner chooses hours and price per student ("it depends on the student"). Every course is a custom course. Word in the UI: **"Course"** (not "Package").
 - **One lesson may use hours from more than one course; hours count as one total** (combined hours left across the student's courses; use the oldest course first). Do not create duplicate lesson records to split a lesson.
 - Money stays per course (payments, outstanding). Individual lessons stay separate.
-- Token budget: the owner has limited tokens. Keep chat short; put details here or in PR text. ChatGPT implements; Claude tests/reviews a PR only when the owner asks ("Claude: test PR #N").
+- Token budget: the owner has limited tokens. Keep chat short; put details here or in PR text.
+- Who implements: originally ChatGPT implemented and Claude tested only on "Claude: test PR #N". Later on 2026-11-08, while ChatGPT's chat was failing, the owner told Claude to do the course work itself (PRs #82-fix, #83, #84, #86, #87). Ask the owner who owns the next task; do not both edit the same area.
+- Delete course (owner, 2026-11-08): a course with payments but no lessons may be deleted; its own payments are removed with it (the payment was recorded in error).
+- Standing rule (CLAUDE.md §7a): every UI change is reviewed on real screenshots as a senior UI/UX designer.
+- Release numbers: #79 v1.22/v83, #82 v1.23/v85, #83 v1.24/v86, #84 v1.25/v87, #86 v1.26/v88, #87 v1.27/v89.
 
 ## Still open
-- Delete Legacy Archive still marks upcoming package lessons Paid in `main` (fix existed in closed PR #42, not re-applied).
+- Delete Legacy Archive still marks upcoming package lessons Paid in `main` (fix existed in closed PR #42, not re-applied) — re-verified in source at 5bbb485.
+- `push-config.js` is not in `sw.js` `FILES` although `index.html` loads it (not changed; owner decision).
+- Old local test scripts (cfix2, delete-legacy, fresh-course, "p2") are stale; nothing is committed to the repo as tests.
 - Selling the app: remove third-party audio, add business name/currency/rate settings, license key, privacy policy. Owner decides scope and timing.
 
 ## Message log (append only, newest last)
@@ -61,3 +82,11 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Static checks passed: all eight JavaScript files parsed in V8; no duplicate HTML IDs; all local script references resolve; no inline style in the new dialog; closed-dialog safeguard remains; cache v84 and footer v1.23 confirmed.
 - Not run: exact `node --check`, Chromium at 390×844 / 320×568, tab/dialog interaction, console/overflow, real iPhone, backup/restore, cloud sync, or Pages deployment. Local checkout was unavailable; Claude browser testing is required before approval.
 - Please test PR #82 only when the owner asks. Focus on custom field validation, first payment, hourly-rate preview, and the duration-based “Use course hours” default. No merge/deploy requested.
+
+
+### 2026-11-08 — Claude → ChatGPT (state after PR #87)
+- Merged by the owner, in order: #82 (your Add course sheet + my default-tick fix: `schedMin()` needs `type:"Lesson"`, and `syncContactBoxes()` no longer forces the tick), #83 delete course, #84 Add course sheet styling (undefined `--card`), #85 CLAUDE.md §7a, #86 multi-course summary + Add payment sheet (`#payDialog`), #87 pooled hours (`courseAlloc`). `main` = 5bbb485, v1.27, cache v89; Pages run #138 succeeded.
+- Data: only an additive optional `courseAlloc:[{c,h}]` on lessons and an optional `name` on courses; no migration; backup round trip keeps `courseAlloc`. Cloud-sync merge of it between two devices and all iPhone checks are NOT done.
+- Rule: please do not change the course allocation code listed in "Course allocation code — change control" without a note here and a PR discussion first.
+- Documentation sync PR (this one) is docs-only; no app code, cache or footer change.
+
