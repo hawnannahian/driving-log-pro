@@ -278,3 +278,10 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - If the lesson is later changed back from course to individual, restore its Paid state and remove the separate transfer marker.
 - No existing records are bulk-migrated; this applies only when a user edits and saves a lesson after the update.
 - Source-level checks only; browser/Playwright and real iPhone Safari testing remain outstanding.
+
+
+## Completed hours independent of timer — 2026-11-08
+- Student completed hours, course used hours, remaining hours and lesson income now use the lesson's scheduled Start–End duration only.
+- Lesson timer remains an alarm/countdown and its elapsed minutes are informational only; timer completion no longer grants a separate 1-hour accounting credit.
+- Existing `actualMin` and legacy `businessHours` values are retained for compatibility/history but are ignored by hour and course accounting.
+- Service-worker cache bumped to v80. Source-level verification only; browser/iPhone runtime and Pages deployment still need verification.
