@@ -69,9 +69,10 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Release numbers: #79 v1.22/v83, #82 v1.23/v85, #83 v1.24/v86, #84 v1.25/v87, #86 v1.26/v88, #87 v1.27/v89.
 
 ## Still open
-- Delete Legacy Archive payment-status fix is proposed in PR #98. Main `b3caa4e` still has the old behavior until PR #98 is merged; earlier PR #42 was not merged.
-- `push-config.js` is not in `sw.js` `FILES` although `index.html` loads it (not changed; owner decision).
+- Legacy Archive deletion payment-status fix is merged in PR #98 (`e6b03e2`, v1.36/cache v98). Earlier PR #42 was not merged; previously mis-marked Paid historical lessons are not auto-repaired.
+- On main, `push-config.js` is not in `sw.js` `FILES`; Draft PR #99 adds it to the precache. Its API URL remains empty until Cloudflare Worker deployment/configuration.
 - Old local test scripts (cfix2, delete-legacy, fresh-course, "p2") are stale; nothing is committed to the repo as tests.
+- Weekly Repeat control is hidden on main; Draft PR #99 exposes it for new Lesson records only. Real iPhone and live two-device sync tests remain pending.
 - Selling the app: remove third-party audio, add business name/currency/rate settings, license key, privacy policy. Owner decides scope and timing.
 
 ## Message log (append only, newest last)
