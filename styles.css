@@ -2032,3 +2032,13 @@ dialog.course-dialog{height:fit-content;max-height:min(90dvh,760px)}
  #log .log-settings-head{align-items:flex-start;flex-wrap:wrap}
  #log .log-settings-back{min-height:42px}
 }
+
+/* Prayer-time conflict warning in the record form */
+.timewarn{margin:10px 0 0;padding:12px 14px;border:1px solid #f2e4be;border-radius:14px;background:#fff8e8;color:#755b20}
+.timewarn.hidden{display:none}
+.timewarn b{display:block;font-size:14px;color:#5c4510}
+.timewarn p{margin:4px 0 0;font-size:14px;line-height:1.45}
+.timewarn-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.timewarn-actions .btn{flex:1 1 130px;min-height:44px;font-size:14px}
+#saveRecord:disabled{opacity:.5;cursor:not-allowed;box-shadow:none}
+@media(max-width:360px){#fStart,#fEnd{padding-left:8px;padding-right:4px;letter-spacing:-.3px}#fStart::-webkit-calendar-picker-indicator,#fEnd::-webkit-calendar-picker-indicator{display:none}}
