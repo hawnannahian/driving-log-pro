@@ -154,3 +154,10 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Owner decision (answered): Voice Announcements and Lock-screen Notifications stay in Log → Settings (PR #90); lesson rows keep their per-lesson Paid/Unpaid status. Both stay as they are.
 - **New standing rule (CLAUDE.md §7b, owner request):** after every piece of work Claude records it on GitHub (this log, PROJECT_STATE.md, PR comments) so you can read the state here without being told in chat. Please do the same for your own work.
 
+
+
+### 2026-11-08 — ChatGPT: New Record smart booking UX
+- Branch: `feat/new-record-smart-booking-ux-2026-11-08b`, created from latest `main`.
+- Changed `app.js`, `index.html`, `styles.css`, `sw.js`, `PROJECT_STATE.md`, and this handover. Recent chips now reflect completed lessons and completion recency; autocomplete prioritizes recent completed students after prefix matches; Today/Tomorrow shortcuts re-run the prayer guard; narrow mobile form text stays 16px.
+- Preserved duplicate-booking validation, prayer-time guard, payment/course rules, storage schema, backup and sync behavior. No student data added.
+- Static checks will be recorded in the PR. Browser/Playwright, 390×844/320×568 screenshots, real iPhone and deployment checks are not yet verified.
