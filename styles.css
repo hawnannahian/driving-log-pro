@@ -946,6 +946,12 @@ main{max-width:1160px}
  margin-top:15px;padding:18px;border-radius:19px;
  background:linear-gradient(145deg,#fff,#f9fbff);box-shadow:0 4px 16px #17243b08;
 }
+.log-settings .settings-card{min-width:0}
+.log-settings .settings-card .settings-card-head{align-items:flex-start;gap:12px}
+.log-settings .settings-card .settings-toggle{margin:0;white-space:nowrap}
+.log-settings .settings-card .hint{margin:8px 0 10px}
+.log-settings #voiceBox .voicelist{margin:8px 0 12px}
+.log-settings #pushStatus{margin:8px 0 12px}
 #overview .ovbox h2{font-size:16px;letter-spacing:-.025em}
 #overview .duaplayer{background:linear-gradient(145deg,#fff,#f2f6ff);border-color:#dfe7fb}
 #overview .dpbtn{box-shadow:0 5px 12px #315ee82c}
@@ -1076,6 +1082,8 @@ dialog .dialogactions .btn{min-height:44px;border-radius:12px}
  .tabpanel{padding:13px;border-radius:18px}
  #overview .nextcard{padding:17px;border-radius:18px}
  #overview .ovbox{padding:14px;border-radius:16px}
+  #logSettingsPanel .settings-card{padding:14px}
+  #logSettingsPanel .settings-card .settings-card-head{gap:8px}
  #calendar .calboard{padding:13px 10px 14px;border-radius:18px}
  #calendar .calday{min-height:47px;border-radius:11px}
  #calendar .calday b{width:29px;height:29px}
