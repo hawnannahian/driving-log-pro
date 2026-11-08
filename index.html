@@ -36,16 +36,6 @@
       <div class="todaygap"></div>
       <div class="sectionhead"><div><h2>Next Day</h2><p class="muted">Tomorrow's lessons</p></div></div>
       <div id="nextDayList" class="recordlist empty">No lessons tomorrow.</div>
-      <section class="ovbox" id="voiceBox" aria-labelledby="voiceTitle">
-        <div class="ovhead"><div><h2 id="voiceTitle">Voice announcements</h2><p class="muted" id="voiceStatus"></p></div><label class="checklabel voiceswitch"><input type="checkbox" id="voiceOn"> On</label></div>
-        <ul class="voicelist"><li>Start: “আপনার লেসনের সময় শুরু হলো।”</li><li>50 min: “আপনার লেসনের আর ৫ মিনিট বাকি।”</li><li>55 min: “আপনার লেসনের সময় শেষ হয়েছে।”</li></ul>
-        <button type="button" class="btn ghost" id="voiceTest">▶ Test voice</button>
-      </section>
-      <section class="ovbox" id="pushBox" aria-labelledby="pushTitle">
-        <div class="ovhead"><div><h2 id="pushTitle">Lock-screen notifications</h2><p class="muted" id="pushStatus">Checking notification support…</p></div></div>
-        <p class="muted">Receive a notification 5 minutes before the lesson timer ends and another when it finishes, even when the app is closed.</p>
-        <button type="button" class="btn primary" id="pushEnable">Enable lock-screen notifications</button>
-      </section>
       <section class="ovbox duaplayer" id="duaPlayer" aria-labelledby="duaTitle">
         <p class="eyebrow">BEFORE YOU DRIVE</p><h2 id="duaTitle">Travel Dua · সফরের দোয়া</h2>
         <div class="dua-arabic" lang="ar" dir="rtl">سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ، وَإِنَّا إِلَى رَبِّنَا لَمُنقَلِبُونَ</div>
@@ -131,7 +121,21 @@
       </details>
       </div>
       <section id="logSettingsPanel" class="log-settings hidden" role="tabpanel">
-        <header class="log-settings-head"><h2>Settings</h2><p>Set your teaching hours and automatic prayer-time protection.</p></header>
+        <header class="log-settings-head"><h2>Settings</h2><p>Manage lesson announcements, lock-screen alerts and booking preferences.</p></header>
+        <section class="settings-card" id="voiceBox" aria-labelledby="voiceTitle">
+          <div class="settings-card-head">
+            <div><h3 id="voiceTitle">Voice Announcements</h3><p>Speak lesson start, 5-minute warning and end reminders.</p></div>
+            <label class="checklabel settings-toggle"><input type="checkbox" id="voiceOn"> On</label>
+          </div>
+          <p class="hint" id="voiceStatus" aria-live="polite"></p>
+          <ul class="voicelist"><li>Start: “আপনার লেসনের সময় শুরু হলো।”</li><li>50 min: “আপনার লেসনের আর ৫ মিনিট বাকি।”</li><li>55 min: “আপনার লেসনের সময় শেষ হয়েছে।”</li></ul>
+          <button type="button" class="btn ghost" id="voiceTest">▶ Test voice</button>
+        </section>
+        <section class="settings-card" id="pushBox" aria-labelledby="pushTitle">
+          <div class="settings-card-head"><div><h3 id="pushTitle">Lock-screen Notifications</h3><p>Get a reminder 5 minutes before the timer ends and another when it finishes.</p></div><span class="settings-icon">🔔</span></div>
+          <p class="hint" id="pushStatus" aria-live="polite">Checking notification support…</p>
+          <button type="button" class="btn primary" id="pushEnable">Enable lock-screen notifications</button>
+        </section>
         <section class="settings-card">
           <div class="settings-card-head"><div><h3>Working Hours</h3><p>Set the hours when students can book lessons.</p></div><span class="settings-icon">◷</span></div>
           <div class="formgrid"><label>Start<input type="time" id="wStart"></label><label>End<input type="time" id="wEnd"></label></div>
@@ -401,7 +405,7 @@
     <button class="tab" data-tab="islamic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M6.5 20v-6.5c0-3 2.5-5 5.5-6.5 3 1.5 5.5 3.5 5.5 6.5V20"/><path d="M12 4.5v2.5"/><path d="M10 20v-3a2 2 0 0 1 4 0v3"/><path d="M3.5 20v-8M20.5 20v-8"/></svg><span>Islamic</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.27</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.28</span></footer>
   <script src="push-config.js"></script>
   <script src="prayer-times.js"></script>
   <script src="full-time-students.js"></script>

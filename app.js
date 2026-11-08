@@ -720,7 +720,7 @@ async function askPersist(){try{if(!navigator.storage?.persist)return;let ok=awa
 let shownDay=dateISO(new Date());function checkDay(){const t=dateISO(new Date());if(t===shownDay){renderNext();renderPrayerLine(t);bindRecords();return;}if(cal.day===shownDay){const n=new Date();cal.y=n.getFullYear();cal.m=n.getMonth();cal.day=t;}shownDay=t;render();}
 setInterval(checkDay,60000);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")checkDay();});
 load();fillPrayerForm();fillWorkForm();renderCloud();renderTimer();keepAwake();if(timer?.runFrom)pushTimerSync("schedule");renderRecovery();askPersist();cloudSync();
-// Overview: voice settings, the timer pill and the Travel Dua player.
+// Log → Settings: voice controls; timer pill and Travel Dua remain on Overview.
 $("voiceOn").onchange=()=>{try{localStorage.setItem(VOICE_KEY,$("voiceOn").checked?"on":"off");}catch{}renderVoice();};
 $("pushEnable").onclick=enablePushNotifications;refreshPushStatus();$("voiceTest").onclick=()=>{if(!voiceOn()){toast("Voice announcements are turned off");return;}if(!(bnVoice||pickBnVoice())){toast("No Bengali voice on this device");return;}speakBn("আপনার লেসনের সময় শুরু হলো।");};
 try{speechSynthesis.addEventListener("voiceschanged",renderVoice);}catch{}renderVoice();

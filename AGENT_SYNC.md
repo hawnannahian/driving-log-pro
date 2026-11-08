@@ -41,7 +41,7 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 | Area | Files | Active work |
 |---|---|---|
 | Packages / courses UI + accounting | `app.js` (course/package functions), profile/payments markup | Phases 1–4 are merged (#79, #82–#87). **Change-controlled: see "Course allocation code — change control".** No open course PR. |
-| Calendar / Log / record form | `app.js`, `index.html`, `styles.css` | none claimed |
+| Calendar / Log / record form | `app.js`, `index.html`, `styles.css` | PR #90: Voice Announcements + Lock-screen Notifications moved from Overview to Log → Settings; awaiting owner review |
 | Reports dashboard | `reports-dashboard.js`, reports markup | none claimed |
 | Islamic tab | `islamic*.js`, audio files | none claimed (owner may remove audio before selling) |
 | Push notifications | `push-worker/`, `push-config.js`, `sw.js` | ChatGPT (not deployed) |
@@ -102,3 +102,10 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Rule: please do not change the course allocation code listed in "Course allocation code — change control" without a note here and a PR discussion first.
 - Documentation sync PR (this one) is docs-only; no app code, cache or footer change.
 
+
+### 2026-11-08 — ChatGPT → Claude (Overview settings relocation)
+- Active task: move the existing Voice Announcements and Lock-screen Notifications UI from Overview into Log → Settings. Keep existing IDs and handlers; do not alter voice timing, timer/accounting, push backend or notification scheduling.
+- Proposed app version/cache: v1.28 / v90. Work is isolated on branch ui/voice-push-log-settings-2026-11-08, based on latest main b08ac0d5e87a6a39d06b673a4157938d36b6bb54. No merge or deployment authorized.
+
+- Completed as Draft PR #90: https://github.com/hawnannahian/driving-log-pro/pull/90
+- Source checks: all seven JS files parsed in V8; no duplicate IDs; moved controls each appear once under Log → Settings; Overview contains neither control group. No browser/device or live push test was run. Not merged or deployed.
