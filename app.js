@@ -703,12 +703,9 @@ function switchTab(id){if(document.querySelector("dialog[open]"))return false;se
 document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>b.closest("dialog").close());
 ["pOn","pMinutes","p_jumua","pLocation","pMethod"].forEach(id=>$(id).addEventListener("change",savePrayer));
 ["wStart","wEnd"].forEach(id=>$(id).addEventListener("change",saveWork));
-const logMenuToggle=$("logMenuToggle"),logMenu=$("logMenu"),showLogSettings=()=>{logMenu.classList.add("hidden");logMenuToggle.setAttribute("aria-expanded","false");$("logRecordsPanel").classList.add("hidden");$("logSettingsPanel").classList.remove("hidden");renderPrayerPreview();$("logSettingsBack").focus();},showLogRecords=()=>{$("logSettingsPanel").classList.add("hidden");$("logRecordsPanel").classList.remove("hidden");};
-logMenuToggle.onclick=()=>{const open=logMenu.classList.toggle("hidden")===false;logMenuToggle.setAttribute("aria-expanded",String(open));};
-$("logMenuSettings").onclick=showLogSettings;
+const logMenuToggle=$("logMenuToggle"),showLogSettings=()=>{$("logRecordsPanel").classList.add("hidden");$("logSettingsPanel").classList.remove("hidden");renderPrayerPreview();$("logSettingsBack").focus();},showLogRecords=()=>{$("logSettingsPanel").classList.add("hidden");$("logRecordsPanel").classList.remove("hidden");};
+logMenuToggle.onclick=showLogSettings;
 $("logSettingsBack").onclick=()=>{showLogRecords();logMenuToggle.focus();};
-document.addEventListener("click",ev=>{if(!ev.target.closest(".log-menu-wrap")){logMenu.classList.add("hidden");logMenuToggle.setAttribute("aria-expanded","false");}});
-document.addEventListener("keydown",ev=>{if(ev.key==="Escape"&&!logMenu.classList.contains("hidden")){logMenu.classList.add("hidden");logMenuToggle.setAttribute("aria-expanded","false");logMenuToggle.focus();}});
 initWaTemplateSettings();$("addRecordBtn").onclick=newExpense;$("calAddBtn").onclick=()=>newRecord(cal.day);$("calPrev").onclick=()=>calMove(-1);$("calNext").onclick=()=>calMove(1);document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>setCalView(b.dataset.view));$("addStudentBtn").onclick=newStudent;$("fType").onchange=toggleLessonFields;
 ["logSearch","logFilter","logSort","studentSearch","studentSort","period","periodValue"].forEach(id=>$(id).addEventListener("input",render));
 let installPrompt;$("installBtn").onclick=async()=>{if(installPrompt){installPrompt.prompt();installPrompt=null;}};
