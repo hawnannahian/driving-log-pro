@@ -157,7 +157,7 @@ export class ReminderScheduler {
       }
     }
 
-    if (due.some(event => event.type === "finished") && !pending.length) {
+    if (due.some(event => event.type === "finished")) {
       await this.state.storage.delete("events");
       await this.state.storage.delete("session");
       await this.state.storage.deleteAlarm();
