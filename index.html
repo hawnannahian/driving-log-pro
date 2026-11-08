@@ -41,6 +41,11 @@
         <ul class="voicelist"><li>Start: “আপনার লেসনের সময় শুরু হলো।”</li><li>50 min: “আপনার লেসনের আর ৫ মিনিট বাকি।”</li><li>55 min: “আপনার লেসনের সময় শেষ হয়েছে।”</li></ul>
         <button type="button" class="btn ghost" id="voiceTest">▶ Test voice</button>
       </section>
+      <section class="ovbox" id="pushBox" aria-labelledby="pushTitle">
+        <div class="ovhead"><div><h2 id="pushTitle">Lock-screen notifications</h2><p class="muted" id="pushStatus">Checking notification support…</p></div></div>
+        <p class="muted">Receive a notification 5 minutes before the lesson timer ends and another when it finishes, even when the app is closed.</p>
+        <button type="button" class="btn primary" id="pushEnable">Enable lock-screen notifications</button>
+      </section>
       <section class="ovbox duaplayer" id="duaPlayer" aria-labelledby="duaTitle">
         <p class="eyebrow">BEFORE YOU DRIVE</p><h2 id="duaTitle">Travel Dua · সফরের দোয়া</h2>
         <div class="dua-arabic" lang="ar" dir="rtl">سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ، وَإِنَّا إِلَى رَبِّنَا لَمُنقَلِبُونَ</div>
@@ -381,6 +386,7 @@
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
   <footer><span>Driving Log Pro</span><span>Personal business manager · v1.22</span></footer>
+  <script src="push-config.js"></script>
   <script src="prayer-times.js"></script>
   <script src="full-time-students.js"></script>
   <script src="app.js"></script>

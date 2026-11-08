@@ -1,0 +1,15 @@
+{
+  "name": "driving-log-pro-push-worker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate-vapid-keys": "node ./scripts/generate-vapid-keys.mjs",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "@mmmike/web-push": "1.5.0"
+  },
+  "devDependencies": {
+    "wrangler": "4.45.0"
+  }
+}

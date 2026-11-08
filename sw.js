@@ -1,4 +1,4 @@
-const CACHE="nahians-schedule-cache-v80";
+const CACHE="nahians-schedule-cache-v81";
 const FILES=["./","./index.html","./styles.css","./app.js","./reports-dashboard.js","./islamic-content.js","./islamic.js","./full-time-students.js","./prayer-times.js","./manifest.webmanifest","./icon.svg","./icon-192.png","./icon-512.png","./icon-maskable-512.png","./apple-touch-icon.png","./travel-dua.mp3","./ayatul-kursi.mp3","./three-quls.mp3","./surah-al-kahf-1-10-alafasy.mp3","./dua-leaving-home.mp3","./dua-long-journey.mp3","./dua-new-place.mp3","./quran-17-80-alafasy.mp3","./dhikr-return-journey.mp3","./istighfar-hadith.mp3","./durood-ibrahim.mp3"];
 
 self.addEventListener("install",event=>{
@@ -75,4 +75,24 @@ self.addEventListener("fetch",event=>{
         throw new Error("offline and not cached: "+request.url);
       })
   );
+});
+
+self.addEventListener("push",event=>{
+  event.waitUntil((async()=>{
+    let data={title:"Driving Log Pro",body:"Lesson reminder",url:"./"};
+    try{if(event.data)data={...data,...event.data.json()};}catch{}
+    await self.registration.showNotification(data.title||"Driving Log Pro",{
+      body:data.body||"Lesson reminder",icon:"./icon-192.png",badge:"./icon-192.png",
+      tag:data.tag||"driving-log-lesson",renotify:false,data:{url:data.url||"./"}
+    });
+  })());
+});
+self.addEventListener("notificationclick",event=>{
+  event.notification.close();
+  event.waitUntil((async()=>{
+    const url=new URL(event.notification.data?.url||"./",self.location.origin).href;
+    const clients=await self.clients.matchAll({type:"window",includeUncontrolled:true});
+    for(const client of clients){if(new URL(client.url).origin===self.location.origin){await client.focus();return;}}
+    await self.clients.openWindow(url);
+  })());
 });
