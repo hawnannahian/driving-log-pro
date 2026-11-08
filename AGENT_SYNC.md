@@ -4,8 +4,8 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no merge without the owner, no student data in the repo).
 
 ## Latest verified project state (update on every release)
-- **Latest `main` = `7108022d17710eff74a8b80fe695cdcd9b403291`** (docs-only handover commit after PR #99, 2026-11-08). Footer **v1.37**, service-worker cache **`nahians-schedule-cache-v99`**; the app assets were last changed in `0cd6ad1`.
-- **Latest deployment evidence:** GitHub Pages workflow run #150 / #42530331667 for `0cd6ad1` completed successfully. This does not verify real iPhone behavior.
+- **Latest `main` = `07ece46128fc40c735d57d2498880f6bbe2ecc15`** (PR #100 Multiple Booking merged, 2026-11-08). Footer **v1.38**, service-worker cache **`nahians-schedule-cache-v100`**.
+- **Latest deployment evidence:** GitHub Pages run #155 (id 42535466211) for `07ece46` was still `in_progress` when this was written — check it before claiming deployment. The "Multiple Booking regression" workflow (10 node tests) passed for head `61318ac` (runs #19/#20). Neither verifies real iPhone behaviour.
 - **PR #98 merged:** https://github.com/hawnannahian/driving-log-pro/pull/98. Legacy Archive deletion rebuilds FIFO allocations, budgets package hours from actual receipts, consumes allocations chronologically (including partial/extra-hour lessons), and only auto-marks fully funded completed lessons Paid. Six focused scenarios, an integration harness and all eight JS syntax checks passed before merge.
 - **PR #99 merged:** https://github.com/hawnannahian/driving-log-pro/pull/99. Weekly Repeat is visible for new Lesson records only (hidden for edits/non-lessons); `push-config.js` is in the Service Worker precache. Eight JS syntax parses, 307 HTML IDs / 0 duplicates, seven script refs, CSS brace balance, Repeat visibility checks, synthetic pooled-repeat allocation and synthetic merge checks passed. No rendered browser, real iPhone or live sync test.
 - `push-config.js` API URL remains empty; Cloudflare Worker is not deployed/configured. Precache alone does not activate Web Push.
@@ -219,4 +219,9 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - The owner said "Claude: fix PR #100". Claude merged `main` (79f2934, conflict only in AGENT_SYNC.md) into `feat/multiple-booking-atomic-batch-v1-38` and fixed the four findings from the test (details in PROJECT_STATE.md "Multiple Booking review fixes" and the PR comment). `saveMultipleBooking` changed in ONE line only (prayer message with a suggestion); no protected course helper or accounting logic was touched.
 - Test status: 10/10 node tests; 90 browser checks (Chromium, both viewports) + regression suites passed. Not tested: real iPhone, two-device sync, deployment. Footer v1.38 / cache v100 unchanged (still unreleased).
 - Please re-read the diff before the owner merges; tell the owner if you disagree with any change.
+
+### 2026-11-08 — Claude → ChatGPT / owner (PR #100 merged)
+- The owner merged PR #100 (Multiple Booking) as `07ece46`: footer v1.38, cache v100. Included my review fixes (global Paid hidden in Multiple mode; mode switch moved above the student field + `resetRecordScroll()`; inline Mark-as-paid, 40px Remove buttons, no clipped time fields at <=360px; prayer suggestion in batch errors). `saveMultipleBooking` atomic logic unchanged apart from that one message line; protected course helpers untouched.
+- Open issue reported by the owner from a real iPhone screenshot of the (old) New record form: the Date field is cut at the right edge and the Start/End time boxes overlap. Not reproducible in Chromium (iOS renders date/time inputs differently). Proposed as a separate CSS-only PR (same approach as the Add course sheet: appearance none, 100% width, box-sizing). Nobody has claimed it yet.
+- Still unverified: real iPhone behaviour of Multiple Booking, two-device sync, deployment of `07ece46`.
 
