@@ -1,6 +1,6 @@
 # PROJECT_STATE — Driving Log Pro
 
-শেষ যাচাই: 2026-11-08 · ভিত্তি: `main` commit `d1d9377347f242929084220ff2c46cd29ce2f22a` (PR #92, app v1.30, cache v92). পুরনো তারিখের অংশগুলো ইতিহাস; বর্তমান আচরণের জন্য live source on `main`-ই authoritative.
+শেষ যাচাই: 2026-11-08 · সর্বশেষ `main`: `761ac912e25192bc7ce90e3de17b7849d03edcfe` (PR #93, v1.30/cache v92). নতুন Overview redesign branch: `ui/overview-dashboard-redesign-2026-11-08` (প্রস্তাবিত v1.31/cache v93; Draft PR review pending). পুরনো তারিখের অংশগুলো ইতিহাস; বর্তমান আচরণের জন্য live source on `main`-ই authoritative.
 
 ## কাজের নিয়ম
 - মালিককে উত্তর দিন বাংলায় এবং খুব সংক্ষেপে: কাজ শেষ হলে শুধু "হয়ে গেছে" + লিংক; না হলে অল্প কথায় কারণ।
@@ -10,9 +10,9 @@
 - Public repository-তে কখনো student data, CSV/JSON backup, token বা private data commit করবেন না।
 - Source update, Pages deployment success এবং real iPhone runtime test—তিনটি আলাদা verification status হিসেবে রিপোর্ট করুন।
 
-## Current verified state (main d1d9377, checked 2026-11-08)
+## Current verified state (main 761ac91, checked 2026-11-08)
 
-**Release:** footer `v1.30` (`index.html`), service-worker cache `nahians-schedule-cache-v92` (`sw.js`). Both verified in current `main` at `d1d9377`.
+**Release:** footer `v1.30` (`index.html`), service-worker cache `nahians-schedule-cache-v92` (`sw.js`). Both verified in current `main` at `761ac91`.
 **Latest change:** PR #92 is merged. The Log heading's three-dot control opens Settings immediately on the first tap; no dropdown or intermediate Settings tab. Settings stays inside Log; Back to Records returns to the records panel.
 **Deployment:** GitHub Pages deployment for `d1d9377` was not confirmed in this check. The available commit-workflow lookup returned no runs (it filters to PR-triggered runs), and combined commit statuses were empty. Do not claim the Pages site is updated until the Pages workflow is checked separately.
 **PR #92 checks (as recorded in its merged PR description):** all seven repository JavaScript files parsed with V8 `new Function`; no duplicate HTML IDs; dropdown markup/styles/handlers removed; direct three-dot click and Back to Records handlers confirmed; branch was 5 commits ahead and 0 behind before merge. These are source-level checks, not browser tests.
@@ -421,3 +421,12 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - No student, lesson, course, payment, expense, accounting, backup, sync or notification-backend data/logic changes.
 - Footer is v1.30; service-worker cache is v92.
 - PR #92 merged as `d1d9377`. Source-level checks are recorded above. Browser/Playwright screenshots at 390×844 and 320×568, real iPhone testing and Pages deployment were not verified in this handover.
+
+### 2026-11-08 — Overview dashboard refresh (proposed v1.31 / cache v93)
+- Owner-approved UI task: refresh the existing Overview screen using its real current content and interactions, not the earlier generic mockup.
+- Added a clear Overview heading and an Add lesson shortcut wired to the existing `newRecord()` flow. Restyled the existing next-lesson card, Today/Next Day lesson rows, prayer line, Travel Dua card, app header and bottom navigation for a cleaner blue/white mobile-first presentation.
+- No earnings, revenue, collected cash, expenses, profit or financial charts were added to Overview. Financial reporting remains on Reports.
+- Voice Announcements and Lock-screen Notifications remain in Log → Settings as established by PR #90; they were deliberately NOT moved back to Overview despite appearing in the initial concept image.
+- No lesson, timer, payment, course, allocation, student, storage or sync logic/data schema changed. Existing timer remains its floating compact timer; lesson rows and Travel Dua keep their existing IDs and handlers.
+- Footer version proposed as v1.31; service-worker cache proposed as v93.
+- Browser screenshots at 390×844 and 320×568, all-tab interaction checks, real iPhone testing and deployment have not yet been verified. Do not claim completion until actual checks are performed.
