@@ -1,6 +1,6 @@
 # PROJECT_STATE — Driving Log Pro
 
-শেষ যাচাই: 2026-11-08 · সর্বশেষ যাচাইকৃত `main`: `e6b03e2c2c1478a36c64f6e6b39be097d63b5f37` (PR #98 merged; footer v1.36/cache v98; Pages run #149 succeeded). PR #99 draft: weekly Repeat UI + push-config precache, proposed v1.37/cache v99; not merged/deployed. পুরনো তারিখের অংশগুলো ইতিহাস; বর্তমান আচরণের জন্য live source on `main`-ই authoritative.
+শেষ যাচাই: 2026-11-08 · সর্বশেষ যাচাইকৃত `main`: `0cd6ad143590a0450d61244facbadb8ed51a71a1` (PR #99 merged; footer v1.37/cache v99; GitHub Pages run #150 succeeded). PR #98 এবং #99—দুটিই merged. PR #99-এর পর app source ও deployment যাচাই হয়েছে; real iPhone/live sync/push delivery আলাদা করে এখনো যাচাই হয়নি। পুরনো তারিখের অংশগুলো ইতিহাস; বর্তমান আচরণের জন্য live source on `main`-ই authoritative.
 
 ## কাজের নিয়ম
 - মালিককে উত্তর দিন বাংলায় এবং খুব সংক্ষেপে: কাজ শেষ হলে শুধু "হয়ে গেছে" + লিংক; না হলে অল্প কথায় কারণ।
@@ -10,14 +10,14 @@
 - Public repository-তে কখনো student data, CSV/JSON backup, token বা private data commit করবেন না।
 - Source update, Pages deployment success এবং real iPhone runtime test—তিনটি আলাদা verification status হিসেবে রিপোর্ট করুন।
 
-## Current verified state (main e6b03e2, checked 2026-11-08)
+## Current verified state (main 0cd6ad1, checked 2026-11-08)
 
-**Release:** footer `v1.36` (`index.html`), Service Worker cache `nahians-schedule-cache-v98` (`sw.js`). Both verified on current `main` at `e6b03e2c2c1478a36c64f6e6b39be097d63b5f37`.
-**Latest change:** PR #98 merged. Legacy Archive deletion now rebuilds FIFO allocations, budgets package hours from actual receipts, consumes allocations chronologically (including partial/extra-hour lessons), and only auto-marks fully funded completed lessons Paid. Existing explicit Paid status is preserved. Previously mis-marked Paid historical lessons are not automatically repaired.
-**Deployment:** GitHub Pages workflow run #149 / #42529356204 for `e6b03e2` completed successfully. This proves Pages workflow success only; it does not verify iPhone behavior.
-**PR #98 checks:** all eight JS files parsed; six focused helper scenarios and the deletion integration harness passed using synthetic data. No browser/iPhone/live-sync test was performed.
-**PR #99 draft:** https://github.com/hawnannahian/driving-log-pro/pull/99 — proposed v1.37/cache v99 exposes the existing weekly Repeat selector for new Lesson records only (hidden for edits and non-lessons) and adds `push-config.js` to Service Worker precache. Eight JS syntax parses, 307 HTML IDs / 0 duplicates, seven local script refs, CSS brace balance, Repeat visibility checks, a synthetic pooled-repeat allocation test and a synthetic merge test passed. Not merged/deployed.
-**Push:** `push-config.js` API URL remains empty on `main`; Cloudflare Worker backend is not deployed/configured. PR #99 only precaches the config file; it does not activate Web Push. No Cloudflare secrets or VAPID keys were accessed.
+**Release:** footer `v1.37` (`index.html`), Service Worker cache `nahians-schedule-cache-v99` (`sw.js`). Both verified on current `main` at `0cd6ad143590a0450d61244facbadb8ed51a71a1`.
+**Latest change:** PR #99 merged at `0cd6ad1`. The existing weekly Repeat selector is visible for new Lesson records only (hidden for edits and non-lessons); `push-config.js` is included in the Service Worker precache. No storage schema, accounting, course allocation, backup/restore or sync merge logic changed.
+**Deployment:** GitHub Pages workflow run #150 / #42530331667 for `0cd6ad1` completed successfully. This proves Pages workflow success only; it does not verify real iPhone behavior.
+**PR #99 checks:** all eight JS files parsed; 307 HTML IDs / 0 duplicates; seven local script refs resolve; CSS braces balanced; focused Repeat visibility checks passed; synthetic pooled-repeat allocation and synthetic two-device merge checks passed. No rendered browser/Playwright, real iPhone, live two-device sync or push-delivery test was run.
+**PR #98:** merged at `e6b03e2` (Pages run #149 succeeded); Legacy Archive deletion rebuilds FIFO allocations, budgets package hours from actual receipts, consumes allocations chronologically (including partial/extra-hour lessons), and only auto-marks fully funded completed lessons Paid. Existing explicit Paid status is preserved. Previously mis-marked historical Paid lessons are not automatically repaired.
+**Push:** `push-config.js` is now precached, but its API URL remains empty; Cloudflare Worker backend is not deployed/configured. Precache does not activate Web Push. No Cloudflare secrets or VAPID keys were accessed.
 **Open PRs:** #73 (older Log-settings follow-up) and #13 (WhatsApp pasted-number fix on a divergent branch) remain open and untouched.
 **Tabs:** Overview, Calendar, Log, Students, Reports and Islamic. Student profile tabs (`PROFILE_TABS`): Overview, Lessons, Course, Payments, Legacy (only when an archive exists for the student), Attendance.
 **PRs #79–#98 (merged to main; release sequence)**
@@ -42,7 +42,7 @@
 | #97 | New Record smart booking shortcuts and mobile modal scroll containment | v1.35 / v97 |
 | #98 | Legacy Archive deletion payment status: actual paid-hour budget and chronological FIFO coverage | v1.36 / v98 |
 
-**Draft PR #99 (not merged):** https://github.com/hawnannahian/driving-log-pro/pull/99 — exposes the existing weekly Repeat selector for new lessons and adds `push-config.js` to the Service Worker precache; proposed footer v1.37/cache v99.
+**Merged PR #99:** https://github.com/hawnannahian/driving-log-pro/pull/99 — exposes the existing weekly Repeat selector for new Lesson records only and adds `push-config.js` to the Service Worker precache; released as footer v1.37/cache v99.
 
 **Course model (current source)**
 - `state.courses=[{id,student,date,hours,price,createdAt,v,name?}]` — hours and price are entered per student; there are no templates; `name` is optional/additive. UI word is "Course". Rate = price ÷ hours. Several courses per student are allowed.
@@ -55,19 +55,19 @@
 - Written only when a new/edited course lesson needs more hours than the oldest course has free; a single-course lesson stores no `courseAlloc`. An edit that keeps the same hours and student keeps the stored allocation; an edit that changes the length re-plans it (editing to a shorter time can drop the field).
 - Shares are scaled to the lesson's current length (`allocParts`). Helpers: `allocParts`, `courseShareH`, `planCourseAlloc`, `pooledFreeH`, `applyAlloc`; `courseLessons/courseDoneH/courseUsedH/courseFreeH` use per-course shares. Record form default tick and "X h available across N courses" use the pooled free hours; not enough pooled hours → the save is refused with the pooled total. Quick booking uses the pool.
 - Money stays per course: `income()` of a split lesson = Σ share × that course's own hourly rate; `coursePaid/courseDue/courseBalance` and payment rows are unchanged. Individual lessons stay separate. No existing lesson is migrated or rewritten.
-- Weekly repeat copies allocate in turn (leftovers become individual lessons). On current `main`, the Repeat control remains hidden. Draft PR #99 proposes showing it for new Lesson records only; the underlying repeat and course-allocation logic is unchanged.
+- Weekly repeat copies allocate in turn (leftovers become individual lessons). On current `main`, the Repeat control is visible for new Lesson records only; it remains hidden for edits and non-Lesson records. This was merged in PR #99; the underlying repeat and course-allocation logic is unchanged.
 - Compatibility: a device still running an older cached version counts the whole split lesson on `lesson.course` (first course) and ignores the second share until it updates; update all devices. Backup/restore carries `courseAlloc` (tested by Claude with a snapshot round trip); cloud-sync merge of it between two devices was NOT tested.
 
 **Accounting invariants to keep** (see also CLAUDE.md §6): revenue, collected cash, outstanding, expenses and prepaid balances are different things; expenses are not income; a lesson linked to a course is never also counted as an individually paid lesson; a paid individual lesson converted to course hours keeps its original receipt separately (`courseTransferPaid/Date`), not as a course payment; the Legacy Archive and lessons linked by `e.pkg` stay read-only history.
 
 **Known unfinished / open (verified in source or GitHub on 2026-11-08)**
 1. **PR #98 is merged.** Legacy Archive deletion rebuilds FIFO allocations before conversion, budgets only money actually received per package, consumes package-funded hours chronologically (including partial/extra-hour lessons), and automatically marks only fully cash-covered completed lessons Paid. It preserves any existing explicit Paid state. Previously mis-marked Paid historical lessons are not automatically repaired.
-2. On `main`, `push-config.js` is loaded by `index.html` but is not listed in `sw.js` `FILES`; draft PR #99 adds it to the precache and bumps cache v99.
+2. On `main`, `push-config.js` is loaded by `index.html` and listed in `sw.js` `FILES` (merged PR #99, cache v99).
 3. Push notification backend (`push-worker/`) is not deployed; `push-config.js` has an empty API URL. Cloudflare account access, VAPID key generation, private Worker secrets, real contact URI and deployment are still required.
-4. Open PRs on GitHub: #73 (Log-settings follow-up from 2026-11-07, based on an old main, cache v78; it appears to be superseded by merged #78 — not verified; do not merge without review) and #13 (WhatsApp paste fix on `claude/intelligent-gates-shiyps`, based on an old main). Neither was touched.
+4. Open PRs on GitHub: #73 (older Log-settings follow-up; likely superseded by merged #78, but verify before any action) and #13 (WhatsApp paste fix on `claude/intelligent-gates-shiyps`, based on an old main). Both remain open and were not changed in the v1.37 release.
 5. A split lesson is shown like any other course lesson (no per-course breakdown) except in the profile Course card ("0.5 h of 1 h"). In an old test run the Calendar day/week blocks of a course lesson showed "Course · €value"; whether showing the value there is intended was not confirmed (that old test expected no amount).
 6. Stale local test scripts (not in the repo): the older cfix2 check (4 failures that predate #82: it expects a hidden compatibility row/old calendar text), and the older delete-legacy, fresh-course and "p2" scripts fail on selectors from the replaced UI. They are known stale, not regressions of #82–#87.
-7. Real iPhone testing of the Add course/Add payment sheets, default tick, pooled booking, weekly repeat, offline start and Pages behavior remains unverified. Two-device cloud sync of `courseAlloc` remains unverified; PR #99 only passed a synthetic merge test.
+7. Real iPhone testing of the Add course/Add payment sheets, default tick, pooled booking, weekly repeat, offline start and Pages behavior remains unverified. Two-device cloud sync of `courseAlloc` remains unverified; PR #99 passed only a synthetic merge test.
 8. Prayer-time timetable has not been compared with a trusted Portugal timetable. Third-party audio/recording licences are unconfirmed (see Islamic Companion notes below).
 
 ### 2026-11-08 — v1.32 (cache v94): Prayer-time conflict guard (branch `fix/prayer-conflict-suggest`)
@@ -88,8 +88,7 @@
 - Full-Time historical register key: `driving-log-pro-full-time-v1`; records keyed by `legacy_student_id`, isolated from normal lesson accounting.
 - Main app exposes a narrow `window.DrivingLogFullTime` bridge (getAll/replace/clear) so full-time data can participate in backup/sync without mixing into lesson accounting.
 - Cloud sync stores `driving-log.json` in the user's own private GitHub data repository; token remains in that browser's localStorage.
-- Current `main` service-worker cache: `nahians-schedule-cache-v95` (verified at 63042c6).
-- Current `main` footer version: `v1.33` (verified at 63042c6). CSS comments may refer to feature revision, not app release.
+- Historical note (superseded): this section's older cache/footer references describe earlier releases. Current `main` is footer `v1.37`, Service Worker cache `nahians-schedule-cache-v99` at `0cd6ad143590a0450d61244facbadb8ed51a71a1` (verified 2026-11-08). CSS comments may refer to feature revision, not app release.
 
 ## Fresh Course system + Legacy Archive (history; the Course bullet below is corrected for current main — see "Current verified state")
 - **Legacy Archive (read-only):** old prepaid packages are moved once into `state.legacy.packages` (original objects verbatim + `archive:{at,v,lessonIds}`) by `migrateLegacy()` on load, restore and cloud merge. Idempotent: an archived id is never copied again or overwritten. A recoverable copy is kept first in `driving-log-pro-v1-before-legacy` (Reports → Safety copies); if it cannot be saved nothing is moved and `pkgs()` still reads leftover `state.packages`, so figures never change. `pkgs()` = archive + leftovers; the old engine (`recomputeAlloc`, `income`, `studentStats` legacy parts) keeps reading it, so historical revenue/hours/payments are identical (verified against `main` with a synthetic seed). Lessons keep `e.pkg` (history). Archived records are never edited; only the student label follows renames/merges.
@@ -487,3 +486,13 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Tests: all 8 JS files parse; 307 HTML IDs, 0 duplicates; all 7 script references resolve; CSS braces balanced; visibility checks pass; synthetic repeat allocation used the oldest course first and stopped when the pool was exhausted; synthetic two-device merge preserved pooled `courseAlloc`, courses, course payments and Full-Time rows.
 - Not run: rendered browser/Playwright, 390×844 / 320×568 screenshots, real iPhone, live two-device sync, push delivery, Cloudflare deployment. No live student data or credentials accessed.
 - Not merged or deployed.
+
+### 2026-11-08 — ChatGPT handover refresh after PR #99 merge
+- Verified `main` at `0cd6ad143590a0450d61244facbadb8ed51a71a1`; PR #99 merged at this commit. Footer v1.37 and Service Worker cache `nahians-schedule-cache-v99` confirmed from source.
+- GitHub Pages workflow run #150 / #42530331667 completed successfully for `main` commit `0cd6ad1`.
+- PR #99 release: existing weekly Repeat selector shown only for new Lesson records (hidden for edits and non-Lesson records); `push-config.js` added to Service Worker precache. No accounting/course allocation/schema/sync logic changed.
+- Checks recorded in merged PR: all 8 JS syntax parses; 307 HTML IDs with 0 duplicates; 7 local script references resolve; CSS braces balanced; Repeat visibility checks; synthetic pooled-repeat allocation check; synthetic two-device merge check.
+- Not run: rendered browser/Playwright screenshots at 390×844 / 320×568, real iPhone Safari/Home Screen test, live two-device cloud sync, push delivery or Cloudflare deployment. Pages success is not device verification.
+- Push remains inactive: `push-config.js` API URL is empty and Cloudflare Worker is not deployed/configured. Precache alone does not enable Web Push.
+- Open PRs #73 and #13 remain untouched; inspect their base/overlap before any future merge. Previously mis-marked Paid historical lessons from the Legacy Archive are not automatically repaired.
+- This documentation refresh changes no app code, data, cache version or footer.
