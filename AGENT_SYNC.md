@@ -45,10 +45,10 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 |---|---|---|
 | Packages / courses UI + accounting | `app.js` (course/package functions), profile/payments markup | Phases 1–4 are merged (#79, #82–#87). **Change-controlled: see "Course allocation code — change control".** Legacy Archive deletion fix #98 is merged. PR #99 only exposes the existing Repeat selector; allocation helpers were not changed. |
 | Overview dashboard | `index.html`, `styles.css`, `app.js`, `sw.js` | ChatGPT PR #94 draft: owner-approved Overview visual refresh; no earnings; voice/push remain in Log Settings | (merged with main e97cc72; v1.33/v95)
-| Calendar / Log / record form | `app.js`, `index.html`, `styles.css` | PRs #90–#92 merged: Voice/Push moved into Log Settings; three-dot control opens Settings directly. No active Log UI task claimed |
+| Calendar / Log / record form | `app.js`, `index.html`, `styles.css` | PRs #90–#92 merged; ChatGPT Draft PR #99 exposes the existing weekly Repeat selector for new lessons only. No accounting helper changed. |
 | Reports dashboard | `reports-dashboard.js`, reports markup | none claimed |
 | Islamic tab | `islamic*.js`, audio files | none claimed (owner may remove audio before selling) |
-| Push notifications | `push-worker/`, `push-config.js`, `sw.js` | ChatGPT (not deployed) |
+| Push notifications | `push-worker/`, `push-config.js`, `sw.js` | ChatGPT Draft PR #99 adds config precache only; Cloudflare Worker not deployed/configured. |
 
 ## Hard-won rules (from incidents on 2026-11-07)
 - `node --check` on **every** JS file before opening a PR, then load the page in a real browser (Chromium, 390×844 and 320×568) and click every tab. A stray `)` in `app.js` (commit ebc6398) froze the whole app.
