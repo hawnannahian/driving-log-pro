@@ -13,9 +13,9 @@ const rateOf = e => { const r=e.rate; return r===""||r==null||isNaN(Number(r))?D
 const cleanTime = s => { const m=String(s??"").trim().match(/^(\d{1,2}):(\d{2})/); return m&&+m[1]<24&&+m[2]<60?`${m[1].padStart(2,"0")}:${m[2]}`:""; };
 // Scheduled length in minutes, from the start and end times.
 const schedMin = e => { if(e.type!=="Lesson"||!e.start||!e.end)return 0; const [sh,sm]=e.start.split(":").map(Number),[eh,em]=e.end.split(":").map(Number);let mins=eh*60+em-sh*60-sm;if(isNaN(mins))return 0;if(mins<0)mins+=1440;return mins; };
-// Lesson length in hours: the actual length when the lesson was completed with a recorded length, otherwise the scheduled length.
-const hours = e => e.type!=="Lesson"?0:Number(e.businessHours)>0?Number(e.businessHours):Number(e.actualMin)>0?Number(e.actualMin)/60:schedMin(e)/60;
-const lessonDurationText=e=>Number(e.businessHours)>0?`1 h credit · ${lengthText(Number(e.actualMin)||55)} actual`:lengthText(Math.round(hours(e)*60));
+// Completed lesson hours always come from the booked Start–End duration. The timer is an alarm only; its elapsed minutes are informational and never affect student/course accounting.
+const hours = e => e.type!=="Lesson"?0:schedMin(e)/60;
+const lessonDurationText=e=>lengthText(schedMin(e));
 const round2=x=>Math.round(x*100)/100,round4=x=>Math.round(x*1e4)/1e4;
 const fmtH=h=>String(Math.round(h*100)/100);
 // Value of a lesson. Course lessons are valued at the course's hourly rate; hours of an archived (legacy) package at that package's rate; everything else at the lesson rate.
@@ -367,7 +367,7 @@ function renderVoice(){const v=bnVoice||pickBnVoice();if(v)bnVoice=v;$("voiceOn"
 function speakBn(text){try{if(!voiceOn()||!("speechSynthesis" in window))return;if(!bnVoice)bnVoice=pickBnVoice();if(!bnVoice)return;document.querySelectorAll("audio").forEach(a=>{try{a.pause();}catch{}});const u=new SpeechSynthesisUtterance(text);u.voice=bnVoice;u.lang=bnVoice.lang;speechSynthesis.speak(u);}catch{}}
 async function keepAwake(){try{if(timer&&timer.runFrom&&"wakeLock" in navigator&&!wake){wake=await navigator.wakeLock.request("screen");wake.addEventListener("release",()=>{wake=null;});}}catch{}}
 function dropAwake(){try{wake?.release();}catch{}wake=null;}
-function finishTimerAt55(){if(!timer||timer.completed)return;const t=timer;t.completed=true;t.elapsed=55*60000;t.runFrom=null;t.spoken55=true;timerSave();speakBn("আপনার লেসনের সময় শেষ হয়েছে।");timer=null;timerSave();dropAwake();renderTimer();const e=state.entries.find(x=>x.id===t.lessonId);if(!e){toast("Lesson not found. Timer stopped; no record was changed.");return;}e.businessHours=1;completeLesson(t.lessonId,{min:55,start:t.startText,end:hhmm(new Date()),session:t.session});}
+function finishTimerAt55(){if(!timer||timer.completed)return;const t=timer;t.completed=true;t.elapsed=55*60000;t.runFrom=null;t.spoken55=true;timerSave();speakBn("আপনার লেসনের সময় শেষ হয়েছে।");timer=null;timerSave();dropAwake();renderTimer();const e=state.entries.find(x=>x.id===t.lessonId);if(!e){toast("Lesson not found. Timer stopped; no record was changed.");return;}completeLesson(t.lessonId,{min:55,start:t.startText,end:hhmm(new Date()),session:t.session});}
 function renderTimerMini(){const m=$("timerMini"),cur=document.querySelector(".tab.active")?.dataset.tab,show=!!timer&&cur!=="overview";m.classList.toggle("hidden",!show);if(show)m.textContent=`⏱ ${timer.label} · ${clock(Math.max(0,55*60000-Math.min(55*60000,elapsedMs())))} left${timer.runFrom?"":" · paused"}`;}
 function renderTimer(){const on=!!timer;$("timerBar").classList.toggle("hidden",!on);document.body.classList.toggle("timing",on);renderTimerMini();if(!on){clearInterval(timerTick);timerTick=null;return;}
  let el=Math.min(55*60000,elapsedMs());if(el>=50*60000&&!timer.spoken50){timer.spoken50=true;timerSave();speakBn("আপনার লেসনের আর ৫ মিনিট বাকি।");}if(el>=55*60000){finishTimerAt55();return;}const left=Math.max(0,55*60000-el),pct=Math.min(100,el/(55*60000)*100);
