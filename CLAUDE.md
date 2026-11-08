@@ -109,6 +109,15 @@ The owner should not have to ask for polish. For every UI change, work as a seni
 - Fix any unprofessional detail found in the touched screen in the same PR (within scope), and say honestly what could not be verified (e.g. real iPhone).
 - After every change, run the regression tests again and report the result.
 
+## 7b. Keep GitHub up to date for the other agent — standing owner instruction (2026-11-08)
+
+Whenever Claude finishes work, merges something or changes anything, it must record it on GitHub so ChatGPT (and the owner) can read the current state without being told in chat:
+
+- Add or update a dated entry in the `AGENT_SYNC.md` Message log (what changed, PR link, tests run / not run, what the other agent must know) and refresh "Latest verified project state" (main SHA, footer version, cache version, deployment evidence).
+- Update `PROJECT_STATE.md` for every app release (CLAUDE.md §8) and correct statements that became untrue.
+- Comment on any PR that was updated or tested with the facts (commit, conflicts resolved, test results, what is unverified).
+- Documentation-only updates still go through a branch and a Draft PR (never directly to `main`); open it as part of the same piece of work and tell the owner the PR link. Never claim deployment, iPhone testing or cloud sync was verified without evidence.
+
 ## 8. Service worker and release versioning
 
 - Every change to an app asset served/cached by the service worker must increment the cache name in `sw.js` to the next unused version.
