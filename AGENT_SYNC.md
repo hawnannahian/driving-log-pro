@@ -4,9 +4,9 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no merge without the owner, no student data in the repo).
 
 ## Latest verified project state (update on every release)
-- **Latest `main` = `761ac912e25192bc7ce90e3de17b7849d03edcfe`** (PR #93 docs sync, checked 2026-11-08). Footer **v1.30**, service-worker cache **`nahians-schedule-cache-v92`**.
+- **Latest `main` = `e97cc72f1761b9b7ba8c50739f153926286d5f66`** (PR #95 prayer-time guard, checked 2026-11-08). Footer **v1.32**, service-worker cache **`nahians-schedule-cache-v94`**. PR #94 (Overview) branch carries v1.33 / v95 after merging this main.
 - **PR #92 merged:** https://github.com/hawnannahian/driving-log-pro/pull/92. Three-dot control on the Log heading opens Settings directly on the first tap; no dropdown/intermediate menu. Settings remains inside Log; Back to Records returns to the records panel. Existing Voice, Push, Working Hours, Prayer Time and WhatsApp settings/IDs/handlers are preserved.
-- **Deployment is NOT verified for 761ac91.** The available commit-workflow lookup returned no runs because it filters to PR-triggered runs; combined commit statuses were empty. Check the GitHub Pages workflow separately before claiming deployment.
+- **Deployment:** Pages workflow run #145 for `e97cc72` = success (build/deploy evidence only; no iPhone/device test). Not verified for the PR #94 branch.
 - **PR #92 source checks (from its merged PR description):** seven JS files parsed with V8 `new Function`; no duplicate HTML IDs; obsolete dropdown markup/styles/handlers removed; direct click and Back handlers confirmed. Current source inspection also found 304 HTML IDs with no duplicates, seven local script references, cache v92. **No Playwright/browser screenshots, real iPhone, two-device cloud-sync, live-data or live push-delivery test was performed for #92.** The repository has no committed test suite.
 - `push-config.js` is loaded by `index.html`, but is still absent from `sw.js` `FILES`; its API URL is empty. Push backend remains unconfigured/not deployed.
 - Open PRs: #73 (Calendar/WhatsApp controls in Log Settings; old, check for overlap before touching) and #13 (WhatsApp pasted-number fix; old branch, inspect before touching). Do not edit either without owner direction.
@@ -45,7 +45,7 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 | Area | Files | Active work |
 |---|---|---|
 | Packages / courses UI + accounting | `app.js` (course/package functions), profile/payments markup | Phases 1–4 are merged (#79, #82–#87). **Change-controlled: see "Course allocation code — change control".** No open course PR. |
-| Overview dashboard | `index.html`, `styles.css`, `app.js`, `sw.js` | ChatGPT PR #94 draft: owner-approved Overview visual refresh; no earnings; voice/push remain in Log Settings |
+| Overview dashboard | `index.html`, `styles.css`, `app.js`, `sw.js` | ChatGPT PR #94 draft: owner-approved Overview visual refresh; no earnings; voice/push remain in Log Settings | (merged with main e97cc72; v1.33/v95)
 | Calendar / Log / record form | `app.js`, `index.html`, `styles.css` | PRs #90–#92 merged: Voice/Push moved into Log Settings; three-dot control opens Settings directly. No active Log UI task claimed |
 | Reports dashboard | `reports-dashboard.js`, reports markup | none claimed |
 | Islamic tab | `islamic*.js`, audio files | none claimed (owner may remove audio before selling) |
@@ -140,3 +140,9 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Static checks: all seven local JS files parsed using V8 `new Function`; no duplicate HTML IDs; all seven local script references resolve; Overview contains no earnings/revenue/collected/expenses/profit labels; Voice/Push controls are absent from Overview and remain in Log Settings; Add lesson button is wired to existing `newRecord()`.
 - Not run: `node --check` in a local checkout, browser/Playwright screenshots or interactions at 390×844 and 320×568, real iPhone/Home Screen test, GitHub Pages deployment.
 - No data/accounting/timer/course/payment logic changed. Do not edit this branch; owner review required. No merge or deployment authorized.
+
+
+### 2026-11-08 — Claude → ChatGPT (PR #94 updated at the owner's explicit request)
+- The owner explicitly directed Claude to update PR #94: `main` e97cc72 (PR #95) was merged into `ui/overview-dashboard-redesign-2026-11-08` (normal merge commit, no force-push). Conflicts: `sw.js` (cache -> v95), `index.html` footer (-> v1.33), `styles.css` (kept both appended CSS blocks). PROJECT_STATE.md/AGENT_SYNC.md refreshed for the new main and numbers. Your Overview changes and the PR #95 prayer-guard code (`prayerBlocks`, `prayerDay`, `prayerConflict`, `suggestLessonTimes`, `refreshPrayerGuard`, `#prayerWarn`) are both intact; no prayer-guard logic was changed.
+- Open owner question recorded: the owner's latest message lists Voice Announcements and Lock-screen Notifications as part of the approved Overview design, while merged PR #90 moved them to Log → Settings and this PR keeps them there. Nothing was moved; the owner must decide.
+- Tests: see the PR #94 comment (Chromium 390×844 and 320×568, synthetic data). Not tested: real iPhone, deployment of this branch.

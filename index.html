@@ -277,7 +277,7 @@
         <p class="lessonfield formhint">Name or phone: one is enough.</p></section>
         <section class="record-panel record-time-panel wide"><div class="record-panel-title">Lesson time</div><div class="record-time-grid"><label class="lessonfield">Start time<input type="time" id="fStart" value="10:00"></label>
         <label class="lessonfield">End time<input type="time" id="fEnd" value="11:00"></label></div>
-        <div class="record-subtitle">Duration</div><div class="chiprow durchips lessonfield wide" id="durChips" role="group" aria-label="Lesson length"><button type="button" data-dur="30">30 m</button><button type="button" data-dur="60">1 h</button><button type="button" data-dur="90">1.5 h</button><button type="button" data-dur="120">2 h</button><button type="button" data-dur="180">3 h</button></div><div class="record-duration-summary" id="recordDurationSummary" aria-live="polite"></div></section>
+        <div class="record-subtitle">Duration</div><div class="chiprow durchips lessonfield wide" id="durChips" role="group" aria-label="Lesson length"><button type="button" data-dur="30">30 m</button><button type="button" data-dur="60">1 h</button><button type="button" data-dur="90">1.5 h</button><button type="button" data-dur="120">2 h</button><button type="button" data-dur="180">3 h</button></div><div class="record-duration-summary" id="recordDurationSummary" aria-live="polite"></div><div class="timewarn hidden" id="prayerWarn" role="alert" aria-live="polite"></div></section>
         <section class="record-panel record-rate-panel wide"><label class="lessonfield rate-field">Hourly rate (€)<input type="number" id="fRate" min="0" step=".01" inputmode="decimal" placeholder="Enter amount"><small>Set the rate for this lesson. No default amount is applied.</small></label>
         <label class="costfield">Cost (€)<input type="number" id="fCost" min="0" step=".01" value="0"></label>
         <label class="kmfield">Odometer (km)<input type="number" id="fKm" min="0" step=".1" value="0"></label>
@@ -408,7 +408,7 @@
     <button class="tab" data-tab="islamic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M6.5 20v-6.5c0-3 2.5-5 5.5-6.5 3 1.5 5.5 3.5 5.5 6.5V20"/><path d="M12 4.5v2.5"/><path d="M10 20v-3a2 2 0 0 1 4 0v3"/><path d="M3.5 20v-8M20.5 20v-8"/></svg><span>Islamic</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.31</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.33</span></footer>
   <script src="push-config.js"></script>
   <script src="prayer-times.js"></script>
   <script src="full-time-students.js"></script>

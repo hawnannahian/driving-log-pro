@@ -1,6 +1,6 @@
 # PROJECT_STATE — Driving Log Pro
 
-শেষ যাচাই: 2026-11-08 · সর্বশেষ `main`: `761ac912e25192bc7ce90e3de17b7849d03edcfe` (PR #93, v1.30/cache v92). নতুন Overview redesign branch: `ui/overview-dashboard-redesign-2026-11-08` (প্রস্তাবিত v1.31/cache v93; Draft PR review pending). পুরনো তারিখের অংশগুলো ইতিহাস; বর্তমান আচরণের জন্য live source on `main`-ই authoritative.
+শেষ যাচাই: 2026-11-08 · সর্বশেষ `main`: `e97cc72f1761b9b7ba8c50739f153926286d5f66` (PR #95, v1.32/cache v94). Overview redesign branch (Draft PR #94, `ui/overview-dashboard-redesign-2026-11-08`) এখন main-এর সাথে merge করা; প্রস্তাবিত v1.33/cache v95; review pending। পুরনো তারিখের অংশগুলো ইতিহাস; বর্তমান আচরণের জন্য live source on `main`-ই authoritative.
 
 ## কাজের নিয়ম
 - মালিককে উত্তর দিন বাংলায় এবং খুব সংক্ষেপে: কাজ শেষ হলে শুধু "হয়ে গেছে" + লিংক; না হলে অল্প কথায় কারণ।
@@ -10,11 +10,11 @@
 - Public repository-তে কখনো student data, CSV/JSON backup, token বা private data commit করবেন না।
 - Source update, Pages deployment success এবং real iPhone runtime test—তিনটি আলাদা verification status হিসেবে রিপোর্ট করুন।
 
-## Current verified state (main 761ac91, checked 2026-11-08)
+## Current verified state (main e97cc72, checked 2026-11-08)
 
-**Release:** footer `v1.30` (`index.html`), service-worker cache `nahians-schedule-cache-v92` (`sw.js`). Both verified in current `main` at `761ac91`.
+**Release:** footer `v1.32` (`index.html`), service-worker cache `nahians-schedule-cache-v94` (`sw.js`). Both verified in current `main` at `e97cc72`.
 **Latest change:** PR #92 is merged. The Log heading's three-dot control opens Settings immediately on the first tap; no dropdown or intermediate Settings tab. Settings stays inside Log; Back to Records returns to the records panel.
-**Deployment:** GitHub Pages deployment for `761ac91` was not confirmed in this check. The available commit-workflow lookup returned no runs (it filters to PR-triggered runs), and combined commit statuses were empty. Do not claim the Pages site is updated until the Pages workflow is checked separately.
+**Deployment:** GitHub Actions "pages build and deployment" run #145 (id 42520093329) for `e97cc72` finished `success` on 2026-11-08 — evidence of a successful Pages build/deploy only, not a device test. Deployment of this Overview branch is not verified.
 **PR #92 checks (as recorded in its merged PR description):** all seven repository JavaScript files parsed with V8 `new Function`; no duplicate HTML IDs; dropdown markup/styles/handlers removed; direct three-dot click and Back to Records handlers confirmed; branch was 5 commits ahead and 0 behind before merge. These are source-level checks, not browser tests.
 **Additional source check in this handover:** current `index.html` has 304 IDs and no duplicate IDs; it loads seven local JS files. `sw.js` cache is v92. `push-config.js` is loaded by `index.html` but is not in the service-worker `FILES` list. No Playwright/browser screenshots, real iPhone Safari/Home Screen test, two-device cloud-sync test, live-data test, or push-delivery test was performed for PR #92. The repo has no committed test suite.
 **Tabs:** Overview, Calendar, Log, Students, Reports, Islamic. Student profile tabs (`PROFILE_TABS`): Overview, Lessons, Course, Payments, Legacy (only when an archive exists for the student), Attendance.
@@ -61,6 +61,16 @@
 7. Real iPhone testing of everything above (date inputs in the Add course/Add payment sheets, default tick, pooled booking), two-device cloud sync, offline start and Pages behaviour on the phone remain unverified.
 8. Prayer-time timetable has not been compared with a trusted Portugal timetable. Third-party audio/recording licences are unconfirmed (see Islamic Companion notes below).
 
+### 2026-11-08 — v1.32 (cache v94): Prayer-time conflict guard (branch `fix/prayer-conflict-suggest`)
+- **Not a false positive:** the reported case (lesson 16:30–17:30, Maghrib block 17:16–17:31) is a genuine overlap; the overlap test `a<blockEnd && blockStart<b` was already correct. The work fixed the real defects around it:
+  1. **Timezone bug:** `prayerDay()` used the *device's* UTC offset, not the prayer city's. On a device outside Portugal times shifted by hours (verified on `main`: Maghrib 17:31 in Lisbon/UTC, 23:31 with a Dhaka device, 12:31 with a New York device). It now uses the city's IANA timezone (`tzOffsetHours()`, DST-aware). Identical results on every device timezone; DST steps verified (2026-03-29 about +60 min, 2026-10-25 about −60 min).
+  2. **Asr was missing from autumn to spring** and wrong in summer: the code passed `90−asrAltitude` to the hour-angle function (unreachable → no Asr block between ~Sept and March; June gave 16:23). Now `hourAngle(asrAlt)` (standard shadow factor 1): Lisbon 2026-11-08 Asr 15:08, 2026-06-21 17:34. Because Asr blocks now exist in winter, some winter slots that used to be bookable are blocked; existing lessons are not touched. Timetable still not compared with a trusted Portugal timetable.
+  3. **Quick booking could override a prayer block** ("Book anyway?"). Prayer overlap is now a hard block there too. The record save handler also checks prayer time *before* the lesson-clash prompt.
+- New shared helpers: `lessonSpan`, `prayerConflict(date,start,end)` (overlap incl. past-midnight lessons, checks the next day's blocks, boundaries touching are allowed), `suggestLessonTimes()` (nearest valid start of the same length, snapped to 5 min, respects prayer blocks, other lessons, working hours, not in the past today; up to two: nearest before/after), `prayerMessage()`, `refreshPrayerGuard()`.
+- Record form: inline amber warning `#prayerWarn` ("Your lesson overlaps with Maghrib (a–b). Suggested alternative: x–y.") with "Use x–y" buttons that keep the duration and recompute the end; **Save record is disabled** while a new or moved lesson overlaps prayer time; revalidated on start/end/date/duration/type changes and again in the submit handler. A saved lesson whose date/start/end are unchanged is not locked out (it shows an informational note; the old "Keep existing lesson?" confirm remains). Expenses are never affected.
+- Payments, rates, course/individual logic, dashboard design: unchanged. No data/schema change. At 320px time inputs lose the clock icon and get tighter padding so "PM" is not clipped.
+- Not changed: CSV import (historical rows) and the Repeat-copy skip logic; the "next prayer" line still compares Lisbon clock times with the device clock (only correct on a Portugal-time device).
+
 ## Architecture
 - Vanilla JavaScript PWA; build step নেই; GitHub Pages: `main`, root.
 - Main files: `index.html`, `styles.css`, `app.js`, `reports-dashboard.js` (Reports dashboard, loaded after app.js), `islamic-content.js` (dua/tasbih text only) + `islamic.js` (Islamic tab), `prayer-times.js`, `full-time-students.js`, `sw.js`, `manifest.webmanifest`.
@@ -69,8 +79,8 @@
 - Full-Time historical register key: `driving-log-pro-full-time-v1`; records keyed by `legacy_student_id`, isolated from normal lesson accounting.
 - Main app exposes a narrow `window.DrivingLogFullTime` bridge (getAll/replace/clear) so full-time data can participate in backup/sync without mixing into lesson accounting.
 - Cloud sync stores `driving-log.json` in the user's own private GitHub data repository; token remains in that browser's localStorage.
-- Current `main` service-worker cache: `nahians-schedule-cache-v92` (verified at 761ac91). The Overview redesign branch proposes v93.
-- Current `main` footer version: `v1.30` (verified at 761ac91). The Overview redesign branch proposes v1.31. CSS comments may refer to feature revision, not app release.
+- Current `main` service-worker cache: `nahians-schedule-cache-v94` (verified at e97cc72). The Overview redesign branch (PR #94) proposes v95.
+- Current `main` footer version: `v1.32` (verified at e97cc72). The Overview redesign branch proposes v1.33. CSS comments may refer to feature revision, not app release.
 
 ## Fresh Course system + Legacy Archive (history; the Course bullet below is corrected for current main — see "Current verified state")
 - **Legacy Archive (read-only):** old prepaid packages are moved once into `state.legacy.packages` (original objects verbatim + `archive:{at,v,lessonIds}`) by `migrateLegacy()` on load, restore and cloud merge. Idempotent: an archived id is never copied again or overwritten. A recoverable copy is kept first in `driving-log-pro-v1-before-legacy` (Reports → Safety copies); if it cannot be saved nothing is moved and `pkgs()` still reads leftover `state.packages`, so figures never change. `pkgs()` = archive + leftovers; the old engine (`recomputeAlloc`, `income`, `studentStats` legacy parts) keeps reading it, so historical revenue/hours/payments are identical (verified against `main` with a synthetic seed). Lessons keep `e.pkg` (history). Archived records are never edited; only the student label follows renames/merges.
@@ -422,11 +432,12 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Footer is v1.30; service-worker cache is v92.
 - PR #92 merged as `d1d9377`. Source-level checks are recorded above. Browser/Playwright screenshots at 390×844 and 320×568, real iPhone testing and Pages deployment were not verified in this handover.
 
-### 2026-11-08 — Overview dashboard refresh (proposed v1.31 / cache v93)
+### 2026-11-08 — Overview dashboard refresh (proposed v1.33 / cache v95)
 - Owner-approved UI task: refresh the existing Overview screen using its real current content and interactions, not the earlier generic mockup.
 - Added a clear Overview heading and an Add lesson shortcut wired to the existing `newRecord()` flow. Restyled the existing next-lesson card, Today/Next Day lesson rows, prayer line, Travel Dua card, app header and bottom navigation for a cleaner blue/white mobile-first presentation.
 - No earnings, revenue, collected cash, expenses, profit or financial charts were added to Overview. Financial reporting remains on Reports.
 - Voice Announcements and Lock-screen Notifications remain in Log → Settings as established by PR #90; they were deliberately NOT moved back to Overview despite appearing in the initial concept image.
 - No lesson, timer, payment, course, allocation, student, storage or sync logic/data schema changed. Existing timer remains its floating compact timer; lesson rows and Travel Dua keep their existing IDs and handlers.
-- Footer version proposed as v1.31; service-worker cache proposed as v93.
+- Claude (at the owner's request) enlarged the Travel Dua "Open in Islamic tab" link to a 44px tap area (CSS only).
+- Footer version proposed as v1.33; service-worker cache proposed as v95 (renumbered from v1.31/v93 after PR #95 merged as v1.32/v94). Main `e97cc72` was merged into this branch on 2026-11-08 at the owner's explicit direction; conflicts were only in `sw.js`, `index.html` footer and `styles.css` (both appended CSS blocks kept). The PR #95 prayer-guard code is unchanged.
 - Browser screenshots at 390×844 and 320×568, all-tab interaction checks, real iPhone testing and deployment have not yet been verified. Do not claim completion until actual checks are performed.
