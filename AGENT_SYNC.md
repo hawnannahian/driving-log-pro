@@ -4,20 +4,20 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no merge without the owner, no student data in the repo).
 
 ## Latest verified project state (update on every release)
-- **Latest `main` = `e6b03e2c2c1478a36c64f6e6b39be097d63b5f37`** (PR #98 merged, 2026-11-08). Footer **v1.36**, service-worker cache **`nahians-schedule-cache-v98`**.
-- **Latest deployment evidence:** GitHub Pages workflow run #42529356204 for `e6b03e2` completed successfully. This does not verify real iPhone behavior.
+- **Latest `main` = `0cd6ad143590a0450d61244facbadb8ed51a71a1`** (PR #99 merged, 2026-11-08). Footer **v1.37**, service-worker cache **`nahians-schedule-cache-v99`**.
+- **Latest deployment evidence:** GitHub Pages workflow run #150 / #42530331667 for `0cd6ad1` completed successfully. This does not verify real iPhone behavior.
 - **PR #98 merged:** https://github.com/hawnannahian/driving-log-pro/pull/98. Legacy Archive deletion rebuilds FIFO allocations, budgets package hours from actual receipts, consumes allocations chronologically (including partial/extra-hour lessons), and only auto-marks fully funded completed lessons Paid. Six focused scenarios, an integration harness and all eight JS syntax checks passed before merge.
-- **PR #99 draft:** https://github.com/hawnannahian/driving-log-pro/pull/99. Proposed v1.37/cache v99 exposes the existing weekly Repeat selector for new lessons only and adds `push-config.js` to Service Worker precache. Eight JS syntax checks, 307 HTML IDs / 0 duplicates, seven script refs, CSS brace balance, Repeat visibility checks, a synthetic pooled-repeat allocation test and a synthetic merge test passed. No browser, real iPhone or live sync test.
-- `push-config.js` remains configured with an empty API URL on `main`; the Cloudflare Worker is not deployed/configured. PR #99 only precaches the config file; it does not activate Web Push.
+- **PR #99 merged:** https://github.com/hawnannahian/driving-log-pro/pull/99. Weekly Repeat is visible for new Lesson records only (hidden for edits/non-lessons); `push-config.js` is in the Service Worker precache. Eight JS syntax parses, 307 HTML IDs / 0 duplicates, seven script refs, CSS brace balance, Repeat visibility checks, synthetic pooled-repeat allocation and synthetic merge checks passed. No rendered browser, real iPhone or live sync test.
+- `push-config.js` API URL remains empty; Cloudflare Worker is not deployed/configured. Precache alone does not activate Web Push.
 - Other open PRs: #73 and #13; neither was changed.
 - Full release history and current source details: `PROJECT_STATE.md`.
 
 ## Where we stopped and what comes next (handover, 2026-11-08)
-**Done and merged:** #82–#87 course work; #90–#92 Log Settings; #94 Overview redesign; #95 prayer-time guard; #96 handover rules; #97 New Record smart booking; #98 Legacy Archive deletion payment-status fix. Latest main: `e6b03e2`, footer v1.36, cache v98; Pages workflow #42529356204 succeeded.
+**Done and merged:** #82–#87 course work; #90–#92 Log Settings; #94 Overview redesign; #95 prayer-time guard; #96 handover rules; #97 New Record smart booking; #98 Legacy Archive deletion payment-status fix; #99 weekly Repeat visibility + push-config precache. Latest main: `0cd6ad1`, footer v1.37, cache v99; Pages workflow #42530331667 succeeded.
 **Owner decisions in force:** custom courses only (hours + price per student), UI word "Course"; hours pooled across a student's courses, money per course; Claude replies in Bangla and concise; never merge/deploy without explicit owner approval; no student data in the repo; owner performs real-iPhone checks.
 **Current verified follow-ups / known issues:**
 1. Legacy Archive deletion payment-status fix is merged in PR #98. Previously mis-marked Paid historical lessons have not been automatically repaired or reviewed against live records.
-2. Draft PR #99 adds `push-config.js` to Service Worker precache (v99) and exposes the existing weekly Repeat selector. It is not merged/deployed; main remains v1.36/cache v98. Push API URL remains empty and Cloudflare backend is not deployed.
+2. PR #99 is merged/deployed: new Lesson records show the existing weekly Repeat selector; edits/non-Lesson records hide it. `push-config.js` is precached. Push API URL remains empty and Cloudflare backend is not deployed/configured.
 3. Real iPhone/Home Screen PWA test for the New Record modal, course sheets, timer and notifications is still pending; owner performs this test.
 4. Two-device cloud sync of `courseAlloc` and broader live-data checks remain unverified. A synthetic merge test passed, but this is not a live device test.
 5. Old local test scripts (`cfix2`, `delete-legacy`, `fresh-course`, `p2`) are stale; no committed test suite exists.
@@ -70,9 +70,10 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 
 ## Still open
 - Legacy Archive deletion payment-status fix is merged in PR #98 (`e6b03e2`, v1.36/cache v98). Earlier PR #42 was not merged; previously mis-marked Paid historical lessons are not auto-repaired.
-- On main, `push-config.js` is not in `sw.js` `FILES`; Draft PR #99 adds it to the precache. Its API URL remains empty until Cloudflare Worker deployment/configuration.
+- PR #99 is merged in `main` (`0cd6ad1`, v1.37/cache v99): weekly Repeat is available on new Lesson records only; `push-config.js` is in `sw.js` `FILES`.
+- Push remains inactive: API URL in `push-config.js` is empty; Cloudflare Worker deployment/configuration, VAPID keys, private secrets and a real contact URI are still required.
 - Old local test scripts (cfix2, delete-legacy, fresh-course, "p2") are stale; nothing is committed to the repo as tests.
-- Weekly Repeat control is hidden on main; Draft PR #99 exposes it for new Lesson records only. Real iPhone and live two-device sync tests remain pending.
+- Real iPhone and live two-device sync tests remain pending. PR #99's merge test used synthetic data only.
 - Selling the app: remove third-party audio, add business name/currency/rate settings, license key, privacy policy. Owner decides scope and timing.
 
 ## Message log (append only, newest last)
@@ -186,3 +187,13 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Not run: rendered browser/Playwright, 390×844 / 320×568 screenshots, real iPhone Safari/Home Screen, live two-device sync, push delivery or Cloudflare deployment.
 - Push Worker remains undeployed; `push-config.js` API URL remains empty. No VAPID keys, secrets or live student data were accessed.
 - PR #99 is draft and not merged/deployed.
+
+### 2026-11-08 — ChatGPT → Claude / owner (PR #99 merged; v1.37 handover)
+- Verified `main` = `0cd6ad143590a0450d61244facbadb8ed51a71a1`; PR #99 merged at this commit. Footer v1.37 and Service Worker cache v99.
+- GitHub Pages workflow run #150 / #42530331667 succeeded for `main` commit `0cd6ad1`.
+- PR #99 implementation: weekly Repeat shown for new Lesson records only, hidden for edits/non-lessons; `push-config.js` added to Service Worker precache. No accounting, course allocation, storage schema, backup/restore or sync merge behavior changed.
+- Merged PR checks: 8 JS syntax parses; 307 HTML IDs / 0 duplicates; 7 local script refs resolve; CSS braces balanced; focused Repeat visibility checks; synthetic pooled-repeat allocation and synthetic two-device merge checks passed.
+- Not tested: rendered browser/Playwright, 390×844 / 320×568 screenshots, real iPhone Safari/Home Screen, live two-device cloud sync, push delivery, Cloudflare Worker deployment. Pages workflow success is not iPhone verification.
+- Push remains inactive: API URL empty; Cloudflare Worker/VAPID/private secrets/contact URI/deployment still need owner-authorized setup. Do not claim push notifications work.
+- Open PRs #73 and #13 remain untouched; review stale base/overlap before action. Previously mis-marked Legacy Archive Paid lessons are not auto-repaired.
+- Docs-only handover refresh; no app source/data/cache/footer change.
