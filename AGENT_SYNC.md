@@ -4,28 +4,26 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no merge without the owner, no student data in the repo).
 
 ## Latest verified project state (update on every release)
-- **Latest `main` = `b3caa4e026cc4369e4c3f6f7e025fc18dc36a932`** (PR #97 merged, 2026-11-08). Footer **v1.35**, service-worker cache **`nahians-schedule-cache-v97`**.
-- **Latest deployment evidence:** GitHub Pages workflow run #42525401396 for `b3caa4e` completed successfully. This does not verify real iPhone behavior.
-- **PR #97 merged:** https://github.com/hawnannahian/driving-log-pro/pull/97. New Record smart-booking UX: recently completed student chips, recency-ranked autocomplete, Today/Tomorrow date shortcuts and a modal with only the inner fields scrolling.
-- **PR #97 checks:** all eight JS files parsed; 307 HTML IDs / 0 duplicates; seven local script references resolve; CSS braces balanced; cache v97/footer v1.35 confirmed. No rendered browser/touch test, real iPhone Safari/Home Screen test or two-device cloud-sync test was run.
-- **PR #98 proposed on branch `fix/legacy-archive-delete-payment-status-2026-11-08`:** Legacy Archive deletion now rebuilds FIFO allocations, budgets paid hours per package from money received, consumes each completed lesson's allocation in chronological order (including partial/extra-hour cases), and only auto-marks fully cash-covered completed lessons Paid. Existing explicit Paid status is preserved. Six focused scenarios and a deletion integration harness passed; all eight JS syntax checks passed. Footer v1.36/cache v98 proposed. PR not yet merged or deployed; browser/iPhone/sync tests not run.
-- `push-config.js` is loaded by `index.html` but remains absent from `sw.js` `FILES`; its API URL is empty and the push backend is not deployed/configured.
-- Other open PRs: #73 and #13; neither overlaps this Legacy Archive fix and neither was modified.
+- **Latest `main` = `e6b03e2c2c1478a36c64f6e6b39be097d63b5f37`** (PR #98 merged, 2026-11-08). Footer **v1.36**, service-worker cache **`nahians-schedule-cache-v98`**.
+- **Latest deployment evidence:** GitHub Pages workflow run #42529356204 for `e6b03e2` completed successfully. This does not verify real iPhone behavior.
+- **PR #98 merged:** https://github.com/hawnannahian/driving-log-pro/pull/98. Legacy Archive deletion rebuilds FIFO allocations, budgets package hours from actual receipts, consumes allocations chronologically (including partial/extra-hour lessons), and only auto-marks fully funded completed lessons Paid. Six focused scenarios, an integration harness and all eight JS syntax checks passed before merge.
+- **PR #99 draft:** https://github.com/hawnannahian/driving-log-pro/pull/99. Proposed v1.37/cache v99 exposes the existing weekly Repeat selector for new lessons only and adds `push-config.js` to Service Worker precache. Eight JS syntax checks, 307 HTML IDs / 0 duplicates, seven script refs, CSS brace balance, Repeat visibility checks and a synthetic merge test passed. No browser, real iPhone or live sync test.
+- `push-config.js` remains configured with an empty API URL on `main`; the Cloudflare Worker is not deployed/configured. PR #99 only precaches the config file; it does not activate Web Push.
+- Other open PRs: #73 and #13; neither was changed.
 - Full release history and current source details: `PROJECT_STATE.md`.
 
 ## Where we stopped and what comes next (handover, 2026-11-08)
-**Done and merged:** #82 custom Add course sheet + default-tick fix; #83 delete course (if no linked lessons, even with payments); #84 Add course sheet styling; #85 UI/UX review rule; #86 multi-course profile summary + Add payment sheet; #87 pooled course hours (`courseAlloc`); #90 moved Voice Announcements and Lock-screen Notifications from Overview to Log Settings; #91 compact three-dot overflow; #92 direct-open Settings on first tap; #94 Overview redesign; #95 prayer-time guard; #96 GitHub handover rule; #97 New Record smart booking and scroll stability. Latest main: `b3caa4e`, footer v1.35, cache v97; Pages workflow #42525401396 succeeded.
+**Done and merged:** #82–#87 course work; #90–#92 Log Settings; #94 Overview redesign; #95 prayer-time guard; #96 handover rules; #97 New Record smart booking; #98 Legacy Archive deletion payment-status fix. Latest main: `e6b03e2`, footer v1.36, cache v98; Pages workflow #42529356204 succeeded.
 **Owner decisions in force:** custom courses only (hours + price per student), UI word "Course"; hours pooled across a student's courses, money per course; Claude replies in Bangla and concise; never merge/deploy without explicit owner approval; no student data in the repo; owner performs real-iPhone checks.
 **Current verified follow-ups / known issues:**
-1. Legacy Archive deletion bug is being fixed in owner-approved Draft PR #98: `https://github.com/hawnannahian/driving-log-pro/pull/98`. The branch rebuilds FIFO allocations, consumes actual paid-hour budgets chronologically (including partial/extra-hour lessons), and only auto-marks fully funded completed lessons Paid. Until PR #98 is merged, current main still has the old behavior.
-2. `push-config.js` is loaded but absent from service-worker cache `FILES`; push API URL is empty and backend is not deployed. Do not deploy/configure without explicit approval.
-3. Real iPhone/Home Screen PWA test for the new Log Settings flow and notifications is still pending.
-4. Two-device cloud sync of `courseAlloc` and broader live-data checks remain unverified.
-5. Old local test scripts (`cfix2`, `delete-legacy`, `fresh-course`, `p2`) are stale; nothing is committed as a test suite.
+1. Legacy Archive deletion payment-status fix is merged in PR #98. Previously mis-marked Paid historical lessons have not been automatically repaired or reviewed against live records.
+2. Draft PR #99 adds `push-config.js` to Service Worker precache (v99) and exposes the existing weekly Repeat selector. It is not merged/deployed; main remains v1.36/cache v98. Push API URL remains empty and Cloudflare backend is not deployed.
+3. Real iPhone/Home Screen PWA test for the New Record modal, course sheets, timer and notifications is still pending; owner performs this test.
+4. Two-device cloud sync of `courseAlloc` and broader live-data checks remain unverified. A synthetic merge test passed, but this is not a live device test.
+5. Old local test scripts (`cfix2`, `delete-legacy`, `fresh-course`, `p2`) are stale; no committed test suite exists.
 6. Selling-app preparation (third-party audio, business name/currency/rate settings, first-run screen, privacy/terms, licensing) remains undecided by owner.
-7. Optional decisions still pending: Calendar course lesson labels, hidden Repeat control, and whether to review/close old PRs #73 and #13.
+7. Open PRs #73 and #13 remain untouched; inspect overlap and stale branches before any action.
 **How to resume:** fetch latest main, read CLAUDE.md + PROJECT_STATE.md + AGENT_SYNC.md, check open PRs, then ask/act only on the owner's selected task.
-
 ## Course allocation code — change control (owner rule, 2026-11-08)
 **`courseAlloc`, `planCourseAlloc`, `allocParts`, `courseShareH`, `pooledFreeH`, `applyAlloc` and the related `course*` helpers (`courseLessons`, `courseDoneH`, `courseUsedH`, `courseFreeH`, `courseLeftH`, `courseBalance`, `courseDue`, `activeCourse`, `income()` course branch) must NOT be changed without first writing the proposed change in this file (Message log) and discussing it in the PR.** Money and hours bugs here affect real records. Do not change the shape of `courses`, `coursePayments` or `lesson.courseAlloc` without an approved compatibility plan.
 
@@ -45,7 +43,7 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 ## Areas (who is working where) — update when it changes
 | Area | Files | Active work |
 |---|---|---|
-| Packages / courses UI + accounting | `app.js` (course/package functions), profile/payments markup | Phases 1–4 are merged (#79, #82–#87). **Change-controlled: see "Course allocation code — change control".** ChatGPT Draft PR #98 fixes Legacy Archive deletion payment status; do not overlap this branch. |
+| Packages / courses UI + accounting | `app.js` (course/package functions), profile/payments markup | Phases 1–4 are merged (#79, #82–#87). **Change-controlled: see "Course allocation code — change control".** Legacy Archive deletion fix #98 is merged. PR #99 only exposes the existing Repeat selector; allocation helpers were not changed. |
 | Overview dashboard | `index.html`, `styles.css`, `app.js`, `sw.js` | ChatGPT PR #94 draft: owner-approved Overview visual refresh; no earnings; voice/push remain in Log Settings | (merged with main e97cc72; v1.33/v95)
 | Calendar / Log / record form | `app.js`, `index.html`, `styles.css` | PRs #90–#92 merged: Voice/Push moved into Log Settings; three-dot control opens Settings directly. No active Log UI task claimed |
 | Reports dashboard | `reports-dashboard.js`, reports markup | none claimed |
@@ -178,3 +176,12 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Updated footer to v1.36 and service-worker cache to v98. Proposed PR #98: https://github.com/hawnannahian/driving-log-pro/pull/98
 - Targeted checks: all eight JS files parse; six helper scenarios pass; deletion integration harness passes for completed funded, upcoming and extra-hour lesson cases. Synthetic data only.
 - Not run: rendered browser/Playwright, real iPhone Safari/Home Screen, two-device cloud sync or live data. No deployment until merge and successful Pages workflow.
+
+
+### 2026-11-08 — ChatGPT → Claude / owner (PR #99)
+- Main verified at `e6b03e2c2c1478a36c64f6e6b39be097d63b5f37`, v1.36/cache v98; Pages run #149 / #42529356204 succeeded after PR #98.
+- Draft PR #99: https://github.com/hawnannahian/driving-log-pro/pull/99 — expose weekly Repeat for new Lesson records only; keep it hidden for edits/non-lessons; precache `push-config.js`; footer v1.37/cache v99.
+- Tests: all 8 JS syntax parses; 307 HTML IDs / 0 duplicates; 7 script refs; CSS braces balanced; focused Repeat visibility checks; synthetic cloud merge preserved pooled `courseAlloc`, courses, course payments and Full-Time rows.
+- Not run: rendered browser/Playwright, 390×844 / 320×568 screenshots, real iPhone Safari/Home Screen, live two-device sync, push delivery or Cloudflare deployment.
+- Push Worker remains undeployed; `push-config.js` API URL remains empty. No VAPID keys, secrets or live student data were accessed.
+- PR #99 is draft and not merged/deployed.
