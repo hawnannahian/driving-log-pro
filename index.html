@@ -326,6 +326,12 @@
 <label>Start date<input id="courseDate" type="date" required></label>
 <label>First payment (€) · optional<input id="courseFirstPayment" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Leave empty if unpaid"></label>
 <p id="courseError" class="formerror" role="alert"></p><div class="dialogactions"><button type="button" class="btn ghost" id="courseDialogCancel">Cancel</button><span></span><button type="submit" class="btn primary">Add course</button></div></form></dialog>
+<dialog id="payDialog" class="course-dialog"><form id="payForm" novalidate>
+<div class="dialoghead"><div><p class="eyebrow">COURSE PAYMENT</p><h2>Add payment</h2><p class="muted" id="payStudentName"></p></div><button type="button" class="iconbtn" id="payDialogClose" aria-label="Close">×</button></div>
+<label>Course<select id="payCourse"></select></label>
+<p class="course-rate-preview" id="payDueInfo"></p>
+<div class="course-form-grid pay-grid"><label>Amount (€)<input id="payAmount" type="number" min="0" step="0.01" inputmode="decimal" required></label><label>Date<input id="payDate" type="date" required></label></div>
+<p id="payError" class="formerror" role="alert"></p><div class="dialogactions"><button type="button" class="btn ghost" id="payDialogCancel">Cancel</button><span></span><button type="submit" class="btn primary">Save payment</button></div></form></dialog>
   <dialog id="quickDialog">
     <form method="dialog" id="quickForm">
       <div class="dialoghead"><div><p class="eyebrow">LESSON</p><h2 id="qName"></h2><p class="muted" id="qInfo"></p></div><button type="button" class="iconbtn" data-close aria-label="Close">×</button></div>
@@ -395,7 +401,7 @@
     <button class="tab" data-tab="islamic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M6.5 20v-6.5c0-3 2.5-5 5.5-6.5 3 1.5 5.5 3.5 5.5 6.5V20"/><path d="M12 4.5v2.5"/><path d="M10 20v-3a2 2 0 0 1 4 0v3"/><path d="M3.5 20v-8M20.5 20v-8"/></svg><span>Islamic</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.25</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.26</span></footer>
   <script src="push-config.js"></script>
   <script src="prayer-times.js"></script>
   <script src="full-time-students.js"></script>

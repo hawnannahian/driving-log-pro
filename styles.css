@@ -1997,3 +1997,14 @@ dialog.course-dialog[open]{display:flex;flex-direction:column}
 @media(max-width:390px){.course-dialog form{padding:0;gap:12px}.course-dialog .dialoghead{padding:14px 16px 10px}.course-dialog form>label,.course-dialog form>.course-form-grid,.course-dialog form>.course-rate-preview,.course-dialog form>.formerror{margin-left:16px;margin-right:16px}.course-dialog .dialogactions{padding-left:16px;padding-right:16px}}
 dialog.course-dialog{height:fit-content;max-height:min(90dvh,760px)}
 .course-dialog form{flex:0 1 auto;max-height:min(90dvh,760px)}
+
+/* Add payment sheet + multi-course summary */
+.course-dialog select{width:100%;min-width:0;min-height:48px;padding:11px 12px;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);font:inherit;font-size:16px;box-sizing:border-box}
+.course-dialog label[hidden]{display:none}
+.coursesum-rows{display:grid;gap:2px;margin:4px 0 8px}
+.coursesum-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+.coursesum-row:last-child{border-bottom:0}
+.coursesum-row .nm{font-weight:750;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.coursesum-row span:nth-child(2){color:#53627b;font-variant-numeric:tabular-nums}
+.coursesum-row .unpaid,.coursesum-row .paid{font-weight:800;font-variant-numeric:tabular-nums}
+@media(max-width:360px){.pay-grid{grid-template-columns:1fr}}
