@@ -706,7 +706,7 @@ document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>b.closest("di
 const logMenuToggle=$("logMenuToggle"),showLogSettings=()=>{$("logRecordsPanel").classList.add("hidden");$("logSettingsPanel").classList.remove("hidden");renderPrayerPreview();$("logSettingsBack").focus();},showLogRecords=()=>{$("logSettingsPanel").classList.add("hidden");$("logRecordsPanel").classList.remove("hidden");};
 logMenuToggle.onclick=showLogSettings;
 $("logSettingsBack").onclick=()=>{showLogRecords();logMenuToggle.focus();};
-initWaTemplateSettings();$("addRecordBtn").onclick=newExpense;$("calAddBtn").onclick=()=>newRecord(cal.day);$("calPrev").onclick=()=>calMove(-1);$("calNext").onclick=()=>calMove(1);document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>setCalView(b.dataset.view));$("addStudentBtn").onclick=newStudent;$("fType").onchange=toggleLessonFields;
+initWaTemplateSettings();$("addRecordBtn").onclick=newExpense;$("overviewAddLesson").onclick=()=>newRecord();$("calAddBtn").onclick=()=>newRecord(cal.day);$("calPrev").onclick=()=>calMove(-1);$("calNext").onclick=()=>calMove(1);document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>setCalView(b.dataset.view));$("addStudentBtn").onclick=newStudent;$("fType").onchange=toggleLessonFields;
 ["logSearch","logFilter","logSort","studentSearch","studentSort","period","periodValue"].forEach(id=>$(id).addEventListener("input",render));
 let installPrompt;$("installBtn").onclick=async()=>{if(installPrompt){installPrompt.prompt();installPrompt=null;}};
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();installPrompt=e;$("installBtn").classList.remove("hidden");});
