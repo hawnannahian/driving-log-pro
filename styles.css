@@ -2033,6 +2033,65 @@ dialog.course-dialog{height:fit-content;max-height:min(90dvh,760px)}
  #log .log-settings-back{min-height:42px}
 }
 
+
+/* v1.31 — Overview dashboard refresh (presentation only) */
+.topbar{background:linear-gradient(115deg,#123b91 0%,#1556c8 58%,#2478e8 100%);box-shadow:0 5px 22px #123b9126}
+.brandmark{background:#ffffff1c;border:1px solid #ffffff30;color:#fff}
+#overview.overview-panel{padding:clamp(14px,2.6vw,24px);border:1px solid #e3eaf7;border-radius:24px;background:linear-gradient(180deg,#f7faff 0%,#fff 34%);box-shadow:0 8px 28px #1c438510}
+.overview-intro{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 18px}
+.overview-kicker{margin:0 0 4px;color:#3267cf;font-size:10px;font-weight:850;letter-spacing:1.25px}
+.overview-intro h1{margin:0;color:#14233e;font-size:clamp(25px,4vw,32px);line-height:1.08;letter-spacing:-1px}
+.overview-subtitle{margin:5px 0 0;color:#718096;font-size:13px}
+.overview-add{min-height:46px;padding:0 17px;border-radius:14px;box-shadow:0 7px 16px #315ee82b;white-space:nowrap}
+#overview .nextcard{margin:0 0 18px;padding:clamp(18px,3vw,25px);border:1px solid #234b91;border-radius:21px;background:radial-gradient(circle at 100% 0%,#3f78d0 0,transparent 43%),linear-gradient(125deg,#102d68,#174b9f 72%,#2367c7);box-shadow:0 12px 26px #174b9f26}
+#overview .nextlabel{font-size:10px;letter-spacing:1px;color:#d8e7ff}
+#overview .nexttime{font-size:clamp(29px,5vw,40px);font-weight:850;letter-spacing:-1.1px}
+#overview .nextname{font-size:clamp(17px,2.5vw,21px)}
+#overview .nextmain small{color:#d7e4fa}
+#overview .nextbtn.primary{background:#fff;color:#174b9f;box-shadow:0 4px 12px #071b3d24}
+#overview .nextempty b{font-size:17px}
+#overview .todayhead,#overview>.sectionhead h2{font-size:19px;letter-spacing:-.45px;color:#172742}
+#overview .todayhead{display:flex;align-items:center;gap:8px;margin:0 0 11px}
+#overview .recordlist{gap:8px}
+#overview .todayrow{min-height:66px;padding:9px 10px;border:1px solid #e5ebf5;border-radius:15px;background:#fff;box-shadow:0 3px 12px #17243b08;gap:9px}
+#overview .tnum{width:29px;height:29px;background:#eaf1ff;color:#2459bd;font-size:11px}
+#overview .tmain{gap:3px}
+#overview .tmain b{color:#42618d;font-size:12px}
+#overview .tmain span{font-size:14px;color:#182943}
+#overview .tstat{font-size:10px}
+#overview .tdone{min-height:38px;border-radius:11px}
+#overview .todaygap{height:20px}
+#overview>.sectionhead{margin:22px 0 11px}
+#overview>.sectionhead .muted{font-size:12px}
+#overview .prayerline{margin-top:12px;border:1px solid #e4def7;background:#f6f3ff;color:#55418f;border-radius:14px}
+#overview .ovbox{margin-top:17px;padding:18px;border:1px solid #e3eaf7;border-radius:19px;background:linear-gradient(145deg,#fff,#f5f8ff);box-shadow:0 5px 16px #17243b0b}
+#overview .duaplayer{border-color:#eadfc6;background:linear-gradient(145deg,#fffdf7,#fff8e8)}
+#overview .duaplayer h2{color:#243550}
+#overview .dua-arabic{border-radius:15px}
+#overview .dpbtn{min-width:42px;min-height:42px;border-radius:13px}
+.tabbar{background:rgba(255,255,255,.96);border:1px solid #dce6f6;box-shadow:0 10px 28px #183d7624}
+.tabbar .tab{color:#64748b}
+.tabbar .tab.active{color:#245bd0}
+.tabbar .tab svg{stroke-width:2}
+.navpill{background:#eaf1ff;border:1px solid #d9e5ff}
+@media(max-width:720px){
+ #overview.overview-panel{padding:13px;border-radius:20px}
+ .overview-intro{align-items:flex-start;margin-bottom:14px}
+ .overview-add{min-height:43px;padding:0 12px;font-size:12px}
+ #overview .nextcard{padding:18px;border-radius:19px}
+ #overview .todayrow{min-height:62px;padding:8px}
+ #overview .tmain span{font-size:13px}
+ #overview .ovbox{padding:15px}
+ .tabbar{background:rgba(255,255,255,.97)}
+}
+@media(max-width:380px){
+ .overview-intro{gap:8px}
+ .overview-intro h1{font-size:25px}
+ .overview-subtitle{max-width:185px;font-size:12px}
+ .overview-add{padding:0 10px;font-size:11px}
+ #overview .todayrow{gap:6px}
+ #overview .tnum{width:25px;height:25px}
+}
 /* Prayer-time conflict warning in the record form */
 .timewarn{margin:10px 0 0;padding:12px 14px;border:1px solid #f2e4be;border-radius:14px;background:#fff8e8;color:#755b20}
 .timewarn.hidden{display:none}
@@ -2042,3 +2101,5 @@ dialog.course-dialog{height:fit-content;max-height:min(90dvh,760px)}
 .timewarn-actions .btn{flex:1 1 130px;min-height:44px;font-size:14px}
 #saveRecord:disabled{opacity:.5;cursor:not-allowed;box-shadow:none}
 @media(max-width:360px){#fStart,#fEnd{padding-left:8px;padding-right:4px;letter-spacing:-.3px}#fStart::-webkit-calendar-picker-indicator,#fEnd::-webkit-calendar-picker-indicator{display:none}}
+/* Overview: comfortable tap area for the Travel Dua "Open in Islamic tab" link */
+#overview #duaOpen{display:inline-flex;align-items:center;min-height:44px}

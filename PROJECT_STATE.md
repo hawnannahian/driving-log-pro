@@ -1,6 +1,6 @@
 # PROJECT_STATE — Driving Log Pro
 
-শেষ যাচাই: 2026-11-08 · ভিত্তি: `main` commit `d1d9377347f242929084220ff2c46cd29ce2f22a` (PR #92, app v1.30, cache v92). পুরনো তারিখের অংশগুলো ইতিহাস; বর্তমান আচরণের জন্য live source on `main`-ই authoritative.
+শেষ যাচাই: 2026-11-08 · সর্বশেষ `main`: `e97cc72f1761b9b7ba8c50739f153926286d5f66` (PR #95, v1.32/cache v94). Overview redesign branch (Draft PR #94, `ui/overview-dashboard-redesign-2026-11-08`) এখন main-এর সাথে merge করা; প্রস্তাবিত v1.33/cache v95; review pending। পুরনো তারিখের অংশগুলো ইতিহাস; বর্তমান আচরণের জন্য live source on `main`-ই authoritative.
 
 ## কাজের নিয়ম
 - মালিককে উত্তর দিন বাংলায় এবং খুব সংক্ষেপে: কাজ শেষ হলে শুধু "হয়ে গেছে" + লিংক; না হলে অল্প কথায় কারণ।
@@ -10,11 +10,11 @@
 - Public repository-তে কখনো student data, CSV/JSON backup, token বা private data commit করবেন না।
 - Source update, Pages deployment success এবং real iPhone runtime test—তিনটি আলাদা verification status হিসেবে রিপোর্ট করুন।
 
-## Current verified state (main d1d9377, checked 2026-11-08)
+## Current verified state (main e97cc72, checked 2026-11-08)
 
-**Release:** footer `v1.30` (`index.html`), service-worker cache `nahians-schedule-cache-v92` (`sw.js`). Both verified in current `main` at `d1d9377`.
+**Release:** footer `v1.32` (`index.html`), service-worker cache `nahians-schedule-cache-v94` (`sw.js`). Both verified in current `main` at `e97cc72`.
 **Latest change:** PR #92 is merged. The Log heading's three-dot control opens Settings immediately on the first tap; no dropdown or intermediate Settings tab. Settings stays inside Log; Back to Records returns to the records panel.
-**Deployment:** GitHub Pages deployment for `d1d9377` was not confirmed in this check. The available commit-workflow lookup returned no runs (it filters to PR-triggered runs), and combined commit statuses were empty. Do not claim the Pages site is updated until the Pages workflow is checked separately.
+**Deployment:** GitHub Actions "pages build and deployment" run #145 (id 42520093329) for `e97cc72` finished `success` on 2026-11-08 — evidence of a successful Pages build/deploy only, not a device test. Deployment of this Overview branch is not verified.
 **PR #92 checks (as recorded in its merged PR description):** all seven repository JavaScript files parsed with V8 `new Function`; no duplicate HTML IDs; dropdown markup/styles/handlers removed; direct three-dot click and Back to Records handlers confirmed; branch was 5 commits ahead and 0 behind before merge. These are source-level checks, not browser tests.
 **Additional source check in this handover:** current `index.html` has 304 IDs and no duplicate IDs; it loads seven local JS files. `sw.js` cache is v92. `push-config.js` is loaded by `index.html` but is not in the service-worker `FILES` list. No Playwright/browser screenshots, real iPhone Safari/Home Screen test, two-device cloud-sync test, live-data test, or push-delivery test was performed for PR #92. The repo has no committed test suite.
 **Tabs:** Overview, Calendar, Log, Students, Reports, Islamic. Student profile tabs (`PROFILE_TABS`): Overview, Lessons, Course, Payments, Legacy (only when an archive exists for the student), Attendance.
@@ -79,8 +79,8 @@
 - Full-Time historical register key: `driving-log-pro-full-time-v1`; records keyed by `legacy_student_id`, isolated from normal lesson accounting.
 - Main app exposes a narrow `window.DrivingLogFullTime` bridge (getAll/replace/clear) so full-time data can participate in backup/sync without mixing into lesson accounting.
 - Cloud sync stores `driving-log.json` in the user's own private GitHub data repository; token remains in that browser's localStorage.
-- Current service-worker cache: `nahians-schedule-cache-v89` (verified at 5bbb485).
-- App footer version: `v1.27` (verified at 5bbb485). CSS comments such as v1.26 may refer to feature revision, not app release.
+- Current `main` service-worker cache: `nahians-schedule-cache-v94` (verified at e97cc72). The Overview redesign branch (PR #94) proposes v95.
+- Current `main` footer version: `v1.32` (verified at e97cc72). The Overview redesign branch proposes v1.33. CSS comments may refer to feature revision, not app release.
 
 ## Fresh Course system + Legacy Archive (history; the Course bullet below is corrected for current main — see "Current verified state")
 - **Legacy Archive (read-only):** old prepaid packages are moved once into `state.legacy.packages` (original objects verbatim + `archive:{at,v,lessonIds}`) by `migrateLegacy()` on load, restore and cloud merge. Idempotent: an archived id is never copied again or overwritten. A recoverable copy is kept first in `driving-log-pro-v1-before-legacy` (Reports → Safety copies); if it cannot be saved nothing is moved and `pkgs()` still reads leftover `state.packages`, so figures never change. `pkgs()` = archive + leftovers; the old engine (`recomputeAlloc`, `income`, `studentStats` legacy parts) keeps reading it, so historical revenue/hours/payments are identical (verified against `main` with a synthetic seed). Lessons keep `e.pkg` (history). Archived records are never edited; only the student label follows renames/merges.
@@ -431,3 +431,13 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - No student, lesson, course, payment, expense, accounting, backup, sync or notification-backend data/logic changes.
 - Footer is v1.30; service-worker cache is v92.
 - PR #92 merged as `d1d9377`. Source-level checks are recorded above. Browser/Playwright screenshots at 390×844 and 320×568, real iPhone testing and Pages deployment were not verified in this handover.
+
+### 2026-11-08 — Overview dashboard refresh (proposed v1.33 / cache v95)
+- Owner-approved UI task: refresh the existing Overview screen using its real current content and interactions, not the earlier generic mockup.
+- Added a clear Overview heading and an Add lesson shortcut wired to the existing `newRecord()` flow. Restyled the existing next-lesson card, Today/Next Day lesson rows, prayer line, Travel Dua card, app header and bottom navigation for a cleaner blue/white mobile-first presentation.
+- No earnings, revenue, collected cash, expenses, profit or financial charts were added to Overview. Financial reporting remains on Reports.
+- Voice Announcements and Lock-screen Notifications remain in Log → Settings as established by PR #90; they were deliberately NOT moved back to Overview despite appearing in the initial concept image.
+- No lesson, timer, payment, course, allocation, student, storage or sync logic/data schema changed. Existing timer remains its floating compact timer; lesson rows and Travel Dua keep their existing IDs and handlers.
+- Claude (at the owner's request) enlarged the Travel Dua "Open in Islamic tab" link to a 44px tap area (CSS only).
+- Footer version proposed as v1.33; service-worker cache proposed as v95 (renumbered from v1.31/v93 after PR #95 merged as v1.32/v94). Main `e97cc72` was merged into this branch on 2026-11-08 at the owner's explicit direction; conflicts were only in `sw.js`, `index.html` footer and `styles.css` (both appended CSS blocks kept). The PR #95 prayer-guard code is unchanged.
+- Browser screenshots at 390×844 and 320×568, all-tab interaction checks, real iPhone testing and deployment have not yet been verified. Do not claim completion until actual checks are performed.
