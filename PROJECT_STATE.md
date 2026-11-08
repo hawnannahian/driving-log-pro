@@ -1,6 +1,6 @@
 # PROJECT_STATE — Driving Log Pro
 
-শেষ যাচাই: 2026-11-08 · ভিত্তি: `main` commit `5bbb485fb46d859612acd0d3927e2a72eec1518b` (PR #87, app v1.27, cache v89). এই ফাইলের পুরনো তারিখের অংশগুলো ইতিহাস; সন্দেহ হলে নিচের "Current verified state" এবং live source দেখুন।
+শেষ যাচাই: 2026-11-08 · ভিত্তি: `main` commit `3019cd59cf3545f27a78a812bb3604d78f01e592` (PR #90, app v1.28, cache v90). এই ফাইলের পুরনো তারিখের অংশগুলো ইতিহাস; সন্দেহ হলে নিচের "Current verified state" এবং live source দেখুন।
 
 ## কাজের নিয়ম
 - মালিককে উত্তর দিন বাংলায় এবং খুব সংক্ষেপে: কাজ শেষ হলে শুধু "হয়ে গেছে" + লিংক; না হলে অল্প কথায় কারণ।
@@ -10,11 +10,11 @@
 - Public repository-তে কখনো student data, CSV/JSON backup, token বা private data commit করবেন না।
 - Source update, Pages deployment success এবং real iPhone runtime test—তিনটি আলাদা verification status হিসেবে রিপোর্ট করুন।
 
-## Current verified state (main 5bbb485, checked 2026-11-08)
+## Current verified state (main 3019cd5, checked 2026-11-08)
 
-**Release:** footer `v1.27` (`index.html`), service-worker cache `nahians-schedule-cache-v89` (`sw.js`). Both read from the source of `main` at 5bbb485.
-**Deployment evidence:** GitHub Actions "pages build and deployment" run #138 for commit 5bbb485 finished `success` (run id 42494073192, 2026-11-08). This proves the Pages build/deploy job succeeded. It does NOT prove the live site behaves correctly, and it is not a device test.
-**Tested how:** PRs #82–#87 were tested by Claude in Playwright/Chromium (390×844 and 320×568) with synthetic data only. **No real iPhone / Home Screen PWA test, no two-device cloud-sync test and no live-data test was performed for any of them.** Test scripts were run from a scratch folder and are NOT in the repository (the repo has no test suite).
+**Release:** footer `v1.28` (`index.html`), service-worker cache `nahians-schedule-cache-v90` (`sw.js`). Both read from the source of `main` at 3019cd5 (PR #90).
+**Deployment evidence:** PR #90 merged to main at 3019cd5. A Pages workflow result for this merge was not confirmed in the current check. This does NOT prove the live site behaves correctly, and it is not a device test.
+**Tested how:** PRs #82–#87 had Playwright/Chromium checks (390×844 and 320×568) with synthetic data only. PR #90 received source-level checks only. **No real iPhone / Home Screen PWA test, no two-device cloud-sync test and no live-data test was performed for PR #90.** Test scripts are run from a scratch folder and are NOT in the repository (the repo has no test suite).
 
 **Tabs:** Overview, Calendar, Log, Students, Reports, Islamic. Student profile tabs (`PROFILE_TABS`): Overview, Lessons, Course, Payments, Legacy (only when an archive exists for the student), Attendance.
 
@@ -28,7 +28,7 @@
 | #84 | CSS: Add course sheet was transparent (undefined `--card`); solid card, sticky header/footer, iOS-safe date input | v1.25 / v87 |
 | #85 | CLAUDE.md §7a: standing professional UI/UX review rule | docs only |
 | #86 | Profile summary for 2+ active courses; `prompt()` payment replaced by Add payment sheet (`#payDialog`: course picker, amount prefilled with outstanding, payment date); Payments tab shows course names | v1.26 / v88 |
-| #87 | Pooled course hours (see below) | v1.27 / v89 |
+| #87 | Pooled course hours (see below) | v1.27 / v89 |\n| #90 | Move Voice Announcements and Lock-screen Notifications from Overview into Log → Settings; preserve IDs and handlers | v1.28 / v90 |
 
 **Course model (current source)**
 - `state.courses=[{id,student,date,hours,price,createdAt,v,name?}]` — hours and price are entered per student; there are no templates; `name` is optional/additive. UI word is "Course". Rate = price ÷ hours. Several courses per student are allowed.
@@ -397,3 +397,13 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - No localStorage keys, record schemas, student/course/lesson/payment data, timer rules or notification backend behavior changed.
 - Proposed release footer v1.28; service-worker cache v90.
 - Verification for this PR: source-level checks only. Browser/Playwright at 390×844 and 320×568, real iPhone Safari/Home Screen, notification permission flow and live push delivery must be checked separately; push backend remains not deployed/configured.
+
+
+## Log Settings overflow menu — proposed PR (2026-11-08)
+- Replaces the full-width Records / Settings sub-tab bar with a compact vertical three-dot menu at the top-right of the Driving Log heading.
+- The menu opens a small Settings dropdown. Selecting it hides Records and shows the existing Settings panel; a Back to Records control returns to the records view.
+- Preserves the existing Settings cards and controls, including Voice Announcements, Lock-screen Notifications, Working Hours, Prayer Time and WhatsApp Message Settings. Existing setting IDs and their storage/notification/voice behavior remain unchanged.
+- Menu closes after selection, on outside click and on Escape; the trigger exposes aria-haspopup, aria-expanded and aria-controls.
+- No student, lesson, course, payment, expense, accounting, backup, sync or notification-backend data/logic changes.
+- Proposed footer v1.29 and service-worker cache v91.
+- Source-level checks: all seven repository JavaScript files parse. Playwright screenshots at 390×844 and 320×568, real iPhone testing and Pages deployment were not available in this workflow and are not claimed.
