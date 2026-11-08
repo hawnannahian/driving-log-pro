@@ -2192,4 +2192,5 @@ body:has(#recordDialog[open]){
 .multi-payment-option.active{border-color:#b9c8ff;background:#edf2ff;color:#244bd0}.multi-payment-option:disabled{opacity:.4;cursor:not-allowed}
 .multi-session-foot{min-height:25px;margin-top:8px;display:flex;align-items:center}.multi-paid{display:flex;flex-direction:row!important;align-items:center;gap:7px;color:#59677d;font-size:11.5px;font-weight:700}.multi-paid input{width:17px;height:17px;accent-color:var(--blue)}
 .multi-course-note{color:var(--muted);font-size:11px}.add-multi-session{width:100%;min-height:42px;margin-top:10px}.multi-booking-summary{margin:10px 0 0;padding-top:9px;border-top:1px solid var(--line);color:#59677d;font-size:11.5px;font-weight:700;line-height:1.45}
+@media(max-width:720px){.multi-session-fields{grid-template-columns:1fr 1fr}.multi-session-fields label:first-child{grid-column:1/-1}}
 @media(max-width:380px){.multi-booking-panel{padding:10px}.multi-session-card{padding:10px}.multi-session-fields{gap:6px}.multi-session-fields input{padding:7px 5px}.multi-payment-option{font-size:10.5px;padding:6px 4px}}
