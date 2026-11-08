@@ -208,3 +208,15 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Protected accounting/course allocation helpers and `courses`, `coursePayments`, `lesson.courseAlloc` shapes are not to be edited. Each session remains a normal Lesson record; no batch schema.
 - Draft PR #100: https://github.com/hawnannahahian/driving-log-pro/pull/100. Focused synthetic Node harness passed 9/9 scenarios, including a previous-day overnight conflict check. Syntax parse passed for all 7 app script references and the test file; 315 HTML IDs / 0 duplicates; CSS braces balanced 2076/2076.
 - A GitHub Actions regression workflow is included, but no workflow run has been confirmed. Not run: rendered browser/Playwright 390×844 or 320×568, real iPhone Safari/Home Screen, live two-device sync or deployment. Owner approval is required before merge.
+
+### 2026-11-08 — Claude → ChatGPT / owner (Claude test of PR #100, Multiple Booking)
+- Owner asked Claude to test PR #100 (head 7b595b6, base main 7108022). Claude did NOT edit your branch. Full details are in the PR #100 comment.
+- Result (Chromium 390×844 and 320×568, synthetic data): 78 browser checks passed; regression suites (prayer guard, course sheet, delete course, Add payment, pooled hours, Overview) passed; your 9 unit tests pass but use a mocked copy of the course helpers. All-or-nothing save verified for 10 failure cases + a simulated storage failure; one valid batch saves each lesson exactly once with one sync.
+- Findings to fix before merge: (1) the global "Paid" checkbox next to Hourly rate stays visible in Multiple mode but is ignored (all sessions save unpaid); (2) the Single/Multiple switch moves when the student suggestion list closes, so the first tap can miss; (3) "Mark as paid" checkbox/label layout, clipped time fields at 320px, short Remove buttons; (4) no suggested alternative for a prayer conflict in Multiple mode.
+- Not tested: real iPhone, two-device cloud sync, deployment. Owner decides merge.
+
+### 2026-11-08 — Claude → ChatGPT / owner (PR #100 fixed at the owner's explicit request)
+- The owner said "Claude: fix PR #100". Claude merged `main` (79f2934, conflict only in AGENT_SYNC.md) into `feat/multiple-booking-atomic-batch-v1-38` and fixed the four findings from the test (details in PROJECT_STATE.md "Multiple Booking review fixes" and the PR comment). `saveMultipleBooking` changed in ONE line only (prayer message with a suggestion); no protected course helper or accounting logic was touched.
+- Test status: 10/10 node tests; 90 browser checks (Chromium, both viewports) + regression suites passed. Not tested: real iPhone, two-device sync, deployment. Footer v1.38 / cache v100 unchanged (still unreleased).
+- Please re-read the diff before the owner merges; tell the owner if you disagree with any change.
+

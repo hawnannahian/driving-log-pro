@@ -269,15 +269,15 @@
       <div class="formgrid">
         <div class="typechips wide" id="typeChips" role="group" aria-label="Record type"><button type="button" data-type="Lesson">Lesson</button><button type="button" data-type="Fuel">Fuel</button><button type="button" data-type="Other Expense">Expense</button><button type="button" data-type="Note">Note</button><button type="button" data-type="Insurance">Insurance</button><button type="button" data-type="Repair">Maintenance</button><button type="button" data-type="Refund">Refund</button></div>
         <label class="hidden">Type<select id="fType"><option>Lesson</option><option>Fuel</option><option>Other Expense</option><option>Note</option><option>Insurance</option><option>Repair</option><option>Refund</option></select></label>
+        <section class="booking-mode-row wide hidden" id="bookingModeRow" aria-label="Booking mode">
+          <div class="booking-mode-options"><button type="button" class="booking-mode-option active" id="bookingSingle" aria-pressed="true">Single Booking</button><button type="button" class="booking-mode-option" id="bookingMultiple" aria-pressed="false">Multiple Booking</button></div>
+        </section>
         <section class="record-panel record-date-panel wide"><label class="wide">Date<input type="date" id="fDate" required></label><div class="record-date-shortcuts" role="group" aria-label="Quick date selection"><button type="button" data-date-shift="0">Today</button><button type="button" data-date-shift="1">Tomorrow</button></div></section>
         <section class="record-panel record-student-panel wide"><p class="recent-students-label hidden" id="recentStudentsLabel">Recently completed</p><div class="chiprow wide hidden" id="recentStudents" aria-label="Recently completed students"></div>
         <div class="record-student-grid"><label class="lessonfield">Student name<input id="fStudent" list="studentOptions" autocomplete="off"><datalist id="studentOptions"></datalist></label>
         <label class="lessonfield">Phone<input id="fPhone" type="text" inputmode="tel" autocomplete="tel" autocapitalize="off" spellcheck="false"></label></div>
         <div class="student-suggestions hidden" id="studentSuggestions" role="listbox" aria-label="Matching students"></div>
         <p class="lessonfield formhint">Name or phone: one is enough.</p></section>
-        <section class="booking-mode-row wide hidden" id="bookingModeRow" aria-label="Booking mode">
-          <div class="booking-mode-options"><button type="button" class="booking-mode-option active" id="bookingSingle" aria-pressed="true">Single Booking</button><button type="button" class="booking-mode-option" id="bookingMultiple" aria-pressed="false">Multiple Booking</button></div>
-        </section>
         <section class="multi-booking-panel wide hidden" id="multiBookingPanel" aria-label="Multiple lesson sessions">
           <div class="multi-booking-head"><div><b>Booking sessions</b><small>Choose a separate date, time and payment method for each lesson.</small></div><span id="multiBookingCount">2 sessions</span></div>
           <div class="multi-sessions-list" id="multiSessionsList"></div>
