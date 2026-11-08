@@ -4,9 +4,9 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no merge without the owner, no student data in the repo).
 
 ## Latest verified project state (update on every release)
-- **`main` = `d1d9377347f242929084220ff2c46cd29ce2f22a`** (PR #92, checked 2026-11-08). Footer **v1.30**, service-worker cache **`nahians-schedule-cache-v92`**.
+- **Latest `main` = `761ac912e25192bc7ce90e3de17b7849d03edcfe`** (PR #93 docs sync, checked 2026-11-08). Footer **v1.30**, service-worker cache **`nahians-schedule-cache-v92`**.
 - **PR #92 merged:** https://github.com/hawnannahian/driving-log-pro/pull/92. Three-dot control on the Log heading opens Settings directly on the first tap; no dropdown/intermediate menu. Settings remains inside Log; Back to Records returns to the records panel. Existing Voice, Push, Working Hours, Prayer Time and WhatsApp settings/IDs/handlers are preserved.
-- **Deployment is NOT verified for d1d9377.** The available commit-workflow lookup returned no runs because it filters to PR-triggered runs; combined commit statuses were empty. Check the GitHub Pages workflow separately before claiming deployment.
+- **Deployment is NOT verified for 761ac91.** The available commit-workflow lookup returned no runs because it filters to PR-triggered runs; combined commit statuses were empty. Check the GitHub Pages workflow separately before claiming deployment.
 - **PR #92 source checks (from its merged PR description):** seven JS files parsed with V8 `new Function`; no duplicate HTML IDs; obsolete dropdown markup/styles/handlers removed; direct click and Back handlers confirmed. Current source inspection also found 304 HTML IDs with no duplicates, seven local script references, cache v92. **No Playwright/browser screenshots, real iPhone, two-device cloud-sync, live-data or live push-delivery test was performed for #92.** The repository has no committed test suite.
 - `push-config.js` is loaded by `index.html`, but is still absent from `sw.js` `FILES`; its API URL is empty. Push backend remains unconfigured/not deployed.
 - Open PRs: #73 (Calendar/WhatsApp controls in Log Settings; old, check for overlap before touching) and #13 (WhatsApp pasted-number fix; old branch, inspect before touching). Do not edit either without owner direction.
@@ -45,6 +45,7 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 | Area | Files | Active work |
 |---|---|---|
 | Packages / courses UI + accounting | `app.js` (course/package functions), profile/payments markup | Phases 1–4 are merged (#79, #82–#87). **Change-controlled: see "Course allocation code — change control".** No open course PR. |
+| Overview dashboard | `index.html`, `styles.css`, `app.js`, `sw.js` | ChatGPT active: owner-approved Overview visual refresh; no earnings; voice/push remain in Log Settings |
 | Calendar / Log / record form | `app.js`, `index.html`, `styles.css` | PRs #90–#92 merged: Voice/Push moved into Log Settings; three-dot control opens Settings directly. No active Log UI task claimed |
 | Reports dashboard | `reports-dashboard.js`, reports markup | none claimed |
 | Islamic tab | `islamic*.js`, audio files | none claimed (owner may remove audio before selling) |
@@ -123,3 +124,11 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Pages deployment for `d1d9377` is not confirmed; the available commit workflow lookup returned no runs and combined statuses were empty. Do not claim deployed.
 - No app code changed in this documentation handover. Confirmed outstanding items: Delete Legacy Archive can mark future package lessons Paid; `push-config.js` is not in the SW cache list and API URL is empty; old PRs #73 and #13 remain open; real iPhone and two-device sync tests remain pending.
 - Documentation refresh is being proposed in a separate draft PR; no merge/deploy authorized.
+
+### 2026-11-08 — ChatGPT → Claude (Overview dashboard refresh)
+- Owner approved a visual refresh of the existing Overview screen based on its current content and interactions. Work is isolated on branch `ui/overview-dashboard-redesign-2026-11-08`, based on latest main `761ac912e25192bc7ce90e3de17b7849d03edcfe`.
+- Scope: add an Overview heading and a working Add lesson shortcut; polish the existing next-lesson card, Today/Next Day lesson rows, prayer line, Travel Dua, top header and bottom navigation.
+- **Do not add Earnings, Revenue, Collected, Expenses, Profit or financial charts to Overview.** All financial reporting stays on Reports.
+- **Voice Announcements and Lock-screen Notifications must remain in Log → Settings** (PR #90 owner-approved relocation). Do not move them back to Overview.
+- No accounting, timer, course allocation, payment, student-data, storage or sync behavior may change. Footer/cache proposal: v1.31 / v93.
+- Active work belongs to ChatGPT on the branch above. Claude must not edit this branch or overlap the Overview UI files while this task is active. Draft PR only; no merge/deploy without owner approval.
