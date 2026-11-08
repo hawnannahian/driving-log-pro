@@ -9,6 +9,18 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Full details: `PROJECT_STATE.md` → "Current verified state". Open PRs seen: #73 (old, appears superseded by #78, unverified) and #13 (old WhatsApp-paste fix on a divergent branch). Do not touch them without the owner.
 - Open issues: Delete Legacy Archive still marks upcoming package lessons Paid (`deleteLegacyArchive()`); `push-config.js` is loaded but not in `sw.js` `FILES`; push backend not deployed; Repeat control hidden in the UI.
 
+## Where we stopped and what comes next (handover, 2026-11-08 — read this first when a new chat starts)
+**Done today (all merged to `main`, Chromium-tested with synthetic data, not on a real iPhone):** #82 custom Add course sheet + default-tick fix; #83 delete a course (even with payments, if no lessons); #84 Add course sheet styling; #85 CLAUDE.md §7a (professional UI/UX review rule); #86 multi-course profile summary + Add payment sheet; #87 pooled hours across a student's courses (`courseAlloc`); #88 docs sync. State: footer v1.27, cache v89.
+**Owner decisions in force:** custom courses only (hours + price per student), word "Course"; hours pooled across a student's courses, money per course; Claude replies in Bangla, short; never merge/deploy without the owner's explicit word; no student data in the repo; iPhone checks are done by the owner.
+**Owner to check on the iPhone:** Add course sheet and Add payment sheet (date field fits, white card), "Use course hours" default tick, a booking that uses two courses. Report with screenshots if anything looks wrong.
+**Next work, owner chooses the order (nothing started):**
+1. Delete Legacy Archive marks upcoming package lessons Paid (small fix, was closed PR #42).
+2. Add `push-config.js` to `sw.js` `FILES` (tiny).
+3. Farhad's data issue: cause unknown; needs a JSON backup from the owner (never put it in the repo).
+4. **Selling the app** (owner is still thinking; decide first how to sell): (a) share the link and take payment outside the app, (b) licence-key service, (c) only prepare first. Preparation items, all safe: remove third-party audio (Islamic tab text-only), business name/currency/default rate/working hours as settings, empty first-run screen, privacy policy and terms page, then licence/price.
+5. Optional: confirm whether Calendar course-lesson blocks should show "Course · €value"; decide about the hidden Repeat control; review/close old PRs #73 and #13.
+**How to resume:** the owner writes e.g. "continue", "do 1" or the choice for 4. Claude then fetches latest `main`, reads CLAUDE.md, PROJECT_STATE.md and this file, and starts with a short plan.
+
 ## Course allocation code — change control (owner rule, 2026-11-08)
 **`courseAlloc`, `planCourseAlloc`, `allocParts`, `courseShareH`, `pooledFreeH`, `applyAlloc` and the related `course*` helpers (`courseLessons`, `courseDoneH`, `courseUsedH`, `courseFreeH`, `courseLeftH`, `courseBalance`, `courseDue`, `activeCourse`, `income()` course branch) must NOT be changed without first writing the proposed change in this file (Message log) and discussing it in the PR.** Money and hours bugs here affect real records. Do not change the shape of `courses`, `coursePayments` or `lesson.courseAlloc` without an approved compatibility plan.
 
