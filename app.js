@@ -229,11 +229,13 @@ const courseLessons=c=>state.entries.filter(e=>e.type==="Lesson"&&e.course===c.i
 const courseDoneH=c=>round4(courseLessons(c).filter(isDone).reduce((a,e)=>a+hours(e),0));
 const courseUsedH=(c,exceptId)=>round4(courseLessons(c).filter(e=>e.id!==exceptId).reduce((a,e)=>a+hours(e),0));
 const courseLeftH=c=>round4(Math.max(0,Number(c.hours)-courseDoneH(c)));
-const coursePaidH=c=>round4(Math.min(Number(c.hours),coursePaid(c)/courseRate(c)));
+// Purchased hours are an entitlement; payment progress never restricts lesson usage.
+const coursePaidH=c=>round4(Math.max(0,Number(c.hours)||0));
 const coursePrepaidH=c=>round4(Math.max(0,coursePaidH(c)-courseDoneH(c)));
-const courseFreeH=(c,exceptId)=>round4(Math.max(0,coursePaidH(c)-courseUsedH(c,exceptId)));
+// Available booking capacity is purchased hours minus all linked lessons (scheduled and completed).
+const courseFreeH=(c,exceptId)=>round4(Math.max(0,Number(c.hours||0)-courseUsedH(c,exceptId)));
 const courseBalance=c=>round2(Math.max(0,coursePaid(c)-courseDoneH(c)*courseRate(c)));
-const activeCourse=name=>courses().filter(c=>sameName(c.student,name)&&courseLeftH(c)>.001).sort((a,b)=>(a.date||"").localeCompare(b.date||""))[0];
+const activeCourse=name=>courses().filter(c=>sameName(c.student,name)&&courseFreeH(c)>.001).sort((a,b)=>(a.date||"").localeCompare(b.date||""))[0];
 // Course money still due / prepaid balance, for the reports (a course counts in the period it was started).
 const dueInPeriod=(p,v)=>round2(pkgs().filter(x=>inSel(x.date||"",p,v)).reduce((a,x)=>a+pkgDue(x),0)+courses().filter(c=>inSel(c.date||"",p,v)).reduce((a,c)=>a+courseDue(c),0));
 const prepaidBalance=()=>round2(courses().reduce((a,c)=>a+courseBalance(c),0));
@@ -282,10 +284,10 @@ $("fRate").addEventListener("input",updateCourseField);
 function conflictOn(date,start,end,id){const a=toMin(start),b=toMin(end),l=lessonsOn(date).find(x=>x.id!==id&&x.start&&x.end&&a<toMin(x.end)&&toMin(x.start)<b);if(l)return l;const p=prayerBlocks(date).find(x=>a<toMin(x.end)&&toMin(x.start)<b);if(p)return p;const w=workCfg();if(a<toMin(w.start)||b>toMin(w.end))return{name:"Working hours",start:w.start,end:w.end};return null;}
 // One course: progress, money and hours. full=false is the short card at the top of the profile.
 function courseCardHTML(c,full){const paid=coursePaid(c),due=courseDue(c),done=courseDoneH(c),left=courseLeftH(c),pct=Math.min(100,done/Number(c.hours)*100),finished=left<=.001,lessons=courseLessons(c).sort((a,b)=>(b.date+(b.start||"")).localeCompare(a.date+(a.start||"")));
- const short=round4(courseUsedH(c)-coursePaidH(c)),warn=short>.001?`<p class="pkgextra">${fmtH(short)} h driven or booked are not paid for yet. Add a payment.</p>`:"",money=`<div class="courseline"><span>💶 Paid <b>${euro(paid)}</b> of ${euro(c.price)}</span>${due>0?`<span class="unpaid">Outstanding <b>${euro(due)}</b></span>`:'<span class="paid">✓ Paid in full</span>'}</div>`;
- if(!full)return `<div class="coursecard${finished?" finished":""}"><div class="coursetop"><b>🎓 ${fmtH(c.hours)}-hour course${finished?" · completed":""}</b><span>${fmtH(done)} / ${fmtH(c.hours)} h</span></div><div class="pkgbar"><i data-w="${pct.toFixed(1)}"></i></div><div class="courseline"><span>⏳ <b>${fmtH(left)} h</b> left</span><span>✅ <b>${fmtH(coursePrepaidH(c))} h</b> prepaid</span></div>${money}${warn}${due>0?`<button type="button" class="btn primary" data-coursepay="${esc(c.id)}">＋ Add payment</button>`:""}</div>`;
+ const available=courseFreeH(c),warn="",money=`<div class="courseline"><span>💶 Paid <b>${euro(paid)}</b> of ${euro(c.price)}</span>${due>0?`<span class="unpaid">Outstanding <b>${euro(due)}</b></span>`:'<span class="paid">✓ Paid in full</span>'}</div>`;
+ if(!full)return `<div class="coursecard${finished?" finished":""}"><div class="coursetop"><b>🎓 ${fmtH(c.hours)}-hour course${finished?" · completed":""}</b><span>${fmtH(done)} / ${fmtH(c.hours)} h</span></div><div class="pkgbar"><i data-w="${pct.toFixed(1)}"></i></div><div class="courseline"><span>⏳ <b>${fmtH(left)} h</b> left</span><span>📘 <b>${fmtH(available)} h</b> available</span></div>${money}${warn}${due>0?`<button type="button" class="btn primary" data-coursepay="${esc(c.id)}">＋ Add payment</button>`:""}</div>`;
  return `<div class="pkgcard${finished?" done":""}"><div class="pkgtop"><span><b>${fmtH(c.hours)}-hour course</b><small>Started ${esc(fmtDate(c.date||dateISO(new Date())))} · ${euro(courseRate(c))}/hour</small></span><em class="pkgstate">${finished?"Completed":"In progress"}</em></div><div class="pkgbar"><i data-w="${pct.toFixed(1)}"></i></div>
- <div class="pkggrid"><div><span>Total price</span><b>${euro(c.price)}</b></div><div><span>Paid</span><b>${euro(paid)}</b></div><div><span>Outstanding</span><b class="${due>0?"unpaid":""}">${euro(due)}</b></div><div><span>Completed</span><b>${fmtH(done)} h</b></div><div><span>Remaining</span><b>${fmtH(left)} h</b></div><div><span>Prepaid hours left</span><b>${fmtH(coursePrepaidH(c))} h</b></div></div>
+ <div class="pkggrid"><div><span>Total price</span><b>${euro(c.price)}</b></div><div><span>Paid</span><b>${euro(paid)}</b></div><div><span>Outstanding</span><b class="${due>0?"unpaid":""}">${euro(due)}</b></div><div><span>Completed</span><b>${fmtH(done)} h</b></div><div><span>Remaining</span><b>${fmtH(left)} h</b></div><div><span>Available to book</span><b>${fmtH(available)} h</b></div></div>
  ${warn}<details class="pkghist"><summary>Course lessons (${lessons.length})</summary>${lessons.map(e=>`<div class="histline"><span>${esc(fmtDate(e.date))}</span><span>${fmtH(hours(e))} h · ${isDone(e)?"done":"booked"}</span></div>`).join("")||'<p class="emptynote">No lessons linked to this course yet. In a lesson, tick “Use course hours”.</p>'}</details>
  ${due>0?`<button type="button" class="btn secondary" data-coursepay="${esc(c.id)}">＋ Add payment</button> `:""}${!coursePays(c).length&&!lessons.length?`<button type="button" class="linkbtn danger" data-delcourse="${esc(c.id)}">Delete course</button>`:""}</div>`;}
 // Archived (old package system): read-only history. It is never used for a new course.
@@ -294,7 +296,7 @@ function legacyHTML(P,L){if(!P.length)return `<p class="emptynote">No archived p
   return `<div class="pkgcard legacy"><div class="pkgtop"><span><b>${esc(p.name||fmtH(p.hours)+"-hour package")}</b><small>Bought ${p.date?esc(fmtDate(p.date)):"–"}${p.archive?" · archived "+esc(fmtDate(p.archive.at.slice(0,10))):""}</small></span><em class="pkgstate">Archived</em></div>
   <div class="pkggrid"><div><span>Hours</span><b>${fmtH(p.hours)} h</b></div><div><span>Price</span><b>${euro(p.amount)}</b></div><div><span>Paid</span><b>${euro(pkgPaidSoFar(p))}</b></div><div><span>Outstanding</span><b class="${pkgDue(p)>0?"unpaid":""}">${euro(pkgDue(p))}</b></div><div><span>Lessons linked</span><b>${linked}</b></div></div>
   ${p.notes?`<p class="pkgnotes">${esc(p.notes)}</p>`:""}${pays.length?`<details class="pkghist"><summary>Payments (${pays.length})</summary>${pays.map(x=>`<div class="histline"><span>${esc(fmtDate(x.date||""))}</span><span>${euro(x.amount)}</span></div>`).join("")}</details>`:""}</div>`;}).join("");}
-function startCourse(){const s=state.students.find(x=>x.id===profileId);if(!s)return;if(activeCourse(s.name)){toast("This student already has a course in progress");return;}
+function startCourse(){const s=state.students.find(x=>x.id===profileId);if(!s)return;
  const v=prompt(`Start a new ${COURSE_HOURS}-hour course for ${s.name}: ${euro(COURSE_PRICE)} (${euro(COURSE_PRICE/COURSE_HOURS)} per hour).\n\nFirst payment in € (leave empty if nothing was paid yet):`,"");if(v===null)return;
  const first=String(v).trim()===""?0:num(String(v).replace(",","."));if(!(first>=0)||first>COURSE_PRICE){toast(`Enter an amount from 0 to ${COURSE_PRICE}`);return;}
  const today=dateISO(new Date()),c={id:uid(),student:s.name,date:today,hours:COURSE_HOURS,price:COURSE_PRICE,createdAt:new Date().toISOString(),v:1};
@@ -304,9 +306,7 @@ function addCoursePayment(id){const c=courseById(id);if(!c)return;const due=cour
  if(!(a>0)){toast("Enter an amount above 0");return;}if(a>due+.001){toast(`The payment is more than the outstanding ${euro(due)}`);return;}
  state.coursePayments=[...(Array.isArray(state.coursePayments)?state.coursePayments:[]),{id:uid(),course:c.id,date:dateISO(new Date()),amount:round2(a)}];save();toast("Payment saved");}
 function removeCoursePayment(pid){const x=(Array.isArray(state.coursePayments)?state.coursePayments:[]).find(p=>p.id===pid),c=x&&courseById(x.course);if(!x||!c)return;
- const rest=coursePaid(c)-(Number(x.amount)||0),hoursPaid=Math.min(Number(c.hours),Math.max(0,rest)/courseRate(c));
- if(hoursPaid+.001<courseUsedH(c)){toast("Cannot remove it: lessons already booked or completed on this course would no longer be paid for.");return;}
- if(!confirm("Remove this payment?"))return;state.coursePayments=state.coursePayments.filter(p=>p.id!==pid);save();}
+ if(!confirm("Remove this payment? This changes the outstanding amount only; course hours and lesson links will remain unchanged."))return;state.coursePayments=state.coursePayments.filter(p=>p.id!==pid);save();}
 function editCoursePaymentDate(pid){const x=(Array.isArray(state.coursePayments)?state.coursePayments:[]).find(p=>p.id===pid);if(!x)return;const current=x.date||dateISO(new Date());const value=prompt("Payment date (YYYY-MM-DD)",current);if(value===null)return;const m=String(value).trim().match(/^(\d{4})-(\d{2})-(\d{2})$/);if(!m){toast("Enter the date as YYYY-MM-DD");return;}const y=Number(m[1]),mo=Number(m[2]),d=Number(m[3]),check=new Date(y,mo-1,d);if(check.getFullYear()!==y||check.getMonth()!==mo-1||check.getDate()!==d){toast("Enter a valid calendar date");return;}x.date=`${m[1]}-${m[2]}-${m[3]}`;save();toast("Payment date updated");}
 function bindCourseActions(){document.querySelectorAll("[data-startcourse]").forEach(b=>b.onclick=startCourse);document.querySelectorAll("[data-coursepay]").forEach(b=>b.onclick=()=>addCoursePayment(b.dataset.coursepay));
  document.querySelectorAll("[data-editcpay]").forEach(b=>b.onclick=()=>editCoursePaymentDate(b.dataset.editcpay));
