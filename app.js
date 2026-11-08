@@ -698,7 +698,7 @@ function saveMultipleBooking(){
    if(hits.length)throw new Error(`${label}: lesson overlaps ${prayerNames(hits)}.`);
    const work=workCfg();
    if(a<toMin(work.start)||b>toMin(work.end))throw new Error(`${label}: bookings are available only between ${work.start} and ${work.end}.`);
-   const overlaps=lessonsOn(date).filter(x=>x.start&&x.end&&(()=>{const span=lessonSpan(x.start,x.end);return a<span[1]&&span[0]<b;})());
+   const previousDate=new Date(date+"T12:00:00");previousDate.setDate(previousDate.getDate()-1);const scheduled=[...lessonsOn(date).filter(x=>x.start&&x.end).map(x=>({x,span:lessonSpan(x.start,x.end)})),...lessonsOn(dateISO(previousDate)).filter(x=>x.start&&x.end&&toMin(x.end)<=toMin(x.start)).map(x=>({x,span:lessonSpan(x.start,x.end).map(v=>v-1440)}))];const overlaps=scheduled.filter(({span})=>a<span[1]&&span[0]<b).map(({x})=>x);
    const studentClash=overlaps.find(x=>sameName(x.student,student));
    if(studentClash){const duplicate=studentClash.start===start&&studentClash.end===end;throw new Error(`${label}: ${duplicate?"duplicate session — this student already has the same time booked.":"this student already has an overlapping lesson."}`);}
    if(overlaps.length)throw new Error(`${label}: instructor is already booked from ${overlaps[0].start} to ${overlaps[0].end}.`);
