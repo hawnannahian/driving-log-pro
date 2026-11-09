@@ -2532,3 +2532,57 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
   #recordDialog .record-rate-panel,
   #recordDialog .donebox{padding:10px}
 }
+
+
+/* v1.43 — Boxed section visual standard, phase 2: primary workspace cards.
+   Presentation only; keep each section independent and preserve all existing IDs/handlers. */
+#overview #nextCard,
+#overview #todayList,
+#overview #nextDayList,
+#calendar .calboard,
+#calendar .weekview,
+#calendar .timeline,
+#calendar #calDayList,
+#calendar #upcomingList,
+#students .student,
+#reports .dashhero,
+#reports .report,
+#reports .chartbox,
+#reports .data-card,
+#reports .reportgrid .report{
+  border:1px solid #e3eaf5;
+  border-radius:15px;
+  background:#fff;
+  box-shadow:0 3px 12px #172b4d08;
+}
+#overview #todayList,
+#overview #nextDayList,
+#calendar #calDayList,
+#calendar #upcomingList{padding:9px}
+#calendar .calboard{overflow:hidden}
+#calendar .weekview,
+#calendar .timeline{padding:12px}
+#students .student{
+  padding:15px;
+  text-align:left;
+  transition:border-color .15s ease,box-shadow .15s ease,transform .15s ease;
+}
+#students .student:hover{
+  border-color:#c8d6f5;
+  box-shadow:0 5px 16px #1c438510;
+}
+#reports .dashhero{overflow:hidden}
+#reports .reportgrid .report{padding:14px}
+#reports .reportgrid{gap:10px}
+@media(max-width:720px){
+  #overview #todayList,#overview #nextDayList,
+  #calendar #calDayList,#calendar #upcomingList{padding:8px}
+  #calendar .weekview,#calendar .timeline{padding:9px}
+  #students .student{padding:13px;border-radius:14px}
+  #reports .reportgrid{gap:8px}
+  #reports .reportgrid .report{padding:11px}
+}
+@media(max-width:360px){
+  #students .student{padding:11px}
+  #reports .reportgrid .report{padding:10px}
+}
