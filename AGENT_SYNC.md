@@ -1,3 +1,11 @@
+### 2026-11-09 — ChatGPT: Compact Calendar Day Timeline v1.61 — DRAFT PR
+- Owner supplied an iPhone screenshot showing a 15:44 lesson but an empty timeline from 08:00 onward.
+- Branch: fix/calendar-dayview-compact-time-range-v1-61, created fresh from latest main.
+- Added an optional compact range to timeRange(); dayTimeline uses it to fit the earliest/latest timed lesson, rounded to whole hours. A 15:44 first lesson therefore starts at 15:00. If no timed lesson exists, configured work hours are retained. Week view unchanged.
+- Footer v1.61; Service Worker cache v123.
+- No booking/payment/accounting/student/sync/storage schema changes intended.
+- CI and real-device QA remain pending. Do not claim verified.
+
 ### 2026-11-09 — ChatGPT: Calendar Today's Students First v1.60 — DRAFT PR
 - Owner asked to make the Calendar tab immediately show the selected day's student list.
 - Branch: ui/calendar-todays-students-first-v1-60, created from latest main.
