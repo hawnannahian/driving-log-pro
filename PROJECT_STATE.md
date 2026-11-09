@@ -1,6 +1,6 @@
 # PROJECT_STATE — Driving Log Pro
 
-শেষ যাচাই: 2026-11-09 · সর্বশেষ যাচাইকৃত `main`: `675c2f42001a92860b74dc4aaa28036ee9ffc2fd` (PR #105 payment selector এবং compact Overview layout merged; footer v1.40/cache v102). Student Profile Premium Compact v1.41 কাজ feature branch-এ; merge/deployment হয়নি।
+শেষ যাচাই: 2026-11-09 · সর্বশেষ যাচাইকৃত `main`: `a4a88c2d9ba126b8e587e48deb7d24c207391508` (PR #107 merged; footer v1.41/cache v103). Boxed-section visual standard v1.42 phase 1 is on feature branch; not merged or deployed.
 
 ## কাজের নিয়ম
 - মালিককে উত্তর দিন বাংলায় এবং খুব সংক্ষেপে: কাজ শেষ হলে শুধু "হয়ে গেছে" + লিংক; না হলে অল্প কথায় কারণ।
@@ -532,3 +532,10 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - UI-only: no changes to storage schema, database, API, sync, booking, course allocation, payment calculations, Prayer Time calculations/integration, or student records.
 - Footer version v1.41; Service Worker cache v103.
 - Draft PR #107: https://github.com/hawnannahian/driving-log-pro/pull/107. Workflow #42545286024 passed (all JS syntax checks and Multiple Booking tests); static checks: 312 HTML IDs / 0 duplicates, 7 local script references resolve, CSS braces balanced. Rendered 390×844 / 320×568 screenshots and real iPhone Safari remain untested. Not deployed; owner approval is required before merge/deployment.
+
+
+### 2026-11-09 — v1.42 proposal (branch `ui/boxed-section-design-v1-42`)
+- Phase 1: consistent, separate card styling for the existing New Record form sections (Date, Student, Lesson time, Payment/rate, Lesson completion).
+- Visual direction: preserve individual boxed sections; white surfaces, subtle blue-grey borders, blue accent, compact spacing, 44px+ touch controls and 16px+ text inputs remain governed by existing styles.
+- Presentation-only CSS. No markup, JavaScript, data schema, accounting, booking, course allocation, sync, Prayer Time or integration changes.
+- Footer v1.42 / Service Worker cache v104 on the feature branch only. Not merged, not deployed; browser/iPhone checks pending.
