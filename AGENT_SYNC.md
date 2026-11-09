@@ -1,3 +1,13 @@
+### 2026-11-09 — ChatGPT: Premium Calendar & Timeline v1.52 — DRAFT PR
+- Owner approved the next Calendar UX pass after supplying iPhone screenshots.
+- Branch: `ui/premium-calendar-timeline-v1-52`, created fresh from latest `main` (not stacked on the unmerged v1.51 PR).
+- Day view: removed large full-height green Free Time overlays from the visual timeline. Available intervals now appear as compact, clearly bookable time-slot cards above the timeline; tapping a slot still opens the existing New Lesson form prefilled with the selected date/start/end.
+- Added a compact selected-day summary (lesson count, planned hours, revenue, available time); refined lesson/prayer timeline presentation and responsive styles; included mobile bottom-dock safe-area/scroll clearance from the v1.51 proposal.
+- App files: `app.js`, `index.html`, `styles.css`, `sw.js`; footer v1.52/cache v114. No data schema, booking validation, payment, course allocation, accounting, student, sync or persistence logic intentionally changed.
+- GitHub Actions run #41 (`42555308428`) SUCCESS: all JavaScript files syntax-checked and Multiple Booking atomic-save regression tests passed. Static checks: 314 HTML IDs / 0 duplicates; CSS braces balanced; footer v1.52/cache v114 verified.
+- Still not verified: rendered 390×844 / 320×568 screenshots, real iPhone Safari/Home Screen, and live Pages deployment. Do not claim these passed.
+- PR draft only; do not merge until owner reviews and QA passes. PR #121 (v1.51 navigation-only) was merged by owner into main at `74e79a4`; this v1.52 branch starts from that updated main.
+
 ### 2026-11-09 — ChatGPT: iPhone Calendar/navigation polish v1.51 — DRAFT PR
 - Owner supplied two real iPhone screenshots and asked for UI/UX improvements. Focused on the fixed bottom navigation dock: slightly more compact touch-safe tabs, safer bottom positioning, and increased main-content scroll clearance so the final calendar/timeline content can clear the dock.
 - Branch: `ui/iphone-calendar-navigation-polish-v1-51`, created from latest main `2c79e6940fa88e087b48a5c71d89f225cedfa2a5`.

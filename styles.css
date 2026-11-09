@@ -2705,3 +2705,37 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
   .tabbar .tab{min-height:50px;font-size:9.5px}
   .tabbar .tab svg{width:20px;height:20px}
 }
+
+/* v1.52 — premium day summary, compact availability and clearer lesson timeline */
+#calendar .cal-day-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:0 0 12px}
+#calendar .cal-stat{min-width:0;padding:10px 8px;border:1px solid #e4eaf4;border-radius:13px;background:linear-gradient(180deg,#fff,#f8faff)}
+#calendar .cal-stat small{display:block;color:#7a879b;font-size:10px;font-weight:700;letter-spacing:.02em}
+#calendar .cal-stat b{display:block;margin-top:4px;color:#1b2b48;font-size:clamp(12px,3.2vw,16px);font-weight:850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
+#calendar .cal-free-slots{margin:0 0 12px;padding:13px;border:1px solid #cfe9dc;border-radius:16px;background:linear-gradient(145deg,#f5fcf8,#fff)}
+#calendar .cal-free-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px}
+#calendar .cal-free-head b{display:block;color:#176b45;font-size:14px}
+#calendar .cal-free-head small{display:block;margin-top:2px;color:#648575;font-size:11px}
+#calendar .cal-free-head>span{flex:none;padding:5px 9px;border-radius:20px;background:#e2f5e9;color:#176b45;font-size:10px;font-weight:800}
+#calendar .cal-slot-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+#calendar .cal-slot{display:flex;align-items:center;justify-content:space-between;gap:7px;min-width:0;padding:9px 10px;border:1px solid #d7ecdf;border-radius:12px;background:#fff;color:#176b45;text-align:left;font:inherit;cursor:pointer;transition:border-color .15s,background .15s}
+#calendar .cal-slot:active{background:#edf9f1;border-color:#8bcba5}
+#calendar .cal-slot>span{display:block;min-width:0}
+#calendar .cal-slot b{display:block;font-size:12px;font-variant-numeric:tabular-nums;white-space:nowrap}
+#calendar .cal-slot small{display:block;margin-top:2px;color:#6c8d7b;font-size:10px}
+#calendar .cal-slot strong{flex:none;font-size:10.5px;white-space:nowrap}
+#calendar .timeline{padding:12px 10px 12px 0;overflow:hidden}
+#calendar .tlhour{border-color:#e9eef5;color:#8491a5;font-size:10px;font-weight:650}
+#calendar .tlpray{background:repeating-linear-gradient(135deg,#f3f0fb 0 7px,#ebe6f8 7px 14px);border:1px solid #e2daf5}
+#calendar .tlles{border-radius:11px;padding:6px 9px;box-shadow:0 3px 10px #17243b12}
+#calendar .tlles .tlrow{gap:7px}
+#calendar .tlles .tlrow b{font-size:11px;color:inherit;opacity:.8}
+#calendar .tlles .tlrow span{font-size:13px;font-weight:800}
+#calendar .tlles small{font-size:10px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+#calendar .tlnow{border-color:#e24d58}
+#calendar .tlnow i{box-shadow:0 0 0 3px #e24d5822}
+#calendar .cal-slot:focus-visible,#calendar .tlles:focus-visible{outline:3px solid #315ee84a;outline-offset:2px}
+@media(max-width:420px){#calendar .cal-day-stats{gap:5px}#calendar .cal-stat{padding:9px 6px;border-radius:11px}#calendar .cal-stat small{font-size:9px}#calendar .cal-slot-list{grid-template-columns:minmax(0,1fr)}#calendar .cal-free-slots{padding:11px}#calendar .tlles{padding:5px 7px}}
+@media(max-width:360px){#calendar .cal-day-stats{grid-template-columns:repeat(2,minmax(0,1fr))}#calendar .cal-stat b{font-size:15px}}
+/* Mobile dock clearance — keep the last calendar slot and timeline actions reachable. */
+@media(max-width:720px){.tabbar{bottom:max(8px,env(safe-area-inset-bottom));padding:5px;border-radius:21px}.tabbar .tab{min-height:52px;gap:2px;padding:5px 0;font-size:10px}.tabbar .tab svg{width:21px;height:21px}.navpill{top:5px;bottom:5px}main{padding-bottom:calc(230px + env(safe-area-inset-bottom))}body.timing main{padding-bottom:calc(280px + env(safe-area-inset-bottom))}}
+@media(max-width:360px){.tabbar{width:calc(100% - 12px);bottom:max(6px,env(safe-area-inset-bottom))}.tabbar .tab{min-height:50px;font-size:9.5px}.tabbar .tab svg{width:20px;height:20px}}

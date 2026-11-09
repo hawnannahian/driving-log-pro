@@ -548,7 +548,7 @@ function placeBlocks(root){root.querySelectorAll("[data-pos]").forEach(el=>{cons
 function dayTimeline(iso){const px=.9,[a,b]=timeRange([iso]),today=dateISO(new Date()),y=m=>((m-a)*px).toFixed(1),hgt=m=>Math.max(18,m*px-2).toFixed(1);let h="";
  for(let m=a;m<b;m+=60)h+=`<span class="tlhour" data-pos="${y(m)}">${fromMin(m)}</span>`;
  for(const p of prayerBlocks(iso))if(toMin(p.end)>a&&toMin(p.start)<b)h+=`<div class="tlpray" data-pos="${y(toMin(p.start))}|${hgt(toMin(p.end)-toMin(p.start))}"><span>🕌 ${esc(p.name)} ${p.start}</span></div>`;
- if(iso>=today)for(const[s,e]of freeSlots(iso))h+=`<button type="button" class="tlfree" data-free="${s}-${e}" data-pos="${y(s)}|${hgt(e-s)}"><span>Free ${fromMin(s)}–${fromMin(e)} · ${lengthText(e-s)}</span><b>＋ Book</b></button>`;
+
  for(const{e,lane,of}of lanes(lessonsOn(iso).filter(x=>x.start&&x.end)))h+=`<button type="button" class="tlles ${lessonStatus(e)}${isDone(e)?" past":""}" data-record="${esc(e.id)}" data-pos="${y(toMin(e.start))}|${hgt(endMin(e)-toMin(e.start))}|calc(54px + (100% - 58px) * ${lane}/${of})|calc((100% - 58px) / ${of} - 4px)"><span class="tlrow"><b>${esc(e.start)}–${esc(e.end)}</b><span>${esc(e.student||"Lesson")}</span></span><small>${esc(lengthText(Math.round(hours(e)*60)))} · ${STATUS_TEXT[lessonStatus(e)]} · ${euro(income(e))}</small></button>`;
  if(iso===today&&nowMin()>=a&&nowMin()<=b)h+=`<div class="tlnow" data-pos="${y(nowMin())}"><i></i></div>`;
  return `<div class="tl" data-tall="${((b-a)*px).toFixed(0)}">${h}</div>`;}
@@ -577,9 +577,12 @@ function renderCalendar(){const today=dateISO(new Date()),v=cal.view,days=weekDa
   $("calGrid").innerHTML=html;}
  if(v==="week"){$("calWeek").innerHTML=weekGrid(days);placeBlocks($("calWeek"));}
  // selected day: title, summary, reminders, timeline, list
- const L=lessonsOn(cal.day),hd=holidayOn(cal.day),free=cal.day>=today?freeSlots(cal.day).reduce((a,[x,y])=>a+y-x,0):0;
+ const L=lessonsOn(cal.day),hd=holidayOn(cal.day),slots=cal.day>=today?freeSlots(cal.day):[],free=slots.reduce((a,[x,y])=>a+y-x,0),st=lessonStats(L);
  $("calDayTitle").textContent=relDay(cal.day);
- $("calDaySum").textContent=statText(lessonStats(L))+(free?` · ${lengthText(free)} free`:"")+(hd?" · 🎉 "+hd:"");
+ $("calDaySum").textContent=statText(st)+(hd?" · 🎉 "+hd:"");
+ $("calDayStats").innerHTML=[["Lessons",String(st.n)],["Hours",hText(st.h)],["Revenue",euro(st.inc)],["Available",free?lengthText(free):"—"]].map(([label,value])=>`<div class="cal-stat"><small>${label}</small><b>${value}</b></div>`).join("");
+ const freeBox=$("calFreeSlots");freeBox.classList.toggle("hidden",!slots.length);
+ freeBox.innerHTML=slots.length?`<div class="cal-free-head"><div><b>Available time</b><small>Choose a slot to book a lesson</small></div><span>${slots.length} slot${slots.length===1?"":"s"}</span></div><div class="cal-slot-list">${slots.map(([s,e])=>`<button type="button" class="cal-slot" data-free="${s}-${e}"><span><b>${fromMin(s)}–${fromMin(e)}</b><small>${lengthText(e-s)} available</small></span><strong>＋ Book</strong></button>`).join("")}</div>`:"";
  renderRemind();
  $("calTimeline").innerHTML=dayTimeline(cal.day);placeBlocks($("calTimeline"));
  $("calListHead").classList.toggle("hidden",!L.length);$("calDayList").className="recordlist"+(L.length?"":" hidden");$("calDayList").innerHTML=L.map(e=>bookingHTML(e,false)).join("");
@@ -588,7 +591,7 @@ function renderCalendar(){const today=dateISO(new Date()),v=cal.view,days=weekDa
  document.querySelectorAll("[data-day]").forEach(b=>b.onclick=()=>{cal.day=b.dataset.day;renderCalendar();bindRecords();});
  document.querySelectorAll("[data-wkday]").forEach(b=>b.onclick=()=>{cal.day=b.dataset.wkday;renderCalendar();bindRecords();});
  document.querySelectorAll("[data-wkcol]").forEach(c=>c.onclick=ev=>{if(ev.target.closest("[data-record]"))return;cal.day=c.dataset.wkcol;renderCalendar();bindRecords();});
- document.querySelectorAll("#calTimeline [data-free]").forEach(x=>x.onclick=()=>{const[a,b]=x.dataset.free.split("-").map(Number);newRecord(cal.day);$("fStart").value=fromMin(a);$("fEnd").value=fromMin(Math.min(a+60,b));syncDur();});}
+ document.querySelectorAll("#calFreeSlots [data-free]").forEach(x=>x.onclick=()=>{const[a,b]=x.dataset.free.split("-").map(Number);newRecord(cal.day);$("fStart").value=fromMin(a);$("fEnd").value=fromMin(Math.min(a+60,b));syncDur();});}
 let quickId=null,quickLen=60;
 function quickCourse(src,len){const c=src&&src.course?courseById(src.course):null;return c?planCourseAlloc(c.student,len/60,""):null;}
 function syncQuick(){const a=$("qStart").value,b=$("qEnd").value,d=a&&b?toMin(b)-toMin(a):0;if(d>0)quickLen=d;document.querySelectorAll("[data-qdur]").forEach(x=>x.classList.toggle("active",Number(x.dataset.qdur)===d));const e=state.entries.find(x=>x.id===quickId),p=e&&d>0?quickCourse(e,d):null,cq=e&&e.course?courseById(e.course):null;$("qPkg").textContent=p&&cq?`Uses the course (${fmtH(pooledFreeH(cq.student,""))} h available).`:"";}

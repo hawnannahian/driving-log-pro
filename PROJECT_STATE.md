@@ -1,9 +1,19 @@
-## Draft v1.51 — iPhone Calendar/navigation polish (2026-11-09)
+## Draft v1.52 — Premium Calendar & Timeline (2026-11-09)
+- Fresh branch from latest main: `ui/premium-calendar-timeline-v1-52`.
+- Day view replaces tall Free Time timeline blocks with compact, tappable availability slots. Existing New Lesson form is still used and prefilled with the selected date/time.
+- Adds selected-day summary metrics: lessons, hours, revenue, available time.
+- Refines lesson/prayer timeline styling and mobile navigation safe-area/scroll clearance.
+- Files: `app.js`, `index.html`, `styles.css`, `sw.js`; footer v1.52/cache v114.
+- No intended changes to booking/payment/accounting/course/student data logic or storage schema.
+- CI run #41 (`42555308428`) passed JavaScript syntax checks and Multiple Booking atomic-save regression tests. Static checks: 314 HTML IDs / 0 duplicates; CSS braces balanced; footer v1.52/cache v114 verified.
+- Rendered 390×844 / 320×568, real iPhone Safari/Home Screen and live Pages deployment remain pending. PR #122 is open and ready for review; not merged/deployed.
+
+## Completed v1.51 — iPhone Calendar/navigation polish (2026-11-09; PR #121 merged)
 - Owner supplied iPhone screenshots; focused CSS polish to compact the fixed bottom navigation and increase scroll clearance.
 - Branch: `ui/iphone-calendar-navigation-polish-v1-51`.
 - Files: `styles.css`, footer v1.51, Service Worker cache v113.
 - No app logic, data, booking, payment, accounting or sync changes.
-- Manual rendered viewport, real-device and Pages deployment checks remain pending; this is not yet a verified release.
+- Source merged to main at `74e79a4`; rendered viewport, real-device and Pages deployment checks remain pending.
 
 # PROJECT_STATE — Driving Log Pro
 
