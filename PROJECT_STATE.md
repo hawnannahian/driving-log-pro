@@ -1,6 +1,6 @@
 # PROJECT_STATE — Driving Log Pro
 
-শেষ যাচাই: 2026-11-08 · সর্বশেষ যাচাইকৃত `main`: `7108022d17710eff74a8b80fe695cdcd9b403291` (PR #99-এর পর docs-only handover commit; footer v1.37/cache v99). Multiple Booking v1.38 কাজ আলাদা feature branch-এ; merge/deployment হয়নি।
+শেষ যাচাই: 2026-11-09 · সর্বশেষ যাচাইকৃত `main`: `675c2f42001a92860b74dc4aaa28036ee9ffc2fd` (PR #105 payment selector এবং compact Overview layout merged; footer v1.40/cache v102). Student Profile Premium Compact v1.41 কাজ feature branch-এ; merge/deployment হয়নি।
 
 ## কাজের নিয়ম
 - মালিককে উত্তর দিন বাংলায় এবং খুব সংক্ষেপে: কাজ শেষ হলে শুধু "হয়ে গেছে" + লিংক; না হলে অল্প কথায় কারণ।
@@ -10,7 +10,7 @@
 - Public repository-তে কখনো student data, CSV/JSON backup, token বা private data commit করবেন না।
 - Source update, Pages deployment success এবং real iPhone runtime test—তিনটি আলাদা verification status হিসেবে রিপোর্ট করুন।
 
-## Current verified state (main 7108022, checked 2026-11-08)
+## Historical verified state (main 7108022, checked 2026-11-08)
 
 **Release:** footer `v1.37` (`index.html`), Service Worker cache `nahians-schedule-cache-v99` (`sw.js`). The v1.37/cache v99 assets were last changed at `0cd6ad143590a0450d61244facbadb8ed51a71a1`; current `main` `7108022` carries the same app assets forward in a docs-only commit.
 **Latest change:** PR #99 merged at `0cd6ad1`. The existing weekly Repeat selector is visible for new Lesson records only (hidden for edits and non-lessons); `push-config.js` is included in the Service Worker precache. No storage schema, accounting, course allocation, backup/restore or sync merge logic changed.
@@ -522,3 +522,13 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Not changed: logic, data, IDs, validation, prayer guard, Multiple Booking.
 - Verification: Chromium only (390×844, 375×667, 320×568, synthetic data): before/after widths identical on Chromium (no regression), Date inside the dialog, Start/End not overlapping, quick-booking and Multiple Booking date/time fields inside their cards, fonts >= 16px, no console errors; regression suites (prayer guard, course sheet, delete course, Add payment, pooled hours, Overview, Multiple Booking, 10 node tests) pass. **NOT verified on a real iPhone — the owner must confirm the overflow/overlap is gone.** WebKit is not installed in the test environment.
 
+
+
+## 2026-11-09 — Premium Compact Student Profile v1.41 (Draft PR)
+- Base `main`: `675c2f42001a92860b74dc4aaa28036ee9ffc2fd`; PR #105 is already merged (Payment Method choice chips, Design C).
+- Owner-approved Student Details redesign: compact header and KPI cards; full-width primary Add lesson; secondary actions in a two-column grid; Course content moved into Course tab; only four profile tabs remain: Lessons, Course, Payments, Attendance.
+- Upcoming bookings and student notes are shown in Lessons. Student name, phone/WhatsApp and join date remain in the profile header.
+- Legacy Archive remains read-only and accessible as a collapsed section inside Course; no historical package records or payment data are removed.
+- UI-only: no changes to storage schema, database, API, sync, booking, course allocation, payment calculations, Prayer Time calculations/integration, or student records.
+- Footer version v1.41; Service Worker cache v103.
+- Draft PR #107: https://github.com/hawnannahian/driving-log-pro/pull/107. Workflow #42545286024 passed (all JS syntax checks and Multiple Booking tests); static checks: 312 HTML IDs / 0 duplicates, 7 local script references resolve, CSS braces balanced. Rendered 390×844 / 320×568 screenshots and real iPhone Safari remain untested. Not deployed; owner approval is required before merge/deployment.

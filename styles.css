@@ -2412,3 +2412,68 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
   #overview .overview-add{padding:0 9px;font-size:11px}
   #overview .todayrow{gap:6px}
 }
+
+
+/* v1.41 — Premium compact student profile (presentation only).
+   Four tabs: Lessons, Course, Payments, Attendance. Legacy history stays under Course. */
+#profileDialog .dialogbody{padding:12px 14px}
+#profileDialog .dialoghead{gap:8px;padding-bottom:10px;margin-bottom:10px}
+#profileDialog .dialoghead h2{font-size:22px;line-height:1.15}
+#profileDialog .dialoghead .eyebrow{margin-bottom:2px}
+#profileDialog .profilestats{gap:8px;margin:10px 0}
+#profileDialog .profilestats .report{min-height:72px;padding:10px 11px;border-radius:13px}
+#profileDialog .profilestats .report span{font-size:11px;line-height:1.3}
+#profileDialog .profilestats .report strong{margin-top:4px;font-size:19px;line-height:1.15}
+#profileDialog .profileactions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:10px 0 12px}
+#profileDialog .profileactions .btn{display:flex;min-width:0;min-height:44px;padding:8px 7px;font-size:12px;line-height:1.2;text-align:center}
+#profileDialog #profileAdd{grid-column:1/-1;min-height:48px;font-size:14px}
+#profileDialog #profileEdit{grid-column:1/-1}
+#profileDialog .ptabs{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;
+  margin:10px 0 12px;padding:5px;overflow:visible;
+  border:1px solid #e7ecf4;border-radius:14px;background:#f5f7fb;
+}
+#profileDialog .ptabs button{
+  display:flex;align-items:center;justify-content:center;min-width:0;min-height:44px;
+  padding:5px 3px;border:0;border-radius:10px;background:transparent;
+  color:#64728a;font-size:clamp(10px,2.7vw,12px);font-weight:750;
+  line-height:1.1;text-align:center;white-space:normal;overflow-wrap:anywhere;
+}
+#profileDialog .ptabs button.active{background:#1b315a;color:#fff;box-shadow:0 2px 7px #172d5725}
+#profileDialog .ptab{padding-top:0}
+#profileDialog .profile-upcoming,#profileDialog .profile-history{margin:0 0 12px}
+#profileDialog .profile-upcoming h3,#profileDialog .profile-history h3{margin:0 0 7px;font-size:14px;line-height:1.25;color:var(--navy)}
+#profileDialog .profile-upcoming .recordlist,#profileDialog .profile-history .recordlist{gap:6px}
+#profileDialog .profile-legacy{margin-top:12px;padding:10px 12px;border:1px solid var(--line);border-radius:13px;background:#f8faff}
+#profileDialog .profile-legacy>summary{display:flex;align-items:center;justify-content:space-between;min-height:44px;cursor:pointer;color:var(--navy);font-size:13px;font-weight:800;list-style:none}
+#profileDialog .profile-legacy>summary::-webkit-details-marker{display:none}
+#profileDialog .profile-legacy>summary:after{content:"＋";font-size:16px;color:var(--muted)}
+#profileDialog .profile-legacy[open]>summary:after{content:"−"}
+#profileDialog .profile-legacy .pkgcard{margin-top:8px}
+@media(max-width:520px){
+  #profileDialog .dialogbody{padding:11px}
+  #profileDialog .dialoghead{padding-bottom:9px;margin-bottom:9px}
+  #profileDialog .profilestats{gap:7px;margin:9px 0}
+  #profileDialog .profilestats .report{min-height:68px;padding:9px 10px}
+  #profileDialog .profilestats .report strong{font-size:18px}
+  #profileDialog .profileactions{gap:7px;margin:9px 0 10px}
+  #profileDialog .profileactions .btn{font-size:11.5px}
+  #profileDialog .ptabs{gap:4px;margin:9px 0 10px;padding:4px}
+  #profileDialog .ptabs button{min-height:44px;padding:4px 2px;font-size:11px}
+}
+@media(max-width:360px){
+  #profileDialog .dialogbody{padding:10px}
+  #profileDialog .profilestats .report{padding:8px}
+  #profileDialog .profilestats .report span{font-size:10.5px}
+  #profileDialog .profilestats .report strong{font-size:17px}
+  #profileDialog .profileactions .btn{padding-inline:5px;font-size:11px}
+  #profileDialog .ptabs button{font-size:10.5px}
+}
+
+
+#profileDialog .profile-notes{margin:0 0 10px;padding:9px 11px;border:1px solid var(--line);border-radius:12px;background:#f8faff}
+#profileDialog .profile-notes>summary{display:flex;align-items:center;min-height:40px;cursor:pointer;color:var(--navy);font-size:12.5px;font-weight:800;list-style:none}
+#profileDialog .profile-notes>summary::-webkit-details-marker{display:none}
+#profileDialog .profile-notes>summary:after{content:"＋";margin-left:auto;color:var(--muted);font-size:15px}
+#profileDialog .profile-notes[open]>summary:after{content:"−"}
+#profileDialog .profile-notes p{margin:7px 0 2px;color:#59677d;font-size:12.5px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
