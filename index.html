@@ -401,12 +401,14 @@
   <dialog id="travelDuaDialog" class="traveldua">
     <div class="traveldua-inner">
       <div class="dialoghead"><div><p class="eyebrow">BEFORE YOU DRIVE</p><h2>Travel Dua · সফরের দোয়া</h2></div><button type="button" class="iconbtn" id="duaClose" aria-label="Close">×</button></div>
+      <div class="traveldua-body">
       <p class="traveldua-intro">গাড়ি চালানো বা সফর শুরু করার আগে পড়ুন। আল্লাহ আপনার যাত্রা নিরাপদ ও বরকতময় করুন।</p>
       <div class="dua-arabic dua-arabic-full" lang="ar" dir="rtl">اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ. سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ، وَإِنَّا إِلَى رَبِّنَا لَمُنقَلِبُونَ. اللَّهُمَّ إِنَّا نَسْأَلُكَ فِي سَفَرِنَا هَذَا الْبِرَّ وَالتَّقْوَى، وَمِنَ الْعَمَلِ مَا تَرْضَى. اللَّهُمَّ هَوِّنْ عَلَيْنَا سَفَرَنَا هَذَا وَاطْوِ عَنَّا بُعْدَهُ. اللَّهُمَّ أَنْتَ الصَّاحِبُ فِي السَّفَرِ، وَالْخَلِيفَةُ فِي الْأَهْلِ. اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ وَعْثَاءِ السَّفَرِ، وَكَآبَةِ الْمَنْظَرِ، وَسُوءِ الْمُنْقَلَبِ فِي الْمَالِ وَالْأَهْلِ.</div>
       <div class="dua-audio-card"><b>🎧 সম্পূর্ণ দোয়া — আসল আরবি রেকর্ডিং</b><audio id="travelDuaAudio" controls preload="none" playsinline src="https://www.hisnmuslim.com/audio/ar/207.mp3">আপনার ব্রাউজার অডিও চালাতে পারে না।</audio><small>ইন্টারনেট সংযোগ প্রয়োজন। অডিও: Hisnul Muslim · সফরের দোয়া (MP3)</small></div>
       <div class="dua-section"><b>বাংলা উচ্চারণ (কুরআনের অংশ)</b><p>সুবহানাল্লাযী সাখখারা লানা হাযা, ওয়া মা কুন্না লাহু মুকরিনীন। ওয়া ইন্না ইলা রব্বিনা লামুনকালিবূন।</p></div>
       <div class="dua-section"><b>অর্থ</b><p>আল্লাহ সর্বশ্রেষ্ঠ—তিনবার। পবিত্র তিনি, যিনি এই বাহনকে আমাদের অধীন করেছেন; আমরা নিজেরা একে বশীভূত করতে পারতাম না। নিশ্চয়ই আমরা আমাদের প্রতিপালকের কাছেই ফিরে যাব। হে আল্লাহ, এই সফরে আমরা আপনার কাছে নেকি, তাকওয়া এবং আপনার পছন্দনীয় আমল চাই। আমাদের সফর সহজ করে দিন এবং এর দূরত্ব সংক্ষিপ্ত করে দিন। সফরে আপনিই আমাদের সঙ্গী এবং পরিবারে আমাদের স্থলাভিষিক্ত। সফরের কষ্ট, দুঃখজনক দৃশ্য এবং সম্পদ ও পরিবারের কাছে খারাপ অবস্থায় ফিরে আসা থেকে আপনার আশ্রয় চাই।</p><p>ফিরে আসার সময় অতিরিক্ত: আমরা প্রত্যাবর্তনকারী, তওবাকারী, ইবাদতকারী এবং আমাদের প্রতিপালকের প্রশংসাকারী।</p></div>
       <small class="dua-source">সূত্র: সহিহ মুসলিম ১৩৪২ · কুরআনের অংশ: সূরা আয-যুখরুফ ৪৩:১৩–১৪ · অডিও উৎস: <a href="https://www.hisnmuslim.com/audio/ar/207.mp3" target="_blank" rel="noopener">Hisnul Muslim MP3</a> · <a href="https://e-quran.com/pages/hisnmuslim/daaa%27_alsfr.html" target="_blank" rel="noopener">উৎস পৃষ্ঠা</a></small>
+      </div>
       <div class="dialogactions dua-actions"><button type="button" class="btn ghost" id="duaSkip">Skip</button><span></span><button type="button" class="btn primary" id="duaStart">দোয়া পড়ে শুরু করুন · Start</button></div>
     </div>
   </dialog>
@@ -421,7 +423,7 @@
     <button class="tab" data-tab="islamic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M6.5 20v-6.5c0-3 2.5-5 5.5-6.5 3 1.5 5.5 3.5 5.5 6.5V20"/><path d="M12 4.5v2.5"/><path d="M10 20v-3a2 2 0 0 1 4 0v3"/><path d="M3.5 20v-8M20.5 20v-8"/></svg><span>Islamic</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.58</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.59</span></footer>
   <script src="push-config.js"></script>
   <script src="prayer-times.js"></script>
   <script src="mawaqit-times.js"></script>

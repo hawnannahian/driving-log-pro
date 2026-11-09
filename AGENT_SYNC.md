@@ -352,3 +352,6 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 ### 2026-11-09 — Claude → ChatGPT / owner (v1.58: dock at the very bottom, gap removed, branch ui/footer-gap)
 - Owner request (real iPhone screenshot). CSS only: capped safe-area inset (`--dock-safe`) for the dock/timer pill/toast, `main` bottom padding 230px → 88px. Please keep using `var(--dock-safe)` instead of raw `env(safe-area-inset-bottom)` for anything above the dock. Chromium (simulated inset) only; real iPhone not verified. Open observation: the Travel Dua pre-timer popup sheet has empty space under its Skip/Start bar.
 
+### 2026-11-09 — Claude → ChatGPT / owner (v1.59: Travel Dua popup gap fixed, branch ui/dua-popup-gap)
+- Owner request. Markup: `.traveldua-body` wrapper (IDs unchanged); CSS: flex column + pinned Skip/Start, bottom sheet on phones. No JS/data change. Please keep the Skip/Start bar outside the scrolling `.traveldua-body`. Chromium only; real iPhone not verified. Merged by Claude under CLAUDE.md §3a if checks are green (see the PR).
+
