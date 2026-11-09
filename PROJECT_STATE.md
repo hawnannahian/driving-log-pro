@@ -1,3 +1,11 @@
+## Draft v1.62 — Auto-update End Time While Editing (2026-11-09)
+- Fresh branch from latest main: fix/edit-record-auto-end-time-v1-62.
+- Changing Start time now updates End time for both new lessons and existing records being edited; it preserves the current selected lesson duration (e.g. 10:00 PM → 11:00 PM for a one-hour lesson).
+- Existing 12-hour maximum validation and end-of-day cap remain unchanged.
+- Footer v1.62; Service Worker cache v124.
+- No booking, payment, accounting, student, sync or storage schema logic intentionally changed.
+- CI and real iPhone Safari QA pending; not merged or deployed.
+
 ## Draft v1.61 — Compact Day Timeline (2026-11-09)
 - Fresh branch from latest main: fix/calendar-dayview-compact-time-range-v1-61.
 - Day view now sizes the timeline to the earliest and latest lesson on the selected date instead of always including the full configured working day.
