@@ -1,5 +1,12 @@
 # AGENT_SYNC — shared channel between Claude Code and ChatGPT
 
+### 2026-11-09 — ChatGPT: Settings mobile polish v1.49 (Draft PR)
+- Based on latest `main` `3525e960` (PR #118 merged); fresh branch `ui/settings-mobile-polish-v1-49`.
+- Refined Log → Settings heading alignment, card hierarchy, WhatsApp disclosure affordance/focus state, and mobile bottom-navigation clearance. Preserved the navy header, white cards, existing blue/nav colours and all settings controls.
+- App files: `styles.css`, `index.html` (footer v1.49), `sw.js` (cache v111). No HTML structure, JavaScript, settings persistence, voice, push, booking, accounting, student data or sync behavior changed.
+- Checks: source-level review only so far. Automated tests, rendered 390×844 / 320×568 screenshots, real iPhone Safari and Pages deployment are not yet verified. Draft PR; no merge/deploy without owner approval.
+
+
 ### 2026-11-09 — ChatGPT: Car brand header v1.48 (Draft PR #117)
 - Rebased cleanly onto latest main `e02a96d` using branch `ui/car-brand-header-v1-48-rebased`; old PR #115 branch was divergent and is superseded.
 - Header uses white outline car icon, `Driving Log Pro` title, `Driving Lesson Management` subtitle and deep navy responsive background. Footer v1.48/cache v110.
@@ -11,7 +18,7 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no merge without the owner, no student data in the repo).
 
 ## Latest verified project state (update on every release)
-- **Main `742c7d7`** includes PR #112 (v1.46: prayer overlap is a confirm warning, not a block) and PR #113 (v1.47: prayer times from the mosque Mawaqit snapshot `mawaqit-times.js`). Footer **v1.47**, Service Worker cache **`nahians-schedule-cache-v109`**. Pages deployment run and real-iPhone checks are not evidenced here. PR #114 (live Mawaqit Worker) was rejected by the owner and closed unmerged; its branch was deleted.
+- **Latest main `3525e96`** includes PR #118 (v1.48: navy car-brand header). Footer **v1.48**, Service Worker cache **`nahians-schedule-cache-v110`**. This is source state; the latest Pages deployment and real-iPhone checks must be verified separately. PR #114 (live Mawaqit Worker) was rejected by the owner and closed unmerged; do not revive it without a new request.
 - **Latest `main` includes PR #109** (boxed-section phase 2; merged 2026-11-09). Follow-up branch `ui/restore-original-colours-v1-44` is based on current `main`; footer **v1.44**, Service Worker cache **`nahians-schedule-cache-v106`** proposed.
 - **Current task:** Move WhatsApp Message Settings out of the Log records/footer area into Log → ⋮ → Settings; keep the existing template editor, IDs, save/reset handlers and local-storage behavior intact. Branch `ui/move-whatsapp-settings-into-log-menu-v1-45`; footer v1.45/cache v107 proposed.
 - **PR #107 merged:** Premium Compact Student Profile; four tabs (Lessons, Course, Payments, Attendance), upcoming lessons/notes under Lessons, Legacy Archive collapsed under Course.
@@ -284,3 +291,9 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - **Things the other agent must know:** block length follows the saved "minutes" setting (old version used 30, fresh-install default is 15); Friday uses the mosque Jumu'ah time, not the app's Jumu'ah setting; the Location/Method prayer settings now only apply as a fallback; `PRAYER_YEAR` in `prayer-times.js` is unused; weekly Repeat copies still skip prayer-overlapping slots; CI runs only `tests/multiple-booking.test.js` (the Mawaqit tests in `tests/mawaqit-prayer.test.js` are not in CI yet).
 - **CLAUDE.md §11** prayer-times note was outdated and is corrected in this docs PR for the owner to review.
 - Docs-only change: no app asset changed, so no cache or footer bump.
+
+### 2026-11-09 — ChatGPT: Settings mobile polish v1.49 (handover)
+- Draft PR proposes clearer Settings header hierarchy, consistent white card surfaces, stronger WhatsApp disclosure affordance/focus visibility, and extra mobile bottom clearance so the fixed six-tab navigation does not obscure the final settings sections.
+- Preserves the existing navy car header and approved colours (`#080C91` family, white cards, subtle blue-grey borders, blue accent); no feature redesign or adjacent tab changes.
+- Files: `styles.css`, `index.html` footer v1.49, `sw.js` cache v111, `AGENT_SYNC.md`, `PROJECT_STATE.md`. No JavaScript or data/storage changes.
+- No browser, real-device, CI or deployment verification is claimed yet. PR remains draft pending owner review; do not merge/deploy without explicit approval.
