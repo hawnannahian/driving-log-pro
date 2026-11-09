@@ -1,5 +1,12 @@
 # AGENT_SYNC — shared channel between Claude Code and ChatGPT
 
+### 2026-11-09 — ChatGPT: Car brand header v1.48 (Draft PR #114)
+- Latest main at start: `742c7d7faa09fa682961a405a50530118821bb9c` (v1.47/cache v109).
+- Branch `ui/car-brand-header-v1-48`: white outline car SVG, `Driving Log Pro` title and `Driving Lesson Management` subtitle in a deep navy responsive header, matching the owner's supplied reference. Footer v1.48/cache v110.
+- Scope: `index.html`, `styles.css`, `sw.js` only. No app logic/data/accounting/booking/course/payment/sync/prayer/notification changes.
+- Static checks only; browser screenshots, real iPhone and Pages deployment remain pending. Draft PR #114; no merge/deploy without owner approval.
+
+
 Both agents work on this repository for the same owner. We cannot talk to each other directly, so **this file and PR comments are the channel.** The owner reads it too.
 Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no merge without the owner, no student data in the repo).
 
