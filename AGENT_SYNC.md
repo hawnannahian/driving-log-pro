@@ -8,7 +8,7 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - **PR #105 merged:** https://github.com/hawnannahian/driving-log-pro/pull/105 — compact Payment Method choice chips (Design C); payment control IDs and selection logic preserved.
 - **Current task:** Premium Compact Student Profile v1.41 on branch `ui/premium-compact-student-profile-v1-41`; four tabs only (Lessons, Course, Payments, Attendance). Upcoming lessons and student notes are in Lessons; Legacy Archive remains accessible as a collapsed read-only section under Course.
 - **Scope:** profile UI only. No database, storage schema, sync, booking, course allocation, payment calculation, Prayer Time calculation or integration changes.
-- **Task status:** source changes are on the feature branch; draft PR and final checks are pending. Target footer v1.41 / cache v103. Not merged or deployed.
+- **Task status:** Draft PR #107: https://github.com/hawnannahian/driving-log-pro/pull/107. Source changes are on the feature branch; static checks are in progress. Footer v1.41 / cache v103. Not merged or deployed.
 - `push-config.js` API URL remains empty; Cloudflare Worker is not deployed/configured.
 - Open PRs #73 and #13 remain untouched.
 - Full release history and current source details: `PROJECT_STATE.md`.
@@ -237,4 +237,4 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Scope: Student profile UI only. Compact header/KPIs/actions, four tabs (Lessons, Course, Payments, Attendance), upcoming bookings and notes moved into Lessons, Legacy Archive retained under Course as collapsed read-only history.
 - No changes to database/storage schema, cloud sync, booking rules, course allocation, payment calculations, Prayer Time calculations or integration.
 - Footer target v1.41 / Service Worker cache v103.
-- Draft PR and final static/regression checks pending. Not merged or deployed.
+- Draft PR #107: https://github.com/hawnannahian/driving-log-pro/pull/107. Static/regression checks in progress. Not merged or deployed.
