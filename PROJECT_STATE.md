@@ -1,3 +1,12 @@
+## Draft v1.52 — Premium Calendar & Timeline (2026-11-09)
+- Fresh branch from latest main: `ui/premium-calendar-timeline-v1-52`.
+- Day view replaces tall Free Time timeline blocks with compact, tappable availability slots. Existing New Lesson form is still used and prefilled with the selected date/time.
+- Adds selected-day summary metrics: lessons, hours, revenue, available time.
+- Refines lesson/prayer timeline styling and mobile navigation safe-area/scroll clearance.
+- Files: `app.js`, `index.html`, `styles.css`, `sw.js`; footer v1.52/cache v114.
+- No intended changes to booking/payment/accounting/course/student data logic or storage schema.
+- Manual responsive/iPhone QA and live Pages deployment are pending; draft PR only.
+
 ## Draft v1.51 — iPhone Calendar/navigation polish (2026-11-09)
 - Owner supplied iPhone screenshots; focused CSS polish to compact the fixed bottom navigation and increase scroll clearance.
 - Branch: `ui/iphone-calendar-navigation-polish-v1-51`.
