@@ -2739,3 +2739,71 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 /* Mobile dock clearance — keep the last calendar slot and timeline actions reachable. */
 @media(max-width:720px){.tabbar{bottom:max(8px,env(safe-area-inset-bottom));padding:5px;border-radius:21px}.tabbar .tab{min-height:52px;gap:2px;padding:5px 0;font-size:10px}.tabbar .tab svg{width:21px;height:21px}.navpill{top:5px;bottom:5px}main{padding-bottom:calc(230px + env(safe-area-inset-bottom))}body.timing main{padding-bottom:calc(280px + env(safe-area-inset-bottom))}}
 @media(max-width:360px){.tabbar{width:calc(100% - 12px);bottom:max(6px,env(safe-area-inset-bottom))}.tabbar .tab{min-height:50px;font-size:9.5px}.tabbar .tab svg{width:20px;height:20px}}
+
+/* v1.54 — compact New Record: the top part (mode switch, date, student) is tight so the real work — time, duration, payment and Save — is visible without scrolling. CSS only; IDs, behaviour and 16px inputs unchanged. */
+#recordDialog form{padding:12px 14px calc(8px + env(safe-area-inset-bottom))}
+#recordDialog .dialoghead{top:-12px;align-items:center;padding:0 0 6px;margin:0 0 6px}
+#recordDialog .dialoghead h2{margin:0;font-size:20px;line-height:1.15}
+#recordDialog .dialoghead .iconbtn{width:38px;height:38px;min-width:38px;font-size:22px}
+#recordDialog .formgrid{gap:6px 10px}
+#recordDialog .record-panel,#recordDialog .donebox{padding:0 0 8px;margin:0}
+#recordDialog .formgrid label{gap:3px;font-size:11px}
+#recordDialog .formgrid input:not([type=checkbox]),#recordDialog .formgrid select,#recordDialog .formgrid textarea{min-height:40px;padding:6px 11px}
+/* 1. booking mode: slim segmented switch */
+#recordDialog .booking-mode-row{margin:0}
+#recordDialog .booking-mode-options{gap:3px;padding:3px;border-radius:11px}
+#recordDialog .booking-mode-option{min-height:34px;border-radius:9px;font-size:13px}
+/* 2. date and Today/Tomorrow on ONE line */
+#recordDialog .record-date-panel{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:0 8px;padding:0 0 8px}
+#recordDialog .record-date-shortcuts{margin:0;gap:6px;flex-wrap:nowrap}
+#recordDialog .record-date-shortcuts button{min-height:40px;padding:0 11px;font-size:12px}
+/* 3. student: recent chips + name + phone, hint one small line */
+#recordDialog .recent-students-label{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0)}
+#recordDialog .record-student-panel{gap:6px;padding:0 0 8px}
+#recordDialog .record-student-panel .chiprow{gap:6px}
+#recordDialog .record-student-panel .chiprow button{min-height:32px;padding:0 12px;font-size:13px}
+#recordDialog .record-student-grid,#recordDialog .record-time-grid{gap:8px}
+#recordDialog .record-student-panel .formhint{margin:0;font-size:11px;line-height:1.3}
+/* 4. lesson time + duration */
+#recordDialog .record-panel-title{margin:0 0 6px;font-size:14px}
+#recordDialog .record-subtitle{margin:6px 0 4px;font-size:11px}
+#recordDialog .durchips{gap:5px}
+#recordDialog .durchips button{min-height:36px;font-size:13px}
+#recordDialog .record-duration-summary{margin-top:6px;padding:6px 10px;font-size:12px}
+/* 5. payment + completion: plain small headings instead of tall coloured bars */
+#recordDialog .record-rate-panel{padding:0 0 8px;gap:4px 10px}
+#recordDialog .record-rate-panel:before,#recordDialog .donebox:before{min-height:0;margin:0 0 4px;padding:0;border-radius:0;background:transparent;font-size:14px}
+#recordDialog .rate-field small{font-size:11px;line-height:1.3}
+#recordDialog .payment-method-label{font-size:12px}
+#recordDialog .payment-option{min-height:44px;padding:6px 10px}
+#recordDialog .donebox{padding:0 0 6px}
+#recordDialog .donebox .checklabel{min-height:30px}
+#recordDialog .donebox small{font-size:11px;line-height:1.3}
+#recordDialog .dialogactions{padding-top:8px}
+/* 320px: keep two columns (name|phone, start|end) instead of stacking, date chips below the date */
+@media(max-width:360px){
+  #recordDialog form{padding-left:12px;padding-right:12px}
+  #recordDialog .record-student-grid,#recordDialog .record-time-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #recordDialog .record-date-shortcuts{gap:5px}
+  #recordDialog .record-date-shortcuts button{padding:0 9px;font-size:12px}
+}
+/* v1.54 follow-up: date + shortcuts on one line (the .wide class made the label span both columns), slim headings, slim inputs and suggestion rows */
+#recordDialog .record-date-panel>label{grid-column:1}
+#recordDialog .record-date-shortcuts{grid-column:2;grid-row:1}
+@media(max-width:300px){#recordDialog .record-date-panel>label{grid-column:1}#recordDialog .record-date-shortcuts{grid-column:1;grid-row:2}}
+#recordDialog .record-panel-title{display:block;background:transparent;border-radius:0}
+#recordDialog #fRate{min-height:40px;height:40px}
+#recordDialog .student-suggestions{padding:4px;gap:2px}
+#recordDialog .student-suggestions button{min-height:44px;padding:6px 12px}
+#recordDialog .formgrid .record-date-panel>label.wide{grid-column:1;grid-row:1}
+#recordDialog .formgrid .record-date-panel .record-date-shortcuts{grid-column:2;grid-row:1}
+@media(max-width:300px){#recordDialog .formgrid .record-date-panel .record-date-shortcuts{grid-column:1;grid-row:2}}
+#recordDialog .record-panel-title:before,#recordDialog .record-panel-title:after{display:none}
+/* (!important only where an older, more specific rule pins a taller minimum height) */
+#recordDialog #fRate{min-height:40px!important;height:40px!important}
+#recordDialog .record-duration-summary{min-height:0!important;padding:5px 10px;margin-top:5px}
+#recordDialog .record-time-panel .record-time-grid label input,#recordDialog .formgrid input[type=time],#recordDialog .formgrid input[type=date]{min-height:40px!important}
+/* the long "Lesson completed" explanation stays for screen readers but no longer takes two lines of screen */
+#recordDialog .donebox .checklabel small{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0)}
+/* v1.54: the sheet was 100% wide but offset by left:12px, so it stuck out 12px past the right edge of the screen (close button, Save and date field looked cut off on iPhone). */
+@media(max-width:720px){#recordDialog[open]{left:0;right:0;width:100%;max-width:100%}}

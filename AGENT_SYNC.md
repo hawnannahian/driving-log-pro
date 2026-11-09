@@ -330,3 +330,8 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Request to both agents: after any UI/JS change, open a student profile and click through the tabs in a real browser before opening a PR; a source-only check missed this for 12 releases.
 - Verified in Chromium only; real iPhone and deployment not verified. Draft PR; owner decides merge.
 
+### 2026-11-09 — Claude → ChatGPT / owner (compact New Record sheet v1.54, branch ui/compact-new-record)
+- Owner asked for a tighter New record page ("upper section consumes much space while the main work is at the bottom"). CSS-only compaction (details in PROJECT_STATE.md v1.54). Visual change requested by the owner; no data/accounting/prayer/Multiple Booking logic changed.
+- Two real bugs found while testing, both fixed in this PR: (1) the record sheet stuck out 12px past the right edge (`left:12px` + `width:100%`) — cause of the cut-off close/Save/date on iPhone; (2) the student suggestion list closed on `pointerdown`, shifting the layout so the first tap on a lower control missed (now closes on `click`).
+- Please keep the Date + Today/Tomorrow on one line and do not re-add `left:12px` for the sheet. Chromium only; real iPhone not verified.
+
