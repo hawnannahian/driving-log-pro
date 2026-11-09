@@ -4,12 +4,13 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no merge without the owner, no student data in the repo).
 
 ## Latest verified project state (update on every release)
-- **Latest `main` = `07ece46128fc40c735d57d2498880f6bbe2ecc15`** (PR #100 Multiple Booking merged, 2026-11-08). Footer **v1.38**, service-worker cache **`nahians-schedule-cache-v100`**.
-- **Latest deployment evidence:** GitHub Pages run #155 (id 42535466211) for `07ece46` was still `in_progress` when this was written — check it before claiming deployment. The "Multiple Booking regression" workflow (10 node tests) passed for head `61318ac` (runs #19/#20). Neither verifies real iPhone behaviour.
-- **PR #98 merged:** https://github.com/hawnannahian/driving-log-pro/pull/98. Legacy Archive deletion rebuilds FIFO allocations, budgets package hours from actual receipts, consumes allocations chronologically (including partial/extra-hour lessons), and only auto-marks fully funded completed lessons Paid. Six focused scenarios, an integration harness and all eight JS syntax checks passed before merge.
-- **PR #99 merged:** https://github.com/hawnannahian/driving-log-pro/pull/99. Weekly Repeat is visible for new Lesson records only (hidden for edits/non-lessons); `push-config.js` is in the Service Worker precache. Eight JS syntax parses, 307 HTML IDs / 0 duplicates, seven script refs, CSS brace balance, Repeat visibility checks, synthetic pooled-repeat allocation and synthetic merge checks passed. No rendered browser, real iPhone or live sync test.
-- `push-config.js` API URL remains empty; Cloudflare Worker is not deployed/configured. Precache alone does not activate Web Push.
-- Other open PRs: #73 and #13; neither was changed.
+- **Latest `main` = `675c2f42001a92860b74dc4aaa28036ee9ffc2fd`** (2026-11-09). Footer **v1.40**, Service Worker cache **`nahians-schedule-cache-v102`**.
+- **PR #105 merged:** https://github.com/hawnannahian/driving-log-pro/pull/105 — compact Payment Method choice chips (Design C); payment control IDs and selection logic preserved.
+- **Current task:** Premium Compact Student Profile v1.41 on branch `ui/premium-compact-student-profile-v1-41`; four tabs only (Lessons, Course, Payments, Attendance). Upcoming lessons and student notes are in Lessons; Legacy Archive remains accessible as a collapsed read-only section under Course.
+- **Scope:** profile UI only. No database, storage schema, sync, booking, course allocation, payment calculation, Prayer Time calculation or integration changes.
+- **Task status:** source changes are on the feature branch; draft PR and final checks are pending. Target footer v1.41 / cache v103. Not merged or deployed.
+- `push-config.js` API URL remains empty; Cloudflare Worker is not deployed/configured.
+- Open PRs #73 and #13 remain untouched.
 - Full release history and current source details: `PROJECT_STATE.md`.
 
 ## Where we stopped and what comes next (handover, 2026-11-08)
@@ -229,3 +230,11 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Owner asked "fix date/time layout" after a real-iPhone screenshot (Date field cut at the right edge, Start/End time boxes overlapping). CSS-only hardening of native date/time inputs in dialogs (see PROJECT_STATE.md v1.39); footer v1.39 / cache v101. No JS/data/accounting change; no protected code touched.
 - Chromium-only verification (3 viewports, screenshots reviewed); iOS WebKit not available, so the fix is UNVERIFIED on iPhone — owner to confirm. If the problem remains, send a new screenshot; do not assume it is fixed.
 
+
+
+### 2026-11-09 — ChatGPT → owner / Claude (Premium Compact Student Profile v1.41)
+- Branch: `ui/premium-compact-student-profile-v1-41`, based on main `675c2f42001a92860b74dc4aaa28036ee9ffc2fd`.
+- Scope: Student profile UI only. Compact header/KPIs/actions, four tabs (Lessons, Course, Payments, Attendance), upcoming bookings and notes moved into Lessons, Legacy Archive retained under Course as collapsed read-only history.
+- No changes to database/storage schema, cloud sync, booking rules, course allocation, payment calculations, Prayer Time calculations or integration.
+- Footer target v1.41 / Service Worker cache v103.
+- Draft PR and final static/regression checks pending. Not merged or deployed.
