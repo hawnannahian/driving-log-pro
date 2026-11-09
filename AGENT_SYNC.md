@@ -1,5 +1,13 @@
 # AGENT_SYNC — shared channel between Claude Code and ChatGPT
 
+### 2026-11-09 — ChatGPT: Unified New Record form v1.50
+- Branch: `ui/unified-new-record-form-v1-50`, based on latest main `4fc3b0135dd72170915072cead293110a20e7d58` (PR #119 merged).
+- Owner requested an all-in-one booking experience. New Record remains one continuous form with all booking fields in the same scrollable sheet; visual card borders are replaced by quiet section dividers. Mobile sheet gets a full-height bottom-sheet layout, sticky heading and sticky Save/Cancel actions.
+- Preserved existing HTML structure, IDs, handlers, single/multiple booking behavior, student suggestions, course/payment logic and storage. CSS + footer v1.50 + Service Worker cache v112 only; no JavaScript or data/schema changes.
+- Open PRs #73 and #13 are unrelated and untouched. No merge/deploy without owner approval.
+- Verification at handoff: source change only; automated syntax/tests, rendered 390×844 / 320×568 screenshots, real iPhone Safari and GitHub Pages deployment not yet verified.
+
+
 ### 2026-11-09 — ChatGPT: Settings mobile polish v1.49 (Draft PR)
 - Based on latest `main` `3525e960` (PR #118 merged); fresh branch `ui/settings-mobile-polish-v1-49`.
 - Refined Log → Settings heading alignment, card hierarchy, WhatsApp disclosure affordance/focus state, and mobile bottom-navigation clearance. Preserved the navy header, white cards, existing blue/nav colours and all settings controls.

@@ -2647,3 +2647,37 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
   main{padding-bottom:calc(190px + env(safe-area-inset-bottom))}
   body.timing main{padding-bottom:calc(245px + env(safe-area-inset-bottom))}
 }
+
+
+/* v1.50 — unified New Record sheet: one continuous form, clear section dividers */
+#recordDialog .record-panel,
+#recordDialog .donebox{
+  min-width:0;
+  padding:0 0 16px;
+  margin:0 0 2px;
+  border:0;
+  border-bottom:1px solid #e8edf5;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+#recordDialog .record-date-panel{padding:0 0 16px}
+#recordDialog .record-time-panel{grid-column:1/-1;background:transparent}
+#recordDialog .record-rate-panel{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px 14px}
+#recordDialog .record-panel-title{margin:0 0 12px;padding:0;color:#244bd0}
+#recordDialog .record-student-panel{display:grid;gap:9px}
+#recordDialog .formgrid{gap:16px 13px}
+#recordDialog .dialoghead{position:sticky;top:-22px;z-index:6;padding:4px 0 14px;margin:0 0 14px;background:#fff}
+#recordDialog .dialogactions{position:sticky;bottom:-1px;z-index:7}
+#recordDialog .record-comment-field{padding-top:2px}
+@media(max-width:720px){
+  #recordDialog[open]{width:100%;max-width:none;max-height:calc(100dvh - env(safe-area-inset-top));height:min(100dvh,900px);margin:auto 0 0;border-radius:24px 24px 0 0}
+  #recordDialog form{padding:18px 18px calc(12px + env(safe-area-inset-bottom))}
+  #recordDialog .dialoghead{top:-18px}
+  #recordDialog .record-student-grid,#recordDialog .record-time-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  #recordDialog .record-panel-title{font-size:15px}
+}
+@media(max-width:360px){
+  #recordDialog form{padding-left:14px;padding-right:14px}
+  #recordDialog .record-student-grid,#recordDialog .record-time-grid{grid-template-columns:minmax(0,1fr)}
+}
