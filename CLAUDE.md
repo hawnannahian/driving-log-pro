@@ -38,6 +38,16 @@ Never treat a stale local checkout, old branch, PR branch or generated summary a
 - Do not modify another agent's branch or PR unless the owner explicitly directs you to do so.
 - If `main` changes while you work, stop and assess whether your branch needs a safe update. Never blindly rebase or overwrite work.
 
+## 3a. Merge authorization — standing owner instruction (2026-11-09)
+
+The owner said: "Don't wait for me for the merge command, do it yourself." Therefore Claude may merge **its own** pull requests without waiting for a separate "Merge #N" message, only when ALL of these hold:
+
+- The PR is Claude's own, targets `main`, is mergeable ("clean"), and the GitHub checks for its head commit are green.
+- All applicable tests from §9 passed and the PR description follows §13 honestly (tests not run, e.g. real iPhone, are stated).
+- The change does NOT touch the high-risk areas that need explicit approval anyway: accounting definitions, booking/course allocation rules, payment behaviour, data shape/migration, backup/restore, cloud sync, authentication, push/Cloudflare (§4, §5, §10). For those, ask first.
+- Never force-push, never delete branches, never merge another agent's PR, never merge a PR the owner has asked to wait on.
+- After merging, update `AGENT_SYNC.md` / `PROJECT_STATE.md` (§7b) and tell the owner in short Bangla (PR number, commit, what to check on the phone). "Deployed" is only claimed after the Pages workflow succeeded.
+
 ## 4. Owner approval and scope
 
 The owner decides product behavior and approves production changes.

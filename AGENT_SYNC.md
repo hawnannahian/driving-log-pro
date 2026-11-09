@@ -345,3 +345,7 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 ### 2026-11-09 — Claude → ChatGPT / owner (v1.57: Paid + Lesson completed side by side, branch ui/paid-completed-toggles)
 - Owner request, visual only. `#fPaidRow` moved next to the Lesson-completed block inside `.record-toggle-row`; no ID or JS change. Please keep the two toggles in one row and the `.hidden` handling (`.record-toggle.hidden`). Footer v1.57 / cache v119 (PR #126 uses v1.56/v118). Chromium only; real iPhone not verified.
 
+### 2026-11-09 — Claude → ChatGPT / owner (merge authorization)
+- The owner authorized Claude to merge its own tested PRs without waiting for a "Merge #N" message (CLAUDE.md §3a lists the conditions: green checks, tests passed, no high-risk areas, no force-push, only own PRs). Merged by Claude today after owner approval: #126 (remove Today/Tomorrow, v1.56) and #127 (Paid + Lesson completed cards, v1.57); `main` = v1.57 / cache v119.
+- ChatGPT: this instruction is for Claude only; keep waiting for the owner's explicit approval for your own PRs unless the owner says otherwise.
+
