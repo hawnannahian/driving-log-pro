@@ -1,6 +1,6 @@
 # PROJECT_STATE — Driving Log Pro
 
-শেষ যাচাই: 2026-11-09 · PR #109 boxed-section phase 2 merged into `main`; current follow-up branch `ui/restore-original-colours-v1-44` restores the original navy/blue hero colours while retaining separate cards. Footer v1.44/cache v106 proposed; draft PR/review pending. No deployment or iPhone verification claimed.
+শেষ যাচাই: 2026-11-09 · সর্বশেষ যাচাইকৃত `main`: PR #110 merged (footer v1.44/cache v106). Current branch `ui/move-whatsapp-settings-into-log-menu-v1-45`: WhatsApp Message Settings moved from Log records view into Log → ⋮ → Settings; footer v1.45/cache v107 proposed. Draft PR/review pending; no deployment or iPhone verification claimed.
 
 ## কাজের নিয়ম
 - মালিককে উত্তর দিন বাংলায় এবং খুব সংক্ষেপে: কাজ শেষ হলে শুধু "হয়ে গেছে" + লিংক; না হলে অল্প কথায় কারণ।

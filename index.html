@@ -104,7 +104,12 @@
       </section>
       <div class="log-list-heading"><h3>Lesson records</h3><span id="logResultCount">0 records</span></div>
       <div id="logList" class="recordlist empty">No records yet.</div>
-      <details class="wa-template-settings" id="waTemplateSettings">
+      
+      </div>
+      <section id="logSettingsPanel" class="log-settings hidden" role="tabpanel">
+        <header class="log-settings-head"><div><h2>Settings</h2><p>Manage lesson announcements, lock-screen alerts and booking preferences.</p></div><button type="button" class="btn ghost log-settings-back" id="logSettingsBack"><span aria-hidden="true">←</span> Back to Records</button></header>
+
+        <details class="wa-template-settings" id="waTemplateSettings">
         <summary><span>WhatsApp Message Settings</span><small>Edit your lesson and payment reminder messages</small></summary>
         <div class="wa-template-body">
           <label for="waLessonTemplate">Lesson Reminder</label>
@@ -122,9 +127,6 @@
           <p class="wa-template-footnote">Saved on this device. Existing student and payment records are not changed.</p>
         </div>
       </details>
-      </div>
-      <section id="logSettingsPanel" class="log-settings hidden" role="tabpanel">
-        <header class="log-settings-head"><div><h2>Settings</h2><p>Manage lesson announcements, lock-screen alerts and booking preferences.</p></div><button type="button" class="btn ghost log-settings-back" id="logSettingsBack"><span aria-hidden="true">←</span> Back to Records</button></header>
         <section class="settings-card" id="voiceBox" aria-labelledby="voiceTitle">
           <div class="settings-card-head">
             <div><h3 id="voiceTitle">Voice Announcements</h3><p>Speak lesson start, 5-minute warning and end reminders.</p></div>
@@ -416,7 +418,7 @@
     <button class="tab" data-tab="islamic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M6.5 20v-6.5c0-3 2.5-5 5.5-6.5 3 1.5 5.5 3.5 5.5 6.5V20"/><path d="M12 4.5v2.5"/><path d="M10 20v-3a2 2 0 0 1 4 0v3"/><path d="M3.5 20v-8M20.5 20v-8"/></svg><span>Islamic</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.44</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.45</span></footer>
   <script src="push-config.js"></script>
   <script src="prayer-times.js"></script>
   <script src="full-time-students.js"></script>
