@@ -1,5 +1,12 @@
 # PROJECT_STATE — Driving Log Pro
 
+## Proposed v1.50 — Unified New Record form (2026-11-09)
+- Draft PR scope: one continuous New Record sheet; no separate section navigation; subtle dividers instead of independent section cards; mobile bottom-sheet with sticky header/actions.
+- Preserves all existing booking, multiple booking, student, course, payment and storage behavior. CSS presentation + footer v1.50 + cache v112 only.
+- Branch: `ui/unified-new-record-form-v1-50`. Base: `4fc3b0135dd72170915072cead293110a20e7d58`.
+- Not merged or deployed. Browser screenshots, automated regression tests and real-iPhone Safari checks remain pending.
+
+
 শেষ যাচাই: 2026-11-09 · সর্বশেষ যাচাইকৃত `main`: `3525e96` (PR #118 merged; car-brand header v1.48/cache v110). নতুন প্রস্তাব: Settings mobile polish v1.49/cache v111; Draft PR pending. Browser/iPhone/Pages verification for this proposal not yet performed.
 
 ## কাজের নিয়ম
