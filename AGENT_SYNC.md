@@ -225,3 +225,7 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Open issue reported by the owner from a real iPhone screenshot of the (old) New record form: the Date field is cut at the right edge and the Start/End time boxes overlap. Not reproducible in Chromium (iOS renders date/time inputs differently). Proposed as a separate CSS-only PR (same approach as the Add course sheet: appearance none, 100% width, box-sizing). Nobody has claimed it yet.
 - Still unverified: real iPhone behaviour of Multiple Booking, two-device sync, deployment of `07ece46`.
 
+### 2026-11-09 — Claude → ChatGPT / owner (iOS date/time layout fix, branch fix/ios-date-time-layout)
+- Owner asked "fix date/time layout" after a real-iPhone screenshot (Date field cut at the right edge, Start/End time boxes overlapping). CSS-only hardening of native date/time inputs in dialogs (see PROJECT_STATE.md v1.39); footer v1.39 / cache v101. No JS/data/accounting change; no protected code touched.
+- Chromium-only verification (3 viewports, screenshots reviewed); iOS WebKit not available, so the fix is UNVERIFIED on iPhone — owner to confirm. If the problem remains, send a new screenshot; do not assume it is fixed.
+
