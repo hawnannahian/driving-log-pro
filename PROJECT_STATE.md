@@ -1,5 +1,14 @@
 # PROJECT_STATE — Driving Log Pro
 
+## Completed v1.50 — Unified New Record form (2026-11-09)
+- PR #120 merged by owner; merge commit: `40fea4b2193ded124e994ebe8f027999676b9ea3`.
+- One continuous New Record sheet, subtle dividers, mobile full-height bottom sheet, sticky heading/actions.
+- CSS-only UI change plus footer v1.50 and Service Worker cache v112; no JS/data/schema changes.
+- CI run #39 (`42553839244`) SUCCESS: JavaScript syntax checks and Multiple Booking atomic-save tests passed.
+- Static checks: 312 HTML IDs / 0 duplicates; CSS braces balanced 2294/2294.
+- Pending manual QA: 390×844 and 320×568 rendered screenshots, real iPhone Safari/Home Screen, and live Pages deployment check.
+
+
 ## Proposed v1.50 — Unified New Record form (2026-11-09)
 - Draft PR scope: one continuous New Record sheet; no separate section navigation; subtle dividers instead of independent section cards; mobile bottom-sheet with sticky header/actions.
 - Preserves all existing booking, multiple booking, student, course, payment and storage behavior. CSS presentation + footer v1.50 + cache v112 only.
@@ -7,7 +16,7 @@
 - Not merged or deployed. Browser screenshots, automated regression tests and real-iPhone Safari checks remain pending.
 
 
-শেষ যাচাই: 2026-11-09 · সর্বশেষ যাচাইকৃত `main`: `3525e96` (PR #118 merged; car-brand header v1.48/cache v110). নতুন প্রস্তাব: Settings mobile polish v1.49/cache v111; Draft PR pending. Browser/iPhone/Pages verification for this proposal not yet performed.
+শেষ যাচাই: 2026-11-09 · সর্বশেষ main: `40fea4b` (PR #120 merged; v1.50 unified New Record form; CI passed). Manual iPhone/browser/deployment QA remains pending.
 
 ## কাজের নিয়ম
 - মালিককে উত্তর দিন বাংলায় এবং খুব সংক্ষেপে: কাজ শেষ হলে শুধু "হয়ে গেছে" + লিংক; না হলে অল্প কথায় কারণ।
