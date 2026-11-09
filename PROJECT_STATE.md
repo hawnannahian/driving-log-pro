@@ -531,4 +531,4 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Legacy Archive remains read-only and accessible as a collapsed section inside Course; no historical package records or payment data are removed.
 - UI-only: no changes to storage schema, database, API, sync, booking, course allocation, payment calculations, Prayer Time calculations/integration, or student records.
 - Footer version v1.41; Service Worker cache v103.
-- Draft PR #107: https://github.com/hawnannahian/driving-log-pro/pull/107. Pending verification: JS syntax, HTML ID/reference checks, automated regression suites, rendered 390×844 and 320×568 browser screenshots, real iPhone Safari. Not deployed; owner approval is required before merge/deployment.
+- Draft PR #107: https://github.com/hawnannahian/driving-log-pro/pull/107. Workflow #42545286024 passed (all JS syntax checks and Multiple Booking tests); static checks: 312 HTML IDs / 0 duplicates, 7 local script references resolve, CSS braces balanced. Rendered 390×844 / 320×568 screenshots and real iPhone Safari remain untested. Not deployed; owner approval is required before merge/deployment.
