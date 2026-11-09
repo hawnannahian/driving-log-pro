@@ -7,12 +7,12 @@
 - No intended changes to booking/payment/accounting/course/student data logic or storage schema.
 - Manual responsive/iPhone QA and live Pages deployment are pending; draft PR only.
 
-## Draft v1.51 — iPhone Calendar/navigation polish (2026-11-09)
+## Completed v1.51 — iPhone Calendar/navigation polish (2026-11-09; PR #121 merged)
 - Owner supplied iPhone screenshots; focused CSS polish to compact the fixed bottom navigation and increase scroll clearance.
 - Branch: `ui/iphone-calendar-navigation-polish-v1-51`.
 - Files: `styles.css`, footer v1.51, Service Worker cache v113.
 - No app logic, data, booking, payment, accounting or sync changes.
-- Manual rendered viewport, real-device and Pages deployment checks remain pending; this is not yet a verified release.
+- Source merged to main at `74e79a4`; rendered viewport, real-device and Pages deployment checks remain pending.
 
 # PROJECT_STATE — Driving Log Pro
 
