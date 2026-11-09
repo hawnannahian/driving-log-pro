@@ -4,7 +4,8 @@
 - Day view: removed large full-height green Free Time overlays from the visual timeline. Available intervals now appear as compact, clearly bookable time-slot cards above the timeline; tapping a slot still opens the existing New Lesson form prefilled with the selected date/start/end.
 - Added a compact selected-day summary (lesson count, planned hours, revenue, available time); refined lesson/prayer timeline presentation and responsive styles; included mobile bottom-dock safe-area/scroll clearance from the v1.51 proposal.
 - App files: `app.js`, `index.html`, `styles.css`, `sw.js`; footer v1.52/cache v114. No data schema, booking validation, payment, course allocation, accounting, student, sync or persistence logic intentionally changed.
-- Static source checks to complete: JavaScript syntax/CI, duplicate HTML IDs, CSS brace balance, and correct cache/footer versions. Rendered 390×844 / 320×568, real iPhone Safari/Home Screen and Pages deployment remain separate manual checks.
+- GitHub Actions run #41 (`42555308428`) SUCCESS: all JavaScript files syntax-checked and Multiple Booking atomic-save regression tests passed. Static checks: 314 HTML IDs / 0 duplicates; CSS braces balanced; footer v1.52/cache v114 verified.
+- Still not verified: rendered 390×844 / 320×568 screenshots, real iPhone Safari/Home Screen, and live Pages deployment. Do not claim these passed.
 - PR draft only; do not merge until owner reviews and QA passes. PR #121 (v1.51 navigation-only) was merged by owner into main at `74e79a4`; this v1.52 branch starts from that updated main.
 
 ### 2026-11-09 — ChatGPT: iPhone Calendar/navigation polish v1.51 — DRAFT PR
