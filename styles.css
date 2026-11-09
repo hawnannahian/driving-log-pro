@@ -2818,6 +2818,8 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
   #recordDialog[open] .dialogactions{flex:none;position:static;margin-top:auto;padding-bottom:0}
 }
 
+/* v1.56 — Today/Tomorrow shortcut buttons removed from New record: the date field uses the full width (the shortcut handler in app.js is a harmless no-op without them). */
+#recordDialog .record-date-panel{grid-template-columns:minmax(0,1fr)}
 /* v1.57 — "Paid" and "Lesson completed" side by side as two tappable cards with a custom check box (green = paid, blue = completed). Markup: both sit in .record-toggle-row; IDs fPaid / fPaidRow / fDone are unchanged. */
 #recordDialog .record-rate-panel{grid-template-columns:minmax(0,1fr)}
 #recordDialog .record-toggle-row{display:flex;gap:10px;margin:0;padding:2px 0 0;border:0;background:transparent}

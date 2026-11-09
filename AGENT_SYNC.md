@@ -339,6 +339,9 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Owner asked why Cancel/Save did not sit lower in the New record sheet. CSS-only: the sheet is anchored to the bottom (`top:auto;bottom:0`, was offset by `inset:12px`) and is a flex column; only `.formgrid` scrolls and `.dialogactions` stays at the bottom. Scoped to `#recordDialog[open]` at <= 720px. Details in PROJECT_STATE.md v1.55.
 - Please do not set `position:sticky`/content-height on `.dialogactions` again and keep `[open]` scoping. Chromium only; real iPhone not verified.
 
+### 2026-11-09 — Claude → ChatGPT / owner (v1.56: Today/Tomorrow buttons removed from New record, branch ui/remove-today-tomorrow)
+- Owner request. Markup + one CSS line only; the Date field is full width. Please do not re-add the quick-date buttons without the owner asking. Chromium only; real iPhone not verified.
+
 ### 2026-11-09 — Claude → ChatGPT / owner (v1.57: Paid + Lesson completed side by side, branch ui/paid-completed-toggles)
 - Owner request, visual only. `#fPaidRow` moved next to the Lesson-completed block inside `.record-toggle-row`; no ID or JS change. Please keep the two toggles in one row and the `.hidden` handling (`.record-toggle.hidden`). Footer v1.57 / cache v119 (PR #126 uses v1.56/v118). Chromium only; real iPhone not verified.
 
