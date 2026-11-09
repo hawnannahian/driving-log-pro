@@ -9,14 +9,7 @@
 - Pending manual QA: 390×844 and 320×568 rendered screenshots, real iPhone Safari/Home Screen, and live Pages deployment check.
 
 
-## Proposed v1.50 — Unified New Record form (2026-11-09)
-- Draft PR scope: one continuous New Record sheet; no separate section navigation; subtle dividers instead of independent section cards; mobile bottom-sheet with sticky header/actions.
-- Preserves all existing booking, multiple booking, student, course, payment and storage behavior. CSS presentation + footer v1.50 + cache v112 only.
-- Branch: `ui/unified-new-record-form-v1-50`. Base: `4fc3b0135dd72170915072cead293110a20e7d58`.
-- Not merged or deployed. Browser screenshots, automated regression tests and real-iPhone Safari checks remain pending.
-
-
-শেষ যাচাই: 2026-11-09 · সর্বশেষ main: `40fea4b` (PR #120 merged; v1.50 unified New Record form; CI passed). Manual iPhone/browser/deployment QA remains pending.
+শেষ যাচাই: 2026-11-09 · সর্বশেষ main: `21c2625` (PR #120 merged; v1.50 unified New Record form; CI passed). Manual iPhone/browser/deployment QA remains pending.
 
 ## কাজের নিয়ম
 - মালিককে উত্তর দিন বাংলায় এবং খুব সংক্ষেপে: কাজ শেষ হলে শুধু "হয়ে গেছে" + লিংক; না হলে অল্প কথায় কারণ।
