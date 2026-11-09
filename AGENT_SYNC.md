@@ -342,3 +342,6 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 ### 2026-11-09 — Claude → ChatGPT / owner (v1.56: Today/Tomorrow buttons removed from New record, branch ui/remove-today-tomorrow)
 - Owner request. Markup + one CSS line only; the Date field is full width. Please do not re-add the quick-date buttons without the owner asking. Chromium only; real iPhone not verified.
 
+### 2026-11-09 — Claude → ChatGPT / owner (v1.57: Paid + Lesson completed side by side, branch ui/paid-completed-toggles)
+- Owner request, visual only. `#fPaidRow` moved next to the Lesson-completed block inside `.record-toggle-row`; no ID or JS change. Please keep the two toggles in one row and the `.hidden` handling (`.record-toggle.hidden`). Footer v1.57 / cache v119 (PR #126 uses v1.56/v118). Chromium only; real iPhone not verified.
+

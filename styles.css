@@ -2820,3 +2820,32 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 
 /* v1.56 — Today/Tomorrow shortcut buttons removed from New record: the date field uses the full width (the shortcut handler in app.js is a harmless no-op without them). */
 #recordDialog .record-date-panel{grid-template-columns:minmax(0,1fr)}
+/* v1.57 — "Paid" and "Lesson completed" side by side as two tappable cards with a custom check box (green = paid, blue = completed). Markup: both sit in .record-toggle-row; IDs fPaid / fPaidRow / fDone are unchanged. */
+#recordDialog .record-rate-panel{grid-template-columns:minmax(0,1fr)}
+#recordDialog .record-toggle-row{display:flex;gap:10px;margin:0;padding:2px 0 0;border:0;background:transparent}
+#recordDialog .record-toggle-row:not(:has(> :not(.hidden))){display:none}
+#recordDialog .record-toggle-row #fPaidRow,#recordDialog .record-toggle-row .record-toggle-done{flex:1 1 0;min-width:0;margin:0}
+#recordDialog .record-toggle-row .record-toggle-done{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+#recordDialog .record-toggle-row .record-toggle-done:before{display:none}
+#recordDialog .record-toggle-row .record-toggle{display:flex!important;align-items:center;gap:10px!important;width:100%;min-height:56px;margin:0;padding:8px 14px;border:1.5px solid #d6e0f3;border-radius:16px;background:linear-gradient(180deg,#fff,#f5f8ff);box-shadow:0 1px 3px #1f3a7a12;color:#35445f!important;font-size:14px!important;font-weight:800!important;line-height:1.2;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .15s,background .15s,box-shadow .15s,color .15s}
+#recordDialog .record-toggle-row .record-toggle.hidden,#recordDialog .record-toggle-row .record-toggle-done.hidden{display:none!important}
+#recordDialog .record-toggle-row .record-toggle input{-webkit-appearance:none;appearance:none;display:grid;place-content:center;flex:none;width:26px;height:26px;min-width:26px;min-height:26px;margin:0;padding:0;border:2px solid #b3c0da;border-radius:9px;background:#fff;transition:background .15s,border-color .15s}
+#recordDialog .record-toggle-row .record-toggle input::after{content:"";width:12px;height:6px;border-left:3px solid #fff;border-bottom:3px solid #fff;transform:translateY(-1px) rotate(-45deg) scale(0);transition:transform .12s}
+#recordDialog .record-toggle-row .record-toggle input:checked::after{transform:translateY(-1px) rotate(-45deg) scale(1)}
+#recordDialog .record-toggle-row .record-toggle-paid input:checked{background:#14a06b;border-color:#14a06b}
+#recordDialog .record-toggle-row .record-toggle-done input:checked{background:#3f5bf0;border-color:#3f5bf0}
+#recordDialog .record-toggle-row .record-toggle-paid:has(input:checked){border-color:#14a06b;background:linear-gradient(180deg,#f2fbf7,#e4f7ee);color:#0e6a47!important;box-shadow:0 2px 8px #14a06b24}
+#recordDialog .record-toggle-row .record-toggle-done .record-toggle:has(input:checked){border-color:#3f5bf0;background:linear-gradient(180deg,#f5f7ff,#e8edff);color:#2a3fc4!important;box-shadow:0 2px 8px #3f5bf024}
+#recordDialog .record-toggle-row .record-toggle:has(input:focus-visible){outline:3px solid #315ee833;outline-offset:2px}
+#recordDialog .record-toggle-row .record-toggle-text{display:grid;min-width:0}
+#recordDialog .record-toggle-row .record-toggle-text b{font-weight:800;overflow-wrap:break-word}
+#recordDialog .record-toggle-row .record-toggle input,#recordDialog .record-toggle-row .record-toggle input:focus{box-shadow:none;outline:none}
+@media(max-width:360px){
+  #recordDialog .record-toggle-row{gap:8px}
+  #recordDialog .record-toggle-row #fPaidRow{flex:0 0 34%}
+  #recordDialog .record-toggle-row .record-toggle{gap:8px!important;padding:8px 10px;font-size:13px!important}
+  #recordDialog .record-toggle-row .record-toggle input{width:24px;height:24px;min-width:24px;min-height:24px;border-radius:8px}
+}
+#recordDialog .record-toggle-row .record-toggle{align-items:center!important}
+#recordDialog .record-toggle-row .record-toggle-done{display:flex;align-items:stretch}
+#recordDialog .record-toggle-row .record-toggle-done .record-toggle{flex:1 1 auto}

@@ -307,8 +307,9 @@
             </button>
           </div>
         </section>
-        <label class="lessonfield checklabel" id="fPaidRow"><input type="checkbox" id="fPaid"> Paid</label></section>
-        <div class="lessonfield wide donebox"><label class="checklabel"><input type="checkbox" id="fDone"> <span><b>Lesson completed</b><small>Finished lessons count automatically. Tick this to finish a lesson early or to record a different length.</small></span></label><label class="donemin hidden">Actual length (minutes)<input type="number" id="fActual" min="1" max="720" step="1" inputmode="numeric"></label></div>
+        </section>
+        <div class="lessonfield wide record-toggle-row"><label class="lessonfield checklabel record-toggle record-toggle-paid" id="fPaidRow"><input type="checkbox" id="fPaid"> <span class="record-toggle-text"><b>Paid</b></span></label>
+        <div class="lessonfield donebox record-toggle-done"><label class="checklabel record-toggle"><input type="checkbox" id="fDone"> <span class="record-toggle-text"><b>Lesson completed</b><small>Finished lessons count automatically. Tick this to finish a lesson early or to record a different length.</small></span></label><label class="donemin hidden">Actual length (minutes)<input type="number" id="fActual" min="1" max="720" step="1" inputmode="numeric"></label></div></div>
         <label class="lessonfield checklabel wide hidden" id="fPackageRow"><input type="checkbox" id="fPackage"> <span id="fPackageText">Use course hours</span></label>
         <label class="lessonfield wide hidden" id="fRepeatRow">Repeat every week<select id="fRepeat"><option value="1">No repeat</option><option value="2">2 weeks</option><option value="4">4 weeks</option><option value="8">8 weeks</option><option value="12">12 weeks</option></select></label>
         <label class="wide record-comment-field hidden">Comment<textarea id="fComment" rows="3" placeholder="Add a note (optional)"></textarea></label>
@@ -420,7 +421,7 @@
     <button class="tab" data-tab="islamic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M6.5 20v-6.5c0-3 2.5-5 5.5-6.5 3 1.5 5.5 3.5 5.5 6.5V20"/><path d="M12 4.5v2.5"/><path d="M10 20v-3a2 2 0 0 1 4 0v3"/><path d="M3.5 20v-8M20.5 20v-8"/></svg><span>Islamic</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.56</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.57</span></footer>
   <script src="push-config.js"></script>
   <script src="prayer-times.js"></script>
   <script src="mawaqit-times.js"></script>
