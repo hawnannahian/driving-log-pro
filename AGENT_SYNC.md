@@ -5,7 +5,7 @@
 - Added a compact selected-day summary (lesson count, planned hours, revenue, available time); refined lesson/prayer timeline presentation and responsive styles; included mobile bottom-dock safe-area/scroll clearance from the v1.51 proposal.
 - App files: `app.js`, `index.html`, `styles.css`, `sw.js`; footer v1.52/cache v114. No data schema, booking validation, payment, course allocation, accounting, student, sync or persistence logic intentionally changed.
 - Static source checks to complete: JavaScript syntax/CI, duplicate HTML IDs, CSS brace balance, and correct cache/footer versions. Rendered 390×844 / 320×568, real iPhone Safari/Home Screen and Pages deployment remain separate manual checks.
-- PR draft only; do not merge until owner reviews and QA passes. Existing PR #121 (v1.51 navigation-only) remains unmerged and separate; v1.52 includes the relevant mobile dock clearance in its own CSS.
+- PR draft only; do not merge until owner reviews and QA passes. PR #121 (v1.51 navigation-only) was merged by owner into main at `74e79a4`; this v1.52 branch starts from that updated main.
 
 ### 2026-11-09 — ChatGPT: iPhone Calendar/navigation polish v1.51 — DRAFT PR
 - Owner supplied two real iPhone screenshots and asked for UI/UX improvements. Focused on the fixed bottom navigation dock: slightly more compact touch-safe tabs, safer bottom positioning, and increased main-content scroll clearance so the final calendar/timeline content can clear the dock.
