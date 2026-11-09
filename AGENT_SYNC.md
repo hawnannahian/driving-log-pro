@@ -8,7 +8,7 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - **PR #105 merged:** https://github.com/hawnannahian/driving-log-pro/pull/105 — compact Payment Method choice chips (Design C); payment control IDs and selection logic preserved.
 - **Current task:** Premium Compact Student Profile v1.41 on branch `ui/premium-compact-student-profile-v1-41`; four tabs only (Lessons, Course, Payments, Attendance). Upcoming lessons and student notes are in Lessons; Legacy Archive remains accessible as a collapsed read-only section under Course.
 - **Scope:** profile UI only. No database, storage schema, sync, booking, course allocation, payment calculation, Prayer Time calculation or integration changes.
-- **Task status:** Draft PR #107: https://github.com/hawnannahian/driving-log-pro/pull/107. Source changes are on the feature branch; static checks are in progress. Footer v1.41 / cache v103. Not merged or deployed.
+- **Task status:** Draft PR #107: https://github.com/hawnannahian/driving-log-pro/pull/107. Source changes are on the feature branch; automated regression and static checks passed. Footer v1.41 / cache v103. Not merged or deployed.
 - `push-config.js` API URL remains empty; Cloudflare Worker is not deployed/configured.
 - Open PRs #73 and #13 remain untouched.
 - Full release history and current source details: `PROJECT_STATE.md`.
@@ -237,4 +237,9 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Scope: Student profile UI only. Compact header/KPIs/actions, four tabs (Lessons, Course, Payments, Attendance), upcoming bookings and notes moved into Lessons, Legacy Archive retained under Course as collapsed read-only history.
 - No changes to database/storage schema, cloud sync, booking rules, course allocation, payment calculations, Prayer Time calculations or integration.
 - Footer target v1.41 / Service Worker cache v103.
-- Draft PR #107: https://github.com/hawnannahian/driving-log-pro/pull/107. Static/regression checks in progress. Not merged or deployed.
+- Draft PR #107: https://github.com/hawnannahian/driving-log-pro/pull/107. Workflow #42545286024 passed (JS syntax + Multiple Booking tests); 312 IDs with no duplicates, all 7 local script references resolve, CSS braces balanced. Browser/iPhone/deployment checks remain unrun.
+
+
+### Verification update — 2026-11-09 (PR #107)
+- **Verification:** GitHub Actions workflow run #42545286024 passed: every JavaScript file passed `node --check`; `tests/multiple-booking.test.js` passed. Static checks: 312 HTML IDs / 0 duplicates; all 7 local script references resolve; CSS braces balanced (2196/2196).
+- **Not run:** rendered browser screenshots at 390×844 and 320×568, real iPhone Safari/Home Screen, live two-device sync, and deployment.
