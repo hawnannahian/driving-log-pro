@@ -1,3 +1,10 @@
+## Draft v1.51 — iPhone Calendar/navigation polish (2026-11-09)
+- Owner supplied iPhone screenshots; focused CSS polish to compact the fixed bottom navigation and increase scroll clearance.
+- Branch: `ui/iphone-calendar-navigation-polish-v1-51`.
+- Files: `styles.css`, footer v1.51, Service Worker cache v113.
+- No app logic, data, booking, payment, accounting or sync changes.
+- Manual rendered viewport, real-device and Pages deployment checks remain pending; this is not yet a verified release.
+
 # PROJECT_STATE — Driving Log Pro
 
 ## Completed v1.50 — Unified New Record form (2026-11-09)

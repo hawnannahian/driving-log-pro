@@ -1,3 +1,10 @@
+### 2026-11-09 — ChatGPT: iPhone Calendar/navigation polish v1.51 — DRAFT PR
+- Owner supplied two real iPhone screenshots and asked for UI/UX improvements. Focused on the fixed bottom navigation dock: slightly more compact touch-safe tabs, safer bottom positioning, and increased main-content scroll clearance so the final calendar/timeline content can clear the dock.
+- Branch: `ui/iphone-calendar-navigation-polish-v1-51`, created from latest main `2c79e6940fa88e087b48a5c71d89f225cedfa2a5`.
+- App files: `styles.css`, footer `v1.51` in `index.html`, Service Worker cache `v113` in `sw.js`. No JavaScript, booking, accounting, course, student data, storage schema or sync behavior changed.
+- Not yet verified: rendered screenshots at 390×844 / 320×568, real iPhone Safari/Home Screen, GitHub Pages deployment. Do not claim visual fix is confirmed until those checks pass.
+- Draft PR only; do not merge without owner approval.
+
 # AGENT_SYNC — shared channel between Claude Code and ChatGPT
 
 ### 2026-11-09 — ChatGPT: Unified New Record form v1.50 — MERGED + CI PASS

@@ -2681,3 +2681,27 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
   #recordDialog form{padding-left:14px;padding-right:14px}
   #recordDialog .record-student-grid,#recordDialog .record-time-grid{grid-template-columns:minmax(0,1fr)}
 }
+
+/* v1.51 — iPhone navigation dock clearance and compact touch-safe layout */
+@media(max-width:720px){
+  .tabbar{
+    bottom:max(8px,env(safe-area-inset-bottom));
+    padding:5px;
+    border-radius:21px;
+  }
+  .tabbar .tab{
+    min-height:52px;
+    gap:2px;
+    padding:5px 0;
+    font-size:10px;
+  }
+  .tabbar .tab svg{width:21px;height:21px}
+  .navpill{top:5px;bottom:5px}
+  main{padding-bottom:calc(230px + env(safe-area-inset-bottom))}
+  body.timing main{padding-bottom:calc(280px + env(safe-area-inset-bottom))}
+}
+@media(max-width:360px){
+  .tabbar{width:calc(100% - 12px);left:50%;bottom:max(6px,env(safe-area-inset-bottom));}
+  .tabbar .tab{min-height:50px;font-size:9.5px}
+  .tabbar .tab svg{width:20px;height:20px}
+}
