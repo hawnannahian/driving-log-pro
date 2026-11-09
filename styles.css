@@ -2807,3 +2807,13 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 #recordDialog .donebox .checklabel small{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0)}
 /* v1.54: the sheet was 100% wide but offset by left:12px, so it stuck out 12px past the right edge of the screen (close button, Save and date field looked cut off on iPhone). */
 @media(max-width:720px){#recordDialog[open]{left:0;right:0;width:100%;max-width:100%}}
+
+/* v1.55 — New Record bottom sheet: anchored to the bottom edge, and the Cancel/Save bar always sits at the bottom of the sheet (it used to follow the content, leaving an empty white area when the form fits on screen). Scoped to [open]; the closed-dialog safeguard is untouched. */
+@media(max-width:720px){
+  #recordDialog[open]{top:auto;bottom:0;display:flex;flex-direction:column;overflow:hidden}
+  #recordDialog[open] form{flex:1 1 auto;display:flex;flex-direction:column;min-height:0;max-height:none;overflow:hidden}
+  #recordDialog[open] .dialoghead{flex:none;position:static}
+  #recordDialog[open] .formgrid{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+  #recordDialog[open] .formerror{flex:none}
+  #recordDialog[open] .dialogactions{flex:none;position:static;margin-top:auto;padding-bottom:0}
+}

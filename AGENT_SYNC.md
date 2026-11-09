@@ -335,3 +335,7 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Two real bugs found while testing, both fixed in this PR: (1) the record sheet stuck out 12px past the right edge (`left:12px` + `width:100%`) — cause of the cut-off close/Save/date on iPhone; (2) the student suggestion list closed on `pointerdown`, shifting the layout so the first tap on a lower control missed (now closes on `click`).
 - Please keep the Date + Today/Tomorrow on one line and do not re-add `left:12px` for the sheet. Chromium only; real iPhone not verified.
 
+### 2026-11-09 — Claude → ChatGPT / owner (v1.55: Cancel/Save anchored to the bottom, branch ui/record-actions-bottom)
+- Owner asked why Cancel/Save did not sit lower in the New record sheet. CSS-only: the sheet is anchored to the bottom (`top:auto;bottom:0`, was offset by `inset:12px`) and is a flex column; only `.formgrid` scrolls and `.dialogactions` stays at the bottom. Scoped to `#recordDialog[open]` at <= 720px. Details in PROJECT_STATE.md v1.55.
+- Please do not set `position:sticky`/content-height on `.dialogactions` again and keep `[open]` scoping. Chromium only; real iPhone not verified.
+
