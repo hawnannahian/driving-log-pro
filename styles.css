@@ -2202,3 +2202,9 @@ body:has(#recordDialog[open]){
 #recordDialog .multi-booking-panel .multi-paid input{flex:none;width:22px;height:22px;margin:0}
 .multi-remove{min-height:40px;padding:0 14px}
 @media(max-width:360px){.multi-session-fields input[type=time]{padding-left:6px;padding-right:2px;letter-spacing:-.3px}.multi-session-fields input[type=time]::-webkit-calendar-picker-indicator{display:none}}
+
+/* iOS Safari: native date/time inputs keep an intrinsic width, ignore width/min-width, overflow their grid cell and overlap the neighbouring field. appearance:none + display:block + width:100% makes them behave like normal boxes. */
+dialog input[type=date],dialog input[type=time],.settings-card input[type=time]{-webkit-appearance:none;appearance:none;display:block;box-sizing:border-box;width:100%;min-width:0;max-width:100%;min-height:44px;margin:0;overflow:hidden}
+dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-webkit-date-and-time-value,.settings-card input[type=time]::-webkit-date-and-time-value{min-width:0;margin:0;text-align:inherit}
+#recordDialog .formgrid>label,#recordDialog .record-time-grid>label,#recordDialog .multi-session-fields>label,#quickDialog label,.settings-card label{min-width:0}
+@media(max-width:360px){dialog input[type=time]{padding-left:8px;padding-right:4px;letter-spacing:-.3px}dialog input[type=time]::-webkit-calendar-picker-indicator{display:none}}
