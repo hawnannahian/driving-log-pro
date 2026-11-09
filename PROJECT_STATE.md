@@ -596,3 +596,12 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Presentation-only CSS plus footer/cache versioning: `styles.css`, footer `v1.49` in `index.html`, Service Worker cache `nahians-schedule-cache-v111` in `sw.js`.
 - Existing HTML structure, IDs, event handlers, WhatsApp templates/save/reset behavior, voice announcements, lock-screen notification behavior, working hours, prayer-time settings, data schema, accounting, booking, sync and student records are unchanged.
 - Static source review only. Automated tests, rendered 390×844 / 320×568 screenshots, real iPhone Safari and GitHub Pages deployment are not yet verified. Draft PR; no merge/deploy without explicit owner approval.
+
+### 2026-11-09 — v1.53 (cache v115): Hotfix — student profile would not open (branch `fix/student-profile-row-undefined`)
+- Owner report (real iPhone, v1.5x): tapping any student in Students does nothing.
+- Root cause (reproduced in Chromium on main v1.52): PR #107 (v1.41 compact student profile, commit 68f79cc) deleted `const row=(k,v)=>...` inside `renderProfile()`, but the Attendance tab still calls `row("Lessons completed",...)`. `renderProfile()` throws `ReferenceError: row is not defined` before the dialog is shown, so NO student profile opened from v1.41 to v1.52 (all students, all data). Lesson: run the page in a browser and open a profile before merging UI work.
+- Fix: restore the one-line helper in `renderProfile()`. No other logic changed; no data, accounting or schema change.
+- Regression guard: `tests/profile-render.test.js` (static check that `renderProfile()` defines every local helper it calls and builds the Lessons/Course/Payments/Attendance tabs; it FAILS on v1.52 source and passes after the fix). CI step now runs all `tests/*.test.js` (was only the Multiple Booking file).
+- Verification: Chromium (iPhone 14 Pro emulation and 320×568, synthetic data): all 5 students including phone-only names, a student with 2 courses and a legacy-package student open their profile; smoke sweep of all 6 tabs, every profile tab, Calendar day/week/month, New record single/Multiple, expense form, edit record, quick booking, Reports: 0 console/page errors; node tests 21/21. **Not tested: real iPhone, deployment.**
+- Known stale local (outside-repo) browser suites after the v1.41–v1.52 redesigns: `t_pr82`, `t_payui` (selectors), `t_prayer`, `t_multi` Single-prayer check (prayer overlap is now a confirm-warning per owner decision, Mawaqit times), `t_datetime`; `t_delc` and `t_pool` pass.
+

@@ -324,3 +324,9 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Preserves the existing navy car header and approved colours (`#080C91` family, white cards, subtle blue-grey borders, blue accent); no feature redesign or adjacent tab changes.
 - Files: `styles.css`, `index.html` footer v1.49, `sw.js` cache v111, `AGENT_SYNC.md`, `PROJECT_STATE.md`. No JavaScript or data/storage changes.
 - No browser, real-device, CI or deployment verification is claimed yet. PR remains draft pending owner review; do not merge/deploy without explicit approval.
+
+### 2026-11-09 — Claude → ChatGPT / owner (hotfix: student profile would not open, v1.53)
+- Owner: "when I click any student nothing opens". Reproduced on main v1.52: `renderProfile()` throws `row is not defined` (PR #107 removed `const row` but Attendance still uses it). Every profile was broken since v1.41. Fixed by restoring the helper (1 line) on branch `fix/student-profile-row-undefined`; footer v1.53 / cache v115. Added `tests/profile-render.test.js` and made CI run all `tests/*.test.js`.
+- Request to both agents: after any UI/JS change, open a student profile and click through the tabs in a real browser before opening a PR; a source-only check missed this for 12 releases.
+- Verified in Chromium only; real iPhone and deployment not verified. Draft PR; owner decides merge.
+
