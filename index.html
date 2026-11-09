@@ -291,13 +291,15 @@
         <label class="costfield">Cost (€)<input type="number" id="fCost" min="0" step=".01" value="0"></label>
         <label class="kmfield">Odometer (km)<input type="number" id="fKm" min="0" step=".1" value="0"></label>
         <section class="lessonfield wide payment-method hidden" id="paymentMethodRow" aria-label="Payment method">
-          <div><b>Payment method</b><small>Choose how this lesson is paid.</small></div>
-          <div class="payment-method-options">
-            <button type="button" class="payment-option" id="paymentIndividual" aria-pressed="true">
-              <span class="payment-icon" aria-hidden="true">€</span><span class="payment-option-copy"><b>Individual lesson</b><small id="individualRateText">€20 per hour</small></span><span class="payment-check" aria-hidden="true">✓</span>
+          <b class="payment-method-label">Payment method</b>
+          <div class="payment-method-options" role="group" aria-label="Choose payment method">
+            <button type="button" class="payment-option" id="paymentIndividual" aria-label="Individual lesson" aria-describedby="individualRateText" aria-pressed="true">
+              <span class="payment-icon" aria-hidden="true">€</span><span class="payment-option-copy"><b>Individual</b></span><span class="payment-check" aria-hidden="true">✓</span>
+              <span class="payment-sr-only" id="individualRateText">Individual lesson payment</span>
             </button>
-            <button type="button" class="payment-option" id="paymentCourse" aria-pressed="false">
-              <span class="payment-icon" aria-hidden="true">▣</span><span class="payment-option-copy"><b>Course hours</b><small id="courseOptionMeta">Prepaid hours available</small></span><span class="payment-check" aria-hidden="true">✓</span>
+            <button type="button" class="payment-option" id="paymentCourse" aria-label="Course hours" aria-describedby="courseOptionMeta" aria-pressed="false">
+              <span class="payment-icon" aria-hidden="true">▣</span><span class="payment-option-copy"><b>Course hours</b></span><span class="payment-check" aria-hidden="true">✓</span>
+              <span class="payment-sr-only" id="courseOptionMeta">Prepaid hours available</span>
             </button>
           </div>
         </section>
