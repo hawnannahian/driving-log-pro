@@ -5,6 +5,7 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 
 ## Latest verified project state (update on every release)
 - **Latest `main` includes PR #109** (boxed-section phase 2; merged 2026-11-09). Follow-up branch `ui/restore-original-colours-v1-44` is based on current `main`; footer **v1.44**, Service Worker cache **`nahians-schedule-cache-v106`** proposed.
+- **Current task:** Move WhatsApp Message Settings out of the Log records/footer area into Log → ⋮ → Settings; keep the existing template editor, IDs, save/reset handlers and local-storage behavior intact. Branch `ui/move-whatsapp-settings-into-log-menu-v1-45`; footer v1.45/cache v107 proposed.
 - **PR #107 merged:** Premium Compact Student Profile; four tabs (Lessons, Course, Payments, Attendance), upcoming lessons/notes under Lessons, Legacy Archive collapsed under Course.
 - **Current task:** Restore the pre-existing navy/blue gradient colours on the Overview next-lesson hero and Reports hero after PR #109; retain the separate boxed sections and existing card styling elsewhere.
 - **Scope:** CSS presentation + footer/cache version only. No HTML structure, JavaScript, data, accounting, booking, course allocation, sync, prayer calculations or integrations changed.
