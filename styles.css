@@ -2613,3 +2613,37 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 .brand b{font-size:clamp(16px,2vw,20px);letter-spacing:-.025em;color:#fff}
 .brand small{font-size:12px;color:#fff;opacity:.88}
 @media(max-width:720px){.topbar{min-height:76px;height:calc(76px + env(safe-area-inset-top));padding-left:15px;padding-right:15px}.brand{gap:10px}.brandmark{width:46px;min-width:46px;height:42px}.brandmark svg{width:46px;height:38px}.brand b{font-size:17px}.brand small{display:block;font-size:10px}}
+
+
+/* v1.49 — Settings mobile hierarchy and fixed-navigation clearance */
+#log .log-settings{gap:18px}
+#log .log-settings-head{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;column-gap:14px;row-gap:8px;margin-bottom:2px}
+#log .log-settings-head>div{min-width:0}
+#log .log-settings-head h2{font-size:clamp(25px,6vw,32px);line-height:1.12;letter-spacing:-.045em;color:#17243b}
+#log .log-settings-head p{max-width:34ch;line-height:1.45}
+#log .log-settings-back{align-self:start;min-height:44px;white-space:nowrap;padding-inline:14px}
+#log .wa-template-settings,#log .settings-card{border:1px solid #dfe7f3;border-radius:19px;background:#fff;box-shadow:0 2px 10px #183d7606}
+#log .wa-template-settings>summary{position:relative;min-height:76px;padding:18px 48px 18px 18px;display:grid;align-content:center;gap:5px}
+#log .wa-template-settings>summary:after{right:18px;top:50%;transform:translateY(-50%);font-size:24px;color:#64748b}
+#log .wa-template-settings>summary:focus-visible{outline:3px solid #315ee82a;outline-offset:-3px;border-radius:18px}
+#log .settings-card{padding:19px}
+#log .settings-card-head{gap:12px;align-items:flex-start;margin-bottom:14px}
+#log .settings-card-head h3{font-size:clamp(18px,4.6vw,21px);line-height:1.25;letter-spacing:-.025em;color:#17243b}
+#log .settings-card-head p{line-height:1.45}
+#log .settings-card .settings-toggle{min-height:40px}
+#log .settings-card .btn{min-height:44px}
+@media(max-width:420px){
+  #log .log-settings-head{grid-template-columns:minmax(0,1fr) auto;gap:8px}
+  #log .log-settings-head p{max-width:30ch}
+  #log .log-settings-back{padding-inline:11px;font-size:12px}
+  #log .settings-card{padding:16px}
+  #log .wa-template-settings>summary{padding:16px 44px 16px 16px}
+}
+@media(max-width:360px){
+  #log .log-settings-head{grid-template-columns:minmax(0,1fr)}
+  #log .log-settings-back{justify-self:start}
+}
+@media(max-width:720px){
+  main{padding-bottom:calc(190px + env(safe-area-inset-bottom))}
+  body.timing main{padding-bottom:calc(245px + env(safe-area-inset-bottom))}
+}
