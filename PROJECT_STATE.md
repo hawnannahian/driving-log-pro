@@ -94,6 +94,12 @@
 - **Not live yet:** the file is a snapshot; it must be regenerated (`node tools/update-mawaqit-times.mjs`, then bump the cache) when the mosque changes its timetable. The browser cannot call Mawaqit directly (no CORS headers; the official API needs a token), so true live refresh needs a server-side step (scheduled GitHub Action or Cloudflare Worker) — owner approval pending.
 - Location/Method settings only matter as a fallback while Mawaqit data exists. No storage/schema change. The unused `PRAYER_YEAR` table in `prayer-times.js` is untouched.
 
+### 2026-11-09 — v1.48 (cache v110): Live Mawaqit refresh via a Cloudflare Worker (owner chose option 2; branch `feature/mawaqit-live-worker-v1-48`)
+- **Worker source:** `mawaqit-worker/` (`src/index.js`, `src/parse.js`, `wrangler.toml`, `README.md`). `GET /times` fetches the mosque's public Mawaqit page (Cloudflare cache 6 h), parses the embedded timetable and returns the same JSON shape as `mawaqit-times.js`, with CORS only for `https://hawnannahian.github.io` (`ALLOWED_ORIGINS`). Public data only; no secrets, bindings or storage. 502 if Mawaqit is down or the page layout changes. **Not deployed:** needs the owner's Cloudflare account (`npx wrangler deploy`, see README).
+- **App:** `mawaqit-config.js` (`window.MAWAQIT_API`, empty = snapshot only). When set, the app fetches `<url>/times` on start, when back online and when the app becomes visible (at most once per 6 h), validates it, uses it for `prayerBlocks()` and re-renders. The last good copy is cached in localStorage under the NEW key `driving-log-pro-mawaqit-v1` (+ `-at` timestamp): public timetable data, not part of backup/sync/export. On any failure the previous timetable (cache, else bundled `mawaqit-times.js`) stays in use.
+- **Still to do after deploy:** put the Worker URL in `mawaqit-config.js` AND the same origin in `connect-src` of the CSP in `index.html` (one small PR; both are needed or the browser blocks the request). Until then behaviour equals v1.47.
+- `tools/update-mawaqit-times.mjs` now imports the shared `mawaqit-worker/src/parse.js` (output verified byte-identical to v1.47's `mawaqit-times.js`).
+
 ## Architecture
 - Vanilla JavaScript PWA; build step নেই; GitHub Pages: `main`, root.
 - Main files: `index.html`, `styles.css`, `app.js`, `reports-dashboard.js` (Reports dashboard, loaded after app.js), `islamic-content.js` (dua/tasbih text only) + `islamic.js` (Islamic tab), `prayer-times.js`, `full-time-students.js`, `sw.js`, `manifest.webmanifest`.

@@ -1,0 +1,7 @@
+name = "driving-log-mawaqit"
+main = "src/index.js"
+compatibility_date = "2026-11-08"
+workers_dev = true
+
+[vars]
+ALLOWED_ORIGINS = "https://hawnannahian.github.io"

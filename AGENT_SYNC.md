@@ -4,6 +4,7 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no merge without the owner, no student data in the repo).
 
 ## Latest verified project state (update on every release)
+- **Main `742c7d7`** includes PR #113 (v1.47 Mawaqit snapshot). Branch `feature/mawaqit-live-worker-v1-48`: Cloudflare Worker source + live refresh code, footer **v1.48**, cache **`nahians-schedule-cache-v110`** proposed. Worker NOT deployed; `MAWAQIT_API` empty. Draft PR; not deployed.
 - **Main `493df82`** includes PR #112 (v1.46 prayer overlap warning). Branch `feature/mawaqit-prayer-times-v1-47`: prayer times from the mosque Mawaqit timetable (`mawaqit-times.js`); footer **v1.47**, cache **`nahians-schedule-cache-v109`** proposed. Draft PR; not deployed.
 - **Branch `feature/prayer-conflict-warning-v1-46`** (based on main `1ab38e0`, PR #111 merged): prayer-time overlap is now a confirm warning instead of a hard block; footer **v1.46**, cache **`nahians-schedule-cache-v108`** proposed. Draft PR; not deployed.
 - **Latest `main` includes PR #109** (boxed-section phase 2; merged 2026-11-09). Follow-up branch `ui/restore-original-colours-v1-44` is based on current `main`; footer **v1.44**, Service Worker cache **`nahians-schedule-cache-v106`** proposed.
@@ -270,3 +271,11 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Tests run: `node --check` on all 9 JS files; `node --test tests/*.test.js` 19/19 (7 new in `tests/mawaqit-prayer.test.js`); 312 HTML IDs / 0 duplicates, all script refs resolve; Playwright (Chrome) at 390×844 and 320×568 with synthetic data: Overview shows Fajr 06:15, booking 06:20 on 2026-11-10 asks to confirm, 07:00 does not, no overflow, no console errors.
 - Not run: real iPhone, GitHub Pages deployment, the CI workflow (it still only runs `tests/multiple-booking.test.js`; consider `tests/*.test.js`).
 - Not live yet: the file is a snapshot. Live refresh needs a server-side step (Mawaqit has no CORS and its API needs a token); owner decision pending.
+
+
+### 2026-11-09 — Claude → owner / ChatGPT (v1.48 live Mawaqit refresh)
+- Branch `feature/mawaqit-live-worker-v1-48`, based on main `742c7d7`. Owner chose the Cloudflare Worker option (explicit approval to write the Worker; deployment is theirs to run, no account access was used).
+- Added `mawaqit-worker/` (Worker + shared parser + README), `mawaqit-config.js` (empty URL), refresh code in `app.js` (`mawaqitValid`, `mawaqitUseCached`, `mawaqitRefresh`), new localStorage cache key `driving-log-pro-mawaqit-v1` (public data, outside backup/sync).
+- Tests run: `node --check` on every JS file; `node --test tests/*.test.js` 28/28 (9 new in `tests/mawaqit-live.test.js`: refresh success/throttle/offline/failure, cached-vs-snapshot, Worker CORS/404/502/preflight, parser); generator output byte-identical to v1.47; Playwright (Chrome) at 390×844 and 320×568 with a mocked same-origin Worker: live time 06:25 shown, cached after reload while the mock returned 502, no overflow, no console errors besides the mocked 502.
+- Not run: the real Worker on Cloudflare, real Mawaqit call from the Worker, real iPhone, Pages deployment. CSP `connect-src` deliberately NOT changed yet (needs the deployed URL).
+- CI workflow still only runs `tests/multiple-booking.test.js`.
