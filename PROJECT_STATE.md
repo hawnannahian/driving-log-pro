@@ -1,6 +1,6 @@
 # PROJECT_STATE — Driving Log Pro
 
-শেষ যাচাই: 2026-11-09 · সর্বশেষ যাচাইকৃত `main`: `742c7d7` (PR #112 v1.46 prayer overlap warning + PR #113 v1.47 Mawaqit prayer times merged); footer v1.47 / cache v109. Pages deployment run and real-iPhone verification not evidenced. PR #114 (live Mawaqit Worker) closed unmerged by owner decision.
+শেষ যাচাই: 2026-11-09 · সর্বশেষ যাচাইকৃত `main`: `e02a96d` (PR #116 handover update; v1.47/cache v109). নতুন PR #117 প্রস্তাব: গাড়ির আইকনসহ Driving Log Pro navy header (v1.48/cache v110); Draft.
 
 ## কাজের নিয়ম
 - মালিককে উত্তর দিন বাংলায় এবং খুব সংক্ষেপে: কাজ শেষ হলে শুধু "হয়ে গেছে" + লিংক; না হলে অল্প কথায় কারণ।
@@ -553,3 +553,12 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Visual direction: preserve individual boxed sections; white surfaces, subtle blue-grey borders, blue accent, compact spacing, 44px+ touch controls and 16px+ text inputs remain governed by existing styles.
 - Presentation-only CSS. No markup, JavaScript, data schema, accounting, booking, course allocation, sync, Prayer Time or integration changes.
 - Footer v1.42 / Service Worker cache v104 on the feature branch only. Not merged, not deployed; browser/iPhone checks pending.
+
+
+## 2026-11-09 — v1.48 Car brand header (Draft PR #117)
+- Owner requested the app header to match the supplied reference: white outline car icon, `Driving Log Pro` title, `Driving Lesson Management` subtitle, deep navy background.
+- Rebased cleanly by creating `ui/car-brand-header-v1-48-rebased` from latest main `e02a96d877654ac683ed2aa6e208eccd82f0e5c7`; this replaces the earlier divergent PR #115 branch.
+- App changes: accessible inline outline car SVG in `index.html`; responsive navy header styling in `styles.css`; footer v1.48 and Service Worker cache v110 in `sw.js`.
+- No JavaScript, data, booking, accounting, course, payment, sync, prayer-time or notification logic changed. No student data added.
+- Static checks: header markup/title/subtitle present; footer v1.48; cache v110; no duplicate HTML IDs; CSS braces balanced.
+- Browser screenshots/visual review at 390×844 and 320×568, real iPhone Safari, and Pages deployment remain unverified. Draft only; no merge/deploy without owner approval.
