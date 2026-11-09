@@ -4,11 +4,11 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no merge without the owner, no student data in the repo).
 
 ## Latest verified project state (update on every release)
-- **Latest `main` = `675c2f42001a92860b74dc4aaa28036ee9ffc2fd`** (2026-11-09). Footer **v1.40**, Service Worker cache **`nahians-schedule-cache-v102`**.
-- **PR #105 merged:** https://github.com/hawnannahian/driving-log-pro/pull/105 — compact Payment Method choice chips (Design C); payment control IDs and selection logic preserved.
-- **Current task:** Premium Compact Student Profile v1.41 on branch `ui/premium-compact-student-profile-v1-41`; four tabs only (Lessons, Course, Payments, Attendance). Upcoming lessons and student notes are in Lessons; Legacy Archive remains accessible as a collapsed read-only section under Course.
-- **Scope:** profile UI only. No database, storage schema, sync, booking, course allocation, payment calculation, Prayer Time calculation or integration changes.
-- **Task status:** Draft PR #107: https://github.com/hawnannahian/driving-log-pro/pull/107. Source changes are on the feature branch; automated regression and static checks passed. Footer v1.41 / cache v103. Not merged or deployed.
+- **Latest `main` = `a4a88c2d9ba126b8e587e48deb7d24c207391508`** (2026-11-09; PR #107 merged). Footer **v1.41**, Service Worker cache **`nahians-schedule-cache-v103`**.
+- **PR #107 merged:** Premium Compact Student Profile; four tabs (Lessons, Course, Payments, Attendance), upcoming lessons/notes under Lessons, Legacy Archive collapsed under Course.
+- **Current task:** Boxed-section visual standard, phase 1, branch `ui/boxed-section-design-v1-42`; New Record form section cards only. Preserve separate boxed sections (Date, Student, Lesson time, Payment/rate, Lesson completion) with consistent white surfaces, subtle borders, blue accent and compact mobile spacing.
+- **Scope:** CSS presentation + footer/cache version only. No HTML structure, JavaScript, data, accounting, booking, course allocation, sync, prayer calculations or integrations changed.
+- **Branch target:** footer **v1.42**, Service Worker cache **`nahians-schedule-cache-v104`**. Browser/iPhone checks and deployment have not been run.
 - `push-config.js` API URL remains empty; Cloudflare Worker is not deployed/configured.
 - Open PRs #73 and #13 remain untouched.
 - Full release history and current source details: `PROJECT_STATE.md`.
@@ -243,3 +243,11 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 ### Verification update — 2026-11-09 (PR #107)
 - **Verification:** GitHub Actions workflow run #42545286024 passed: every JavaScript file passed `node --check`; `tests/multiple-booking.test.js` passed. Static checks: 312 HTML IDs / 0 duplicates; all 7 local script references resolve; CSS braces balanced (2196/2196).
 - **Not run:** rendered browser screenshots at 390×844 and 320×568, real iPhone Safari/Home Screen, live two-device sync, and deployment.
+
+
+### 2026-11-09 — ChatGPT → owner / Claude (Boxed-section visual standard v1.42)
+- Branch: `ui/boxed-section-design-v1-42`, based on main `a4a88c2d9ba126b8e587e48deb7d24c207391508` (PR #107 already merged).
+- Owner preference: retain clearly separated individual boxes/cards; do not flatten the form into one large card.
+- Phase 1 styles the New Record form's existing Date, Student, Lesson time, Payment/rate and Lesson completion sections as consistent compact cards. Existing markup, IDs, event handlers and behavior are unchanged.
+- Footer target v1.42 / Service Worker cache v104.
+- Verification pending at branch creation: browser screenshots at 390×844 and 320×568, iPhone Safari, CI and deployment not yet verified. No merge/deploy without owner approval.
