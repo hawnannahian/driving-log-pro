@@ -1,6 +1,6 @@
 # PROJECT_STATE — Driving Log Pro
 
-শেষ যাচাই: 2026-11-09 · সর্বশেষ যাচাইকৃত `main`: `742c7d7` (PR #113; v1.47/cache v109). নতুন Draft PR #114 প্রস্তাব: Driving Log Pro header-এ সাদা outline car icon, brand title/subtitle, navy header; footer v1.48/cache v110.
+শেষ যাচাই: 2026-11-09 · সর্বশেষ যাচাইকৃত `main`: `742c7d7` (PR #112 v1.46 + PR #113 v1.47 merged); footer v1.47/cache v109. PR #115-এ গাড়ির Header পরিবর্তন প্রস্তাবিত (v1.48/cache v110); Draft, review pending.
 
 ## কাজের নিয়ম
 - মালিককে উত্তর দিন বাংলায় এবং খুব সংক্ষেপে: কাজ শেষ হলে শুধু "হয়ে গেছে" + লিংক; না হলে অল্প কথায় কারণ।
@@ -555,10 +555,11 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Footer v1.42 / Service Worker cache v104 on the feature branch only. Not merged, not deployed; browser/iPhone checks pending.
 
 
-## 2026-11-09 — v1.48 Car brand header (Draft PR #114)
+## 2026-11-09 — v1.48 Car brand header (Draft PR #115)
 - Owner requested the app header to match the supplied reference: white outline car icon, `Driving Log Pro` title, `Driving Lesson Management` subtitle, deep navy background.
-- Branch `ui/car-brand-header-v1-48`, based on latest main `742c7d7faa09fa682961a405a50530118821bb9c`.
-- Changed only `index.html`, `styles.css`, `sw.js`: replaced the old `NS / Nahians Schedule Management` mark with an accessible inline outline car SVG and app branding; added responsive header styling using navy `#080C91`; footer v1.48; cache v110.
+- Branch `ui/car-brand-header-v1-48`, originally based on latest main `742c7d7faa09fa682961a405a50530118821bb9c`.
+- Changed only `index.html`, `styles.css`, `sw.js` for the app: accessible inline outline car SVG and responsive navy header; footer v1.48; cache v110.
 - No JavaScript, data, booking, accounting, course, payment, sync, prayer-time or notification logic changed. No student data added.
-- Static checks: header markup/title/subtitle present; footer v1.48; cache v110; CSS braces balanced. Browser screenshots and interaction review, real iPhone Safari, and Pages deployment not yet verified.
-- Draft only; do not merge or deploy without owner approval.
+- Static checks: header markup/title/subtitle present; footer v1.48; cache v110; 312 HTML IDs with zero duplicates; CSS braces balanced.
+- PR #115 conflict resolution: refreshed this document from current `main` to retain the latest main-side release state, then appended this v1.48 proposal note. No application source was changed as part of resolving the documentation conflict.
+- Browser screenshots/visual review at 390×844 and 320×568, real iPhone Safari, and Pages deployment remain unverified. Draft only; no merge/deploy without owner approval.
