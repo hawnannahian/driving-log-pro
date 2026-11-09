@@ -104,7 +104,12 @@
       </section>
       <div class="log-list-heading"><h3>Lesson records</h3><span id="logResultCount">0 records</span></div>
       <div id="logList" class="recordlist empty">No records yet.</div>
-      <details class="wa-template-settings" id="waTemplateSettings">
+      
+      </div>
+      <section id="logSettingsPanel" class="log-settings hidden" role="tabpanel">
+        <header class="log-settings-head"><div><h2>Settings</h2><p>Manage lesson announcements, lock-screen alerts and booking preferences.</p></div><button type="button" class="btn ghost log-settings-back" id="logSettingsBack"><span aria-hidden="true">←</span> Back to Records</button></header>
+
+        <details class="wa-template-settings" id="waTemplateSettings">
         <summary><span>WhatsApp Message Settings</span><small>Edit your lesson and payment reminder messages</small></summary>
         <div class="wa-template-body">
           <label for="waLessonTemplate">Lesson Reminder</label>
@@ -122,9 +127,6 @@
           <p class="wa-template-footnote">Saved on this device. Existing student and payment records are not changed.</p>
         </div>
       </details>
-      </div>
-      <section id="logSettingsPanel" class="log-settings hidden" role="tabpanel">
-        <header class="log-settings-head"><div><h2>Settings</h2><p>Manage lesson announcements, lock-screen alerts and booking preferences.</p></div><button type="button" class="btn ghost log-settings-back" id="logSettingsBack"><span aria-hidden="true">←</span> Back to Records</button></header>
         <section class="settings-card" id="voiceBox" aria-labelledby="voiceTitle">
           <div class="settings-card-head">
             <div><h3 id="voiceTitle">Voice Announcements</h3><p>Speak lesson start, 5-minute warning and end reminders.</p></div>
