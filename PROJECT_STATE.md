@@ -1,3 +1,12 @@
+## Draft v1.60 — Calendar Today's Students First (2026-11-09)
+- Fresh branch from latest main: ui/calendar-todays-students-first-v1-60.
+- Moves the selected date's lesson list directly under the Calendar date heading, before metrics, reminders, availability and timeline.
+- Dynamically labels the list “Today's students” for today and “Students on selected day” for other dates; displays lesson count, chronological order and a clear empty state.
+- Removes the duplicate lesson list from below the timeline. Existing booking cards, click handlers and lesson data remain unchanged.
+- Footer v1.60; Service Worker cache v122.
+- No booking, payment, accounting, student, sync or storage schema logic intentionally changed.
+- Pending CI, responsive screenshot and real iPhone QA. Not merged or deployed.
+
 ## Draft v1.52 — Premium Calendar & Timeline (2026-11-09)
 - Fresh branch from latest main: `ui/premium-calendar-timeline-v1-52`.
 - Day view replaces tall Free Time timeline blocks with compact, tappable availability slots. Existing New Lesson form is still used and prefilled with the selected date/time.

@@ -65,12 +65,15 @@
       <div id="calWeek" class="weekview hidden"></div>
       <div class="sectionhead caltitle" id="calDayHead"><h3 id="calDayTitle"></h3><button class="btn primary" id="calAddBtn">＋ Add lesson</button></div>
       <p class="daysum" id="calDaySum"></p>
+      <section class="cal-students-panel" aria-labelledby="calListHead">
+        <div class="cal-students-heading"><h3 class="caltitle" id="calListHead">Today's students</h3><span id="calStudentsCount" class="cal-students-count">0 lessons</span></div>
+        <p class="cal-students-hint">Your lesson list for the selected date, sorted by start time.</p>
+        <div id="calDayList" class="recordlist empty" aria-live="polite">No lessons booked for this day.</div>
+      </section>
       <div id="calDayStats" class="cal-day-stats" aria-label="Selected day summary"></div>
       <div class="remindbox hidden" id="calRemind"></div>
       <div id="calFreeSlots" class="cal-free-slots hidden" aria-label="Available booking times"></div>
       <div id="calTimeline" class="timeline"></div>
-      <h3 class="caltitle" id="calListHead">Lessons</h3>
-      <div id="calDayList" class="recordlist empty"></div>
       <h3 class="caltitle">Upcoming lessons</h3>
       <div id="upcomingList" class="recordlist empty"></div>
 
@@ -423,7 +426,7 @@
     <button class="tab" data-tab="islamic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M6.5 20v-6.5c0-3 2.5-5 5.5-6.5 3 1.5 5.5 3.5 5.5 6.5V20"/><path d="M12 4.5v2.5"/><path d="M10 20v-3a2 2 0 0 1 4 0v3"/><path d="M3.5 20v-8M20.5 20v-8"/></svg><span>Islamic</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.59</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.60</span></footer>
   <script src="push-config.js"></script>
   <script src="prayer-times.js"></script>
   <script src="mawaqit-times.js"></script>
