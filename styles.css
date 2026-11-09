@@ -2586,3 +2586,21 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
   #students .student{padding:11px}
   #reports .reportgrid .report{padding:10px}
 }
+
+
+/* v1.44 — Restore the original premium navy/blue hero colours.
+   Keep the new independent cards, but do not recolour the existing highlighted cards. */
+#overview #nextCard{
+  border:0;
+  border-radius:18px;
+  background:linear-gradient(135deg,#101c33,#1d3a78);
+  color:#fff;
+  box-shadow:0 10px 24px #101c3330;
+}
+#reports .dashhero{
+  border:0;
+  border-radius:22px;
+  background:radial-gradient(circle at 100% 0%,#3159b2 0,transparent 48%),linear-gradient(125deg,#101c33,#1b3568 72%,#24488f);
+  color:#fff;
+  box-shadow:0 14px 32px #101c3326;
+}
