@@ -1,6 +1,6 @@
 # PROJECT_STATE — Driving Log Pro
 
-শেষ যাচাই: 2026-11-09 · সর্বশেষ যাচাইকৃত `main`: `742c7d7` (PR #112 v1.46 prayer overlap warning + PR #113 v1.47 Mawaqit prayer times merged); footer v1.47 / cache v109. Pages deployment run and real-iPhone verification not evidenced. PR #114 (live Mawaqit Worker) closed unmerged by owner decision.
+শেষ যাচাই: 2026-11-09 · সর্বশেষ যাচাইকৃত `main`: `742c7d7` (PR #112 v1.46 prayer overlap warning + PR #113 v1.47 Mawaqit prayer times merged); footer v1.47 / cache v109. GitHub Pages workflow succeeded for `493df82`, `742c7d7` and `e02a96d` (checked 2026-11-09); real-iPhone verification not evidenced. PR #114 (live Mawaqit Worker) closed unmerged by owner decision.
 
 ## কাজের নিয়ম
 - মালিককে উত্তর দিন বাংলায় এবং খুব সংক্ষেপে: কাজ শেষ হলে শুধু "হয়ে গেছে" + লিংক; না হলে অল্প কথায় কারণ।
