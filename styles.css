@@ -2604,3 +2604,12 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
   color:#fff;
   box-shadow:0 14px 32px #101c3326;
 }
+
+/* v1.48 — premium navy car brand header */
+.topbar{background:linear-gradient(115deg,#080c91 0%,#1018a8 58%,#1b35bd 100%);color:#fff;box-shadow:0 5px 22px #080c9126}
+.brand{gap:14px}
+.brandmark{width:52px;height:44px;min-width:52px;border:0;background:transparent;color:#fff;border-radius:0;display:grid;place-items:center}
+.brandmark svg{display:block;width:52px;height:42px}
+.brand b{font-size:clamp(16px,2vw,20px);letter-spacing:-.025em;color:#fff}
+.brand small{font-size:12px;color:#fff;opacity:.88}
+@media(max-width:720px){.topbar{min-height:76px;height:calc(76px + env(safe-area-inset-top));padding-left:15px;padding-right:15px}.brand{gap:10px}.brandmark{width:46px;min-width:46px;height:42px}.brandmark svg{width:46px;height:38px}.brand b{font-size:17px}.brand small{display:block;font-size:10px}}
