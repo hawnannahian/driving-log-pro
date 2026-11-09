@@ -1,6 +1,6 @@
 # PROJECT_STATE — Driving Log Pro
 
-শেষ যাচাই: 2026-11-09 · সর্বশেষ যাচাইকৃত `main`: `e02a96d` (PR #116 handover update; v1.47/cache v109). নতুন PR #117 প্রস্তাব: গাড়ির আইকনসহ Driving Log Pro navy header (v1.48/cache v110); Draft.
+শেষ যাচাই: 2026-11-09 · সর্বশেষ যাচাইকৃত `main`: `3525e96` (PR #118 merged; car-brand header v1.48/cache v110). নতুন প্রস্তাব: Settings mobile polish v1.49/cache v111; Draft PR pending. Browser/iPhone/Pages verification for this proposal not yet performed.
 
 ## কাজের নিয়ম
 - মালিককে উত্তর দিন বাংলায় এবং খুব সংক্ষেপে: কাজ শেষ হলে শুধু "হয়ে গেছে" + লিংক; না হলে অল্প কথায় কারণ।
@@ -562,3 +562,11 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - No JavaScript, data, booking, accounting, course, payment, sync, prayer-time or notification logic changed. No student data added.
 - Static checks: header markup/title/subtitle present; footer v1.48; cache v110; no duplicate HTML IDs; CSS braces balanced.
 - Browser screenshots/visual review at 390×844 and 320×568, real iPhone Safari, and Pages deployment remain unverified. Draft only; no merge/deploy without owner approval.
+
+
+## 2026-11-09 — Settings mobile polish v1.49 (Draft PR)
+- Based on latest main `3525e960845be19eade58c6e7cd8fabecf267fb4`, which includes PR #118 and the v1.48 navy car-brand header.
+- Owner asked to apply the UI/UX review to the Settings screen: improve Settings heading alignment and hierarchy, keep individual white cards visually consistent, make the WhatsApp disclosure easier to identify/focus, and prevent the fixed bottom navigation from covering the lower settings content on mobile.
+- Presentation-only CSS plus footer/cache versioning: `styles.css`, footer `v1.49` in `index.html`, Service Worker cache `nahians-schedule-cache-v111` in `sw.js`.
+- Existing HTML structure, IDs, event handlers, WhatsApp templates/save/reset behavior, voice announcements, lock-screen notification behavior, working hours, prayer-time settings, data schema, accounting, booking, sync and student records are unchanged.
+- Static source review only. Automated tests, rendered 390×844 / 320×568 screenshots, real iPhone Safari and GitHub Pages deployment are not yet verified. Draft PR; no merge/deploy without explicit owner approval.
