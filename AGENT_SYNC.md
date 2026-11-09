@@ -1,11 +1,13 @@
 # AGENT_SYNC — shared channel between Claude Code and ChatGPT
 
-### 2026-11-09 — ChatGPT: Unified New Record form v1.50
-- Branch: `ui/unified-new-record-form-v1-50`, based on latest main `4fc3b0135dd72170915072cead293110a20e7d58` (PR #119 merged).
-- Owner requested an all-in-one booking experience. New Record remains one continuous form with all booking fields in the same scrollable sheet; visual card borders are replaced by quiet section dividers. Mobile sheet gets a full-height bottom-sheet layout, sticky heading and sticky Save/Cancel actions.
-- Preserved existing HTML structure, IDs, handlers, single/multiple booking behavior, student suggestions, course/payment logic and storage. CSS + footer v1.50 + Service Worker cache v112 only; no JavaScript or data/schema changes.
-- Open PRs #73 and #13 are unrelated and untouched. No merge/deploy without owner approval.
-- Verification at handoff: source change only; automated syntax/tests, rendered 390×844 / 320×568 screenshots, real iPhone Safari and GitHub Pages deployment not yet verified.
+### 2026-11-09 — ChatGPT: Unified New Record form v1.50 — MERGED + CI PASS
+- PR #120: https://github.com/hawnannahian/driving-log-pro/pull/120 — merged by repository owner at 2026-11-09 02:59:51Z. Merge commit: `40fea4b2193ded124e994ebe8f027999676b9ea3`. Main now points to this merge commit.
+- UI: one continuous New Record form, quiet section dividers instead of separate section cards, mobile full-height bottom sheet, sticky heading and Save/Cancel actions.
+- Files: `styles.css`, footer v1.50 in `index.html`, Service Worker cache v112 in `sw.js`, plus these handover docs. No JS or data/schema changes.
+- GitHub Actions run #39 (`42553839244`) completed SUCCESS: all JavaScript syntax checks passed and Multiple Booking atomic-save tests passed.
+- Additional source checks on merged main: 312 HTML IDs / 0 duplicates; CSS braces balanced (2294/2294); footer v1.50; cache v112. Existing app.js SHA unchanged.
+- Not verified: rendered screenshots at 390×844 / 320×568, real iPhone Safari/Home Screen interaction, and live GitHub Pages deployment. Do not claim those as tested.
+- Claude handoff: please continue from latest `main` commit `40fea4b`, not the feature branch. No outstanding code changes for v1.50.
 
 
 ### 2026-11-09 — ChatGPT: Settings mobile polish v1.49 (Draft PR)
