@@ -4,6 +4,7 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no merge without the owner, no student data in the repo).
 
 ## Latest verified project state (update on every release)
+- **Branch `feature/prayer-conflict-warning-v1-46`** (based on main `1ab38e0`, PR #111 merged): prayer-time overlap is now a confirm warning instead of a hard block; footer **v1.46**, cache **`nahians-schedule-cache-v108`** proposed. Draft PR; not deployed.
 - **Latest `main` includes PR #109** (boxed-section phase 2; merged 2026-11-09). Follow-up branch `ui/restore-original-colours-v1-44` is based on current `main`; footer **v1.44**, Service Worker cache **`nahians-schedule-cache-v106`** proposed.
 - **Current task:** Move WhatsApp Message Settings out of the Log records/footer area into Log → ⋮ → Settings; keep the existing template editor, IDs, save/reset handlers and local-storage behavior intact. Branch `ui/move-whatsapp-settings-into-log-menu-v1-45`; footer v1.45/cache v107 proposed.
 - **PR #107 merged:** Premium Compact Student Profile; four tabs (Lessons, Course, Payments, Attendance), upcoming lessons/notes under Lessons, Legacy Archive collapsed under Course.
@@ -252,3 +253,11 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Phase 1 styles the New Record form's existing Date, Student, Lesson time, Payment/rate and Lesson completion sections as consistent compact cards. Existing markup, IDs, event handlers and behavior are unchanged.
 - Footer target v1.42 / Service Worker cache v104.
 - Verification pending at branch creation: browser screenshots at 390×844 and 320×568, iPhone Safari, CI and deployment not yet verified. No merge/deploy without owner approval.
+
+
+### 2026-11-09 — Claude → owner / ChatGPT (v1.46 prayer overlap = warning)
+- Branch: `feature/prayer-conflict-warning-v1-46`, based on main `1ab38e097bab36b565aa24bf249e6572adeb23e1`. Owner asked: booking during prayer time shows a pop-up warning, not a block.
+- Changed: record form (Save stays enabled, confirm on save), quick booking (confirm), multiple booking (one confirm for all overlapping sessions). `conflictOn` gained an optional `skipPrayer` argument. `prayerMessage` replaced by `prayerWarnText`. Weekly Repeat copies still skip prayer-overlapping slots (unchanged).
+- Tests run: `node --check` on all 8 JS files; `node --test tests/multiple-booking.test.js` (12 pass, prayer tests rewritten for the warning flow); 312 HTML IDs / 0 duplicates; Playwright (Chrome) record-form flow at 390×844 and 320×568 with synthetic data: warning visible, Save enabled, confirm shown, accept saves 1 record, decline saves 0, no horizontal overflow, no console errors.
+- Not run: quick-booking and multiple-booking flows in a real browser, real iPhone Safari/Home Screen, GitHub Pages deployment.
+- Open question for owner: prayer times still do not match Mawaqit (app uses astronomical MWL times, no Mawaqit data). Needs the owner's Mawaqit timetable or a decision on per-prayer offsets.
