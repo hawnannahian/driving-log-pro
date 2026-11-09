@@ -1,3 +1,11 @@
+### 2026-11-09 — ChatGPT: Calendar Today's Students First v1.60 — DRAFT PR
+- Owner asked to make the Calendar tab immediately show the selected day's student list.
+- Branch: ui/calendar-todays-students-first-v1-60, created from latest main.
+- Moved calDayList section above metrics/reminders/availability/timeline; renamed dynamically to “Today's students” or “Students on selected day”; added lesson count and empty state; removed duplicate lower list.
+- Existing bookingHTML cards and handlers reused; no booking/payment/accounting/student/sync/storage schema changes intended.
+- Footer v1.60; Service Worker cache v122.
+- Pending CI, responsive screenshot and real iPhone QA. Do not claim these have passed.
+
 ### 2026-11-09 — ChatGPT: Premium Calendar & Timeline v1.52 — DRAFT PR
 - Owner approved the next Calendar UX pass after supplying iPhone screenshots.
 - Branch: `ui/premium-calendar-timeline-v1-52`, created fresh from latest `main` (not stacked on the unmerged v1.51 PR).
