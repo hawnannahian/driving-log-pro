@@ -1,6 +1,6 @@
 # PROJECT_STATE — Driving Log Pro
 
-শেষ যাচাই: 2026-11-09 · সর্বশেষ যাচাইকৃত `main`: `a4a88c2d9ba126b8e587e48deb7d24c207391508` (PR #107 merged; footer v1.41/cache v103). Feature branch `ui/boxed-section-design-v1-42`: footer v1.43/cache v105; phase 1 + phase 2 visual styling; not merged/deployed. Boxed-section visual standard v1.43 phase 2 is on feature branch; not merged or deployed.
+শেষ যাচাই: 2026-11-09 · PR #109 boxed-section phase 2 merged into `main`; current follow-up branch `ui/restore-original-colours-v1-44` restores the original navy/blue hero colours while retaining separate cards. Footer v1.44/cache v106 proposed; draft PR/review pending. No deployment or iPhone verification claimed.
 
 ## কাজের নিয়ম
 - মালিককে উত্তর দিন বাংলায় এবং খুব সংক্ষেপে: কাজ শেষ হলে শুধু "হয়ে গেছে" + লিংক; না হলে অল্প কথায় কারণ।
