@@ -541,13 +541,13 @@ const relDay=iso=>{const t=new Date(),d0=dateISO(t),d1=dateISO(new Date(t.getFul
 function lessonStats(list){return{n:list.length,h:list.reduce((a,e)=>a+hours(e),0),inc:list.reduce((a,e)=>a+income(e),0),un:list.filter(e=>unpaidAmt(e)>0).length};}
 const statText=s=>s.n?`${s.n} lesson${s.n>1?"s":""} · ${hText(s.h)} · ${euro(s.inc)}${s.un?` · ${s.un} unpaid`:""}`:"No lessons";
 function weekDays(iso){const d=new Date(iso+"T12:00:00"),k=(d.getDay()+6)%7;return[...Array(7)].map((_,i)=>dateISO(new Date(d.getFullYear(),d.getMonth(),d.getDate()-k+i)));}
-function timeRange(isos){const w=workCfg();let a=toMin(w.start),b=toMin(w.end);for(const iso of isos)for(const e of lessonsOn(iso))if(e.start&&e.end){a=Math.min(a,toMin(e.start));b=Math.max(b,endMin(e));}return[Math.floor(a/60)*60,Math.min(1440,Math.ceil(b/60)*60)];}
+function timeRange(isos,compact=false){const w=workCfg();let a=compact?1440:toMin(w.start),b=compact?0:toMin(w.end),found=false;for(const iso of isos)for(const e of lessonsOn(iso))if(e.start&&e.end){found=true;a=Math.min(a,toMin(e.start));b=Math.max(b,endMin(e));}if(compact&&!found){a=toMin(w.start);b=toMin(w.end);}return[Math.floor(a/60)*60,Math.min(1440,Math.ceil(b/60)*60)];}
 // Lessons that overlap share the width side by side.
 function lanes(list){const out=[];let group=[],ends=[],until=-1;const flush=()=>{group.forEach(x=>x.of=ends.length);out.push(...group);group=[];ends=[];};for(const e of [...list].sort((x,y)=>toMin(x.start)-toMin(y.start))){const a=toMin(e.start);if(a>=until)flush();let i=ends.findIndex(x=>x<=a);if(i<0){i=ends.length;ends.push(0);}ends[i]=endMin(e);until=Math.max(until,endMin(e));group.push({e,lane:i,of:1});}flush();return out;}
 const nowMin=()=>{const n=new Date();return n.getHours()*60+n.getMinutes();};
 // Blocks are positioned from data-pos ("top,height[,left,width]") because the page's security policy blocks inline styles.
 function placeBlocks(root){root.querySelectorAll("[data-pos]").forEach(el=>{const[t,h,l,w]=el.dataset.pos.split("|");el.style.top=t+"px";if(h)el.style.height=h+"px";if(l)el.style.left=l;if(w)el.style.width=w;});root.querySelectorAll("[data-tall]").forEach(el=>el.style.height=el.dataset.tall+"px");root.querySelectorAll("[data-rows]").forEach(el=>el.style.backgroundSize=`100% ${el.dataset.rows}px`);}
-function dayTimeline(iso){const px=.9,[a,b]=timeRange([iso]),today=dateISO(new Date()),y=m=>((m-a)*px).toFixed(1),hgt=m=>Math.max(18,m*px-2).toFixed(1);let h="";
+function dayTimeline(iso){const px=.9,[a,b]=timeRange([iso],true),today=dateISO(new Date()),y=m=>((m-a)*px).toFixed(1),hgt=m=>Math.max(18,m*px-2).toFixed(1);let h="";
  for(let m=a;m<b;m+=60)h+=`<span class="tlhour" data-pos="${y(m)}">${fromMin(m)}</span>`;
  for(const p of prayerBlocks(iso))if(toMin(p.end)>a&&toMin(p.start)<b)h+=`<div class="tlpray" data-pos="${y(toMin(p.start))}|${hgt(toMin(p.end)-toMin(p.start))}"><span>🕌 ${esc(p.name)} ${p.start}</span></div>`;
 
