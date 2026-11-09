@@ -4,8 +4,7 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no merge without the owner, no student data in the repo).
 
 ## Latest verified project state (update on every release)
-- **Main `493df82`** includes PR #112 (v1.46 prayer overlap warning). Branch `feature/mawaqit-prayer-times-v1-47`: prayer times from the mosque Mawaqit timetable (`mawaqit-times.js`); footer **v1.47**, cache **`nahians-schedule-cache-v109`** proposed. Draft PR; not deployed.
-- **Branch `feature/prayer-conflict-warning-v1-46`** (based on main `1ab38e0`, PR #111 merged): prayer-time overlap is now a confirm warning instead of a hard block; footer **v1.46**, cache **`nahians-schedule-cache-v108`** proposed. Draft PR; not deployed.
+- **Main `742c7d7`** includes PR #112 (v1.46: prayer overlap is a confirm warning, not a block) and PR #113 (v1.47: prayer times from the mosque Mawaqit snapshot `mawaqit-times.js`). Footer **v1.47**, Service Worker cache **`nahians-schedule-cache-v109`**. Pages deployment run and real-iPhone checks are not evidenced here. PR #114 (live Mawaqit Worker) was rejected by the owner and closed unmerged; its branch was deleted.
 - **Latest `main` includes PR #109** (boxed-section phase 2; merged 2026-11-09). Follow-up branch `ui/restore-original-colours-v1-44` is based on current `main`; footer **v1.44**, Service Worker cache **`nahians-schedule-cache-v106`** proposed.
 - **Current task:** Move WhatsApp Message Settings out of the Log records/footer area into Log → ⋮ → Settings; keep the existing template editor, IDs, save/reset handlers and local-storage behavior intact. Branch `ui/move-whatsapp-settings-into-log-menu-v1-45`; footer v1.45/cache v107 proposed.
 - **PR #107 merged:** Premium Compact Student Profile; four tabs (Lessons, Course, Payments, Attendance), upcoming lessons/notes under Lessons, Legacy Archive collapsed under Course.
@@ -270,3 +269,11 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Tests run: `node --check` on all 9 JS files; `node --test tests/*.test.js` 19/19 (7 new in `tests/mawaqit-prayer.test.js`); 312 HTML IDs / 0 duplicates, all script refs resolve; Playwright (Chrome) at 390×844 and 320×568 with synthetic data: Overview shows Fajr 06:15, booking 06:20 on 2026-11-10 asks to confirm, 07:00 does not, no overflow, no console errors.
 - Not run: real iPhone, GitHub Pages deployment, the CI workflow (it still only runs `tests/multiple-booking.test.js`; consider `tests/*.test.js`).
 - Not live yet: the file is a snapshot. Live refresh needs a server-side step (Mawaqit has no CORS and its API needs a token); owner decision pending.
+
+
+### 2026-11-09 — Claude → owner / ChatGPT (handover sync: prayer work finished)
+- **Done on main:** #112 (v1.46) and #113 (v1.47), see their entries above and in `PROJECT_STATE.md`.
+- **Owner decisions:** (1) overlap with prayer time must warn, never block; (2) prayer times must come from the mosque's Mawaqit timetable; (3) live refresh from a Cloudflare Worker was offered (PR #114) and **rejected** — PR closed, branch deleted; do not rebuild it without a new owner request. The timetable is a manual snapshot: when the mosque changes times, run `node tools/update-mawaqit-times.mjs`, bump the Service Worker cache, update the footer/docs.
+- **Things the other agent must know:** block length follows the saved "minutes" setting (old version used 30, fresh-install default is 15); Friday uses the mosque Jumu'ah time, not the app's Jumu'ah setting; the Location/Method prayer settings now only apply as a fallback; `PRAYER_YEAR` in `prayer-times.js` is unused; weekly Repeat copies still skip prayer-overlapping slots; CI runs only `tests/multiple-booking.test.js` (the Mawaqit tests in `tests/mawaqit-prayer.test.js` are not in CI yet).
+- **CLAUDE.md §11** prayer-times note was outdated and is corrected in this docs PR for the owner to review.
+- Docs-only change: no app asset changed, so no cache or footer bump.

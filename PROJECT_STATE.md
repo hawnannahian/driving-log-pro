@@ -1,6 +1,6 @@
 # PROJECT_STATE — Driving Log Pro
 
-শেষ যাচাই: 2026-11-09 · সর্বশেষ যাচাইকৃত `main`: PR #110 merged (footer v1.44/cache v106). Current branch `ui/move-whatsapp-settings-into-log-menu-v1-45`: WhatsApp Message Settings moved from Log records view into Log → ⋮ → Settings; footer v1.45/cache v107 proposed. Draft PR/review pending; no deployment or iPhone verification claimed.
+শেষ যাচাই: 2026-11-09 · সর্বশেষ যাচাইকৃত `main`: `742c7d7` (PR #112 v1.46 prayer overlap warning + PR #113 v1.47 Mawaqit prayer times merged); footer v1.47 / cache v109. Pages deployment run and real-iPhone verification not evidenced. PR #114 (live Mawaqit Worker) closed unmerged by owner decision.
 
 ## কাজের নিয়ম
 - মালিককে উত্তর দিন বাংলায় এবং খুব সংক্ষেপে: কাজ শেষ হলে শুধু "হয়ে গেছে" + লিংক; না হলে অল্প কথায় কারণ।

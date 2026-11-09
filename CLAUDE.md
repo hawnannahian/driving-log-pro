@@ -155,7 +155,7 @@ Do not deploy Cloudflare infrastructure, create/rotate secrets, change token sco
 
 - The latest handover available when this file was prepared documented main as app v1.22 and service-worker cache v82. Re-check the current branch before changing anything.
 - Web Push implementation exists in source, but the backend was documented as not deployed/configured; `push-config.js` had an empty API URL. Verify current configuration without exposing secrets.
-- Prayer times use local astronomical calculations with Lisbon/Amadora defaults; the timetable had not been validated against a trusted local Portugal timetable.
+- Prayer times (since v1.47) come from the mosque's Mawaqit timetable in `mawaqit-times.js` (a manual snapshot; regenerate with `node tools/update-mawaqit-times.mjs`); the previous local astronomical calculation (Lisbon/Amadora defaults) is only the fallback when a date is missing. Prayer overlap warns and never blocks a booking.
 - Real iPhone Safari/Home Screen PWA testing remains an acceptance requirement for relevant mobile, audio, offline and notification work.
 - A Student Package Calculation Phase 1 PR was open when this document was prepared. Inspect its current status and diff; do not assume it is merged, base unrelated work on it, or modify it without owner direction.
 
