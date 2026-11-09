@@ -4,11 +4,11 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no merge without the owner, no student data in the repo).
 
 ## Latest verified project state (update on every release)
-- **Latest `main` = `a4a88c2d9ba126b8e587e48deb7d24c207391508`** (2026-11-09; PR #107 merged). Footer **v1.41**, Service Worker cache **`nahians-schedule-cache-v103`**.
+- **Latest `main` includes PR #109** (boxed-section phase 2; merged 2026-11-09). Follow-up branch `ui/restore-original-colours-v1-44` is based on current `main`; footer **v1.44**, Service Worker cache **`nahians-schedule-cache-v106`** proposed.
 - **PR #107 merged:** Premium Compact Student Profile; four tabs (Lessons, Course, Payments, Attendance), upcoming lessons/notes under Lessons, Legacy Archive collapsed under Course.
-- **Current task:** Boxed-section visual standard, phase 2, branch `ui/boxed-section-design-v1-42`; New Record form + Overview, Calendar, Students and Reports card styling. Preserve separate boxed sections (Date, Student, Lesson time, Payment/rate, Lesson completion) with consistent white surfaces, subtle borders, blue accent and compact mobile spacing.
+- **Current task:** Restore the pre-existing navy/blue gradient colours on the Overview next-lesson hero and Reports hero after PR #109; retain the separate boxed sections and existing card styling elsewhere.
 - **Scope:** CSS presentation + footer/cache version only. No HTML structure, JavaScript, data, accounting, booking, course allocation, sync, prayer calculations or integrations changed.
-- **Branch target:** footer **v1.43**, Service Worker cache **`nahians-schedule-cache-v105`**. Browser/iPhone checks and deployment have not been run.
+- **Branch target:** footer **v1.44**, Service Worker cache **`nahians-schedule-cache-v106`**. Source-only CSS correction; browser screenshots, iPhone checks and deployment remain pending.
 - `push-config.js` API URL remains empty; Cloudflare Worker is not deployed/configured.
 - Open PRs #73 and #13 remain untouched.
 - Full release history and current source details: `PROJECT_STATE.md`.
