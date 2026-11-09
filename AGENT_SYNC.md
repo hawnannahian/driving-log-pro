@@ -1,3 +1,11 @@
+### 2026-11-09 — ChatGPT: Auto End Time on Edit v1.62 — DRAFT PR
+- Owner screenshot showed editing a lesson: changing Start to 10:00 PM left End at 11:00 AM because the change handler only auto-adjusted End when no record ID existed.
+- Branch: fix/edit-record-auto-end-time-v1-62, created from latest main.
+- Removed the new-record-only guard. Start changes now advance End by the retained lessonLen for both new and edited records; e.g. 22:00 → 23:00 for a 60-minute lesson.
+- Existing end-of-day cap and 12-hour validation remain unchanged.
+- Footer v1.62; Service Worker cache v124.
+- CI and real iPhone Safari QA pending. Do not claim verified.
+
 ### 2026-11-09 — ChatGPT: Compact Calendar Day Timeline v1.61 — DRAFT PR
 - Owner supplied an iPhone screenshot showing a 15:44 lesson but an empty timeline from 08:00 onward.
 - Branch: fix/calendar-dayview-compact-time-range-v1-61, created fresh from latest main.
