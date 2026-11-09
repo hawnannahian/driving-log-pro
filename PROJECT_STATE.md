@@ -1,3 +1,13 @@
+## Draft v1.61 — Compact Day Timeline (2026-11-09)
+- Fresh branch from latest main: fix/calendar-dayview-compact-time-range-v1-61.
+- Day view now sizes the timeline to the earliest and latest lesson on the selected date instead of always including the full configured working day.
+- Time labels remain rounded to whole hours; a 15:44 first lesson starts the visible timeline at 15:00, not 08:00.
+- If the selected day has no timed lessons, the configured working-hours range remains available as before.
+- Week view retains its existing working-hours range.
+- Footer v1.61; Service Worker cache v123.
+- No booking, payment, accounting, student, sync or storage schema logic intentionally changed.
+- Pending CI and real iPhone visual QA; not merged or deployed.
+
 ## Draft v1.60 — Calendar Today's Students First (2026-11-09)
 - Fresh branch from latest main: ui/calendar-todays-students-first-v1-60.
 - Moves the selected date's lesson list directly under the Calendar date heading, before metrics, reminders, availability and timeline.
