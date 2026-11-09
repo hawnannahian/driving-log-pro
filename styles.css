@@ -2849,3 +2849,15 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 #recordDialog .record-toggle-row .record-toggle{align-items:center!important}
 #recordDialog .record-toggle-row .record-toggle-done{display:flex;align-items:stretch}
 #recordDialog .record-toggle-row .record-toggle-done .record-toggle{flex:1 1 auto}
+
+/* v1.58 — bottom dock at the very bottom, no huge gap above it. The safe-area inset is capped (min(env(...),14px)): on the owner's Home Screen app the inset is large, which lifted the dock ~90px off the bottom, and main reserved 230px of bottom padding. */
+:root{--dock-safe:min(env(safe-area-inset-bottom),14px)}
+@media(max-width:720px){
+  main{padding-bottom:calc(88px + var(--dock-safe))}
+  body.timing main{padding-bottom:calc(166px + var(--dock-safe))}
+  .tabbar{bottom:calc(6px + var(--dock-safe))}
+  .timermini{bottom:calc(76px + var(--dock-safe))}
+  body.is-mini-on .timermini{bottom:calc(150px + var(--dock-safe))}
+  #toast{bottom:calc(84px + var(--dock-safe))}
+  .timerbar{bottom:calc(72px + var(--dock-safe))}
+}

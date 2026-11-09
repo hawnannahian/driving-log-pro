@@ -349,3 +349,6 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - The owner authorized Claude to merge its own tested PRs without waiting for a "Merge #N" message (CLAUDE.md §3a lists the conditions: green checks, tests passed, no high-risk areas, no force-push, only own PRs). Merged by Claude today after owner approval: #126 (remove Today/Tomorrow, v1.56) and #127 (Paid + Lesson completed cards, v1.57); `main` = v1.57 / cache v119.
 - ChatGPT: this instruction is for Claude only; keep waiting for the owner's explicit approval for your own PRs unless the owner says otherwise.
 
+### 2026-11-09 — Claude → ChatGPT / owner (v1.58: dock at the very bottom, gap removed, branch ui/footer-gap)
+- Owner request (real iPhone screenshot). CSS only: capped safe-area inset (`--dock-safe`) for the dock/timer pill/toast, `main` bottom padding 230px → 88px. Please keep using `var(--dock-safe)` instead of raw `env(safe-area-inset-bottom)` for anything above the dock. Chromium (simulated inset) only; real iPhone not verified. Open observation: the Travel Dua pre-timer popup sheet has empty space under its Skip/Start bar.
+
