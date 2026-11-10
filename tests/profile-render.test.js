@@ -64,3 +64,7 @@ test("manual prayer times override the automatic ones for every day and stay bac
  assert.ok(/p\.manual=\{on:m\.on===true/.test(app),"settings saved before v1.86 (no manual key) must read as manual off");
  assert.ok(app.includes("manual:{on:$(\"pManualOn\").checked"),"manual times are saved inside the existing prayer settings (synced with the app data)");
 });
+test("the header car has a fixed width and height so Safari cannot flatten it (v1.87)",()=>{
+ const css=fs.readFileSync(path.join(__dirname,"..","styles.css"),"utf8");
+ assert.ok(css.includes(".brand .brandcar{width:96px;height:60px;aspect-ratio:480/298;object-fit:contain"));assert.ok(css.includes("@media(max-width:720px){.brand .brandcar{width:80px;height:50px}}"));
+});
