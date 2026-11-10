@@ -85,7 +85,10 @@ const WA_DEFAULTS={
 function getWaTemplates(){try{const x=JSON.parse(localStorage.getItem(WA_TEMPLATE_KEY)||"{}");return{lesson:typeof x.lesson==="string"?x.lesson:WA_DEFAULTS.lesson,payment:typeof x.payment==="string"?x.payment:WA_DEFAULTS.payment};}catch{return{...WA_DEFAULTS};}}
 let waTemplates=getWaTemplates();
 const fillWaTemplate=(template,vars)=>String(template||"").replace(/{{\s*(day|time|amount)\s*}}/g,(_,k)=>vars[k]??"");
-const lessonMsg=e=>fillWaTemplate(waTemplates.lesson,{day:dayName(e.date),time:timeText(e)});
+// When the same student has more than one not-yet-completed lesson in the 7 days from this lesson (e.g. a multiple booking), one message lists all of them.
+const WA_MULTI_INTRO="আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ ভাই।\nআপনার আসন্ন ড্রাইভিং লেসনগুলো:",WA_MULTI_OUTRO="অনুগ্রহ করে প্রতিটি লেসনের নির্ধারিত সময়ের কয়েক মিনিট আগে উপস্থিত থাকবেন।\nধন্যবাদ।";
+const upcomingLessonsFor=e=>{const[y,m,d]=String(e.date).split("-").map(Number),limit=dateISO(new Date(y,m-1,d+7));return state.entries.filter(x=>x.type==="Lesson"&&x.start&&sameName(x.student,e.student)&&!isDone(x)&&x.date>=e.date&&x.date<=limit).sort((p,q)=>(p.date+p.start).localeCompare(q.date+q.start));};
+const lessonMsg=e=>{const list=upcomingLessonsFor(e);if(list.length<2||!list.some(x=>x.id===e.id))return fillWaTemplate(waTemplates.lesson,{day:dayName(e.date),time:timeText(e)});return WA_MULTI_INTRO+"\n"+list.map(x=>"• "+dayName(x.date)+", "+timeText(x)).join("\n")+"\n"+WA_MULTI_OUTRO;};
 const payMsg=amount=>fillWaTemplate(waTemplates.payment,{amount:euro(amount)});
 function renderWaTemplatePreviews(){
  const lesson= $("waLessonTemplate"),payment=$("waPaymentTemplate");

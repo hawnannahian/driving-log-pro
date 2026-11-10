@@ -49,3 +49,8 @@ test("the Outstanding tile of the Business dashboard hero is hidden but its id i
  const html=fs.readFileSync(path.join(__dirname,"..","index.html"),"utf8"),css=fs.readFileSync(path.join(__dirname,"..","styles.css"),"utf8");
  assert.ok(html.includes('<div class="hero-hidden" hidden><span>Outstanding</span><b id="rUnpaid"'));assert.ok(css.includes("#reports .herogrid .hero-hidden{display:none!important}"));
 });
+test("WhatsApp lesson message lists all of a student's not-yet-completed lessons in the next 7 days (v1.84)",()=>{
+ const app=fs.readFileSync(path.join(__dirname,"..","app.js"),"utf8");
+ assert.ok(app.includes("const upcomingLessonsFor=e=>"));assert.ok(/const lessonMsg=e=>\{const list=upcomingLessonsFor\(e\);if\(list\.length<2/.test(app),"a single lesson must keep the normal template");
+ assert.ok(app.includes("fillWaTemplate(waTemplates.lesson,{day:dayName(e.date),time:timeText(e)})"),"the editable one-lesson template must stay the default");
+});
