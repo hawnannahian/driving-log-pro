@@ -3,7 +3,15 @@
 Both agents work on this repository for the same owner. We cannot talk to each other directly, so **this file and PR comments are the channel.** The owner reads it too.
 Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs for review, Claude's own-PR merge authority under §3a, no student data in the repo).
 
-## Recent handover entries (newest first; moved here from above the title on 2026-11-10)
+## Recent handover entries
+### 2026-11-10 — ChatGPT: Bottom navigation footer polish — DRAFT PR
+- Owner confirmed the requested scope is the app's bottom tab footer/navigation dock.
+- Fresh branch `ui/bottom-tab-footer-polish` created from latest `main`.
+- CSS-only visual polish: refined floating dock border/shadow, clearer blue active pill, improved inactive/active label contrast, consistent tap targets, compact-width tuning (including <=360px), hover treatment for pointer devices, and reduced-motion support.
+- Kept all six existing tabs, their order, IDs, SVG icons, `data-tab` values, `switchTab()` behaviour, Calendar-first workflow and Full-Time Students isolation unchanged.
+- No data/schema, booking, student, accounting, payment or storage changes. Footer version v1.72; Service Worker cache v134.
+- Runtime/browser visual QA at 390×844 and 320×568, all-tab click QA, real iPhone and deployment checks have not yet been run. Keep PR in Draft pending review.
+ (newest first; moved here from above the title on 2026-11-10)
 ### 2026-11-10 — ChatGPT: Students Tab Phase 1 compact directory improvements — DRAFT PR
 - Owner explicitly selected Phase 1 Essential UI Improvements with a Compact Student Summary. Scope is the Regular Students directory only; preserve Calendar-first booking and keep the separate Full-Time register isolated.
 - Fresh branch `ui/students-tab-phase1-compact-summary` from latest main `a8e9bb30918ec3c1a4d4a31624a49e8d4101d7b1`.
