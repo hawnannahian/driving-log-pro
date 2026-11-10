@@ -449,3 +449,10 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 - Replace only the header's car illustration with a compact navy rounded-square “DL” monogram and a small golden road-line accent. Keep Golden Yellow + Navy branding.
 - Footer v1.67; Service Worker cache v129. No app logic, student data, payments, booking, course allocation, storage, backup, restore or sync behavior changed.
 - No merge/deploy. Automated checks, browser 390×844/320×568 and real iPhone QA remain pending.
+
+### 2026-11-10 — Claude: daily cloud backup v1.68 (implementation, owner approved)
+- Implements the plan logged above. `app.js`: `dailySnapshot()` runs after a successful `cloudSync()`; `pruneSnapshots()` (30 days, newest 7 always kept); `listSnapshots()`/`showSnapshots()` UI (Reports → Data → Cloud sync). `index.html`: `#snapBox`, `#snapStatus`, `#snapShow`, `#snapList`; footer v1.68; `sw.js` cache v130. No change to `cloudSync` merge logic, storage keys (one new marker `...-cloud-lastsnap`) or data shape.
+- Tests: `tests/daily-cloud-backup.test.js` (10 tests, fake GitHub API): once/day, never overwrite, offline/500/401 handling, prune rules, exact-name deletion, list order, 3-day warning. Total `node --test tests/*.test.js` 45/45. Real Chromium + fake GitHub at 390×844 and 320×568: file created, list shows, Put back replaces data and keeps a local safety copy, no second file same day, no overflow, no console errors (the only 404 is the app's existing first read of a missing `driving-log.json`).
+- Also reviewed ChatGPT PR #142 (DL monogram v1.67, merged): renders cleanly at 390/320, no errors. Note its AGENT_SYNC/PROJECT_STATE text calls it "Draft PR #141" and "proposed", but #141 is Claude's docs PR and #142 is merged; treat v1.67 as merged (cache v129).
+- Not verified: real iPhone, real GitHub API (only a fake), Pages deployment. Owner must connect a private repo + token with Contents read/write and check that `backups/` appears after the next sync.
+
