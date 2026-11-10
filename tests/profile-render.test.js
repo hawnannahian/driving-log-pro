@@ -24,3 +24,9 @@ test("retained individual receipts can be removed only with a confirmation and a
  assert.ok(!/courseAlloc|coursePayments|\.hours|\.price|\.course\b/.test(body),"must not touch course allocation, course payments, hours or price");
  assert.ok(app.includes('data-delreceipt="${esc(e.id)}"')&&app.includes('["before-receipt-remove"'));
 });
+test("Add student shows existing matches (name or phone) so the same person is not added twice (v1.79)",()=>{
+ const app=fs.readFileSync(path.join(__dirname,"..","app.js"),"utf8"),html=fs.readFileSync(path.join(__dirname,"..","index.html"),"utf8");
+ assert.ok(html.includes('id="studentDups"'));assert.ok(app.includes("function showStudentDups()"));
+ assert.ok(app.includes('["sName","sPhone"].forEach(id=>{const el=$(id);if(el)el.addEventListener("input",showStudentDups);});'));
+ assert.ok(/function showStudentDups\(\)\{[\s\S]*?filter\(s=>s\.id!==editing\)/.test(app),"must not list the student being edited");
+});

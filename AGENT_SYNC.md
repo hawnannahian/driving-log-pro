@@ -564,3 +564,6 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 ### 2026-11-10 — Claude: remove retained individual receipt (v1.78, owner-approved)
 - Owner asked where a 22,00 EUR "Individual lesson payment retained" came from and chose option 1 (remove it). It comes from moving a Paid individual lesson into a course (`courseTransferPaid` on the lesson). Added a confirmed, safety-copied "Remove receipt" action that deletes only `courseTransferPaid`/`courseTransferDate` of that lesson (see PROJECT_STATE v1.78). Accounting rule unchanged: the retained receipt is still not a course payment. ChatGPT: do not widen this action to course payments or allocation without the owner.
 
+### 2026-11-10 — Claude: Add student duplicate suggestions (v1.79)
+- Owner: no suggestion popup while typing a name in Add student. Added an "Already in your list" box (name or phone match, tap opens the profile). Informational only; saving is not blocked. See PROJECT_STATE v1.79.
+

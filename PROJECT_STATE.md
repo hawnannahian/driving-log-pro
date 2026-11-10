@@ -16,6 +16,12 @@
 
 
 
+
+## v1.79 — "Already in your list" suggestions in Add student (2026-11-10)
+- Owner reported that typing a name in Add student showed no popup/suggestion (the New record form has one, Add student did not). Add student now lists existing students that match the typed name (2+ letters) or phone number (5+ digits) in a highlighted box: "Already in your list. Tap to open instead of adding again" (stronger wording on an exact name). Tapping a row closes Add student and opens that student's profile. Nothing is saved or blocked: a genuinely new name still saves normally, and editing a student never lists the student itself.
+- Reuses `studentMatches()`; no data, storage, accounting or sync change. Files: `index.html` (`#studentDups`, footer v1.79), `app.js`, `styles.css`, `sw.js` (cache v142), `tests/profile-render.test.js`.
+- Checked in Chromium 390×844 and 320×568 with synthetic data (26 checks); real iPhone not verified.
+
 ## v1.78 — Remove a retained individual-lesson receipt (2026-11-10; owner-approved, option 1)
 - Background: when a lesson that was marked Paid as an individual lesson is moved into a course, the app keeps `courseTransferPaid` (hours x rate, e.g. 22,00 EUR) and `courseTransferDate` on that lesson. It shows in the student's Payments history as "Individual lesson payment retained" and only raises "Total paid"; it is deliberately not a course payment (CLAUDE.md section 6), so course Due is unchanged.
 - New: a "Remove receipt" button on that history row, for the case where no money was actually received (the Paid tick was a mistake). After a confirmation (amount, "only if no money was received", safety copy) the app saves a safety copy `driving-log-pro-v1-before-receipt-remove` (listed under Safety copies; refuses to continue if there is no room) and deletes only `courseTransferPaid` and `courseTransferDate` on that one lesson.
