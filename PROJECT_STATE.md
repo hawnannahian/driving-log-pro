@@ -7,7 +7,7 @@
 - New `lesson-recovery.js` is loaded before `app.js`; `full-time-students.js`, its storage key, CSV flow and historical accounting are untouched. Full-Time records are not added to lesson recovery/audit.
 - No changes to lesson booking, student management, accounting definitions, payment logic, course/package allocation or legacy archive behavior. Non-lesson record deletion retains its existing behavior.
 - Files: `app.js`, `index.html`, `styles.css`, `sw.js`, `lesson-recovery.js`, `tests/lesson-recovery.test.js`, `AGENT_SYNC.md`, `PROJECT_STATE.md`. Footer v1.75; Service Worker cache v138.
-- Automated tests and static syntax checks pending CI. Rendered browser checks at 390×844 / 320×568, real iPhone Safari/PWA QA and deployment are not run. Keep PR Draft; do not merge or deploy until owner review.
+- Targeted Node 22.16.0 run of the exact recovery helper and test file: 8/8 tests passed. Initial GitHub Actions run #76 passed all-JS syntax checks and all 45 existing tests, but the 8 new tests first failed because the VM harness lacked `window`; that harness was corrected and the cross-realm assertion made realm-safe. A fresh Actions run for the latest head has not yet run, so the combined suite is not yet confirmed green. Rendered browser checks at 390×844 / 320×568, real iPhone Safari/PWA QA and deployment are not run. Keep PR Draft; do not merge or deploy until owner review.
 - Risk: audit history is intentionally unbounded and shares browser storage capacity with app data. If local storage is cleared or exhausted, the private cloud sync and user-exported backups are the additional copies; this is not a separately administered immutable server archive.
 
 ## Proposed v1.74 — Student Profile Overview UX (2026-11-10; Draft PR)
