@@ -2,7 +2,7 @@
 const fs=require("node:fs"),path=require("node:path"),vm=require("node:vm");
 const test=require("node:test"),assert=require("node:assert/strict");
 const source=fs.readFileSync(path.join(__dirname,"..","lesson-recovery.js"),"utf8");
-function api(){const ctx={crypto:{randomUUID:(()=>{let n=0;return()=>"event-"+(++n);})()}};vm.createContext(ctx);vm.runInContext(source,ctx);return ctx.DrivingLogRecovery;}
+function api(){const ctx={crypto:{randomUUID:(()=>{let n=0;return()=>"event-"+(++n);})()}};ctx.window=ctx;vm.createContext(ctx);vm.runInContext(source,ctx);return ctx.DrivingLogRecovery;}
 const lesson=(id="lesson-1")=>({id,type:"Lesson",student:"Synthetic Student",date:"2026-11-01",start:"10:00",end:"11:00",paid:true,course:"course-1"});
 const at=day=>new Date(day+"T12:00:00.000Z").toISOString();
 test("soft delete stores the original lesson, removes it from active entries and appends audit",()=>{
