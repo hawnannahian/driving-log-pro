@@ -4,6 +4,16 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs for review, Claude's own-PR merge authority under §3a, no student data in the repo).
 
 ## Recent handover entries
+### 2026-11-10 — ChatGPT: Recoverable Lesson Deletion + Hybrid Audit v1.75 — DRAFT PR
+- Owner approved the hybrid design: audit history stays in main local data, is included in JSON backups and syncs through the existing private GitHub data repository. No new backend/service or credentials.
+- Fresh branch `feat/lesson-recovery-audit-hybrid-v1-75` created from main `222503b66d69904312855c93b314c11906846b8a`.
+- Lesson deletion moves the lesson out of active records into a 30-day recovery collection; Reports → Backup & restore gains Deleted lessons with Restore and a retained Lesson activity history. Expiry removes the lesson payload but keeps a tombstone and audit event. Restore is a newer lifecycle event.
+- Cloud merge resolves recovery state by latest lifecycle timestamp, filters deleted IDs from active entries and unions append-only audit events by event ID. Backups/restores include the new collections; older backups remain accepted and preserve current device audit/recovery history.
+- Full-Time Students script/storage/accounting are unchanged and isolated. No booking, accounting, payments, course/package allocation, student profile or legacy archive logic is intentionally changed. Non-lesson deletion remains unchanged.
+- Files: `app.js`, `index.html`, `styles.css`, `sw.js`, `lesson-recovery.js`, `tests/lesson-recovery.test.js`, `AGENT_SYNC.md`, `PROJECT_STATE.md`. Footer v1.75; SW cache v138.
+- Targeted Node 22.16.0 recovery tests: 8/8 pass. Initial GitHub Actions #76 passed syntax checks and the 45 existing tests; the 8 new tests initially failed because the VM test harness lacked `window`. The harness and cross-realm assertion were fixed; latest-head Actions rerun is not yet available, so the combined suite is not confirmed green. Rendered browser QA at 390×844 / 320×568, real iPhone QA and deployment remain pending. Draft only: do not merge or deploy until owner review.
+- Storage note: audit history has no automatic expiry and grows over time; it shares browser storage capacity with the app. Cloud sync and user JSON backups provide additional copies, not a separately managed immutable archive.
+
 ### 2026-11-10 — ChatGPT: Student Profile Overview UX v1.74 — Draft PR
 
 - Owner confirmed: add Overview while retaining all existing Profile tabs; keep Student Notes in its existing location inside Lessons; keep existing quick actions and improve layout only.
@@ -528,3 +538,14 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 - No app code, localStorage, live student data, authentication, accounting, payment, booking, backup, restore, cloud sync, licensing or deployment behavior changed. No student data or credentials accessed.
 - Tests not run: no JS changes; no browser/iPhone/deployment checks. Main footer remains v1.70/cache v132.
 - Blocking owner decision before implementation: shared hosted SaaS with isolated school workspaces, or separate standalone installation/deployment for each customer?
+
+### 2026-11-10 — Claude: review + completion of v1.75 Lesson Recovery (still DRAFT PR; not merged, not deployed)
+- Continued on `feat/lesson-recovery-audit-hybrid-v1-75` (ChatGPT's commits kept). Reviewed `lesson-recovery.js` and the `app.js` integration critically and fixed three issues:
+  1. `lesson-recovery.js` was missing from the service-worker `FILES` list, so offline the module would not load and a delete would silently become a permanent delete. Added `./lesson-recovery.js` (cache stays v138, not yet released).
+  2. `deleteEntry` now only promises "restorable for 30 days" (and only reports recovery) when the module actually loaded.
+  3. Restoring a whole JSON backup (also the cloud-backup "Put back" and safety copies) now calls new `DrivingLogRecovery.adopt()`: a lesson that the backup holds as active but this device had soft-deleted is marked restored with a newer timestamp and a "Restore from backup" audit event. Before, such a lesson stayed deleted and would have silently expired after 30 days; and without a newer restore a later cloud sync could have undone the backup restore.
+- Lifecycle: delete -> row `{id,lesson,status:"deleted",deletedAt,updatedAt}` + audit `deleted`; restore -> `restored` (newer `updatedAt`) + audit `restored`; after 30 days `cleanup()` sets `lesson:null`, `purgedAt`, keeps the tombstone (status stays `deleted`, so stale copies cannot resurrect it) + audit `expired`. Expired rows cannot be restored from Deleted lessons; a full backup restore may re-import a lesson (explicit owner action, audited).
+- Sync: rows merge by newest `updatedAt` (tie prefers `deleted`), audit events union by event id, deleted ids are filtered from active entries, a newer restore re-adds the lesson. Older cloud files without the fields never erase local history. Dangling course links after restore are already tolerated by existing code (treated as an individual lesson).
+- Tests: `node --test tests/*.test.js` 60/60 (15 recovery tests, 7 added); real Chromium (390×844 and 320×568) UI flow 20 checks (delete confirm text, list, restore, no duplicate id, course link kept, 31-day expiry, old backup, backup with soft-deleted lesson, invalid recovery data rejected, Full-Time key byte-identical, six tabs, no CSP violations, no overflow) and fake-GitHub sync scenarios (stale cloud copy, newer restore wins, restore from another device, new device, older cloud file) all passed. Older scratch regression runs (t_delc, t_pool, t_smoke) report the same 2 "inline style" CSP console errors on main as on this branch (pre-existing, unrelated; owner/ChatGPT should locate the inline `style` writer).
+- Known limits / decisions for the owner: audit events keep the student name, date and time with no expiry (needed so history stays readable after the 30-day purge; say if the name should be dropped); restored rows keep a copy of the lesson; history grows without limit; cloud-sync clock differences between devices can reorder very close events; not tested on a real iPhone or against the real GitHub API; Pages deployment not applicable (draft).
+
