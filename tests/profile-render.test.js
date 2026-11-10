@@ -45,3 +45,7 @@ test("Students tab 'Recently joined' lists newest students first without a 3-les
  assert.ok(!/3 or more lessons/i.test(app),"the 3-or-more-lessons grouping must be gone");
  assert.ok(app.includes('<p class="listhead">Recently joined</p>'));assert.ok(!app.includes('"All other students"')&&!app.includes("All other students"));
 });
+test("the Outstanding tile of the Business dashboard hero is hidden but its id is kept (v1.83)",()=>{
+ const html=fs.readFileSync(path.join(__dirname,"..","index.html"),"utf8"),css=fs.readFileSync(path.join(__dirname,"..","styles.css"),"utf8");
+ assert.ok(html.includes('<div class="hero-hidden" hidden><span>Outstanding</span><b id="rUnpaid"'));assert.ok(css.includes("#reports .herogrid .hero-hidden{display:none!important}"));
+});
