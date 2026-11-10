@@ -1,3 +1,14 @@
+## v1.63 — Smart Lesson Time + Manual Override (2026-11-09)
+- Implemented on the existing PR #133 branch to keep the prerequisite Start-time edit fix and the complete UX in one reviewable change set.
+- New and edit single-lesson forms initialise duration from the existing record; new lessons default to 60 minutes.
+- Changing Start moves End by the current duration. Manually changing End updates the duration; subsequent Start changes preserve that latest duration.
+- Duration chips set the duration relative to Start. Active chip and live duration summary stay in sync.
+- Added inline time validation. Durations crossing midnight are not silently truncated to 23:59; End is cleared and the user is asked to choose a shorter duration or earlier Start.
+- Existing save-time 12-hour, overlap, prayer-time, working-hours, payment and course checks remain in place.
+- Canonical stored time remains HH:mm; no storage schema changes.
+- Footer v1.63; Service Worker cache v125.
+- CI and real iPhone Safari QA pending; PR remains draft and is not deployed.
+
 ## Draft v1.62 — Auto-update End Time While Editing (2026-11-09)
 - Fresh branch from latest main: fix/edit-record-auto-end-time-v1-62.
 - Changing Start time now updates End time for both new lessons and existing records being edited; it preserves the current selected lesson duration (e.g. 10:00 PM → 11:00 PM for a one-hour lesson).
