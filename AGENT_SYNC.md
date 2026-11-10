@@ -4,6 +4,15 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs for review, Claude's own-PR merge authority under §3a, no student data in the repo).
 
 ## Recent handover entries (newest first; moved here from above the title on 2026-11-10)
+### 2026-11-10 — ChatGPT: Log page polish, remove Log search field v1.66 — DRAFT PR #140
+- Owner asked to apply the Log page UI/UX polish but remove the Log page's “Search student, type or note” field.
+- PR: https://github.com/hawnannahian/driving-log-pro/pull/140; branch `ui/log-page-polish-no-search-v1-66`, based on main `fa537cc03d13561cde76fc58e464354dc42ce3e3`.
+- Removed only the Log search input, its search filtering and its event listener. The separate Students tab `studentSearch` remains in place.
+- Kept Log filter and sort controls; improved their two-column mobile layout, added “Today's performance” above KPIs, and refined spacing/typography for the Add expense action, KPI summary and lesson/payment rows.
+- Files: `app.js`, `index.html`, `styles.css`, `sw.js`, plus this handover and `PROJECT_STATE.md`. Footer v1.66; cache v128.
+- No student data, payment calculations, accounting, booking, course allocation, storage schema, backup, restore or sync behavior changed.
+- Source-level checks: no `logSearch` markup/JS references remain; `studentSearch`, `logFilter` and `logSort` remain. No automated tests, rendered browser checks, real iPhone QA or deployment performed yet. Keep draft pending verification.
+
 ### 2026-11-10 — ChatGPT: Smart Lesson Time + Manual End Override v1.63 — MERGED (PR #133)
 - Owner selected Smart + Manual Override after reviewing the lesson-time UX proposal.
 - Merged to `main` at `e946f7323bb75e2e56d4646a02efbed604dea0f2`; PR: https://github.com/hawnannahian/driving-log-pro/pull/133
@@ -74,13 +83,12 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 
 
 ## Latest verified project state
-- **main `5ee15693cea51b40f4d8b676ac1598eeb83e94dc`**: footer **v1.63**, Service Worker cache **`nahians-schedule-cache-v125`**. This is the latest main source verified before the v1.64 proposal.
-- Smart Lesson Time regression coverage was added on main: `node --test tests/*.test.js` passed **35/35**, and `node --check` passed for all JavaScript files (reported in the 2026-11-10 handover).
-- **Open PRs:** #73 (Calendar and WhatsApp controls in Driving Log Settings) and #13 (WhatsApp number parsing); inspect current diffs/freshness before working.
-- **Current proposal:** ChatGPT PR #138 — [Student Course tab polish v1.64](https://github.com/hawnannahian/driving-log-pro/pull/138) — draft, not merged or deployed. Footer v1.64/cache v126 are on its branch only.
-- **Deployment:** the v1.63 Pages deployment was not verified in the previous handover. Do not claim v1.64 is live unless the Pages workflow for its merge commit succeeds.
-- **Still pending for PR #138:** automated CI after the final PR update, browser rendering at 390×844 and 320×568, real iPhone Safari/Home Screen QA, and Pages deployment.
-- Push API URL was previously empty; Cloudflare Worker deployment/configuration remains unverified. Never expose secrets.
+- **main `fa537cc03d13561cde76fc58e464354dc42ce3e3`**: PR #139 merged; footer **v1.65**, Service Worker cache **`nahians-schedule-cache-v127`**. This confirms source on main, not Pages deployment.
+- **Current proposal:** [PR #140 — Log page polish and remove Log search field (v1.66)](https://github.com/hawnannahian/driving-log-pro/pull/140), branch `ui/log-page-polish-no-search-v1-66`. The Log search field and only its filtering were removed; Students tab search remains.
+- v1.66 footer/cache are v1.66 / `nahians-schedule-cache-v128` on the PR branch.
+- **Open PRs:** #73 and #13; inspect before unrelated work.
+- **v1.66 checks pending:** JavaScript syntax and regression suite, HTML duplicate-ID/script-reference checks, rendered browser checks at 390×844 and 320×568, real iPhone Safari/Home Screen QA, and Pages deployment.
+- Push API URL / Cloudflare Worker configuration remains unverified; never expose secrets.
 - Prayer times use the Mawaqit snapshot (`mawaqit-times.js`); overlap warns and does not block booking.
 
 ## Where we stopped and what comes next (handover, 2026-11-08)

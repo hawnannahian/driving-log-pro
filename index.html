@@ -91,11 +91,11 @@
         <button class="btn primary log-add" id="addRecordBtn"><span aria-hidden="true">＋</span> Add expense</button>
       </div>
       <div class="toolbar log-toolbar">
-        <input id="logSearch" type="search" placeholder="Search student, type or note" aria-label="Search log records">
         <select id="logFilter" aria-label="Filter records"><option value="today">Today's lessons</option><option value="all">All records</option><option value="Lesson">Lessons</option><option value="expense">Expenses</option><option value="paid">Paid</option><option value="unpaid">Unpaid</option><option value="prepaid">Courses</option></select>
         <details class="log-extra-filter"><summary>Sort &amp; more</summary><select id="logSort" aria-label="Sort records"><option value="latest">Latest first</option><option value="oldest">Oldest first</option><option value="amount">Highest amount</option><option value="outstanding">Highest outstanding</option></select></details>
       </div>
       <section class="log-summary" aria-label="Today's summary">
+        <h3 class="log-summary-title">Today's performance</h3>
         <div class="log-summary-main">
           <article class="log-kpi"><span class="log-kpi-icon">▤</span><div><b id="logRecordsToday">0</b><small>Lessons done today</small></div></article>
           <article class="log-kpi"><span class="log-kpi-icon">◷</span><div><b id="logHoursToday">0 h</b><small>Total lesson hours</small></div></article>
@@ -426,7 +426,7 @@
     <button class="tab" data-tab="islamic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M6.5 20v-6.5c0-3 2.5-5 5.5-6.5 3 1.5 5.5 3.5 5.5 6.5V20"/><path d="M12 4.5v2.5"/><path d="M10 20v-3a2 2 0 0 1 4 0v3"/><path d="M3.5 20v-8M20.5 20v-8"/></svg><span>Islamic</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.65</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.66</span></footer>
   <script src="push-config.js"></script>
   <script src="prayer-times.js"></script>
   <script src="mawaqit-times.js"></script>

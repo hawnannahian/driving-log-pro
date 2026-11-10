@@ -1,15 +1,13 @@
 # PROJECT_STATE — Driving Log Pro
 
-> **Current source state (2026-11-10):** main `b50f8a594077b25e525910d7d7208bcc15266279` (PR #138 merged), footer v1.64, cache `nahians-schedule-cache-v126`. v1.65 Golden Yellow + Navy header is proposed on PR #139; not merged or deployed.
+> **Current source state (2026-11-10):** main `fa537cc03d13561cde76fc58e464354dc42ce3e3` (PR #139 merged), footer v1.65, cache `nahians-schedule-cache-v127`. Draft PR #140 proposes Log page polish v1.66; not merged or deployed.
 
-## Proposed v1.65 — Golden Yellow + Navy brand header (2026-11-10)
-- PR: https://github.com/hawnannahian/driving-log-pro/pull/139 (draft; branch `ui/golden-yellow-navy-header-v1-65`).
-- Owner selected a warm golden-yellow gradient with deep navy car mark, title and subtitle.
-- Browser theme tint updated; iOS Home Screen status-bar style set to default for dark indicators on the light header.
-- Footer v1.65; Service Worker cache `nahians-schedule-cache-v127`.
-- Header-only presentation change. No student data, storage, booking, payment, accounting, course allocation, backup, restore or sync logic changed.
-- Automated tests, browser 390×844/320×568, real iPhone QA and Pages deployment remain unverified.
-> **Current source state (2026-11-10):** main `b50f8a594077b25e525910d7d7208bcc15266279` (PR #138 merged), footer v1.64, cache `nahians-schedule-cache-v126`. PR #139 proposes v1.65 Golden Yellow + Navy header; not merged or deployed.
+## Completed v1.65 — Golden Yellow + Navy brand header (2026-11-10; PR #139 merged)
+- PR: https://github.com/hawnannahian/driving-log-pro/pull/139, merged to main at `fa537cc03d13561cde76fc58e464354dc42ce3e3`.
+- Header uses a warm golden-yellow gradient with deep navy car mark, title and subtitle. Browser theme tint and iOS status-bar style updated for the light header.
+- Footer v1.65; Service Worker cache v127.
+- Header-only visual change; no student data, storage, booking, payment, accounting, course allocation, backup, restore or sync logic changed.
+- Automated tests, rendered browser checks at 390×844/320×568, real iPhone QA and Pages deployment were not verified in this handover.
 
 ## Completed v1.64 — Student Course tab polish (2026-11-10; PR #138 merged at `b50f8a594077b25e525910d7d7208bcc15266279`)
 - PR: https://github.com/hawnannahian/driving-log-pro/pull/138 (merged into `main`).
