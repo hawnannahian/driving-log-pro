@@ -313,6 +313,7 @@ function updateCourseField(){const box=$("fPackage"),row=$("fPackageRow"),paidRo
  individualBtn.setAttribute("aria-pressed",String(!courseSelected));courseBtn.setAttribute("aria-pressed",String(courseSelected));courseBtn.disabled=!!box.disabled;
  $("individualRateText").textContent=$("fRate").value.trim()?`${euro(num($("fRate").value))} per hour`:"Enter a rate for this lesson";$("fRate").required=lesson&&!courseSelected&&$("recordDialog").dataset.bookingMode!=="multiple";
  paidRow.classList.toggle("hidden",courseSelected||$("recordDialog").dataset.bookingMode==="multiple");if(courseSelected)$("fPaid").checked=false;
+ {const rateField=document.querySelector("#recordDialog .rate-field"),note=$("courseRateNote");if(rateField)rateField.classList.toggle("hidden",courseSelected);if(note){note.classList.toggle("hidden",!courseSelected);if(courseSelected){const open=courses().filter(x=>sameName(x.student,c.student)&&courseFreeH(x,rid)>.001),rates=[...new Set(open.map(x=>round2(courseRate(x))))];note.textContent=rates.length>1?"Each course uses its own rate (set in the course). No hourly rate is needed here.":"Course rate: "+euro(courseRate(open[0]||c))+" per hour (from the course). No hourly rate is needed here.";}}}
 }
 $("paymentIndividual").addEventListener("click",()=>{$("fPackage").checked=false;$("fPackage").dataset.courseChoiceTouched="1";updateCourseField();});
 $("paymentCourse").addEventListener("click",()=>{if($("paymentCourse").disabled)return;$("fPackage").checked=true;$("fPackage").dataset.courseChoiceTouched="1";updateCourseField();});

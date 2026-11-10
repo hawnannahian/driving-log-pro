@@ -567,3 +567,6 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 ### 2026-11-10 — Claude: Add student duplicate suggestions (v1.79)
 - Owner: no suggestion popup while typing a name in Add student. Added an "Already in your list" box (name or phone match, tap opens the profile). Informational only; saving is not blocked. See PROJECT_STATE v1.79.
 
+### 2026-11-10 — Claude: hide hourly rate for course lessons (v1.80)
+- Owner idea (approved): avoid confusion/calculation mistakes by not showing an hourly rate when a lesson is booked on a course. UI-only; money is still computed from the course rate. See PROJECT_STATE v1.80.
+
