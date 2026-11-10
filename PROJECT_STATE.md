@@ -18,6 +18,10 @@
 
 
 
+
+## v1.81 — Long student names stay on one line in the profile header (2026-11-10)
+- A very long student name (an address had been typed into the name field) wrapped to two lines and made the sticky profile header tall. The name is now one line with an ellipsis; the full name stays in the page (title and text), in Edit student and in lists. Header height 74 px at 390 and 320 wide. Files: `styles.css`, `app.js` (one line), `index.html` (footer v1.81), `sw.js` (cache v144), `tests/profile-render.test.js`. No data change. Checked in Chromium at 390×844 and 320×568; real iPhone not verified.
+
 ## v1.80 — Course lessons: no hourly-rate field (2026-11-10; owner idea, approved)
 - In New/Edit record, choosing **Course hours** now hides the "Hourly rate" field and shows "Course rate: X per hour (from the course)" (or "Each course uses its own rate" when the student's open courses have different rates). **Individual** shows the field exactly as before. Reason: a course lesson is always valued at the course's own rate (price / hours), so a typed hourly rate was ignored but looked like it mattered.
 - Calculations are unchanged (`income()`/`courseRate()` untouched); previously saved lessons keep any stored rate; a course lesson can be saved with no rate. Files: `index.html` (`#courseRateNote`, footer v1.80), `app.js` (`updateCourseField`), `styles.css`, `sw.js` (cache v143), `tests/profile-render.test.js`.

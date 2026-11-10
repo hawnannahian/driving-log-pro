@@ -570,3 +570,6 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 ### 2026-11-10 — Claude: hide hourly rate for course lessons (v1.80)
 - Owner idea (approved): avoid confusion/calculation mistakes by not showing an hourly rate when a lesson is booked on a course. UI-only; money is still computed from the course rate. See PROJECT_STATE v1.80.
 
+### 2026-11-10 — Claude: one-line student name in profile header (v1.81)
+- Owner agreed (Do it) to limit the long-name header to one line. CSS ellipsis + `title`; see PROJECT_STATE v1.81.
+
