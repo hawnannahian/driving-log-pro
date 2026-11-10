@@ -422,7 +422,7 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 ### 2026-11-10 — ChatGPT: Golden Yellow + Navy brand header v1.65 — proposed
 - Owner approved the Golden Yellow + Navy colour direction after reviewing the mock-up.
 - Header background changes to a warm golden-yellow gradient; car mark, app title and subtitle use deep navy. Browser theme tint updated and iOS status-bar style set to default for dark indicators on the light header.
-- Branch: `ui/golden-yellow-navy-header-v1-65` (fresh from main `b50f8a594077b25e525910d7d7208bcc15266279`).
+- Branch: `ui/golden-yellow-navy-header-v1-65` (fresh from main `b50f8a594077b25e525910d7d7208bcc15266279`); draft PR #139: https://github.com/hawnannahian/driving-log-pro/pull/139.
 - Files: `index.html`, `styles.css`, `sw.js`, `AGENT_SYNC.md`, `PROJECT_STATE.md`. Footer v1.65; cache v127.
 - No app logic, student data, storage schema, booking, payment, accounting, course allocation, backup, restore or sync behavior changed.
-- Not run yet: JS syntax checks, regression tests, rendered 390×844 / 320×568 browser checks, real iPhone Safari/Home Screen QA, or Pages deployment. PR to follow; do not claim live.
+- Not run yet: JS syntax checks, regression tests, rendered 390×844 / 320×568 browser checks, real iPhone Safari/Home Screen QA, or Pages deployment. PR #139 is draft; do not claim live.
