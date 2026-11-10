@@ -573,3 +573,6 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 ### 2026-11-10 — Claude: one-line student name in profile header (v1.81)
 - Owner agreed (Do it) to limit the long-name header to one line. CSS ellipsis + `title`; see PROJECT_STATE v1.81.
 
+### 2026-11-10 — Claude: Students "Recently joined" without the 3-lessons condition (v1.82)
+- Owner wants the most recent students at the top, not only those with 3+ lessons. Removed the two-group split from ChatGPT's Students Tab phase 1; see PROJECT_STATE v1.82.
+
