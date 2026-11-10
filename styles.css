@@ -2892,3 +2892,13 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 #recordDialog .lesson-time-error.hidden{display:none}
 #recordDialog .durchips button.active{border-color:#315de8;background:#315de8;color:#fff;box-shadow:0 2px 8px #315de82b}
 @media(max-width:420px){#recordDialog .lesson-time-help{font-size:10px}#recordDialog .lesson-time-error{font-size:11px;padding:7px 9px}}
+
+
+/* v1.64: clearer course financial and lesson-progress grouping in the student profile. */
+#profileDialog .pkgmetric-group{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+#profileDialog .pkgmetric-heading{margin:0 0 8px;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:.045em;text-transform:uppercase}
+#profileDialog .pkgmetric-group .pkggrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+#profileDialog .pkgmetric-group .pkggrid div{min-width:0;min-height:62px;padding:10px 12px;border:1px solid #edf0f6;border-radius:12px;background:#f6f8fc}
+#profileDialog .pkgmetric-group .pkggrid span{font-size:11px;line-height:1.35}
+#profileDialog .pkgmetric-group .pkggrid b{font-size:16px;overflow-wrap:anywhere}
+#profileDialog .pkgmetric-note{margin:7px 2px 0;color:var(--muted);font-size:11px;line-height:1.4}
