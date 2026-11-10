@@ -3313,3 +3313,30 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 /* Keyboard focus: keep the active field reachable by allowing the sheet itself to scroll. */
 #studentDialog[open]{scroll-padding-block:20px}
 #studentDialog .formgrid input{scroll-margin-block:18px}
+
+
+/* Student Profile Overview — presentation only (v1.74) */
+#profileDialog .ptabs{position:sticky;top:-1px;z-index:4;background:#fff;padding:8px 2px;margin:8px -2px 14px;border-bottom:1px solid var(--line)}
+#profileDialog .ptabs button{min-height:40px}
+#profileDialog .profileactions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+#profileDialog .profileactions .btn{display:flex;align-items:center;justify-content:center;min-width:0;min-height:42px;margin:0;padding:9px 10px;text-align:center;white-space:normal}
+#profileDialog .profileactions #profileAdd{grid-column:1/-1}
+#profileDialog .profile-overview-grid{display:grid;gap:12px}
+#profileDialog .profile-overview-panel{min-width:0;padding:14px;border:1px solid var(--line);border-radius:15px;background:#fff}
+#profileDialog .profile-overview-panel>header{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+#profileDialog .profile-overview-panel h3{margin:0;font-size:14px;color:var(--ink)}
+#profileDialog .profile-overview-panel>header span{color:var(--muted);font-size:11px}
+#profileDialog .profile-overview-course{padding:10px 0;border-top:1px solid var(--line)}
+#profileDialog .profile-overview-course:first-of-type{border-top:0;padding-top:0}
+#profileDialog .profile-overview-course>div:first-child{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+#profileDialog .profile-overview-course b{font-size:13px;min-width:0;overflow-wrap:anywhere}
+#profileDialog .profile-overview-course strong{font-size:12px;white-space:nowrap;color:var(--blue)}
+#profileDialog .profile-progress{height:7px;margin:9px 0 5px;border-radius:99px;background:#edf1f7;overflow:hidden}
+#profileDialog .profile-progress i{display:block;height:100%;border-radius:inherit;background:var(--blue)}
+#profileDialog .profile-overview-course small,#profileDialog .profile-overview-next span{display:block;color:var(--muted);font-size:11px}
+#profileDialog .profile-overview-next{display:grid;gap:5px;padding:12px;border-radius:12px;background:#f5f8ff}
+#profileDialog .profile-overview-next small{font-size:10px;font-weight:800;letter-spacing:.06em;color:var(--muted)}
+#profileDialog .profile-overview-next b{font-size:14px}
+#profileDialog .profile-overview-balance>strong{display:block;font-size:24px;color:var(--orange);font-variant-numeric:tabular-nums}
+#profileDialog .profile-overview-balance>small{display:block;margin-top:3px;color:var(--muted);font-size:11px}
+@media(max-width:360px){#profileDialog .dialogbody{padding:14px}#profileDialog .profileactions{gap:6px}#profileDialog .profileactions .btn{font-size:11.5px;padding:8px 6px}#profileDialog .ptabs button{padding:0 10px;font-size:12px}}

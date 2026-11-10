@@ -1,3 +1,13 @@
+## Proposed v1.74 — Student Profile Overview UX (2026-11-10; Draft PR)
+
+- Owner decisions: keep all existing Profile tabs and add Overview; keep Student Notes in its existing place inside Lessons; retain existing quick actions and improve layout only.
+- Added Overview as the default for a newly opened student profile. Overview derives course progress, upcoming lesson and outstanding balance from existing records; it does not write data or create new financial definitions.
+- Existing Lessons, Courses, Payments and Attendance tabs remain. Notes remain inside Lessons. Existing Add Lesson, Add Course, WhatsApp lesson/payment, Call and Edit Student actions/handlers remain.
+- Presentation-only Profile scope. No schema, migration, student data, accounting, payment, course allocation, booking, backup, restore or cloud sync changes. Calendar-first workflow preserved.
+- Full-Time Students script/storage remain isolated and untouched; no Full-Time records are merged into regular profiles.
+- Footer v1.74; Service Worker cache v137. Branch `ui/student-profile-overview-ux-v1-74`.
+- Static checks pending; rendered browser 390×844 / 320×568, interaction/regression QA, real iPhone and deployment are not yet verified. Draft PR only; do not merge without explicit owner approval.
+
 # PROJECT_STATE — Driving Log Pro
 
 ## Proposed v1.73 — Better Forms Phase 1 (2026-11-10; Draft PR pending)
