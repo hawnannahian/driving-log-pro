@@ -1,6 +1,6 @@
 # PROJECT_STATE — Driving Log Pro
 
-> **Current source state (2026-11-10):** main 915d06925ae9e4c3129fb8ba6ec35f9cca789d86, Learning Plan specification PR #146 merged, footer v1.70, Service Worker cache v132. GitHub Pages deployment was not verified in this audit.
+> **Current source state (2026-11-10):** main ced0b7e93c808bccd676ee69142911855e97ea58, Individual Receivable Ledger design PR #147 merged, footer v1.70, Service Worker cache v132. GitHub Pages deployment was not verified in this audit.
 
 
 
@@ -16,6 +16,14 @@
 - PR: https://github.com/hawnannahian/driving-log-pro/pull/147.
 - See INDIVIDUAL_RECEIVABLE_DESIGN.md for the recommended data model, derived balance rules, conversion transaction sequence, reporting/payment integration, backup/restore/cloud sync compatibility, lifecycle safeguards and regression matrix.
 - Documentation proposal only. No implementation or data migration authorized/performed. Student-deletion and conversion-reversal safeguards plus old/new app cloud compatibility must be confirmed before code changes.
+
+## Commercial Product Architecture proposal (2026-11-10; DRAFT PR #148)
+- Owner clarified that Driving Log Pro is intended for sale to independent driving schools; new customers must start with independent, empty business data rather than inherit or be modelled only on the owner's current records.
+- PR: https://github.com/hawnannahian/driving-log-pro/pull/148. Design: `COMMERCIAL_PRODUCT_ARCHITECTURE.md`.
+- Current source is a single-user PWA: one global localStorage state/key, no authentication/workspace identity/first-run business setup, EUR/`pt-PT` formatting and default lesson rate hard-coded, and customer-configured GitHub private-repository sync with a browser-stored token.
+- The design compares a hosted SaaS with isolated school workspaces against separate customer installations, and recommends SaaS only if the intended sales model is one shared hosted product. It documents workspace isolation, onboarding/business settings, secure backend sync, backup/restore and safe migration of the owner's existing records.
+- Documentation only. No app code, authentication, data shape, live records, accounting, booking, backup, restore, cloud sync, licensing or deployment behavior changed.
+- Blocking decision before implementation: shared hosted SaaS with separate school workspaces, or separate standalone installation/deployment per customer? Staff access, currency-change policy and backend selection also remain open.
 
 ## Proposed v1.70 — Realistic car image in the header (2026-11-10)
 - Owner rejected the drawn cartoon sedan (v1.69) and asked for a real car shape. A photo-style, brand-neutral white sedan (no badges/logos/text; red "learner" triangle on the roof) was generated with an image tool, the white background cut out locally (flood fill + edge feather, no paid tool) and saved as `brand-car.png` (480 px wide, transparent, ~168 KB). `brand-car.svg` (v1.69) is removed.
