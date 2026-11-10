@@ -5,7 +5,7 @@
 - Regular Students directory only: compact totals (all regular students, with outstanding, with course), clearer cards with phone / completed lessons / completed hours / course hours left / outstanding, filters for All / With Outstanding / Course Students, and sort by fewest course hours remaining.
 - Existing search, call, WhatsApp and profile actions retained. Calendar-first booking remains unchanged. Full-Time register, script and storage remain isolated and untouched.
 - No schema, student records, accounting definitions, payment behavior, booking behavior, backup, restore or Cloud Sync changes. Footer v1.71; Service Worker cache v133.
-- Branch: `ui/students-tab-phase1-compact-summary`, based on main `a8e9bb30918ec3c1a4d4a31624a49e8d4101d7b1`. JS/tests, browser screenshots, real iPhone and deployment checks pending.
+- Branch: `ui/students-tab-phase1-compact-summary`, based on main `a8e9bb30918ec3c1a4d4a31624a49e8d4101d7b1`. GitHub Actions check passed syntax-checking every JS file and existing Node regression tests for Multiple Booking, Mawaqit and profile render (run #42746081569). Rendered browser screenshots at 390×844 / 320×568, all-tab interaction QA, real iPhone and deployment checks remain pending.
 
 
 > **Current source state (2026-11-10):** main `a8e9bb30918ec3c1a4d4a31624a49e8d4101d7b1`, Individual Receivable Ledger design PR #147 merged, footer v1.70, Service Worker cache v132. GitHub Pages deployment was not verified in this audit. Commercial Product Architecture PR #148 remains open/draft and is paused at the owner's request; no commercial implementation is authorized until the owner resumes and selects a deployment model.
