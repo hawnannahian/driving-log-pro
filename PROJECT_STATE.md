@@ -12,7 +12,8 @@
 - Proposed data architecture is documented in INDIVIDUAL_RECEIVABLE_DESIGN.md. It proposes separate receivable principal and append-only transaction ledgers, with required backup/restore/cloud merge integration.
 - No app code, live student data, storage, accounting calculation, booking flow or deployment behavior changed by the merged specification.
 
-## Individual Receivable Ledger design proposal (2026-11-10)
+## Individual Receivable Ledger design proposal (2026-11-10; draft PR #147)
+- PR: https://github.com/hawnannahian/driving-log-pro/pull/147.
 - See INDIVIDUAL_RECEIVABLE_DESIGN.md for the recommended data model, derived balance rules, conversion transaction sequence, reporting/payment integration, backup/restore/cloud sync compatibility, lifecycle safeguards and regression matrix.
 - Documentation proposal only. No implementation or data migration authorized/performed. Student-deletion and conversion-reversal safeguards plus old/new app cloud compatibility must be confirmed before code changes.
 
