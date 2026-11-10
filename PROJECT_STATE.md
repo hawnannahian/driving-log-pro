@@ -1,3 +1,15 @@
+## Proposed v1.75 — Recoverable Lesson Deletion + Hybrid Audit (2026-11-10; Draft PR)
+- Owner approved the hybrid audit architecture: retain audit events in the app's main local data, include them in full JSON backups and the existing private GitHub Cloud Sync. No separate cloud service, token, repository or backend is introduced.
+- Lesson deletion is now soft deletion: the lesson leaves active `state.entries` immediately (so existing lesson/course calculations continue to derive only from active entries) and a recoverable copy is retained for 30 days. Reports → Backup & restore will show deleted lessons with a Restore action and remaining recovery time.
+- New `state.lessonRecovery` lifecycle records retain a small tombstone after the 30-day payload expires, preventing stale cloud devices from resurrecting deleted lessons. A later restore has a newer lifecycle timestamp and wins conflict resolution. Purged lesson payloads are removed on save/startup; the audit event remains.
+- New append-only `state.lessonAudit` events record deleted, restored and expired actions with lesson ID, student label, date/time, actor and timestamp. No audit-history delete UI or expiry is provided; sync merges events by immutable event ID and unions them across older clients.
+- Backward compatibility: older JSON backups without the new fields remain accepted; restore preserves the current device's recovery/audit history and reconciles restored/deleted lesson state. New snapshots/backups include both collections. Older cloud clients that omit these fields do not erase known recovery records/events on a newer client.
+- New `lesson-recovery.js` is loaded before `app.js`; `full-time-students.js`, its storage key, CSV flow and historical accounting are untouched. Full-Time records are not added to lesson recovery/audit.
+- No changes to lesson booking, student management, accounting definitions, payment logic, course/package allocation or legacy archive behavior. Non-lesson record deletion retains its existing behavior.
+- Files: `app.js`, `index.html`, `styles.css`, `sw.js`, `lesson-recovery.js`, `tests/lesson-recovery.test.js`, `AGENT_SYNC.md`, `PROJECT_STATE.md`. Footer v1.75; Service Worker cache v138.
+- Automated tests and static syntax checks pending CI. Rendered browser checks at 390×844 / 320×568, real iPhone Safari/PWA QA and deployment are not run. Keep PR Draft; do not merge or deploy until owner review.
+- Risk: audit history is intentionally unbounded and shares browser storage capacity with app data. If local storage is cleared or exhausted, the private cloud sync and user-exported backups are the additional copies; this is not a separately administered immutable server archive.
+
 ## Proposed v1.74 — Student Profile Overview UX (2026-11-10; Draft PR)
 
 - Owner decisions: keep all existing Profile tabs and add Overview; keep Student Notes in its existing place inside Lessons; retain existing quick actions and improve layout only.
