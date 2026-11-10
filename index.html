@@ -392,11 +392,14 @@
     <form method="dialog" id="studentForm">
       <div class="dialoghead"><div><p class="eyebrow">STUDENT DIRECTORY</p><h2 id="studentTitle">Add student</h2></div><button type="button" class="iconbtn" data-close aria-label="Close">×</button></div>
       <input type="hidden" id="studentId">
-      <div class="formgrid">
-        <label class="wide">Name<input id="sName" required></label>
-        <label>Phone<input id="sPhone" type="text" inputmode="tel" autocomplete="tel" autocapitalize="off" spellcheck="false"></label>
-        <label>WhatsApp (if different)<input id="sWhats" type="text" inputmode="tel" autocomplete="tel" autocapitalize="off" spellcheck="false" placeholder="+351…"></label>
-        <label>Hourly rate (€)<input id="sRate" type="number" min="0" step=".01" inputmode="decimal" placeholder="20"></label>
+      <div class="formgrid student-form-grid">
+        <div class="form-section-title wide"><span class="form-section-icon" aria-hidden="true">01</span><span><b>Student details</b><small>Basic information for the student directory</small></span></div>
+        <label class="wide">Full name<input id="sName" name="name" autocomplete="name" placeholder="Enter student's full name" required></label>
+        <div class="form-section-title wide"><span class="form-section-icon" aria-hidden="true">02</span><span><b>Contact information</b><small>At least one contact number is recommended</small></span></div>
+        <label>Phone <span class="field-optional">Optional</span><input id="sPhone" name="tel" type="tel" inputmode="tel" autocomplete="tel" autocapitalize="off" spellcheck="false" placeholder="+351…"></label>
+        <label>WhatsApp <span class="field-optional">If different</span><input id="sWhats" name="whatsapp" type="tel" inputmode="tel" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="+351…"></label>
+        <div class="form-section-title wide"><span class="form-section-icon" aria-hidden="true">03</span><span><b>Lesson rate</b><small>Optional student-specific hourly rate</small></span></div>
+        <label class="wide">Hourly rate (€)<input id="sRate" name="rate" type="number" min="0" step=".01" inputmode="decimal" placeholder="e.g. 20.00"></label>
       </div>
       <p id="studentError" class="formerror" role="alert"></p>
       <div class="dialogactions"><button type="button" class="btn danger hidden" id="deleteStudent">Delete</button><span></span><button type="button" class="btn ghost" data-close>Cancel</button><button type="submit" class="btn primary">Save student</button></div>
@@ -436,7 +439,7 @@
     <button class="tab" data-tab="islamic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M6.5 20v-6.5c0-3 2.5-5 5.5-6.5 3 1.5 5.5 3.5 5.5 6.5V20"/><path d="M12 4.5v2.5"/><path d="M10 20v-3a2 2 0 0 1 4 0v3"/><path d="M3.5 20v-8M20.5 20v-8"/></svg><span>Islamic</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.72</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.73</span></footer>
   <script src="push-config.js"></script>
   <script src="prayer-times.js"></script>
   <script src="mawaqit-times.js"></script>

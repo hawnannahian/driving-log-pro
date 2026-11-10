@@ -1,5 +1,13 @@
 # PROJECT_STATE — Driving Log Pro
 
+## Proposed v1.73 — Better Forms Phase 1 (2026-11-10; Draft PR pending)
+- Add/Edit Student form reorganized into clear sections with optional field guidance, better placeholders/autocomplete/input types, touch-friendly controls, focus visibility, sticky action footer and responsive modal sizing.
+- Existing record form IDs, validation, booking/payment controls and save handlers retained; shared focus/reduced-motion polish applied.
+- No data/schema, accounting, payment, course allocation, booking or storage logic changed. Calendar-first flow and Full-Time Students isolation preserved.
+- Footer v1.73; Service Worker cache v135. Branch: `ux/better-forms-phase1`, created from latest main.
+- JS syntax/regression checks and rendered QA at 390×844 / 320×568, all-form interaction QA, iPhone and deployment checks pending.
+
+
 ## Proposed v1.72 — Bottom navigation footer polish (2026-11-10; Draft PR pending)
 - CSS-only Minimal White redesign of the six-tab navigation: full-width white iOS-style bar, grey inactive items, blue active icon/label and slim underline, subtle top border/shadow, iOS safe-area padding, narrow-phone sizing, hover and reduced-motion states. Supersedes the initial dark floating-dock styling.
 - Existing tab order/IDs/icons/data-tab handlers unchanged. Calendar-first flow and Full-Time Students isolation preserved. No data, booking, accounting or payment logic changed.

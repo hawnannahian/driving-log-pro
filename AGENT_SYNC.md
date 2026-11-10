@@ -4,6 +4,15 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs for review, Claude's own-PR merge authority under §3a, no student data in the repo).
 
 ## Recent handover entries
+### 2026-11-10 — ChatGPT: Better Forms Phase 1 — Draft PR
+- Owner requested UI + functionality improvements to forms while preserving existing workflow and student data safety.
+- Fresh branch `ux/better-forms-phase1` created from latest `main`.
+- Improved Add/Edit Student form hierarchy into Student Details, Contact Information and Lesson Rate sections; clarified optional phone/WhatsApp fields; added helpful placeholders, autocomplete/input semantics, accessible focus states and responsive touch sizing.
+- Added a consistent sticky action footer and improved modal sizing/scroll handling for phone screens. Record form existing booking/payment controls, IDs, validation and save handlers retained; shared focus and reduced-motion polish applied.
+- No student data, schema, accounting, payment, course allocation, booking or storage logic changed. Calendar-first booking and Full-Time Students isolation remain untouched.
+- Footer version v1.73; Service Worker cache v135. No live student data accessed.
+- Syntax/regression tests and rendered browser QA at 390×844 / 320×568, all-form interaction QA, real iPhone and deployment checks remain pending. Keep PR Draft; do not merge until reviewed.
+
 ### 2026-11-10 — ChatGPT: Bottom navigation footer polish — DRAFT PR
 - Owner confirmed the requested scope is the app's bottom tab footer/navigation dock.
 - Fresh branch `ui/bottom-tab-footer-polish` created from latest `main`.
