@@ -441,3 +441,11 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 - Proposed design: after a successful `cloudSync()`, if `localStorage` marker `driving-log-pro-v1-cloud-lastsnap` != today, PUT `backups/driving-log-YYYY-MM-DD.json` (same `snapshot()` JSON; no new data shape; never overwritten if it exists), then list `backups/` and delete files older than 30 days. Marker updated only after success. Failures never block normal sync and show a plain status line. Settings gets a "Cloud backups" list (date + Download + Put back); Put back goes through existing `replaceData()` (confirmation + safety copy). Warn when the token has expired or no backup for 3 days.
 - Risks / owner decisions: this touches backup + cloud sync (CLAUDE.md §10) so it needs explicit approval; the repo MUST stay private (already enforced by `cloudConnect`); token needs contents write (already required); 30-day retention is a proposal; backup files contain student data, so nothing may ever be committed to this public repo. Tests: synthetic fake-GitHub harness (once/day, prune, failure, restore). Not yet decided: whether to also offer a manual "Back up now".
 - Status: nothing implemented; no app asset changed.
+
+
+### 2026-11-10 — ChatGPT: Professional DL monogram logo v1.67 — proposed
+- Owner noted the header still used a cartoon car illustration as the brand logo and asked for a more professional identity.
+- New branch `ui/professional-dl-monogram-logo-v1-67` created from latest main. Draft PR #141 proposed.
+- Replace only the header's car illustration with a compact navy rounded-square “DL” monogram and a small golden road-line accent. Keep Golden Yellow + Navy branding.
+- Footer v1.67; Service Worker cache v129. No app logic, student data, payments, booking, course allocation, storage, backup, restore or sync behavior changed.
+- No merge/deploy. Automated checks, browser 390×844/320×568 and real iPhone QA remain pending.
