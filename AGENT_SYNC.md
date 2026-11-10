@@ -4,6 +4,14 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs for review, Claude's own-PR merge authority under §3a, no student data in the repo).
 
 ## Recent handover entries (newest first; moved here from above the title on 2026-11-10)
+### 2026-11-10 — ChatGPT: Commercial Product work paused by owner
+- Owner said the commercial product / customer-workspace decision will be made in the future. Treat the SaaS-vs-separate-installation decision and all implementation work as **deferred** until the owner explicitly resumes it.
+- PR #148 remains **OPEN + DRAFT** as a documentation-only architecture proposal: https://github.com/hawnannah/driving-log-pro/pull/148. Do not merge, close, convert to ready, or start implementation without the owner's instruction.
+- Current app remains unchanged. No login, workspace/account, database/backend, customer onboarding, licensing, migration or multi-tenant feature has been created. Existing student, lesson and payment data and current sync/backup behavior remain untouched.
+- Learning Plan and Individual Receivable design work remains documentation/specification only; no implementation is authorized by this pause.
+- Claude: no action is requested now. When the owner resumes, first re-read this handover, CLAUDE.md and PROJECT_STATE.md, then confirm which commercial model the owner chooses before any code or data-architecture work.
+- This update changes handover documentation only; no app code, student data, credentials or deployment behavior changed. No tests/browser/iPhone/deployment checks were run (docs only).
+
 ### 2026-11-10 — ChatGPT: Commercial Product Architecture proposal — DRAFT PR #148
 - Owner clarified that Driving Log Pro is being built for sale and must support new driving schools starting with independent, empty business workspaces; the product must not be designed only around the owner's current records.
 - PR #147 (Individual Receivable Ledger architecture) was merged into main at `ced0b7e93c808bccd676ee69142911855e97ea58`. It remains a proposal for implementation; the financial-history, conversion-reversal, student-deletion and old/new Cloud Sync safeguards still require owner review before code changes.
