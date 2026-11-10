@@ -3074,3 +3074,153 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 @media(prefers-reduced-motion:reduce){
   .navpill,.tabbar .tab svg{transition:none}
 }
+
+
+/* v1.73 — Better Forms Phase 1: clearer student form sections, field guidance, touch-friendly controls and consistent focus/error states. Presentation only; existing form IDs and save logic are preserved. */
+#studentDialog{
+  width:min(560px,calc(100% - 24px));
+  max-width:560px;
+  max-height:min(90dvh,760px);
+  border:1px solid #e4eaf3;
+  border-radius:24px;
+  box-shadow:0 24px 70px rgba(16,28,51,.22);
+}
+#studentDialog::backdrop{background:rgba(16,28,51,.55);backdrop-filter:blur(4px)}
+#studentDialog form{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  padding:22px;
+}
+#studentDialog .dialoghead{
+  position:sticky;
+  top:0;
+  z-index:2;
+  margin:0 0 16px;
+  padding:0 0 14px;
+  border-bottom:1px solid #edf0f5;
+  background:#fff;
+}
+#studentDialog .dialoghead h2{font-size:23px;letter-spacing:-.5px}
+#studentDialog .dialoghead .eyebrow{margin-bottom:5px}
+#studentDialog .formgrid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:13px 12px;
+}
+#studentDialog .formgrid label{
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  gap:7px;
+  min-width:0;
+  color:#53627a;
+  font-size:12px;
+  font-weight:750;
+}
+#studentDialog .formgrid input{
+  width:100%;
+  min-width:0;
+  min-height:49px;
+  padding:11px 13px;
+  border:1px solid #dfe6f1;
+  border-radius:13px;
+  background:#fff;
+  color:#17233a;
+  font:inherit;
+  font-size:16px;
+  font-weight:600;
+  box-shadow:inset 0 1px 2px rgba(18,33,59,.025);
+}
+#studentDialog .formgrid input:focus{
+  outline:3px solid rgba(49,94,232,.12);
+  border-color:#7797f4;
+}
+#studentDialog .form-section-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:3px 0 0;
+  padding:10px 0 0;
+  border-top:1px solid #edf0f5;
+}
+#studentDialog .form-section-title:first-child{border-top:0;padding-top:0}
+#studentDialog .form-section-icon{
+  display:grid;
+  place-items:center;
+  flex:0 0 30px;
+  width:30px;
+  height:30px;
+  border-radius:10px;
+  background:#edf2ff;
+  color:#315ee8;
+  font-size:10px;
+  font-weight:850;
+}
+#studentDialog .form-section-title b{
+  display:block;
+  color:#182338;
+  font-size:13px;
+  font-weight:850;
+}
+#studentDialog .form-section-title small{
+  display:block;
+  margin-top:2px;
+  color:#8290a5;
+  font-size:11px;
+  font-weight:500;
+  line-height:1.35;
+}
+#studentDialog .field-optional{
+  display:inline;
+  margin-left:4px;
+  color:#929daf;
+  font-size:10px;
+  font-weight:600;
+}
+#studentDialog .formerror{
+  padding:0;
+  line-height:1.45;
+}
+#studentDialog .dialogactions{
+  position:sticky;
+  bottom:0;
+  z-index:2;
+  margin:16px -22px -22px;
+  padding:12px 22px max(14px,env(safe-area-inset-bottom));
+  border-top:1px solid #edf0f5;
+  background:rgba(255,255,255,.97);
+}
+#studentDialog .dialogactions .btn{min-height:46px}
+#recordDialog .formgrid input:focus-visible,
+#recordDialog .formgrid select:focus-visible,
+#recordDialog .formgrid textarea:focus-visible,
+#studentDialog .formgrid input:focus-visible{
+  outline:3px solid rgba(49,94,232,.16);
+  outline-offset:1px;
+}
+#recordDialog .formerror,#studentDialog .formerror{line-height:1.45}
+@media(max-width:720px){
+  #studentDialog{
+    width:calc(100% - 16px);
+    max-height:calc(100dvh - 16px);
+    margin:auto 8px;
+    border-radius:22px;
+  }
+  #studentDialog form{padding:17px 15px}
+  #studentDialog .dialoghead{margin-bottom:14px}
+  #studentDialog .formgrid{gap:12px 9px}
+  #studentDialog .dialogactions{
+    margin:15px -15px -17px;
+    padding:11px 15px max(12px,env(safe-area-inset-bottom));
+  }
+  #studentDialog .dialogactions .btn{min-height:48px}
+}
+@media(max-width:380px){
+  #studentDialog .formgrid{grid-template-columns:minmax(0,1fr)}
+  #studentDialog .formgrid .wide{grid-column:1}
+  #studentDialog .form-section-title.wide{grid-column:1}
+}
+@media(prefers-reduced-motion:reduce){
+  #studentDialog *,#recordDialog *{scroll-behavior:auto!important;transition:none!important}
+}
