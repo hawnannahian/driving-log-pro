@@ -38,7 +38,6 @@ function cleanup(data,now){
 }
 function merge(base,local,remote,mergeList){
  const b=base||{},l=local||{},r=remote||{};
- const mergedRecovery=mergeList(b.lessonRecovery||[],l.lessonRecovery||[],r.lessonRecovery||[]);
  const recoveryById=new Map();
  for(const row of [...(b.lessonRecovery||[]),...(l.lessonRecovery||[]),...(r.lessonRecovery||[])]){
   const old=recoveryById.get(row.id),stamp=Date.parse(row.updatedAt)||0,oldStamp=old?(Date.parse(old.updatedAt)||0):-1;
