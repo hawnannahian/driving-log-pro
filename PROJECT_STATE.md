@@ -1,6 +1,13 @@
 # PROJECT_STATE — Driving Log Pro
 
-> **Current source state (2026-11-10):** main `fa537cc03d13561cde76fc58e464354dc42ce3e3` (PR #139 merged), footer v1.65, cache `nahians-schedule-cache-v127`. Draft PR #140 proposes Log page polish v1.66; not merged or deployed.
+> **Current source state (2026-11-10):** main includes PR #140 Log page polish v1.66, footer v1.66, cache v128. Draft PR #141 proposes a professional DL monogram logo v1.67; not merged or deployed.
+
+## Proposed v1.67 — Professional DL monogram logo (2026-11-10; draft PR #141)
+- PR: https://github.com/hawnannahian/driving-log-pro/pull/141 (branch `ui/professional-dl-monogram-logo-v1-67`).
+- Replaces the cartoon car header mark with a clean navy “DL” monogram and a subtle golden road-line accent; retains the Golden Yellow + Navy header.
+- Footer v1.67; Service Worker cache v129.
+- Header identity-only change; no student data, app logic, payments, booking, course allocation, storage, backup, restore or sync behavior changed.
+- Automated tests, browser 390×844/320×568, real iPhone QA and Pages deployment remain unverified.
 
 ## Completed v1.65 — Golden Yellow + Navy brand header (2026-11-10; PR #139 merged)
 - PR: https://github.com/hawnannahian/driving-log-pro/pull/139, merged to main at `fa537cc03d13561cde76fc58e464354dc42ce3e3`.
