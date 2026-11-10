@@ -57,3 +57,10 @@ test("WhatsApp several-lessons message: editable wording and period, older saved
  assert.ok(html.includes('id="waMultiTemplate"')&&html.includes('id="waMultiDays"')&&html.includes('id="waMultiPreview"'));
  assert.ok(/typeof x\.multi==="string"&&x\.multi\.trim\(\)\?x\.multi:WA_DEFAULTS\.multi/.test(app)&&/WA_DAYS_ALLOWED\.includes\(Number\(x\.days\)\)/.test(app),"old saved objects without the new fields must fall back to defaults");
 });
+test("manual prayer times override the automatic ones for every day and stay backward compatible (v1.86)",()=>{
+ const app=fs.readFileSync(path.join(__dirname,"..","app.js"),"utf8"),html=fs.readFileSync(path.join(__dirname,"..","index.html"),"utf8");
+ for(const id of ["pManualOn","pmFajr","pmDhuhr","pmAsr","pmMaghrib","pmIsha","prayerEdit"])assert.ok(html.includes('id="'+id+'"'),id);
+ assert.ok(app.includes("man=p.manual&&p.manual.on?p.manual:null")&&app.includes("man.fajr||base.fajr"),"a blank manual time falls back to the automatic time");
+ assert.ok(/p\.manual=\{on:m\.on===true/.test(app),"settings saved before v1.86 (no manual key) must read as manual off");
+ assert.ok(app.includes("manual:{on:$(\"pManualOn\").checked"),"manual times are saved inside the existing prayer settings (synced with the app data)");
+});

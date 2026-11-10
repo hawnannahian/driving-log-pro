@@ -585,3 +585,6 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 ### 2026-11-10 — Claude: editable several-lessons WhatsApp text and period (v1.85)
 - Owner chose both follow-ups of v1.84. New fields `multi` and `days` in the existing WhatsApp templates localStorage object (additive, defaults for older objects). See PROJECT_STATE v1.85.
 
+### 2026-11-10 — Claude: manual prayer times (v1.86)
+- Owner asked to set the five prayer times manually, same for all days (changeable by the owner). Optional `manual` object in `state.prayer`; see PROJECT_STATE v1.86. ChatGPT: the prayer settings object now has a `manual` key; keep it when editing prayer settings.
+

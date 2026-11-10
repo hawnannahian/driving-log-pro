@@ -23,6 +23,13 @@
 
 
 
+
+## v1.86 — Manual prayer times (2026-11-10; owner request: one fixed set for all days)
+- Log -> Settings -> Prayer Time: new switch **Set prayer times manually** with five time fields (Fajr, Dhuhr, Asr, Maghrib, Isha). When on, these times replace the mosque (Mawaqit) and calculated times on **every day**; Friday uses the existing Jum'a field instead of Dhuhr; a blank field falls back to the automatic time; booking blocks are jamaat..jamaat+minutes like the mosque times; booking still only warns. Off = exactly the previous behaviour. Overview's prayer line gets an **Edit times** button that opens these settings.
+- Data: optional `manual` object inside the existing `state.prayer` (`{on,fajr,dhuhr,asr,maghrib,isha}`); settings saved before v1.86 read as manual off; it travels with the existing prayer setting in backup and cloud sync (`mergeVal`). No new storage key.
+- Also fixed in the touched screen: the Settings switches (prayer protection, manual times) had a zero-width checkbox and clipped text on phones; they now show a real checkbox and wrap.
+- Files: `app.js` (`prayerCfg`, `prayerBlocks`, `fillPrayerForm`, `savePrayer`, Edit times), `index.html` (footer v1.86), `styles.css`, `sw.js` (cache v149), `tests/profile-render.test.js`. Checked in Chromium at 390×844 and 320×568 (off/on, five times, Friday, 40 days later, lesson-guard warning at the manual Asr, saved + in the sync snapshot, blank fallback, Edit times, switch off restores the automatic times, no overflow/CSP/console errors); real iPhone not verified.
+
 ## v1.85 — WhatsApp several-lessons message: editable wording and period (2026-11-10; owner request, items 1 and 2)
 - Log -> Settings -> WhatsApp Message Settings gains: **Several lessons (multiple booking)** text with a `{{lessons}}` placeholder (one "• Fri 13 Nov, 19:00–20:00" line per lesson; if the placeholder is removed the list is appended; an empty text falls back to the default) and **Which lessons to include**: only that day / that day and the next 3, 7 (default) or 14 days. Saved in the existing `driving-log-pro-v1-whatsapp-templates` object as `multi` and `days`; older saved objects with only `lesson` and `payment` keep working (defaults fill in), "Reset defaults" restores both. A single lesson still uses the editable one-lesson template.
 - Files: `app.js`, `index.html` (footer v1.85), `styles.css`, `sw.js` (cache v148), `tests/profile-render.test.js`. No change to lesson, payment or student data. Checked in Chromium at 390×844 and 320×568 (old settings, edit/save, all four periods, missing placeholder, empty text, reset, no overflow/errors); real iPhone and real WhatsApp not verified.

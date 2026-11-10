@@ -3386,3 +3386,12 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 /* v1.85 — WhatsApp settings: several-lessons message and period. */
 .wa-template-body select#waMultiDays{width:100%;min-height:46px;padding:0 12px;border:1px solid var(--line,#e3e9f2);border-radius:12px;background:#fff;color:var(--ink);font:inherit;font-size:16px;margin:0 0 10px}
 
+/* v1.86 — manual prayer times. */
+.prayer-manual-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.prayer-manual-grid.hidden{display:none!important}
+.prayer-manual-grid input[type=time]{width:100%;min-width:0;font-size:16px}
+#prayerLine .prayer-edit{margin-top:8px;min-height:44px}
+/* v1.86 — the Settings switches (prayer protection, manual prayer times) had a zero-width checkbox and clipped text: give the checkbox a real size and let the label wrap. */
+.log-settings .settings-card .settings-toggle{white-space:normal;align-items:flex-start;gap:12px;min-height:44px}
+.log-settings .settings-card .settings-toggle input[type=checkbox]{flex:none;width:24px;min-width:24px;height:24px;margin:1px 0 0;accent-color:var(--blue)}
+
