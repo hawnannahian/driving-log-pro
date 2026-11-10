@@ -36,6 +36,11 @@ test("audit merge unions immutable events from both devices without dropping eit
  const merged=R.merge({}, {entries:[],lessonRecovery:[],lessonAudit:[a]}, {entries:[],lessonRecovery:[],lessonAudit:[b]},(base,left,right)=>[...new Map([...left,...right].map(x=>[x.id,x])).values()]);
  assert.deepEqual(merged.lessonAudit.map(x=>x.id).sort(),["a","b"]);
 });
+test("append-only audit events survive when an older sync client omits the audit array",()=>{
+ const R=api(),event={id:"historic",lessonId:"l",action:"deleted",at:at("2026-11-02")};
+ const merged=R.merge({entries:[],lessonRecovery:[],lessonAudit:[event]},{entries:[],lessonRecovery:[],lessonAudit:[event]},{entries:[],lessonRecovery:[],lessonAudit:[]},(base,left,right)=>{const m=new Map([...left,...right].map(x=>[x.id,x]));return [...m.values()];});
+ assert.equal(merged.lessonAudit.length,1);assert.equal(merged.lessonAudit[0].id,"historic");
+});
 test("legacy backups without recovery fields remain valid optional input",()=>{
  const R=api();assert.equal(R.validateRecovery(undefined),true);assert.equal(R.validateAudit(undefined),true);
  assert.equal(R.validateRecovery([{id:"x",status:"deleted",updatedAt:at("2026-11-02"),lesson:lesson("x")}]),true);
