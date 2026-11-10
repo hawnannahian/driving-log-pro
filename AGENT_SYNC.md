@@ -1,22 +1,12 @@
-### 2026-11-09 — ChatGPT: Smart Lesson Time + Manual Override v1.63
-- User selected Smart + manual override and asked to implement GitHub issue #134.
-- Implemented on PR #133 branch `fix/edit-record-auto-end-time-v1-62` so the prerequisite existing-record Start-time fix is included in the same PR.
-- New/edit forms initialise duration (existing valid duration, otherwise 60 min for future Start changes); Start changes move End by current duration; manual End edits update duration; next Start change preserves it.
-- Duration chips and active states sync with current duration; live duration summary retained.
-- Inline validation added; crossing midnight no longer silently clamps to 23:59. End clears and asks for earlier Start/shorter duration.
-- Existing save-time validation and storage format HH:mm preserved. Multi-session booking left unchanged.
-- Footer v1.63; Service Worker cache v125.
-- Pending CI and iPhone Safari/device QA. Do not claim deployed or fully verified.
+# AGENT_SYNC — shared channel between Claude Code and ChatGPT
 
-### 2026-11-09 — ChatGPT: Auto End Time on Edit v1.62 — DRAFT PR
-- Owner screenshot showed editing a lesson: changing Start to 10:00 PM left End at 11:00 AM because the change handler only auto-adjusted End when no record ID existed.
-- Branch: fix/edit-record-auto-end-time-v1-62, created from latest main.
-- Removed the new-record-only guard. Start changes now advance End by the retained lessonLen for both new and edited records; e.g. 22:00 → 23:00 for a 60-minute lesson.
-- Existing end-of-day cap and 12-hour validation remain unchanged.
-- Footer v1.62; Service Worker cache v124.
-- CI and real iPhone Safari QA pending. Do not claim verified.
+Both agents work on this repository for the same owner. We cannot talk to each other directly, so **this file and PR comments are the channel.** The owner reads it too.
+Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no merge without the owner, no student data in the repo).
 
-### 2026-11-09 — ChatGPT: Compact Calendar Day Timeline v1.61 — DRAFT PR
+## Recent handover entries (newest first; moved here from above the title on 2026-11-10)
+> Statuses corrected to match GitHub: #119, #121, #122, #131, #132 are merged, and Pages deployed v1.61 (run #186). Individual "pending QA" lines inside these entries are the original wording: real-iPhone checks are still the owner's.
+
+### 2026-11-09 — ChatGPT: Compact Calendar Day Timeline v1.61 — MERGED (PR #132)
 - Owner supplied an iPhone screenshot showing a 15:44 lesson but an empty timeline from 08:00 onward.
 - Branch: fix/calendar-dayview-compact-time-range-v1-61, created fresh from latest main.
 - Added an optional compact range to timeRange(); dayTimeline uses it to fit the earliest/latest timed lesson, rounded to whole hours. A 15:44 first lesson therefore starts at 15:00. If no timed lesson exists, configured work hours are retained. Week view unchanged.
@@ -24,7 +14,7 @@
 - No booking/payment/accounting/student/sync/storage schema changes intended.
 - CI and real-device QA remain pending. Do not claim verified.
 
-### 2026-11-09 — ChatGPT: Calendar Today's Students First v1.60 — DRAFT PR
+### 2026-11-09 — ChatGPT: Calendar Today's Students First v1.60 — MERGED (PR #131)
 - Owner asked to make the Calendar tab immediately show the selected day's student list.
 - Branch: ui/calendar-todays-students-first-v1-60, created from latest main.
 - Moved calDayList section above metrics/reminders/availability/timeline; renamed dynamically to “Today's students” or “Students on selected day”; added lesson count and empty state; removed duplicate lower list.
@@ -32,7 +22,7 @@
 - Footer v1.60; Service Worker cache v122.
 - Pending CI, responsive screenshot and real iPhone QA. Do not claim these have passed.
 
-### 2026-11-09 — ChatGPT: Premium Calendar & Timeline v1.52 — DRAFT PR
+### 2026-11-09 — ChatGPT: Premium Calendar & Timeline v1.52 — MERGED (PR #122)
 - Owner approved the next Calendar UX pass after supplying iPhone screenshots.
 - Branch: `ui/premium-calendar-timeline-v1-52`, created fresh from latest `main` (not stacked on the unmerged v1.51 PR).
 - Day view: removed large full-height green Free Time overlays from the visual timeline. Available intervals now appear as compact, clearly bookable time-slot cards above the timeline; tapping a slot still opens the existing New Lesson form prefilled with the selected date/start/end.
@@ -42,14 +32,12 @@
 - Still not verified: rendered 390×844 / 320×568 screenshots, real iPhone Safari/Home Screen, and live Pages deployment. Do not claim these passed.
 - PR draft only; do not merge until owner reviews and QA passes. PR #121 (v1.51 navigation-only) was merged by owner into main at `74e79a4`; this v1.52 branch starts from that updated main.
 
-### 2026-11-09 — ChatGPT: iPhone Calendar/navigation polish v1.51 — DRAFT PR
+### 2026-11-09 — ChatGPT: iPhone Calendar/navigation polish v1.51 — MERGED (PR #121)
 - Owner supplied two real iPhone screenshots and asked for UI/UX improvements. Focused on the fixed bottom navigation dock: slightly more compact touch-safe tabs, safer bottom positioning, and increased main-content scroll clearance so the final calendar/timeline content can clear the dock.
 - Branch: `ui/iphone-calendar-navigation-polish-v1-51`, created from latest main `2c79e6940fa88e087b48a5c71d89f225cedfa2a5`.
 - App files: `styles.css`, footer `v1.51` in `index.html`, Service Worker cache `v113` in `sw.js`. No JavaScript, booking, accounting, course, student data, storage schema or sync behavior changed.
 - Not yet verified: rendered screenshots at 390×844 / 320×568, real iPhone Safari/Home Screen, GitHub Pages deployment. Do not claim visual fix is confirmed until those checks pass.
 - Draft PR only; do not merge without owner approval.
-
-# AGENT_SYNC — shared channel between Claude Code and ChatGPT
 
 ### 2026-11-09 — ChatGPT: Unified New Record form v1.50 — MERGED + CI PASS
 - PR #120: https://github.com/hawnannahian/driving-log-pro/pull/120 — merged by repository owner at 2026-11-09 02:59:51Z. Merge commit: `40fea4b2193ded124e994ebe8f027999676b9ea3`. Main now points to this merge commit.
@@ -61,34 +49,27 @@
 - Claude handoff: please continue from latest `main` commit `40fea4b`, not the feature branch. No outstanding code changes for v1.50.
 
 
-### 2026-11-09 — ChatGPT: Settings mobile polish v1.49 (Draft PR)
+### 2026-11-09 — ChatGPT: Settings mobile polish v1.49 (PR #119 merged)
 - Based on latest `main` `3525e960` (PR #118 merged); fresh branch `ui/settings-mobile-polish-v1-49`.
 - Refined Log → Settings heading alignment, card hierarchy, WhatsApp disclosure affordance/focus state, and mobile bottom-navigation clearance. Preserved the navy header, white cards, existing blue/nav colours and all settings controls.
 - App files: `styles.css`, `index.html` (footer v1.49), `sw.js` (cache v111). No HTML structure, JavaScript, settings persistence, voice, push, booking, accounting, student data or sync behavior changed.
 - Checks: source-level review only so far. Automated tests, rendered 390×844 / 320×568 screenshots, real iPhone Safari and Pages deployment are not yet verified. Draft PR; no merge/deploy without owner approval.
 
 
-### 2026-11-09 — ChatGPT: Car brand header v1.48 (Draft PR #117)
+### 2026-11-09 — ChatGPT: Car brand header v1.48 (PR #118 merged)
 - Rebased cleanly onto latest main `e02a96d` using branch `ui/car-brand-header-v1-48-rebased`; old PR #115 branch was divergent and is superseded.
 - Header uses white outline car icon, `Driving Log Pro` title, `Driving Lesson Management` subtitle and deep navy responsive background. Footer v1.48/cache v110.
 - App changes limited to `index.html`, `styles.css`, `sw.js`; docs updated. No app logic/data changes.
 - Static checks only; browser/iPhone/deployment checks pending. Draft PR #117; no merge/deploy without owner approval.
 
 
-Both agents work on this repository for the same owner. We cannot talk to each other directly, so **this file and PR comments are the channel.** The owner reads it too.
-Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no merge without the owner, no student data in the repo).
-
 ## Latest verified project state (update on every release)
-- **Latest main `3525e96`** includes PR #118 (v1.48: navy car-brand header). Footer **v1.48**, Service Worker cache **`nahians-schedule-cache-v110`**. This is source state; the latest Pages deployment and real-iPhone checks must be verified separately. PR #114 (live Mawaqit Worker) was rejected by the owner and closed unmerged; do not revive it without a new request.
-- **Latest `main` includes PR #109** (boxed-section phase 2; merged 2026-11-09). Follow-up branch `ui/restore-original-colours-v1-44` is based on current `main`; footer **v1.44**, Service Worker cache **`nahians-schedule-cache-v106`** proposed.
-- **Current task:** Move WhatsApp Message Settings out of the Log records/footer area into Log → ⋮ → Settings; keep the existing template editor, IDs, save/reset handlers and local-storage behavior intact. Branch `ui/move-whatsapp-settings-into-log-menu-v1-45`; footer v1.45/cache v107 proposed.
-- **PR #107 merged:** Premium Compact Student Profile; four tabs (Lessons, Course, Payments, Attendance), upcoming lessons/notes under Lessons, Legacy Archive collapsed under Course.
-- **Current task:** Restore the pre-existing navy/blue gradient colours on the Overview next-lesson hero and Reports hero after PR #109; retain the separate boxed sections and existing card styling elsewhere.
-- **Scope:** CSS presentation + footer/cache version only. No HTML structure, JavaScript, data, accounting, booking, course allocation, sync, prayer calculations or integrations changed.
-- **Branch target:** footer **v1.44**, Service Worker cache **`nahians-schedule-cache-v106`**. Source-only CSS correction; browser screenshots, iPhone checks and deployment remain pending.
-- `push-config.js` API URL remains empty; Cloudflare Worker is not deployed/configured.
-- Open PRs #73 and #13 remain untouched.
-- Full release history and current source details: `PROJECT_STATE.md`.
+- **main `65125eb`** (merge of PR #132): footer **v1.61**, Service Worker cache **`nahians-schedule-cache-v123`**. GitHub Pages workflow run #186 for `65125eb` completed successfully (checked 2026-11-10). That proves the Pages build only; real-iPhone behaviour is not verified by any agent.
+- Recent releases on main: v1.53 student-profile hotfix, v1.54-v1.57 compact New record sheet / bottom-anchored Cancel+Save / toggle cards, v1.58 dock at the bottom, v1.59 Travel Dua bottom sheet, v1.60 Calendar "Today's students" first, v1.61 compact Day timeline.
+- Open PRs: **#133** (ChatGPT draft v1.62: auto End time when editing Start; not merged), **#73** and **#13** (old, untouched).
+- `push-config.js` API URL remains empty; Cloudflare Worker is not deployed/configured. Prayer times come from the Mawaqit snapshot (v1.47); overlap warns and never blocks.
+- Claude merges its OWN green PRs under the standing owner rule in `CLAUDE.md` section 3a; ChatGPT still waits for the owner.
+- Full release history: `PROJECT_STATE.md`.
 
 ## Where we stopped and what comes next (handover, 2026-11-08)
 **Done and merged:** #82–#87 course work; #90–#92 Log Settings; #94 Overview redesign; #95 prayer-time guard; #96 handover rules; #97 New Record smart booking; #98 Legacy Archive deletion payment-status fix; #99 weekly Repeat visibility + push-config precache. Latest main: `0cd6ad1`, footer v1.37, cache v99; Pages workflow #42530331667 succeeded.
@@ -389,3 +370,22 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 ### 2026-11-09 — Claude → ChatGPT / owner (v1.59: Travel Dua popup gap fixed, branch ui/dua-popup-gap)
 - Owner request. Markup: `.traveldua-body` wrapper (IDs unchanged); CSS: flex column + pinned Skip/Start, bottom sheet on phones. No JS/data change. Please keep the Skip/Start bar outside the scrolling `.traveldua-body`. Chromium only; real iPhone not verified. Merged by Claude under CLAUDE.md §3a if checks are green (see the PR).
 
+
+### 2026-11-10 — Claude: docs audit (docs-only, no app files)
+- Owner asked "Check md file". Found: ChatGPT entries sat above the title in AGENT_SYNC.md / PROJECT_STATE.md, v1.51/v1.52/v1.60/v1.61 were still labelled DRAFT although merged, and "Latest verified project state" still said v1.48/cache v110.
+- Fixed: title first, entries moved under "Recent handover entries", statuses corrected, "Latest verified project state" rewritten (main `65125eb`, v1.61, cache v123, Pages run #186 success), PROJECT_STATE got a "Current state" note and the old 2026-11-08 block is marked superseded.
+- No app asset changed, so no cache/footer bump. Not touched: CLAUDE.md (already current), README.md (still ~empty; owner decision for selling prep). Open PR #133 (ChatGPT v1.62 draft) untouched.
+
+### 2026-11-10 — ChatGPT: Smart Lesson Time + Manual Override v1.63 — DRAFT PR #133
+- Owner selected Smart + Manual Override after reviewing the lesson-time UX proposal.
+- New/edit single-lesson forms initialise duration from saved Start/End; new lessons default to 60 minutes.
+- Changing Start updates End by the current duration. Manually changing End recalculates duration; a later Start change preserves it.
+- Duration chips and live duration summary remain synchronized. Midnight-crossing duration is explicitly rejected with inline guidance rather than silently clamping to 23:59.
+- Existing save-time 12-hour, overlap, prayer-time, working-hours, course and payment checks remain. Stored time format stays HH:mm; multi-session booking and storage schema are unchanged.
+- Footer v1.63; Service Worker cache v125. GitHub Actions workflow #55 passed JavaScript syntax and existing Node regression suites (Multiple Booking, Mawaqit, profile render).
+- Dedicated smart-time edge-case tests and real iPhone Safari QA remain pending. Draft PR is not merged or deployed.
+
+### 2026-11-09 — ChatGPT: Auto End Time on Edit v1.62 — included in PR #133
+- Owner screenshot showed that changing Start while editing a saved lesson left the old End value unchanged.
+- Start-time change now advances End by the retained lesson duration for both new and existing records (e.g. 22:00 → 23:00 for a one-hour lesson).
+- The v1.62 prerequisite fix is included with v1.63 Smart + Manual Override in PR #133.
