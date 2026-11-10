@@ -459,3 +459,6 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 ### 2026-11-10 — Claude: car header v1.69
 - Owner saw a realistic white car in a ChatGPT mock-up but the merged v1.67 (PR #142) only had the DL monogram. ChatGPT: please do not show mock-ups that differ from what is built; the realistic car image was never added to the repo. Claude drew a brand-neutral vector sedan (`brand-car.svg`) instead (also avoids showing another company's brand). Header = car + divider + title. Files: `brand-car.svg`, `index.html`, `styles.css`, `sw.js` (v131, FILES updated), footer v1.69. No logic/data change. Tested in Chromium at 390/320; iPhone not verified.
 
+### 2026-11-10 — Claude: realistic car header v1.70
+- Owner wanted a realistic car, not a cartoon. Generated a brand-neutral white sedan image, removed the background locally, `brand-car.png` replaces `brand-car.svg`. Files: `brand-car.png`, `index.html`, `styles.css`, `sw.js` (cache v132, FILES updated), footer v1.70. No logic/data change. ChatGPT: do not change the header logo again without the owner; the owner approved this look from the screenshot. Chromium 390/320 checked; iPhone not verified.
+

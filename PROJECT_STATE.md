@@ -4,6 +4,12 @@
 
 
 
+
+## Proposed v1.70 — Realistic car image in the header (2026-11-10)
+- Owner rejected the drawn cartoon sedan (v1.69) and asked for a real car shape. A photo-style, brand-neutral white sedan (no badges/logos/text; red "learner" triangle on the roof) was generated with an image tool, the white background cut out locally (flood fill + edge feather, no paid tool) and saved as `brand-car.png` (480 px wide, transparent, ~168 KB). `brand-car.svg` (v1.69) is removed.
+- Header = car + divider + title; Golden Yellow + Navy unchanged. Files: `brand-car.png` (new, in the service-worker FILES list), `index.html`, `styles.css`, `sw.js` (cache v132), footer v1.70. No JS, data, storage, backup or sync change.
+- Licence note: the image is AI-generated for this project; keep a note if the app is sold. Checked at 390×844 and 320×568 in Chromium (no overflow/errors); real iPhone and Pages deployment not verified.
+
 ## Proposed v1.69 — Car illustration header (2026-11-10)
 - Owner wanted a car in the header again (the DL monogram of v1.67 / PR #142 was merged instead of the car shown in ChatGPT's mock-up; the realistic car photo from that mock-up never existed in the repo). New brand-neutral flat vector white sedan `brand-car.svg` (own drawing, no third-party logo or brand), a thin divider, then the Driving Log Pro title; Golden Yellow + Navy header unchanged.
 - Files: `brand-car.svg` (new, added to the service-worker FILES list), `index.html`, `styles.css`, `sw.js` (cache v131), footer v1.69. No JS, data, storage, backup or sync change. The old DL monogram CSS is left unused.
