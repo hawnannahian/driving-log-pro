@@ -21,6 +21,11 @@
 
 
 
+
+## v1.84 — WhatsApp lesson message covers a multiple booking (2026-11-10; owner report)
+- Report: after a multiple booking (several days), the WhatsApp reminder chip in the Calendar only contained the text for one day. `lessonMsg(e)` now checks the same student's not-yet-completed lessons from that lesson's date up to 7 days later; with 2+ lessons it builds one message: a greeting, "আপনার আসন্ন ড্রাইভিং লেসনগুলো:", one "• Fri 13 Nov, 19:00–20:00" line per lesson, and a closing line. With a single lesson the existing editable template (WhatsApp Message Settings) is used unchanged. Applies wherever `lessonMsg` is used (Calendar chips, profile "WhatsApp: lesson", quick dialog, Overview next-day list). Lessons already completed, other students' lessons and lessons more than 7 days later are excluded.
+- Limits: the multi-lesson wording is built in (not yet editable in settings); the 7-day window is a choice. Files: `app.js`, `index.html` (footer v1.84), `sw.js` (cache v147), `tests/profile-render.test.js`. No data change. Checked in Chromium 390×844 and 320×568 (15 checks); real iPhone and real WhatsApp not verified.
+
 ## v1.83 — Business dashboard: Outstanding tile hidden (2026-11-10; owner request)
 - The "Outstanding" tile in the dark Business dashboard hero (Reports) is hidden (`hidden` + `hero-hidden`); Expenses, Net profit and Collected stay and Collected uses the full row. The element and `#rUnpaid` stay so `reports-dashboard.js` keeps updating it. Not hidden (owner asked only for this tile): Outstanding on the Log page, in student profiles, the payments chart and the PDF/CSV export. Overview still shows no financial figures.
 - Files: `index.html` (footer v1.83), `styles.css`, `sw.js` (cache v146), `tests/profile-render.test.js`. No data or calculation change. Checked in Chromium 390×844 and 320×568; real iPhone not verified.
