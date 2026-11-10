@@ -2952,3 +2952,9 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
  #log .recordvalue{font-size:11px}
  #log .markpaid{min-width:62px;max-width:66px;padding:6px 4px;font-size:9px}
 }
+
+
+/* v1.67 — Professional DL monogram replaces the cartoon car header logo. */
+.brandmark{width:46px;min-width:46px;height:46px;border-radius:13px;background:transparent;border:0;color:#102653;display:grid;place-items:center}
+.brandmark svg{display:block;width:46px;height:46px}
+@media(max-width:720px){.brandmark{width:42px;min-width:42px;height:42px}.brandmark svg{width:42px;height:42px}}
