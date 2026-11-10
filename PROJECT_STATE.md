@@ -6,7 +6,7 @@
 
 
 ## Learning Plan specification — owner-confirmed requirements (2026-11-10)
-- See LEARNING_PLAN_SPEC.md for the complete Calendar-first product flow and conversion rules.
+- See LEARNING_PLAN_SPEC.md for the complete Calendar-first product flow and conversion rules. Draft PR #146: https://github.com/hawnannahian/driving-log-pro/pull/146.
 - Owner confirmed Convert All and accounting Option A: convert eligible completed Individual Lessons whether Paid or Unpaid; retain paid receipts separately and preserve unpaid amounts as separate individual outstanding balances.
 - This is a documentation/specification decision only. No code, data shape, accounting calculation, booking flow or live student record was changed. A separate implementation PR must include the additive receivable representation, compatibility/migration plan, targeted accounting regression tests and owner review.
 
