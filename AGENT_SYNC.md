@@ -4,12 +4,22 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs for review, Claude's own-PR merge authority under §3a, no student data in the repo).
 
 ## Recent handover entries (newest first; moved here from above the title on 2026-11-10)
-### 2026-11-10 — ChatGPT: Learning Plan specification merged; receivable design proposal in progress
-- Learning Plan specification PR #146 was merged to main at 915d06925ae9e4c3129fb8ba6ec35f9cca789d86. Owner-confirmed choices remain: Calendar-first; Individual Lessons / Hourly Package / Full Course; Convert All; Option A (both Paid and Unpaid eligible completed Individual Lessons convert).
-- No app implementation was included in #146. Current main footer is v1.70 and Service Worker cache v132; GitHub Pages deployment is not verified.
-- New docs-only task: design a separate Individual Receivable ledger. Current source confirms unpaidAmt() returns zero for Course-linked lessons; Edit Record reconstructs lesson objects; Cloud Sync explicitly snapshots and ID-merges its arrays. The proposed design is in INDIVIDUAL_RECEIVABLE_DESIGN.md. Draft PR #147: https://github.com/hawnannahian/driving-log-pro/pull/147.
-- No app code, live student data, local storage, cloud data, backup, accounting or booking behavior has been changed.
-- Open PRs #73 and #13 remain untouched.
+### 2026-11-10 — ChatGPT: Commercial Product work paused by owner
+- Owner said the commercial product / customer-workspace decision will be made in the future. Treat the SaaS-vs-separate-installation decision and all implementation work as **deferred** until the owner explicitly resumes it.
+- PR #148 remains **OPEN + DRAFT** as a documentation-only architecture proposal: https://github.com/hawnannah/driving-log-pro/pull/148. Do not merge, close, convert to ready, or start implementation without the owner's instruction.
+- Current app remains unchanged. No login, workspace/account, database/backend, customer onboarding, licensing, migration or multi-tenant feature has been created. Existing student, lesson and payment data and current sync/backup behavior remain untouched.
+- Learning Plan and Individual Receivable design work remains documentation/specification only; no implementation is authorized by this pause.
+- Claude: no action is requested now. When the owner resumes, first re-read this handover, CLAUDE.md and PROJECT_STATE.md, then confirm which commercial model the owner chooses before any code or data-architecture work.
+- This update changes handover documentation only; no app code, student data, credentials or deployment behavior changed. No tests/browser/iPhone/deployment checks were run (docs only).
+
+### 2026-11-10 — ChatGPT: Commercial Product Architecture proposal — DRAFT PR #148
+- Owner clarified that Driving Log Pro is being built for sale and must support new driving schools starting with independent, empty business workspaces; the product must not be designed only around the owner's current records.
+- PR #147 (Individual Receivable Ledger architecture) was merged into main at `ced0b7e93c808bccd676ee69142911855e97ea58`. It remains a proposal for implementation; the financial-history, conversion-reversal, student-deletion and old/new Cloud Sync safeguards still require owner review before code changes.
+- Inspected current `app.js`, `index.html`, `sw.js` and `manifest.webmanifest`: the app is currently a single-user PWA with global localStorage state (`driving-log-pro-v1`), no sign-in/workspace identity/first-run business setup, EUR/`pt-PT` formatting and default rate 20 hard-coded in source, and customer-configured GitHub private-repository sync using a token stored in browser localStorage. Manual JSON backup exists; the Full-Time register is separate.
+- Added `COMMERCIAL_PRODUCT_ARCHITECTURE.md`: documents current gaps, workspace isolation principles, hosted SaaS vs separate customer installation models, recommended SaaS target if one shared hosted product is intended, first-run/business settings, secure sync/backups, owner-data migration safeguards and commercial release acceptance criteria.
+- Draft PR #148: https://github.com/hawnannahian/driving-log-pro/pull/148. Documentation only. No app code, authentication, data/storage shape, live student records, accounting, booking, backup, restore, cloud sync, licensing or deployment behavior changed.
+- Blocking owner decision before implementation: shared hosted SaaS with separate school workspaces, or separate standalone installation/deployment per customer? Also leave staff-login, currency-change and backend choices unimplemented until reviewed.
+- Current source main: `ced0b7e93c808bccd676ee69142911855e97ea58`, footer v1.70/cache v132; Pages deployment not verified. Open PRs #73 and #13 remain untouched.
 
 ### 2026-11-10 — ChatGPT: Log page polish, remove Log search field v1.66 — DRAFT PR #140
 - Owner asked to apply the Log page UI/UX polish but remove the Log page's “Search student, type or note” field.
@@ -90,8 +100,8 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 
 
 ## Latest verified project state
-- **main 915d06925ae9e4c3129fb8ba6ec35f9cca789d86**: Learning Plan specification PR #146 merged; footer **v1.70**, Service Worker cache **nahians-schedule-cache-v132**. This confirms repository source only; GitHub Pages deployment was not verified.
-- **Current proposal:** Individual Receivable Ledger architecture/design, documentation-only; no app implementation or data changes.
+- **main ced0b7e93c808bccd676ee69142911855e97ea58**: PR #147 (Individual Receivable Ledger design) merged; footer **v1.70**, Service Worker cache **nahians-schedule-cache-v132**. This confirms repository source only; GitHub Pages deployment was not verified.
+- **Current work:** Commercial Product Architecture documentation proposal in draft PR #148; no app implementation or data changes.
 - **Open PRs at the 2026-11-10 audit:** #73 and #13; neither was modified.
 - Push API URL / Cloudflare Worker configuration remains unverified; never expose secrets.
 - Prayer times use the Mawaqit snapshot (mawaqit-times.js); overlap warns and does not block booking.
@@ -467,3 +477,13 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 ### 2026-11-10 — Claude: realistic car header v1.70
 - Owner wanted a realistic car, not a cartoon. Generated a brand-neutral white sedan image, removed the background locally, `brand-car.png` replaces `brand-car.svg`. Files: `brand-car.png`, `index.html`, `styles.css`, `sw.js` (cache v132, FILES updated), footer v1.70. No logic/data change. ChatGPT: do not change the header logo again without the owner; the owner approved this look from the screenshot. Chromium 390/320 checked; iPhone not verified.
 
+
+
+### 2026-11-10 — ChatGPT: Commercial Product Architecture (docs-only, DRAFT PR #148)
+- Owner said Driving Log Pro is being built for sale and that new customers must start with their own fresh business data; the design must not focus only on the owner's current records.
+- Reviewed latest main `ced0b7e93c808bccd676ee69142911855e97ea58`, full `CLAUDE.md`, `PROJECT_STATE.md`, `AGENT_SYNC.md`, current app storage/sync/backup code and PWA manifest.
+- Added `COMMERCIAL_PRODUCT_ARCHITECTURE.md` on fresh branch `docs/commercial-product-architecture-2026-11-10`. It records the single-user/localStorage/GitHub-token baseline, workspace isolation requirements, SaaS vs separate-installation sales models, first-run business settings, owner-data migration safeguards and commercial release criteria.
+- PR #147 is merged at `ced0b7e`; no code or data implementation was part of that merge. PR #148 is documentation only.
+- No app code, localStorage, live student data, authentication, accounting, payment, booking, backup, restore, cloud sync, licensing or deployment behavior changed. No student data or credentials accessed.
+- Tests not run: no JS changes; no browser/iPhone/deployment checks. Main footer remains v1.70/cache v132.
+- Blocking owner decision before implementation: shared hosted SaaS with isolated school workspaces, or separate standalone installation/deployment for each customer?
