@@ -401,3 +401,9 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 - Owner screenshot showed that changing Start while editing a saved lesson left the old End value unchanged.
 - Start-time change now advances End by the retained lesson duration for both new and existing records (e.g. 22:00 → 23:00 for a one-hour lesson).
 - The v1.62 prerequisite fix is included with v1.63 Smart + Manual Override in PR #133.
+
+### 2026-11-10 — Claude: Smart Lesson Time regression tests (test-only)
+- Added `tests/smart-lesson-time.test.js` (14 tests, synthetic values): cuts `applyLessonDuration`/`syncDur`/`setLessonTimeError` out of `app.js` and runs them on a fake DOM. Covers default 60 min, edit keeps saved duration, the reported 22:00 bug, manual End override then Start change, duration chips, 23:59 boundary, midnight-crossing clear + recovery, End<=Start, >12 h, exactly 12 h, empty Start, invalid saved span fallback. Also asserts the Start-change handler still re-applies the duration.
+- Result: `node --test tests/*.test.js` 35/35 pass; `node --check` on all JS OK. No app asset changed (no cache/footer bump). CI already runs `tests/*.test.js`.
+- Not run: real browser at 390×844/320×568 and real iPhone for the Start/End fields (the fake DOM does not prove native time-input behaviour).
+
