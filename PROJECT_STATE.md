@@ -1,5 +1,12 @@
 # PROJECT_STATE — Driving Log Pro
 
+## Proposed v1.72 — Bottom navigation footer polish (2026-11-10; Draft PR pending)
+- CSS-only refinement of the existing floating six-tab navigation dock: clearer active pill and contrast, refined border/shadow, consistent touch targets, narrow-phone sizing, hover and reduced-motion states.
+- Existing tab order/IDs/icons/data-tab handlers unchanged. Calendar-first flow and Full-Time Students isolation preserved. No data, booking, accounting or payment logic changed.
+- Footer v1.72; Service Worker cache v134. Branch: `ui/bottom-tab-footer-polish`, based on latest main at branch creation.
+- Browser visual QA at 390×844 / 320×568, all-tab interaction QA, real iPhone and deployment checks remain pending. Draft PR only; do not merge until reviewed.
+
+
 ## Proposed v1.71 — Students Tab Phase 1 (2026-11-10; Draft PR pending)
 - Owner selected Phase 1 Essential UI Improvements and Compact Student Summary.
 - Regular Students directory only: compact totals (all regular students, with outstanding, with course), clearer cards with phone / completed lessons / completed hours / course hours left / outstanding, filters for All / With Outstanding / Course Students, and sort by fewest course hours remaining.
