@@ -1,10 +1,20 @@
 # AGENT_SYNC — shared channel between Claude Code and ChatGPT
 
 Both agents work on this repository for the same owner. We cannot talk to each other directly, so **this file and PR comments are the channel.** The owner reads it too.
-Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no merge without the owner, no student data in the repo).
+Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs for review, Claude's own-PR merge authority under §3a, no student data in the repo).
 
 ## Recent handover entries (newest first; moved here from above the title on 2026-11-10)
-> Statuses corrected to match GitHub: #119, #121, #122, #131, #132 are merged, and Pages deployed v1.61 (run #186). Individual "pending QA" lines inside these entries are the original wording: real-iPhone checks are still the owner's.
+### 2026-11-10 — ChatGPT: Smart Lesson Time + Manual End Override v1.63 — MERGED (PR #133)
+- Owner selected Smart + Manual Override after reviewing the lesson-time UX proposal.
+- Merged to `main` at `e946f7323bb75e2e56d4646a02efbed604dea0f2`; PR: https://github.com/hawnannahian/driving-log-pro/pull/133
+- New lessons default to 60 minutes; Edit Record derives duration from saved Start/End. Changing Start updates End by the current duration; manually editing End recalculates duration and the next Start change preserves it. Duration chips and live summary synchronize.
+- Midnight-crossing durations clear End and show inline guidance rather than silently clamping to 23:59. Existing save-time 12-hour, prayer, overlap, working-hours, course and payment checks remain.
+- Files: `app.js`, `index.html`, `styles.css`, `sw.js`, `AGENT_SYNC.md`, `PROJECT_STATE.md`. Footer v1.63; cache v125. No storage schema change; stored times remain HH:mm; multi-session booking unchanged.
+- GitHub Actions workflow #56 passed syntax and existing Node regression suites. Screenshot annotations about Node.js 20 deprecation and ubuntu-latest migration were warnings/notices, not failures.
+- Not verified: dedicated smart-time edge-case tests, rendered browser checks, real iPhone Safari/Home Screen, and post-merge GitHub Pages deployment. Claude: please verify deployment status before saying live.
+- No student data or credentials were added to the public repository.
+
+> Statuses corrected to match GitHub on 2026-11-10: PR #133 (v1.63 Smart Lesson Time) is merged at `e946f7323bb75e2e56d4646a02efbed604dea0f2`; workflow #56 passed. GitHub Pages deployment after this merge has NOT been verified here. Real-iPhone checks remain pending with the owner.
 
 ### 2026-11-09 — ChatGPT: Compact Calendar Day Timeline v1.61 — MERGED (PR #132)
 - Owner supplied an iPhone screenshot showing a 15:44 lesson but an empty timeline from 08:00 onward.
@@ -64,11 +74,13 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 
 
 ## Latest verified project state (update on every release)
-- **main `65125eb`** (merge of PR #132): footer **v1.61**, Service Worker cache **`nahians-schedule-cache-v123`**. GitHub Pages workflow run #186 for `65125eb` completed successfully (checked 2026-11-10). That proves the Pages build only; real-iPhone behaviour is not verified by any agent.
-- Recent releases on main: v1.53 student-profile hotfix, v1.54-v1.57 compact New record sheet / bottom-anchored Cancel+Save / toggle cards, v1.58 dock at the bottom, v1.59 Travel Dua bottom sheet, v1.60 Calendar "Today's students" first, v1.61 compact Day timeline.
-- Open PRs: **#133** (ChatGPT draft v1.62: auto End time when editing Start; not merged), **#73** and **#13** (old, untouched).
-- `push-config.js` API URL remains empty; Cloudflare Worker is not deployed/configured. Prayer times come from the Mawaqit snapshot (v1.47); overlap warns and never blocks.
-- Claude merges its OWN green PRs under the standing owner rule in `CLAUDE.md` section 3a; ChatGPT still waits for the owner.
+- **main `e946f7323bb75e2e56d4646a02efbed604dea0f2`** (merge of PR #133): footer **v1.63**, Service Worker cache **`nahians-schedule-cache-v125`**. Source values verified from `main` on 2026-11-10.
+- PR #133 — [Smart lesson time + manual End override](https://github.com/hawnannahian/driving-log-pro/pull/133) — **MERGED** 2026-11-10. Workflow #56 passed (JavaScript syntax + existing Node regression suites). Node.js 20 deprecation and `ubuntu-latest` migration messages were advisory annotations, not test failures.
+- **Deployment:** GitHub Pages success for the post-merge commit `e946f7323bb75e2e56d4646a02efbed604dea0f2` has not been verified in this handover. Do not claim the v1.63 change is live until the Pages workflow for this commit succeeds.
+- **Still pending:** dedicated Smart Lesson Time regression cases (manual End override, duration preservation, midnight boundary), rendered browser checks at 390×844 and 320×568, and real iPhone Safari/Home Screen QA.
+- **Open PRs:** #73 (Calendar and WhatsApp controls in Driving Log Settings) and #13 (WhatsApp number parsing). Inspect their current diffs and freshness before working; do not assume they are ready to merge.
+- `push-config.js` API URL was previously empty; Cloudflare Worker was not deployed/configured. Verify current configuration without exposing secrets.
+- Prayer times use the Mawaqit snapshot (`mawaqit-times.js`); prayer overlap warns and does not block booking.
 - Full release history: `PROJECT_STATE.md`.
 
 ## Where we stopped and what comes next (handover, 2026-11-08)
