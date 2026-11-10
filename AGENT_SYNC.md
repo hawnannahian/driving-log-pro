@@ -73,15 +73,15 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 - Static checks only; browser/iPhone/deployment checks pending. Draft PR #117; no merge/deploy without owner approval.
 
 
-## Latest verified project state (update on every release)
-- **main `e946f7323bb75e2e56d4646a02efbed604dea0f2`** (merge of PR #133): footer **v1.63**, Service Worker cache **`nahians-schedule-cache-v125`**. Source values verified from `main` on 2026-11-10.
-- PR #133 — [Smart lesson time + manual End override](https://github.com/hawnannahian/driving-log-pro/pull/133) — **MERGED** 2026-11-10. Workflow #56 passed (JavaScript syntax + existing Node regression suites). Node.js 20 deprecation and `ubuntu-latest` migration messages were advisory annotations, not test failures.
-- **Deployment:** GitHub Pages success for the post-merge commit `e946f7323bb75e2e56d4646a02efbed604dea0f2` has not been verified in this handover. Do not claim the v1.63 change is live until the Pages workflow for this commit succeeds.
-- **Still pending:** dedicated Smart Lesson Time regression cases (manual End override, duration preservation, midnight boundary), rendered browser checks at 390×844 and 320×568, and real iPhone Safari/Home Screen QA.
-- **Open PRs:** #73 (Calendar and WhatsApp controls in Driving Log Settings) and #13 (WhatsApp number parsing). Inspect their current diffs and freshness before working; do not assume they are ready to merge.
-- `push-config.js` API URL was previously empty; Cloudflare Worker was not deployed/configured. Verify current configuration without exposing secrets.
-- Prayer times use the Mawaqit snapshot (`mawaqit-times.js`); prayer overlap warns and does not block booking.
-- Full release history: `PROJECT_STATE.md`.
+## Latest verified project state
+- **main `5ee15693cea51b40f4d8b676ac1598eeb83e94dc`**: footer **v1.63**, Service Worker cache **`nahians-schedule-cache-v125`**. This is the latest main source verified before the v1.64 proposal.
+- Smart Lesson Time regression coverage was added on main: `node --test tests/*.test.js` passed **35/35**, and `node --check` passed for all JavaScript files (reported in the 2026-11-10 handover).
+- **Open PRs:** #73 (Calendar and WhatsApp controls in Driving Log Settings) and #13 (WhatsApp number parsing); inspect current diffs/freshness before working.
+- **Current proposal:** ChatGPT PR #138 — [Student Course tab polish v1.64](https://github.com/hawnannahian/driving-log-pro/pull/138) — draft, not merged or deployed. Footer v1.64/cache v126 are on its branch only.
+- **Deployment:** the v1.63 Pages deployment was not verified in the previous handover. Do not claim v1.64 is live unless the Pages workflow for its merge commit succeeds.
+- **Still pending for PR #138:** automated CI after the final PR update, browser rendering at 390×844 and 320×568, real iPhone Safari/Home Screen QA, and Pages deployment.
+- Push API URL was previously empty; Cloudflare Worker deployment/configuration remains unverified. Never expose secrets.
+- Prayer times use the Mawaqit snapshot (`mawaqit-times.js`); overlap warns and does not block booking.
 
 ## Where we stopped and what comes next (handover, 2026-11-08)
 **Done and merged:** #82–#87 course work; #90–#92 Log Settings; #94 Overview redesign; #95 prayer-time guard; #96 handover rules; #97 New Record smart booking; #98 Legacy Archive deletion payment-status fix; #99 weekly Repeat visibility + push-config precache. Latest main: `0cd6ad1`, footer v1.37, cache v99; Pages workflow #42530331667 succeeded.
@@ -407,3 +407,13 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 - Result: `node --test tests/*.test.js` 35/35 pass; `node --check` on all JS OK. No app asset changed (no cache/footer bump). CI already runs `tests/*.test.js`.
 - Not run: real browser at 390×844/320×568 and real iPhone for the Start/End fields (the fake DOM does not prove native time-input behaviour).
 
+
+### 2026-11-10 — ChatGPT: Student Course tab polish v1.64 — DRAFT PR #138
+- Owner said “Do it” after reviewing the student profile Course tab UX recommendations.
+- Removed the duplicate Add payment action from course cards; payment entry remains in the Payments tab. Renamed the profile tab label to “Courses”.
+- Grouped course metrics into Financial overview and Lesson progress. Renamed “Remaining” to “Not yet completed” and clarified that available hours exclude already-booked lessons; calculations are unchanged.
+- Branch: `ui/student-course-tab-polish-v1-64`; PR: https://github.com/hawnannahian/driving-log-pro/pull/138
+- App files: `app.js`, `index.html`, `styles.css`, `sw.js`; footer v1.64/cache v126 on the PR branch.
+- No storage schema, student records, course/payment calculations, accounting, booking, backup, restore or sync behavior changed.
+- Source-level checks confirmed the duplicate payment action is absent from course cards, the Courses label and metric groups exist, and footer/cache versions match.
+- Not run: JS syntax checks, automated tests after this UI change, rendered browser checks at 390×844/320×568, real iPhone Safari/Home Screen QA, or Pages deployment. Keep PR draft pending CI and owner visual review.
