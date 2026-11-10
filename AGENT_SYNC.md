@@ -375,3 +375,17 @@ Rules from `CLAUDE.md` still apply (branches from latest `main`, draft PRs, no m
 - Owner asked "Check md file". Found: ChatGPT entries sat above the title in AGENT_SYNC.md / PROJECT_STATE.md, v1.51/v1.52/v1.60/v1.61 were still labelled DRAFT although merged, and "Latest verified project state" still said v1.48/cache v110.
 - Fixed: title first, entries moved under "Recent handover entries", statuses corrected, "Latest verified project state" rewritten (main `65125eb`, v1.61, cache v123, Pages run #186 success), PROJECT_STATE got a "Current state" note and the old 2026-11-08 block is marked superseded.
 - No app asset changed, so no cache/footer bump. Not touched: CLAUDE.md (already current), README.md (still ~empty; owner decision for selling prep). Open PR #133 (ChatGPT v1.62 draft) untouched.
+
+### 2026-11-10 — ChatGPT: Smart Lesson Time + Manual Override v1.63 — DRAFT PR #133
+- Owner selected Smart + Manual Override after reviewing the lesson-time UX proposal.
+- New/edit single-lesson forms initialise duration from saved Start/End; new lessons default to 60 minutes.
+- Changing Start updates End by the current duration. Manually changing End recalculates duration; a later Start change preserves it.
+- Duration chips and live duration summary remain synchronized. Midnight-crossing duration is explicitly rejected with inline guidance rather than silently clamping to 23:59.
+- Existing save-time 12-hour, overlap, prayer-time, working-hours, course and payment checks remain. Stored time format stays HH:mm; multi-session booking and storage schema are unchanged.
+- Footer v1.63; Service Worker cache v125. GitHub Actions workflow #55 passed JavaScript syntax and existing Node regression suites (Multiple Booking, Mawaqit, profile render).
+- Dedicated smart-time edge-case tests and real iPhone Safari QA remain pending. Draft PR is not merged or deployed.
+
+### 2026-11-09 — ChatGPT: Auto End Time on Edit v1.62 — included in PR #133
+- Owner screenshot showed that changing Start while editing a saved lesson left the old End value unchanged.
+- Start-time change now advances End by the retained lesson duration for both new and existing records (e.g. 22:00 → 23:00 for a one-hour lesson).
+- The v1.62 prerequisite fix is included with v1.63 Smart + Manual Override in PR #133.

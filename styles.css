@@ -2884,3 +2884,11 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 #calendar .cal-student-list>.record:active{border-color:#b9c9ef;background:#f8faff}
 #calendar .cal-students-empty{margin:0;padding:13px;border:1px dashed #d9e2ef;border-radius:11px;background:#fbfcfe;color:#8290a4;text-align:center;font-size:12px}
 @media(max-width:420px){#calendar .cal-students-panel{padding:11px;border-radius:14px}#calendar .cal-students-heading .caltitle{font-size:15px}#calendar .cal-student-list{gap:6px}}
+
+
+/* v1.63 — Smart lesson time with manual End-time override. */
+#recordDialog .lesson-time-help{margin:7px 0 0;color:#77859a;font-size:11px;line-height:1.4}
+#recordDialog .lesson-time-error{margin:7px 0 0;padding:8px 10px;border:1px solid #f2caca;border-radius:10px;background:#fff3f3;color:#b83d3d;font-size:12px;font-weight:650;line-height:1.4}
+#recordDialog .lesson-time-error.hidden{display:none}
+#recordDialog .durchips button.active{border-color:#315de8;background:#315de8;color:#fff;box-shadow:0 2px 8px #315de82b}
+@media(max-width:420px){#recordDialog .lesson-time-help{font-size:10px}#recordDialog .lesson-time-error{font-size:11px;padding:7px 9px}}
