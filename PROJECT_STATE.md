@@ -1,17 +1,17 @@
 # PROJECT_STATE — Driving Log Pro
 
-> **Current state (2026-11-10):** main `65125eb`, footer v1.61, cache `nahians-schedule-cache-v123`, Pages run #186 success. Open PRs: #133 (ChatGPT draft v1.62), #73, #13. Entries below the release list are history; newest releases are listed first.
+> **Current source state (2026-11-10):** main `e946f7323bb75e2e56d4646a02efbed604dea0f2` (PR #133 merged), footer v1.63, cache `nahians-schedule-cache-v125`. Workflow #56 passed. Post-merge GitHub Pages deployment and real iPhone QA are not verified. Open PRs: #73 and #13. Entries below are release history; newest releases are listed first.
 
-## Draft v1.63 — Smart Lesson Time + Manual Override (2026-11-10; PR #133)
-- New/edit single-lesson forms initialise duration from the existing Start/End; new lessons default to 60 minutes.
-- Changing Start moves End by the current duration. Manually changing End recalculates duration; subsequent Start changes preserve that latest duration.
+## Completed v1.63 — Smart Lesson Time + Manual End Override (2026-11-10; PR #133 merged)
+- Merged to `main` at `e946f7323bb75e2e56d4646a02efbed604dea0f2`; [PR #133](https://github.com/hawnannahian/driving-log-pro/pull/133).
+- New lessons default to 60 minutes; Edit Record derives duration from saved Start/End. Changing Start updates End by the current duration; manual End edits recalculate duration, and subsequent Start changes preserve it.
 - Duration chips, active state and live duration summary stay synchronized.
 - Midnight-crossing duration is not silently clamped to 23:59; End is cleared and inline guidance asks for an earlier Start or shorter duration.
-- Existing save-time 12-hour, overlap, prayer-time, working-hours, payment and course checks remain. Canonical stored time remains HH:mm; no schema changes; multi-session booking is unchanged.
-- Footer v1.63; Service Worker cache v125.
-- GitHub Actions workflow #55 passed JavaScript syntax and existing Node regression suites (Multiple Booking, Mawaqit, profile render). Dedicated smart-time edge-case tests and real iPhone Safari QA remain pending.
-- Draft PR #133 is not merged or deployed. Main remains v1.61/cache v123 until review and merge.
-
+- Existing save-time 12-hour, overlap, prayer-time, working-hours, payment and course checks remain. Canonical stored time remains HH:mm; no schema change; multi-session booking unchanged.
+- Files: `app.js`, `index.html`, `styles.css`, `sw.js`, `AGENT_SYNC.md`, `PROJECT_STATE.md`. Footer v1.63; Service Worker cache v125.
+- GitHub Actions workflow #56 passed JavaScript syntax checks and existing Node regression suites. Node.js 20 deprecation and ubuntu-latest migration annotations were warnings/notices, not failures.
+- Still pending: dedicated Smart Lesson Time edge-case regression tests, rendered browser checks at 390×844 / 320×568, real iPhone Safari/Home Screen QA, and post-merge GitHub Pages deployment verification. Do not claim deployed until the Pages workflow for the merge commit succeeds.
+- No storage schema or live student data changed.
 
 ## Completed v1.61 — Compact Day Timeline (2026-11-09)
 - Fresh branch from latest main: fix/calendar-dayview-compact-time-range-v1-61.
