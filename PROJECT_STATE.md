@@ -1,23 +1,19 @@
-## v1.63 — Smart Lesson Time + Manual Override (2026-11-09)
-- Implemented on the existing PR #133 branch to keep the prerequisite Start-time edit fix and the complete UX in one reviewable change set.
-- New and edit single-lesson forms initialise duration from the existing record; new lessons default to 60 minutes.
-- Changing Start moves End by the current duration. Manually changing End updates the duration; subsequent Start changes preserve that latest duration.
-- Duration chips set the duration relative to Start. Active chip and live duration summary stay in sync.
-- Added inline time validation. Durations crossing midnight are not silently truncated to 23:59; End is cleared and the user is asked to choose a shorter duration or earlier Start.
-- Existing save-time 12-hour, overlap, prayer-time, working-hours, payment and course checks remain in place.
-- Canonical stored time remains HH:mm; no storage schema changes.
+# PROJECT_STATE — Driving Log Pro
+
+> **Current state (2026-11-10):** main `65125eb`, footer v1.61, cache `nahians-schedule-cache-v123`, Pages run #186 success. Open PRs: #133 (ChatGPT draft v1.62), #73, #13. Entries below the release list are history; newest releases are listed first.
+
+## Draft v1.63 — Smart Lesson Time + Manual Override (2026-11-10; PR #133)
+- New/edit single-lesson forms initialise duration from the existing Start/End; new lessons default to 60 minutes.
+- Changing Start moves End by the current duration. Manually changing End recalculates duration; subsequent Start changes preserve that latest duration.
+- Duration chips, active state and live duration summary stay synchronized.
+- Midnight-crossing duration is not silently clamped to 23:59; End is cleared and inline guidance asks for an earlier Start or shorter duration.
+- Existing save-time 12-hour, overlap, prayer-time, working-hours, payment and course checks remain. Canonical stored time remains HH:mm; no schema changes; multi-session booking is unchanged.
 - Footer v1.63; Service Worker cache v125.
-- CI and real iPhone Safari QA pending; PR remains draft and is not deployed.
+- GitHub Actions workflow #55 passed JavaScript syntax and existing Node regression suites (Multiple Booking, Mawaqit, profile render). Dedicated smart-time edge-case tests and real iPhone Safari QA remain pending.
+- Draft PR #133 is not merged or deployed. Main remains v1.61/cache v123 until review and merge.
 
-## Draft v1.62 — Auto-update End Time While Editing (2026-11-09)
-- Fresh branch from latest main: fix/edit-record-auto-end-time-v1-62.
-- Changing Start time now updates End time for both new lessons and existing records being edited; it preserves the current selected lesson duration (e.g. 10:00 PM → 11:00 PM for a one-hour lesson).
-- Existing 12-hour maximum validation and end-of-day cap remain unchanged.
-- Footer v1.62; Service Worker cache v124.
-- No booking, payment, accounting, student, sync or storage schema logic intentionally changed.
-- CI and real iPhone Safari QA pending; not merged or deployed.
 
-## Draft v1.61 — Compact Day Timeline (2026-11-09)
+## Completed v1.61 — Compact Day Timeline (2026-11-09)
 - Fresh branch from latest main: fix/calendar-dayview-compact-time-range-v1-61.
 - Day view now sizes the timeline to the earliest and latest lesson on the selected date instead of always including the full configured working day.
 - Time labels remain rounded to whole hours; a 15:44 first lesson starts the visible timeline at 15:00, not 08:00.
@@ -25,18 +21,18 @@
 - Week view retains its existing working-hours range.
 - Footer v1.61; Service Worker cache v123.
 - No booking, payment, accounting, student, sync or storage schema logic intentionally changed.
-- Pending CI and real iPhone visual QA; not merged or deployed.
+- Merged as PR #132; Pages run #186 succeeded. Real iPhone visual QA pending.
 
-## Draft v1.60 — Calendar Today's Students First (2026-11-09)
+## Completed v1.60 — Calendar Today's Students First (2026-11-09)
 - Fresh branch from latest main: ui/calendar-todays-students-first-v1-60.
 - Moves the selected date's lesson list directly under the Calendar date heading, before metrics, reminders, availability and timeline.
 - Dynamically labels the list “Today's students” for today and “Students on selected day” for other dates; displays lesson count, chronological order and a clear empty state.
 - Removes the duplicate lesson list from below the timeline. Existing booking cards, click handlers and lesson data remain unchanged.
 - Footer v1.60; Service Worker cache v122.
 - No booking, payment, accounting, student, sync or storage schema logic intentionally changed.
-- Pending CI, responsive screenshot and real iPhone QA. Not merged or deployed.
+- Merged as PR #131; Pages run #185 succeeded. Real iPhone QA pending.
 
-## Draft v1.52 — Premium Calendar & Timeline (2026-11-09)
+## Completed v1.52 — Premium Calendar & Timeline (2026-11-09)
 - Fresh branch from latest main: `ui/premium-calendar-timeline-v1-52`.
 - Day view replaces tall Free Time timeline blocks with compact, tappable availability slots. Existing New Lesson form is still used and prefilled with the selected date/time.
 - Adds selected-day summary metrics: lessons, hours, revenue, available time.
@@ -44,7 +40,7 @@
 - Files: `app.js`, `index.html`, `styles.css`, `sw.js`; footer v1.52/cache v114.
 - No intended changes to booking/payment/accounting/course/student data logic or storage schema.
 - CI run #41 (`42555308428`) passed JavaScript syntax checks and Multiple Booking atomic-save regression tests. Static checks: 314 HTML IDs / 0 duplicates; CSS braces balanced; footer v1.52/cache v114 verified.
-- Rendered 390×844 / 320×568, real iPhone Safari/Home Screen and live Pages deployment remain pending. PR #122 is open and ready for review; not merged/deployed.
+- Rendered 390×844 / 320×568, real iPhone Safari/Home Screen and live Pages deployment remain pending. PR #122 merged; Pages deployed.
 
 ## Completed v1.51 — iPhone Calendar/navigation polish (2026-11-09; PR #121 merged)
 - Owner supplied iPhone screenshots; focused CSS polish to compact the fixed bottom navigation and increase scroll clearance.
@@ -53,7 +49,6 @@
 - No app logic, data, booking, payment, accounting or sync changes.
 - Source merged to main at `74e79a4`; rendered viewport, real-device and Pages deployment checks remain pending.
 
-# PROJECT_STATE — Driving Log Pro
 
 ## Completed v1.50 — Unified New Record form (2026-11-09)
 - PR #120 merged by owner; merge commit: `40fea4b2193ded124e994ebe8f027999676b9ea3`.
@@ -74,7 +69,7 @@
 - Public repository-তে কখনো student data, CSV/JSON backup, token বা private data commit করবেন না।
 - Source update, Pages deployment success এবং real iPhone runtime test—তিনটি আলাদা verification status হিসেবে রিপোর্ট করুন।
 
-## Historical verified state (main 7108022, checked 2026-11-08)
+## Historical verified state (main 7108022, checked 2026-11-08 — OLD, superseded by the Current state note at the top)
 
 **Release:** footer `v1.37` (`index.html`), Service Worker cache `nahians-schedule-cache-v99` (`sw.js`). The v1.37/cache v99 assets were last changed at `0cd6ad143590a0450d61244facbadb8ed51a71a1`; current `main` `7108022` carries the same app assets forward in a docs-only commit.
 **Latest change:** PR #99 merged at `0cd6ad1`. The existing weekly Repeat selector is visible for new Lesson records only (hidden for edits and non-lessons); `push-config.js` is included in the Service Worker precache. No storage schema, accounting, course allocation, backup/restore or sync merge logic changed.
