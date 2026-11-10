@@ -19,6 +19,11 @@
 
 
 
+
+## v1.82 — Students tab: "Recently joined" is simply newest first (2026-11-10; owner request)
+- Removed the split of the Students list into "Recently joined · 3 or more lessons" and "All other students". With the default sort ("Recently joined", no search, filter "All students") the list is now one list under a "Recently joined" heading, newest join date first (`createdAt`, else first lesson date), whatever the number of lessons. Other sorts, search and filters are unchanged.
+- Files: `app.js` (one render line), `index.html` (footer v1.82), `sw.js` (cache v145), `tests/profile-render.test.js`. No data change. Checked in Chromium at 390×844 and 320×568; real iPhone not verified.
+
 ## v1.81 — Long student names stay on one line in the profile header (2026-11-10)
 - A very long student name (an address had been typed into the name field) wrapped to two lines and made the sticky profile header tall. The name is now one line with an ellipsis; the full name stays in the page (title and text), in Edit student and in lists. Header height 74 px at 390 and 320 wide. Files: `styles.css`, `app.js` (one line), `index.html` (footer v1.81), `sw.js` (cache v144), `tests/profile-render.test.js`. No data change. Checked in Chromium at 390×844 and 320×568; real iPhone not verified.
 

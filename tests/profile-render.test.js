@@ -40,3 +40,8 @@ test("a long student name stays on one line in the profile header (v1.81)",()=>{
  const css=fs.readFileSync(path.join(__dirname,"..","styles.css"),"utf8"),app=fs.readFileSync(path.join(__dirname,"..","app.js"),"utf8");
  assert.ok(css.includes("#profileDialog #profileName{white-space:nowrap;overflow:hidden;text-overflow:ellipsis"));assert.ok(app.includes('$("profileName").title=s.name;'));
 });
+test("Students tab 'Recently joined' lists newest students first without a 3-lessons condition (v1.82)",()=>{
+ const app=fs.readFileSync(path.join(__dirname,"..","app.js"),"utf8");
+ assert.ok(!/3 or more lessons/i.test(app),"the 3-or-more-lessons grouping must be gone");
+ assert.ok(app.includes('<p class="listhead">Recently joined</p>'));assert.ok(!app.includes('"All other students"')&&!app.includes("All other students"));
+});
