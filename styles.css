@@ -3360,3 +3360,14 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 /* v1.78 — remove a retained individual-lesson receipt (profile payment history). */
 #profileDialog .payment-meta:has(.payment-remove){display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 #profileDialog .payment-remove{min-height:44px;padding:6px 14px;font-size:12.5px;font-weight:800;color:#b93838;border-color:#f1d0d0}
+
+/* v1.79 — "already in your list" suggestions while adding a student. */
+#studentDialog .student-dups{grid-column:1/-1;display:grid;gap:6px;max-height:210px;overflow:auto;padding:9px;background:#fff8e8;border:1px solid #f0dcae;border-radius:12px}
+#studentDialog .student-dups.hidden{display:none!important}
+#studentDialog .student-dups-head{margin:0 0 2px;font-size:12px;font-weight:800;color:#8a5a00}
+#studentDialog .student-dup{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:46px;padding:8px 12px;border:1px solid #ecd9ad;border-radius:10px;background:#fff;color:var(--ink);text-align:left;font:inherit;cursor:pointer}
+#studentDialog .student-dup b,#studentDialog .student-dup small{display:block}
+#studentDialog .student-dup b{font-size:14px}
+#studentDialog .student-dup small{margin-top:2px;font-size:12px;color:var(--muted)}
+#studentDialog .student-dup-open{flex:none;font-size:12px;font-weight:800;color:#315ee8}
+
