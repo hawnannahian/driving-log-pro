@@ -845,7 +845,7 @@ document.addEventListener("visibilitychange",()=>{if(document.visibilityState===
 $("calToday").onclick=()=>{const n=new Date();cal.y=n.getFullYear();cal.m=n.getMonth();cal.day=dateISO(n);renderCalendar();bindRecords();};
 {let sx=null;const box=$("calBoard");box.addEventListener("touchstart",e=>{sx=e.touches[0].clientX;},{passive:true});box.addEventListener("touchend",e=>{if(sx==null)return;const dx=e.changedTouches[0].clientX-sx;sx=null;if(Math.abs(dx)>60)calMove(dx<0?1:-1);});}
 $("profileCourse").onclick=startCourse;$("fPaid").addEventListener("change",updateCourseField);$("deleteLegacy").onclick=deleteLegacyArchive;
-document.querySelectorAll("[data-ptab]").forEach(b=>b.onclick=()=>{profileTab=b.dataset.ptab;renderProfile();bindRecords();});
+document.querySelectorAll("[data-ptab]").forEach(b=>b.onclick=()=>{profileTab=b.dataset.ptab;renderProfile();bindRecords();b.scrollIntoView({block:"nearest",inline:"nearest"});});
 $("cloudConnect").onclick=cloudConnect;$("snapShow").onclick=showSnapshots;$("cloudNow").onclick=()=>cloudSync();$("cloudDisconnect").onclick=()=>{if(confirm("Stop syncing on this device? Your records stay here and in the cloud."))cloudOff();};
 window.addEventListener("online",()=>scheduleSync());document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")cloudSync();});
 $("profileEdit").onclick=()=>{const id=profileId;$("profileDialog").close();openStudent(id);};

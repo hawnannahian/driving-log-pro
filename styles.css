@@ -3343,3 +3343,16 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 
 /* v1.75: recoverable lesson deletion and retained activity history */
 #lessonAuditList{max-height:420px;overflow:auto;overscroll-behavior:contain}#lessonAuditList .recoveryrow{background:#fff}#deletedLessonsList .recoveryrow{background:#fff}#lessonAuditSummary{margin:0 0 8px}.data-card#lessonRecoveryCard,.data-card#lessonAuditCard{margin-top:12px}
+
+/* v1.77 — Student profile tabs: five tabs fit one row (Attendance no longer wraps alone) and the tab strip no longer sticks underneath the sticky name header. */
+#profileDialog .ptabs{position:static;z-index:auto;backdrop-filter:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;padding:5px;overflow:visible;border:1px solid #e7ecf4;border-radius:14px;background:#f5f7fb}
+#profileDialog .ptabs button{min-height:44px;padding:5px 2px;font-size:11px;letter-spacing:-.1px;white-space:nowrap;overflow-wrap:normal}
+@media(max-width:360px){
+ #profileDialog .ptabs{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:max-content;overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+ #profileDialog .ptabs::-webkit-scrollbar{display:none}
+ #profileDialog .ptabs button{padding:5px 12px;font-size:12px}
+}
+/* v1.77 — no content peeking above the sticky name header while scrolling a student profile. */
+#profileDialog .dialogbody{padding-top:0}
+#profileDialog .dialoghead{top:0;z-index:12;padding-top:clamp(16px,3vw,25px);background:#fff}
+

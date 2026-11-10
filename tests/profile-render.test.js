@@ -12,3 +12,8 @@ test("renderProfile defines every local helper it calls (row)",()=>{
 test("renderProfile builds the Lessons, Course, Payments and Attendance tabs",()=>{
  for(const id of ["ptab-lessons","ptab-course","ptab-payments","ptab-attendance"])assert.ok(body.includes(`$("${id}")`),`${id} must be rendered`);
 });
+test("student profile tab strip has one grid column per tab (v1.77: Attendance wrapped alone when 4 columns served 5 tabs)",()=>{
+ const html=fs.readFileSync(path.join(__dirname,"..","index.html"),"utf8"),css=fs.readFileSync(path.join(__dirname,"..","styles.css"),"utf8");
+ const tabs=(html.match(/data-ptab="/g)||[]).length,last=[...css.matchAll(/#profileDialog \.ptabs\{[^}]*grid-template-columns:repeat\((\d+),/g)].pop();
+ assert.ok(last,"a final repeat(N) rule for #profileDialog .ptabs must exist");assert.equal(Number(last[1]),tabs);
+});

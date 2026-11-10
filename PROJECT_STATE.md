@@ -14,6 +14,12 @@
 - Risk: audit history is intentionally unbounded and shares browser storage capacity with app data. If local storage is cleared or exhausted, the private cloud sync and user-exported backups are the additional copies; this is not a separately administered immutable server archive.
 
 
+
+## v1.77 — Student profile tab strip and sticky header fixed (2026-11-10)
+- From the owner's iPhone screenshots: (1) v1.74 added the Overview tab, but the tab strip was still a 4-column grid, so "Attendance" wrapped alone onto a second row; (2) the tab strip was sticky at the same position as the sticky name header, so while scrolling the strip hid behind the header with a clipped "Attendance" label peeking, and page content showed in the gap above the header.
+- Fix (CSS + one line of JS): five equal columns at >=361 px; at <=360 px the tabs scroll horizontally and the selected tab is scrolled into view; the tab strip is no longer sticky (the name header with the close button stays sticky and now starts at the dialog top, no gap). Files: `styles.css`, `app.js`, `index.html` (footer v1.77), `sw.js` (cache v140), `tests/profile-render.test.js` (tab count must match grid columns). No data, accounting or sync change.
+- Checked in Chromium 390×844 and 320×568 with synthetic data; real iPhone not verified.
+
 ## v1.76 — Student profile progress bars fixed (2026-11-10)
 - Bug from v1.74 (Student Profile Overview): the course progress bar used `<i style="width:..%">`; the Content Security Policy blocks inline styles, so the browser rejected it and every course bar showed full width (also 2 CSP console errors each time a profile opened). The width is now carried in `data-pct` and applied by script (`el.style.width`, which the CSP allows).
 - Found by tracing the CSP violation to `app.js` line 132 (student profile). New `tests/no-inline-style.test.js` fails if any `style="..."` appears in app scripts or `index.html`.
