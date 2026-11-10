@@ -169,7 +169,16 @@
 
     <section class="panel tabpanel hidden" id="students">
       <div class="sectionhead"><div><h2>Students</h2><p class="muted">Your student directory</p></div><button class="btn primary" id="addStudentBtn">＋ Add student</button></div>
-      <div class="toolbar"><input id="studentSearch" type="search" placeholder="Search students"><select id="studentSort" aria-label="Sort students"><option value="joined">Recently joined</option><option value="name">Name A–Z</option><option value="lessons">Most lessons</option><option value="hours">Most completed hours</option><option value="unpaid">Outstanding balance</option></select></div>
+      <div class="student-summary" id="studentSummary" aria-label="Student summary">
+        <div class="student-summary-item"><strong id="studentTotal">0</strong><span>Total students</span></div>
+        <div class="student-summary-item"><strong id="studentDueCount">0</strong><span>With outstanding</span></div>
+        <div class="student-summary-item"><strong id="studentCourseCount">0</strong><span>Course students</span></div>
+      </div>
+      <div class="toolbar student-toolbar">
+        <input id="studentSearch" type="search" placeholder="Search name, phone or email" aria-label="Search students">
+        <select id="studentFilter" aria-label="Filter students"><option value="all">All students</option><option value="due">With outstanding</option><option value="course">Course students</option></select>
+        <select id="studentSort" aria-label="Sort students"><option value="joined">Recently joined</option><option value="name">Name A–Z</option><option value="lessons">Most lessons</option><option value="hours">Most completed hours</option><option value="unpaid">Highest outstanding</option><option value="courseLeft">Fewest course hours left</option></select>
+      </div>
       <div id="studentList" class="studentgrid empty">No students yet.</div>
     </section>
 
@@ -427,7 +436,7 @@
     <button class="tab" data-tab="islamic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M6.5 20v-6.5c0-3 2.5-5 5.5-6.5 3 1.5 5.5 3.5 5.5 6.5V20"/><path d="M12 4.5v2.5"/><path d="M10 20v-3a2 2 0 0 1 4 0v3"/><path d="M3.5 20v-8M20.5 20v-8"/></svg><span>Islamic</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.70</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.71</span></footer>
   <script src="push-config.js"></script>
   <script src="prayer-times.js"></script>
   <script src="mawaqit-times.js"></script>
