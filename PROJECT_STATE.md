@@ -1,14 +1,23 @@
 # PROJECT_STATE — Driving Log Pro
 
-> **Current source state (2026-11-10):** main `5ee15693cea51b40f4d8b676ac1598eeb83e94dc`, footer v1.63, cache `nahians-schedule-cache-v125`. Smart Lesson Time regression suite: 35/35 passed; all JS syntax checks passed. Draft PR #138 proposes v1.64 student Course tab polish; not merged or deployed. Browser/iPhone QA remains pending.
+> **Current source state (2026-11-10):** main `b50f8a594077b25e525910d7d7208bcc15266279` (PR #138 merged), footer v1.64, cache `nahians-schedule-cache-v126`. v1.65 Golden Yellow + Navy header is proposed on PR #139; not merged or deployed.
 
-## Proposed v1.64 — Student Course tab polish (2026-11-10; draft PR #138)
-- PR: https://github.com/hawnannahian/driving-log-pro/pull/138 (branch `ui/student-course-tab-polish-v1-64`).
+## Proposed v1.65 — Golden Yellow + Navy brand header (2026-11-10)
+- PR: https://github.com/hawnannahian/driving-log-pro/pull/139 (draft; branch `ui/golden-yellow-navy-header-v1-65`).
+- Owner selected a warm golden-yellow gradient with deep navy car mark, title and subtitle.
+- Browser theme tint updated; iOS Home Screen status-bar style set to default for dark indicators on the light header.
+- Footer v1.65; Service Worker cache `nahians-schedule-cache-v127`.
+- Header-only presentation change. No student data, storage, booking, payment, accounting, course allocation, backup, restore or sync logic changed.
+- Automated tests, browser 390×844/320×568, real iPhone QA and Pages deployment remain unverified.
+> **Current source state (2026-11-10):** main `b50f8a594077b25e525910d7d7208bcc15266279` (PR #138 merged), footer v1.64, cache `nahians-schedule-cache-v126`. PR #139 proposes v1.65 Golden Yellow + Navy header; not merged or deployed.
+
+## Completed v1.64 — Student Course tab polish (2026-11-10; PR #138 merged at `b50f8a594077b25e525910d7d7208bcc15266279`)
+- PR: https://github.com/hawnannahian/driving-log-pro/pull/138 (merged into `main`).
 - Removes the duplicate Add payment action from course cards; payment entry remains in the Payments tab. Renames the profile tab label to “Courses”.
 - Separates the course card metrics into Financial overview and Lesson progress. “Remaining” is clarified as “Not yet completed”; a note explains that Available to book excludes lessons already booked.
 - Files: `app.js`, `index.html`, `styles.css`, `sw.js`. Footer v1.64/cache v126 on the PR branch.
 - No storage, student data, course/payment calculations, accounting, booking, backup, restore or sync changes.
-- Source-level checks passed. Automated tests, browser 390×844/320×568, real iPhone and Pages deployment have not yet been run/verified. Draft PR; owner review required.
+- Source-level checks passed before merge. Automated tests after the final update, browser 390×844/320×568, real iPhone and Pages deployment remain unverified.
 
 ## Completed v1.63 — Smart Lesson Time + Manual End Override (2026-11-10; PR #133 merged)
 - Merged to `main` at `e946f7323bb75e2e56d4646a02efbed604dea0f2`; [PR #133](https://github.com/hawnannahian/driving-log-pro/pull/133).

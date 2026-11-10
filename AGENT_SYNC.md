@@ -417,3 +417,12 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 - No storage schema, student records, course/payment calculations, accounting, booking, backup, restore or sync behavior changed.
 - Source-level checks confirmed the duplicate payment action is absent from course cards, the Courses label and metric groups exist, and footer/cache versions match.
 - Not run: JS syntax checks, automated tests after this UI change, rendered browser checks at 390×844/320×568, real iPhone Safari/Home Screen QA, or Pages deployment. Keep PR draft pending CI and owner visual review.
+
+
+### 2026-11-10 — ChatGPT: Golden Yellow + Navy brand header v1.65 — proposed
+- Owner approved the Golden Yellow + Navy colour direction after reviewing the mock-up.
+- Header background changes to a warm golden-yellow gradient; car mark, app title and subtitle use deep navy. Browser theme tint updated and iOS status-bar style set to default for dark indicators on the light header.
+- Branch: `ui/golden-yellow-navy-header-v1-65` (fresh from main `b50f8a594077b25e525910d7d7208bcc15266279`); draft PR #139: https://github.com/hawnannahian/driving-log-pro/pull/139.
+- Files: `index.html`, `styles.css`, `sw.js`, `AGENT_SYNC.md`, `PROJECT_STATE.md`. Footer v1.65; cache v127.
+- No app logic, student data, storage schema, booking, payment, accounting, course allocation, backup, restore or sync behavior changed.
+- Not run yet: JS syntax checks, regression tests, rendered 390×844 / 320×568 browser checks, real iPhone Safari/Home Screen QA, or Pages deployment. PR #139 is draft; do not claim live.
