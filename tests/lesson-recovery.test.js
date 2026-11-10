@@ -34,7 +34,7 @@ test("a newer restore wins over a stale cloud deletion and returns the lesson",(
 test("audit merge unions immutable events from both devices without dropping either",()=>{
  const R=api(),a={id:"a",lessonId:"l",action:"deleted",at:at("2026-11-02")},b={id:"b",lessonId:"l",action:"restored",at:at("2026-11-03")};
  const merged=R.merge({}, {entries:[],lessonRecovery:[],lessonAudit:[a]}, {entries:[],lessonRecovery:[],lessonAudit:[b]},(base,left,right)=>[...new Map([...left,...right].map(x=>[x.id,x])).values()]);
- assert.deepEqual(merged.lessonAudit.map(x=>x.id).sort(),["a","b"]);
+ assert.equal(Array.from(merged.lessonAudit,x=>x.id).sort().join(","),"a,b");
 });
 test("append-only audit events survive when an older sync client omits the audit array",()=>{
  const R=api(),event={id:"historic",lessonId:"l",action:"deleted",at:at("2026-11-02")};
