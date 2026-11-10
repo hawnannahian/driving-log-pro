@@ -102,6 +102,12 @@ Current source has a courseTransferPaid / date mechanism for retaining previousl
 
 The implementation must therefore add a durable, backward-compatible representation for the transferred individual receivable and its collection/payment state, plus the corresponding Payments UI and report/stat calculations. It must not overload coursePayments or silently treat the old individual debt as Course Due. Exact field names and any migration/compatibility behavior must be specified in the implementation PR before code changes.
 
+
+
+## 5.6 Proposed implementation data design
+
+The recommended separate receivable and collection ledgers, their formulas, backup/sync requirements, lifecycle safeguards and regression matrix are documented in `INDIVIDUAL_RECEIVABLE_DESIGN.md`. This is an architecture proposal for owner review, not permission to change accounting or storage behavior. The implementation PR must follow the design only after the owner confirms the deletion/reversal safeguards and the cloud-version rollout plan.
+
 ## 6. Conversion capacity safeguard — proposed, pending implementation review
 
 Recommended all-or-nothing rule: if the total eligible converted hours exceed the purchased hours in the target plan, do not partially convert and do not allow negative remaining hours. Show the hour deficit and require the instructor to increase the plan hours or cancel and resolve the mismatch.
