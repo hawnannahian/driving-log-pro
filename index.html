@@ -33,7 +33,7 @@
       <section class="timerbar hidden" id="timerBar" role="timer" aria-live="off"><div class="timerfill" id="timerFill"></div><div class="timerhead"><div><small class="timerkicker">DRIVING LESSON</small><b id="timerLabel">Student</b></div><span id="timerStatus" class="timerstatus live">LIVE</span></div><div class="timercenter"><div class="timerring" id="timerRing"><div class="timerringinner"><small>TIME REMAINING</small><b id="timerDigits">55:00</b><small id="timerSub">00:00 elapsed</small></div></div></div><div class="timeractions"><button type="button" class="timerbtn" id="timerPause">Pause</button><button type="button" class="timerbtn timerend" id="timerEnd">End lesson</button></div></section>
       <h2 class="todayhead" id="todayTitle">Today</h2>
       <div id="todayList" class="recordlist empty">No lessons today.</div>
-      <details class="prayerline hidden" id="prayerLine"><summary id="prayerNext"></summary><div id="prayerAll" class="recordlist"></div></details>
+      <details class="prayerline hidden" id="prayerLine"><summary id="prayerNext"></summary><div id="prayerAll" class="recordlist"></div><button type="button" class="btn ghost prayer-edit" id="prayerEdit">Edit times</button></details>
       <div class="todaygap"></div>
       <div class="sectionhead"><div><h2>Next Day</h2><p class="muted">Tomorrow's lessons</p></div></div>
       <div id="nextDayList" class="recordlist empty">No lessons tomorrow.</div>
@@ -167,6 +167,13 @@
             <label>Jum'a (Friday)<input type="time" id="p_jumua"></label>
           </div>
           <p class="hint">Prayer times update daily using the selected city and calculation method. A 15-minute booking block is placed immediately before each prayer. Friday uses your Jum'a time.</p>
+          <label class="checklabel settings-toggle" id="pManualRow"><input type="checkbox" id="pManualOn"> Set prayer times manually (my own times for every day)</label>
+          <div class="formgrid prayer-manual-grid hidden" id="pManualGrid">
+            <label>Fajr<input type="time" id="pmFajr"></label><label>Dhuhr<input type="time" id="pmDhuhr"></label>
+            <label>Asr<input type="time" id="pmAsr"></label><label>Maghrib<input type="time" id="pmMaghrib"></label>
+            <label>Isha<input type="time" id="pmIsha"></label>
+          </div>
+          <p class="hint">With this on, these times are used for every day instead of the mosque or calculated times. Friday uses the Jum'a time above. A blank time falls back to the automatic time. Change them whenever the mosque changes.</p>
           <div id="prayerPreview" class="prayer-preview" aria-live="polite"></div>
         </section>
         <p class="settings-note">These settings are saved with your app data and included in backup and sync. Lesson timer and completed-hour accounting are not affected.</p>
@@ -450,7 +457,7 @@
     <button class="tab" data-tab="islamic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M6.5 20v-6.5c0-3 2.5-5 5.5-6.5 3 1.5 5.5 3.5 5.5 6.5V20"/><path d="M12 4.5v2.5"/><path d="M10 20v-3a2 2 0 0 1 4 0v3"/><path d="M3.5 20v-8M20.5 20v-8"/></svg><span>Islamic</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.85</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.86</span></footer>
   <script src="push-config.js"></script>
   <script src="prayer-times.js"></script>
   <script src="mawaqit-times.js"></script>
