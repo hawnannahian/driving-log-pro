@@ -11,7 +11,7 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 - Cloud merge resolves recovery state by latest lifecycle timestamp, filters deleted IDs from active entries and unions append-only audit events by event ID. Backups/restores include the new collections; older backups remain accepted and preserve current device audit/recovery history.
 - Full-Time Students script/storage/accounting are unchanged and isolated. No booking, accounting, payments, course/package allocation, student profile or legacy archive logic is intentionally changed. Non-lesson deletion remains unchanged.
 - Files: `app.js`, `index.html`, `styles.css`, `sw.js`, `lesson-recovery.js`, `tests/lesson-recovery.test.js`, `AGENT_SYNC.md`, `PROJECT_STATE.md`. Footer v1.75; SW cache v138.
-- Tests/CI, rendered browser QA at 390×844 and 320×568, real iPhone QA and deployment are pending. Draft only: do not merge or deploy until owner review.
+- Targeted Node 22.16.0 recovery tests: 8/8 pass. Initial GitHub Actions #76 passed syntax checks and the 45 existing tests; the 8 new tests initially failed because the VM test harness lacked `window`. The harness and cross-realm assertion were fixed; latest-head Actions rerun is not yet available, so the combined suite is not confirmed green. Rendered browser QA at 390×844 / 320×568, real iPhone QA and deployment remain pending. Draft only: do not merge or deploy until owner review.
 - Storage note: audit history has no automatic expiry and grows over time; it shares browser storage capacity with the app. Cloud sync and user JSON backups provide additional copies, not a separately managed immutable archive.
 
 ### 2026-11-10 — ChatGPT: Student Profile Overview UX v1.74 — Draft PR
