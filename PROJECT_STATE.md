@@ -8,7 +8,7 @@
 - Separates the course card metrics into Financial overview and Lesson progress. “Remaining” is clarified as “Not yet completed”; a note explains that Available to book excludes lessons already booked.
 - Files: `app.js`, `index.html`, `styles.css`, `sw.js`. Footer v1.64/cache v126 on the PR branch.
 - No storage, student data, course/payment calculations, accounting, booking, backup, restore or sync changes.
-- Source-level checks passed. Automated tests, browser 390×844/320×568, real iPhone and Pages deployment have not yet been run/verified. Draft PR; owner review required.
+- Source-level checks passed. Automated tests and browser 390×844/320×568, real iPhone and Pages deployment have not yet been run/verified. No PR-triggered workflow run was returned for the latest docs commit. GitHub rejected the attempt to mark the draft PR ready for review; owner review/permission is needed. Not merged or deployed.
 
 ## Completed v1.63 — Smart Lesson Time + Manual End Override (2026-11-10; PR #133 merged)
 - Merged to `main` at `e946f7323bb75e2e56d4646a02efbed604dea0f2`; [PR #133](https://github.com/hawnannahian/driving-log-pro/pull/133).
