@@ -55,7 +55,7 @@ The owner decides product behavior and approves production changes.
 - Do only the requested task. Do not start new features or redesign adjacent screens without approval.
 - Preserve the existing UI/UX unless the task explicitly requests a visual change.
 - Ask before changing accounting definitions, booking rules, course/package allocation, payment behavior, data migration, backup/restore, cloud sync, authentication, push notifications or historical records.
-- Never merge or deploy unless the owner explicitly authorizes that action.
+- Merge authorization: follow §3a. Claude may merge its own PR only when every §3a condition is met; never merge another agent's PR. Do not treat merge authorization as permission to claim deployment. Verify the GitHub Pages workflow separately.
 - Never claim work is deployed, live, browser-tested or iPhone-tested unless that exact verification was performed.
 - Report source changes, automated test results, GitHub Pages deployment and real-device tests as separate statuses.
 
@@ -163,11 +163,14 @@ Do not deploy Cloudflare infrastructure, create/rotate secrets, change token sco
 
 ## 11. Current known project notes — verify before relying
 
-- The latest handover available when this file was prepared documented main as app v1.22 and service-worker cache v82. Re-check the current branch before changing anything.
-- Web Push implementation exists in source, but the backend was documented as not deployed/configured; `push-config.js` had an empty API URL. Verify current configuration without exposing secrets.
-- Prayer times (since v1.47) come from the mosque's Mawaqit timetable in `mawaqit-times.js` (a manual snapshot; regenerate with `node tools/update-mawaqit-times.mjs`); the previous local astronomical calculation (Lisbon/Amadora defaults) is only the fallback when a date is missing. Prayer overlap warns and never blocks a booking.
-- Real iPhone Safari/Home Screen PWA testing remains an acceptance requirement for relevant mobile, audio, offline and notification work.
-- A Student Package Calculation Phase 1 PR was open when this document was prepared. Inspect its current status and diff; do not assume it is merged, base unrelated work on it, or modify it without owner direction.
+- **Latest verified source state (2026-11-10):** `main` is merge commit `e946f7323bb75e2e56d4646a02efbed604dea0f2` (PR #133); footer is `v1.63` and Service Worker cache is `nahians-schedule-cache-v125`. These values describe source on `main`, not proof that GitHub Pages has deployed it.
+- **PR #133 — Smart lesson time + manual End override:** merged 2026-11-10. New single lessons default to 60 minutes; editing derives duration from saved Start/End; changing Start updates End by the current duration; manually editing End recalculates duration and the next Start change preserves it. Duration chips and live summary synchronize. A duration crossing midnight clears End and shows inline guidance rather than silently clamping to 23:59. Existing save-time 12-hour, prayer, overlap, working-hours, course and payment checks remain. Storage stays `HH:mm`; no schema or multi-session booking change was intended.
+- **Checks for PR #133:** GitHub Actions workflow #56 passed. The workflow screenshot showed a Node.js 20 deprecation warning and an `ubuntu-latest` migration notice; these were annotations, not test failures. Dedicated Smart Lesson Time edge-case tests and real iPhone Safari QA were still pending at handoff. Verify current workflow and deployment state before making claims.
+- **Current open PRs at handoff:** #73 (Calendar and WhatsApp controls in Driving Log Settings) and #13 (WhatsApp number parsing). Inspect their current status, base and diff before working; do not assume they are current or modify them without owner direction.
+- **Web Push:** implementation exists in source, but the backend was previously documented as not deployed/configured and `push-config.js` had an empty API URL. Verify current configuration without exposing secrets before relying on push.
+- Prayer times come from the mosque's Mawaqit timetable in `mawaqit-times.js` (a manual snapshot; regenerate with `node tools/update-mawaqit-times.mjs`); the previous local astronomical calculation (Lisbon/Amadora defaults) is only the fallback when a date is missing. Prayer overlap warns and never blocks a booking.
+- Real iPhone Safari/Home Screen PWA testing remains an acceptance requirement for relevant mobile, audio, offline and notification work. Never report a real-device check unless it was actually performed.
+- Read `PROJECT_STATE.md` for the release history and `AGENT_SYNC.md` for the latest cross-agent handover. Always verify both against current `main` and GitHub before acting.
 
 ## 12. Claude model and advisor workflow
 
