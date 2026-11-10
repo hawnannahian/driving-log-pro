@@ -2958,3 +2958,11 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 .brandmark{width:46px;min-width:46px;height:46px;border-radius:13px;background:transparent;border:0;color:#102653;display:grid;place-items:center}
 .brandmark svg{display:block;width:46px;height:46px}
 @media(max-width:720px){.brandmark{width:42px;min-width:42px;height:42px}.brandmark svg{width:42px;height:42px}}
+
+/* v1.69 — white sedan illustration + divider replace the DL monogram in the header. */
+.brand .brandcar{display:block;width:120px;height:auto;flex:none;filter:drop-shadow(0 2px 3px rgba(16,28,51,.25))}
+.brand .branddiv{display:block;width:2px;height:38px;flex:none;border-radius:2px;background:#101c33;opacity:.6}
+.brand{gap:12px}
+@media(max-width:720px){.brand .brandcar{width:98px}.brand .branddiv{height:32px}.brand{gap:10px}}
+@media(max-width:360px){.brand .brandcar{width:78px}.brand .branddiv{height:28px}.brand{gap:8px}}
+
