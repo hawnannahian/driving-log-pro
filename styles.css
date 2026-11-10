@@ -2902,3 +2902,10 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 #profileDialog .pkgmetric-group .pkggrid span{font-size:11px;line-height:1.35}
 #profileDialog .pkgmetric-group .pkggrid b{font-size:16px;overflow-wrap:anywhere}
 #profileDialog .pkgmetric-note{margin:7px 2px 0;color:var(--muted);font-size:11px;line-height:1.4}
+
+
+/* v1.65 — Golden yellow + navy brand header. Keep the rest of the app palette unchanged. */
+.topbar{background:linear-gradient(115deg,#ffd43b 0%,#ffc21a 55%,#f5a900 100%);color:#102653;box-shadow:0 5px 22px #b879001f}
+.brandmark{background:transparent;border:0;color:#102653}
+.brand b{color:#102653}
+.brand small{color:#18345f;opacity:.9}
