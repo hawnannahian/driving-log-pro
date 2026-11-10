@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 66" role="img" aria-label="Car">
+<defs>
+<linearGradient id="b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#eef2f8"/><stop offset="1" stop-color="#cfd7e4"/></linearGradient>
+<linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2c4a86"/><stop offset="1" stop-color="#0d1a38"/></linearGradient>
+<linearGradient id="r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4f6fa"/><stop offset="1" stop-color="#8d99ae"/></linearGradient>
+</defs>
+<ellipse cx="80" cy="63" rx="70" ry="2.6" fill="#101c33" opacity=".22"/>
+<path d="M6 47Q6 40 13 38.5L36 34Q45 17 63 14.5L101 14.5Q119 17 130 32L147 35Q154 37 154 45L154 50Q154 52 151 52L9 52Q6 52 6 49Z" fill="url(#b)" stroke="#aab4c6" stroke-width=".8"/>
+<path d="M41.5 33Q49 20 63 17.5L78 17.5L78 33Z" fill="url(#g)"/>
+<path d="M82 17.5L100 17.5Q114 19.5 123 33L82 33Z" fill="url(#g)"/>
+<path d="M50 29Q55 21.5 64 20L67 20L58 29Z" fill="#fff" opacity=".28"/>
+<path d="M85 20L98 20Q104 21 108 25L90 25Z" fill="#fff" opacity=".2"/>
+<path d="M80 33L80 49" stroke="#bcc5d4" stroke-width=".9"/>
+<path d="M84 37.5L91 37.5M68 37.5L75 37.5" stroke="#9aa5b9" stroke-width="1.4" stroke-linecap="round"/>
+<path d="M10 47.5L150 47.5" stroke="#ffc928" stroke-width="1.8" stroke-linecap="round"/>
+<path d="M7 41L19 38.8L19 42.8L7 44.5Z" fill="#fff7c9" stroke="#e5b800" stroke-width=".7"/>
+<path d="M149.5 39L154 41.5L154 45L148.5 44Z" fill="#e5383b"/>
+<circle cx="38" cy="50" r="13" fill="#0d1a38"/><circle cx="123" cy="50" r="13" fill="#0d1a38"/>
+<g><circle cx="38" cy="52" r="11" fill="#161d30"/><circle cx="38" cy="52" r="7" fill="url(#r)"/><circle cx="38" cy="52" r="2.4" fill="#5b6780"/><path d="M38 45.5V58.5M31.5 52H44.5M33.4 47.4L42.6 56.6M42.6 47.4L33.4 56.6" stroke="#8d99ae" stroke-width=".8"/></g>
+<g><circle cx="123" cy="52" r="11" fill="#161d30"/><circle cx="123" cy="52" r="7" fill="url(#r)"/><circle cx="123" cy="52" r="2.4" fill="#5b6780"/><path d="M123 45.5V58.5M116.5 52H129.5M118.4 47.4L127.6 56.6M127.6 47.4L118.4 56.6" stroke="#8d99ae" stroke-width=".8"/></g>
+</svg>

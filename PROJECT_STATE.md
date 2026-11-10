@@ -3,6 +3,12 @@
 > **Current source state (2026-11-10):** main includes PR #140 Log page polish v1.66, footer v1.66, cache v128. Draft PR #141 proposes a professional DL monogram logo v1.67; not merged or deployed.
 
 
+
+## Proposed v1.69 — Car illustration header (2026-11-10)
+- Owner wanted a car in the header again (the DL monogram of v1.67 / PR #142 was merged instead of the car shown in ChatGPT's mock-up; the realistic car photo from that mock-up never existed in the repo). New brand-neutral flat vector white sedan `brand-car.svg` (own drawing, no third-party logo or brand), a thin divider, then the Driving Log Pro title; Golden Yellow + Navy header unchanged.
+- Files: `brand-car.svg` (new, added to the service-worker FILES list), `index.html`, `styles.css`, `sw.js` (cache v131), footer v1.69. No JS, data, storage, backup or sync change. The old DL monogram CSS is left unused.
+- Checked in Chromium at 390×844 and 320×568 (no overflow, no errors). Real iPhone and Pages deployment not verified.
+
 ## Proposed v1.68 — Daily cloud backup (2026-11-10)
 - Owner-approved feature ("ক্লাউড backup শুরু করো"). After the first successful cloud sync of each calendar day the app also writes `backups/driving-log-YYYY-MM-DD.json` (same JSON as `driving-log.json`, no new data shape) to the owner's private data repo; an existing file is never overwritten (HTTP 422/409 = already there). Files older than 30 days are removed, but the newest 7 are always kept and only exact `driving-log-YYYY-MM-DD.json` names are ever deleted.
 - Marker `driving-log-pro-v1-cloud-lastsnap` (localStorage) is set only after success, so offline/token failures retry on the next sync; failures never block normal sync and show a plain status line. Warning after 3 days without a backup. Marker cleared when cloud sync is disconnected.

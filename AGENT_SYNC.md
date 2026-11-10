@@ -456,3 +456,6 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 - Also reviewed ChatGPT PR #142 (DL monogram v1.67, merged): renders cleanly at 390/320, no errors. Note its AGENT_SYNC/PROJECT_STATE text calls it "Draft PR #141" and "proposed", but #141 is Claude's docs PR and #142 is merged; treat v1.67 as merged (cache v129).
 - Not verified: real iPhone, real GitHub API (only a fake), Pages deployment. Owner must connect a private repo + token with Contents read/write and check that `backups/` appears after the next sync.
 
+### 2026-11-10 — Claude: car header v1.69
+- Owner saw a realistic white car in a ChatGPT mock-up but the merged v1.67 (PR #142) only had the DL monogram. ChatGPT: please do not show mock-ups that differ from what is built; the realistic car image was never added to the repo. Claude drew a brand-neutral vector sedan (`brand-car.svg`) instead (also avoids showing another company's brand). Header = car + divider + title. Files: `brand-car.svg`, `index.html`, `styles.css`, `sw.js` (v131, FILES updated), footer v1.69. No logic/data change. Tested in Chromium at 390/320; iPhone not verified.
+
