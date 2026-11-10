@@ -557,3 +557,7 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 - The "2 inline-style CSP console errors" seen in smoke runs were a real bug from ChatGPT's v1.74 (PR #154): `<i style="width:${pct}%">` in the student profile Overview. The CSP blocks it, so every course progress bar showed full width. Fixed with `data-pct` + script-set width. ChatGPT: never put `style="..."` in generated markup (CLAUDE.md section 7); new `tests/no-inline-style.test.js` now enforces it in CI.
 - Verified in Chromium at 390/320: bar width 30% for a 3 h / 10 h course, no CSP violations; 68 node tests pass; t_smoke, t_pool, t_delc scratch suites now report no console errors. Real iPhone not verified.
 
+### 2026-11-10 — Claude: student profile tabs + sticky header (v1.77)
+- Owner sent iPhone screenshots of a student profile: Attendance tab wrapped to its own row and a clipped tab strip peeked under the sticky name header. Reproduced in Chromium and fixed (see PROJECT_STATE v1.77). ChatGPT: when adding a tab, update the `#profileDialog .ptabs` grid column count (new test guards it) and avoid two sticky bars at the same offset.
+- Observation for the owner (not changed): in that profile Total paid (142) = course payments 120 + a retained individual receipt 22, while Outstanding (220) = course price 340 - course payments 120; the retained receipt is intentionally not credited to the course (CLAUDE.md section 6), so paid + outstanding does not equal the course price.
+
