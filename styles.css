@@ -3383,3 +3383,6 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 #reports .herogrid .hero-hidden{display:none!important}
 #reports .herogrid .hero-wide{grid-column:1/-1}
 
+/* v1.85 — WhatsApp settings: several-lessons message and period. */
+.wa-template-body select#waMultiDays{width:100%;min-height:46px;padding:0 12px;border:1px solid var(--line,#e3e9f2);border-radius:12px;background:#fff;color:var(--ink);font:inherit;font-size:16px;margin:0 0 10px}
+

@@ -49,8 +49,11 @@ test("the Outstanding tile of the Business dashboard hero is hidden but its id i
  const html=fs.readFileSync(path.join(__dirname,"..","index.html"),"utf8"),css=fs.readFileSync(path.join(__dirname,"..","styles.css"),"utf8");
  assert.ok(html.includes('<div class="hero-hidden" hidden><span>Outstanding</span><b id="rUnpaid"'));assert.ok(css.includes("#reports .herogrid .hero-hidden{display:none!important}"));
 });
-test("WhatsApp lesson message lists all of a student's not-yet-completed lessons in the next 7 days (v1.84)",()=>{
- const app=fs.readFileSync(path.join(__dirname,"..","app.js"),"utf8");
- assert.ok(app.includes("const upcomingLessonsFor=e=>"));assert.ok(/const lessonMsg=e=>\{const list=upcomingLessonsFor\(e\);if\(list\.length<2/.test(app),"a single lesson must keep the normal template");
- assert.ok(app.includes("fillWaTemplate(waTemplates.lesson,{day:dayName(e.date),time:timeText(e)})"),"the editable one-lesson template must stay the default");
+test("WhatsApp several-lessons message: editable wording and period, older saved settings stay valid (v1.85)",()=>{
+ const app=fs.readFileSync(path.join(__dirname,"..","app.js"),"utf8"),html=fs.readFileSync(path.join(__dirname,"..","index.html"),"utf8");
+ assert.ok(app.includes("const upcomingLessonsFor=e=>")&&app.includes("Number(waTemplates.days||0)"),"the period comes from the saved setting");
+ assert.ok(/const lessonMsg=e=>\{const list=upcomingLessonsFor\(e\);if\(list\.length<2/.test(app),"a single lesson must keep the normal template");
+ assert.ok(app.includes("fillWaTemplate(waTemplates.lesson,{day:dayName(e.date),time:timeText(e)})"));
+ assert.ok(html.includes('id="waMultiTemplate"')&&html.includes('id="waMultiDays"')&&html.includes('id="waMultiPreview"'));
+ assert.ok(/typeof x\.multi==="string"&&x\.multi\.trim\(\)\?x\.multi:WA_DEFAULTS\.multi/.test(app)&&/WA_DAYS_ALLOWED\.includes\(Number\(x\.days\)\)/.test(app),"old saved objects without the new fields must fall back to defaults");
 });

@@ -582,3 +582,6 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 ### 2026-11-10 — Claude: WhatsApp message for multiple bookings (v1.84)
 - Owner: a multiple booking only produced the text for one day. One message now lists all of the student's not-yet-completed lessons in the next 7 days (2+ lessons); a single lesson keeps the editable template. See PROJECT_STATE v1.84. Owner may want the wording editable or a different window.
 
+### 2026-11-10 — Claude: editable several-lessons WhatsApp text and period (v1.85)
+- Owner chose both follow-ups of v1.84. New fields `multi` and `days` in the existing WhatsApp templates localStorage object (additive, defaults for older objects). See PROJECT_STATE v1.85.
+
