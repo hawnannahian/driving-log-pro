@@ -4,6 +4,16 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs for review, Claude's own-PR merge authority under §3a, no student data in the repo).
 
 ## Recent handover entries
+### 2026-11-10 — ChatGPT: Student Profile Overview UX v1.74 — Draft PR
+
+- Owner confirmed: add Overview while retaining all existing Profile tabs; keep Student Notes in its existing location inside Lessons; keep existing quick actions and improve layout only.
+- Added an Overview tab as the default when opening a different student profile. It displays derived course progress, the next booked lesson and the existing outstanding balance using the current in-memory student/course/lesson data.
+- Retained Lessons, Courses, Payments and Attendance tabs and their existing rendering/actions. Student Notes remain in Lessons. Existing Add Lesson, Add Course, WhatsApp lesson/payment, Call and Edit Student actions are retained; only their layout is reorganized.
+- Presentation-only Profile changes; no data/schema/migration, accounting, payment, booking, course allocation, backup, restore or sync logic changes. Calendar-first workflow preserved. `full-time-students.js` and its `driving-log-pro-full-time-v1` storage remain untouched; no Full-Time records are included in the regular profile.
+- Files: `app.js`, `index.html`, `styles.css`, `sw.js`, `AGENT_SYNC.md`, `PROJECT_STATE.md`. Footer v1.74; Service Worker cache v137.
+- Static source checks only so far; Node/browser/mobile/iPhone QA and deployment remain pending. Draft PR; do not merge without owner approval.
+
+
 ### 2026-11-10 — ChatGPT: Better Forms Phase 1 — Draft PR
 
 - Follow-up from owner screenshot: removed numbered section badges; fixed Add Student mobile dialog sizing so it is content-height when space allows, scrolls when constrained, and keeps Cancel/Save in normal document flow so they cannot cover the hourly-rate field. Added mobile keyboard-friendly scroll margins and retained safe-area padding. Visual QA is still pending.
