@@ -3376,3 +3376,6 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 #recordDialog .course-rate-note{grid-column:1/-1;margin:0;padding:10px 12px;border:1px solid #cfe0ff;border-radius:12px;background:#eef4ff;color:#1d3f8f;font-size:13px;font-weight:700;line-height:1.4}
 #recordDialog .course-rate-note.hidden{display:none!important}
 
+/* v1.81 — a long student name stays on one line (ellipsis) so the sticky profile header does not take a quarter of the screen. */
+#profileDialog #profileName{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+

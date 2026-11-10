@@ -36,3 +36,7 @@ test("choosing Course hours hides the hourly-rate field and shows the course rat
  assert.ok(css.includes("#recordDialog .rate-field.hidden{display:none!important}"),"a closed rate field must really be hidden");
  assert.ok(app.includes("(from the course)"));
 });
+test("a long student name stays on one line in the profile header (v1.81)",()=>{
+ const css=fs.readFileSync(path.join(__dirname,"..","styles.css"),"utf8"),app=fs.readFileSync(path.join(__dirname,"..","app.js"),"utf8");
+ assert.ok(css.includes("#profileDialog #profileName{white-space:nowrap;overflow:hidden;text-overflow:ellipsis"));assert.ok(app.includes('$("profileName").title=s.name;'));
+});
