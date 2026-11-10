@@ -3356,3 +3356,7 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 #profileDialog .dialogbody{padding-top:0}
 #profileDialog .dialoghead{top:0;z-index:12;padding-top:clamp(16px,3vw,25px);background:#fff}
 
+
+/* v1.78 — remove a retained individual-lesson receipt (profile payment history). */
+#profileDialog .payment-meta:has(.payment-remove){display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+#profileDialog .payment-remove{min-height:44px;padding:6px 14px;font-size:12.5px;font-weight:800;color:#b93838;border-color:#f1d0d0}

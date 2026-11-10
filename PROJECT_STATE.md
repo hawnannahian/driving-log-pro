@@ -15,6 +15,14 @@
 
 
 
+
+## v1.78 — Remove a retained individual-lesson receipt (2026-11-10; owner-approved, option 1)
+- Background: when a lesson that was marked Paid as an individual lesson is moved into a course, the app keeps `courseTransferPaid` (hours x rate, e.g. 22,00 EUR) and `courseTransferDate` on that lesson. It shows in the student's Payments history as "Individual lesson payment retained" and only raises "Total paid"; it is deliberately not a course payment (CLAUDE.md section 6), so course Due is unchanged.
+- New: a "Remove receipt" button on that history row, for the case where no money was actually received (the Paid tick was a mistake). After a confirmation (amount, "only if no money was received", safety copy) the app saves a safety copy `driving-log-pro-v1-before-receipt-remove` (listed under Safety copies; refuses to continue if there is no room) and deletes only `courseTransferPaid` and `courseTransferDate` on that one lesson.
+- Not changed: course price, hours, allocation, course payments, lesson links, other lessons; the lesson stays in the course. Total paid drops by the receipt amount; course Paid/Due unchanged.
+- Verified (Chromium 390×844 and 320×568, synthetic data): exact scenario reproduced through the real lesson form (paid individual lesson moved into a course creates the 22 EUR receipt), removal leaves course payment 120, price 340, hours 17 and the other lesson byte-identical, Full-Time key untouched, no CSP errors. 70 node tests pass. Real iPhone not verified.
+- Files: `app.js`, `styles.css`, `index.html` (footer v1.78), `sw.js` (cache v141), `tests/profile-render.test.js`.
+
 ## v1.77 — Student profile tab strip and sticky header fixed (2026-11-10)
 - From the owner's iPhone screenshots: (1) v1.74 added the Overview tab, but the tab strip was still a 4-column grid, so "Attendance" wrapped alone onto a second row; (2) the tab strip was sticky at the same position as the sticky name header, so while scrolling the strip hid behind the header with a clipped "Attendance" label peeking, and page content showed in the gap above the header.
 - Fix (CSS + one line of JS): five equal columns at >=361 px; at <=360 px the tabs scroll horizontally and the selected tab is scrolled into view; the tab strip is no longer sticky (the name header with the close button stays sticky and now starts at the dialog top, no gap). Files: `styles.css`, `app.js`, `index.html` (footer v1.77), `sw.js` (cache v140), `tests/profile-render.test.js` (tab count must match grid columns). No data, accounting or sync change.

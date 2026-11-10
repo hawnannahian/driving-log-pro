@@ -17,3 +17,10 @@ test("student profile tab strip has one grid column per tab (v1.77: Attendance w
  const tabs=(html.match(/data-ptab="/g)||[]).length,last=[...css.matchAll(/#profileDialog \.ptabs\{[^}]*grid-template-columns:repeat\((\d+),/g)].pop();
  assert.ok(last,"a final repeat(N) rule for #profileDialog .ptabs must exist");assert.equal(Number(last[1]),tabs);
 });
+test("retained individual receipts can be removed only with a confirmation and a safety copy (v1.78)",()=>{
+ const app=fs.readFileSync(path.join(__dirname,"..","app.js"),"utf8"),i=app.indexOf("function removeRetainedReceipt(id){"),body=app.slice(i,app.indexOf("function editCoursePaymentDate",i));
+ assert.ok(i>0);assert.ok(body.includes("confirm("));assert.ok(body.includes('keepCopy("receipt-remove")'));
+ assert.ok(body.includes("delete e.courseTransferPaid")&&body.includes("delete e.courseTransferDate"));
+ assert.ok(!/courseAlloc|coursePayments|\.hours|\.price|\.course\b/.test(body),"must not touch course allocation, course payments, hours or price");
+ assert.ok(app.includes('data-delreceipt="${esc(e.id)}"')&&app.includes('["before-receipt-remove"'));
+});
