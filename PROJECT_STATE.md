@@ -1,9 +1,14 @@
 # PROJECT_STATE — Driving Log Pro
 
-> **Current source state (2026-11-10):** main includes PR #140 Log page polish v1.66, footer v1.66, cache v128. Draft PR #141 proposes a professional DL monogram logo v1.67; not merged or deployed.
+> **Current source state (2026-11-10):** main c7b96afae6aa569c907433cc78b4046dd853725b, footer v1.70, Service Worker cache v132. GitHub Pages deployment was not verified in this audit.
 
 
 
+
+## Learning Plan specification — owner-confirmed requirements (2026-11-10)
+- See LEARNING_PLAN_SPEC.md for the complete Calendar-first product flow and conversion rules. Draft PR #146: https://github.com/hawnannahian/driving-log-pro/pull/146.
+- Owner confirmed Convert All and accounting Option A: convert eligible completed Individual Lessons whether Paid or Unpaid; retain paid receipts separately and preserve unpaid amounts as separate individual outstanding balances.
+- This is a documentation/specification decision only. No code, data shape, accounting calculation, booking flow or live student record was changed. A separate implementation PR must include the additive receivable representation, compatibility/migration plan, targeted accounting regression tests and owner review.
 
 ## Proposed v1.70 — Realistic car image in the header (2026-11-10)
 - Owner rejected the drawn cartoon sedan (v1.69) and asked for a real car shape. A photo-style, brand-neutral white sedan (no badges/logos/text; red "learner" triangle on the roof) was generated with an image tool, the white background cut out locally (flood fill + edge feather, no paid tool) and saved as `brand-car.png` (480 px wide, transparent, ~168 KB). `brand-car.svg` (v1.69) is removed.
