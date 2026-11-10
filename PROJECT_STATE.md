@@ -1,4 +1,4 @@
-## Proposed v1.75 — Recoverable Lesson Deletion + Hybrid Audit (2026-11-10; Draft PR, reviewed and completed by Claude)
+## Completed v1.75 — Recoverable Lesson Deletion + Hybrid Audit (2026-11-10; PR #155 merged at `df510f4`, Pages run #207 succeeded)
 - **Storage fields (additive, optional):** `state.lessonRecovery[]` rows `{id,lesson|null,status:"deleted"|"restored",deletedAt,restoredAt,purgedAt,updatedAt,deletedBy,restoredBy}` and `state.lessonAudit[]` events `{id,lessonId,action:"deleted"|"restored"|"expired",at,actor,student,date,start,end}`. Included in `snapshot()` (cloud sync, daily cloud backup) and in JSON backups; `validBackup` validates them; older backups without them stay valid. Storage keys unchanged.
 - **Lifecycle:** soft delete -> 30 days restorable -> `cleanup()` purges the lesson copy but keeps the tombstone and an `expired` event. A backup restore re-activates lessons that the backup holds as active (`adopt()`, audited). `lesson-recovery.js` is in the service-worker cache list.
 - **Tests:** 60 node tests pass; browser UI flow and fake-GitHub sync scenarios pass at 390×844 and 320×568; real iPhone and real GitHub API not tested.
@@ -50,7 +50,7 @@
 - Branch: `ui/students-tab-phase1-compact-summary`, based on main `a8e9bb30918ec3c1a4d4a31624a49e8d4101d7b1`. GitHub Actions check passed syntax-checking every JS file and existing Node regression tests for Multiple Booking, Mawaqit and profile render (run #42746081569). Rendered browser screenshots at 390×844 / 320×568, all-tab interaction QA, real iPhone and deployment checks remain pending.
 
 
-> **Current source state (2026-11-10):** main `a8e9bb30918ec3c1a4d4a31624a49e8d4101d7b1`, Individual Receivable Ledger design PR #147 merged, footer v1.70, Service Worker cache v132. GitHub Pages deployment was not verified in this audit. Commercial Product Architecture PR #148 remains open/draft and is paused at the owner's request; no commercial implementation is authorized until the owner resumes and selects a deployment model.
+> **Current source state (2026-11-10):** main `df510f4` (PR #155 merged), footer v1.75, cache `nahians-schedule-cache-v138`. GitHub Pages run #207 succeeded (build only; real iPhone not verified). Open PRs: #73 and #13.
 
 
 
