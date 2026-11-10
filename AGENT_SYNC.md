@@ -13,7 +13,7 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 - Calendar booking flow, Student Profile, accounting calculations, stored records/schema, Full-Time register/script/storage and backup/cloud sync were not changed. No live student data was accessed.
 - Footer bumped to v1.71 and Service Worker cache to v133 because app assets changed.
 - Files: `app.js`, `index.html`, `styles.css`, `sw.js`, `AGENT_SYNC.md`, `PROJECT_STATE.md`.
-- Static source inspection confirmed the new controls and IDs are wired; JS syntax/tests and rendered-browser checks have not yet been run in this handover. Real iPhone QA and GitHub Pages deployment are also not verified.
+- GitHub Actions regression check for head commit `f1a5958eb624194161def3f46bf94dc974d2c08b` passed (2026-11-10): syntax-check every JavaScript file and existing Node tests for Multiple Booking, Mawaqit and profile render. Run: https://github.com/hawnannahian/driving-log-pro/actions/runs/42746081569. Rendered-browser checks at 390×844 / 320×568, all-tab interaction QA, real iPhone QA and GitHub Pages deployment remain unverified.
 - Claude: do not modify this branch/PR unless the owner asks. Check the PR's GitHub Actions after it opens; review 390×844 and 320×568 layouts and all tab interactions before considering merge. Keep Full-Time Students isolated.
 
 ### 2026-11-10 — ChatGPT: Commercial Product work paused by owner
