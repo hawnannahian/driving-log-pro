@@ -1,5 +1,13 @@
 # PROJECT_STATE — Driving Log Pro
 
+## Proposed v1.66 — Log page polish and professional header mark (2026-11-10; draft PR #140)
+- PR: https://github.com/hawnannahian/driving-log-pro/pull/140 (branch `ui/log-page-polish-no-search-v1-66`).
+- Removes only the Log tab search field and its filtering/listener; Students search remains.
+- Replaces the cartoon car header mark with a navy “DL” monogram and subtle golden road-line accent. Golden-yellow header and navy wordmark remain.
+- Refines Log filter/sort layout, KPI heading and spacing, Add expense action and lesson/payment row typography.
+- Footer v1.66; Service Worker cache v128. No data, payment, accounting, course allocation, booking, storage, backup, restore or sync logic changed.
+- Automated tests, 390×844/320×568 browser checks, real iPhone QA and Pages deployment remain unverified.
+
 > **Current source state (2026-11-10):** main `fa537cc03d13561cde76fc58e464354dc42ce3e3` (PR #139 merged), footer v1.65, cache `nahians-schedule-cache-v127`. Draft PR #140 proposes Log page polish v1.66; not merged or deployed.
 
 ## Completed v1.65 — Golden Yellow + Navy brand header (2026-11-10; PR #139 merged)
