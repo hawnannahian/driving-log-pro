@@ -38,7 +38,13 @@ function cleanup(data,now){
 }
 function merge(base,local,remote,mergeList){
  const b=base||{},l=local||{},r=remote||{};
- const recovery=mergeList(b.lessonRecovery||[],l.lessonRecovery||[],r.lessonRecovery||[]);
+ const mergedRecovery=mergeList(b.lessonRecovery||[],l.lessonRecovery||[],r.lessonRecovery||[]);
+ const recoveryById=new Map();
+ for(const row of [...(b.lessonRecovery||[]),...(l.lessonRecovery||[]),...(r.lessonRecovery||[])]){
+  const old=recoveryById.get(row.id),stamp=Date.parse(row.updatedAt)||0,oldStamp=old?(Date.parse(old.updatedAt)||0):-1;
+  if(!old||stamp>oldStamp||(stamp===oldStamp&&row.status==="deleted"&&old.status!=="deleted"))recoveryById.set(row.id,row);
+ }
+ const recovery=[...recoveryById.values()];
  const audit=mergeList(b.lessonAudit||[],l.lessonAudit||[],r.lessonAudit||[]);
  const entries=mergeList(b.entries||[],l.entries||[],r.entries||[]);
  const byId=new Map(recovery.map(x=>[x.id,x]));
