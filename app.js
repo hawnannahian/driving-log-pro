@@ -1,5 +1,6 @@
 const DB_KEY = "driving-log-pro-v1";
 let state = { entries: [], students: [], lessonRecovery: [], lessonAudit: [] };
+let lessonAuditExpanded=false;
 let multiSessions = [];
 const $ = id => document.getElementById(id);
 const euro = n => new Intl.NumberFormat("pt-PT",{style:"currency",currency:"EUR"}).format(Number(n)||0);
@@ -869,12 +870,13 @@ function renderRecovery(){
 function restoreDeletedLesson(id){const result=window.DrivingLogRecovery?.restore(state,id,new Date().toISOString(),"Owner");if(!result?.ok){toast("This lesson is no longer available to restore.");return;}save();renderRecovery();toast("Lesson restored");}
 function renderLessonRecovery(){
  const R=window.DrivingLogRecovery;if(!R)return;
- const deleted=R.deleted(state,new Date()),history=[...(state.lessonAudit||[])].sort((a,b)=>b.at.localeCompare(a.at)),shown=history.slice(0,50);
+ const deleted=R.deleted(state,new Date()),history=[...(state.lessonAudit||[])].sort((a,b)=>b.at.localeCompare(a.at)),shown=lessonAuditExpanded?history:history.slice(0,50);
  $("deletedLessonsList").innerHTML=deleted.length?deleted.map(row=>{
   const e=row.lesson,days=Math.max(0,Math.ceil(30-(Date.now()-Date.parse(row.deletedAt))/86400000));
   return '<div class="recoveryrow"><span><b>'+esc(e.student||"Lesson")+'</b><br><small>'+esc(fmtDate(e.date))+' · '+esc(e.start||"")+'–'+esc(e.end||"")+' · Deleted '+esc(new Date(row.deletedAt).toLocaleString("en-GB"))+' · '+days+' day(s) left</small></span><button type="button" class="btn secondary" data-restore-lesson="'+esc(row.id)+'">Restore lesson</button></div>';
  }).join(""):'<p class="hint">No lessons waiting to be restored.</p>';
- $("lessonAuditSummary").textContent=history.length?"Showing "+shown.length+" of "+history.length+" retained events.":"No lesson activity recorded yet.";
+ $("lessonAuditSummary").textContent=history.length?(lessonAuditExpanded?"Showing all "+history.length+" retained events.":"Showing newest "+shown.length+" of "+history.length+" retained events."):"No lesson recovery events recorded yet.";
+ $("lessonAuditToggle").classList.toggle("hidden",history.length<=50);$("lessonAuditToggle").textContent=lessonAuditExpanded?"Show latest 50":"Show all "+history.length+" events";$("lessonAuditToggle").onclick=()=>{lessonAuditExpanded=!lessonAuditExpanded;renderLessonRecovery();};
  $("lessonAuditList").innerHTML=shown.length?shown.map(event=>{
   const label=event.action==="deleted"?"Lesson deleted":event.action==="restored"?"Lesson restored":"Recovery period expired";
   return '<div class="recoveryrow"><span><b>'+label+'</b><br><small>'+esc(event.student||"Lesson")+' · '+esc(event.date||"")+' · '+esc(event.start||"")+'–'+esc(event.end||"")+' · '+esc(new Date(event.at).toLocaleString("en-GB"))+' · '+esc(event.actor||"Owner")+'</small></span></div>';
