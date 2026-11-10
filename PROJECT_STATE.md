@@ -1,6 +1,8 @@
 # PROJECT_STATE — Driving Log Pro
 
 ## Proposed v1.73 — Better Forms Phase 1 (2026-11-10; Draft PR pending)
+
+- Follow-up from owner screenshot: removed numbered section badges; fixed Add Student mobile dialog sizing so it is content-height when space allows, scrolls when constrained, and keeps Cancel/Save in normal document flow so they cannot cover the hourly-rate field. Added mobile keyboard-friendly scroll margins and retained safe-area padding. Visual QA is still pending.
 - Add/Edit Student form reorganized into clear, unnumbered sections with optional field guidance, better placeholders/autocomplete/input types, touch-friendly controls, focus visibility, sticky action footer and responsive modal sizing.
 - Existing record form IDs, validation, booking/payment controls and save handlers retained; shared focus/reduced-motion polish applied.
 - No data/schema, accounting, payment, course allocation, booking or storage logic changed. Calendar-first flow and Full-Time Students isolation preserved.
