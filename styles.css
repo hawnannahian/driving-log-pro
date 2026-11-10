@@ -3395,3 +3395,8 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 .log-settings .settings-card .settings-toggle{white-space:normal;align-items:flex-start;gap:12px;min-height:44px}
 .log-settings .settings-card .settings-toggle input[type=checkbox]{flex:none;width:24px;min-width:24px;height:24px;margin:1px 0 0;accent-color:var(--blue)}
 
+/* v1.87 — header car: fixed width AND height (same 480:298 ratio) instead of height:auto, so Safari cannot collapse the image to a flat strip before it is decoded. */
+.brand .brandcar{width:96px;height:60px;aspect-ratio:480/298;object-fit:contain;object-position:left center}
+@media(max-width:720px){.brand .brandcar{width:80px;height:50px}}
+@media(max-width:360px){.brand .brandcar{width:66px;height:41px}}
+

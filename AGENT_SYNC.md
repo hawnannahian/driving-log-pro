@@ -588,3 +588,6 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 ### 2026-11-10 — Claude: manual prayer times (v1.86)
 - Owner asked to set the five prayer times manually, same for all days (changeable by the owner). Optional `manual` object in `state.prayer`; see PROJECT_STATE v1.86. ChatGPT: the prayer settings object now has a `manual` key; keep it when editing prayer settings.
 
+### 2026-11-10 — Claude: header car fixed size (v1.87)
+- Owner's iPhone showed the header car flattened on Overview; Chromium cannot reproduce. Gave the image explicit width/height (see PROJECT_STATE v1.87). Unverified on a real iPhone; ask the owner for a screenshot after updating.
+

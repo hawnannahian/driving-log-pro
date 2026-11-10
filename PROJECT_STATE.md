@@ -24,6 +24,11 @@
 
 
 
+
+## v1.87 — Header car kept from flattening on iPhone Safari (2026-11-10; owner screenshot)
+- The owner's iPhone showed the header car squashed into a flat strip on the Overview tab (it was fine on other tabs and in Chromium, which could not reproduce it). Cause not proven (Safari cannot be run here); the image relied on `height:auto`. Now `.brandcar` has an explicit width and height with the image's own 480:298 ratio (96x60, 80x50 up to 720 px, 66x41 up to 360 px) plus `aspect-ratio` and `object-fit:contain`, so layout no longer depends on the image being decoded first.
+- Files: `styles.css`, `index.html` (footer v1.87), `sw.js` (cache v150), `tests/profile-render.test.js`. Verified only in Chromium (sizes 80x50 / 66x41 at 390 / 320 / 430 wide); whether it fixes the iPhone is NOT verified.
+
 ## v1.86 — Manual prayer times (2026-11-10; owner request: one fixed set for all days)
 - Log -> Settings -> Prayer Time: new switch **Set prayer times manually** with five time fields (Fajr, Dhuhr, Asr, Maghrib, Isha). When on, these times replace the mosque (Mawaqit) and calculated times on **every day**; Friday uses the existing Jum'a field instead of Dhuhr; a blank field falls back to the automatic time; booking blocks are jamaat..jamaat+minutes like the mosque times; booking still only warns. Off = exactly the previous behaviour. Overview's prayer line gets an **Edit times** button that opens these settings.
 - Data: optional `manual` object inside the existing `state.prayer` (`{on,fajr,dhuhr,asr,maghrib,isha}`); settings saved before v1.86 read as manual off; it travels with the existing prayer setting in backup and cloud sync (`mergeVal`). No new storage key.
