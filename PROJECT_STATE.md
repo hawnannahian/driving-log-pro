@@ -1,7 +1,7 @@
 # PROJECT_STATE — Driving Log Pro
 
 ## Proposed v1.73 — Better Forms Phase 1 (2026-11-10; Draft PR pending)
-- Add/Edit Student form reorganized into clear sections with optional field guidance, better placeholders/autocomplete/input types, touch-friendly controls, focus visibility, sticky action footer and responsive modal sizing.
+- Add/Edit Student form reorganized into clear, unnumbered sections with optional field guidance, better placeholders/autocomplete/input types, touch-friendly controls, focus visibility, sticky action footer and responsive modal sizing.
 - Existing record form IDs, validation, booking/payment controls and save handlers retained; shared focus/reduced-motion polish applied.
 - No data/schema, accounting, payment, course allocation, booking or storage logic changed. Calendar-first flow and Full-Time Students isolation preserved.
 - Footer v1.73; Service Worker cache v135. Branch: `ux/better-forms-phase1`, created from latest main.
