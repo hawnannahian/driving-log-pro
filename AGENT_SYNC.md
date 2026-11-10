@@ -7,7 +7,7 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 ### 2026-11-10 — ChatGPT: Learning Plan specification merged; receivable design proposal in progress
 - Learning Plan specification PR #146 was merged to main at 915d06925ae9e4c3129fb8ba6ec35f9cca789d86. Owner-confirmed choices remain: Calendar-first; Individual Lessons / Hourly Package / Full Course; Convert All; Option A (both Paid and Unpaid eligible completed Individual Lessons convert).
 - No app implementation was included in #146. Current main footer is v1.70 and Service Worker cache v132; GitHub Pages deployment is not verified.
-- New docs-only task: design a separate Individual Receivable ledger. Current source confirms unpaidAmt() returns zero for Course-linked lessons; Edit Record reconstructs lesson objects; Cloud Sync explicitly snapshots and ID-merges its arrays. The proposed design is in INDIVIDUAL_RECEIVABLE_DESIGN.md.
+- New docs-only task: design a separate Individual Receivable ledger. Current source confirms unpaidAmt() returns zero for Course-linked lessons; Edit Record reconstructs lesson objects; Cloud Sync explicitly snapshots and ID-merges its arrays. The proposed design is in INDIVIDUAL_RECEIVABLE_DESIGN.md. Draft PR #147: https://github.com/hawnannahian/driving-log-pro/pull/147.
 - No app code, live student data, local storage, cloud data, backup, accounting or booking behavior has been changed.
 - Open PRs #73 and #13 remain untouched.
 
