@@ -79,7 +79,7 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 - **Open PRs:** #73 (Calendar and WhatsApp controls in Driving Log Settings) and #13 (WhatsApp number parsing); inspect current diffs/freshness before working.
 - **Current proposal:** ChatGPT PR #138 — [Student Course tab polish v1.64](https://github.com/hawnannahian/driving-log-pro/pull/138) — draft, not merged or deployed. Footer v1.64/cache v126 are on its branch only.
 - **Deployment:** the v1.63 Pages deployment was not verified in the previous handover. Do not claim v1.64 is live unless the Pages workflow for its merge commit succeeds.
-- **Still pending for PR #138:** automated CI after the final PR update, browser rendering at 390×844 and 320×568, real iPhone Safari/Home Screen QA, and Pages deployment.
+- **Still pending for PR #138:** automated CI, browser rendering at 390×844 and 320×568, real iPhone Safari/Home Screen QA, and Pages deployment. No PR-triggered workflow run was returned for the latest docs commit. An attempt to mark the draft PR ready was rejected by GitHub permissions; it remains draft.
 - Push API URL was previously empty; Cloudflare Worker deployment/configuration remains unverified. Never expose secrets.
 - Prayer times use the Mawaqit snapshot (`mawaqit-times.js`); overlap warns and does not block booking.
 
@@ -417,3 +417,5 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 - No storage schema, student records, course/payment calculations, accounting, booking, backup, restore or sync behavior changed.
 - Source-level checks confirmed the duplicate payment action is absent from course cards, the Courses label and metric groups exist, and footer/cache versions match.
 - Not run: JS syntax checks, automated tests after this UI change, rendered browser checks at 390×844/320×568, real iPhone Safari/Home Screen QA, or Pages deployment. Keep PR draft pending CI and owner visual review.
+
+- Follow-up: Attempted to mark PR #138 ready for review on 2026-11-10; GitHub denied the GraphQL action for this account. PR remains draft. No merge or deployment performed.
