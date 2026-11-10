@@ -4,6 +4,17 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs for review, Claude's own-PR merge authority under §3a, no student data in the repo).
 
 ## Recent handover entries (newest first; moved here from above the title on 2026-11-10)
+### 2026-11-10 — ChatGPT: Learning Plan specification — owner decisions captured (docs-only)
+- Owner confirmed the Calendar-first design: register/book the student from Calendar; the first booking defaults to an Individual Lesson; no new main app tab.
+- Learning Plan choices: **Individual Lessons**, **Hourly Package**, and **Full Course**. Hourly Package and Full Course use the existing custom hours + price model; no fixed package templates or expiry are introduced. Existing pooled course hours (oldest-first), multiple courses per student, and separate per-course payment ledgers remain the accounting foundation.
+- Student Profile remains the plan dashboard: lesson history, course/plan hours and progress, remaining/available hours, payments and outstanding balance.
+- Owner selected **Convert All** when a student later buys a plan: convert every eligible already-completed Individual Lesson, not upcoming lessons, lessons already linked to a course, Legacy Archive records, or previously converted lessons. Converted hours count as used plan hours; preview and explicit confirmation are required; conversion must be all-or-nothing and auditable.
+- Accounting decision confirmed by owner (**Option A**): Paid and Unpaid eligible lessons both convert. Paid receipts and original dates remain separate historical individual payments and must not be added to coursePayments. Unpaid amounts remain separately collectible as individual outstanding balances and must never be folded into Course Due.
+- Important implementation gap: current unpaidAmt() returns 0 for course-linked lessons, while courseTransferPaid only preserves paid history. The implementation therefore needs a durable separate transferred-individual-receivable representation and Payment UI handling. This is a high-risk accounting/data change; do not implement until the compatibility/data migration plan is described and reviewed in its implementation PR. Do not change courses, coursePayments or lesson.courseAlloc shapes without an approved plan.
+- Proposed safety rule pending final implementation review: if the total hours selected for conversion exceed the purchased plan hours, block the entire conversion and show the deficit; do not partially convert or silently create negative hours.
+- Specification: LEARNING_PLAN_SPEC.md. No app source, live data, storage, accounting or booking behavior changed in this docs-only PR.
+- Base verified: main c7b96afae6aa569c907433cc78b4046dd853725b, footer v1.70, cache v132. Pages deployment not verified. Open PRs at audit: #73 and #13; neither was modified.
+
 ### 2026-11-10 — ChatGPT: Log page polish, remove Log search field v1.66 — DRAFT PR #140
 - Owner asked to apply the Log page UI/UX polish but remove the Log page's “Search student, type or note” field.
 - PR: https://github.com/hawnannahian/driving-log-pro/pull/140; branch `ui/log-page-polish-no-search-v1-66`, based on main `fa537cc03d13561cde76fc58e464354dc42ce3e3`.
@@ -83,13 +94,11 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 
 
 ## Latest verified project state
-- **main `fa537cc03d13561cde76fc58e464354dc42ce3e3`**: PR #139 merged; footer **v1.65**, Service Worker cache **`nahians-schedule-cache-v127`**. This confirms source on main, not Pages deployment.
-- **Current proposal:** [PR #140 — Log page polish and remove Log search field (v1.66)](https://github.com/hawnannahian/driving-log-pro/pull/140), branch `ui/log-page-polish-no-search-v1-66`. The Log search field and only its filtering were removed; Students tab search remains.
-- v1.66 footer/cache are v1.66 / `nahians-schedule-cache-v128` on the PR branch.
-- **Open PRs:** #73 and #13; inspect before unrelated work.
-- **v1.66 checks pending:** JavaScript syntax and regression suite, HTML duplicate-ID/script-reference checks, rendered browser checks at 390×844 and 320×568, real iPhone Safari/Home Screen QA, and Pages deployment.
+- **main c7b96afae6aa569c907433cc78b4046dd853725b**: source footer **v1.70**, Service Worker cache **nahians-schedule-cache-v132**. This confirms repository source only; GitHub Pages deployment was not verified in this audit.
+- **Current work:** Learning Plan specification is documentation-only; no app implementation is included.
+- **Open PRs at the 2026-11-10 audit:** #73 and #13; neither was modified.
 - Push API URL / Cloudflare Worker configuration remains unverified; never expose secrets.
-- Prayer times use the Mawaqit snapshot (`mawaqit-times.js`); overlap warns and does not block booking.
+- Prayer times use the Mawaqit snapshot (mawaqit-times.js); overlap warns and does not block booking.
 
 ## Where we stopped and what comes next (handover, 2026-11-08)
 **Done and merged:** #82–#87 course work; #90–#92 Log Settings; #94 Overview redesign; #95 prayer-time guard; #96 handover rules; #97 New Record smart booking; #98 Legacy Archive deletion payment-status fix; #99 weekly Repeat visibility + push-config precache. Latest main: `0cd6ad1`, footer v1.37, cache v99; Pages workflow #42530331667 succeeded.
