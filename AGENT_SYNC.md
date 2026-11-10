@@ -4,16 +4,12 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs for review, Claude's own-PR merge authority under §3a, no student data in the repo).
 
 ## Recent handover entries (newest first; moved here from above the title on 2026-11-10)
-### 2026-11-10 — ChatGPT: Learning Plan specification — owner decisions captured (docs-only)
-- Owner confirmed the Calendar-first design: register/book the student from Calendar; the first booking defaults to an Individual Lesson; no new main app tab.
-- Learning Plan choices: **Individual Lessons**, **Hourly Package**, and **Full Course**. Hourly Package and Full Course use the existing custom hours + price model; no fixed package templates or expiry are introduced. Existing pooled course hours (oldest-first), multiple courses per student, and separate per-course payment ledgers remain the accounting foundation.
-- Student Profile remains the plan dashboard: lesson history, course/plan hours and progress, remaining/available hours, payments and outstanding balance.
-- Owner selected **Convert All** when a student later buys a plan: convert every eligible already-completed Individual Lesson, not upcoming lessons, lessons already linked to a course, Legacy Archive records, or previously converted lessons. Converted hours count as used plan hours; preview and explicit confirmation are required; conversion must be all-or-nothing and auditable.
-- Accounting decision confirmed by owner (**Option A**): Paid and Unpaid eligible lessons both convert. Paid receipts and original dates remain separate historical individual payments and must not be added to coursePayments. Unpaid amounts remain separately collectible as individual outstanding balances and must never be folded into Course Due.
-- Important implementation gap: current unpaidAmt() returns 0 for course-linked lessons, while courseTransferPaid only preserves paid history. The implementation therefore needs a durable separate transferred-individual-receivable representation and Payment UI handling. This is a high-risk accounting/data change; do not implement until the compatibility/data migration plan is described and reviewed in its implementation PR. Do not change courses, coursePayments or lesson.courseAlloc shapes without an approved plan.
-- Proposed safety rule pending final implementation review: if the total hours selected for conversion exceed the purchased plan hours, block the entire conversion and show the deficit; do not partially convert or silently create negative hours.
-- Specification: LEARNING_PLAN_SPEC.md. Draft PR #146: https://github.com/hawnannahian/driving-log-pro/pull/146. No app source, live data, storage, accounting or booking behavior changed in this docs-only PR.
-- Base verified: main c7b96afae6aa569c907433cc78b4046dd853725b, footer v1.70, cache v132. Pages deployment not verified. Open PRs at audit: #73 and #13; neither was modified.
+### 2026-11-10 — ChatGPT: Learning Plan specification merged; receivable design proposal in progress
+- Learning Plan specification PR #146 was merged to main at 915d06925ae9e4c3129fb8ba6ec35f9cca789d86. Owner-confirmed choices remain: Calendar-first; Individual Lessons / Hourly Package / Full Course; Convert All; Option A (both Paid and Unpaid eligible completed Individual Lessons convert).
+- No app implementation was included in #146. Current main footer is v1.70 and Service Worker cache v132; GitHub Pages deployment is not verified.
+- New docs-only task: design a separate Individual Receivable ledger. Current source confirms unpaidAmt() returns zero for Course-linked lessons; Edit Record reconstructs lesson objects; Cloud Sync explicitly snapshots and ID-merges its arrays. The proposed design is in INDIVIDUAL_RECEIVABLE_DESIGN.md. Draft PR #147: https://github.com/hawnannahian/driving-log-pro/pull/147.
+- No app code, live student data, local storage, cloud data, backup, accounting or booking behavior has been changed.
+- Open PRs #73 and #13 remain untouched.
 
 ### 2026-11-10 — ChatGPT: Log page polish, remove Log search field v1.66 — DRAFT PR #140
 - Owner asked to apply the Log page UI/UX polish but remove the Log page's “Search student, type or note” field.
@@ -94,8 +90,8 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 
 
 ## Latest verified project state
-- **main c7b96afae6aa569c907433cc78b4046dd853725b**: source footer **v1.70**, Service Worker cache **nahians-schedule-cache-v132**. This confirms repository source only; GitHub Pages deployment was not verified in this audit.
-- **Current work:** Learning Plan specification is documentation-only; no app implementation is included.
+- **main 915d06925ae9e4c3129fb8ba6ec35f9cca789d86**: Learning Plan specification PR #146 merged; footer **v1.70**, Service Worker cache **nahians-schedule-cache-v132**. This confirms repository source only; GitHub Pages deployment was not verified.
+- **Current proposal:** Individual Receivable Ledger architecture/design, documentation-only; no app implementation or data changes.
 - **Open PRs at the 2026-11-10 audit:** #73 and #13; neither was modified.
 - Push API URL / Cloudflare Worker configuration remains unverified; never expose secrets.
 - Prayer times use the Mawaqit snapshot (mawaqit-times.js); overlap warns and does not block booking.

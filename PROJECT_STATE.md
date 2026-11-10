@@ -1,14 +1,21 @@
 # PROJECT_STATE — Driving Log Pro
 
-> **Current source state (2026-11-10):** main c7b96afae6aa569c907433cc78b4046dd853725b, footer v1.70, Service Worker cache v132. GitHub Pages deployment was not verified in this audit.
+> **Current source state (2026-11-10):** main 915d06925ae9e4c3129fb8ba6ec35f9cca789d86, Learning Plan specification PR #146 merged, footer v1.70, Service Worker cache v132. GitHub Pages deployment was not verified in this audit.
 
 
 
 
-## Learning Plan specification — owner-confirmed requirements (2026-11-10)
-- See LEARNING_PLAN_SPEC.md for the complete Calendar-first product flow and conversion rules. Draft PR #146: https://github.com/hawnannahian/driving-log-pro/pull/146.
+## Learning Plan specification — owner-confirmed requirements (2026-11-10; PR #146 merged)
+- PR #146 merged into main at 915d06925ae9e4c3129fb8ba6ec35f9cca789d86: https://github.com/hawnannahian/driving-log-pro/pull/146.
+- See LEARNING_PLAN_SPEC.md for the complete Calendar-first product flow and conversion rules.
 - Owner confirmed Convert All and accounting Option A: convert eligible completed Individual Lessons whether Paid or Unpaid; retain paid receipts separately and preserve unpaid amounts as separate individual outstanding balances.
-- This is a documentation/specification decision only. No code, data shape, accounting calculation, booking flow or live student record was changed. A separate implementation PR must include the additive receivable representation, compatibility/migration plan, targeted accounting regression tests and owner review.
+- Proposed data architecture is documented in INDIVIDUAL_RECEIVABLE_DESIGN.md. It proposes separate receivable principal and append-only transaction ledgers, with required backup/restore/cloud merge integration.
+- No app code, live student data, storage, accounting calculation, booking flow or deployment behavior changed by the merged specification.
+
+## Individual Receivable Ledger design proposal (2026-11-10; draft PR #147)
+- PR: https://github.com/hawnannahian/driving-log-pro/pull/147.
+- See INDIVIDUAL_RECEIVABLE_DESIGN.md for the recommended data model, derived balance rules, conversion transaction sequence, reporting/payment integration, backup/restore/cloud sync compatibility, lifecycle safeguards and regression matrix.
+- Documentation proposal only. No implementation or data migration authorized/performed. Student-deletion and conversion-reversal safeguards plus old/new app cloud compatibility must be confirmed before code changes.
 
 ## Proposed v1.70 — Realistic car image in the header (2026-11-10)
 - Owner rejected the drawn cartoon sedan (v1.69) and asked for a real car shape. A photo-style, brand-neutral white sedan (no badges/logos/text; red "learner" triangle on the roof) was generated with an image tool, the white background cut out locally (flood fill + edge feather, no paid tool) and saved as `brand-car.png` (480 px wide, transparent, ~168 KB). `brand-car.svg` (v1.69) is removed.
