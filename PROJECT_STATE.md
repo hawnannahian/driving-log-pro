@@ -2,6 +2,15 @@
 
 > **Current source state (2026-11-10):** main includes PR #140 Log page polish v1.66, footer v1.66, cache v128. Draft PR #141 proposes a professional DL monogram logo v1.67; not merged or deployed.
 
+
+## Proposed v1.68 — Daily cloud backup (2026-11-10)
+- Owner-approved feature ("ক্লাউড backup শুরু করো"). After the first successful cloud sync of each calendar day the app also writes `backups/driving-log-YYYY-MM-DD.json` (same JSON as `driving-log.json`, no new data shape) to the owner's private data repo; an existing file is never overwritten (HTTP 422/409 = already there). Files older than 30 days are removed, but the newest 7 are always kept and only exact `driving-log-YYYY-MM-DD.json` names are ever deleted.
+- Marker `driving-log-pro-v1-cloud-lastsnap` (localStorage) is set only after success, so offline/token failures retry on the next sync; failures never block normal sync and show a plain status line. Warning after 3 days without a backup. Marker cleared when cloud sync is disconnected.
+- Reports → Data → Cloud sync: "Show cloud backups" lists dated copies with Download and Put back (uses existing `validBackup` + `replaceData`, so confirmation and a local safety copy come first).
+- Not possible: an exact midnight run (a PWA cannot run while closed; a server cannot read phone-only data). Practical effect: one backup per day on first use of the day.
+- Files: `app.js`, `index.html`, `sw.js` (cache v130), footer v1.68, `tests/daily-cloud-backup.test.js`. Existing sync/merge code and data shape unchanged.
+- Backup files contain student data: the repo must stay private (`cloudConnect` already refuses public repos). Never commit backups to this public repo.
+
 ## Proposed v1.67 — Professional DL monogram logo (2026-11-10; draft PR #141)
 - PR: https://github.com/hawnannahian/driving-log-pro/pull/141 (branch `ui/professional-dl-monogram-logo-v1-67`).
 - Replaces the cartoon car header mark with a clean navy “DL” monogram and a subtle golden road-line accent; retains the Golden Yellow + Navy header.
