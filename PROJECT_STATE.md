@@ -22,6 +22,11 @@
 
 
 
+
+## v1.85 — WhatsApp several-lessons message: editable wording and period (2026-11-10; owner request, items 1 and 2)
+- Log -> Settings -> WhatsApp Message Settings gains: **Several lessons (multiple booking)** text with a `{{lessons}}` placeholder (one "• Fri 13 Nov, 19:00–20:00" line per lesson; if the placeholder is removed the list is appended; an empty text falls back to the default) and **Which lessons to include**: only that day / that day and the next 3, 7 (default) or 14 days. Saved in the existing `driving-log-pro-v1-whatsapp-templates` object as `multi` and `days`; older saved objects with only `lesson` and `payment` keep working (defaults fill in), "Reset defaults" restores both. A single lesson still uses the editable one-lesson template.
+- Files: `app.js`, `index.html` (footer v1.85), `styles.css`, `sw.js` (cache v148), `tests/profile-render.test.js`. No change to lesson, payment or student data. Checked in Chromium at 390×844 and 320×568 (old settings, edit/save, all four periods, missing placeholder, empty text, reset, no overflow/errors); real iPhone and real WhatsApp not verified.
+
 ## v1.84 — WhatsApp lesson message covers a multiple booking (2026-11-10; owner report)
 - Report: after a multiple booking (several days), the WhatsApp reminder chip in the Calendar only contained the text for one day. `lessonMsg(e)` now checks the same student's not-yet-completed lessons from that lesson's date up to 7 days later; with 2+ lessons it builds one message: a greeting, "আপনার আসন্ন ড্রাইভিং লেসনগুলো:", one "• Fri 13 Nov, 19:00–20:00" line per lesson, and a closing line. With a single lesson the existing editable template (WhatsApp Message Settings) is used unchanged. Applies wherever `lessonMsg` is used (Calendar chips, profile "WhatsApp: lesson", quick dialog, Overview next-day list). Lessons already completed, other students' lessons and lessons more than 7 days later are excluded.
 - Limits: the multi-lesson wording is built in (not yet editable in settings); the 7-day window is a choice. Files: `app.js`, `index.html` (footer v1.84), `sw.js` (cache v147), `tests/profile-render.test.js`. No data change. Checked in Chromium 390×844 and 320×568 (15 checks); real iPhone and real WhatsApp not verified.

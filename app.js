@@ -78,36 +78,40 @@ function renderBackup(){let last=0;try{last=Number(localStorage.getItem(BACKUP_K
 async function backupNow(){const done=await download("DrivingLogPro_Backup.json",JSON.stringify({...state,fullTime:window.DrivingLogFullTime?.getAll()||[],backupCreated:new Date().toISOString()},null,2),"application/json");if(done){try{localStorage.setItem(BACKUP_KEY,String(Date.now()));}catch{}renderBackup();toast("Backup created");}}
 const waNumber=s=>{const raw=cleanPhone(s.whatsapp||s.phone||s.name||""),d=raw.replace(/\D/g,"");if(raw.startsWith("+")&&d.length>=9)return d;if(/^9\d{8}$/.test(d))return "351"+d;return null;};
 const WA_TEMPLATE_KEY=DB_KEY+"-whatsapp-templates";
+const WA_MULTI_DEFAULT="আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ ভাই।\nআপনার আসন্ন ড্রাইভিং লেসনগুলো:\n{{lessons}}\nঅনুগ্রহ করে প্রতিটি লেসনের নির্ধারিত সময়ের কয়েক মিনিট আগে উপস্থিত থাকবেন।\nধন্যবাদ।",WA_DAYS_ALLOWED=[0,3,7,14];
 const WA_DEFAULTS={
  lesson:"আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ ভাই।\nআপনার পরবর্তী ড্রাইভিং লেসন {{day}}, {{time}}। অনুগ্রহ করে নির্ধারিত সময়ের কয়েক মিনিট আগে উপস্থিত থাকবেন।\nধন্যবাদ।",
- payment:"আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ ভাই।\nআপনার ড্রাইভিং লেসন বাবদ {{amount}} পরিশোধ বাকি রয়েছে। অনুগ্রহ করে আপনার সুবিধামতো সময়ে পরিশোধ করবেন।\nধন্যবাদ।"
+ payment:"আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ ভাই।\nআপনার ড্রাইভিং লেসন বাবদ {{amount}} পরিশোধ বাকি রয়েছে। অনুগ্রহ করে আপনার সুবিধামতো সময়ে পরিশোধ করবেন।\nধন্যবাদ।",
+ multi:WA_MULTI_DEFAULT,days:7
 };
-function getWaTemplates(){try{const x=JSON.parse(localStorage.getItem(WA_TEMPLATE_KEY)||"{}");return{lesson:typeof x.lesson==="string"?x.lesson:WA_DEFAULTS.lesson,payment:typeof x.payment==="string"?x.payment:WA_DEFAULTS.payment};}catch{return{...WA_DEFAULTS};}}
+function getWaTemplates(){try{const x=JSON.parse(localStorage.getItem(WA_TEMPLATE_KEY)||"{}");return{lesson:typeof x.lesson==="string"?x.lesson:WA_DEFAULTS.lesson,payment:typeof x.payment==="string"?x.payment:WA_DEFAULTS.payment,multi:typeof x.multi==="string"&&x.multi.trim()?x.multi:WA_DEFAULTS.multi,days:WA_DAYS_ALLOWED.includes(Number(x.days))?Number(x.days):WA_DEFAULTS.days};}catch{return{...WA_DEFAULTS};}}
 let waTemplates=getWaTemplates();
-const fillWaTemplate=(template,vars)=>String(template||"").replace(/{{\s*(day|time|amount)\s*}}/g,(_,k)=>vars[k]??"");
-// When the same student has more than one not-yet-completed lesson in the 7 days from this lesson (e.g. a multiple booking), one message lists all of them.
-const WA_MULTI_INTRO="আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ ভাই।\nআপনার আসন্ন ড্রাইভিং লেসনগুলো:",WA_MULTI_OUTRO="অনুগ্রহ করে প্রতিটি লেসনের নির্ধারিত সময়ের কয়েক মিনিট আগে উপস্থিত থাকবেন।\nধন্যবাদ।";
-const upcomingLessonsFor=e=>{const[y,m,d]=String(e.date).split("-").map(Number),limit=dateISO(new Date(y,m-1,d+7));return state.entries.filter(x=>x.type==="Lesson"&&x.start&&sameName(x.student,e.student)&&!isDone(x)&&x.date>=e.date&&x.date<=limit).sort((p,q)=>(p.date+p.start).localeCompare(q.date+q.start));};
-const lessonMsg=e=>{const list=upcomingLessonsFor(e);if(list.length<2||!list.some(x=>x.id===e.id))return fillWaTemplate(waTemplates.lesson,{day:dayName(e.date),time:timeText(e)});return WA_MULTI_INTRO+"\n"+list.map(x=>"• "+dayName(x.date)+", "+timeText(x)).join("\n")+"\n"+WA_MULTI_OUTRO;};
+const fillWaTemplate=(template,vars)=>String(template||"").replace(/{{\s*(day|time|amount|lessons)\s*}}/g,(_,k)=>vars[k]??"");
+// When the same student has more than one not-yet-completed lesson within the chosen window (e.g. a multiple booking), one message lists all of them.
+// The window (0 = that day only, 3, 7 or 14 more days) and the wording ({{lessons}}) are set in Log -> Settings -> WhatsApp Message Settings.
+const upcomingLessonsFor=e=>{const[y,m,d]=String(e.date).split("-").map(Number),limit=dateISO(new Date(y,m-1,d+Number(waTemplates.days||0)));return state.entries.filter(x=>x.type==="Lesson"&&x.start&&sameName(x.student,e.student)&&!isDone(x)&&x.date>=e.date&&x.date<=limit).sort((p,q)=>(p.date+p.start).localeCompare(q.date+q.start));};
+const waLessonLines=list=>list.map(x=>"• "+dayName(x.date)+", "+timeText(x)).join("\n");
+const lessonMsg=e=>{const list=upcomingLessonsFor(e);if(list.length<2||!list.some(x=>x.id===e.id))return fillWaTemplate(waTemplates.lesson,{day:dayName(e.date),time:timeText(e)});const lines=waLessonLines(list),t=String(waTemplates.multi||WA_MULTI_DEFAULT);return /{{\s*lessons\s*}}/.test(t)?fillWaTemplate(t,{lessons:lines}):t.replace(/\s+$/,"")+"\n"+lines;};
 const payMsg=amount=>fillWaTemplate(waTemplates.payment,{amount:euro(amount)});
 function renderWaTemplatePreviews(){
- const lesson= $("waLessonTemplate"),payment=$("waPaymentTemplate");
+ const lesson= $("waLessonTemplate"),payment=$("waPaymentTemplate"),multi=$("waMultiTemplate");
  if(!lesson||!payment)return;
  $("waLessonPreview").textContent=fillWaTemplate(lesson.value,{day:"Monday, 10 November",time:"10:00–11:00"});
  $("waPaymentPreview").textContent=fillWaTemplate(payment.value,{amount:"€40,00"});
+ if(multi&&$("waMultiPreview")){const sample="• Mon 10 Nov, 10:00–11:00\n• Tue 11 Nov, 15:30–16:30",t=multi.value||WA_MULTI_DEFAULT;$("waMultiPreview").textContent=/{{\s*lessons\s*}}/.test(t)?fillWaTemplate(t,{lessons:sample}):t.replace(/\s+$/,"")+"\n"+sample;}
 }
 function initWaTemplateSettings(){
- const lesson=$("waLessonTemplate"),payment=$("waPaymentTemplate");
+ const lesson=$("waLessonTemplate"),payment=$("waPaymentTemplate"),multi=$("waMultiTemplate"),days=$("waMultiDays");
  if(!lesson||!payment)return;
- lesson.value=waTemplates.lesson;payment.value=waTemplates.payment;
- [lesson,payment].forEach(el=>el.addEventListener("input",renderWaTemplatePreviews));
+ lesson.value=waTemplates.lesson;payment.value=waTemplates.payment;if(multi)multi.value=waTemplates.multi;if(days)days.value=String(waTemplates.days);
+ [lesson,payment,multi].filter(Boolean).forEach(el=>el.addEventListener("input",renderWaTemplatePreviews));
  $("waTemplateSave").onclick=()=>{
-  const next={lesson:lesson.value,payment:payment.value};
+  const next={lesson:lesson.value,payment:payment.value,multi:multi&&multi.value.trim()?multi.value:WA_DEFAULTS.multi,days:days&&WA_DAYS_ALLOWED.includes(Number(days.value))?Number(days.value):WA_DEFAULTS.days};
   try{localStorage.setItem(WA_TEMPLATE_KEY,JSON.stringify(next));waTemplates=next;toast("WhatsApp messages saved on this device.");}
   catch{toast("Could not save WhatsApp messages. Check device storage.");}
  };
  $("waTemplateReset").onclick=()=>{
-  lesson.value=WA_DEFAULTS.lesson;payment.value=WA_DEFAULTS.payment;renderWaTemplatePreviews();
+  lesson.value=WA_DEFAULTS.lesson;payment.value=WA_DEFAULTS.payment;if(multi)multi.value=WA_DEFAULTS.multi;if(days)days.value=String(WA_DEFAULTS.days);renderWaTemplatePreviews();
  };
  renderWaTemplatePreviews();
 }
