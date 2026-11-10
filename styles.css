@@ -3224,3 +3224,92 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 @media(prefers-reduced-motion:reduce){
   #studentDialog *,#recordDialog *{scroll-behavior:auto!important;transition:none!important}
 }
+
+
+/* v1.73 follow-up — Student form mobile sheet: content-sized when idle, scrollable when space is limited, and footer stays in normal flow (never overlays an input). */
+#studentDialog{
+  overflow:hidden;
+}
+#studentDialog form{
+  min-width:0;
+}
+#studentDialog .formgrid{
+  min-width:0;
+}
+#studentDialog .dialogactions{
+  position:static;
+  flex:none;
+}
+@media(max-width:720px){
+  #studentDialog[open]{
+    position:fixed;
+    top:50%;
+    bottom:auto;
+    left:8px;
+    right:8px;
+    transform:translateY(-50%);
+    width:auto;
+    height:auto;
+    max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 24px);
+    margin:0;
+    padding:0;
+    overflow-x:hidden;
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+    border-radius:22px;
+  }
+  #studentDialog form{
+    display:flex;
+    flex-direction:column;
+    min-height:0;
+    max-height:none;
+    overflow:visible;
+    padding:16px 15px max(12px,env(safe-area-inset-bottom));
+  }
+  #studentDialog .dialoghead{
+    position:static;
+    flex:none;
+    margin:0 0 12px;
+    padding:0 0 11px;
+  }
+  #studentDialog .formgrid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px 9px;
+    overflow:visible;
+    flex:none;
+    padding:0 0 4px;
+  }
+  #studentDialog .form-section-title{
+    margin-top:1px;
+    padding-top:8px;
+  }
+  #studentDialog .form-section-title small{font-size:10.5px}
+  #studentDialog .formgrid label{gap:5px}
+  #studentDialog .formgrid input{min-height:46px}
+  #studentDialog .formerror{flex:none;margin:8px 0 0}
+  #studentDialog .dialogactions{
+    position:static;
+    display:flex;
+    flex:none;
+    flex-wrap:nowrap;
+    gap:8px;
+    margin:10px -15px -16px;
+    padding:10px 15px max(11px,env(safe-area-inset-bottom));
+    border-top:1px solid #edf0f5;
+    background:#fff;
+  }
+  #studentDialog .dialogactions span{display:none}
+  #studentDialog .dialogactions .btn{flex:1 1 0;min-width:0;min-height:46px}
+}
+@media(max-width:380px){
+  #studentDialog[open]{top:calc(env(safe-area-inset-top) + 8px);bottom:calc(env(safe-area-inset-bottom) + 8px);transform:none}
+  #studentDialog form{padding:14px 13px}
+  #studentDialog .formgrid{grid-template-columns:minmax(0,1fr);gap:9px}
+  #studentDialog .formgrid .wide,#studentDialog .form-section-title.wide{grid-column:1}
+  #studentDialog .dialogactions{margin:9px -13px -14px;padding:9px 13px max(10px,env(safe-area-inset-bottom))}
+}
+/* Keyboard focus: keep the active field reachable by allowing the sheet itself to scroll. */
+#studentDialog[open]{scroll-padding-block:20px}
+#studentDialog .formgrid input{scroll-margin-block:18px}

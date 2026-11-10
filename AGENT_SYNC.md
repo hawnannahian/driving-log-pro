@@ -5,6 +5,8 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 
 ## Recent handover entries
 ### 2026-11-10 — ChatGPT: Better Forms Phase 1 — Draft PR
+
+- Follow-up from owner screenshot: removed numbered section badges; fixed Add Student mobile dialog sizing so it is content-height when space allows, scrolls when constrained, and keeps Cancel/Save in normal document flow so they cannot cover the hourly-rate field. Added mobile keyboard-friendly scroll margins and retained safe-area padding. Visual QA is still pending.
 - Owner requested UI + functionality improvements to forms while preserving existing workflow and student data safety.
 - Fresh branch `ux/better-forms-phase1` created from latest `main`.
 - Improved Add/Edit Student form hierarchy into Student Details, Contact Information and Lesson Rate sections; clarified optional phone/WhatsApp fields; added helpful placeholders, autocomplete/input semantics, accessible focus states and responsive touch sizing.
