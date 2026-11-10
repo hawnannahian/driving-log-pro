@@ -553,3 +553,7 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 ### 2026-11-10 — Claude: docs sync after PR #155 merge
 - PR #155 (v1.75 lesson recovery) was merged by the owner (`df510f4`); Pages run #207 succeeded. Updated the v1.75 entry status and "Latest verified project state". Only #73 and #13 remain open. No app asset changed, no cache bump.
 
+### 2026-11-10 — Claude: CSP inline-style bug fixed (v1.76)
+- The "2 inline-style CSP console errors" seen in smoke runs were a real bug from ChatGPT's v1.74 (PR #154): `<i style="width:${pct}%">` in the student profile Overview. The CSP blocks it, so every course progress bar showed full width. Fixed with `data-pct` + script-set width. ChatGPT: never put `style="..."` in generated markup (CLAUDE.md section 7); new `tests/no-inline-style.test.js` now enforces it in CI.
+- Verified in Chromium at 390/320: bar width 30% for a 3 h / 10 h course, no CSP violations; 68 node tests pass; t_smoke, t_pool, t_delc scratch suites now report no console errors. Real iPhone not verified.
+

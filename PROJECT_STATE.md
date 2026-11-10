@@ -13,6 +13,12 @@
 - Targeted Node 22.16.0 run of the exact recovery helper and test file: 8/8 tests passed. Initial GitHub Actions run #76 passed all-JS syntax checks and all 45 existing tests, but the 8 new tests first failed because the VM harness lacked `window`; that harness was corrected and the cross-realm assertion made realm-safe. A fresh Actions run for the latest head has not yet run, so the combined suite is not yet confirmed green. Rendered browser checks at 390×844 / 320×568, real iPhone Safari/PWA QA and deployment are not run. Keep PR Draft; do not merge or deploy until owner review.
 - Risk: audit history is intentionally unbounded and shares browser storage capacity with app data. If local storage is cleared or exhausted, the private cloud sync and user-exported backups are the additional copies; this is not a separately administered immutable server archive.
 
+
+## v1.76 — Student profile progress bars fixed (2026-11-10)
+- Bug from v1.74 (Student Profile Overview): the course progress bar used `<i style="width:..%">`; the Content Security Policy blocks inline styles, so the browser rejected it and every course bar showed full width (also 2 CSP console errors each time a profile opened). The width is now carried in `data-pct` and applied by script (`el.style.width`, which the CSP allows).
+- Found by tracing the CSP violation to `app.js` line 132 (student profile). New `tests/no-inline-style.test.js` fails if any `style="..."` appears in app scripts or `index.html`.
+- Files: `app.js`, `index.html` (footer v1.76), `sw.js` (cache v139), `tests/no-inline-style.test.js`. No data, storage, accounting or sync change.
+
 ## Proposed v1.74 — Student Profile Overview UX (2026-11-10; Draft PR)
 
 - Owner decisions: keep all existing Profile tabs and add Overview; keep Student Notes in its existing place inside Lessons; retain existing quick actions and improve layout only.
