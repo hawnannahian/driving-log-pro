@@ -4,6 +4,18 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs for review, Claude's own-PR merge authority under §3a, no student data in the repo).
 
 ## Recent handover entries (newest first; moved here from above the title on 2026-11-10)
+### 2026-11-10 — ChatGPT: Students Tab Phase 1 compact directory improvements — DRAFT PR
+- Owner explicitly selected Phase 1 Essential UI Improvements with a Compact Student Summary. Scope is the Regular Students directory only; preserve Calendar-first booking and keep the separate Full-Time register isolated.
+- Fresh branch `ui/students-tab-phase1-compact-summary` from latest main `a8e9bb30918ec3c1a4d4a31624a49e8d4101d7b1`.
+- Added compact summary counts: total regular students, regular students with outstanding balance, and regular students with an active course (derived from existing `studentStats`).
+- Redesigned regular Student Cards to show full name/phone, completed lesson count, completed hours, course hours remaining and outstanding due with clearer hierarchy. Kept existing Call, WhatsApp and Profile actions.
+- Added regular-student filters: All, With Outstanding, Course Students. Retained existing search and sort options and added Fewest Course Hours Left. No inferred Active/Inactive status and no new learning-plan type labels.
+- Calendar booking flow, Student Profile, accounting calculations, stored records/schema, Full-Time register/script/storage and backup/cloud sync were not changed. No live student data was accessed.
+- Footer bumped to v1.71 and Service Worker cache to v133 because app assets changed.
+- Files: `app.js`, `index.html`, `styles.css`, `sw.js`, `AGENT_SYNC.md`, `PROJECT_STATE.md`.
+- Static source inspection confirmed the new controls and IDs are wired; JS syntax/tests and rendered-browser checks have not yet been run in this handover. Real iPhone QA and GitHub Pages deployment are also not verified.
+- Claude: do not modify this branch/PR unless the owner asks. Check the PR's GitHub Actions after it opens; review 390×844 and 320×568 layouts and all tab interactions before considering merge. Keep Full-Time Students isolated.
+
 ### 2026-11-10 — ChatGPT: Commercial Product work paused by owner
 - Owner said the commercial product / customer-workspace decision will be made in the future. Treat the SaaS-vs-separate-installation decision and all implementation work as **deferred** until the owner explicitly resumes it.
 - PR #148 remains **OPEN + DRAFT** as a documentation-only architecture proposal: https://github.com/hawnannah/driving-log-pro/pull/148. Do not merge, close, convert to ready, or start implementation without the owner's instruction.
