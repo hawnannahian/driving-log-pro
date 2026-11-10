@@ -7,7 +7,7 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 ### 2026-11-10 — ChatGPT: Bottom navigation footer polish — DRAFT PR
 - Owner confirmed the requested scope is the app's bottom tab footer/navigation dock.
 - Fresh branch `ui/bottom-tab-footer-polish` created from latest `main`.
-- CSS-only visual polish: refined floating dock border/shadow, clearer blue active pill, improved inactive/active label contrast, consistent tap targets, compact-width tuning (including <=360px), hover treatment for pointer devices, and reduced-motion support.
+- CSS-only Minimal White redesign: full-width white iOS-style bottom bar, grey inactive icons/labels, blue active icon/label with a slim blue underline, subtle top border/shadow, safe-area padding, compact-width tuning (including <=360px), hover treatment and reduced-motion support. Supersedes the earlier dark floating-dock styling.
 - Kept all six existing tabs, their order, IDs, SVG icons, `data-tab` values, `switchTab()` behaviour, Calendar-first workflow and Full-Time Students isolation unchanged.
 - No data/schema, booking, student, accounting, payment or storage changes. Footer version v1.72; Service Worker cache v134.
 - Runtime/browser visual QA at 390×844 and 320×568, all-tab click QA, real iPhone and deployment checks have not yet been run. Keep PR in Draft pending review.
