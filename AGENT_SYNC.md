@@ -4,6 +4,16 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs for review, Claude's own-PR merge authority under §3a, no student data in the repo).
 
 ## Recent handover entries
+### 2026-11-10 — ChatGPT: Recoverable Lesson Deletion + Hybrid Audit v1.75 — DRAFT PR
+- Owner approved the hybrid design: audit history stays in main local data, is included in JSON backups and syncs through the existing private GitHub data repository. No new backend/service or credentials.
+- Fresh branch `feat/lesson-recovery-audit-hybrid-v1-75` created from main `222503b66d69904312855c93b314c11906846b8a`.
+- Lesson deletion moves the lesson out of active records into a 30-day recovery collection; Reports → Backup & restore gains Deleted lessons with Restore and a retained Lesson activity history. Expiry removes the lesson payload but keeps a tombstone and audit event. Restore is a newer lifecycle event.
+- Cloud merge resolves recovery state by latest lifecycle timestamp, filters deleted IDs from active entries and unions append-only audit events by event ID. Backups/restores include the new collections; older backups remain accepted and preserve current device audit/recovery history.
+- Full-Time Students script/storage/accounting are unchanged and isolated. No booking, accounting, payments, course/package allocation, student profile or legacy archive logic is intentionally changed. Non-lesson deletion remains unchanged.
+- Files: `app.js`, `index.html`, `styles.css`, `sw.js`, `lesson-recovery.js`, `tests/lesson-recovery.test.js`, `AGENT_SYNC.md`, `PROJECT_STATE.md`. Footer v1.75; SW cache v138.
+- Tests/CI, rendered browser QA at 390×844 and 320×568, real iPhone QA and deployment are pending. Draft only: do not merge or deploy until owner review.
+- Storage note: audit history has no automatic expiry and grows over time; it shares browser storage capacity with the app. Cloud sync and user JSON backups provide additional copies, not a separately managed immutable archive.
+
 ### 2026-11-10 — ChatGPT: Student Profile Overview UX v1.74 — Draft PR
 
 - Owner confirmed: add Overview while retaining all existing Profile tabs; keep Student Notes in its existing location inside Lessons; keep existing quick actions and improve layout only.
