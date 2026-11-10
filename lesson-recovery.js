@@ -44,7 +44,7 @@ function merge(base,local,remote,mergeList){
   if(!old||stamp>oldStamp||(stamp===oldStamp&&row.status==="deleted"&&old.status!=="deleted"))recoveryById.set(row.id,row);
  }
  const recovery=[...recoveryById.values()];
- const audit=mergeList(b.lessonAudit||[],l.lessonAudit||[],r.lessonAudit||[]);
+ const auditById=new Map();for(const event of [...(b.lessonAudit||[]),...(l.lessonAudit||[]),...(r.lessonAudit||[])]){const old=auditById.get(event.id);if(!old||(Date.parse(event.at)||0)>(Date.parse(old.at)||0))auditById.set(event.id,event);}const audit=[...auditById.values()];
  const entries=mergeList(b.entries||[],l.entries||[],r.entries||[]);
  const byId=new Map(recovery.map(x=>[x.id,x]));
  for(const row of recovery){
