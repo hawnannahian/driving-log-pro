@@ -1,3 +1,13 @@
+### 2026-11-09 — ChatGPT: Smart Lesson Time + Manual Override v1.63
+- User selected Smart + manual override and asked to implement GitHub issue #134.
+- Implemented on PR #133 branch `fix/edit-record-auto-end-time-v1-62` so the prerequisite existing-record Start-time fix is included in the same PR.
+- New/edit forms initialise duration (existing valid duration, otherwise 60 min for future Start changes); Start changes move End by current duration; manual End edits update duration; next Start change preserves it.
+- Duration chips and active states sync with current duration; live duration summary retained.
+- Inline validation added; crossing midnight no longer silently clamps to 23:59. End clears and asks for earlier Start/shorter duration.
+- Existing save-time validation and storage format HH:mm preserved. Multi-session booking left unchanged.
+- Footer v1.63; Service Worker cache v125.
+- Pending CI and iPhone Safari/device QA. Do not claim deployed or fully verified.
+
 ### 2026-11-09 — ChatGPT: Auto End Time on Edit v1.62 — DRAFT PR
 - Owner screenshot showed editing a lesson: changing Start to 10:00 PM left End at 11:00 AM because the change handler only auto-adjusted End when no record ID existed.
 - Branch: fix/edit-record-auto-end-time-v1-62, created from latest main.
