@@ -434,3 +434,10 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 - Files: `index.html`, `styles.css`, `sw.js`, `AGENT_SYNC.md`, `PROJECT_STATE.md`. Footer v1.65; cache v127.
 - No app logic, student data, storage schema, booking, payment, accounting, course allocation, backup, restore or sync behavior changed.
 - Not run yet: JS syntax checks, regression tests, rendered 390×844 / 320×568 browser checks, real iPhone Safari/Home Screen QA, or Pages deployment. PR #139 is draft; do not claim live.
+
+
+### 2026-11-10 — ChatGPT: Replace cartoon car logo with DL monogram (v1.66; PR #140 update)
+- Owner pointed out the header still used a cartoon-style car as the brand mark.
+- Replaced the car illustration in the header with a compact navy rounded-square “DL” monogram, with a small golden road-line accent. Kept the golden-yellow header and navy wordmark.
+- No car artwork remains in the header brandmark. This does not change the app icon or any business logic.
+- PR #140 remains draft; automated/browser/iPhone QA and deployment are still pending.
