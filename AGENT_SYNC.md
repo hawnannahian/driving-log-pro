@@ -576,3 +576,6 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 ### 2026-11-10 — Claude: Students "Recently joined" without the 3-lessons condition (v1.82)
 - Owner wants the most recent students at the top, not only those with 3+ lessons. Removed the two-group split from ChatGPT's Students Tab phase 1; see PROJECT_STATE v1.82.
 
+### 2026-11-10 — Claude: hide Outstanding tile on the Business dashboard (v1.83)
+- Owner asked to hide the Outstanding tile in the dashboard hero. Display only; id kept. See PROJECT_STATE v1.83. Other Outstanding figures were not touched.
+

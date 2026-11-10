@@ -20,6 +20,11 @@
 
 
 
+
+## v1.83 — Business dashboard: Outstanding tile hidden (2026-11-10; owner request)
+- The "Outstanding" tile in the dark Business dashboard hero (Reports) is hidden (`hidden` + `hero-hidden`); Expenses, Net profit and Collected stay and Collected uses the full row. The element and `#rUnpaid` stay so `reports-dashboard.js` keeps updating it. Not hidden (owner asked only for this tile): Outstanding on the Log page, in student profiles, the payments chart and the PDF/CSV export. Overview still shows no financial figures.
+- Files: `index.html` (footer v1.83), `styles.css`, `sw.js` (cache v146), `tests/profile-render.test.js`. No data or calculation change. Checked in Chromium 390×844 and 320×568; real iPhone not verified.
+
 ## v1.82 — Students tab: "Recently joined" is simply newest first (2026-11-10; owner request)
 - Removed the split of the Students list into "Recently joined · 3 or more lessons" and "All other students". With the default sort ("Recently joined", no search, filter "All students") the list is now one list under a "Recently joined" heading, newest join date first (`createdAt`, else first lesson date), whatever the number of lessons. Other sorts, search and filters are unchanged.
 - Files: `app.js` (one render line), `index.html` (footer v1.82), `sw.js` (cache v145), `tests/profile-render.test.js`. No data change. Checked in Chromium at 390×844 and 320×568; real iPhone not verified.
