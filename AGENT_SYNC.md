@@ -4,7 +4,7 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs for review, Claude's own-PR merge authority under §3a, no student data in the repo).
 
 ## Recent handover entries
-### 2026-11-10 — ChatGPT: Recoverable Lesson Deletion + Hybrid Audit v1.75 — DRAFT PR
+### 2026-11-10 — ChatGPT: Recoverable Lesson Deletion + Hybrid Audit v1.75 — MERGED (PR #155)
 - Owner approved the hybrid design: audit history stays in main local data, is included in JSON backups and syncs through the existing private GitHub data repository. No new backend/service or credentials.
 - Fresh branch `feat/lesson-recovery-audit-hybrid-v1-75` created from main `222503b66d69904312855c93b314c11906846b8a`.
 - Lesson deletion moves the lesson out of active records into a 30-day recovery collection; Reports → Backup & restore gains Deleted lessons with Restore and a retained Lesson activity history. Expiry removes the lesson payload but keeps a tombstone and audit event. Restore is a newer lifecycle event.
@@ -151,11 +151,12 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 
 
 ## Latest verified project state
-- **main ced0b7e93c808bccd676ee69142911855e97ea58**: PR #147 (Individual Receivable Ledger design) merged; footer **v1.70**, Service Worker cache **nahians-schedule-cache-v132**. This confirms repository source only; GitHub Pages deployment was not verified.
-- **Current work:** Commercial Product Architecture documentation proposal in draft PR #148; no app implementation or data changes.
-- **Open PRs at the 2026-11-10 audit:** #73 and #13; neither was modified.
-- Push API URL / Cloudflare Worker configuration remains unverified; never expose secrets.
-- Prayer times use the Mawaqit snapshot (mawaqit-times.js); overlap warns and does not block booking.
+- **main `df510f4`** (merge of PR #155, merged by the owner 2026-11-10 16:06 UTC): footer **v1.75**, Service Worker cache **`nahians-schedule-cache-v138`**. GitHub Pages workflow run #207 for `df510f4` completed successfully (checked 2026-11-10). That proves the Pages build only; real-iPhone behaviour is not verified by any agent.
+- **v1.75 Recoverable Lesson Deletion + Hybrid Audit is live in source and deployed**: deleted lessons are restorable for 30 days (Reports -> Backup & restore -> Deleted lessons), append-only Lesson activity history, cloud/backup compatible, Full-Time Students isolated. CI run #80 (head `69c0d10`) passed; 60 node tests. Real iPhone and real GitHub API not tested.
+- Other recent releases: v1.68 daily cloud backup, v1.70 realistic car header image, v1.71-v1.74 (ChatGPT) Students/Forms/bottom-nav/profile UX.
+- **Open PRs:** #73 and #13 only (old, untouched). Older "DRAFT" labels on earlier ChatGPT entries below are historical wording; check GitHub for the real state.
+- `push-config.js` API URL remains empty; Cloudflare Worker not deployed/configured. Prayer times use the Mawaqit snapshot; overlap warns and does not block booking.
+- Known unrelated issue: 2 console CSP "inline style" errors appear in older scratch smoke runs on main (source not yet located).
 
 ## Where we stopped and what comes next (handover, 2026-11-08)
 **Done and merged:** #82–#87 course work; #90–#92 Log Settings; #94 Overview redesign; #95 prayer-time guard; #96 handover rules; #97 New Record smart booking; #98 Legacy Archive deletion payment-status fix; #99 weekly Repeat visibility + push-config precache. Latest main: `0cd6ad1`, footer v1.37, cache v99; Pages workflow #42530331667 succeeded.
@@ -548,4 +549,7 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 - Sync: rows merge by newest `updatedAt` (tie prefers `deleted`), audit events union by event id, deleted ids are filtered from active entries, a newer restore re-adds the lesson. Older cloud files without the fields never erase local history. Dangling course links after restore are already tolerated by existing code (treated as an individual lesson).
 - Tests: `node --test tests/*.test.js` 60/60 (15 recovery tests, 7 added); real Chromium (390×844 and 320×568) UI flow 20 checks (delete confirm text, list, restore, no duplicate id, course link kept, 31-day expiry, old backup, backup with soft-deleted lesson, invalid recovery data rejected, Full-Time key byte-identical, six tabs, no CSP violations, no overflow) and fake-GitHub sync scenarios (stale cloud copy, newer restore wins, restore from another device, new device, older cloud file) all passed. Older scratch regression runs (t_delc, t_pool, t_smoke) report the same 2 "inline style" CSP console errors on main as on this branch (pre-existing, unrelated; owner/ChatGPT should locate the inline `style` writer).
 - Known limits / decisions for the owner: audit events keep the student name, date and time with no expiry (needed so history stays readable after the 30-day purge; say if the name should be dropped); restored rows keep a copy of the lesson; history grows without limit; cloud-sync clock differences between devices can reorder very close events; not tested on a real iPhone or against the real GitHub API; Pages deployment not applicable (draft).
+
+### 2026-11-10 — Claude: docs sync after PR #155 merge
+- PR #155 (v1.75 lesson recovery) was merged by the owner (`df510f4`); Pages run #207 succeeded. Updated the v1.75 entry status and "Latest verified project state". Only #73 and #13 remain open. No app asset changed, no cache bump.
 
