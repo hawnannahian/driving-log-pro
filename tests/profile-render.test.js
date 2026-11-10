@@ -30,3 +30,9 @@ test("Add student shows existing matches (name or phone) so the same person is n
  assert.ok(app.includes('["sName","sPhone"].forEach(id=>{const el=$(id);if(el)el.addEventListener("input",showStudentDups);});'));
  assert.ok(/function showStudentDups\(\)\{[\s\S]*?filter\(s=>s\.id!==editing\)/.test(app),"must not list the student being edited");
 });
+test("choosing Course hours hides the hourly-rate field and shows the course rate (v1.80)",()=>{
+ const app=fs.readFileSync(path.join(__dirname,"..","app.js"),"utf8"),html=fs.readFileSync(path.join(__dirname,"..","index.html"),"utf8"),css=fs.readFileSync(path.join(__dirname,"..","styles.css"),"utf8");
+ assert.ok(html.includes('id="courseRateNote"'));assert.ok(app.includes('rateField.classList.toggle("hidden",courseSelected)'));
+ assert.ok(css.includes("#recordDialog .rate-field.hidden{display:none!important}"),"a closed rate field must really be hidden");
+ assert.ok(app.includes("(from the course)"));
+});

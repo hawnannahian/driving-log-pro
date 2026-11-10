@@ -17,6 +17,12 @@
 
 
 
+
+## v1.80 — Course lessons: no hourly-rate field (2026-11-10; owner idea, approved)
+- In New/Edit record, choosing **Course hours** now hides the "Hourly rate" field and shows "Course rate: X per hour (from the course)" (or "Each course uses its own rate" when the student's open courses have different rates). **Individual** shows the field exactly as before. Reason: a course lesson is always valued at the course's own rate (price / hours), so a typed hourly rate was ignored but looked like it mattered.
+- Calculations are unchanged (`income()`/`courseRate()` untouched); previously saved lessons keep any stored rate; a course lesson can be saved with no rate. Files: `index.html` (`#courseRateNote`, footer v1.80), `app.js` (`updateCourseField`), `styles.css`, `sw.js` (cache v143), `tests/profile-render.test.js`.
+- Checked in Chromium 390×844 and 320×568 (synthetic data): visible/hidden rules, note text for one and for two courses with different rates, saving a course lesson with no rate (value = hours x course rate), editing a course lesson, no CSP/console errors. Real iPhone not verified.
+
 ## v1.79 — "Already in your list" suggestions in Add student (2026-11-10)
 - Owner reported that typing a name in Add student showed no popup/suggestion (the New record form has one, Add student did not). Add student now lists existing students that match the typed name (2+ letters) or phone number (5+ digits) in a highlighted box: "Already in your list. Tap to open instead of adding again" (stronger wording on an exact name). Tapping a row closes Add student and opens that student's profile. Nothing is saved or blocked: a genuinely new name still saves normally, and editing a student never lists the student itself.
 - Reuses `studentMatches()`; no data, storage, accounting or sync change. Files: `index.html` (`#studentDups`, footer v1.79), `app.js`, `styles.css`, `sw.js` (cache v142), `tests/profile-render.test.js`.

@@ -3371,3 +3371,8 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 #studentDialog .student-dup small{margin-top:2px;font-size:12px;color:var(--muted)}
 #studentDialog .student-dup-open{flex:none;font-size:12px;font-weight:800;color:#315ee8}
 
+/* v1.80 — course lessons use the course rate: hide the hourly-rate field and explain it. */
+#recordDialog .rate-field.hidden{display:none!important}
+#recordDialog .course-rate-note{grid-column:1/-1;margin:0;padding:10px 12px;border:1px solid #cfe0ff;border-radius:12px;background:#eef4ff;color:#1d3f8f;font-size:13px;font-weight:700;line-height:1.4}
+#recordDialog .course-rate-note.hidden{display:none!important}
+
