@@ -36,6 +36,19 @@ function cleanup(data,now){
  }
  return count;
 }
+// Explicit restore of a whole backup: lessons that the backup holds as active but this device has soft-deleted
+// are marked restored (newer than the delete), so the backup restore sticks and a later cloud sync cannot undo it.
+function adopt(data,entries,at,actor){
+ ensure(data);const when=iso(at)||new Date().toISOString();let count=0;
+ for(const e of entries||[]){
+  if(!e||e.type!=="Lesson"||!e.id)continue;
+  const row=data.lessonRecovery.find(x=>x.id===e.id);
+  if(!row||row.status!=="deleted")continue;
+  row.lesson=row.lesson||clone(e);row.status="restored";row.restoredAt=when;row.updatedAt=when;row.restoredBy=actor||"Backup restore";
+  addAudit(data,e,"restored",when,actor||"Backup restore");count++;
+ }
+ return count;
+}
 function merge(base,local,remote,mergeList){
  const b=base||{},l=local||{},r=remote||{};
  const recoveryById=new Map();
@@ -65,5 +78,5 @@ function validateRecovery(list){
 function validateAudit(list){
  return list==null||Array.isArray(list)&&list.every(x=>x&&typeof x.id==="string"&&x.id&&typeof x.lessonId==="string"&&["deleted","restored","expired"].includes(x.action)&&typeof x.at==="string");
 }
-window.DrivingLogRecovery=Object.freeze({RETENTION_DAYS,ensure,recordDelete,restore,cleanup,merge,deleted,validateRecovery,validateAudit});
+window.DrivingLogRecovery=Object.freeze({RETENTION_DAYS,ensure,recordDelete,restore,cleanup,adopt,merge,deleted,validateRecovery,validateAudit});
 })();

@@ -47,3 +47,42 @@ test("legacy backups without recovery fields remain valid optional input",()=>{
  assert.equal(R.validateAudit([{id:"e",lessonId:"x",action:"deleted",at:at("2026-11-02")}]),true);
  assert.equal(R.validateRecovery([{id:"x",status:"unknown",updatedAt:"x",lesson:null}]),false);
 });
+test("restoring a whole backup re-activates lessons the device had soft-deleted, so the restore sticks",()=>{
+ const R=api(),local={entries:[],students:[]},l=lesson("x");R.recordDelete(local,l,at("2026-11-02"));
+ assert.equal(R.adopt(local,[l],at("2026-11-05"),"Backup restore"),1);
+ assert.equal(local.lessonRecovery[0].status,"restored");assert.equal(local.lessonAudit.at(-1).action,"restored");
+ const merged=R.merge({}, {entries:[],lessonRecovery:local.lessonRecovery,lessonAudit:local.lessonAudit},{entries:[l],lessonRecovery:[],lessonAudit:[]},(b,a,c)=>[...new Map([...a,...c].map(x=>[x.id,x])).values()]);
+ assert.equal(merged.entries.length,1);
+ // the stale cloud delete (older) cannot undo it
+ const stale={id:"x",lesson:l,status:"deleted",deletedAt:at("2026-11-02"),updatedAt:at("2026-11-02")};
+ const after=R.merge(merged,{entries:merged.entries,lessonRecovery:merged.lessonRecovery,lessonAudit:merged.lessonAudit},{entries:[],lessonRecovery:[stale],lessonAudit:[]},(b,a,c)=>[...new Map([...a,...c].map(x=>[x.id,x])).values()]);
+ assert.equal(after.entries.length,1);assert.equal(after.lessonRecovery[0].status,"restored");
+});
+test("an old backup does not erase existing local recovery history or audit events",()=>{
+ const R=api(),local={entries:[],students:[]};R.recordDelete(local,lesson("a"),at("2026-11-02"));
+ const keepRows=local.lessonRecovery.length,keepAudit=local.lessonAudit.length;
+ R.adopt(local,[lesson("other")],at("2026-11-05"));
+ assert.equal(local.lessonRecovery.length,keepRows);assert.equal(local.lessonAudit.length,keepAudit);assert.equal(local.lessonRecovery[0].status,"deleted");
+});
+test("a purged (expired) lesson cannot be restored from the Deleted lessons list",()=>{
+ const R=api(),data={entries:[]};R.recordDelete(data,lesson(),at("2026-11-01"));R.cleanup(data,at("2026-12-05"));
+ assert.equal(R.restore(data,"lesson-1",at("2026-12-06")).ok,false);assert.equal(data.entries.length,0);
+});
+test("restore never creates a duplicate lesson id",()=>{
+ const R=api(),data={entries:[lesson()]};R.recordDelete(data,lesson(),at("2026-11-02"));R.restore(data,"lesson-1",at("2026-11-03"));
+ assert.equal(data.entries.filter(x=>x.id==="lesson-1").length,1);
+});
+test("merging the same audit events twice never duplicates them",()=>{
+ const R=api(),ev={id:"e1",lessonId:"l",action:"deleted",at:at("2026-11-02")},side={entries:[],lessonRecovery:[],lessonAudit:[ev]};
+ const m=R.merge(side,side,side,(b,a,c)=>[...new Map([...a,...c].map(x=>[x.id,x])).values()]);assert.equal(m.lessonAudit.length,1);
+});
+test("the recovery module never touches the Full-Time register",()=>{
+ assert.ok(!/fullTime|DrivingLogFullTime|full-time/i.test(source.replace(/\/\*[\s\S]*?\*\//,"")),"lesson-recovery.js must stay isolated from Full-Time Students");
+ const R=api(),data={entries:[],students:[],fullTime:[{legacy_student_id:"ft-1",name:"Synthetic Full-Time"}]};R.recordDelete(data,lesson(),at("2026-11-02"));R.restore(data,"lesson-1",at("2026-11-03"));R.cleanup(data,at("2027-01-01"));
+ assert.deepEqual(JSON.parse(JSON.stringify(data.fullTime)),[{legacy_student_id:"ft-1",name:"Synthetic Full-Time"}]);
+});
+test("the app keeps the storage keys and loads the module offline",()=>{
+ const app=fs.readFileSync(path.join(__dirname,"..","app.js"),"utf8"),sw=fs.readFileSync(path.join(__dirname,"..","sw.js"),"utf8"),html=fs.readFileSync(path.join(__dirname,"..","index.html"),"utf8");
+ assert.match(app,/DB_KEY\s*=\s*"driving-log-pro-v1"/);assert.ok(fs.readFileSync(path.join(__dirname,"..","full-time-students.js"),"utf8").includes("driving-log-pro-full-time-v1"));
+ assert.ok(sw.includes('"./lesson-recovery.js"'),"service worker must cache lesson-recovery.js");assert.ok(html.includes('src="lesson-recovery.js"'));
+});
