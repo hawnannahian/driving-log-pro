@@ -3410,3 +3410,23 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 #recordDialog .typechips button{flex:0 0 auto}
 #recordDialog[open][data-mode="expense"]{height:auto}
 #recordDialog[data-mode="expense"] form{height:auto}
+
+/* v1.92 — New expense sheet polish: icon tiles for the type, card sections, bold amount, smooth open. Settings shows the app version (the footer is hidden on phones). */
+.app-version{margin:14px 0 0;text-align:center;color:var(--muted);font-size:12px;font-weight:650;letter-spacing:.2px}
+#recordDialog .typechips button .chip-ico{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#recordDialog .typechips button{display:inline-flex;align-items:center;justify-content:center;gap:7px;transition:background-color .15s ease,border-color .15s ease,color .15s ease,transform .1s ease}
+#recordDialog .typechips button:active{transform:scale(.97)}
+#recordDialog[data-mode="expense"] .formgrid>.typechips{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px}
+#recordDialog[data-mode="expense"] .typechips button{flex-direction:column;gap:6px;min-height:76px;padding:10px 6px;border-radius:16px;font-size:13px;line-height:1.2;text-align:center;background:#f7f9fd;border-color:#e3e9f4}
+#recordDialog[data-mode="expense"] .typechips button span{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#recordDialog[data-mode="expense"] .typechips button[data-type="Fuel"],#recordDialog[data-mode="expense"] .typechips button[data-type="Other Expense"],#recordDialog[data-mode="expense"] .typechips button[data-type="Insurance"]{grid-column:span 2}
+#recordDialog[data-mode="expense"] .typechips button[data-type="Repair"],#recordDialog[data-mode="expense"] .typechips button[data-type="Refund"]{grid-column:span 3}
+#recordDialog[data-mode="expense"] .typechips button.active{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 3px 8px #315ee833}
+#recordDialog[data-mode="expense"] .record-panel{padding:14px;border:1px solid #e5ebf5;border-radius:18px;background:#fff;box-shadow:0 2px 10px #172b4d08}
+#recordDialog[data-mode="expense"] .record-rate-panel{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+#recordDialog[data-mode="expense"] .record-rate-panel:before{content:"Payment";display:block;margin:0 0 2px;padding:0;color:var(--green);font-size:13px;font-weight:800;letter-spacing:.3px;text-transform:uppercase;background:transparent}
+#recordDialog[data-mode="expense"] .costfield input{min-height:58px;font-size:24px;font-weight:800;letter-spacing:-.3px}
+#recordDialog[data-mode="expense"] .kmfield input{min-height:50px}
+#recordDialog[data-mode="expense"] .formgrid label{font-size:12px;font-weight:750;color:#51607a;letter-spacing:.2px}
+@media(prefers-reduced-motion:no-preference){#recordDialog[open]{animation:sheetup .22s ease-out}@keyframes sheetup{from{opacity:.4;transform:translateY(24px)}to{opacity:1;transform:none}}}
+@media(max-width:340px){#recordDialog[data-mode="expense"] .typechips button{min-height:62px;padding:8px 4px;font-size:12px}#recordDialog[data-mode="expense"] .formgrid{row-gap:10px}#recordDialog[data-mode="expense"] .record-panel{padding:12px}#recordDialog[data-mode="expense"] .costfield input{min-height:52px}}
