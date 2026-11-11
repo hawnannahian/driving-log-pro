@@ -3408,8 +3408,6 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 #recordDialog .formgrid{align-content:start;align-items:start}
 #recordDialog .typechips{align-items:flex-start;align-content:flex-start}
 #recordDialog .typechips button{flex:0 0 auto}
-#recordDialog[open][data-mode="expense"]{height:auto}
-#recordDialog[data-mode="expense"] form{height:auto}
 
 /* v1.92 — New expense sheet polish: icon tiles for the type, card sections, bold amount, smooth open. Settings shows the app version (the footer is hidden on phones). */
 .app-version{margin:14px 0 0;text-align:center;color:var(--muted);font-size:12px;font-weight:650;letter-spacing:.2px}
@@ -3430,3 +3428,23 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 #recordDialog[data-mode="expense"] .formgrid label{font-size:12px;font-weight:750;color:#51607a;letter-spacing:.2px}
 @media(prefers-reduced-motion:no-preference){#recordDialog[open]{animation:sheetup .22s ease-out}@keyframes sheetup{from{opacity:.4;transform:translateY(24px)}to{opacity:1;transform:none}}}
 @media(max-width:340px){#recordDialog[data-mode="expense"] .typechips button{min-height:62px;padding:8px 4px;font-size:12px}#recordDialog[data-mode="expense"] .formgrid{row-gap:10px}#recordDialog[data-mode="expense"] .record-panel{padding:12px}#recordDialog[data-mode="expense"] .costfield input{min-height:52px}}
+
+/* v1.93 — New expense is a full-height iPhone-style page sheet: it always opens from the top (under the status area), keeps the same height for every expense type so nothing jumps, uses grouped white cards on a light grey page and list rows (label left, value right). */
+@media(max-width:720px){
+  #recordDialog[open][data-mode="expense"]{height:calc(100dvh - env(safe-area-inset-top) - 10px);max-height:none;margin:auto 0 0;background:#f2f4f9;border-radius:22px 22px 0 0}
+  #recordDialog[data-mode="expense"] form{height:100%;max-height:none;padding:0 16px calc(12px + env(safe-area-inset-bottom));background:#f2f4f9}
+  #recordDialog[data-mode="expense"] .formgrid{flex:1 1 auto;align-content:start;row-gap:14px}
+  #recordDialog[data-mode="expense"] .dialoghead{top:0;margin:0;padding:18px 0 12px;background:#f2f4f9}
+  #recordDialog[data-mode="expense"] .dialoghead h2{font-size:28px;font-weight:800;letter-spacing:-.8px}
+  #recordDialog[data-mode="expense"] .typechips button{background:#fff;border-color:#e6ebf4}
+  #recordDialog[data-mode="expense"] .typechips button.active{background:var(--blue);border-color:var(--blue)}
+  #recordDialog[data-mode="expense"] .record-panel{padding:0 16px;border:0;border-radius:16px;box-shadow:0 1px 2px #172b4d0d}
+  #recordDialog[data-mode="expense"] .record-date-panel label,#recordDialog[data-mode="expense"] .costfield,#recordDialog[data-mode="expense"] .kmfield{display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:12px;min-height:56px;margin:0;font-size:15px;font-weight:650;color:#34425b;letter-spacing:0}
+  #recordDialog[data-mode="expense"] .record-date-panel input,#recordDialog[data-mode="expense"] .costfield input,#recordDialog[data-mode="expense"] .kmfield input{width:55%!important;min-height:44px!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;text-align:right;font-size:17px;font-weight:700;color:var(--ink)}
+  #recordDialog[data-mode="expense"] .record-date-panel input{width:auto!important;max-width:60%}
+  #recordDialog[data-mode="expense"] .costfield input{font-size:22px;font-weight:800;color:var(--blue)}
+  #recordDialog[data-mode="expense"] .record-rate-panel{display:block;padding:0 16px}
+  #recordDialog[data-mode="expense"] .record-rate-panel:before{padding:14px 0 6px;margin:0;font-size:12px}
+  #recordDialog[data-mode="expense"] .costfield,#recordDialog[data-mode="expense"] .kmfield{border-top:1px solid #eceff5}
+  #recordDialog[data-mode="expense"] .dialogactions{margin:0 -16px;padding:12px 16px calc(10px + env(safe-area-inset-bottom));background:#f2f4f9;border-top:1px solid #e3e8f2}
+}
