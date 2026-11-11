@@ -176,7 +176,7 @@
           <p class="hint">With this on, these times are used for every day instead of the mosque or calculated times. Friday uses the Jum'a time above. A blank time falls back to the automatic time. Change them whenever the mosque changes.</p>
           <div id="prayerPreview" class="prayer-preview" aria-live="polite"></div>
         </section>
-        <p class="app-version" id="appVersion">Driving Log Pro · Version v1.93</p>
+        <p class="app-version" id="appVersion">Driving Log Pro · Version v1.94</p>
         <p class="settings-note">These settings are saved with your app data and included in backup and sync. Lesson timer and completed-hour accounting are not affected.</p>
       </section>
     </section>
@@ -322,8 +322,8 @@
         <p class="lesson-time-help">Start time updates End automatically. You can edit End time anytime.</p><div class="record-subtitle">Duration</div><div class="chiprow durchips lessonfield wide" id="durChips" role="group" aria-label="Lesson length"><button type="button" data-dur="30">30 m</button><button type="button" data-dur="60">1 h</button><button type="button" data-dur="90">1.5 h</button><button type="button" data-dur="120">2 h</button><button type="button" data-dur="180">3 h</button></div><div class="record-duration-summary" id="recordDurationSummary" aria-live="polite"></div><p class="lesson-time-error hidden" id="lessonTimeError" role="alert" aria-live="polite"></p><div class="timewarn hidden" id="prayerWarn" role="alert" aria-live="polite"></div></section>
         <section class="record-panel record-rate-panel wide"><label class="lessonfield rate-field">Hourly rate (€)<input type="number" id="fRate" min="0" step=".01" inputmode="decimal" placeholder="Enter amount"><small>Set the rate for this lesson. No default amount is applied.</small></label>
         <p class="course-rate-note hidden" id="courseRateNote" role="status"></p>
-        <label class="costfield">Amount (€)<input type="number" id="fCost" min="0" step=".01" value="0"></label>
-        <label class="kmfield">Odometer (km)<input type="number" id="fKm" min="0" step=".1" value="0"></label>
+        <label class="costfield">Amount (€)<input type="number" id="fCost" min="0" step=".01" value="0" placeholder="0"></label>
+        <label class="kmfield">Odometer (km)<input type="number" id="fKm" min="0" step=".1" value="0" placeholder="0"></label>
         <section class="lessonfield wide payment-method hidden" id="paymentMethodRow" aria-label="Payment method">
           <b class="payment-method-label">Payment method</b>
           <div class="payment-method-options" role="group" aria-label="Choose payment method">
@@ -458,7 +458,7 @@
     <button class="tab" data-tab="islamic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M6.5 20v-6.5c0-3 2.5-5 5.5-6.5 3 1.5 5.5 3.5 5.5 6.5V20"/><path d="M12 4.5v2.5"/><path d="M10 20v-3a2 2 0 0 1 4 0v3"/><path d="M3.5 20v-8M20.5 20v-8"/></svg><span>Islamic</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.93</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.94</span></footer>
   <script src="push-config.js"></script>
   <script src="prayer-times.js"></script>
   <script src="mawaqit-times.js"></script>
