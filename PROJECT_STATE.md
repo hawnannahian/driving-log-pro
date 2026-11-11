@@ -8,7 +8,7 @@
 ## v1.93 — New expense as a full-height iPhone-style sheet (2026-11-11; owner screenshot)
 - Owner: sheet looked half-height and layout shifted between expense types. Now the sheet always fills the screen below the status area (same height for Fuel/Expense/Insurance/Maintenance/Refund, geometry measured identical), light grey page with white grouped cards, list rows (label left, value right), sticky Cancel/Save.
 - Phones only (max-width 720px); lesson form unchanged. CSS only. Files: `styles.css`, `index.html` (v1.93), `sw.js` (cache v156), `tests/expense-fullscreen.test.js`. No data/schema change.
-- Tests: node --check all JS; 89 node tests; Chromium 390×844 and 320×568, all five types. Not tested: real iPhone Safari/PWA.
+- Tests: node --check all JS; 89 node tests (one obsolete v1.91 assertion updated); Chromium 390×844 and 320×568, all five types. Not tested: real iPhone Safari/PWA.
 
 ## v1.92 — New expense sheet polish + version in Settings (2026-11-11; owner request)
 - New expense: type chips are icon tiles (Fuel, Expense, Insurance, Maintenance, Refund; inline SVG, no inline style), Date and Payment are card sections, Amount is bold and larger, sheet opens with a short slide-up (disabled for reduced motion). Lesson form unchanged.
