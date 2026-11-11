@@ -953,3 +953,6 @@ a.addEventListener("error",()=>{if(own())$("duaState").textContent="The recitati
  $("duaSeek").addEventListener("input",()=>{if(own()&&isFinite(a.duration)&&a.duration>0)a.currentTime=Number($("duaSeek").value)/100*a.duration;});}
 // Only one recording plays at a time.
 document.addEventListener("play",ev=>{document.querySelectorAll("audio").forEach(x=>{if(x!==ev.target)try{x.pause();}catch{}});},true);
+
+// v1.94 — Amount/Odometer: a lone "0" is cleared on focus so typing replaces it (shown as a grey 0 placeholder), and restored on blur if left empty. Saving still reads the value through num(), so an empty field is 0.
+["fCost","fKm"].forEach(id=>{const el=$(id);if(!el)return;el.addEventListener("focus",()=>{if(num(el.value)===0&&el.value.trim()!=="")el.value="";});el.addEventListener("blur",()=>{if(el.value.trim()==="")el.value="0";});});

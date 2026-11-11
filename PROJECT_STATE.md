@@ -5,6 +5,11 @@
 - GitHub Actions workflow #94 passed: syntax-check of every JavaScript file and `node --test tests/*.test.js` (including the new expense-form regression tests). Rendered browser checks at 390×844 / 320×568, real iPhone Safari/PWA QA and Pages deployment are not run; this branch is not deployed.
 
 
+## v1.94 — Expense Amount entry and Date row (2026-11-11; owner iPhone screenshot)
+- Amount/Odometer started at "0" and typing appended to it (value drifted right). Now a lone 0 is cleared on focus (grey 0 placeholder), restored to 0 on blur if left empty; saving still reads via `num()` (empty = 0). Date label/value share one centred line on iPhone; heavy focus box on list rows replaced by a soft row highlight.
+- Files: `app.js`, `index.html`, `styles.css`, `sw.js` (cache v157), `tests/expense-amount-entry.test.js`. No data/schema change; stored amounts unchanged.
+- Tests: node --check all JS; 91 node tests; Chromium flow (focus→type→blur→save: cost 25.5, km 1200). Not tested: real iPhone keyboard behaviour (the iOS keyboard also scrolls the sheet up; not changed).
+
 ## v1.93 — New expense as a full-height iPhone-style sheet (2026-11-11; owner screenshot)
 - Owner: sheet looked half-height and layout shifted between expense types. Now the sheet always fills the screen below the status area (same height for Fuel/Expense/Insurance/Maintenance/Refund, geometry measured identical), light grey page with white grouped cards, list rows (label left, value right), sticky Cancel/Save.
 - Phones only (max-width 720px); lesson form unchanged. CSS only. Files: `styles.css`, `index.html` (v1.93), `sw.js` (cache v156), `tests/expense-fullscreen.test.js`. No data/schema change.
