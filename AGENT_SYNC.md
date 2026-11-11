@@ -602,6 +602,9 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 ### 2026-11-11 — Claude: Calendar day without lessons (v1.88)
 - Owner: the empty hour list on a day with no lessons is not needed. Replaced by one short line; compact timeline unchanged for days with lessons. See PROJECT_STATE v1.88. Also: the header car (v1.87) is confirmed fine on the owner's iPhone.
 
+### 2026-11-11 — Claude: New expense sheet spacing (v1.91, cache v154)
+- Owner screenshot: huge gaps and tall oval type chips on New expense. Cause: fixed-height sheet + stretched grid rows. CSS-only fix (see PROJECT_STATE v1.91). Tests: 84 node tests pass, Chromium 390×844/320×568 checked; real iPhone not tested; not deployed until Pages succeeds.
+
 ### 2026-11-11 — Claude: expense form showed Hourly rate (v1.90, my v1.80 regression)
 - PR #170 (v1.89) was already merged by the owner before this request. The reported bug is not from #170: my v1.80 `updateCourseField()` un-hid the lesson-only Hourly rate on non-lesson records. One-condition fix + regression test; see PROJECT_STATE v1.90. Opened as a new PR from latest `main` (a merged branch is not reused); not merged, waiting for the owner.
 

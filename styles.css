@@ -3403,3 +3403,10 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 /* v1.88 — a day without lessons shows one short line instead of the empty hour-by-hour timeline. */
 #calendar .timeline .tl-empty{margin:0;padding:2px 14px;color:var(--muted);font-size:13px;line-height:1.5;text-align:center}
 
+
+/* v1.91 — New expense: the bottom sheet had a fixed height and the form grid stretched its rows to fill it, so the type chips became tall ovals and the sections had huge gaps. Rows keep their natural height, and the expense sheet fits its content. */
+#recordDialog .formgrid{align-content:start;align-items:start}
+#recordDialog .typechips{align-items:flex-start;align-content:flex-start}
+#recordDialog .typechips button{flex:0 0 auto}
+#recordDialog[open][data-mode="expense"]{height:auto}
+#recordDialog[data-mode="expense"] form{height:auto}
