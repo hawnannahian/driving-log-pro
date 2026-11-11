@@ -5,6 +5,12 @@
 - GitHub Actions workflow #94 passed: syntax-check of every JavaScript file and `node --test tests/*.test.js` (including the new expense-form regression tests). Rendered browser checks at 390×844 / 320×568, real iPhone Safari/PWA QA and Pages deployment are not run; this branch is not deployed.
 
 
+## v1.92 — New expense sheet polish + version in Settings (2026-11-11; owner request)
+- New expense: type chips are icon tiles (Fuel, Expense, Insurance, Maintenance, Refund; inline SVG, no inline style), Date and Payment are card sections, Amount is bold and larger, sheet opens with a short slide-up (disabled for reduced motion). Lesson form unchanged.
+- Settings (Log tab → menu) now ends with "Driving Log Pro · Version v1.92" because the footer is hidden on phones (`footer{display:none}` under max-width 720px since the scroll-containment PR).
+- Files: `index.html`, `styles.css`, `sw.js` (cache v155), `tests/expense-sheet-polish.test.js`. No data/schema change.
+- Tests: node --check all JS; 87 node tests; Chromium 390×844 and 320×568 screenshots. Not tested: real iPhone Safari.
+
 ## v1.91 — New expense sheet spacing fixed (2026-11-11; owner iPhone screenshot)
 - Problem: the New expense bottom sheet has a fixed height; the form grid stretched its rows to fill it, so the type chips became tall ovals and sections had huge gaps.
 - Fix (CSS only): `#recordDialog .formgrid{align-content:start;align-items:start}`, chips `flex:0 0 auto`, and the expense-mode sheet is `height:auto`. Lesson sheet height unchanged.

@@ -176,6 +176,7 @@
           <p class="hint">With this on, these times are used for every day instead of the mosque or calculated times. Friday uses the Jum'a time above. A blank time falls back to the automatic time. Change them whenever the mosque changes.</p>
           <div id="prayerPreview" class="prayer-preview" aria-live="polite"></div>
         </section>
+        <p class="app-version" id="appVersion">Driving Log Pro · Version v1.92</p>
         <p class="settings-note">These settings are saved with your app data and included in backup and sync. Lesson timer and completed-hour accounting are not affected.</p>
       </section>
     </section>
@@ -299,7 +300,7 @@
       <div class="dialoghead"><div><p class="eyebrow">DRIVING LOG</p><h2 id="recordTitle">New record</h2></div><button type="button" class="iconbtn" data-close aria-label="Close">×</button></div>
       <input type="hidden" id="recordId">
       <div class="formgrid">
-        <div class="typechips wide" id="typeChips" role="group" aria-label="Record type"><button type="button" data-type="Lesson">Lesson</button><button type="button" data-type="Fuel">Fuel</button><button type="button" data-type="Other Expense">Expense</button><button type="button" data-type="Note">Note</button><button type="button" data-type="Insurance">Insurance</button><button type="button" data-type="Repair">Maintenance</button><button type="button" data-type="Refund">Refund</button></div>
+        <div class="typechips wide" id="typeChips" role="group" aria-label="Record type"><button type="button" data-type="Lesson"><svg class="chip-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5"/><path d="M12 14.5V21M9.6 11H3.2M14.4 11h6.4"/></svg><span>Lesson</span></button><button type="button" data-type="Fuel"><svg class="chip-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h12M14 9h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V8l-3-3"/><path d="M7 8h4"/></svg><span>Fuel</span></button><button type="button" data-type="Other Expense"><svg class="chip-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg><span>Expense</span></button><button type="button" data-type="Note"><svg class="chip-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20l4-1 11-11-3-3L5 16z"/></svg><span>Note</span></button><button type="button" data-type="Insurance"><svg class="chip-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg><span>Insurance</span></button><button type="button" data-type="Repair"><svg class="chip-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg><span>Maintenance</span></button><button type="button" data-type="Refund"><svg class="chip-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-15-6.7L3 13"/></svg><span>Refund</span></button></div>
         <label class="hidden">Type<select id="fType"><option>Lesson</option><option>Fuel</option><option>Other Expense</option><option>Note</option><option>Insurance</option><option>Repair</option><option>Refund</option></select></label>
         <section class="booking-mode-row wide hidden" id="bookingModeRow" aria-label="Booking mode">
           <div class="booking-mode-options"><button type="button" class="booking-mode-option active" id="bookingSingle" aria-pressed="true">Single Booking</button><button type="button" class="booking-mode-option" id="bookingMultiple" aria-pressed="false">Multiple Booking</button></div>
@@ -457,7 +458,7 @@
     <button class="tab" data-tab="islamic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M6.5 20v-6.5c0-3 2.5-5 5.5-6.5 3 1.5 5.5 3.5 5.5 6.5V20"/><path d="M12 4.5v2.5"/><path d="M10 20v-3a2 2 0 0 1 4 0v3"/><path d="M3.5 20v-8M20.5 20v-8"/></svg><span>Islamic</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.91</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.92</span></footer>
   <script src="push-config.js"></script>
   <script src="prayer-times.js"></script>
   <script src="mawaqit-times.js"></script>
