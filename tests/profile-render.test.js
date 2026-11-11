@@ -32,7 +32,7 @@ test("Add student shows existing matches (name or phone) so the same person is n
 });
 test("choosing Course hours hides the hourly-rate field and shows the course rate (v1.80)",()=>{
  const app=fs.readFileSync(path.join(__dirname,"..","app.js"),"utf8"),html=fs.readFileSync(path.join(__dirname,"..","index.html"),"utf8"),css=fs.readFileSync(path.join(__dirname,"..","styles.css"),"utf8");
- assert.ok(html.includes('id="courseRateNote"'));assert.ok(app.includes('rateField.classList.toggle("hidden",courseSelected)'));
+ assert.ok(html.includes('id="courseRateNote"'));assert.ok(app.includes('rateField.classList.toggle("hidden",courseSelected||!lesson)'));
  assert.ok(css.includes("#recordDialog .rate-field.hidden{display:none!important}"),"a closed rate field must really be hidden");
  assert.ok(app.includes("(from the course)"));
 });
