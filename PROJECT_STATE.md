@@ -25,6 +25,11 @@
 
 
 
+
+## v1.88 — Calendar day without lessons: no empty hour timeline (2026-11-11; owner request)
+- In the Calendar Day view a day with no lessons used to show the whole working day as an empty hour-by-hour list (08:00-22:00, the v1.61 fallback). It now shows one short line, "No lessons on this day.", in that place. A day with lessons keeps the compact timeline (first to last lesson). The "Available time" slots, the lesson list, the Week view and all data are unchanged.
+- Files: `app.js` (one render line), `styles.css`, `index.html` (footer v1.88), `sw.js` (cache v151), `tests/profile-render.test.js`. Checked in Chromium at 390×844 and 320×568; real iPhone not verified.
+
 ## v1.87 — Header car kept from flattening on iPhone Safari (2026-11-10; owner screenshot)
 - The owner's iPhone showed the header car squashed into a flat strip on the Overview tab (it was fine on other tabs and in Chromium, which could not reproduce it). Cause not proven (Safari cannot be run here); the image relied on `height:auto`. Now `.brandcar` has an explicit width and height with the image's own 480:298 ratio (96x60, 80x50 up to 720 px, 66x41 up to 360 px) plus `aspect-ratio` and `object-fit:contain`, so layout no longer depends on the image being decoded first.
 - Files: `styles.css`, `index.html` (footer v1.87), `sw.js` (cache v150), `tests/profile-render.test.js`. Verified only in Chromium (sizes 80x50 / 66x41 at 390 / 320 / 430 wide); whether it fixes the iPhone is NOT verified.
