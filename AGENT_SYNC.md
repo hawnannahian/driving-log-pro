@@ -602,6 +602,9 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 ### 2026-11-11 — Claude: Calendar day without lessons (v1.88)
 - Owner: the empty hour list on a day with no lessons is not needed. Replaced by one short line; compact timeline unchanged for days with lessons. See PROJECT_STATE v1.88. Also: the header car (v1.87) is confirmed fine on the owner's iPhone.
 
+### 2026-11-11 — Claude: expense sheet full-height iPhone style (v1.93, cache v156)
+- Owner screenshot of v1.92: half-height sheet, jumping layout. CSS-only full-height grouped-card sheet; geometry identical across expense types. Tests: 89 node tests, Chromium checked; real iPhone not tested; not deployed until Pages succeeds.
+
 ### 2026-11-11 — Claude: expense sheet polish + version line in Settings (v1.92, cache v155)
 - Owner asked for a nicer, more professional New expense form and found the footer version invisible on the phone (footer hidden under 720px). Icon tiles, card sections, version shown at the end of Log → Settings. Tests: 87 node tests, Chromium 390×844/320×568 checked; real iPhone not tested; not deployed until Pages succeeds.
 
