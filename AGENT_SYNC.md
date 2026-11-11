@@ -591,3 +591,6 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 ### 2026-11-10 — Claude: header car fixed size (v1.87)
 - Owner's iPhone showed the header car flattened on Overview; Chromium cannot reproduce. Gave the image explicit width/height (see PROJECT_STATE v1.87). Unverified on a real iPhone; ask the owner for a screenshot after updating.
 
+### 2026-11-11 — Claude: Calendar day without lessons (v1.88)
+- Owner: the empty hour list on a day with no lessons is not needed. Replaced by one short line; compact timeline unchanged for days with lessons. See PROJECT_STATE v1.88. Also: the header car (v1.87) is confirmed fine on the owner's iPhone.
+

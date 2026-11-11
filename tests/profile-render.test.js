@@ -68,3 +68,7 @@ test("the header car has a fixed width and height so Safari cannot flatten it (v
  const css=fs.readFileSync(path.join(__dirname,"..","styles.css"),"utf8");
  assert.ok(css.includes(".brand .brandcar{width:96px;height:60px;aspect-ratio:480/298;object-fit:contain"));assert.ok(css.includes("@media(max-width:720px){.brand .brandcar{width:80px;height:50px}}"));
 });
+test("a calendar day without lessons shows one short line instead of the empty hour timeline (v1.88)",()=>{
+ const app=fs.readFileSync(path.join(__dirname,"..","app.js"),"utf8");
+ assert.ok(app.includes('lessonsOn(cal.day).length?dayTimeline(cal.day):\'<p class="tl-empty">No lessons on this day.</p>\''));
+});

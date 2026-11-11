@@ -3400,3 +3400,6 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 @media(max-width:720px){.brand .brandcar{width:80px;height:50px}}
 @media(max-width:360px){.brand .brandcar{width:66px;height:41px}}
 
+/* v1.88 — a day without lessons shows one short line instead of the empty hour-by-hour timeline. */
+#calendar .timeline .tl-empty{margin:0;padding:2px 14px;color:var(--muted);font-size:13px;line-height:1.5;text-align:center}
+
