@@ -10,7 +10,7 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 - Fresh branch `ui/expense-amount-label-v1-89` created from latest main `8519785528724f19e4fc6bbfe14164cb9bcd60ed`.
 - Files: `index.html`, `sw.js` (cache v152), `tests/expense-form-label.test.js`, `PROJECT_STATE.md`, `AGENT_SYNC.md`. Footer v1.89.
 - No storage/schema/record migration, accounting, payments, booking/course allocation, backup/restore, cloud sync or Full-Time isolation changes.
-- Tests, rendered 390×844 / 320×568 browser checks, real iPhone Safari and Pages deployment have not yet been run. Keep PR draft pending CI and owner review.
+- GitHub Actions workflow #94 passed every-JavaScript syntax checks and `node --test tests/*.test.js`, including the new expense-form regression tests. Rendered 390×844 / 320×568 browser checks, real iPhone Safari and Pages deployment have not been run. Keep PR draft for owner review.
 
 ### 2026-11-10 — ChatGPT: Recoverable Lesson Deletion + Hybrid Audit v1.75 — MERGED (PR #155)
 - Owner approved the hybrid design: audit history stays in main local data, is included in JSON backups and syncs through the existing private GitHub data repository. No new backend/service or credentials.
