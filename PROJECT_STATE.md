@@ -5,6 +5,12 @@
 - GitHub Actions workflow #94 passed: syntax-check of every JavaScript file and `node --test tests/*.test.js` (including the new expense-form regression tests). Rendered browser checks at 390×844 / 320×568, real iPhone Safari/PWA QA and Pages deployment are not run; this branch is not deployed.
 
 
+## v1.91 — New expense sheet spacing fixed (2026-11-11; owner iPhone screenshot)
+- Problem: the New expense bottom sheet has a fixed height; the form grid stretched its rows to fill it, so the type chips became tall ovals and sections had huge gaps.
+- Fix (CSS only): `#recordDialog .formgrid{align-content:start;align-items:start}`, chips `flex:0 0 auto`, and the expense-mode sheet is `height:auto`. Lesson sheet height unchanged.
+- Files: `styles.css`, `sw.js` (cache v154), `index.html` (footer v1.91), `tests/expense-sheet-spacing.test.js`. No data/schema change.
+- Tests: node --check all JS; 84 node tests pass; Chromium 390×844 and 320×568 screenshots checked. Not tested: real iPhone Safari.
+
 ## v1.90 — Hourly rate no longer shows on expense forms (2026-11-11; owner iPhone screenshot)
 - Bug: in New expense (Fuel, Other Expense, Insurance, Repair, Refund) and for Note, the lesson-only "Hourly rate (€)" field and its helper text were visible. Root cause: my v1.80 change in `updateCourseField()` did `rateField.classList.toggle("hidden",courseSelected)`; `toggleLessonFields()` hides the rate field for non-lessons and then calls `updateCourseField()`, which removed `hidden` again because `courseSelected` is false for non-lessons. Not a stale cache: it affected every version since v1.80 (v1.89 was current in the screenshot).
 - Fix (one condition): `toggle("hidden",courseSelected||!lesson)`. Lesson behaviour is unchanged (Individual shows the field, Course hours hides it and shows the course-rate note). No CSS workaround, no data change.
