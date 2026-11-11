@@ -2,7 +2,7 @@
 - In the New expense form, the existing `fCost` field is labelled **Amount (€)** instead of **Cost (€)** so the amount paid is clear. The field, stored `cost` value, Fuel odometer, date, category controls and Save workflow are unchanged. The Hourly rate remains lesson-only through the existing `.lessonfield` visibility logic; no lesson pricing behavior changed.
 - Files: `index.html`, `sw.js`, `tests/expense-form-label.test.js`, `AGENT_SYNC.md`, `PROJECT_STATE.md`. Footer v1.89; Service Worker cache v152.
 - No storage keys, record fields, existing records, accounting calculations, payment behavior, booking/course allocation, backup/restore, cloud sync or Full-Time Students isolation changed.
-- Automated/browser/iPhone checks and Pages deployment are pending CI and review; this branch is not deployed.
+- GitHub Actions workflow #94 passed: syntax-check of every JavaScript file and `node --test tests/*.test.js` (including the new expense-form regression tests). Rendered browser checks at 390×844 / 320×568, real iPhone Safari/PWA QA and Pages deployment are not run; this branch is not deployed.
 
 ## Completed v1.75 — Recoverable Lesson Deletion + Hybrid Audit (2026-11-10; PR #155 merged at `df510f4`, Pages run #207 succeeded)
 - **Storage fields (additive, optional):** `state.lessonRecovery[]` rows `{id,lesson|null,status:"deleted"|"restored",deletedAt,restoredAt,purgedAt,updatedAt,deletedBy,restoredBy}` and `state.lessonAudit[]` events `{id,lessonId,action:"deleted"|"restored"|"expired",at,actor,student,date,start,end}`. Included in `snapshot()` (cloud sync, daily cloud backup) and in JSON backups; `validBackup` validates them; older backups without them stay valid. Storage keys unchanged.
