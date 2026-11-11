@@ -1,4 +1,4 @@
-const CACHE="nahians-schedule-cache-v151";
+const CACHE="nahians-schedule-cache-v152";
 const FILES=["./","./index.html","./push-config.js","./styles.css","./app.js","./reports-dashboard.js","./islamic-content.js","./islamic.js","./full-time-students.js","./lesson-recovery.js","./prayer-times.js","./mawaqit-times.js","./manifest.webmanifest","./icon.svg","./brand-car.png","./icon-192.png","./icon-512.png","./icon-maskable-512.png","./apple-touch-icon.png","./travel-dua.mp3","./ayatul-kursi.mp3","./three-quls.mp3","./surah-al-kahf-1-10-alafasy.mp3","./dua-leaving-home.mp3","./dua-long-journey.mp3","./dua-new-place.mp3","./quran-17-80-alafasy.mp3","./dhikr-return-journey.mp3","./istighfar-hadith.mp3","./durood-ibrahim.mp3"];
 
 self.addEventListener("install",event=>{
