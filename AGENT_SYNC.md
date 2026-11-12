@@ -602,6 +602,9 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 ### 2026-11-11 — Claude: Calendar day without lessons (v1.88)
 - Owner: the empty hour list on a day with no lessons is not needed. Replaced by one short line; compact timeline unchanged for days with lessons. See PROJECT_STATE v1.88. Also: the header car (v1.87) is confirmed fine on the owner's iPhone.
 
+### 2026-11-12 — Claude: Calendar Add lesson pre-fills a free time (v1.97, cache v160)
+- Calendar audit found no functional bug; owner approved the first suggestion. Add lesson on a busy day now opens at the first free slot instead of an occupied 10:00. Tests listed in PROJECT_STATE v1.97; real device not tested; not deployed until Pages succeeds.
+
 ### 2026-11-12 — Claude: Collected includes retained receipts (v1.96, cache v159) — accounting change, owner approved
 - Reports Collected now counts retained individual-lesson receipts once, by receipt date, to match the student profile. See PROJECT_STATE v1.96 for cases. Tests listed there; real device not tested; not deployed until Pages succeeds. Other agent: do not double-count these receipts as course payments.
 
