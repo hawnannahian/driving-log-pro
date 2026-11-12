@@ -5,6 +5,13 @@
 - GitHub Actions workflow #94 passed: syntax-check of every JavaScript file and `node --test tests/*.test.js` (including the new expense-form regression tests). Rendered browser checks at 390×844 / 320×568, real iPhone Safari/PWA QA and Pages deployment are not run; this branch is not deployed.
 
 
+## v1.96 — Reports "Collected" includes retained individual-lesson receipts (2026-11-12; owner-approved accounting change)
+- Problem: when a paid individual lesson is moved into a course, its money stays on the lesson as a retained receipt (`courseTransferPaid`/`courseTransferDate`). The student profile counted it in Total paid but Reports "Collected" skipped it (course lessons were excluded), so the same cash showed 20 € in the profile and 0 € in Reports.
+- Fix: `dashCollected` adds each retained receipt once, in the period of its `courseTransferDate` (fallback lesson date), only while the lesson is still a course lesson (so an orphaned lesson already counted as a paid individual lesson is not counted twice). Not a course payment; Revenue, Net profit, Outstanding, course ledger, stored data and the profile are unchanged.
+- Synthetic results: receipt only → Collected 20 (was 0); receipt dated in another month → 0 this month; receipt 20 + course payment 50 → 70; orphan paid lesson counted once. Earlier cases (individual, course, refund) unchanged.
+- Files: `reports-dashboard.js`, `index.html` (v1.96), `sw.js` (cache v159), `tests/collected-retained-receipt.test.js`. No data/schema change.
+- Not tested: real iPhone; the student profile has its own separate behaviour for an orphaned course reference (not touched).
+
 ## v1.95 — CSV keeps negative numbers as numbers (2026-11-12; owner-approved)
 - Bug: `csvCell` prefixed an apostrophe to any value starting with "-" even when it was a number, so a negative Net profit exported as text `'-20`. Now the formula-injection guard applies to text only; numbers are written as they are. Text beginning with = + - @ tab CR is still neutralised.
 - Files: `app.js`, `index.html` (v1.95), `sw.js` (cache v158), `tests/csv-cell.test.js`. No data/schema change; CSV layout unchanged.
