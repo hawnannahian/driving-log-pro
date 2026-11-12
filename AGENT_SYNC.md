@@ -602,6 +602,9 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 ### 2026-11-11 — Claude: Calendar day without lessons (v1.88)
 - Owner: the empty hour list on a day with no lessons is not needed. Replaced by one short line; compact timeline unchanged for days with lessons. See PROJECT_STATE v1.88. Also: the header car (v1.87) is confirmed fine on the owner's iPhone.
 
+### 2026-11-12 — Claude: CSV negative numbers (v1.95, cache v158)
+- Owner approved. `csvCell` no longer prefixes numbers with an apostrophe (negative profit exported as text). Text guard unchanged. A separate PR (Collected + retained receipts) is pending the owner's review of results.
+
 ### 2026-11-11 — Claude: expense Amount entry + Date row (v1.94, cache v157)
 - Owner screenshot: "0" stays in Amount and typed digits push it right; Date value misaligned. Fixed (see PROJECT_STATE v1.94). Tests: 91 node tests, Chromium flow checked; real iPhone not tested; not deployed until Pages succeeds.
 
