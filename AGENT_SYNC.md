@@ -602,6 +602,9 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 ### 2026-11-11 — Claude: Calendar day without lessons (v1.88)
 - Owner: the empty hour list on a day with no lessons is not needed. Replaced by one short line; compact timeline unchanged for days with lessons. See PROJECT_STATE v1.88. Also: the header car (v1.87) is confirmed fine on the owner's iPhone.
 
+### 2026-11-12 — Claude: service worker cache-first + audio cache (v1.98, cache v161) — owner approved
+- Slow/blank launch fix: shell served from cache first, updates via the existing banner, audio in `nahians-audio-cache-v1`. **Other agent: always bump `CACHE` in `sw.js` for any cached-asset change — with cache-first an un-bumped change never reaches the phone.** Tests/measurements in PROJECT_STATE v1.98; real iPhone not tested; not deployed until Pages succeeds.
+
 ### 2026-11-12 — Claude: Calendar Add lesson pre-fills a free time (v1.97, cache v160)
 - Calendar audit found no functional bug; owner approved the first suggestion. Add lesson on a busy day now opens at the first free slot instead of an occupied 10:00. Tests listed in PROJECT_STATE v1.97; real device not tested; not deployed until Pages succeeds.
 
