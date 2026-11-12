@@ -922,7 +922,7 @@ const logMenuToggle=$("logMenuToggle"),showLogSettings=()=>{$("logRecordsPanel")
 logMenuToggle.onclick=showLogSettings;
 $("prayerEdit").onclick=()=>{document.querySelector('.tab[data-tab="log"]').click();showLogSettings();$("pManualOn").scrollIntoView({block:"center"});};
 $("logSettingsBack").onclick=()=>{showLogRecords();logMenuToggle.focus();};
-initWaTemplateSettings();$("addRecordBtn").onclick=newExpense;$("overviewAddLesson").onclick=()=>newRecord();$("calAddBtn").onclick=()=>newRecord(cal.day);$("calPrev").onclick=()=>calMove(-1);$("calNext").onclick=()=>calMove(1);document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>setCalView(b.dataset.view));$("addStudentBtn").onclick=newStudent;$("fType").onchange=toggleLessonFields;
+initWaTemplateSettings();$("addRecordBtn").onclick=newExpense;$("overviewAddLesson").onclick=()=>newRecord();$("calAddBtn").onclick=addLessonOnSelectedDay;$("calPrev").onclick=()=>calMove(-1);$("calNext").onclick=()=>calMove(1);document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>setCalView(b.dataset.view));$("addStudentBtn").onclick=newStudent;$("fType").onchange=toggleLessonFields;
 ["logFilter","logSort","studentSearch","studentFilter","studentSort","period","periodValue"].forEach(id=>$(id).addEventListener("input",render));
 let installPrompt;$("installBtn").onclick=async()=>{if(installPrompt){installPrompt.prompt();installPrompt=null;}};
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();installPrompt=e;$("installBtn").classList.remove("hidden");});
@@ -956,3 +956,6 @@ document.addEventListener("play",ev=>{document.querySelectorAll("audio").forEach
 
 // v1.94 — Amount/Odometer: a lone "0" is cleared on focus so typing replaces it (shown as a grey 0 placeholder), and restored on blur if left empty. Saving still reads the value through num(), so an empty field is 0.
 ["fCost","fKm"].forEach(id=>{const el=$(id);if(!el)return;el.addEventListener("focus",()=>{if(num(el.value)===0&&el.value.trim()!=="")el.value="";});el.addEventListener("blur",()=>{if(el.value.trim()==="")el.value="0";});});
+
+// v1.97 — Calendar "Add lesson": keep the usual 10:00–11:00 when it is free; otherwise pre-fill the first free slot of the selected day (a slot of at least 1 hour if there is one). Free slots already exclude booked lessons, prayer blocks, past time today and the working-hours limits. Past days and days with no free slot keep the normal default. Only the Start/End fields change; saving checks are unchanged.
+function addLessonOnSelectedDay(){newRecord(cal.day);if(cal.day<dateISO(new Date()))return;const slots=freeSlots(cal.day);if(!slots.length||slots.some(([a,b])=>a<=600&&b>=660))return;const pick=slots.find(([a,b])=>b-a>=60)||slots[0];$("fStart").value=fromMin(pick[0]);$("fEnd").value=fromMin(Math.min(pick[0]+60,pick[1]));syncDur();}
