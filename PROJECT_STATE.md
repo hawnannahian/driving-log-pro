@@ -5,6 +5,14 @@
 - GitHub Actions workflow #94 passed: syntax-check of every JavaScript file and `node --test tests/*.test.js` (including the new expense-form regression tests). Rendered browser checks at 390×844 / 320×568, real iPhone Safari/PWA QA and Pages deployment are not run; this branch is not deployed.
 
 
+## v1.98 — App opens from the cache at once; audio in its own cache (2026-11-12; owner-approved, slow/blank launch)
+- Problem: `sw.js` was network-first for the page and every file, with no timeout, so each launch waited for index.html, styles.css, app.js and ~8 scripts from the network (blank/black then white screen on weak connections), and every release re-downloaded all files including ~7 MB of audio.
+- Fix: navigation and shell files are served from the versioned cache first (instant, offline-safe). New releases arrive through the service worker (`sw.js` changes → new shell downloaded in the background → existing "new version ready" banner → Reload). `app.js` now also calls `reg.update()` right after registering. The 11 audio files moved to a separate persistent cache `nahians-audio-cache-v1` that survives version bumps; the first install reuses audio from the old cache (no re-download) and fills any missing file in the background, never blocking an update.
+- Rule unchanged and now essential: every change to a cached asset must bump `CACHE` in `sw.js` (CLAUDE.md §8). New test `tests/sw-cache.test.js` checks every local asset the page loads is cached.
+- Measured (Chromium, local server with 4 s delay per request): old code did not render within 30 s; new code rendered in ~0.1 s; offline works; release flow (old shell opens → banner → Reload → new version) and migration from cache v160 verified; audio files not requested again after a release.
+- Files: `sw.js`, `app.js`, `index.html` (v1.98), `tests/sw-cache.test.js`. No data/schema change; localStorage untouched.
+- Not tested: real iPhone Safari/Home Screen (iOS still shows its own black launch screen before the page; no startup images added). First launch after this release still downloads once; from the next release on, updates need one extra open/Reload to show.
+
 ## v1.97 — Calendar "Add lesson" pre-fills a free time (2026-11-12; owner-approved)
 - Before: Add lesson on a selected day always opened at 10:00–11:00, even if that time was already booked.
 - Now: if 10:00–11:00 is free it stays; otherwise the first free slot of that day is used (a slot of at least 1 hour if one exists), counting booked lessons, prayer blocks, time already passed today and working hours. Past days and days with no free slot keep the old default. Free-slot buttons, Overview Add lesson and all save-time checks (12-hour, prayer, overlap, working hours, course, payment) are unchanged. Only Start/End are pre-filled.

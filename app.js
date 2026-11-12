@@ -927,7 +927,7 @@ initWaTemplateSettings();$("addRecordBtn").onclick=newExpense;$("overviewAddLess
 let installPrompt;$("installBtn").onclick=async()=>{if(installPrompt){installPrompt.prompt();installPrompt=null;}};
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();installPrompt=e;$("installBtn").classList.remove("hidden");});
 // When a new version of the app has been installed in the background, offer a reload.
-if("serviceWorker" in navigator)window.addEventListener("load",()=>{const had=!!navigator.serviceWorker.controller;navigator.serviceWorker.register("./sw.js").then(reg=>document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")reg.update().catch(()=>{});})).catch(()=>{});navigator.serviceWorker.addEventListener("controllerchange",()=>{if(had)$("updateBanner").classList.remove("hidden");});});
+if("serviceWorker" in navigator)window.addEventListener("load",()=>{const had=!!navigator.serviceWorker.controller;navigator.serviceWorker.register("./sw.js").then(reg=>{reg.update().catch(()=>{});document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")reg.update().catch(()=>{});});}).catch(()=>{});navigator.serviceWorker.addEventListener("controllerchange",()=>{if(had)$("updateBanner").classList.remove("hidden");});});
 $("updateBtn").onclick=()=>location.reload();
 
 $("saveBannerBtn").onclick=backupNow;
