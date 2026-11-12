@@ -5,6 +5,11 @@
 - GitHub Actions workflow #94 passed: syntax-check of every JavaScript file and `node --test tests/*.test.js` (including the new expense-form regression tests). Rendered browser checks at 390×844 / 320×568, real iPhone Safari/PWA QA and Pages deployment are not run; this branch is not deployed.
 
 
+## v1.95 — CSV keeps negative numbers as numbers (2026-11-12; owner-approved)
+- Bug: `csvCell` prefixed an apostrophe to any value starting with "-" even when it was a number, so a negative Net profit exported as text `'-20`. Now the formula-injection guard applies to text only; numbers are written as they are. Text beginning with = + - @ tab CR is still neutralised.
+- Files: `app.js`, `index.html` (v1.95), `sw.js` (cache v158), `tests/csv-cell.test.js`. No data/schema change; CSV layout unchanged.
+- Tests: node --check all JS; node tests pass; Chromium export of a negative-profit month. Not tested: opening the CSV in Excel/Sheets on a device.
+
 ## v1.94 — Expense Amount entry and Date row (2026-11-11; owner iPhone screenshot)
 - Amount/Odometer started at "0" and typing appended to it (value drifted right). Now a lone 0 is cleared on focus (grey 0 placeholder), restored to 0 on blur if left empty; saving still reads via `num()` (empty = 0). Date label/value share one centred line on iPhone; heavy focus box on list rows replaced by a soft row highlight.
 - Files: `app.js`, `index.html`, `styles.css`, `sw.js` (cache v157), `tests/expense-amount-entry.test.js`. No data/schema change; stored amounts unchanged.
