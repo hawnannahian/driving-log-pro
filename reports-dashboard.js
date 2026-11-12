@@ -2,7 +2,7 @@
 // Reports dashboard (loaded after app.js and uses its helpers).
 // Every figure comes from the app's own records, with the same money rules as the Log and the student profiles:
 // - Revenue (earned)  = value of completed lessons (totals().income). Advance payments are not revenue by themselves.
-// - Collected         = money received in the period: paid normal lessons (by lesson date) + course/package payments (by payment date).
+// - Collected         = money received in the period: paid normal lessons (by lesson date) + retained individual-lesson receipts of lessons moved into a course (by receipt date) + course/package payments (by payment date).
 // - Outstanding       = completed lessons not paid yet + course/package amounts still due (packages bought in the period).
 // - Expenses          = cost of Fuel, Maintenance, Insurance, Refund and other expense records (totals().expenses).
 // - Net profit        = Revenue − Expenses.
@@ -15,6 +15,8 @@ const dashReduce=(()=>{try{return matchMedia("(prefers-reduced-motion: reduce)")
 
 function dashCollected(p,v){
  let c=state.entries.filter(e=>e.type==="Lesson"&&isDone(e)&&e.paid&&!isCourseLesson(e)&&inSel(e.date,p,v)).reduce((a,e)=>a+(e.pkg?(e.extraH||0)*rateOf(e):income(e)),0);
+ // Retained receipts: money paid for an individual lesson that was later moved into a course. It was really received (on courseTransferDate), the student profile counts it in Total paid, and it is not a course payment, so it is added here once. Only while the lesson is still a course lesson, otherwise the paid-lesson line above already counts it.
+ c+=state.entries.filter(e=>e.type==="Lesson"&&Number(e.courseTransferPaid)>0&&isCourseLesson(e)&&inSel(e.courseTransferDate||e.date||"",p,v)).reduce((a,e)=>a+(Number(e.courseTransferPaid)||0),0);
  // Course payments: each payment record is counted once, on its own date.
  for(const k of courses())c+=coursePays(k).filter(x=>inSel(x.date||k.date||"",p,v)).reduce((a,x)=>a+(Number(x.amount)||0),0);
  for(const k of pkgs()){if(Array.isArray(k.payments))c+=k.payments.filter(x=>inSel(x.date||k.date||"",p,v)).reduce((a,x)=>a+(Number(x.amount)||0),0);else if(k.paid!==false&&inSel(k.date||"",p,v))c+=Number(k.amount||0);}

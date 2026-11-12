@@ -602,6 +602,9 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 ### 2026-11-11 — Claude: Calendar day without lessons (v1.88)
 - Owner: the empty hour list on a day with no lessons is not needed. Replaced by one short line; compact timeline unchanged for days with lessons. See PROJECT_STATE v1.88. Also: the header car (v1.87) is confirmed fine on the owner's iPhone.
 
+### 2026-11-12 — Claude: Collected includes retained receipts (v1.96, cache v159) — accounting change, owner approved
+- Reports Collected now counts retained individual-lesson receipts once, by receipt date, to match the student profile. See PROJECT_STATE v1.96 for cases. Tests listed there; real device not tested; not deployed until Pages succeeds. Other agent: do not double-count these receipts as course payments.
+
 ### 2026-11-12 — Claude: CSV negative numbers (v1.95, cache v158)
 - Owner approved. `csvCell` no longer prefixes numbers with an apostrophe (negative profit exported as text). Text guard unchanged. A separate PR (Collected + retained receipts) is pending the owner's review of results.
 
