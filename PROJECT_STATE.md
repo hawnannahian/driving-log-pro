@@ -9,7 +9,7 @@
 - Before: Add lesson on a selected day always opened at 10:00–11:00, even if that time was already booked.
 - Now: if 10:00–11:00 is free it stays; otherwise the first free slot of that day is used (a slot of at least 1 hour if one exists), counting booked lessons, prayer blocks, time already passed today and working hours. Past days and days with no free slot keep the old default. Free-slot buttons, Overview Add lesson and all save-time checks (12-hour, prayer, overlap, working hours, course, payment) are unchanged. Only Start/End are pre-filled.
 - Files: `app.js` (`addLessonOnSelectedDay`), `index.html` (v1.97), `sw.js` (cache v160), `tests/calendar-add-free-slot.test.js`. No data/schema change.
-- Tests: node --check all JS; node tests pass; Chromium cases: busy day → 11:00–12:00, empty day → 10:00–11:00, past day unchanged, today → first free time after now/prayer, nearly full day → 21:15–22:00. Not tested: real iPhone.
+- Tests: node --check all JS; node tests 97 pass; Chromium cases: busy day → 11:00–12:00, empty day → 10:00–11:00, past day unchanged, today → first free time after now/prayer, nearly full day → 21:15–22:00. Not tested: real iPhone.
 
 ## v1.96 — Reports "Collected" includes retained individual-lesson receipts (2026-11-12; owner-approved accounting change)
 - Problem: when a paid individual lesson is moved into a course, its money stays on the lesson as a retained receipt (`courseTransferPaid`/`courseTransferDate`). The student profile counted it in Total paid but Reports "Collected" skipped it (course lessons were excluded), so the same cash showed 20 € in the profile and 0 € in Reports.
