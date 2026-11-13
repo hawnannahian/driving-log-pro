@@ -3515,3 +3515,84 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 #calendar[data-calview="day"]>h3.caltitle{order:8}
 #calendar[data-calview="day"]>#upcomingList{order:9}
 #calendar[data-calview="day"]>#calWeek{order:10}
+
+/* v1.104 — Premium minimal Calendar (presentation only): lighter header, flat cards on a soft background, compact stats / reminders / available time, a clearer timeline and a refined bottom bar.
+   Tokens: primary #315CEB · background #F8FAFC · card #FFFFFF · navy #1E3155 · secondary #718096 · soft green #E8F6EE · success #16A36A · amber #F4B942. */
+:root{--pc-blue:#315ceb;--pc-bg:#f8fafc;--pc-card:#fff;--pc-navy:#1e3155;--pc-muted:#718096;--pc-green-bg:#e8f6ee;--pc-green:#16a36a;--pc-amber:#f4b942;--pc-line:#e6ebf2}
+body{background:var(--pc-bg)}
+/* header: compact and calmer */
+.topbar{background:linear-gradient(115deg,#ffdb6b 0%,#fcc93e 60%,#f7b92c 100%)!important;box-shadow:0 2px 10px #b879001a!important}
+@media(max-width:720px){.topbar{min-height:76px!important;height:calc(76px + env(safe-area-inset-top))!important}.brand b{font-size:17px!important;letter-spacing:-.3px}.brand small{font-size:11.5px!important}.brand .brandcar{width:72px!important;height:45px!important}}
+/* Calendar page: sections are individual cards on the page background */
+#calendar.panel{background:transparent;border:0;box-shadow:none;padding:6px 0 0;min-height:0}
+#calendar .calviews{margin:0 0 10px}
+#calendar .calboard{padding:10px 10px 8px;border:1px solid var(--pc-line);border-radius:16px;background:var(--pc-card);box-shadow:none}
+#calendar .calhead{padding-bottom:6px}
+#calendar .caltitlebox b{color:var(--pc-navy);font-size:17px;letter-spacing:-.3px}
+#calendar .caltoday{font-size:12px;color:var(--pc-blue)}
+#calendar .calhead .iconbtn{width:36px;height:36px;min-width:36px;min-height:36px;border-radius:11px;background:#f3f6fb;border:0;color:var(--pc-navy)}
+#calendar .calsum{margin:0 0 8px;padding:0;border:0;background:none;color:var(--pc-muted);font-size:12.5px;font-weight:650;text-align:center}
+#calendar .calstrip{margin:6px 0 2px;gap:3px}
+#calendar .stripday{min-height:58px;padding:5px 0 4px;border-radius:12px;border-color:#eef2f7;gap:1px}
+#calendar .stripday small{font-size:9.5px}
+#calendar .stripday b{width:30px;height:30px;font-size:16px;color:var(--pc-navy)}
+#calendar .stripday.selected b{background:var(--pc-blue);color:#fff}
+#calendar .stripday.past b{color:#aab4c3}
+#calendar .callegend{margin:6px 2px 0;font-size:10.5px;gap:4px 10px}
+/* Add lesson: one consistent primary button */
+#calendar .sectionhead.caltitle{margin:12px 0 10px}
+#calendar #calAddBtn{min-height:46px;padding:0 18px;border-radius:14px;background:var(--pc-blue);font-size:15px;font-weight:800;box-shadow:0 6px 16px #315ceb33}
+#calendar #calDayHead.dayview{display:block}
+#calendar #calDayHead.dayview #calAddBtn{width:100%}
+/* stats: four equal compact cards */
+#calendar .cal-day-stats{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:6px;margin:0 0 10px}
+#calendar .cal-stat{padding:9px 8px;border:1px solid var(--pc-line);border-radius:13px;background:var(--pc-card);box-shadow:none}
+#calendar .cal-stat small{display:block;margin:0 0 3px;font-size:10px;font-weight:700;color:var(--pc-muted);letter-spacing:.2px;text-transform:none}
+#calendar .cal-stat b{display:block;font-size:16px;font-weight:800;color:var(--pc-navy);letter-spacing:-.3px;white-space:nowrap;font-variant-numeric:tabular-nums}
+@media(max-width:360px){#calendar .cal-day-stats{gap:4px}#calendar .cal-stat{padding:8px 5px}#calendar .cal-stat b{font-size:13px}#calendar .cal-stat small{font-size:9px}}
+/* WhatsApp reminders: compact */
+#calendar .remindbox{margin:0 0 10px;padding:10px 12px;border:1px solid #cfeadb;border-radius:14px;background:var(--pc-green-bg)}
+#calendar .remindbox p{display:flex;align-items:baseline;flex-wrap:wrap;gap:2px 8px;margin:0 0 8px}
+#calendar .remindbox p b{display:inline;font-size:13px;color:#0f7a4f}
+#calendar .remindbox p small{flex:1 1 100%;font-size:11px;color:#4f7f68}
+#calendar .remindbox .remindcount{display:inline-block;margin-left:2px;padding:2px 8px;border-radius:999px;background:var(--pc-green);color:#fff;font-size:10.5px;font-weight:800}
+#calendar .remindlist{display:flex;flex-wrap:wrap;gap:6px}
+#calendar .remindchip{max-width:100%;min-height:32px;padding:6px 11px;border-radius:999px;background:var(--pc-green);color:#fff;font-size:12px;font-weight:700;line-height:1.2;white-space:normal;overflow-wrap:anywhere}
+#calendar .remindchip.sent{background:#cfeadb;color:#2c6b4c}
+/* available time: compact slot cards */
+#calendar .cal-free-slots{margin:0 0 10px;padding:10px;border:1px solid var(--pc-line);border-radius:14px;background:var(--pc-card)}
+#calendar .cal-free-head{margin-bottom:8px;align-items:center}
+#calendar .cal-free-head b{font-size:13.5px;color:var(--pc-navy)}
+#calendar .cal-free-head small{display:none}
+#calendar .cal-free-head>span{background:var(--pc-green-bg);color:#0f7a4f;font-size:10.5px;padding:4px 9px}
+#calendar .cal-slot-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+#calendar .cal-slot{min-height:48px;padding:7px 9px;border:1px solid #e4ebf3;border-radius:12px;background:#fbfcfe;color:var(--pc-navy)}
+#calendar .cal-slot b{font-size:12.5px;color:var(--pc-navy);white-space:nowrap}
+#calendar .cal-slot small{font-size:10.5px;color:var(--pc-muted)}
+#calendar .cal-slot strong{flex:none;padding:5px 8px;border-radius:9px;background:var(--pc-blue);color:#fff;font-size:11px;font-weight:800}
+@media(max-width:340px){#calendar .cal-slot-list{grid-template-columns:minmax(0,1fr)}}
+/* timeline: the main event */
+#calendar .timeline{margin:0 0 12px;padding:12px 10px 12px 0;border:1px solid var(--pc-line);border-radius:16px;background:var(--pc-card);box-shadow:none}
+#calendar .tlhour{border-color:#eef2f7;color:#8a96aa;font-size:10.5px;font-weight:700}
+#calendar .tlles{border-radius:12px;padding:6px 10px;box-shadow:none;border-left-width:4px;border-style:solid;border-top-color:transparent;border-right-color:transparent;border-bottom-color:transparent}
+#calendar .tlles.paid{background:var(--pc-green-bg);border-left-color:var(--pc-green);color:#0b6a43}
+#calendar .tlles.unpaid{background:#fff7e3;border-left-color:var(--pc-amber);color:#8a5a00}
+#calendar .tlles.pkg,#calendar .tlles.course{background:#eaf0ff;border-left-color:var(--pc-blue);color:#2447bd}
+#calendar .tlles.past,#calendar .tlles.done{opacity:.62}
+#calendar .tlrow b{font-size:11.5px;font-weight:700;opacity:.9}
+#calendar .tlrow span{font-size:13.5px;font-weight:800;color:var(--pc-navy)}
+#calendar .tlles small{font-size:11px;font-weight:650}
+/* student list below stays calm */
+#calendar .cal-students-panel{border:1px solid var(--pc-line);border-radius:16px;background:var(--pc-card);box-shadow:none}
+/* bottom bar */
+.tabbar{border-top:1px solid var(--pc-line)!important;box-shadow:0 -2px 14px #1e315512!important}
+.tabbar .tab{color:#8793a6;font-weight:700}
+.tabbar .tab svg{width:22px;height:22px}
+.tabbar .tab.active{color:var(--pc-blue);background:#eef2ff}
+.navpill{background:var(--pc-blue)!important}
+#calendar .calviews{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;max-width:none;margin:0 0 10px}
+#calendar .calviews button{min-width:0;min-height:36px;padding:0 6px}
+#calendar .remindchip{min-height:28px;padding:5px 10px;font-size:11.5px}
+#calendar .remindbox p{margin:0 0 7px}
+@media(max-width:400px){#calendar .cal-stat{padding:9px 6px}#calendar .cal-stat b{font-size:14.5px;overflow:visible;text-overflow:clip}}
+@media(max-width:360px){#calendar .cal-day-stats{gap:3px}#calendar .cal-stat{padding:8px 4px}#calendar .cal-stat b{font-size:12.5px;letter-spacing:-.4px}}

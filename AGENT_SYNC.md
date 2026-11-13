@@ -602,6 +602,9 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 ### 2026-11-11 — Claude: Calendar day without lessons (v1.88)
 - Owner: the empty hour list on a day with no lessons is not needed. Replaced by one short line; compact timeline unchanged for days with lessons. See PROJECT_STATE v1.88. Also: the header car (v1.87) is confirmed fine on the owner's iPhone.
 
+### 2026-11-14 — Claude: Premium minimal Calendar UI (v1.104, cache v167) — DRAFT PR, NOT merged
+- Owner brief: premium iOS-style Calendar, presentation only, wait for visual approval before merge/deploy. Done on branch `feature/premium-calendar-ui`; see PROJECT_STATE v1.104. **Other agent: do not merge or deploy this PR; the owner approves the look first.** Real iPhone not tested.
+
 ### 2026-11-14 — Claude: Calendar Day view + week strip, colours not dots (v1.103, cache v166)
 - Owner approved the redesign sample (no dots; colour for package, day off, holiday). Done: Day default, week strip, blue/red/orange colours. Open: "day off" needs a data decision (no such concept yet); quick-booking sheet and slide-up day sheet not built. Details/tests in PROJECT_STATE v1.103. Real device not tested; not deployed until Pages succeeds.
 
