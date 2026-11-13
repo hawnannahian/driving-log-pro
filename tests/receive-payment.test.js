@@ -12,14 +12,19 @@ test("v1.99: it reuses the course ledger - no new top-level data",()=>{
   assert.match(code,/keepCopy\("receive-payment"\)/);
   assert.match(app,/\["before-receive-payment","Before a payment was received"\]/);
 });
-test("v1.99: only scheduled, unpaid, unlinked lessons of the same student can be covered",()=>{
+test("v1.100: only this student's unlinked lessons can be covered: scheduled unpaid ones, and already-Paid lessons of the received date",()=>{
   const code=app.slice(app.indexOf("const receiveEligible"),app.indexOf("const receiveHours"));
-  for(const part of ["sameName(e.student,s.name)","!isDone(e)","e.done!==false","!e.course","!e.pkg","!e.paid"])assert.ok(code.includes(part),part);
+  for(const part of ["sameName(e.student,s.name)","e.done!==false","!e.course","!e.pkg","courseTransferPaid","(!isDone(e)&&!e.paid)","e.paid&&!!date&&e.date===date"])assert.ok(code.includes(part),part);
+});
+test("v1.100: an already-Paid lesson is never pre-ticked and its payment is replaced, not doubled",()=>{
+  assert.match(app,/if\(reset&&!i\.dataset\.paid&&h<=left\+\.001\)/);
+  assert.match(app,/if\(e\.paid\)e\.paid=false;/);
+  assert.match(app,/Total paid for this student becomes/);
 });
 test("v1.99: hours = amount / price per hour, and ticked lessons may not exceed them",()=>{
   assert.match(app,/round4\(amount\/rate\)/);
   assert.match(app,/need>total\+\.001/);
-  assert.match(app,/chosen\.forEach\(e=>\{e\.course=c\.id;delete e\.courseAlloc;\}\)/);
+  assert.match(app,/chosen\.forEach\(e=>\{e\.course=c\.id;delete e\.courseAlloc;if\(e\.paid\)e\.paid=false;\}\)/);
 });
 test("v1.99: footer and Settings version match",()=>{
   const v=html.match(/Version (v[\d.]+)</)[1];assert.ok(html.includes("manager · "+v+"</span></footer>"));
