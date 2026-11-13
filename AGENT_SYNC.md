@@ -602,6 +602,9 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 ### 2026-11-11 — Claude: Calendar day without lessons (v1.88)
 - Owner: the empty hour list on a day with no lessons is not needed. Replaced by one short line; compact timeline unchanged for days with lessons. See PROJECT_STATE v1.88. Also: the header car (v1.87) is confirmed fine on the owner's iPhone.
 
+### 2026-11-13 — Claude: Calendar swipe threshold (v1.102, cache v165)
+- Owner: month changed with a slight touch. Swipe now needs a deliberate horizontal gesture (see PROJECT_STATE v1.102). Real finger feel not tested on an iPhone; thresholds are in `calSwipeDir` if they need tuning. Not deployed until Pages succeeds.
+
 ### 2026-11-13 — Claude: Students "Recent activity" sort (v1.101, cache v164)
 - Default Students sort is now Recent activity (last opened on this device / last completed lesson). Recents are device-local (own localStorage key), not part of data/sync. Details/tests in PROJECT_STATE v1.101. Real device not tested; not deployed until Pages succeeds.
 

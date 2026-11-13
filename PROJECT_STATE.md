@@ -5,6 +5,12 @@
 - GitHub Actions workflow #94 passed: syntax-check of every JavaScript file and `node --test tests/*.test.js` (including the new expense-form regression tests). Rendered browser checks at 390×844 / 320×568, real iPhone Safari/PWA QA and Pages deployment are not run; this branch is not deployed.
 
 
+## v1.102 — Calendar swipe no longer fires on slight touches (2026-11-13; owner iPhone report)
+- Problem: the Calendar board changed month/week/day for any sideways drift above 60 px, regardless of vertical movement or speed, so a slight touch or a diagonal scroll could jump to another month.
+- Fix: `calSwipeDir` — only a deliberate, mostly-horizontal swipe counts: sideways distance at least max(110 px, 30% of the board width), vertical movement at most 45% of it, finished within 0.7 s, one finger only, and the page must not have scrolled during the touch (`touchcancel` resets). The ‹ › arrow buttons are unchanged.
+- Files: `app.js`, `index.html` (v1.102), `sw.js` (cache v165), `tests/calendar-swipe.test.js`. No data/schema change.
+- Tests: node --check all JS; node tests pass; Chromium with real touch events (CDP) at 390×844 and 320×568: 70 px / 100 px / diagonal / slow drags do not change the month, a deliberate swipe goes next and back, arrows work, 0 errors. Not tested: real iPhone finger feel (thresholds may need a small tune).
+
 ## v1.101 — Students list "Recent activity" (2026-11-13; owner request)
 - Owner: the Students list should show first the students opened/searched most recently and those who most recently completed a lesson.
 - New first and default sort **Recent activity**. A student's activity time = the later of (a) when you last opened their profile (from the list, search or a duplicate hint) and (b) their most recent completed lesson (date + end time; scheduled or not-completed lessons ignored). Ties fall back to Recently joined, then name. The heading reads "Recent activity". The list re-orders when a profile is closed. All other sorts (Recently joined, Name A–Z, Most lessons, …) are unchanged and still selectable.
