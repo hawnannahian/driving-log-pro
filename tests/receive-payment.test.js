@@ -24,7 +24,7 @@ test("v1.100: an already-Paid lesson is never pre-ticked and its payment is repl
 test("v1.99: hours = amount / price per hour, and ticked lessons may not exceed them",()=>{
   assert.match(app,/round4\(amount\/rate\)/);
   assert.match(app,/need>total\+\.001/);
-  assert.match(app,/chosen\.forEach\(e=>\{e\.course=c\.id;delete e\.courseAlloc;\}\)/);
+  assert.match(app,/chosen\.forEach\(e=>\{e\.course=c\.id;delete e\.courseAlloc;if\(e\.paid\)e\.paid=false;\}\)/);
 });
 test("v1.99: footer and Settings version match",()=>{
   const v=html.match(/Version (v[\d.]+)</)[1];assert.ok(html.includes("manager · "+v+"</span></footer>"));
