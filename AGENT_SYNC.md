@@ -602,6 +602,9 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 ### 2026-11-11 — Claude: Calendar day without lessons (v1.88)
 - Owner: the empty hour list on a day with no lessons is not needed. Replaced by one short line; compact timeline unchanged for days with lessons. See PROJECT_STATE v1.88. Also: the header car (v1.87) is confirmed fine on the owner's iPhone.
 
+### 2026-11-13 — Claude: owner communication preference recorded (docs only)
+- CLAUDE.md §14 now states: one final message per task, no progress/waiting messages, no replies to background notifications. Documentation only; no app asset changed, so no cache or footer bump.
+
 ### 2026-11-13 — Claude: Calendar swipe threshold (v1.102, cache v165)
 - Owner: month changed with a slight touch. Swipe now needs a deliberate horizontal gesture (see PROJECT_STATE v1.102). Real finger feel not tested on an iPhone; thresholds are in `calSwipeDir` if they need tuning. Not deployed until Pages succeeds.
 

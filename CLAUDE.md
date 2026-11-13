@@ -202,3 +202,4 @@ Every PR description or final task report must state:
 - Before substantial or risky work, summarize the narrow plan.
 - If requirements are ambiguous or a change could affect money, bookings or existing records, ask one focused question instead of guessing.
 - Do not claim success until the relevant checks have actually passed.
+- **Owner preference (2026-11-13):** send only ONE message per task, when it is finished: what changed, what was tested, what the owner should check on the phone. Do not send progress or waiting messages ("PR opened, waiting for CI", "CI is running", "will merge when green"). Do not reply to automatic background-task or monitor notifications at all (no "old event, nothing to do" messages); wait silently. Merge own PRs without asking (§3a) and report the result once.
