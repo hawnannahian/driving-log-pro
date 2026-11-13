@@ -3457,3 +3457,15 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
   #recordDialog[data-mode="expense"] .costfield:focus-within,#recordDialog[data-mode="expense"] .kmfield:focus-within{background:#f6f8ff;margin:0 -16px;padding:0 16px}
   #recordDialog[data-mode="expense"] .costfield input::placeholder,#recordDialog[data-mode="expense"] .kmfield input::placeholder{color:#b4bccb;font-weight:700}
 }
+
+/* v1.99 — Receive payment button and dialog. */
+#profileDialog .profileactions #profileReceive{grid-column:1/-1;background:#e8f6ee;color:#11663a;border:1px solid #bfe3cd;font-weight:800;font-size:14px;min-height:46px}
+.receive-body{display:flex;flex-direction:column;gap:12px;padding:4px 20px 0;overflow-y:auto;min-height:0}
+.receive-body label{display:flex;flex-direction:column;gap:6px;font-weight:700;font-size:13px}
+.receive-body input{min-height:48px;font-size:16px}
+.receive-hint{margin:-6px 0 0;color:var(--muted)}
+.receive-lessons{display:flex;flex-direction:column;gap:8px;padding:12px;border:1px solid var(--line);border-radius:14px;background:#f7f9fd}
+.receive-lesson{flex-direction:row!important;align-items:center;gap:10px!important;min-height:44px;font-weight:650!important}
+.receive-lesson input{width:22px;height:22px;min-height:0;flex:none}
+#receiveDialog .formerror{padding:0 20px}
+#receiveDialog .dialogactions{padding:12px 20px calc(14px + env(safe-area-inset-bottom))}

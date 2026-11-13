@@ -884,7 +884,7 @@ function useBackup(d){const priorRecovery=state.lessonRecovery||[],priorAudit=st
 // Replace the data with d, keeping the current data as a safety copy first.
 function replaceData(d,question){const cloud=cloudCfg()?" Cloud sync is on, so the cloud copy will be replaced too.":"";if(!confirm(question+cloud+" The current data is kept as a safety copy."))return false;if(hasData(snapshot())&&!keepCopy("restore")&&!confirm("There is no room to keep a safety copy. Download a backup first. Continue without a safety copy?"))return false;useBackup(d);return true;}
 $("restoreBackup").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(!validBackup(d))throw Error("Invalid backup");if(replaceData(d,"Replace current app data with this backup?"))toast("Backup restored");}catch(err){toast("Could not restore backup: "+err.message);}e.target.value="";};
-const COPIES=[["before-legacy","Before the Legacy Archive was created"],["before-legacy-delete","Before the Legacy Archive was deleted"],["before-course-delete","Before a course was deleted"],["before-receipt-remove","Before a retained receipt was removed"],["before-upgrade","Before the v1.19 upgrade"],["before-restore","Before the last restore"],["before-sync","Before the first cloud sync"],["damaged","Saved data that could not be read"]];
+const COPIES=[["before-legacy","Before the Legacy Archive was created"],["before-legacy-delete","Before the Legacy Archive was deleted"],["before-course-delete","Before a course was deleted"],["before-receipt-remove","Before a retained receipt was removed"],["before-receive-payment","Before a payment was received"],["before-upgrade","Before the v1.19 upgrade"],["before-restore","Before the last restore"],["before-sync","Before the first cloud sync"],["damaged","Saved data that could not be read"]];
 const readCopy=k=>{try{return localStorage.getItem(DB_KEY+"-"+k);}catch{return null;}};
 function renderRecovery(){
  const rows=COPIES.map(([k,label])=>{const raw=readCopy(k);if(!raw)return"";let d=null;try{d=JSON.parse(raw);}catch{}const ok=validBackup(d),when=ok&&d.copySaved&&!isNaN(new Date(d.copySaved))?" · "+new Date(d.copySaved).toLocaleString("en-GB",{dateStyle:"medium",timeStyle:"short"}):"",info=ok?d.entries.length+" records, "+d.students.length+" students"+when:"Can only be downloaded";return '<div class="recoveryrow"><span><b>'+esc(label)+'</b><br><small>'+esc(info)+'</small></span><button type="button" class="btn secondary" data-copydl="'+k+'">Download</button>'+(ok?'<button type="button" class="btn secondary" data-copyuse="'+k+'">Put back</button>':"")+'<button type="button" class="btn ghost" data-copydel="'+k+'">Delete</button></div>';}).join("");
@@ -959,3 +959,36 @@ document.addEventListener("play",ev=>{document.querySelectorAll("audio").forEach
 
 // v1.97 — Calendar "Add lesson": keep the usual 10:00–11:00 when it is free; otherwise pre-fill the first free slot of the selected day (a slot of at least 1 hour if there is one). Free slots already exclude booked lessons, prayer blocks, past time today and the working-hours limits. Past days and days with no free slot keep the normal default. Only the Start/End fields change; saving checks are unchanged.
 function addLessonOnSelectedDay(){newRecord(cal.day);if(cal.day<dateISO(new Date()))return;const slots=freeSlots(cal.day);if(!slots.length||slots.some(([a,b])=>a<=600&&b>=660))return;const pick=slots.find(([a,b])=>b-a>=60)||slots[0];$("fStart").value=fromMin(pick[0]);$("fEnd").value=fromMin(Math.min(pick[0]+60,pick[1]));syncDur();}
+
+// v1.99 — Receive payment: one simple form for money a student pays in advance.
+// It uses the existing course ledger (no new data type): amount ÷ price per hour = prepaid hours, stored as a course with one payment.
+// Scheduled lessons the owner ticks are linked to that course; nothing else (completed, paid, package or other lessons, other courses) is touched.
+const receiveRateFor=s=>{const L=state.entries.filter(e=>e.type==="Lesson"&&sameName(e.student,s.name)&&!isCourseLesson(e)&&!e.pkg&&Number(e.rate)>0).sort((a,b)=>(b.date+(b.start||"")).localeCompare(a.date+(a.start||"")))[0];return L?round2(Number(L.rate)):20;};
+const receiveEligible=s=>state.entries.filter(e=>e.type==="Lesson"&&sameName(e.student,s.name)&&!isDone(e)&&e.done!==false&&!e.course&&!e.pkg&&!e.paid&&hours(e)>0).sort((a,b)=>(a.date+(a.start||"")).localeCompare(b.date+(b.start||"")));
+const receiveHours=()=>{const amount=num($("receiveAmount").value),rate=num($("receiveRate").value);return amount>0&&rate>0?round4(amount/rate):0;};
+function receiveTick(reset){const total=receiveHours();let left=total;document.querySelectorAll("#receiveLessonList input").forEach(i=>{const h=Number(i.dataset.h);if(reset)i.checked=false;if(reset&&h<=left+.001){i.checked=true;left=round4(left-h);}});}
+function receiveRefresh(reset){const total=receiveHours(),amount=num($("receiveAmount").value),rate=num($("receiveRate").value);
+ if(reset)receiveTick(true);
+ let used=0;document.querySelectorAll("#receiveLessonList input:checked").forEach(i=>{used=round4(used+Number(i.dataset.h));});
+ $("receivePreview").textContent=total>0?`${euro(amount)} ÷ ${euro(rate)} per hour = ${fmtH(total)} h prepaid`:"Enter the amount received.";
+ $("receiveLessonNote").textContent=total>0?(used>0?`Covers ${fmtH(used)} h of lessons. ${fmtH(Math.max(0,round4(total-used)))} h stays as credit for later.`:`${fmtH(total)} h stays as credit for later.`):"";}
+function startReceive(){const s=state.students.find(x=>x.id===profileId);if(!s)return;$("receiveForm").reset();$("receiveStudentName").textContent=s.name;$("receiveError").textContent="";$("receiveDate").value=dateISO(new Date());$("receiveRate").value=String(receiveRateFor(s));
+ const list=receiveEligible(s);$("receiveLessons").classList.toggle("hidden",!list.length);
+ $("receiveLessonList").innerHTML=list.map(e=>`<label class="receive-lesson"><input type="checkbox" data-rl="${esc(e.id)}" data-h="${hours(e)}"><span>${esc(dayName(e.date))} · ${esc(timeText(e))} · ${fmtH(hours(e))} h</span></label>`).join("");
+ receiveRefresh(true);$("receiveDialog").showModal();$("receiveAmount").focus();}
+$("profileReceive").onclick=startReceive;$("receiveClose").onclick=()=>$("receiveDialog").close();$("receiveCancel").onclick=()=>$("receiveDialog").close();
+$("receiveAmount").addEventListener("input",()=>receiveRefresh(true));$("receiveRate").addEventListener("input",()=>receiveRefresh(true));
+$("receiveLessonList").addEventListener("change",ev=>{const i=ev.target.closest("input");if(!i)return;let used=0;document.querySelectorAll("#receiveLessonList input:checked").forEach(x=>{used=round4(used+Number(x.dataset.h));});if(used>receiveHours()+.001){i.checked=false;$("receiveError").textContent="That is more than the hours this payment covers.";}else $("receiveError").textContent="";receiveRefresh(false);});
+$("receiveForm").addEventListener("submit",ev=>{ev.preventDefault();const s=state.students.find(x=>x.id===profileId);if(!s)return;const error=$("receiveError");error.textContent="";
+ const amountRaw=$("receiveAmount").value.trim(),rateRaw=$("receiveRate").value.trim(),amount=Number(amountRaw),rate=Number(rateRaw),date=$("receiveDate").value;
+ if(amountRaw===""||!Number.isFinite(amount)||amount<=0||amount>100000||Math.round(amount*100)!==amount*100){error.textContent="Enter the amount received (more than €0, up to 2 decimals).";return;}
+ if(rateRaw===""||!Number.isFinite(rate)||rate<=0||rate>1000||Math.round(rate*100)!==rate*100){error.textContent="Enter the price per hour (more than €0, up to 2 decimals).";return;}
+ if(!date||!/^\d{4}-\d{2}-\d{2}$/.test(date)||dateISO(new Date(date+"T12:00:00"))!==date){error.textContent="Choose a valid date.";return;}
+ const total=round4(amount/rate);if(total<.01){error.textContent="That amount is too small for one hour at this price.";return;}
+ const ids=[...document.querySelectorAll("#receiveLessonList input:checked")].map(i=>i.dataset.rl),chosen=ids.map(id=>state.entries.find(x=>x.id===id)).filter(e=>e&&e.type==="Lesson"&&sameName(e.student,s.name)&&!isDone(e)&&e.done!==false&&!e.course&&!e.pkg&&!e.paid);
+ const need=round4(chosen.reduce((a,e)=>a+hours(e),0));if(need>total+.001){error.textContent="The ticked lessons need more hours than this payment covers.";return;}
+ if(!keepCopy("receive-payment")&&!confirm("A safety copy could not be saved. Continue anyway?"))return;
+ const c={id:uid(),student:s.name,name:"Prepaid payment",date,hours:total,price:round2(amount),createdAt:new Date().toISOString(),v:1};
+ state.courses=[...courses(),c];state.coursePayments=[...(Array.isArray(state.coursePayments)?state.coursePayments:[]),{id:uid(),course:c.id,date,amount:round2(amount)}];
+ chosen.forEach(e=>{e.course=c.id;delete e.courseAlloc;});
+ $("receiveDialog").close();profileTab="payments";save();toast(`Payment received: ${fmtH(total)} h prepaid${chosen.length?`, ${chosen.length} lesson${chosen.length>1?"s":""} covered`:""}`);});
