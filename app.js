@@ -559,7 +559,7 @@ function openDone(id){const e=state.entries.find(x=>x.id===id);if(!e)return;done
 $("undoDone").onclick=()=>undoLessonCompletion(doneEntryId);
 function syncDoneLink(){if(doneNumber)$("doneWa").href=waLink(doneNumber,$("doneMsg").value);}
 const cal={y:new Date().getFullYear(),m:new Date().getMonth(),day:dateISO(new Date()),view:"month"};
-try{cal.view=["month","week","day"].includes(localStorage.getItem(DB_KEY+"-calview"))?localStorage.getItem(DB_KEY+"-calview"):"month";}catch{}
+try{cal.view=["month","week","day"].includes(localStorage.getItem(DB_KEY+"-calview"))?localStorage.getItem(DB_KEY+"-calview"):"day";}catch{}
 const timeText = e => e.start&&e.end?`${e.start}–${e.end}`:"No time set";
 const dayName = iso => new Date(iso+"T12:00:00").toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"});
 const lessonsOn = iso => state.entries.filter(e=>e.type==="Lesson"&&e.date===iso).sort((a,b)=>(a.start||"").localeCompare(b.start||""));
@@ -597,7 +597,13 @@ let reminded=new Set();
 function renderRemind(){const iso=cal.day,today=dateISO(new Date()),box=$("calRemind"),list=iso<today?[]:lessonsOn(iso).filter(e=>e.start&&(iso>today||toMin(e.start)>nowMin())).map(e=>{const s=state.students.find(x=>sameName(x.name,e.student));return{e,n:s?waNumber(s):null};}).filter(x=>x.n);box.classList.toggle("hidden",!list.length);if(!list.length){box.innerHTML="";return;}
  box.innerHTML=`<p><b>📲 WhatsApp reminders</b><small>Tap each student to send the lesson message.</small></p><div class="remindlist">${list.map(({e,n})=>`<a class="remindchip${reminded.has(e.id)?" sent":""}" data-remind="${esc(e.id)}" href="${esc(waLink(n,lessonMsg(e)))}" target="_blank" rel="noopener">${reminded.has(e.id)?"✓ ":""}${esc(e.student)} · ${esc(e.start)}</a>`).join("")}</div>`;
  box.querySelectorAll("[data-remind]").forEach(a=>a.addEventListener("click",()=>{reminded.add(a.dataset.remind);setTimeout(renderRemind,400);}));}
-function renderCalendar(){const today=dateISO(new Date()),v=cal.view,days=weekDays(cal.day),first=new Date(cal.y,cal.m,1);
+// v1.103 — day colours (no dots): blue = a course/package lesson that day, red = holiday, orange count = money still due.
+function calDayClass(iso,L){return (L.some(e=>isCourseLesson(e)||e.pkg)?" course":"")+(L.some(e=>unpaidAmt(e)>0)?" due":"")+(holidayOn(iso)?" hol":"");}
+function renderCalStrip(days,today){const box=$("calStrip");box.classList.toggle("hidden",cal.view!=="day");if(cal.view!=="day")return;
+ box.innerHTML=days.map(iso=>{const L=lessonsOn(iso),n=L.length,d=new Date(iso+"T12:00:00"),hd=holidayOn(iso);
+  return `<button type="button" class="stripday${iso===cal.day?" selected":""}${iso===today?" today":""}${iso<today?" past":""}${calDayClass(iso,L)}" data-sday="${iso}" aria-label="${esc(dayName(iso))}: ${n} lessons${hd?", "+esc(hd):""}"><small>${d.toLocaleDateString("en-GB",{weekday:"short"}).toUpperCase()}</small><b>${d.getDate()}</b><span class="calcount">${n||""}</span></button>`;}).join("");
+ box.querySelectorAll("[data-sday]").forEach(b=>b.onclick=()=>{cal.day=b.dataset.sday;const d=new Date(cal.day+"T12:00:00");cal.y=d.getFullYear();cal.m=d.getMonth();renderCalendar();bindRecords();});}
+function renderCalendar(){const today=dateISO(new Date()),v=cal.view,days=weekDays(cal.day),first=new Date(cal.y,cal.m,1);$("calendar").dataset.calview=v;renderCalStrip(days,today);
  document.querySelectorAll("[data-view]").forEach(b=>b.classList.toggle("active",b.dataset.view===v));
  $("calMonth").classList.toggle("hidden",v!=="month");$("calWeek").classList.toggle("hidden",v!=="week");$("calDaySum").classList.toggle("hidden",v==="day");$("calDayHead").classList.toggle("dayview",v==="day");
  const fmt=(iso,o)=>new Date(iso+"T12:00:00").toLocaleDateString("en-GB",o);
@@ -609,7 +615,7 @@ function renderCalendar(){const today=dateISO(new Date()),v=cal.view,days=weekDa
  const hol=v==="day"?holidayOn(cal.day):"";$("calSum").textContent=(v==="month"?"This month: ":v==="week"?"This week: ":"")+statText(lessonStats(period))+(hol?" · 🎉 "+hol:"");
  if(v==="month"){const count=new Date(cal.y,cal.m+1,0).getDate(),pad=(first.getDay()+6)%7;let html="<span></span>".repeat(pad);
   for(let d=1;d<=count;d++){const iso=dateISO(new Date(cal.y,cal.m,d)),L=lessonsOn(iso),st=lessonStats(L),heat=!st.h?0:st.h<=1?1:st.h<=2.5?2:st.h<=4?3:4,hd=holidayOn(iso);
-   html+=`<button class="calday${st.n?" has":""}${iso===today?" today":""}${iso===cal.day?" selected":""}${iso<today?" past":""}${hd?" hol":""}" data-day="${iso}" aria-label="${esc(dayName(iso))}: ${st.n} lessons${hd?", "+esc(hd):""}"${hd?` title="${esc(hd)}"`:""}><b>${d}</b><span class="calcount">${st.n?st.n:""}</span></button>`;}
+   html+=`<button class="calday${st.n?" has":""}${iso===today?" today":""}${iso===cal.day?" selected":""}${iso<today?" past":""}${calDayClass(iso,L)}" data-day="${iso}" aria-label="${esc(dayName(iso))}: ${st.n} lessons${hd?", "+esc(hd):""}"${hd?` title="${esc(hd)}"`:""}><b>${d}</b><span class="calcount">${st.n?st.n:""}</span></button>`;}
   $("calGrid").innerHTML=html;}
  if(v==="week"){$("calWeek").innerHTML=weekGrid(days);placeBlocks($("calWeek"));}
  // selected day: title, summary, reminders, timeline, list

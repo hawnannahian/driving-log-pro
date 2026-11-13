@@ -5,6 +5,14 @@
 - GitHub Actions workflow #94 passed: syntax-check of every JavaScript file and `node --test tests/*.test.js` (including the new expense-form regression tests). Rendered browser checks at 390×844 / 320×568, real iPhone Safari/PWA QA and Pages deployment are not run; this branch is not deployed.
 
 
+## v1.103 — Calendar: Day view with a week strip, colours instead of dots (2026-11-14; owner-approved redesign, step 1+2 of the plan)
+- Day is now the default Calendar view (a saved Month/Week choice is kept). In Day view a week strip (Mon–Sun, tap a day) sits under the title; the timeline comes before the student list; the legend explains the colours.
+- No dots anywhere: lessons are shown by a plain count number; the empty grey placeholder pills in Month view are gone. Colours: **blue** day = has a course/package lesson, **red** day = holiday (existing holiday list), **orange count** = money still due that day (`unpaidAmt`). Selected day keeps the blue circle; today keeps the ring.
+- Month cells are a little more compact so the selected day's lessons appear sooner.
+- Not done yet (asked/proposed): a "day off" colour (the app has no day-off setting; needs an owner decision because it would add data), the quick-booking sheet from a free slot (step 3), and turning the selected-day panel into a slide-up sheet.
+- Files: `app.js` (`calDayClass`, `renderCalStrip`), `index.html` (`#calStrip`, `#calLegend`; v1.103), `styles.css`, `sw.js` (cache v166), `tests/calendar-today-view.test.js`. No data/schema change.
+- Tests: node --check all JS; 119 node tests; Chromium 390×844 and 320×568, synthetic data: Day default, 7-day strip, today's cell shows count + course + due colours, strip tap selects, timeline above students, no empty pills, holiday and course tints, legend in Month/Day only, no overflow, 0 errors. Not tested: real iPhone.
+
 ## v1.102 — Calendar swipe no longer fires on slight touches (2026-11-13; owner iPhone report)
 - Problem: the Calendar board changed month/week/day for any sideways drift above 60 px, regardless of vertical movement or speed, so a slight touch or a diagonal scroll could jump to another month.
 - Fix: `calSwipeDir` — only a deliberate, mostly-horizontal swipe counts: sideways distance at least max(110 px, 30% of the board width), vertical movement at most 45% of it, finished within 0.7 s, one finger only, and the page must not have scrolled during the touch (`touchcancel` resets). The ‹ › arrow buttons are unchanged.

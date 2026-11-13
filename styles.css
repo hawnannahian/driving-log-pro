@@ -3473,3 +3473,45 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 /* v1.100 — note under a lesson that was already marked Paid. */
 .receive-lesson span{display:flex;flex-direction:column;gap:2px}
 .receive-paidnote{color:#8a4a08;font-size:11.5px;font-weight:600;line-height:1.35}
+
+/* v1.103 — Calendar: Day view is the default and shows the week as a strip (no dots anywhere); colours mark course/package days (blue), holidays (red) and money due (orange number). The timeline comes before the student list. */
+#calendar .calcount{background:none!important;min-width:0!important;height:auto!important;padding:0!important;font-size:12px!important;line-height:1.1!important;font-weight:800;color:#2348c7}
+#calendar .calcount:empty{display:none}
+#calendar .calday.due .calcount,#calendar .stripday.due .calcount{color:#b76b12}
+#calendar .calday{min-height:46px}
+#calendar .calday.course{background:#e8eeff}
+#calendar .calday.hol{background:#fdecec}
+#calendar .calday.selected{background:#dfe8ff}
+#calendar .calstrip{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;margin:10px 0 4px}
+#calendar .calstrip.hidden{display:none}
+#calendar .stripday{display:flex;flex-direction:column;align-items:center;gap:2px;min-height:68px;padding:6px 0 5px;border:1px solid #eef1f6;border-radius:14px;background:#fff;color:var(--ink);font:inherit;cursor:pointer}
+#calendar .stripday small{font-size:10px;font-weight:800;color:#93a1ba;letter-spacing:.5px}
+#calendar .stripday b{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;font-size:17px}
+#calendar .stripday.past b{color:#a3adbd}
+#calendar .stripday.today b{box-shadow:0 0 0 2px #fff,0 0 0 4px #b9c9ff}
+#calendar .stripday.selected b{background:var(--blue);color:#fff}
+#calendar .stripday.course{background:#e8eeff;border-color:#d3defb}
+#calendar .stripday.hol{background:#fdecec;border-color:#f4cfcf}
+#calendar .stripday.hol b{color:#c13b68}
+#calendar .stripday.hol.selected b{color:#fff}
+#calendar .stripday .calcount{display:block;min-height:14px}
+#calendar .stripday .calcount:empty{display:block;visibility:hidden}
+#calendar .callegend{display:none;flex-wrap:wrap;align-items:center;gap:6px 12px;margin:8px 2px 0;color:var(--muted);font-size:11.5px;font-weight:650}
+#calendar[data-calview="month"] .callegend,#calendar[data-calview="day"] .callegend{display:flex}
+#calendar .callegend .lg{display:inline-block;width:16px;height:10px;border-radius:3px;margin-right:-6px}
+#calendar .callegend .lg.course{background:#cfdcff}
+#calendar .callegend .lg.hol{background:#f7c9c9}
+#calendar .callegend .lgnum{font-weight:800;color:#b76b12;margin-right:-6px}
+#calendar[data-calview="day"]:not(.hidden){display:flex;flex-direction:column}
+#calendar[data-calview="day"]>.calviews{order:0}
+#calendar[data-calview="day"]>#calBoard{order:1}
+#calendar[data-calview="day"]>#calDayHead{order:2}
+#calendar[data-calview="day"]>#calDaySum{order:2}
+#calendar[data-calview="day"]>#calDayStats{order:3}
+#calendar[data-calview="day"]>#calRemind{order:4}
+#calendar[data-calview="day"]>#calFreeSlots{order:5}
+#calendar[data-calview="day"]>#calTimeline{order:6}
+#calendar[data-calview="day"]>.cal-students-panel{order:7}
+#calendar[data-calview="day"]>h3.caltitle{order:8}
+#calendar[data-calview="day"]>#upcomingList{order:9}
+#calendar[data-calview="day"]>#calWeek{order:10}

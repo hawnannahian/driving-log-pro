@@ -57,10 +57,12 @@
       <div class="calboard" id="calBoard">
         <div class="calhead"><button class="iconbtn" id="calPrev" aria-label="Previous">‹</button><div class="caltitlebox"><b id="calTitle"></b><button type="button" class="caltoday hidden" id="calToday">Back to today</button></div><button class="iconbtn" id="calNext" aria-label="Next">›</button></div>
         <p class="calsum" id="calSum"></p>
+        <div class="calstrip hidden" id="calStrip" role="group" aria-label="Days of this week"></div>
         <div id="calMonth">
           <div class="calweek"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
           <div class="calgrid" id="calGrid"></div>
         </div>
+        <p class="callegend" id="calLegend"><span class="lg course"></span>Course/package <span class="lg hol"></span>Holiday <span class="lgnum">2</span>Money due</p>
       </div>
       <div id="calWeek" class="weekview hidden"></div>
       <div class="sectionhead caltitle" id="calDayHead"><h3 id="calDayTitle"></h3><button class="btn primary" id="calAddBtn">＋ Add lesson</button></div>
@@ -176,7 +178,7 @@
           <p class="hint">With this on, these times are used for every day instead of the mosque or calculated times. Friday uses the Jum'a time above. A blank time falls back to the automatic time. Change them whenever the mosque changes.</p>
           <div id="prayerPreview" class="prayer-preview" aria-live="polite"></div>
         </section>
-        <p class="app-version" id="appVersion">Driving Log Pro · Version v1.102</p>
+        <p class="app-version" id="appVersion">Driving Log Pro · Version v1.103</p>
         <p class="settings-note">These settings are saved with your app data and included in backup and sync. Lesson timer and completed-hour accounting are not affected.</p>
       </section>
     </section>
@@ -469,7 +471,7 @@
     <button class="tab" data-tab="islamic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M6.5 20v-6.5c0-3 2.5-5 5.5-6.5 3 1.5 5.5 3.5 5.5 6.5V20"/><path d="M12 4.5v2.5"/><path d="M10 20v-3a2 2 0 0 1 4 0v3"/><path d="M3.5 20v-8M20.5 20v-8"/></svg><span>Islamic</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.102</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.103</span></footer>
   <script src="push-config.js"></script>
   <script src="prayer-times.js"></script>
   <script src="mawaqit-times.js"></script>
