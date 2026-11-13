@@ -962,22 +962,25 @@ function addLessonOnSelectedDay(){newRecord(cal.day);if(cal.day<dateISO(new Date
 
 // v1.99 — Receive payment: one simple form for money a student pays in advance.
 // It uses the existing course ledger (no new data type): amount ÷ price per hour = prepaid hours, stored as a course with one payment.
-// Scheduled lessons the owner ticks are linked to that course; nothing else (completed, paid, package or other lessons, other courses) is touched.
+// Lessons the owner ticks are linked to that course: scheduled unpaid ones, and lessons of the same day already marked Paid (their own payment is part of the money received, so it is replaced by this payment, not counted twice). Nothing else is touched.
 const receiveRateFor=s=>{const L=state.entries.filter(e=>e.type==="Lesson"&&sameName(e.student,s.name)&&!isCourseLesson(e)&&!e.pkg&&Number(e.rate)>0).sort((a,b)=>(b.date+(b.start||"")).localeCompare(a.date+(a.start||"")))[0];return L?round2(Number(L.rate)):20;};
-const receiveEligible=s=>state.entries.filter(e=>e.type==="Lesson"&&sameName(e.student,s.name)&&!isDone(e)&&e.done!==false&&!e.course&&!e.pkg&&!e.paid&&hours(e)>0).sort((a,b)=>(a.date+(a.start||"")).localeCompare(b.date+(b.start||"")));
+const receiveEligible=(s,date)=>state.entries.filter(e=>e.type==="Lesson"&&sameName(e.student,s.name)&&e.done!==false&&!e.course&&!e.pkg&&hours(e)>0&&!(Number(e.courseTransferPaid)>0)&&((!isDone(e)&&!e.paid)||(!!e.paid&&!!date&&e.date===date))).sort((a,b)=>(a.date+(a.start||"")).localeCompare(b.date+(b.start||"")));
 const receiveHours=()=>{const amount=num($("receiveAmount").value),rate=num($("receiveRate").value);return amount>0&&rate>0?round4(amount/rate):0;};
-function receiveTick(reset){const total=receiveHours();let left=total;document.querySelectorAll("#receiveLessonList input").forEach(i=>{const h=Number(i.dataset.h);if(reset)i.checked=false;if(reset&&h<=left+.001){i.checked=true;left=round4(left-h);}});}
+function receiveTick(reset){const total=receiveHours();let left=total;document.querySelectorAll("#receiveLessonList input").forEach(i=>{const h=Number(i.dataset.h);if(reset)i.checked=false;if(reset&&!i.dataset.paid&&h<=left+.001){i.checked=true;left=round4(left-h);}});}
 function receiveRefresh(reset){const total=receiveHours(),amount=num($("receiveAmount").value),rate=num($("receiveRate").value);
  if(reset)receiveTick(true);
  let used=0;document.querySelectorAll("#receiveLessonList input:checked").forEach(i=>{used=round4(used+Number(i.dataset.h));});
- $("receivePreview").textContent=total>0?`${euro(amount)} ÷ ${euro(rate)} per hour = ${fmtH(total)} h prepaid`:"Enter the amount received.";
- $("receiveLessonNote").textContent=total>0?(used>0?`Covers ${fmtH(used)} h of lessons. ${fmtH(Math.max(0,round4(total-used)))} h stays as credit for later.`:`${fmtH(total)} h stays as credit for later.`):"";}
+
+ const s=state.students.find(x=>x.id===profileId);let replaced=0;document.querySelectorAll("#receiveLessonList input:checked").forEach(i=>{if(i.dataset.paid){const e=state.entries.find(x=>x.id===i.dataset.rl);if(e)replaced=round2(replaced+income(e));}});
+ const paidNow=s?studentStats(s).paid:0;
+ $("receiveLessonNote").textContent=total>0?(used>0?`Covers ${fmtH(used)} h of lessons. ${fmtH(Math.max(0,round4(total-used)))} h stays as credit for later.`:`${fmtH(total)} h stays as credit for later.`)+``:"";
+ $("receivePreview").textContent=total>0?`${euro(amount)} ÷ ${euro(rate)} per hour = ${fmtH(total)} h prepaid. Total paid for this student becomes ${euro(round2(paidNow+amount-replaced))}.`:"Enter the amount received.";}
+function renderReceiveList(s){const list=receiveEligible(s,$("receiveDate").value);$("receiveLessons").classList.toggle("hidden",!list.length);
+ $("receiveLessonList").innerHTML=list.map(e=>`<label class="receive-lesson"><input type="checkbox" data-rl="${esc(e.id)}" data-h="${hours(e)}"${e.paid?' data-paid="1"':""}><span>${esc(dayName(e.date))} · ${esc(timeText(e))} · ${fmtH(hours(e))} h${e.paid?`<small class="receive-paidnote">Already marked Paid (${euro(income(e))}). Tick it only if the money you received includes it</small>`:""}</span></label>`).join("");receiveRefresh(true);}
 function startReceive(){const s=state.students.find(x=>x.id===profileId);if(!s)return;$("receiveForm").reset();$("receiveStudentName").textContent=s.name;$("receiveError").textContent="";$("receiveDate").value=dateISO(new Date());$("receiveRate").value=String(receiveRateFor(s));
- const list=receiveEligible(s);$("receiveLessons").classList.toggle("hidden",!list.length);
- $("receiveLessonList").innerHTML=list.map(e=>`<label class="receive-lesson"><input type="checkbox" data-rl="${esc(e.id)}" data-h="${hours(e)}"><span>${esc(dayName(e.date))} · ${esc(timeText(e))} · ${fmtH(hours(e))} h</span></label>`).join("");
- receiveRefresh(true);$("receiveDialog").showModal();$("receiveAmount").focus();}
+ renderReceiveList(s);$("receiveDialog").showModal();$("receiveAmount").focus();}
 $("profileReceive").onclick=startReceive;$("receiveClose").onclick=()=>$("receiveDialog").close();$("receiveCancel").onclick=()=>$("receiveDialog").close();
-$("receiveAmount").addEventListener("input",()=>receiveRefresh(true));$("receiveRate").addEventListener("input",()=>receiveRefresh(true));
+$("receiveDate").addEventListener("change",()=>{const s=state.students.find(x=>x.id===profileId);if(s)renderReceiveList(s);});$("receiveAmount").addEventListener("input",()=>receiveRefresh(true));$("receiveRate").addEventListener("input",()=>receiveRefresh(true));
 $("receiveLessonList").addEventListener("change",ev=>{const i=ev.target.closest("input");if(!i)return;let used=0;document.querySelectorAll("#receiveLessonList input:checked").forEach(x=>{used=round4(used+Number(x.dataset.h));});if(used>receiveHours()+.001){i.checked=false;$("receiveError").textContent="That is more than the hours this payment covers.";}else $("receiveError").textContent="";receiveRefresh(false);});
 $("receiveForm").addEventListener("submit",ev=>{ev.preventDefault();const s=state.students.find(x=>x.id===profileId);if(!s)return;const error=$("receiveError");error.textContent="";
  const amountRaw=$("receiveAmount").value.trim(),rateRaw=$("receiveRate").value.trim(),amount=Number(amountRaw),rate=Number(rateRaw),date=$("receiveDate").value;
@@ -985,10 +988,10 @@ $("receiveForm").addEventListener("submit",ev=>{ev.preventDefault();const s=stat
  if(rateRaw===""||!Number.isFinite(rate)||rate<=0||rate>1000||Math.round(rate*100)!==rate*100){error.textContent="Enter the price per hour (more than €0, up to 2 decimals).";return;}
  if(!date||!/^\d{4}-\d{2}-\d{2}$/.test(date)||dateISO(new Date(date+"T12:00:00"))!==date){error.textContent="Choose a valid date.";return;}
  const total=round4(amount/rate);if(total<.01){error.textContent="That amount is too small for one hour at this price.";return;}
- const ids=[...document.querySelectorAll("#receiveLessonList input:checked")].map(i=>i.dataset.rl),chosen=ids.map(id=>state.entries.find(x=>x.id===id)).filter(e=>e&&e.type==="Lesson"&&sameName(e.student,s.name)&&!isDone(e)&&e.done!==false&&!e.course&&!e.pkg&&!e.paid);
+ const ids=[...document.querySelectorAll("#receiveLessonList input:checked")].map(i=>i.dataset.rl),allowed=receiveEligible(s,date).map(x=>x.id),chosen=ids.filter(id=>allowed.includes(id)).map(id=>state.entries.find(x=>x.id===id)).filter(Boolean);
  const need=round4(chosen.reduce((a,e)=>a+hours(e),0));if(need>total+.001){error.textContent="The ticked lessons need more hours than this payment covers.";return;}
  if(!keepCopy("receive-payment")&&!confirm("A safety copy could not be saved. Continue anyway?"))return;
  const c={id:uid(),student:s.name,name:"Prepaid payment",date,hours:total,price:round2(amount),createdAt:new Date().toISOString(),v:1};
  state.courses=[...courses(),c];state.coursePayments=[...(Array.isArray(state.coursePayments)?state.coursePayments:[]),{id:uid(),course:c.id,date,amount:round2(amount)}];
- chosen.forEach(e=>{e.course=c.id;delete e.courseAlloc;});
+ chosen.forEach(e=>{e.course=c.id;delete e.courseAlloc;if(e.paid)e.paid=false;});
  $("receiveDialog").close();profileTab="payments";save();toast(`Payment received: ${fmtH(total)} h prepaid${chosen.length?`, ${chosen.length} lesson${chosen.length>1?"s":""} covered`:""}`);});
