@@ -4,6 +4,9 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs for review, Claude's own-PR merge authority under §3a, no student data in the repo).
 
 ## Recent handover entries
+### 2026-11-14 — Claude: Expense history in New expense sheet v1.106
+- Read-only history list at the bottom of the New expense sheet (newest first, 10 + Show more, tap to edit). No data/schema, accounting, sync or backup change. Cache v169. Tests: 133 node tests pass; Chromium 390×844 / 320×568 checked; real iPhone not tested.
+
 ### 2026-11-11 — ChatGPT: New Expense amount label v1.89 — Draft PR pending
 - Owner approved a minimal change: keep the existing New expense layout and controls; label the existing expense amount field **Amount (€)** rather than **Cost (€)**. Its existing `id="fCost"` and saved `cost` property remain unchanged. Fuel Odometer and all category/date/save workflows remain as-is.
 - The existing Hourly rate field remains lesson-only via `toggleLessonFields()`; no lesson rate/payment calculation was changed.

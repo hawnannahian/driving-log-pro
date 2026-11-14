@@ -3621,3 +3621,11 @@ body{background:var(--pc-bg)}
 .pc-item.next b{color:#f2c96b}
 .pc-foot{margin:10px 0 0;font-size:11px;font-weight:600;color:#9fd8c9;text-align:center}
 @media(max-width:360px){.pc-hero>div:first-child b,.pc-at b{font-size:26px}.pc-item b{font-size:13.5px}.pc-item small{font-size:9px}.pc-row{gap:4px}}
+
+#recordDialog .expense-history{display:grid;gap:8px;margin-top:6px;padding-top:14px;border-top:1px solid var(--line)}
+#recordDialog .expense-history.hidden{display:none}
+#recordDialog .expense-history-head{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px}
+#recordDialog .expense-history-head span{color:var(--muted);font-size:12px;font-weight:600}
+#recordDialog .expense-history-list{display:grid;gap:8px}
+#recordDialog .expense-history-list .record{width:100%;min-height:56px}
+#recordDialog .expense-history-empty{margin:4px 0;font-size:13px}

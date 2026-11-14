@@ -1,3 +1,9 @@
+## v1.106 — Expense history in the New expense sheet (2026-11-14; owner request)
+- The New expense sheet now ends with an **Expense history** section: all non-lesson, non-note records (Fuel, Expense, Insurance, Maintenance, Refund), newest first, 10 at a time with "Show more". Each row reuses the Log row (type, date, comment, amount; refunds with a minus sign). Tapping a row closes the sheet and opens that record for editing.
+- Read-only list: no totals or accounting definitions added, nothing saved or recalculated. Hidden for Lesson/Note types.
+- Files: `app.js` (`renderExpenseHistory`), `index.html` (`#expenseHistory`; v1.106), `styles.css`, `sw.js` (cache v169), `tests/expense-history.test.js`. No data/schema change.
+- Tests: node --check all JS; 133 node tests pass; Chromium (synthetic data) at 390×844 and 320×568: list renders, no horizontal overflow, no console errors, tap opens the record for edit. Real iPhone Safari not tested. Not deployed until the Pages workflow succeeds.
+
 ## v1.89 — Clear expense amount label (2026-11-11; owner request)
 - In the New expense form, the existing `fCost` field is labelled **Amount (€)** instead of **Cost (€)** so the amount paid is clear. The field, stored `cost` value, Fuel odometer, date, category controls and Save workflow are unchanged. The Hourly rate remains lesson-only through the existing `.lessonfield` visibility logic; no lesson pricing behavior changed.
 - Files: `index.html`, `sw.js`, `tests/expense-form-label.test.js`, `AGENT_SYNC.md`, `PROJECT_STATE.md`. Footer v1.89; Service Worker cache v152.
