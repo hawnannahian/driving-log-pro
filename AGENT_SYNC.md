@@ -602,6 +602,9 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 ### 2026-11-11 — Claude: Calendar day without lessons (v1.88)
 - Owner: the empty hour list on a day with no lessons is not needed. Replaced by one short line; compact timeline unchanged for days with lessons. See PROJECT_STATE v1.88. Also: the header car (v1.87) is confirmed fine on the owner's iPhone.
 
+### 2026-11-14 — Claude: Overview prayer card (v1.105, cache v168)
+- Mawaqit-style prayer card on Overview (read-only, works with protection off). Premium Calendar PR #186 was merged by the owner's "Merge 186". See PROJECT_STATE v1.105. Real device not tested; not deployed until Pages succeeds.
+
 ### 2026-11-14 — Claude: Premium minimal Calendar UI (v1.104, cache v167) — DRAFT PR, NOT merged
 - Owner brief: premium iOS-style Calendar, presentation only, wait for visual approval before merge/deploy. Done on branch `feature/premium-calendar-ui`; see PROJECT_STATE v1.104. **Other agent: do not merge or deploy this PR; the owner approves the look first.** Real iPhone not tested.
 

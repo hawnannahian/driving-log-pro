@@ -3596,3 +3596,28 @@ body{background:var(--pc-bg)}
 #calendar .remindbox p{margin:0 0 7px}
 @media(max-width:400px){#calendar .cal-stat{padding:9px 6px}#calendar .cal-stat b{font-size:14.5px;overflow:visible;text-overflow:clip}}
 @media(max-width:360px){#calendar .cal-day-stats{gap:3px}#calendar .cal-stat{padding:8px 4px}#calendar .cal-stat b{font-size:12.5px;letter-spacing:-.4px}}
+
+/* v1.105 — Overview prayer card (Mawaqit-style): deep green card, gold highlight for the next prayer, countdown and a progress bar. The older collapsed prayer line is hidden because this card shows the same information. */
+#overview #prayerLine{display:none!important}
+.prayercard{margin:12px 0 16px;padding:14px 14px 12px;border-radius:20px;color:#fff;background:linear-gradient(150deg,#0a2f3d 0%,#0b4a4a 55%,#0d6153 100%);box-shadow:0 10px 26px #0a2f3d3d}
+.prayercard.hidden{display:none}
+.prayercard small{display:block;font-size:10.5px;font-weight:800;letter-spacing:1.1px;color:#9fd8c9}
+.pc-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.pc-top b{display:block;margin-top:3px;font-size:14px;font-weight:700;color:#e8f6f1}
+.pc-edit{min-height:32px;padding:0 13px;border:1px solid #ffffff3d;border-radius:999px;background:#ffffff14;color:#fff;font:inherit;font-size:12px;font-weight:700}
+.pc-hero{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin:14px 0 10px}
+.pc-hero>div:first-child b{display:block;margin-top:2px;font-size:30px;font-weight:800;letter-spacing:-.8px;line-height:1.05}
+.pc-at{text-align:right}
+.pc-at b{display:block;font-size:30px;font-weight:800;letter-spacing:-.8px;line-height:1.05;color:#f2c96b;font-variant-numeric:tabular-nums}
+.pc-at span{display:block;margin-top:3px;font-size:12.5px;font-weight:700;color:#cfeee5}
+.pc-bar{height:5px;border-radius:999px;background:#ffffff26;overflow:hidden}
+.pc-bar i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,#f2c96b,#ffe39a)}
+.pc-row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin-top:12px}
+.pc-item{padding:9px 2px 8px;border-radius:14px;background:#ffffff12;text-align:center}
+.pc-item small{font-size:10px;letter-spacing:.3px;font-weight:700;color:#b6e3d6}
+.pc-item b{display:block;margin-top:4px;font-size:15px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.3px}
+.pc-item.past{opacity:.55}
+.pc-item.next{background:#f2c96b22;box-shadow:inset 0 0 0 1.5px #f2c96b}
+.pc-item.next b{color:#f2c96b}
+.pc-foot{margin:10px 0 0;font-size:11px;font-weight:600;color:#9fd8c9;text-align:center}
+@media(max-width:360px){.pc-hero>div:first-child b,.pc-at b{font-size:26px}.pc-item b{font-size:13.5px}.pc-item small{font-size:9px}.pc-row{gap:4px}}
