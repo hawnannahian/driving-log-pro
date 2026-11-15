@@ -1,3 +1,10 @@
+## v1.107 — Prayer card shows tomorrow after Isha; Calendar strip starts at today (2026-11-15; owner-approved audit items 1+2)
+- Prayer card: after Isha the card used to show tomorrow's Fajr as "next" above today's tiles (confusing when the mosque time changes overnight, e.g. 06:15 → 06:30). Now it switches to tomorrow's five times, headed "Tomorrow · <date>", with Fajr highlighted and nothing dimmed.
+- Calendar Day view strip: shows today + the next 6 days while the selected day is inside that window (tomorrow is always visible, also on Sundays); for other days it shows that day's Mon–Sun week (`calStripDays`). Navigation, swipe and the selected-day logic are unchanged.
+- Also: `tests/expense-history.test.js` no longer pins the version to v1.106 (it would fail on every later release); it still checks footer and Settings match.
+- Files: `app.js`, `index.html` (v1.107), `sw.js` (cache v170), `tests/prayer-tomorrow-strip.test.js`, `tests/expense-history.test.js`. No data/schema change.
+- Tests: node --check all JS; 135 node tests; Chromium (fake clock Sun 22:40) at 390×844 and 320×568: card shows tomorrow's times, strip 15–21 with tomorrow tappable, strip follows the week after 8× next, no overflow, 0 errors. Not tested: real iPhone.
+
 ## v1.106 — Expense history in the New expense sheet (2026-11-14; owner request)
 - The New expense sheet now ends with an **Expense history** section: all non-lesson, non-note records (Fuel, Expense, Insurance, Maintenance, Refund), newest first, 10 at a time with "Show more". Each row reuses the Log row (type, date, comment, amount; refunds with a minus sign). Tapping a row closes the sheet and opens that record for editing.
 - Read-only list: no totals or accounting definitions added, nothing saved or recalculated. Hidden for Lesson/Note types.

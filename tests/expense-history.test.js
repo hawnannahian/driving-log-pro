@@ -16,5 +16,5 @@ test("v1.106: no inline styles and closed-dialog safeguard kept",()=>{
   assert.match(css,/#recordDialog \.expense-history\.hidden\{display:none\}/);
 });
 test("v1.106: footer and Settings version match",()=>{
-  const v=html.match(/Version (v[\d.]+)</)[1];assert.equal(v,"v1.106");assert.ok(html.includes("manager · "+v+"</span></footer>"));
+  const v=html.match(/Version (v[\d.]+)</)[1];assert.ok(html.includes("manager · "+v+"</span></footer>"));
 });
