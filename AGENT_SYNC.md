@@ -4,6 +4,9 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs for review, Claude's own-PR merge authority under §3a, no student data in the repo).
 
 ## Recent handover entries
+### 2026-11-15 — Claude: styles.css clean-up (v1.109, cache v172)
+- Removed provably dead rules and overridden declarations with `tools/css-clean.py` (dry run: `python3 tools/css-clean.py .`; apply with `--write`; keep `"--protect=.brand .brandcar"`). 138-state screenshot sweep pixel-identical. See PROJECT_STATE v1.109. If a visual regression appears in a state outside the sweep (legacy package cards, cloud panels, print), compare with the previous `styles.css` first.
+
 ### 2026-11-15 — Claude: lesson confirmation card (v1.108, cache v171) — owner approved
 - Overview asks "Did these lessons happen?" for ended, unconfirmed lessons of the last 3 days; Yes/No write the existing `done` fields. `isDone` rule unchanged. See PROJECT_STATE v1.108. **Note for agents: code appended at the end of app.js must not declare top-level `const` used by `render()` — the first render runs before the end of the file (TDZ error). Keep such constants inside the function.**
 

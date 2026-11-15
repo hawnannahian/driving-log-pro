@@ -1,72 +1,67 @@
-:root{--navy:#101c33;--blue:#315ee8;--ink:#182338;--muted:#718096;--line:#e7ebf1;--bg:#f4f6fa;--green:#16845b;--orange:#b76b12;--red:#b93838;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}*{box-sizing:border-box}body{margin:0;min-height:100vh}.topbar{height:76px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 max(20px,calc((100vw - 1120px)/2));position:sticky;top:0;z-index:5}.brand{display:flex;align-items:center;gap:12px}.brandmark{width:42px;height:42px;border-radius:13px;background:#315ee8;display:grid;place-items:center;font-weight:800;letter-spacing:-1px}.brand b{display:block;font-size:16px}.brand small{color:#aab6cc;font-size:11px}main{max-width:1120px;margin:auto;padding:30px 22px 60px}.welcome,.sectionhead{display:flex;align-items:center;justify-content:space-between;gap:16px}.welcome{margin:10px 0 24px}.eyebrow{font-size:10px;letter-spacing:1.6px;color:var(--blue);font-weight:800;margin:0 0 7px}.welcome h1{font-size:32px;margin:0 0 5px;letter-spacing:-1px}.muted{color:var(--muted);margin:0;font-size:13px}.btn{border:0;border-radius:11px;padding:11px 15px;font-weight:700;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:7px;text-decoration:none}.primary{background:var(--blue);color:white}.secondary{background:#edf1ff;color:#244bd0}.ghost{background:#fff;color:#34425b;border:1px solid var(--line)}.danger{background:#fff0f0;color:var(--red)}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:24px}.stat,.panel,.report,.data-card{background:#fff;border:1px solid var(--line);border-radius:16px}.stat{padding:18px}.stat span,.report span{font-size:12px;color:var(--muted);display:block}.stat strong{display:block;font-size:25px;letter-spacing:-.7px;margin:9px 0 4px}.stat small{color:#9aa4b4;font-size:11px}.tabs{display:flex;gap:7px;overflow:auto;margin-bottom:14px;padding-bottom:2px}.tab{border:0;background:transparent;padding:11px 16px;border-radius:10px;color:#68758a;font-weight:700;white-space:nowrap;cursor:pointer}.tab.active{background:#e8edff;color:#244bd0}.panel{padding:22px;min-height:220px}.sectionhead{margin-bottom:17px}.sectionhead h2{font-size:19px;margin:0 0 5px}.recordlist{display:grid;gap:9px}.record{display:flex;align-items:center;gap:12px;padding:13px;border:1px solid var(--line);border-radius:12px;background:white;cursor:pointer;text-align:left;width:100%;color:inherit}.record:hover,.student:hover{border-color:#c4d0f8}.recordicon{width:38px;height:38px;border-radius:12px;background:#edf1ff;color:var(--blue);display:grid;place-items:center;font-weight:800}.recordmain{flex:1;min-width:0}.recordmain b{display:block;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.recordmain small,.recordvalue small{display:block;color:var(--muted);font-size:11px;margin-top:4px}.recordvalue{text-align:right;font-weight:800;font-size:13px}.recordvalue small.unpaid{color:var(--orange)}.recordvalue small.paid{color:var(--green)}.empty{color:#8a96a8;font-size:13px;padding:22px;text-align:center;background:#fafbfc;border:1px dashed var(--line);border-radius:12px}.toolbar{display:flex;gap:9px;margin:14px 0;flex-wrap:wrap}.toolbar input,.toolbar select{border:1px solid var(--line);border-radius:10px;padding:11px 12px;background:#fff;color:var(--ink);font:inherit;font-size:13px}.toolbar input{flex:1;min-width:190px}.studentgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.student{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fff;text-align:left;cursor:pointer;color:inherit}.student b{display:block;font-size:14px}.student small{display:block;color:var(--muted);margin-top:5px}.reportgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:15px 0}.report{padding:16px}.report strong{display:block;font-size:22px;margin-top:9px}.dataactions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}.data-card{padding:18px;display:flex;align-items:flex-start;flex-direction:column;gap:9px}.data-card h3{margin:0;font-size:15px}.data-card p{margin:0 0 6px;color:var(--muted);font-size:12px;line-height:1.5}.data-card .btn{width:100%}.data-card input[type=file]{display:none}.hint{font-size:11px!important}.notice{margin-top:15px;padding:13px;background:#fff8e8;border:1px solid #f2e4be;border-radius:11px;color:#755b20;font-size:12px;line-height:1.5}dialog{border:0;border-radius:18px;padding:0;width:min(620px,calc(100% - 24px));box-shadow:0 25px 80px #0d193344}dialog::backdrop{background:#101c3377;backdrop-filter:blur(3px)}dialog form{padding:22px}.dialoghead{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px}.dialoghead h2{margin:0;font-size:22px}.iconbtn{border:0;background:#f0f2f6;border-radius:50%;width:32px;height:32px;font-size:22px;cursor:pointer}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.formgrid label{display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:700;color:#59677d}.formgrid input,.formgrid select,.formgrid textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:10px;font:inherit;font-size:14px;color:var(--ink);background:white}.formgrid .wide{grid-column:1/-1}.formgrid .checklabel{flex-direction:row;align-items:center}.checklabel input{width:auto}.dialogactions{display:flex;align-items:center;gap:8px;margin-top:20px}.dialogactions span{flex:1}footer{max-width:1120px;margin:auto;padding:20px 22px 30px;display:flex;justify-content:space-between;color:#9aa4b4;font-size:11px}.hidden{display:none!important}#toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);background:var(--navy);color:white;padding:12px 18px;border-radius:12px;font-size:13px;opacity:0;pointer-events:none;transition:.2s;z-index:20;max-width:90vw}#toast.show{opacity:1;transform:translate(-50%,0)}@media(max-width:720px){main{padding:22px 14px 45px}.topbar{padding:0 15px;height:66px}.welcome{align-items:flex-start;flex-direction:column}.welcome h1{font-size:28px}.stats{grid-template-columns:repeat(2,1fr);gap:9px}.stat{padding:14px}.stat strong{font-size:21px}.panel{padding:15px}.studentgrid,.dataactions{grid-template-columns:1fr}.reportgrid{grid-template-columns:repeat(2,1fr)}.sectionhead.wrap{align-items:flex-start;flex-direction:column}.formgrid{grid-template-columns:1fr}.formgrid .wide{grid-column:auto}.dialogactions{flex-wrap:wrap}.dialogactions span{display:none}.dialogactions .btn{flex:1}footer{padding:18px 14px;gap:12px;flex-wrap:wrap}}
-.topbar{height:calc(76px + env(safe-area-inset-top));padding-top:env(safe-area-inset-top)}footer{padding-bottom:calc(30px + env(safe-area-inset-bottom))}dialog{max-height:calc(100dvh - 24px);overflow:auto}.formerror{color:var(--red);font-size:13px;margin:12px 0 0}.formerror:empty{display:none}.toolbar select{min-width:150px}
-@media(max-width:720px){.topbar{height:calc(66px + env(safe-area-inset-top))}.toolbar input,.toolbar select,.formgrid input,.formgrid select,.formgrid textarea{font-size:16px}.toolbar input,.toolbar select{min-width:0}.toolbar select{flex:1}.formgrid input,.formgrid select{min-height:44px}.tab,.iconbtn{min-height:44px}.iconbtn{min-width:44px}}
+:root{--navy:#101c33;--blue:#315ee8;--ink:#182338;--muted:#718096;--line:#e7ebf1;--bg:#f4f6fa;--green:#16845b;--orange:#b76b12;--red:#b93838;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}*{box-sizing:border-box}body{margin:0;min-height:100vh}.topbar{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 max(20px,calc((100vw - 1120px)/2));position:sticky;top:0;z-index:5}.brand{display:flex;align-items:center}.brand b{display:block;font-size:16px}main{margin:auto;padding:30px 22px 60px}.sectionhead{display:flex;align-items:center;justify-content:space-between;gap:16px}.eyebrow{font-size:10px;letter-spacing:1.6px;color:var(--blue);font-weight:800;margin:0 0 7px}.muted{color:var(--muted);margin:0;font-size:13px}.btn{border:0;padding:11px 15px;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:7px;text-decoration:none}.primary{background:var(--blue);color:white}.secondary{background:#edf1ff;color:#244bd0}.ghost{background:#fff;color:#34425b;border:1px solid var(--line)}.danger{background:#fff0f0;color:var(--red)}.stat,.panel,.report,.data-card{background:#fff;border:1px solid var(--line);border-radius:16px}.stat{padding:18px}.stat span,.report span{font-size:12px;color:var(--muted);display:block}.stat strong{display:block;font-size:25px;letter-spacing:-.7px;margin:9px 0 4px}.stat small{color:#9aa4b4;font-size:11px}.tabs{display:flex;gap:7px;overflow:auto;margin-bottom:14px;padding-bottom:2px}.tab{border:0;background:transparent;padding:11px 16px;border-radius:10px;color:#68758a;font-weight:700;white-space:nowrap;cursor:pointer}.tab.active{background:#e8edff;color:#244bd0}.panel{padding:22px;min-height:220px}.sectionhead{margin-bottom:17px}.sectionhead h2{margin:0 0 5px}.recordlist{display:grid;gap:9px}.record{display:flex;align-items:center;gap:12px;padding:13px;border:1px solid var(--line);background:white;cursor:pointer;text-align:left;width:100%;color:inherit}.record:hover,.student:hover{border-color:#c4d0f8}.recordicon{width:38px;height:38px;border-radius:12px;background:#edf1ff;color:var(--blue);display:grid;place-items:center;font-weight:800}.recordmain{flex:1}.recordmain b{display:block;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.recordmain small,.recordvalue small{display:block;color:var(--muted);font-size:11px;margin-top:4px}.recordvalue{text-align:right;font-weight:800;font-size:13px}.recordvalue small.unpaid{color:var(--orange)}.recordvalue small.paid{color:var(--green)}.empty{color:#8a96a8;font-size:13px;padding:22px;text-align:center;background:#fafbfc;border:1px dashed var(--line);border-radius:12px}.toolbar{display:flex;flex-wrap:wrap}.toolbar input,.toolbar select{border:1px solid var(--line);border-radius:10px;padding:11px 12px;background:#fff;color:var(--ink);font:inherit;font-size:13px}.toolbar input{min-width:190px}.studentgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.student{border:1px solid var(--line);border-radius:12px;background:#fff;text-align:left;color:inherit}.student b{display:block;font-size:14px}.student small{display:block;color:var(--muted);margin-top:5px}.reportgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:15px 0}.report{padding:16px}.report strong{display:block;margin-top:9px}.dataactions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}.data-card{padding:18px;display:flex;align-items:flex-start;flex-direction:column;gap:9px}.data-card h3{margin:0;font-size:15px}.data-card p{margin:0 0 6px;color:var(--muted);font-size:12px;line-height:1.5}.data-card .btn{width:100%}.data-card input[type=file]{display:none}.hint{font-size:11px!important}.notice{margin-top:15px;padding:13px;background:#fff8e8;border:1px solid #f2e4be;border-radius:11px;color:#755b20;font-size:12px;line-height:1.5}dialog{padding:0;width:min(620px,calc(100% - 24px))}dialog form{padding:22px}.dialoghead{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px}.dialoghead h2{margin:0;font-size:22px}.iconbtn{border:0;background:#f0f2f6;border-radius:50%;width:32px;height:32px;font-size:22px;cursor:pointer}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.formgrid label{display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:700;color:#59677d}.formgrid input,.formgrid select,.formgrid textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:10px;font:inherit;font-size:14px;color:var(--ink);background:white}.formgrid .wide{grid-column:1/-1}.formgrid .checklabel{flex-direction:row;align-items:center}.checklabel input{width:auto}.dialogactions{display:flex;align-items:center;gap:8px;margin-top:20px}.dialogactions span{flex:1}footer{max-width:1120px;margin:auto;padding:20px 22px 30px;display:flex;justify-content:space-between;color:#9aa4b4;font-size:11px}.hidden{display:none!important}#toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);background:var(--navy);color:white;padding:12px 18px;font-size:13px;opacity:0;pointer-events:none;transition:.2s;z-index:20;max-width:90vw}#toast.show{opacity:1;transform:translate(-50%,0)}@media(max-width:720px){.topbar{padding:0 15px;height:66px}.studentgrid,.dataactions{grid-template-columns:1fr}.reportgrid{grid-template-columns:repeat(2,1fr)}.sectionhead.wrap{align-items:flex-start;flex-direction:column}.formgrid{grid-template-columns:1fr}.dialogactions{flex-wrap:wrap}.dialogactions span{display:none}.dialogactions .btn{flex:1}footer{gap:12px;flex-wrap:wrap}}
+.topbar{height:calc(76px + env(safe-area-inset-top));padding-top:env(safe-area-inset-top)}footer{padding-bottom:calc(30px + env(safe-area-inset-bottom))}.formerror{color:var(--red);font-size:13px;margin:12px 0 0}.formerror:empty{display:none}.toolbar select{min-width:150px}
+@media(max-width:720px){.topbar{height:calc(66px + env(safe-area-inset-top))}.toolbar input,.toolbar select,.formgrid input,.formgrid select,.formgrid textarea{font-size:16px}.toolbar input,.toolbar select{min-width:0}.formgrid input,.formgrid select{min-height:44px}.tab,.iconbtn{min-height:44px}.iconbtn{min-width:44px}}
 
-.calhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.calhead b{font-size:16px}.calweek,.calgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}.calweek{margin-bottom:5px;text-align:center;color:var(--muted);font-size:11px;font-weight:700}.calday{min-height:52px;padding:6px 1px;border:1px solid var(--line);border-radius:10px;background:#fff;color:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;font:inherit}.calday b{font-size:14px;font-weight:600}.calday small{font-size:9px;color:var(--blue);font-weight:700;white-space:nowrap}.calday.busy{background:#edf1ff;border-color:#d5defb}.calday.today b{color:var(--blue);font-weight:800}.calday.selected{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}.caltitle{margin:20px 0 12px}.caltitle h3,h3.caltitle{font-size:15px;margin-top:0;margin-bottom:0}h3.caltitle{margin:20px 0 12px}.booktime{width:50px;font-size:12px}
+.calhead{display:flex;align-items:center;justify-content:space-between}.calhead b{font-size:16px}.calweek,.calgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}.calweek{margin-bottom:5px;text-align:center;font-size:11px}.calday{cursor:pointer;display:flex;flex-direction:column;align-items:center;font:inherit}.calday small{font-size:9px;color:var(--blue);font-weight:700;white-space:nowrap}.calday.busy{border-color:#d5defb}.calday.selected{border-color:var(--blue)}.caltitle{margin:20px 0 12px}.caltitle h3,h3.caltitle{font-size:15px;margin-top:0;margin-bottom:0}h3.caltitle{margin:20px 0 12px}.booktime{width:50px;font-size:12px}
 
-.payrow{display:flex;gap:7px;align-items:stretch}.payrow .record{flex:1;min-width:0}.markpaid{flex:none;width:58px;border:1px solid #cfe9dc;border-radius:12px;background:#ecf8f2;color:var(--green);font:inherit;font-size:11px;font-weight:800;cursor:pointer;line-height:1.2}.backupbanner{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;padding:12px 14px;background:#fff8e8;border:1px solid #f2e4be;border-radius:14px;color:#755b20;font-size:13px;font-weight:600}.backupbanner .btn{flex:none}.todayhead{font-size:19px;margin:0 0 12px}.todaygap{height:24px}.dialogbody{padding:22px}.profilestats{display:grid;grid-template-columns:1fr 1fr;gap:9px}.profilestats .report{padding:12px}.profilestats .report strong{font-size:18px;margin-top:6px}.profileactions .btn{flex:1}.student small.unpaid{color:var(--orange);font-weight:700}
+.payrow{display:flex;gap:7px;align-items:stretch}.payrow .record{flex:1;min-width:0}.markpaid{flex:none;width:58px;border:1px solid #cfe9dc;border-radius:12px;background:#ecf8f2;color:var(--green);font:inherit;font-size:11px;font-weight:800;cursor:pointer;line-height:1.2}.backupbanner{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;padding:12px 14px;background:#fff8e8;border:1px solid #f2e4be;border-radius:14px;color:#755b20;font-size:13px;font-weight:600}.backupbanner .btn{flex:none}.todayhead{font-size:19px;margin:0 0 12px}.todaygap{height:24px}.dialogbody{padding:22px}.profilestats{display:grid;grid-template-columns:1fr 1fr;gap:9px}.profilestats .report{padding:12px}.profilestats .report strong{font-size:18px;margin-top:6px}.student small.unpaid{color:var(--orange);font-weight:700}
 
 .prayerrow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 13px;border-radius:12px;background:#f1eefb;color:#4b3a8f;font-size:13px}.prayerrow span{font-weight:700;white-space:nowrap}.prayerbox{margin-top:22px;padding:13px;border:1px solid var(--line);border-radius:12px}.prayerbox summary{cursor:pointer;font-weight:700;font-size:14px;min-height:24px}.prayerbox .formgrid{margin-top:14px}.prayerbox .hint{margin:12px 0 0;color:var(--muted)}
 
-.freegrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.freeslot{display:flex;flex-direction:column;gap:3px;align-items:flex-start;padding:10px 12px;min-height:50px;border:1px solid #cfe9dc;border-radius:12px;background:#ecf8f2;color:var(--green);font:inherit;cursor:pointer}.freeslot b{font-size:13px}.freeslot small{font-size:11px;font-weight:600}
-
 .profileactions:not(:has(.btn:not(.hidden))){display:none}
 
-.reportpdf{width:100%;margin-bottom:6px}.chartbox{margin-top:14px;padding:16px;border:1px solid var(--line);border-radius:14px}.chartbox h3{margin:0 0 8px;font-size:15px}.chartlegend{display:flex;gap:14px;font-size:12px;color:#59677d;margin-bottom:8px}.chartlegend span{display:flex;align-items:center;gap:6px}.swatch{width:12px;height:12px;border-radius:3px;display:inline-block}.swatch.barincome{background:#315ee8}.swatch.barexpense{background:#e0861a}#chartSvg{display:block;width:100%;height:auto}path.barincome{fill:#315ee8}path.barexpense{fill:#e0861a}.chartgrid{stroke:var(--line);stroke-width:1}.charttick{fill:var(--muted);font-size:9px}.charthit{fill:transparent;cursor:pointer}.chartreadout{margin:10px 0;font-size:12px;line-height:1.5;color:#34425b}.chartbox summary{cursor:pointer;font-size:13px;font-weight:700;min-height:24px}.charttable{width:100%;border-collapse:collapse;margin-top:8px;font-size:12px}.charttable th,.charttable td{padding:7px 4px;text-align:right;border-bottom:1px solid var(--line)}.charttable th:first-child,.charttable td:first-child{text-align:left}.pkghead{display:flex;align-items:center;justify-content:space-between;margin:18px 0 10px}.pkghead h3{margin:0;font-size:15px}.pkgrow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 13px;border:1px solid var(--line);border-radius:12px}.pkgrow b{display:block;font-size:13px}.pkgrow small{display:block;margin-top:3px;color:var(--muted);font-size:11px}
+.chartbox{margin-top:14px;padding:16px;border:1px solid var(--line);border-radius:14px}.chartbox h3{margin:0 0 8px;font-size:15px}.chartlegend{display:flex;gap:14px;font-size:12px;color:#59677d;margin-bottom:8px}.chartlegend span{display:flex;align-items:center;gap:6px}.swatch{width:12px;height:12px;border-radius:3px;display:inline-block}.swatch.barincome{background:#315ee8}.swatch.barexpense{background:#e0861a}#chartSvg{display:block;width:100%;height:auto}path.barincome{fill:#315ee8}path.barexpense{fill:#e0861a}.chartgrid{stroke:var(--line);stroke-width:1}.charttick{fill:var(--muted);font-size:9px}.charthit{fill:transparent;cursor:pointer}.chartreadout{margin:10px 0;font-size:12px;line-height:1.5;color:#34425b}.chartbox summary{cursor:pointer;font-size:13px;font-weight:700;min-height:24px}.charttable{width:100%;border-collapse:collapse;margin-top:8px;font-size:12px}.charttable th,.charttable td{padding:7px 4px;text-align:right;border-bottom:1px solid var(--line)}.charttable th:first-child,.charttable td:first-child{text-align:left}.pkghead{margin:18px 0 10px}
 
 .cloudcard{margin-top:12px}.cloudform{display:flex;flex-direction:column;gap:9px;width:100%}.cloudform label{display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:700;color:#59677d}.cloudform input{width:100%;border:1px solid var(--line);border-radius:9px;padding:10px;font:inherit;font-size:16px;color:var(--ink);background:#fff}.cloudbad{color:var(--red)!important}
 
 /* v1.13: calendar board, tab bar, timer */
-:root{--stud:#ffc24d}.eyebrow{display:none}.offtab{display:none!important}.welcome{margin:2px 0 14px}.welcome h1{font-size:28px}
-.topbar{height:calc(58px + env(safe-area-inset-top))}.brandmark{width:36px;height:36px;border-radius:11px;font-size:14px}.brand small{display:none}
-main{padding-bottom:150px}body.timing main{padding-bottom:220px}footer{padding-bottom:calc(130px + env(safe-area-inset-bottom))}body.timing footer{padding-bottom:calc(200px + env(safe-area-inset-bottom))}
+:root{--stud:#ffc24d}.eyebrow{display:none}.offtab{display:none!important}
+.topbar{height:calc(58px + env(safe-area-inset-top))}.brand small{display:none}
+main{padding-bottom:150px}footer{padding-bottom:calc(130px + env(safe-area-inset-bottom))}body.timing footer{padding-bottom:calc(200px + env(safe-area-inset-bottom))}
 .tabpanel{animation:panelin .2s ease-out}@keyframes panelin{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
-.tabbar{position:fixed;z-index:6;left:50%;bottom:calc(10px + env(safe-area-inset-bottom));transform:translateX(-50%);width:min(560px,calc(100% - 20px));display:grid;grid-template-columns:repeat(6,minmax(0,1fr));padding:6px;border-radius:24px;background:rgba(16,28,51,.95);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 12px 30px #101c3345}
-.navpill{position:absolute;top:6px;bottom:6px;left:6px;width:calc((100% - 12px)/6);border-radius:18px;background:var(--blue);transition:transform .3s cubic-bezier(.3,.9,.3,1)}
-.tabbar .tab{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:54px;padding:6px 0;border:0;border-radius:18px;background:none;color:#a9b5cb;font:inherit;font-size:10.5px;font-weight:600;cursor:pointer;transition:color .2s;-webkit-tap-highlight-color:transparent}
-.tabbar .tab.active{background:none;color:#fff}.tabbar .tab:focus-visible,.fab:focus-visible,.calday:focus-visible{outline:2px solid var(--stud);outline-offset:2px}
-.fab{position:fixed;z-index:6;right:max(14px,calc(50% - 266px));bottom:calc(88px + env(safe-area-inset-bottom));width:56px;height:56px;border:0;border-radius:20px;background:var(--blue);color:#fff;font-size:24px;line-height:1;cursor:pointer;box-shadow:0 10px 24px #315ee855;transition:transform .15s}.fab:active{transform:scale(.93)}
+.tabbar{position:fixed;z-index:6;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));padding:6px}
+.navpill{position:absolute;bottom:6px;left:6px;width:calc((100% - 12px)/6)}
+.tabbar .tab{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border:0;background:none;font:inherit;cursor:pointer;transition:color .2s;-webkit-tap-highlight-color:transparent}
+.tabbar .tab:focus-visible,.calday:focus-visible{outline:2px solid var(--stud);outline-offset:2px}
+
 #toast{bottom:calc(92px + env(safe-area-inset-bottom))}
-.calboard{margin:-2px 0 4px;padding:14px 12px 16px;border-radius:20px;background:var(--navy);color:#fff}.calhead{margin-bottom:0;padding-bottom:12px;background:linear-gradient(90deg,#ffffff40 55%,transparent 55%) 0 100%/22px 2px repeat-x}.calhead .iconbtn{flex:none;background:#ffffff1c;color:#fff}.caltitlebox{display:flex;flex-direction:column;align-items:center;gap:2px}.caltitlebox b{font-size:17px;letter-spacing:-.2px}.caltoday{border:0;background:none;color:var(--stud);font:inherit;font-size:12px;font-weight:600;cursor:pointer;padding:2px 6px}
-.calweek{margin:12px 0 6px;color:#93a1ba;font-weight:600}.calgrid{gap:2px}.calday{min-height:50px;padding:5px 0 4px;border:0;border-radius:14px;background:none;color:#fff;justify-content:flex-start;gap:4px;transition:background .15s}.calday b{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;font-size:14px;font-weight:600;font-variant-numeric:tabular-nums}.calday.busy{background:none;border:0}.calday.past b{color:#7d8ba5}.calday.today b{color:#fff;box-shadow:inset 0 0 0 1.5px var(--stud)}.calday.selected{box-shadow:none;border:0}.calday.selected b{background:#fff;color:var(--navy);box-shadow:none}
-.studs{display:flex;gap:3px;height:5px}.studs em{width:5px;height:5px;border-radius:50%;background:var(--stud);box-shadow:0 0 5px #ffc24d99}
+.calboard{margin:-2px 0 4px;padding:14px 12px 16px;border-radius:20px;color:#fff}.calhead{margin-bottom:0}.calhead .iconbtn{flex:none;background:#ffffff1c;color:#fff}.caltitlebox{display:flex;flex-direction:column;align-items:center;gap:2px}.caltitlebox b{letter-spacing:-.2px}.caltoday{border:0;background:none;color:var(--stud);font:inherit;font-size:12px;font-weight:600;cursor:pointer;padding:2px 6px}
+.calweek{margin:12px 0 6px}.calgrid{gap:2px}.calday{padding:5px 0 4px;border:0;color:#fff;justify-content:flex-start;transition:background .15s}.calday b{display:grid;place-items:center;border-radius:50%;font-size:14px;font-variant-numeric:tabular-nums}.calday.busy{background:none;border:0}.calday.today b{color:#fff;box-shadow:inset 0 0 0 1.5px var(--stud)}.calday.selected{box-shadow:none;border:0}.calday.selected b{background:#fff}
+
 .caltitle{margin-top:22px}
-.timercard{margin:0 0 22px;padding:16px;border-radius:18px;background:var(--navy);color:#fff}.timercard h2{margin:0 0 12px;font-size:16px}.timerchips{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:10px}.timerchip{min-height:44px;border:0;border-radius:12px;background:#ffffff1c;color:#dfe5f0;font:inherit;font-size:14px;font-weight:600;cursor:pointer}.timerchip.active{background:#fff;color:var(--navy)}.timerstart{width:100%;min-height:48px;background:var(--stud);color:var(--navy);font-size:15px}
-.timerbar{position:fixed;z-index:7;left:max(10px,calc(50% - 270px));right:max(82px,calc(50% - 198px));bottom:calc(84px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:5px;overflow:hidden;padding:9px 8px 9px 13px;border-radius:18px;background:var(--navy);color:#fff;box-shadow:0 10px 26px #101c3350}.timerfill{position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--stud);transform-origin:left;transition:transform .45s linear}.timertext{flex:1;min-width:0}.timertext small{display:block;overflow:hidden;font-size:10px;color:#b7c2d6;text-overflow:ellipsis;white-space:nowrap}.timertext b{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.4px}.timerbtn{flex:none;min-width:40px;min-height:40px;padding:0 7px;border:0;border-radius:12px;background:#ffffff1f;color:#fff;font:inherit;font-size:12px;font-weight:600;cursor:pointer}.timerbar.timerdone{background:#b93838}.timerbar.timerdone .timertext small{color:#fff}
+
+.timerbar{position:fixed;z-index:7;bottom:calc(84px + env(safe-area-inset-bottom));color:#fff}.timerfill{position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--stud);transform-origin:left;transition:transform .45s linear}.timerbtn{flex:none;min-width:40px;padding:0 7px;border:0;font:inherit;font-weight:600;cursor:pointer}
 .agendalesson{display:grid;gap:6px}.lessontimer{min-height:42px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--blue);font:inherit;font-size:13px;font-weight:600;cursor:pointer}
 .formhint{grid-column:1/-1;margin:-6px 0 0;color:var(--muted);font-size:12px}.formgrid label{min-width:0}
-@media(max-width:720px){.topbar{height:calc(56px + env(safe-area-inset-top))}main{padding:16px 14px 150px}body.timing main{padding-bottom:220px}.panel{padding:13px}.formgrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:11px}.formgrid .wide{grid-column:1/-1}}
-@media(prefers-reduced-motion:reduce){.tabpanel{animation:none}.navpill,.timerfill,.fab{transition:none}}
+@media(max-width:720px){.topbar{height:calc(56px + env(safe-area-inset-top))}.formgrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:11px}.formgrid .wide{grid-column:1/-1}}
+@media(prefers-reduced-motion:reduce){.tabpanel{animation:none}.navpill,.timerfill{transition:none}}
 .savebanner{background:#fff0f0;border-color:#f3c9c9;color:var(--red)}.updatebanner{background:#edf1ff;border-color:#cdd8fb;color:#244bd0}
 .recoverylist{display:grid;gap:8px;width:100%}.recoveryrow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:10px;border:1px solid var(--line);border-radius:12px}.recoveryrow span{flex:1 1 100%;font-size:12px;color:var(--ink)}.recoveryrow small{color:var(--muted)}.data-card .recoveryrow .btn{width:auto;flex:1;padding:8px 10px;font-size:12px}
-.statstrip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;margin:0 0 14px;padding:10px 6px 8px;background:#fff;border:1px solid var(--line);border-radius:16px;position:relative}.statstrip div{padding:4px 8px;text-align:center;border-right:1px solid var(--line);min-width:0}.statstrip div:nth-child(4){border-right:0}.statstrip span{display:block;font-size:11px;color:var(--muted);font-weight:600}.statstrip strong{display:block;font-size:17px;letter-spacing:-.4px;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.statstrip small{grid-column:1/-1;text-align:center;font-size:10px;color:#9aa4b4;margin-top:4px}
+
 .nextcard{margin:0 0 10px;padding:16px;border-radius:18px;background:linear-gradient(135deg,#101c33,#1d3a78);color:#fff;box-shadow:0 10px 24px #101c3330}
 .nextlabel{display:flex;align-items:center;gap:8px;margin:0 0 8px;font-size:12px;font-weight:700;color:#c8d3ea;text-transform:uppercase;letter-spacing:.6px}.nextlabel i{width:8px;height:8px;border-radius:50%;background:var(--stud)}
 .nextmain{display:grid;gap:2px}.nexttime{font-size:30px;letter-spacing:-.8px;font-variant-numeric:tabular-nums}.nextname{font-size:18px;font-weight:700}.nextmain small{color:#b7c2d6;font-size:13px}.nextmain em{font-style:normal;font-weight:700}.nextmain em.paid{color:#7ee2b0}.nextmain em.unpaid{color:var(--stud)}
 .nextactions{display:flex;gap:8px;margin-top:14px}.nextbtn{flex:1;min-height:44px}.nextbtn.primary{background:var(--stud);color:var(--navy)}.nextbtn.wa{background:#1fa855;color:#fff}.nextbtn.ghost{background:#ffffff1f;color:#fff;border:0}
 .nextempty{display:flex;align-items:center;justify-content:space-between;gap:12px}.nextempty b{display:block;font-size:16px}.nextempty small{display:block;color:#b7c2d6;font-size:12px;margin-top:3px}.nextempty .btn{flex:none}
-.timerquick{width:100%;min-height:44px;margin:0 0 22px}
+
 .prayerline{margin-top:10px;border-radius:12px;background:#f1eefb;color:#4b3a8f;font-size:13px}.prayerline summary{padding:11px 13px;font-weight:700;cursor:pointer;list-style:none}.prayerline summary::-webkit-details-marker{display:none}.prayerline summary::after{content:"Show all ›";float:right;font-weight:600;opacity:.7}.prayerline[open] summary::after{content:"Hide"}.prayerline .recordlist{padding:0 8px 8px;gap:6px}.prayerline .prayerrow{background:#fff}
 .typechips,.chiprow{display:flex;flex-wrap:wrap;gap:6px}.typechips button,.chiprow button{min-height:38px;padding:0 13px;border:1px solid var(--line);border-radius:20px;background:#fff;color:#34425b;font:inherit;font-size:13px;font-weight:600;cursor:pointer}.typechips button.active,.chiprow button.active{background:var(--blue);border-color:var(--blue);color:#fff}
 .durchips{margin-top:-4px}.durchips button{flex:1}
-.moreopts summary{cursor:pointer;font-size:13px;font-weight:700;color:var(--blue);padding:4px 0}.moregrid{display:grid;gap:11px;margin-top:10px}.moregrid label{display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:700;color:#59677d}.moregrid select,.moregrid textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:10px;font:inherit;font-size:16px;color:var(--ink);background:#fff}.moregrid select{min-height:44px}
-.student{display:flex;align-items:center;gap:6px;padding:8px 8px 8px 10px;cursor:default}.studentmain{flex:1;min-width:0;display:flex;align-items:center;gap:11px;border:0;background:none;padding:4px 0;text-align:left;font:inherit;color:inherit;cursor:pointer}.studenttext{flex:1;min-width:0}.studenttext b,.studenttext small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.studenttext small{margin-top:3px!important}
+
+.student{display:flex;align-items:center;gap:6px;padding:8px 8px 8px 10px;cursor:default}.studentmain{flex:1;display:flex;align-items:center;gap:11px;border:0;background:none;padding:4px 0;text-align:left;font:inherit;color:inherit;cursor:pointer}.studenttext{flex:1}.studenttext b,.studenttext small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.studenttext small{margin-top:3px!important}
 .avatar{flex:none;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:17px;color:#fff}.av0{background:#315ee8}.av1{background:#16845b}.av2{background:#b76b12}.av3{background:#8a3fd1}.av4{background:#c23b5a}.av5{background:#0f7f94}
-.duebadge{flex:none;padding:4px 8px;border-radius:20px;background:#fdecec;color:var(--red);font-size:11px;font-weight:800;white-space:nowrap}
+
 .studentacts{display:flex;gap:6px;flex:none}.actbtn{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:#edf1ff;color:var(--blue)}.actbtn.wa{background:#e6f7ec;color:#1fa855}
-.fab{transition:transform .2s,opacity .2s}.fab.fabhide{transform:translateY(140px);opacity:0;pointer-events:none}
-@media(prefers-reduced-motion:reduce){.fab{transition:none}}
-@media(max-width:380px){.statstrip strong{font-size:15px}.duebadge{display:none}}
-.studentgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.student{min-width:0}
+
+.studentgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(max-width:720px){.studentgrid{grid-template-columns:minmax(0,1fr)}}
 .recordlist{grid-template-columns:minmax(0,1fr)}.recordlist>*,.payrow,.agendalesson{min-width:0}.recordmain small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.calviews{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;margin:0 0 10px;border-radius:14px;background:#e8edf6}.calviews button{min-height:38px;border:0;border-radius:10px;background:none;color:#4d5b73;font:inherit;font-size:13px;font-weight:700;cursor:pointer}.calviews button.active{background:#fff;color:var(--navy);box-shadow:0 2px 6px #101c331a}
+.calviews{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;margin:0 0 10px;border-radius:14px}.calviews button{min-height:38px;border:0;border-radius:10px;background:none;color:#4d5b73;font:inherit;font-size:13px;font-weight:700;cursor:pointer}.calviews button.active{background:#fff;color:var(--navy);box-shadow:0 2px 6px #101c331a}
 .calsum{margin:10px 0 0;text-align:center;font-size:12.5px;font-weight:600;color:#c8d3ea}
 .calday{position:relative;min-height:54px;gap:2px}.calday b{width:30px;height:30px}
-.calday.heat1{background:#315ee82e}.calday.heat2{background:#315ee857}.calday.heat3{background:#315ee88a}.calday.heat4{background:#315ee8c2}
-.calcount{min-height:12px;font-size:11px;font-weight:800;color:var(--stud);line-height:1}
-.caldots{position:absolute;top:4px;right:5px;display:flex;gap:2px}.caldots i{width:6px;height:6px;border-radius:50%}.caldots .due{background:#ff8a4c}.caldots .hol{background:#ff5d8f}
-.calday.hol b{color:#ff9fbd}
+
+.calcount{font-weight:800}
+
 .callegend{display:flex;justify-content:center;gap:14px;margin-top:10px;font-size:11px;color:#93a1ba;flex-wrap:wrap}.callegend span{display:flex;align-items:center;gap:5px}.lg{width:9px;height:9px;border-radius:3px}.lg.heat{background:#315ee8c2}.lg.due{background:#ff8a4c;border-radius:50%}.lg.hol{background:#ff5d8f;border-radius:50%}
 .daysum{margin:-6px 0 12px;font-size:13px;color:var(--muted);font-weight:600}
 .remindbox{margin:0 0 12px;padding:12px;border-radius:14px;background:#e6f7ec;border:1px solid #c7ecd4}.remindbox p{margin:0 0 8px}.remindbox b{display:block;font-size:13px;color:#11663a}.remindbox small{font-size:11.5px;color:#3d7a57}.remindlist{display:flex;flex-wrap:wrap;gap:6px}.remindchip{padding:8px 12px;border-radius:20px;background:#1fa855;color:#fff;font-size:12.5px;font-weight:700;text-decoration:none}.remindchip.sent{background:#fff;color:#1a7f44;border:1px solid #9fd8b4}
@@ -75,8 +70,8 @@ main{padding-bottom:150px}body.timing main{padding-bottom:220px}footer{padding-b
 .tlhour{position:absolute;left:0;right:0;height:0;border-top:1px solid #eef1f6;font-size:10.5px;color:#9aa4b4;font-variant-numeric:tabular-nums;padding-left:10px;line-height:0}
 .tlhour::before{content:"";position:absolute}
 .tlpray{position:absolute;left:54px;right:4px;border-radius:8px;background:repeating-linear-gradient(135deg,#f1eefb 0 6px,#e9e3f8 6px 12px);color:#5b4a9f;font-size:10.5px;font-weight:700;overflow:hidden}.tlpray span{display:block;padding:2px 8px}
-.tlfree{position:absolute;left:54px;right:4px;display:flex;align-items:flex-start;justify-content:space-between;gap:8px;padding:5px 9px;border:1.5px dashed #9fd8b4;border-radius:10px;background:#f2fbf5;color:#1a7f44;font:inherit;font-size:11.5px;cursor:pointer;overflow:hidden;text-align:left}.tlfree b{flex:none;font-size:11.5px}
-.tlles{position:absolute;display:flex;flex-direction:column;align-items:flex-start;gap:1px;padding:5px 9px;border:0;border-left:4px solid;border-radius:10px;font:inherit;text-align:left;cursor:pointer;overflow:hidden;box-shadow:0 2px 8px #101c3314;z-index:2}.tlles b{font-size:12px}.tlles span{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}.tlles small{font-size:10.5px;opacity:.8}
+
+.tlles{position:absolute;display:flex;flex-direction:column;align-items:flex-start;border:0;border-left:4px solid;border-radius:10px;font:inherit;text-align:left;cursor:pointer;overflow:hidden;box-shadow:0 2px 8px #101c3314;z-index:2}.tlles b{font-size:12px}.tlles span{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}.tlles small{font-size:10.5px;opacity:.8}
 .tlles.paid,.wkles.paid{background:#e6f7ec;border-color:#1fa855;color:#11663a}.tlles.unpaid,.wkles.unpaid{background:#fff3e6;border-color:#f08a24;color:#8a4a08}.tlles.pkg,.wkles.pkg{background:#e8eeff;border-color:#315ee8;color:#1f3f9e}.tlles.past,.wkles.past{opacity:.7}
 .tlnow{position:absolute;left:46px;right:0;height:0;border-top:2px solid #e5484d;z-index:3}.tlnow i{position:absolute;left:-5px;top:-6px;width:10px;height:10px;border-radius:50%;background:#e5484d}
 .weekview{margin:0 0 14px;padding:8px 6px 10px;border:1px solid var(--line);border-radius:16px;background:#fff}
@@ -90,22 +85,22 @@ main{padding-bottom:150px}body.timing main{padding-bottom:220px}footer{padding-b
 .uphead{margin:8px 0 -2px;font-size:12px;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.4px}.uphead:first-child{margin-top:0}
 #calDayHead.dayview h3{display:none}
 .tlles{padding:4px 8px;gap:2px}.tlrow{display:flex;align-items:baseline;gap:6px;min-width:0;max-width:100%}.tlrow b{flex:none;font-size:11.5px}.tlrow span{font-size:13px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
-.tlfree{border-width:1px;background:#f6fcf8;font-size:11px}
+
 .todayrow{display:flex;align-items:center;gap:8px;padding:8px 8px 8px 10px;border:1px solid var(--line);border-radius:14px;background:#fff;min-width:0}
 .tnum{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--navy);color:#fff;font-size:12px;font-weight:800}
 .tmain{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:1px;border:0;background:none;padding:2px 0;font:inherit;color:inherit;text-align:left;cursor:pointer}.tmain b{font-size:13px;font-variant-numeric:tabular-nums}.tmain span{font-size:14px;font-weight:700;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tstat{flex:none;font-size:11px;font-weight:800}.tstat.paid{color:var(--green)}.tstat.unpaid{color:var(--orange)}
 .tpay{flex:none;min-height:40px;padding:0 10px;border:1px solid #cfe9dc;border-radius:12px;background:#ecf8f2;color:var(--green);font:inherit;font-size:12px;font-weight:800;cursor:pointer}
 .todayrow .actbtn{width:40px;height:40px}
-.todayrow.done{opacity:.55}.todayrow.done .tnum{background:#9aa4b4}
-.calday.hol b{color:#ff7aa8;font-weight:800}
+
+.calday.hol b{font-weight:800}
 .qwa{width:100%;min-height:48px;margin:4px 0 6px;background:#1fa855;color:#fff}
-.qhead{margin:16px 0 0;font-size:15px}
+
 #qPkg:empty{display:none}#qPkg{color:var(--blue)}
 @media(max-width:380px){.tstat{display:none}}
 /* ---------- v1.19 design pass ---------- */
 :root{--royal:#315ee8;--soft:#eef3ff;--card-shadow:0 1px 2px #101c330d,0 4px 14px #101c330a}
-.sectionhead h2{font-size:20px;letter-spacing:-.3px}.panel{box-shadow:var(--card-shadow)}
+.sectionhead h2{font-size:20px}.panel{box-shadow:var(--card-shadow)}
 .report strong{font-size:22px;letter-spacing:-.5px}
 /* light calendar */
 .calboard{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:var(--card-shadow)}
@@ -129,14 +124,14 @@ main{padding-bottom:150px}body.timing main{padding-bottom:220px}footer{padding-b
 .tstat.pkg,.recordvalue small.pkg,.nextmain em.pkg{color:var(--royal)}
 .todayrow.done{opacity:.6}.todayrow.done .tnum{background:#1fa855}
 /* timer */
-.timerbar{flex-wrap:nowrap}.timertext small#timerSub{font-size:10.5px;color:#c8d3ea;margin-top:1px}
-.timerbtn.timerend{background:var(--stud);color:var(--navy);font-weight:800}
+.timerbar{flex-wrap:nowrap}
+.timerbtn.timerend{font-weight:800}
 .timerbar.timerpaused{background:#33415c}.timerbar.timerdone{background:#b93838}
 /* log */
 .recordicon.exp{background:#fff3e6;color:#b76b12}.recordicon.pkg{background:var(--soft);color:var(--royal)}
 .recordmain small.cum{color:var(--royal);font-weight:600;margin-top:2px}
-.qdetails{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0 12px}.qdetails div,.donestats div,.pblock div,.paysum div,.pkggrid div{display:flex;flex-direction:column;gap:2px;padding:8px 10px;border-radius:10px;background:#f6f8fc}
-.qdetails span,.donestats span,.pblock span,.paysum span,.pkggrid span{font-size:11px;color:var(--muted);font-weight:600}.qdetails b,.donestats b,.pblock b,.paysum b,.pkggrid b{font-size:14px}
+.qdetails{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0 12px}.qdetails div,.donestats div,.paysum div,.pkggrid div{display:flex;flex-direction:column;gap:2px;padding:8px 10px;border-radius:10px;background:#f6f8fc}
+.qdetails span,.donestats span,.paysum span,.pkggrid span{font-size:11px;color:var(--muted);font-weight:600}.qdetails b,.donestats b,.paysum b,.pkggrid b{font-size:14px}
 b.paid{color:var(--green)}b.unpaid,span.unpaid{color:var(--orange)}b.pkg{color:var(--royal)}
 .qactions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
 /* completion window */
@@ -150,11 +145,11 @@ b.paid{color:var(--green)}b.unpaid,span.unpaid{color:var(--orange)}b.pkg{color:v
 /* profile */
 dialog.widedialog{width:min(640px,calc(100% - 20px))}
 .profileactions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.profileactions .btn{flex:1 1 auto}
-.ptabs{display:flex;gap:4px;overflow-x:auto;margin:4px -2px 12px;padding:2px;scrollbar-width:none}.ptabs::-webkit-scrollbar{display:none}
-.ptabs button{flex:none;min-height:36px;padding:0 12px;border:1px solid var(--line);border-radius:18px;background:#fff;color:#4d5b73;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer}.ptabs button.active{background:var(--navy);border-color:var(--navy);color:#fff}
-.pblock{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px}.pblock h4{grid-column:1/-1;margin:4px 0 0;font-size:13px;color:var(--navy)}
+.ptabs{display:flex;gap:4px;margin:4px -2px 12px;padding:2px;scrollbar-width:none}.ptabs::-webkit-scrollbar{display:none}
+.ptabs button{min-height:36px;padding:0 12px;border:1px solid var(--line);border-radius:18px;background:#fff;color:#4d5b73;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer}.ptabs button.active{background:var(--navy);border-color:var(--navy);color:#fff}
+
 .paysum{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
-.payline{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}.payline span:first-child{flex:1;min-width:0}.payline b{display:block;font-size:13px}.payline small{color:var(--muted);font-size:11.5px}.payline .amt{font-weight:800;font-size:13px}
+
 .paytoggle{flex:none;min-height:34px;padding:0 10px;border-radius:10px;border:1px solid var(--line);background:#fff;font:inherit;font-size:12px;font-weight:800;cursor:pointer}.paytoggle.paid{color:var(--green);border-color:#cfe9dc;background:#ecf8f2}.paytoggle.unpaid{color:var(--orange);border-color:#f6dcb8;background:#fff7ec}
 .emptynote{color:var(--muted);font-size:13px;margin:10px 0}
 .pkghead{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}.pkghead h3{margin:0;font-size:15px}
@@ -165,8 +160,7 @@ dialog.widedialog{width:min(640px,calc(100% - 20px))}
 .pkggrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
 .pkgnotes{margin:10px 0 0;font-size:12.5px;color:#59677d}.pkghist{margin-top:10px;font-size:12.5px}.pkghist summary{cursor:pointer;font-weight:700;color:var(--royal)}.histline{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)}
 .linkbtn{margin-top:10px;border:0;background:none;font:inherit;font-size:12px;font-weight:700;cursor:pointer;padding:4px 0}.linkbtn.danger{color:var(--red)}
-.pkgextra{margin:10px 0 0;padding:10px 12px;border-radius:12px;background:#fff7ec;color:#8a4a08;font-size:12.5px}
-.pkgrate{margin:-4px 0 0;font-size:12.5px;color:var(--royal);font-weight:700}.pkgrate:empty{display:none}
+
 #ptab-notes textarea{margin-bottom:10px}
 /* record form completion */
 .donebox{display:grid;gap:8px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#f8faff}.donebox .hint{margin:0}
@@ -175,8 +169,8 @@ dialog.widedialog{width:min(640px,calc(100% - 20px))}
 .cmp{padding:14px;border:1px solid var(--line);border-radius:16px;background:#fff;box-shadow:var(--card-shadow)}.cmp h4{margin:0 0 8px;font-size:14px;color:var(--navy)}.cmp table{width:100%;border-collapse:collapse;font-size:12.5px}.cmp th{text-align:left;color:var(--muted);font-weight:600;padding:4px 0}.cmp td{padding:5px 0;border-top:1px solid var(--line)}.cmp td em{font-style:normal;font-size:11px;font-weight:800}.cmp .up{color:var(--green)}.cmp .down{color:var(--red)}
 .barhours{fill:var(--royal)}.swatch.barpaid{background:#1fa855}.swatch.barowed{background:#f08a24}
 .paybars{display:grid;gap:8px}.payrowbar{display:grid;grid-template-columns:90px 1fr auto;align-items:center;gap:8px;font-size:12px}.pname{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ptrack{display:flex;height:12px;border-radius:6px;background:#eef1f6;overflow:hidden}.ptrack i{display:block;height:100%;width:0}.ppaid{background:#1fa855}.powed{background:#f08a24}.pval{font-weight:700;white-space:nowrap}.pval em{font-style:normal;color:#b76b12}
-.reportpdf{width:100%;min-height:48px;margin:4px 0 14px}
-@media(max-width:720px){.comparebox{grid-template-columns:1fr}.pkggrid{grid-template-columns:repeat(2,minmax(0,1fr))}.pblock{grid-template-columns:1fr 1fr}}
+
+@media(max-width:720px){.comparebox{grid-template-columns:1fr}.pkggrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:380px){.tpay,.tdone{padding:0 7px}.payrowbar{grid-template-columns:70px 1fr auto}}
 
 /* Premium 55-minute lesson timer */
@@ -187,12 +181,10 @@ dialog.widedialog{width:min(640px,calc(100% - 20px))}
 .timerring:before{content:"";position:absolute;inset:8px;border-radius:50%;background:#101c33}.timerringinner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:7px}.timerringinner small{font-size:9px;color:#9eacc3;letter-spacing:1.1px}.timerringinner b{font-size:36px;line-height:1;color:#fff;font-variant-numeric:tabular-nums;letter-spacing:-1.5px}
 .timeractions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.timerbtn{min-height:46px;border-radius:13px;background:#263754;color:#fff;font-size:13px}.timerbtn.timerend{background:#315ee8;color:#fff}
 .timerbar .timerfill{height:3px;background:#5a8aff;opacity:.45;transition:transform .25s linear}
-@media(max-width:720px){.timerbar{bottom:calc(76px + env(safe-area-inset-bottom));width:calc(100vw - 20px);padding:14px 15px 15px;gap:11px}.timerring{width:164px;height:164px}.timerringinner b{font-size:32px}.timeractions .timerbtn{min-height:44px}}
+@media(max-width:720px){.timerbar{bottom:calc(76px + env(safe-area-inset-bottom));width:calc(100vw - 20px)}.timerring{width:164px;height:164px}.timerringinner b{font-size:32px}.timeractions .timerbtn{min-height:44px}}
 
 .traveldua{width:min(560px,calc(100% - 24px));padding:0;background:#fff}.traveldua-inner{padding:22px}.traveldua-intro{font-size:13px;line-height:1.6;color:var(--muted);margin:-4px 0 16px}.dua-arabic{font-family:"Times New Roman",serif;font-size:25px;line-height:2;text-align:center;background:#f6f8fc;border:1px solid var(--line);border-radius:14px;padding:18px 14px;margin:12px 0 15px;color:#172744}.dua-section{margin:12px 0}.dua-section b{font-size:12px;color:var(--blue)}.dua-section p{font-size:13px;line-height:1.7;margin:5px 0 0;color:#39465b}.dua-source{display:block;color:var(--muted);font-size:11px;margin-top:12px}.dua-actions{margin-top:18px}
 @media(max-width:520px){.traveldua-inner{padding:17px}.dua-arabic{font-size:21px;padding:13px 10px}.dua-actions .btn{font-size:12px;padding:10px}}
-
-.dua-voice-row{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0}.dua-voice-row .btn{flex:1;min-width:140px;justify-content:center}
 
 /* v1.26: complete recorded travel dua player */
 .dua-arabic-full{font-size:22px;line-height:2.15;text-align:right}.dua-audio-card{display:flex;flex-direction:column;gap:9px;padding:14px;border:1px solid #dce5f7;border-radius:14px;background:#f5f8ff;margin:14px 0}.dua-audio-card b{font-size:13px;color:#1d3766}.dua-audio-card audio{display:block;width:100%;height:44px}.dua-audio-card small{font-size:11px;line-height:1.5;color:var(--muted)}.dua-source a{color:var(--blue);text-decoration:underline}
@@ -201,78 +193,70 @@ dialog.widedialog{width:min(640px,calc(100% - 20px))}
 /* Full-Time Students: isolated historical register. */
 .ft-tabs{display:flex;gap:8px;margin:0 0 16px;flex-wrap:wrap}.ft-tab{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:10px;padding:9px 14px;font:inherit;font-size:13px;font-weight:650;cursor:pointer}.ft-tab[aria-selected="true"]{background:var(--navy);border-color:var(--navy);color:#fff}.ft-panel{border:1px solid var(--line);background:#fff;border-radius:14px;padding:14px;margin:12px 0}.ft-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:12px 0}.ft-stat{background:#f6f8fb;border:1px solid var(--line);border-radius:12px;padding:12px;min-width:0}.ft-stat span{display:block;color:var(--muted);font-size:11px;margin-bottom:6px}.ft-stat strong{font-size:19px;overflow-wrap:anywhere}.ft-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.ft-actions input[type=file]{max-width:100%;font-size:12px}.ft-search{width:100%;max-width:420px;padding:11px;border:1px solid var(--line);border-radius:10px;font:inherit}.ft-table-wrap{overflow:auto;margin-top:12px}.ft-table{width:100%;border-collapse:collapse;font-size:13px;min-width:620px}.ft-table th,.ft-table td{padding:11px 9px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}.ft-table th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em}.ft-muted{color:var(--muted);font-size:12px;line-height:1.5}.ft-status{font-size:12px;margin-top:10px;min-height:18px}.ft-empty{padding:24px;text-align:center;color:var(--muted);font-size:13px}@media(max-width:700px){.ft-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.ft-stat strong{font-size:17px}}
 
-
-
 /* Keep native iOS text selection, long-press menus and paste available in every editable control. */
 input,textarea,select,[contenteditable="true"]{-webkit-user-select:text!important;user-select:text!important;-webkit-touch-callout:default}
 input,textarea,[contenteditable="true"]{-webkit-tap-highlight-color:transparent}
 
-
 /* Premium Log screen refresh — scoped to #log to leave every other tab untouched. */
-#log.logpanel{padding:clamp(16px,3vw,28px);border-radius:22px;background:#fff;box-shadow:0 8px 28px #1823380a}
+#log.logpanel{padding:clamp(16px,3vw,28px);box-shadow:0 8px 28px #1823380a}
 #log .log-heading{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 22px}
 #log .log-eyebrow{margin:0 0 6px;color:var(--blue);font-size:10px;font-weight:800;letter-spacing:1.4px}
-#log .log-heading h2{margin:0 0 5px;font-size:clamp(23px,3vw,30px);letter-spacing:-.8px}
+#log .log-heading h2{margin:0 0 5px;font-size:clamp(23px,3vw,30px)}
 #log .log-heading .muted{font-size:13px}
-#log .log-date-pill{display:flex;align-items:center;gap:10px;flex:none;padding:10px 14px;border:1px solid #dfe6f2;border-radius:15px;background:#fbfcff}
-#log .log-calendar{display:grid;place-items:center;width:38px;height:38px;border-radius:11px;background:#edf2ff;color:var(--blue);font-size:25px}
-#log .log-date-pill b,#log .log-date-pill small{display:block}
-#log .log-date-pill b{font-size:13px}
-#log .log-date-pill small{margin-top:3px;color:var(--muted);font-size:11px}
+
 #log .log-action-row{display:flex;gap:10px;margin-bottom:15px}
-#log .log-add{min-height:46px;padding-inline:20px;border-radius:13px;font-size:14px}
-#log .log-export{min-height:46px;border-radius:13px;font-size:13px}
-#log .log-toolbar{display:grid;grid-template-columns:minmax(180px,1fr) minmax(145px,.42fr) minmax(145px,.42fr);gap:9px;margin:0 0 16px}
+#log .log-add{font-size:14px}
+
+#log .log-toolbar{display:grid;grid-template-columns:minmax(180px,1fr) minmax(145px,.42fr) minmax(145px,.42fr);margin:0 0 16px}
 #log .log-toolbar input,#log .log-toolbar select{width:100%;min-width:0;min-height:46px;border-radius:13px;border-color:#dfe6f0;padding:11px 13px;font-size:13px}
-#log .log-summary{margin:0 0 21px;padding:14px;border:1px solid #e5ebf6;border-radius:17px;background:linear-gradient(135deg,#f7f9ff,#f0f4ff)}
+#log .log-summary{margin:0 0 21px;border:1px solid #e5ebf6}
 #log .log-summary-main{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
-#log .log-kpi{display:flex;align-items:center;justify-content:center;gap:10px;min-width:0;padding:5px 8px;border-right:1px solid #dce4f2}
+#log .log-kpi{display:flex;align-items:center;gap:10px;min-width:0;border-right:1px solid #dce4f2}
 #log .log-kpi:last-child{border-right:0}
-#log .log-kpi-icon{display:grid;place-items:center;flex:none;width:34px;height:34px;border-radius:11px;background:#e6edff;color:var(--blue);font-size:22px;font-weight:700}
+#log .log-kpi-icon{display:grid;place-items:center;flex:none;background:#e6edff;color:var(--blue);font-size:22px;font-weight:700}
 #log .log-kpi b,#log .log-kpi small{display:block}
-#log .log-kpi b{font-size:clamp(16px,2vw,22px);letter-spacing:-.4px;white-space:nowrap}
-#log .log-kpi small{margin-top:3px;color:var(--muted);font-size:10px;white-space:nowrap}
-#log .log-payment-summary{display:flex;justify-content:flex-end;gap:22px;margin-top:12px;padding-top:11px;border-top:1px solid #dce4f2}
+#log .log-kpi b{font-size:clamp(16px,2vw,22px);white-space:nowrap}
+#log .log-kpi small{margin-top:3px;color:var(--muted)}
+#log .log-payment-summary{display:flex;justify-content:flex-end;gap:22px;border-top:1px solid #dce4f2}
 #log .log-payment-summary div{display:flex;align-items:center;gap:8px}
 #log .log-payment-summary span{color:var(--muted);font-size:11px}
 #log .log-payment-summary b{font-size:13px}
 #log .log-payment-summary .collected{color:var(--green)}
 #log .log-payment-summary .outstanding{color:var(--orange)}
-#log .log-list-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 11px}
-#log .log-list-heading h3{margin:0;font-size:16px}
+
+#log .log-list-heading h3{margin:0}
 #log .log-list-heading span{color:var(--muted);font-size:11px}
-#log .recordlist{gap:11px}
-#log .record{min-height:82px;padding:14px;border-radius:15px;border-color:#e2e8f1;gap:12px}
+
+#log .record{min-height:82px;border-color:#e2e8f1;gap:12px}
 #log .recordicon{width:46px;height:46px;border-radius:14px;font-size:16px;flex:none}
 #log .recordmain b{font-size:14px}
 #log .recordmain small{font-size:11px;line-height:1.4}
 #log .recordmain .cum{color:var(--blue);font-weight:700}
 #log .recordvalue{font-size:14px;white-space:nowrap}
 #log .recordvalue small{font-size:11px;font-weight:700}
-#log .payrow{gap:9px;align-items:stretch}
+#log .payrow{gap:9px}
 #log .payrow .record{flex:1;min-width:0}
 #log .markpaid{width:auto;min-width:104px;padding:8px 12px;border-radius:14px;font-size:12px}
 #log .markpaid:hover{background:#dff4e9}
 @media(max-width:720px){
- #log.logpanel{padding:17px 14px 20px;border-radius:20px}
- #log .log-heading{align-items:flex-start;margin-bottom:17px}
+ #log.logpanel{padding:17px 14px 20px}
+ #log .log-heading{align-items:flex-start}
  #log .log-heading h2{font-size:25px}
- #log .log-date-pill{padding:8px 10px;gap:7px}
- #log .log-calendar{width:32px;height:32px}
+
  #log .log-action-row{display:grid;grid-template-columns:1fr auto}
  #log .log-add{min-width:0}
- #log .log-export{padding-inline:12px}
+ 
  #log .log-toolbar{grid-template-columns:1fr 1fr}
  #log .log-toolbar input{grid-column:1/-1}
- #log .log-summary{padding:11px 8px;margin-bottom:18px}
- #log .log-kpi{flex-direction:column;gap:5px;padding:5px 3px;text-align:center}
- #log .log-kpi-icon{width:30px;height:30px;font-size:19px}
+ #log .log-summary{margin-bottom:18px}
+ #log .log-kpi{flex-direction:column;gap:5px}
+ #log .log-kpi-icon{font-size:19px}
  #log .log-kpi b{font-size:16px}
- #log .log-kpi small{font-size:9px}
+ 
  #log .log-payment-summary{justify-content:space-around;gap:8px}
  #log .log-payment-summary div{flex-direction:column;gap:2px}
  #log .log-payment-summary b{font-size:12px}
- #log .record{padding:11px;gap:9px}
+ #log .record{gap:9px}
  #log .recordicon{width:38px;height:38px;border-radius:12px}
  #log .recordmain b{font-size:13px}
  #log .recordmain small{font-size:10px}
@@ -280,20 +264,18 @@ input,textarea,[contenteditable="true"]{-webkit-tap-highlight-color:transparent}
  #log .markpaid{min-width:72px;max-width:78px;padding:7px 6px;font-size:10px}
 }
 @media(max-width:380px){
- #log .log-date-pill{padding:7px}
- #log .log-date-pill small{font-size:10px}
+
  #log .log-kpi b{font-size:14px}
- #log .log-toolbar select{font-size:14px}
- #log .markpaid{min-width:64px;max-width:68px}
+
 }
 
 #courseCard{display:grid;gap:8px;margin:0 0 12px}#courseCard:empty{display:none}.coursecard{padding:14px;border:1px solid #c9d6fb;border-radius:16px;background:#f5f8ff}.coursetop{display:flex;justify-content:space-between;gap:10px;align-items:center}.coursetop b{font-size:15px}.coursetop span{flex:none;font-weight:800;font-size:13px;color:var(--muted)}.coursecard .pkgbar{margin:10px 0}.courseline{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;margin-bottom:10px}.courseline .unpaid{color:var(--orange)}.courseline .paid{color:var(--green)}.coursecard .btn{width:100%}
-.payhead{font-size:15px;margin:18px 0 8px}#ptab-overview .pblock .recordlist{margin-top:6px}
+
 #recordDialog[data-mode="expense"] [data-type="Lesson"]{display:none}
 #overview .timerbar{position:relative;left:auto;right:auto;bottom:auto;transform:none;width:auto;max-width:none;margin:0 0 18px;z-index:auto}
 body.timing main{padding-bottom:150px}body.timing footer{padding-bottom:calc(130px + env(safe-area-inset-bottom))}
 .timermini{position:fixed;z-index:7;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom));max-width:calc(100vw - 32px);border:0;border-radius:99px;padding:11px 16px;background:var(--navy);color:#fff;font:inherit;font-size:13px;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 8px 24px #0d193344;cursor:pointer}
-.ovbox{margin:22px 0 0;padding:16px;border:1px solid var(--line);border-radius:16px;background:#fff}.ovbox h2{font-size:17px;margin:0 0 4px}.ovhead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}.voiceswitch{display:flex;align-items:center;gap:6px;font-weight:800;font-size:13px;white-space:nowrap}.voiceswitch input{width:20px;height:20px}
+.ovbox{margin:22px 0 0;padding:16px;border:1px solid var(--line);border-radius:16px;background:#fff}.ovbox h2{font-size:17px;margin:0 0 4px}
 .voicelist{margin:10px 0 12px;padding-left:18px;font-size:13px;line-height:1.75;color:#34425b}
 .duaplayer .dua-arabic{margin:12px 0 4px}.dpctl{display:flex;align-items:center;gap:8px;margin:12px 0 6px}.dpbtn{flex:none;width:46px;height:46px;border:0;border-radius:50%;background:var(--blue);color:#fff;font-size:16px;cursor:pointer}.dpbtn.ghost{background:#edf1ff;color:var(--blue)}#duaSeek{flex:1;min-width:0;accent-color:var(--blue)}.dptime{flex:none;font-size:12px;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
 .duamore{margin:12px 0 8px}.duamore summary{cursor:pointer;font-weight:800;font-size:13px;color:var(--blue);padding:6px 0}.duaplayer .dua-source{display:block;color:var(--muted);font-size:11px}
@@ -322,7 +304,7 @@ body.timing main{padding-bottom:150px}body.timing footer{padding-bottom:calc(130
 @media print{.topbar,.tabbar,.timermini,.backupbanner,.dashactions,.dataactions,.cloudcard,.notice,footer,#overview,#calendar,#log,#students,.toolbar select{display:none!important}#reports{display:block!important}body,main{background:#fff;padding:0!important}.chartbox,.dashhero,.report{break-inside:avoid}.dashhero{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 .healthitem.na b{font-size:14px;color:#8a96a8}
 /* Islamic Companion */
-.tabbar .tab span{white-space:nowrap}@media(max-width:400px){.tabbar .tab{font-size:9.5px}.tabbar .tab svg{width:20px;height:20px}}
+.tabbar .tab span{white-space:nowrap}
 .islamicpanel{--isar:"Geeza Pro","Noto Naskh Arabic","Amiri","Traditional Arabic","Arabic Typesetting",serif;--isbn:"Kohinoor Bangla","Bangla Sangam MN","Noto Sans Bengali",Inter,-apple-system,sans-serif;font-family:var(--isbn)}
 .isbanner{position:relative;height:150px;margin:-2px 0 12px;border-radius:20px;overflow:hidden;background:linear-gradient(180deg,#0d1730 0%,#1b2f5c 70%,#3b4f86 100%);color:#fff}.isbanner svg{position:absolute;inset:0;width:100%;height:100%}
 .isbanner h2{position:absolute;left:22px;top:28px;margin:0;font-size:23px;letter-spacing:-.3px}.isbanner p{position:absolute;left:22px;top:64px;margin:0;font-size:13px;color:#cdd7ee}
@@ -372,11 +354,11 @@ body.is-mini-on .timermini{bottom:calc(160px + env(safe-area-inset-bottom))}
 
 /* Simplified Log and lesson flows — preserve all existing controls and calculations. */
 #log .log-toolbar{grid-template-columns:minmax(0,1fr) minmax(140px,.48fr) auto}
-#log .log-extra-filter{position:relative;min-width:0}
+#log .log-extra-filter{position:relative}
 #log .log-extra-filter summary,#log .log-payment-details summary{list-style:none;cursor:pointer;color:var(--blue);font-size:12px;font-weight:700;padding:12px 4px;white-space:nowrap}
 #log .log-extra-filter summary::-webkit-details-marker,#log .log-payment-details summary::-webkit-details-marker,.qbooking summary::-webkit-details-marker{display:none}
-#log .log-extra-filter[open] select{position:absolute;z-index:3;right:0;top:38px;width:190px;min-height:44px;padding:9px 11px;border:1px solid var(--line);border-radius:12px;background:#fff;box-shadow:0 8px 24px #101c3320;font:inherit}
-#log .log-payment-details{margin-top:10px;border-top:1px solid #dce4f2}
+#log .log-extra-filter[open] select{position:absolute;z-index:3;right:0;padding:9px 11px;border:1px solid var(--line);border-radius:12px;background:#fff;box-shadow:0 8px 24px #101c3320;font:inherit}
+#log .log-payment-details{border-top:1px solid #dce4f2}
 #log .log-payment-details summary{padding:10px 2px 0}
 #log .log-payment-summary{margin-top:8px;padding-top:8px}
 .qbooking{margin:16px 0 4px;border:1px solid var(--line);border-radius:14px;background:#fbfcff}
@@ -387,12 +369,11 @@ body.is-mini-on .timermini{bottom:calc(160px + env(safe-area-inset-bottom))}
 #quickDialog .qdetails{margin-bottom:12px}
 #quickDialog .qactions{margin-top:14px}
 #recordDialog .typechips button.hidden{display:none}
-#recordDialog .donebox{padding:12px;border-radius:14px}
+
 @media(max-width:720px){
  #log .log-toolbar{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
  #log .log-extra-filter{grid-column:1/-1}
- #log .log-extra-filter summary{padding:3px 2px}
- #log .log-extra-filter[open] select{position:static;width:100%;margin-top:6px}
+
  #log .log-payment-summary{margin-top:8px}
 }
 /* Courses (new) and the Legacy Archive */
@@ -404,7 +385,7 @@ b.course{color:var(--royal)}
 .pkgcard.legacy .pkgstate{background:#eef0f4;color:#59677d}
 .legacynote{margin:2px 0 12px;padding:10px 12px;border-radius:12px;background:#f5f7fb;color:#59677d;font-size:12.5px;line-height:1.5}
 #ptab-course .pkgcard{margin-bottom:10px}
-.ptabs{overflow-x:auto;-webkit-overflow-scrolling:touch}.ptabs button{flex:none;white-space:nowrap}
+.ptabs{overflow-x:auto}.ptabs button{flex:none;white-space:nowrap}
 
 /* Lesson payment method selector */
 .payment-method{display:grid;gap:9px;padding-top:3px}
@@ -423,114 +404,96 @@ b.course{color:var(--royal)}
 #fPackageRow{display:none!important}
 @media(max-width:390px){.payment-method-options{gap:7px}.payment-option{gap:7px;padding:9px;min-height:72px}.payment-option[aria-pressed="true"]{padding:8px}.payment-icon{flex-basis:29px;width:29px;height:29px}.payment-option-copy b{font-size:12px}.payment-option-copy small{font-size:10px}}
 
-
 /* Calendar → New Record: clearer mobile form hierarchy and safe sticky actions. */
-#recordDialog{max-height:calc(100dvh - 24px);overflow-y:auto;overscroll-behavior:contain}
-#recordDialog form{padding:clamp(16px,3vw,24px)}
-#recordDialog .dialoghead{align-items:center;position:sticky;top:-1px;z-index:4;padding:4px 0 12px;background:#fff}
-#recordDialog .dialoghead h2{letter-spacing:-.45px}
+#recordDialog{max-height:calc(100dvh - 24px);overflow-y:auto}
+
 #recordDialog .typechips{display:flex;flex-wrap:wrap;gap:7px}
 #recordDialog .typechips button{min-height:42px;padding:9px 15px;border:1px solid var(--line);border-radius:999px;background:#fff;color:#34425b;font:inherit;font-size:13px;font-weight:750}
 #recordDialog .typechips button.active{background:var(--blue);border-color:var(--blue);color:#fff}
 #recordDialog .formgrid{row-gap:13px;column-gap:12px}
-#recordDialog .formgrid label{gap:7px;font-size:12px}
+
 #recordDialog .formgrid input:not([type=checkbox]),#recordDialog .formgrid select,#recordDialog .formgrid textarea{min-height:48px;border-radius:12px;padding:11px 13px;font-size:16px}
-#recordDialog .rate-field small{font-size:11px;font-weight:500;color:var(--muted);line-height:1.35}
+
 #recordDialog .rate-field input:focus{border-color:var(--blue);outline:3px solid #315ee81a}
 #recordDialog #recentStudents{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:7px;padding:2px 0 5px;scrollbar-width:none}
 #recordDialog #recentStudents::-webkit-scrollbar{display:none}
 #recordDialog #recentStudents button{flex:none;max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border:1px solid var(--line);border-radius:999px;background:#fff;padding:9px 13px;color:#34425b;font:inherit;font-size:12px;font-weight:700}
 #recordDialog #recentStudents button.active{background:#edf1ff;border-color:#b9c9ff;color:#244bd0}
-#recordDialog .durchips{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:7px;padding-bottom:2px}
-#recordDialog .durchips button{flex:1 0 auto;min-height:44px;border:1px solid var(--line);border-radius:999px;background:#fff;color:#34425b;font:inherit;font-size:13px;font-weight:750}
-#recordDialog .durchips button.active{background:var(--blue);border-color:var(--blue);color:#fff}
-#recordDialog .donebox{display:grid;gap:12px;padding:14px;border:1px solid var(--line);border-radius:15px;background:#f7f9fd}
+#recordDialog .durchips{padding-bottom:2px}
+
 #recordDialog .donebox .hint{margin:0;color:var(--muted);line-height:1.45}
-#recordDialog .moreopts{border-top:1px solid var(--line);padding-top:12px}
-#recordDialog .moreopts summary{min-height:34px;color:var(--blue);font-weight:750}
-#recordDialog .dialogactions{position:sticky;bottom:-1px;z-index:4;padding:12px 0 max(2px,env(safe-area-inset-bottom));margin:14px 0 0;background:linear-gradient(180deg,#ffffffed,#fff 24%);border-top:1px solid var(--line)}
+
 @media(max-width:720px){
- #recordDialog{width:calc(100% - 16px);max-height:calc(100dvh - 16px);border-radius:22px}
- #recordDialog form{padding:16px 14px max(12px,env(safe-area-inset-bottom))}
- #recordDialog .dialoghead{margin-bottom:12px}
- #recordDialog .formgrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px 10px}
+
+ #recordDialog .formgrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
  #recordDialog .formgrid .wide{grid-column:1/-1}
  #recordDialog .formgrid input:not([type=checkbox]),#recordDialog .formgrid select{min-width:0}
- #recordDialog .dialogactions .btn{min-height:46px}
+ 
 }
 @media(max-width:380px){
  #recordDialog .typechips{gap:6px}
  #recordDialog .typechips button{padding:8px 11px;font-size:12px}
- #recordDialog .formgrid{gap:10px 8px}
+ 
 }
 
-
 /* Premium Edit Record layout: clean, lesson-first and category tabs out of the way. */
-#recordDialog{width:min(100% - 28px,760px);max-width:760px;border:0;border-radius:28px;background:#fff;box-shadow:0 28px 90px #0b17334a}
+#recordDialog{width:min(100% - 28px,760px);background:#fff}
 #recordDialog::backdrop{background:#101b31a6;backdrop-filter:blur(7px)}
-#recordDialog form{padding:22px 22px 14px}
-#recordDialog .dialoghead{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:16px;padding:2px 0 12px;border-bottom:0}
-#recordDialog .dialoghead .eyebrow{display:none}
-#recordDialog .dialoghead h2{font-size:25px;font-weight:800;letter-spacing:-.7px;margin:0}
-#recordDialog .dialoghead .iconbtn{width:46px;height:46px;border-radius:50%;background:#f0f4ff;color:var(--blue);font-size:25px}
-#recordDialog .formgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px 12px}
+
+#recordDialog .dialoghead{display:flex;justify-content:space-between;gap:14px;margin-bottom:16px;border-bottom:0}
+
+#recordDialog .dialoghead .iconbtn{border-radius:50%}
+#recordDialog .formgrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
 #recordDialog .formgrid>.typechips{display:none}
-#recordDialog[data-mode="expense"] .formgrid>.typechips{display:flex}
+
 #recordDialog[data-editing-lesson="true"] .formgrid>.typechips{display:none!important}
-#recordDialog .record-panel{min-width:0;padding:15px;border:1px solid #e5ebf5;border-radius:19px;background:#fff;box-shadow:0 3px 12px #172b4d08}
-#recordDialog .record-date-panel{padding:0;border:0;box-shadow:none}
-#recordDialog .record-student-panel{display:grid;gap:9px}
+
 #recordDialog .record-student-grid,#recordDialog .record-time-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-#recordDialog .record-panel-title{font-size:15px;font-weight:800;color:var(--navy);margin-bottom:12px}
-#recordDialog .record-subtitle{font-size:12px;font-weight:800;color:var(--muted);margin:12px 0 7px}
-#recordDialog .formgrid label{display:grid;gap:7px;min-width:0;color:#53627a;font-size:13px;font-weight:750}
+#recordDialog .record-panel-title{margin-bottom:12px}
+
+#recordDialog .formgrid label{display:grid;min-width:0;color:#53627a;font-weight:750}
 #recordDialog .formgrid input:not([type=checkbox]),#recordDialog .formgrid select,#recordDialog .formgrid textarea{width:100%;min-width:0;min-height:50px;border:1px solid #dfe6f1;border-radius:14px;background:#fff;padding:12px 14px;color:#17233a;font:inherit;font-size:16px;font-weight:650;box-shadow:inset 0 1px 2px #12213b05}
 #recordDialog .formgrid input:focus,#recordDialog .formgrid textarea:focus,#recordDialog .formgrid select:focus{outline:3px solid #315ee81c;border-color:#7797f4}
 #recordDialog .record-date-panel>label{font-size:13px}
 #recordDialog #fDate{min-height:58px;text-align:center;font-size:19px;font-weight:800}
-#recordDialog .record-student-panel .formhint{margin:0;font-size:12px;color:#8290a5;font-weight:500}
-#recordDialog .record-time-panel{grid-column:1/-1;background:#fbfcff}
+#recordDialog .record-student-panel .formhint{color:#8290a5;font-weight:500}
+
 #recordDialog .record-time-grid label input{text-align:center;font-size:19px;font-weight:800}
-#recordDialog .durchips{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:7px;padding:0 0 2px}
-#recordDialog .durchips button{flex:1 0 auto;min-width:0;min-height:44px;border:1px solid #e0e7f2;border-radius:999px;background:#fff;color:#35445f;font:inherit;font-size:13px;font-weight:800}
-#recordDialog .durchips button.active{background:var(--blue);border-color:var(--blue);color:#fff}
-#recordDialog .record-duration-summary{margin-top:12px;padding:11px 13px;border-radius:13px;background:#edf3ff;color:#2452d5;font-size:13px;font-weight:800}
+#recordDialog .durchips{flex-wrap:nowrap;overflow-x:auto;padding:0 0 2px}
+#recordDialog .durchips button{flex:1 0 auto;font:inherit}
+
 #recordDialog .record-duration-summary.hidden{display:none}
-#recordDialog .record-rate-panel{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px 14px}
+#recordDialog .record-rate-panel{grid-template-columns:minmax(0,1fr) auto}
 #recordDialog .record-rate-panel .rate-field{grid-row:1/3}
-#recordDialog .record-rate-panel #fPaidRow{align-self:center;white-space:nowrap}
-#recordDialog .rate-field small{font-size:11px;font-weight:500;color:#78879d;line-height:1.4}
+
+#recordDialog .rate-field small{font-weight:500;color:#78879d}
 #recordDialog .record-rate-panel #fRate{font-size:18px;font-weight:800}
 #recordDialog .checklabel{display:flex!important;align-items:center;gap:9px!important;color:#35445f!important;font-size:14px!important;font-weight:800!important}
 #recordDialog .checklabel input[type=checkbox]{width:21px;height:21px;min-width:21px;min-height:21px;accent-color:var(--blue)}
-#recordDialog .donebox{grid-column:1/-1;display:grid;gap:12px;padding:17px;border:1px solid #e5ebf5;border-radius:19px;background:#f5f8fd}
+#recordDialog .donebox{grid-column:1/-1}
 #recordDialog .donebox .checklabel{align-items:flex-start!important}
 #recordDialog .donebox .checklabel span{display:grid;gap:4px}
-#recordDialog .donebox .checklabel small{font-size:12px;font-weight:500;line-height:1.45;color:#78879d}
+
 #recordDialog .record-comment-field{grid-column:1/-1}
 #recordDialog .record-comment-field textarea{min-height:86px;resize:vertical;font-weight:500!important}
 #recordDialog #fRepeatRow{grid-column:1/-1}
-#recordDialog .dialogactions{position:sticky;bottom:-1px;z-index:5;display:flex;align-items:center;gap:10px;padding:13px 0 max(4px,env(safe-area-inset-bottom));margin:14px 0 0;background:#ffffffed;backdrop-filter:blur(12px);border-top:1px solid #e8edf5}
-#recordDialog .dialogactions .btn{flex:1;min-width:0;min-height:52px;border-radius:15px;font-size:14px;font-weight:800}
-#recordDialog .dialogactions span{display:none}
+#recordDialog .dialogactions{backdrop-filter:blur(12px)}
+#recordDialog .dialogactions .btn{min-width:0}
+
 #recordDialog .dialogactions #deleteRecord{background:#fff0f0;color:#bd3e3e;border-color:#ffe1e1}
 #recordDialog .dialogactions #saveRecord{flex:1.15}
 @media(max-width:720px){
- #recordDialog{width:calc(100% - 16px);max-height:calc(100dvh - 16px);border-radius:25px}
- #recordDialog form{padding:17px 14px max(10px,env(safe-area-inset-bottom))}
- #recordDialog .dialoghead h2{font-size:23px}
- #recordDialog .formgrid{gap:12px 9px}
- #recordDialog .record-panel{padding:13px;border-radius:17px}
- #recordDialog .record-rate-panel{grid-template-columns:minmax(0,1fr) auto;gap:8px}
+
+ #recordDialog .record-rate-panel{grid-template-columns:minmax(0,1fr) auto}
  #recordDialog .record-rate-panel .rate-field{grid-row:auto}
- #recordDialog .dialogactions{gap:7px}
- #recordDialog .dialogactions .btn{min-height:48px;padding:0 8px;font-size:13px}
+ 
+ #recordDialog .dialogactions .btn{padding:0 8px}
 }
 @media(max-width:390px){
  #recordDialog .record-student-grid,#recordDialog .record-time-grid{gap:8px}
- #recordDialog .record-panel{padding:11px}
+ 
  #recordDialog .formgrid input:not([type=checkbox]),#recordDialog .formgrid select{padding:10px;font-size:15px}
- #recordDialog .durchips button{font-size:12px}
+ 
 }
 
 @media(min-width:721px){#recordDialog .record-student-panel{grid-column:1/-1}}
@@ -539,92 +502,69 @@ b.course{color:var(--royal)}
 #recordDialog[data-mode="expense"] .record-rate-panel .costfield,#recordDialog[data-mode="expense"] .record-rate-panel .kmfield{grid-column:1/-1}
 #recordDialog[data-mode="expense"] .record-comment-field{grid-column:1/-1}
 
-
 /* Mobile touch stability: keep gestures inside the intended scroll surface. */
 html,body{max-width:100%;overflow-x:clip;overscroll-behavior-x:none}
 body{touch-action:pan-y pinch-zoom}
-main{min-width:0;overscroll-behavior-y:contain}
+main{overscroll-behavior-y:contain}
 .tabs,.ptabs,.ischips,.rangechips,.durchips,.tabbar{touch-action:pan-x pan-y;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
-dialog{overscroll-behavior:contain}
+
 dialog[open]{touch-action:pan-y}
 dialog form,.dialogbody{overscroll-behavior-y:contain;touch-action:pan-y;-webkit-overflow-scrolling:touch}
 html:has(dialog[open]),body:has(dialog[open]){overflow:hidden;overscroll-behavior:none}
-#recordDialog{overflow:hidden;overscroll-behavior:contain;touch-action:pan-y}
+
 #recordDialog form{max-height:calc(100dvh - 20px);overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y}
-#recordDialog .dialogactions{position:sticky;bottom:-1px}
 
 /* Compact mobile layout: less chrome, less dead space, more usable content. */
 @media(max-width:720px){
  html,body{width:100%;min-height:100%;overflow-x:clip}
- .topbar{height:calc(50px + env(safe-area-inset-top));min-height:50px}
- .brand{gap:8px}.brandmark{width:32px;height:32px;border-radius:10px;font-size:13px}
- .brand b{font-size:14px}.brand small{font-size:10px}
+ .topbar{height:calc(50px + env(safe-area-inset-top))}
+
  main{padding:10px 10px 112px}
  body.timing main{padding-bottom:150px}
- .welcome{gap:5px;margin:5px 0 12px}
- .welcome h1{font-size:23px;letter-spacing:-.6px}
- .welcome .muted{font-size:11px;line-height:1.35}
- .stats{gap:7px;margin-bottom:12px}
- .stat{padding:10px;border-radius:12px}
+
+ .stat{padding:10px}
  .stat span,.report span{font-size:10px}
  .stat strong{font-size:19px;margin:5px 0 2px}
  .stat small{font-size:9px}
  .tabs{gap:4px;margin-bottom:9px;padding-bottom:1px}
  .tab{padding:8px 11px;font-size:12px;border-radius:9px}
- .panel{padding:10px;border-radius:13px;min-height:0}
- .sectionhead{gap:8px;margin-bottom:10px}
- .sectionhead h2{font-size:17px}
- .toolbar{gap:6px;margin:9px 0}
+ .panel{border-radius:13px;min-height:0}
+
  .toolbar input,.toolbar select{padding:9px 10px;font-size:12px;min-height:38px}
- .statstrip{margin-bottom:9px;padding:7px 4px 5px;border-radius:12px}
- .statstrip div{padding:3px 5px}
- .statstrip span{font-size:9px}
- .statstrip strong{font-size:15px}
- .statstrip small{font-size:9px;margin-top:2px}
+
  .recordlist{gap:6px}
- .record{gap:8px;padding:9px;border-radius:10px}
+ .record{gap:8px;padding:9px}
  .recordicon{width:32px;height:32px;border-radius:9px}
  .recordmain b,.recordvalue{font-size:12px}
  .recordmain small,.recordvalue small{font-size:10px;margin-top:2px}
  .studentgrid,.reportgrid{gap:7px}
- .report{padding:10px;border-radius:11px}
+ .report{padding:10px}
  .report strong{font-size:18px;margin-top:5px}
  .data-card{padding:12px;gap:7px}
  .btn{padding:9px 11px;font-size:12px}
  footer{padding:12px 10px 100px;font-size:10px}
  body.timing footer{padding-bottom:130px}
- .tabbar{bottom:calc(6px + env(safe-area-inset-bottom));padding:4px;border-radius:18px}
+ 
  .tabbar button{min-height:42px}
- .fab{width:48px;height:48px;border-radius:16px;right:12px;bottom:calc(72px + env(safe-area-inset-bottom))}
+ 
  .timerbar{bottom:calc(70px + env(safe-area-inset-bottom));padding:12px 13px;border-radius:17px;gap:9px}
  .timermini{bottom:calc(72px + env(safe-area-inset-bottom));font-size:12px;padding:9px 13px}
 }
 @media(max-width:720px){
- #recordDialog{width:calc(100% - 12px);max-height:calc(100dvh - 12px);border-radius:20px}
- #recordDialog form{max-height:calc(100dvh - 12px);padding:12px 11px max(8px,env(safe-area-inset-bottom))}
+
  #recordDialog .dialoghead{margin-bottom:8px;padding-bottom:7px}
- #recordDialog .dialoghead h2{font-size:20px}
- #recordDialog .dialoghead .iconbtn{width:38px;height:38px}
- #recordDialog .formgrid{gap:8px 7px}
- #recordDialog .record-panel{padding:9px;border-radius:13px}
- #recordDialog .record-panel-title{font-size:13px;margin-bottom:7px}
- #recordDialog .record-subtitle{margin:7px 0 5px}
- #recordDialog .formgrid label{gap:4px;font-size:11px}
+
+ #recordDialog .record-panel-title{margin-bottom:7px}
+
  #recordDialog .formgrid input:not([type=checkbox]),#recordDialog .formgrid select,#recordDialog .formgrid textarea{min-height:40px;padding:8px 9px;border-radius:10px;font-size:15px}
  #recordDialog #fDate{min-height:43px;font-size:16px}
  #recordDialog .record-time-grid label input{font-size:16px}
- #recordDialog .durchips{gap:5px}
- #recordDialog .durchips button{min-height:36px;font-size:11px}
- #recordDialog .record-duration-summary{margin-top:7px;padding:8px 9px;font-size:11px}
- #recordDialog .donebox{gap:7px;padding:10px;border-radius:13px}
- #recordDialog .donebox .checklabel small{font-size:10px}
+
  #recordDialog .checklabel{font-size:12px!important}
  #recordDialog .checklabel input[type=checkbox]{width:18px;height:18px;min-width:18px;min-height:18px}
  #recordDialog .record-comment-field textarea{min-height:58px}
- #recordDialog .dialogactions{gap:6px;padding:8px 0 max(3px,env(safe-area-inset-bottom));margin-top:8px}
- #recordDialog .dialogactions .btn{min-height:42px;font-size:12px;border-radius:11px}
-}
 
+}
 
 /* v2 mobile scroll system: one stable vertical viewport shared by every main tab. */
 @media(max-width:720px){
@@ -646,7 +586,6 @@ html:has(dialog[open]),body:has(dialog[open]){overflow:hidden;overscroll-behavio
   flex:1 1 auto;
   min-height:0;
   height:auto;
-  width:100%;
   margin:0 auto;
   overflow-x:hidden;
   overflow-y:auto;
@@ -686,31 +625,22 @@ html:has(dialog[open]),body:has(dialog[open]){overflow:hidden;overscroll-behavio
  }
 }
 
-
 /* iOS safe-area fix: keep dialog close controls below the status-bar hit area. */
 @media(max-width:720px){
  dialog[open]{
-  position:fixed;
   top:calc(env(safe-area-inset-top) + 8px);
   bottom:calc(env(safe-area-inset-bottom) + 8px);
   margin-block:0;
-  max-height:none;
  }
  #recordDialog{
   max-height:none;
-  overflow:hidden;
  }
  #recordDialog form{
   height:100%;
   max-height:none;
   padding-top:14px;
  }
- dialog:not(#recordDialog) .dialoghead{
-  position:sticky;
-  top:0;
-  z-index:30;
-  background:#fff;
- }
+ 
  .dialoghead .iconbtn,
  #recordDialog .dialoghead .iconbtn{
   position:relative;
@@ -725,7 +655,6 @@ html:has(dialog[open]),body:has(dialog[open]){overflow:hidden;overscroll-behavio
   -webkit-tap-highlight-color:transparent;
  }
 }
-
 
 /* iPhone dialog safety: reserve the status-bar and home-indicator areas.
    Keep the dialog content scrollable; do not force a fixed content height. */
@@ -751,11 +680,9 @@ html:has(dialog[open]),body:has(dialog[open]){overflow:hidden;overscroll-behavio
   flex-direction:column;
   height:auto;
   min-height:0;
-  overflow:hidden;
  }
  #recordDialog form{
   flex:1 1 auto;
-  min-height:0;
   width:100%;
   max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 16px);
   overflow-x:hidden;
@@ -764,12 +691,7 @@ html:has(dialog[open]),body:has(dialog[open]){overflow:hidden;overscroll-behavio
   -webkit-overflow-scrolling:touch;
   touch-action:pan-y;
  }
- #recordDialog .dialoghead{
-  position:sticky;
-  top:0;
-  z-index:20;
-  background:#fff;
- }
+ 
  dialog:not(#recordDialog) .dialoghead{
   position:sticky;
   top:0;
@@ -789,7 +711,6 @@ html:has(dialog[open]),body:has(dialog[open]){overflow:hidden;overscroll-behavio
   -webkit-tap-highlight-color:transparent;
  }
 }
-
 
 /* ── Premium design foundation · shared across every tab and dialog ── */
 :root{
@@ -820,7 +741,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
  outline:3px solid #315ee855;
  outline-offset:2px;
 }
-.panel,.stat,.report,.data-card,.record,.backupbanner,.student-card,.calendar-card{
+.panel,.stat,.report,.data-card,.record,.backupbanner,.student-card{
  border-color:var(--line);
  box-shadow:var(--card-shadow);
 }
@@ -830,16 +751,14 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 }
 .sectionhead{align-items:center}
 .sectionhead h2{letter-spacing:-.025em}
-.welcome h1{letter-spacing:-.04em;line-height:1.08}
+
 .muted,.hint,.sectionhead p{color:var(--muted)}
 .btn{
  min-height:42px;
  border-radius:12px;
- font-weight:650;
- letter-spacing:-.01em;
  transition:transform .16s ease,background-color .16s ease,box-shadow .16s ease;
 }
-.btn:active{transform:scale(.98)}
+
 .btn.primary,.btn:not(.ghost):not(.danger):not(.secondary){
  box-shadow:0 5px 14px #315ee826;
 }
@@ -862,25 +781,20 @@ input:not([type=checkbox]):not([type=radio]):focus,select:focus,textarea:focus{
 .record,.report,.stat,.data-card{
  border-radius:15px;
 }
-dialog{
- border-radius:22px;
- box-shadow:0 24px 80px #101a3040;
-}
-dialog::backdrop{background:#101a30a6;backdrop-filter:blur(5px)}
+
 #toast{border-radius:14px;box-shadow:0 12px 36px #101a3030}
 @media(max-width:720px){
  :root{--space-page:12px;--radius-card:15px}
- main{padding-left:var(--space-page);padding-right:var(--space-page)}
+ 
  .panel{padding:13px}
  .sectionhead{gap:8px;margin-bottom:11px}
  .sectionhead h2{font-size:18px}
  .btn{min-height:44px}
- .tabbar{box-shadow:0 8px 28px #101a3030}
+ 
 }
 @media(prefers-reduced-motion:reduce){
  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
-
 
 /* ==========================================================
    PREMIUM REDESIGN · ALL MAIN TABS + PROFILE SUB-PAGES
@@ -897,13 +811,7 @@ dialog::backdrop{background:#101a30a6;backdrop-filter:blur(5px)}
  --premium-shadow:0 2px 5px #17243b08,0 12px 30px #17243b0c;
 }
 body{background:var(--premium-bg);color:var(--premium-ink)}
-.topbar{
- background:linear-gradient(112deg,#101a30 0%,#172b50 72%,#203d78 100%);
- box-shadow:0 5px 20px #101a3017;
-}
-.brand b{letter-spacing:-.025em}
-.brand small{opacity:.78}
-main{max-width:1160px}
+
 .tabpanel{
  border:1px solid #e8edf5;
  border-radius:24px;
@@ -930,53 +838,34 @@ main{max-width:1160px}
 /* Overview — priority card, schedule and personal tools */
 #overview{background:linear-gradient(180deg,#fff 0%,#fbfcff 100%)}
 #overview .nextcard{
- padding:clamp(18px,3vw,26px);border:1px solid #263e701c;border-radius:22px;
- background:radial-gradient(circle at 100% 0%,#4569bd 0,transparent 42%),linear-gradient(125deg,#101c33,#1b3568 72%,#294c9d);
- box-shadow:0 14px 32px #132b5a24;
+ padding:clamp(18px,3vw,26px);
 }
-#overview .nextlabel{font-size:10px;letter-spacing:1.1px}
-#overview .nexttime{font-size:clamp(30px,5vw,42px);font-weight:850;letter-spacing:-1.3px}
+
+#overview .nexttime{font-size:clamp(30px,5vw,42px)}
 #overview .nextname{font-size:clamp(17px,2.5vw,21px);margin-top:2px}
 #overview .nextactions{gap:9px}
 #overview .nextbtn{border-radius:13px;font-weight:800}
 #overview .todayhead,#overview>.sectionhead h2{font-size:19px;letter-spacing:-.035em}
-#overview .recordlist{gap:8px}
+
 #overview .record{border-radius:15px;padding:12px 13px;background:#fff;box-shadow:0 2px 10px #17243b08}
-#overview .ovbox{
- margin-top:15px;padding:18px;border-radius:19px;
- background:linear-gradient(145deg,#fff,#f9fbff);box-shadow:0 4px 16px #17243b08;
-}
+
 .log-settings .settings-card{min-width:0}
 .log-settings .settings-card .settings-card-head{align-items:flex-start;gap:12px}
-.log-settings .settings-card .settings-toggle{margin:0;white-space:nowrap}
+.log-settings .settings-card .settings-toggle{margin:0}
 .log-settings .settings-card .hint{margin:8px 0 10px}
 .log-settings #voiceBox .voicelist{margin:8px 0 12px}
 .log-settings #pushStatus{margin:8px 0 12px}
 #overview .ovbox h2{font-size:16px;letter-spacing:-.025em}
-#overview .duaplayer{background:linear-gradient(145deg,#fff,#f2f6ff);border-color:#dfe7fb}
+
 #overview .dpbtn{box-shadow:0 5px 12px #315ee82c}
 
 /* Calendar — clearer controls, month grid and agenda cards */
 #calendar .calviews{padding:5px;background:#eef2f9;border:1px solid #e5eaf3;border-radius:15px}
-#calendar .calviews button{min-height:42px;border-radius:11px}
-#calendar .calviews button.active{background:#fff;color:var(--premium-blue);box-shadow:0 3px 10px #17243b12}
-#calendar .calboard{
- padding:17px 15px 18px;border-radius:22px;
- background:radial-gradient(circle at 100% 0%,#294b91 0,transparent 46%),linear-gradient(135deg,#101c33,#172d57);
- box-shadow:0 12px 28px #101c3326;
-}
-#calendar .calhead{align-items:center;padding-bottom:14px}
-#calendar .calhead .iconbtn{width:40px;height:40px;border:1px solid #ffffff24;border-radius:13px;background:#ffffff14;font-size:25px}
-#calendar .caltitlebox b{font-size:19px;letter-spacing:-.04em}
-#calendar .calweek{font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:#aab9d4}
-#calendar .calday{min-height:54px;border-radius:13px}
-#calendar .calday b{width:32px;height:32px}
-#calendar .calday.selected b{background:#fff;color:#1b3470;box-shadow:0 3px 10px #0002}
+
+#calendar .calweek{text-transform:uppercase}
+
 #calendar .calday.today:not(.selected) b{outline:1px solid #ffffff70}
-#calendar .calsum{font-size:11px;color:#c9d6ef}
-#calendar .timeline{border-radius:18px;padding:12px 10px;background:#fbfcff}
-#calendar .recordlist{gap:8px}
-#calendar .record{border-radius:15px;padding:12px;background:#fff}
+
 #calendar .prayerbox{margin-top:12px;border:1px solid var(--premium-line);border-radius:15px;background:#fbfcff}
 #calendar .prayerbox summary{padding:13px 15px;font-weight:750;color:#34435d}
 #calendar .prayerbox .formgrid{padding:0 14px 14px}
@@ -985,13 +874,12 @@ main{max-width:1160px}
 #log.logpanel{padding:clamp(15px,2.5vw,26px);border-radius:22px;background:#fff}
 #log .log-heading{margin-bottom:14px}
 #log .log-heading h2{font-size:clamp(24px,3vw,31px);letter-spacing:-1px}
-#log .log-add{min-height:46px;padding-inline:18px;border-radius:14px}
-#log .log-summary{
- padding:15px;border-radius:19px;border-color:#e2e9f6;
+#log .log-add{padding-inline:18px}
+#log .log-summary{border-color:#e2e9f6;
  background:linear-gradient(135deg,#f7f9ff,#edf3ff);
 }
-#log .log-kpi{justify-content:flex-start;padding:7px 10px}
-#log .log-kpi-icon{width:38px;height:38px;border-radius:12px}
+#log .log-kpi{justify-content:flex-start}
+
 #log .log-kpi b{font-size:clamp(17px,2vw,23px);letter-spacing:-.6px}
 #log .log-kpi small{font-size:10px;white-space:normal}
 #log .log-payment-details{margin-top:10px}
@@ -1005,11 +893,9 @@ main{max-width:1160px}
 #students .sectionhead{align-items:center}
 #students #addStudentBtn{min-height:44px;border-radius:13px;padding-inline:15px}
 #students .toolbar input{flex:1 1 220px}
-#students .studentgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+#students .studentgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
 #students .student{
- position:relative;min-height:94px;padding:16px 15px;border:1px solid #e5eaf3;border-radius:17px;
- background:linear-gradient(145deg,#fff,#fbfcff);box-shadow:0 3px 12px #17243b08;
- transition:transform .16s,border-color .16s,box-shadow .16s;
+ position:relative;min-height:94px;
 }
 #students .student:active{transform:scale(.985)}
 #students .student b{font-size:15px;letter-spacing:-.02em}
@@ -1020,17 +906,14 @@ main{max-width:1160px}
 #reports .dashactions{gap:8px;margin:12px 0 15px}
 #reports .chipbtn{min-height:39px;padding-inline:14px;border-radius:12px;background:#f8faff}
 #reports .dashhero{
- padding:clamp(18px,3vw,25px);border-radius:22px;
- background:radial-gradient(circle at 100% 0%,#3159b2 0,transparent 48%),linear-gradient(125deg,#101c33,#1b3568 72%,#24488f);
- box-shadow:0 14px 32px #101c3326;
+ padding:clamp(18px,3vw,25px);
 }
 #reports .herorev strong{font-size:clamp(31px,5vw,42px);letter-spacing:-1.4px}
 #reports .herogrid{gap:9px}
 #reports .herogrid div{border:1px solid #ffffff12;background:#ffffff13;border-radius:14px}
-#reports .reportgrid{gap:10px}
+
 #reports .report{
- min-height:94px;padding:15px;border-radius:17px;
- background:linear-gradient(145deg,#fff,#f9fbff);box-shadow:0 3px 12px #17243b08;
+ min-height:94px;padding:15px;
 }
 #reports .report span{font-size:11px;font-weight:700;color:#718099}
 #reports .report strong{font-size:clamp(18px,2.2vw,23px);letter-spacing:-.5px}
@@ -1057,20 +940,17 @@ main{max-width:1160px}
 #islamic .isplayer{border:1px solid #e5eaf3;border-radius:17px;background:#f8faff}
 
 /* Student profile sub-pages and every dialog */
-#profileDialog .dialogbody{padding:clamp(16px,3vw,25px)}
-#profileDialog .profilestats{gap:9px}
+
 #profileDialog .report{border-radius:15px;background:#f9fbff}
-#profileDialog .profileactions{gap:8px}
-#profileDialog .profileactions .btn{border-radius:12px}
+
 #profileDialog .ptabs{
- position:sticky;top:0;z-index:8;padding:7px 2px;background:#ffffffed;
- border-bottom:1px solid #e9edf4;backdrop-filter:blur(12px);
+ border-bottom:1px solid #e9edf4;
 }
-#profileDialog .ptabs button{min-height:40px;border-radius:12px;padding-inline:14px}
-#profileDialog .ptabs button.active{background:#172d57;border-color:#172d57;box-shadow:0 4px 10px #172d5726}
-#profileDialog .ptab{padding-top:5px}
+#profileDialog .ptabs button{padding-inline:14px}
+#profileDialog .ptabs button.active{border-color:#172d57}
+
 dialog{border:1px solid #e5eaf2;border-radius:22px;box-shadow:0 24px 80px #101a3040}
-dialog::backdrop{background:#101a30a8;backdrop-filter:blur(5px)}
+
 dialog form,dialog .dialogbody{padding:clamp(16px,3vw,24px)}
 dialog .dialoghead{align-items:center;gap:12px;padding-bottom:13px;border-bottom:1px solid #edf0f5;margin-bottom:15px}
 dialog .dialoghead h2{font-size:21px;letter-spacing:-.04em}
@@ -1079,39 +959,33 @@ dialog .dialogactions{gap:8px;padding-top:12px;border-top:1px solid #edf0f5}
 dialog .dialogactions .btn{min-height:44px;border-radius:12px}
 
 @media(max-width:720px){
- .tabpanel{padding:13px;border-radius:18px}
- #overview .nextcard{padding:17px;border-radius:18px}
- #overview .ovbox{padding:14px;border-radius:16px}
+
   #logSettingsPanel .settings-card{padding:14px}
   #logSettingsPanel .settings-card .settings-card-head{gap:8px}
- #calendar .calboard{padding:13px 10px 14px;border-radius:18px}
- #calendar .calday{min-height:47px;border-radius:11px}
- #calendar .calday b{width:29px;height:29px}
- #log .log-summary{padding:10px;border-radius:15px}
- #log .log-kpi{display:block;text-align:center;padding:5px 3px}
- #log .log-kpi-icon{margin:0 auto 6px;width:32px;height:32px}
+
+ #log .log-kpi{display:block;text-align:center}
+ #log .log-kpi-icon{margin:0 auto 6px}
  #log .log-kpi small{font-size:9px}
- #students .studentgrid{grid-template-columns:1fr;gap:8px}
- #students .student{min-height:76px;padding:13px}
- #reports .reportgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ #students .studentgrid{grid-template-columns:1fr}
+ #students .student{min-height:76px}
+ #reports .reportgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
  #reports .report{min-height:82px;padding:12px}
  #reports .herogrid{gap:7px}
  #reports .herogrid div{padding:10px}
  #islamic .isbanner{height:150px}
  #islamic .isrow{padding:10px 6px}
- #profileDialog .ptabs{margin-inline:-3px;top:0}
+ #profileDialog .ptabs{margin-inline:-3px}
  dialog .dialogactions{flex-wrap:wrap}
 }
 @media(max-width:390px){
  #log .log-kpi b{font-size:16px}
  #reports .report strong{font-size:17px}
  #reports .report span{font-size:10px}
- #calendar .calday{min-height:43px}
+ 
 }
 @media(prefers-reduced-motion:reduce){
  #students .student:active,.btn:active{transform:none}
 }
-
 
 /* RESPONSIVE AUDIT FIX · horizontal containment, iOS viewport and modal layers */
 html{width:100%;max-width:100%;overflow-x:clip}
@@ -1131,8 +1005,8 @@ button,input,select,textarea{max-width:100%;min-width:0}
 .calweek,.calgrid{grid-template-columns:repeat(7,minmax(0,1fr));width:100%}
 .calday{min-width:0;overflow:hidden}
 .calday small{max-width:100%;overflow:hidden;text-overflow:ellipsis}
-.tabbar{max-width:calc(100vw - 16px)}
-.tabbar .tab{min-width:0;overflow:hidden}
+
+.tabbar .tab{overflow:hidden}
 .tabbar .tab span,.tabbar .tab small{max-width:100%;overflow:hidden;text-overflow:ellipsis}
 :where(.tabpanel,dialog,.profile-content,.dialogbody){overscroll-behavior:contain}
 dialog{
@@ -1149,9 +1023,7 @@ dialog .dialoghead{position:sticky;top:-1px;z-index:3;background:#fff;padding:2p
 dialog .dialogactions{position:sticky;bottom:-1px;z-index:3;background:#fff;padding:12px 0 max(4px,env(safe-area-inset-bottom));}
 dialog::backdrop{background:#101c33b8;backdrop-filter:blur(5px)}
 body:has(dialog[open]){overflow:hidden}
-body:has(dialog[open]) .tabbar,
-body:has(dialog[open]) .fab,
-body:has(dialog[open]) .timerbar{visibility:hidden;pointer-events:none}
+body:has(dialog[open]) .tabbar,body:has(dialog[open]) .timerbar{visibility:hidden;pointer-events:none}
 @media(max-width:720px){
   main{width:100%;max-width:100%;padding-left:12px;padding-right:12px}
   .tabpanel{width:100%;padding:12px;border-radius:18px}
@@ -1161,7 +1033,7 @@ body:has(dialog[open]) .timerbar{visibility:hidden;pointer-events:none}
   .formgrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
   .formgrid>*{min-width:0}
   .formgrid input,.formgrid select,.formgrid textarea{min-width:0}
-  .tabbar{bottom:max(6px,env(safe-area-inset-bottom));}
+  
   dialog{
     position:fixed;
     inset:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
@@ -1188,12 +1060,10 @@ body:has(dialog[open]) .timerbar{visibility:hidden;pointer-events:none}
   .calday b{width:27px;height:27px;font-size:12px}
   .calday{min-height:48px}
   .calweek{font-size:9px}
-  .statstrip{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .statstrip div:nth-child(2){border-right:0}
-  .statstrip div:nth-child(3),.statstrip div:nth-child(4){border-top:1px solid var(--line)}
+
   .nextactions{flex-wrap:wrap}
   .nextbtn{min-width:0}
-  .tabbar .tab{font-size:9px}
+  
 }
 @media(orientation:landscape) and (max-height:500px){
   dialog{
@@ -1204,11 +1074,10 @@ body:has(dialog[open]) .timerbar{visibility:hidden;pointer-events:none}
     max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
     overflow-y:auto;-webkit-overflow-scrolling:touch;
   }
-  .tabbar{bottom:max(4px,env(safe-area-inset-bottom));}
+  
 }
 /* A closed dialog must never be shown: an ID rule such as #recordDialog{display:flex} would otherwise override the browser's dialog:not([open]){display:none}. */
 dialog:not([open]){display:none!important}
-
 
 /* Professional calendar refresh — focused, light, high-contrast, responsive */
 #calendar{--cal-ink:#17243b;--cal-muted:#71809a;--cal-line:#e5eaf2;--cal-accent:#315ee8}
@@ -1217,34 +1086,28 @@ dialog:not([open]){display:none!important}
   width:max-content;max-width:100%;margin:0 auto 16px;padding:4px;
   border:1px solid #e3e8f1;border-radius:13px;background:#f2f5fa;
 }
-#calendar .calviews button{
-  min-width:76px;min-height:38px;padding:0 16px;border:0;border-radius:9px;
+#calendar .calviews button{border:0;border-radius:9px;
   background:transparent;color:#64728a;font-size:13px;font-weight:750;
   letter-spacing:-.01em;transition:background .16s ease,color .16s ease,box-shadow .16s ease;
 }
 #calendar .calviews button.active{
   background:#fff;color:#234bc5;box-shadow:0 1px 4px #15233b18,0 3px 9px #15233b0b;
 }
-#calendar .calboard{
-  padding:18px 18px 16px;border:1px solid #e4e9f1;border-radius:20px;
-  background:#fff;color:var(--cal-ink);box-shadow:0 5px 22px #17243b0a;
+#calendar .calboard{color:var(--cal-ink);
 }
 #calendar .calhead{
   display:grid;grid-template-columns:42px minmax(0,1fr) 42px;align-items:center;
   gap:8px;margin:0;padding:0 0 14px;border:0;background:none;
 }
 #calendar .calhead .iconbtn{
-  display:grid;place-items:center;width:40px;height:40px;padding:0;
-  border:1px solid #e5eaf2;border-radius:12px;background:#f7f9fc;
+  display:grid;place-items:center;padding:0;
   color:#34435d;font-size:24px;line-height:1;transition:background .15s,border-color .15s;
 }
 #calendar .calhead .iconbtn:hover{background:#edf2ff;border-color:#cbd7fa}
 #calendar .caltitlebox{gap:4px}
-#calendar .caltitlebox b{color:#17243b;font-size:20px;font-weight:800;letter-spacing:-.65px}
-#calendar .caltoday{padding:2px 8px;color:#315ee8;font-size:12px;font-weight:750}
-#calendar .calsum{
-  margin:0 0 12px;padding:9px 11px;border:1px solid #e8edf5;border-radius:10px;
-  background:#f8faff;color:#687790;font-size:11.5px;font-weight:650;line-height:1.45;
+#calendar .caltitlebox b{color:#17243b;font-weight:800}
+#calendar .caltoday{padding:2px 8px;color:#315ee8;font-weight:750}
+#calendar .calsum{border-radius:10px;color:#687790;line-height:1.45;
 }
 #calendar .calweek{
   margin:0 0 8px;padding:0 0 8px;border-bottom:1px solid #edf0f5;
@@ -1252,7 +1115,7 @@ dialog:not([open]){display:none!important}
 }
 #calendar .calgrid{gap:4px}
 #calendar .calday{
-  position:relative;min-width:0;min-height:61px;padding:6px 1px 5px;
+  position:relative;min-width:0;padding:6px 1px 5px;
   display:flex;align-items:center;gap:3px;border:1px solid transparent;border-radius:12px;
   background:#fff;color:#34435d;overflow:hidden;transition:background .14s,border-color .14s,transform .14s;
 }
@@ -1266,7 +1129,7 @@ dialog:not([open]){display:none!important}
   color:#234bc5;background:#edf2ff;box-shadow:inset 0 0 0 1px #cbd8ff;
 }
 #calendar .calday.selected{
-  border-color:#cbd8ff;background:#f1f5ff;box-shadow:inset 0 0 0 1px #e0e8ff;
+  border-color:#cbd8ff;box-shadow:inset 0 0 0 1px #e0e8ff;
 }
 #calendar .calday.selected b{background:#315ee8;color:#fff;box-shadow:0 2px 6px #315ee833}
 #calendar .calday .calcount{
@@ -1279,22 +1142,18 @@ dialog:not([open]){display:none!important}
 #calendar .calday:focus-visible,#calendar .calviews button:focus-visible{
   outline:2px solid #315ee8;outline-offset:2px;
 }
-#calendar .sectionhead.caltitle{align-items:center;gap:12px;margin:20px 0 8px}
+#calendar .sectionhead.caltitle{align-items:center;gap:12px}
 #calendar .sectionhead.caltitle h3{color:#17243b;font-size:18px;font-weight:800;letter-spacing:-.4px}
-#calendar #calAddBtn{min-height:42px;padding:0 15px;border-radius:12px;font-size:12.5px;font-weight:800}
+
 #calendar .daysum{margin:0 0 12px;color:#71809a;font-size:12px;font-weight:650}
-#calendar .timeline{
-  padding:12px;border:1px solid #e7ecf3;border-radius:16px;background:#f8faff;
-}
+
 #calendar .recordlist{gap:9px}
 #calendar .record{
   border:1px solid #e8edf4;border-radius:13px;padding:12px 13px;
   background:#fff;box-shadow:0 2px 7px #17243b07;
 }
 #calendar .record:active{transform:scale(.995)}
-#calendar .weekview{
-  padding:10px 7px 12px;border:1px solid #e5eaf2;border-radius:16px;background:#fff;
-}
+
 #calendar .wkday{min-width:0;padding:7px 1px;border-radius:10px}
 #calendar .wkday small{font-size:9px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
 #calendar .wkday b{font-size:14px}
@@ -1303,33 +1162,31 @@ dialog:not([open]){display:none!important}
 #calendar .wkcol{border-color:#edf0f5;background-image:linear-gradient(#edf0f5 1px,transparent 1px)}
 #calendar .wkcol.sel{background-color:#f5f7ff}
 #calendar .wkles{border-radius:6px;box-shadow:0 1px 3px #17243b12}
-#calendar .remindbox{border-radius:14px}
+
 #calendar .prayerbox{box-shadow:0 2px 8px #17243b06}
 @media(max-width:420px){
   #calendar>.calviews{margin-bottom:12px}
-  #calendar .calviews button{min-width:68px;min-height:36px;padding:0 12px;font-size:12px}
-  #calendar .calboard{padding:13px 9px 12px;border-radius:16px}
-  #calendar .calhead{grid-template-columns:36px minmax(0,1fr) 36px;gap:5px;padding-bottom:10px}
-  #calendar .calhead .iconbtn{width:35px;height:35px;border-radius:10px}
-  #calendar .caltitlebox b{font-size:17px}
+  #calendar .calviews button{font-size:12px}
+  
+  #calendar .calhead{grid-template-columns:36px minmax(0,1fr) 36px;gap:5px}
+
   #calendar .calweek{font-size:9px;letter-spacing:.04em}
   #calendar .calgrid{gap:2px}
-  #calendar .calday{min-height:49px;border-radius:9px;padding:4px 0}
+  #calendar .calday{border-radius:9px;padding:4px 0}
   #calendar .calday b{width:27px;height:27px;font-size:12px}
   #calendar .calday .calcount{min-width:15px;height:15px;padding:0 3px;font-size:8px;line-height:15px}
   #calendar .sectionhead.caltitle{align-items:flex-start}
-  #calendar #calAddBtn{min-height:39px;padding:0 11px;font-size:11.5px}
+  
 }
 @media(max-width:350px){
   #calendar .calboard{padding-inline:7px}
-  #calendar .calday{min-height:45px}
+  
   #calendar .calday b{width:25px;height:25px;font-size:11px}
-  #calendar .calviews button{min-width:61px;padding-inline:9px}
+  #calendar .calviews button{padding-inline:9px}
 }
 @media(prefers-reduced-motion:reduce){
   #calendar .calviews button,#calendar .calday,#calendar .calhead .iconbtn{transition:none}
 }
-
 
 /* Student Profile — mobile-first containment and premium hierarchy */
 #profileDialog.widedialog{
@@ -1341,7 +1198,6 @@ dialog:not([open]){display:none!important}
 }
 #profileDialog .dialogbody{
   width:100%;max-width:100%;min-width:0;max-height:inherit;
-  padding:clamp(15px,2.8vw,24px);
   overflow-x:hidden;overflow-y:auto;
   overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
 }
@@ -1355,26 +1211,20 @@ dialog:not([open]){display:none!important}
 #profileDialog .dialoghead>div{min-width:0;flex:1}
 #profileDialog #profileName{overflow-wrap:anywhere}
 #profileDialog #profilePhone{line-height:1.5;overflow-wrap:anywhere}
-#profileDialog .profilestats{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}
+#profileDialog .profilestats{grid-template-columns:repeat(2,minmax(0,1fr))}
 #profileDialog .profilestats .report{
-  min-width:0;padding:14px;border:1px solid #e5ebf5;border-radius:16px;
+  min-width:0;border:1px solid #e5ebf5;
   background:linear-gradient(145deg,#fff,#f7f9fd);
 }
-#profileDialog .profilestats .report span{font-size:11px;line-height:1.35}
+
 #profileDialog .profilestats .report strong{
-  margin-top:7px;font-size:clamp(18px,3vw,23px);line-height:1.2;
   overflow-wrap:anywhere;font-variant-numeric:tabular-nums;
 }
-#profileDialog .profileactions{
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:9px;margin:14px 0 16px;
+#profileDialog .profileactions{grid-template-columns:repeat(2,minmax(0,1fr));
 }
-#profileDialog .profileactions .btn{
-  display:flex;align-items:center;justify-content:center;
-  min-width:0;min-height:46px;padding:10px 11px;border-radius:13px;
-  white-space:normal;text-align:center;line-height:1.25;font-size:12.5px;
+#profileDialog .profileactions .btn{border-radius:13px;
 }
-#profileDialog #profileAdd{grid-column:1/-1;min-height:50px;font-size:14px}
+
 #profileDialog #courseCard{display:grid;gap:10px;margin:0 0 16px}
 #profileDialog .coursecard{
   min-width:0;max-width:100%;padding:15px;border:1px solid #dce5fb;
@@ -1387,37 +1237,26 @@ dialog:not([open]){display:none!important}
 #profileDialog .coursecard .pkgbar{max-width:100%;overflow:hidden}
 #profileDialog .coursecard .btn{min-height:46px;border-radius:13px}
 #profileDialog .ptabs{
-  display:flex;gap:6px;margin:4px 0 14px;padding:6px;
   overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;
-  border:1px solid #e7ecf4;border-radius:14px;background:#f5f7fb;
   -webkit-overflow-scrolling:touch;
 }
 #profileDialog .ptabs::-webkit-scrollbar{display:none}
 #profileDialog .ptabs button{
-  flex:0 0 auto;min-height:39px;padding:0 13px;border:0;border-radius:10px;
-  background:transparent;color:#64728a;font-size:12px;font-weight:750;white-space:nowrap;
+  flex:0 0 auto;
 }
-#profileDialog .ptabs button.active{
-  background:#1b315a;color:#fff;box-shadow:0 2px 7px #172d5725;
-}
+
 #profileDialog .ptab{min-width:0;overflow-wrap:anywhere}
-#profileDialog .pblock{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-#profileDialog .pblock>div,
+
 #profileDialog .paysum>div{
   min-width:0;padding:11px 12px;border:1px solid #edf0f5;border-radius:12px;background:#f8faff;
 }
-#profileDialog .pblock span,
 #profileDialog .paysum span{line-height:1.35}
-#profileDialog .pblock b,
 #profileDialog .paysum b{overflow-wrap:anywhere;line-height:1.35}
-#profileDialog .pblock .recordlist{grid-column:1/-1;min-width:0}
+
 #profileDialog .record{min-width:0;max-width:100%;gap:9px;padding:11px}
 #profileDialog .recordmain{min-width:0;flex:1}
 #profileDialog .recordvalue{max-width:38%;overflow-wrap:anywhere}
-#profileDialog .payline{min-width:0;flex-wrap:wrap;gap:8px}
-#profileDialog .payline>span:first-child{flex:1 1 140px}
-#profileDialog .payline .amt{flex:0 1 auto;overflow-wrap:anywhere}
-#profileDialog .payline .paytoggle{flex:0 0 auto}
+
 #profileDialog .charttable{display:block;max-width:100%;overflow-x:auto;white-space:nowrap}
 #profileDialog .ptab .coursecard,
 #profileDialog .ptab .pkgcard{min-width:0;max-width:100%;overflow-wrap:anywhere}
@@ -1428,30 +1267,18 @@ dialog:not([open]){display:none!important}
     max-height:calc(100dvh - 16px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
     border-radius:20px;
   }
-  #profileDialog .dialogbody{padding:14px}
-  #profileDialog .dialoghead{gap:8px;padding-bottom:12px;margin-bottom:12px}
-  #profileDialog .dialoghead h2{font-size:24px}
-  #profileDialog .profilestats{gap:8px;margin:12px 0}
-  #profileDialog .profilestats .report{padding:11px;border-radius:14px}
-  #profileDialog .profilestats .report strong{font-size:19px}
-  #profileDialog .profileactions{gap:8px;margin:12px 0}
-  #profileDialog .profileactions .btn{min-height:44px;padding:9px 8px;font-size:11.5px}
-  #profileDialog #profileAdd{min-height:48px;font-size:13px}
+
   #profileDialog .coursecard{padding:12px;border-radius:15px}
   #profileDialog .courseline{font-size:12px;gap:7px 10px}
-  #profileDialog .ptabs{margin-inline:0;padding:5px}
-  #profileDialog .ptabs button{min-height:37px;padding-inline:11px;font-size:11.5px}
-  #profileDialog .pblock{grid-template-columns:minmax(0,1fr)}
-  #profileDialog .pblock h4{margin-top:5px}
-  #profileDialog .pblock>div{padding:10px 11px}
+  #profileDialog .ptabs{margin-inline:0}
+  #profileDialog .ptabs button{padding-inline:11px}
+
   #profileDialog .paysum{grid-template-columns:repeat(2,minmax(0,1fr))}
   #profileDialog .record{padding:9px;gap:7px}
   #profileDialog .recordvalue{max-width:34%;font-size:12px}
 }
 @media(max-width:360px){
-  #profileDialog .dialogbody{padding:11px}
-  #profileDialog .profilestats .report strong{font-size:17px}
-  #profileDialog .profileactions .btn{font-size:10.5px}
+
   #profileDialog .ptabs button{padding-inline:9px}
   #profileDialog .recordicon{width:32px;height:32px;flex:0 0 32px}
 }
@@ -1464,7 +1291,6 @@ dialog:not([open]){display:none!important}
   input,select,textarea{font-size:16px!important}
   button,a,label,summary,.tab{touch-action:manipulation}
 }
-
 
 /* Premium student payment dashboard */
 .payment-dashboard{display:flex;flex-direction:column;gap:14px;min-width:0}
@@ -1510,7 +1336,6 @@ dialog:not([open]){display:none!important}
 .payment-more .paytoggle{width:100%;border-radius:0 0 9px 9px}
 @media(max-width:390px){.payment-metrics{gap:6px}.payment-metrics .metric{padding:10px 8px}.payment-course{padding:11px}.payment-filters button{padding:6px 7px}.payment-heading h3{font-size:16px}.payment-add{padding:0 10px}}
 @media(prefers-reduced-motion:no-preference){.payment-card,.payment-add,.payment-edit{transition:box-shadow .18s ease,transform .18s ease}.payment-edit:active,.payment-add:active{transform:scale(.98)}}
-
 
 /* Payments tab refinement — presentation only; existing payment actions and calculations are unchanged. */
 #profileDialog #ptab-payments{min-width:0;max-width:100%;overflow-x:clip}
@@ -1588,70 +1413,17 @@ dialog:not([open]){display:none!important}
   #profileDialog .payment-card:focus-within{border-color:#c7d6f5;box-shadow:0 7px 18px #1d355f12}
 }
 /* Premium New Record visual pass — CSS only; preserve all existing form IDs and behavior. */
-#recordDialog .record-time-panel{
-  padding:16px;border-color:#dce6fb;
-  background:linear-gradient(145deg,#f5f8ff 0%,#fbfcff 78%);
-  box-shadow:0 7px 22px #234b9410
-}
-#recordDialog .record-panel-title{
-  display:flex;align-items:center;gap:9px;
-  margin:-16px -16px 14px;padding:13px 16px;
-  border-radius:18px 18px 0 0;background:#eaf0ff;
-  color:#183d9b;font-size:15px;letter-spacing:-.01em
-}
-#recordDialog .record-panel-title:before{
-  content:"◷";display:grid;place-items:center;width:27px;height:27px;
-  border-radius:9px;background:#fff;color:#315eea;font-size:19px
-}
+
 #recordDialog .record-time-grid label,
 #recordDialog .record-rate-panel .rate-field{gap:7px}
-#recordDialog .record-time-grid input{
-  min-height:54px;border-radius:15px;background:#fff;
-  font-variant-numeric:tabular-nums
+
+#recordDialog .durchips button{transition:background .15s,border-color .15s,transform .15s}
+
+#recordDialog .record-rate-panel:before{letter-spacing:-.01em
 }
-#recordDialog .record-subtitle{margin:14px 0 8px;font-size:13px}
-#recordDialog .durchips{gap:8px}
-#recordDialog .durchips button{min-height:47px;border-radius:14px;transition:background .15s,border-color .15s,transform .15s}
-#recordDialog .durchips button.active{box-shadow:0 5px 12px #315eea2b}
-#recordDialog .record-duration-summary{
-  display:flex;align-items:center;gap:8px;margin-top:13px;
-  padding:12px 14px;border:1px solid #e1eaff;border-radius:14px;
-  background:#eaf1ff;color:#2452d5;font-size:13px
-}
-#recordDialog .record-rate-panel{
-  padding:15px;border-color:#d8eee3;border-radius:18px;
-  background:linear-gradient(145deg,#f1faf5 0%,#fff 90%);
-  box-shadow:0 6px 18px #1684510b
-}
-#recordDialog .record-rate-panel:before{
-  content:"Payment";grid-column:1/-1;display:flex;align-items:center;
-  min-height:30px;margin:-15px -15px 1px;padding:10px 15px;
-  border-radius:17px 17px 0 0;background:#e4f5ec;color:#126344;
-  font-size:15px;font-weight:850;letter-spacing:-.01em
-}
-#recordDialog .record-rate-panel .rate-field small{font-size:11px;line-height:1.45}
-#recordDialog .record-rate-panel #fRate{
-  min-height:54px;border-radius:14px;background:#fff
-}
-#recordDialog .record-rate-panel #fPaidRow{
-  min-height:50px;padding:0 4px 0 12px;border-left:1px solid #d8e9df;
-  color:#24513c!important
-}
-#recordDialog .record-rate-panel #fPaidRow input{width:22px;height:22px;min-width:22px;min-height:22px}
-#recordDialog .donebox{
-  gap:14px;padding:0 15px 15px;border-color:#e4e1fb;border-radius:18px;
-  background:linear-gradient(145deg,#f7f5ff 0%,#fff 92%);
-  box-shadow:0 6px 18px #5140a10a
-}
-#recordDialog .donebox:before{
-  content:"Lesson completion";display:flex;align-items:center;min-height:46px;
-  margin:0 -15px 0;padding:0 15px;border-radius:17px 17px 0 0;
-  background:#efedff;color:#4635a5;font-size:15px;font-weight:850
-}
-#recordDialog .donebox .checklabel{min-height:34px}
-#recordDialog .donebox .checklabel input{width:23px;height:23px;min-width:23px;min-height:23px}
-#recordDialog .donebox .checklabel b{font-size:14px}
-#recordDialog .donebox .checklabel small{font-size:11.5px}
+
+#recordDialog .donebox{border-color:#e4e1fb}
+
 #recordDialog .donebox .donemin{gap:7px}
 #recordDialog .donebox .donemin input{min-height:52px;border-radius:14px}
 #recordDialog .payment-method{
@@ -1659,121 +1431,73 @@ dialog:not([open]){display:none!important}
   background:#f7f9ff
 }
 #recordDialog .payment-method>div:first-child b{font-size:14px}
-#recordDialog .payment-option{min-height:70px;border-radius:14px}
-#recordDialog .payment-option[aria-pressed="true"]{
-  border-color:#315eea;background:#edf3ff;
-  box-shadow:0 5px 14px #315eea18
-}
-#recordDialog .dialogactions{
-  gap:9px;padding-top:14px;border-color:#e4eaf4
+
+#recordDialog .dialogactions{border-color:#e4eaf4
 }
 #recordDialog .dialogactions .btn{
-  min-height:54px;border-radius:15px;font-size:14px;
   transition:transform .15s,box-shadow .15s
 }
-#recordDialog .dialogactions #saveRecord{
-  box-shadow:0 8px 18px #315eea2b
-}
+
 #recordDialog .dialogactions .btn:active{transform:scale(.985)}
-#recordDialog .dialoghead h2{font-size:25px;letter-spacing:-.055em}
+
 #recordDialog .dialoghead .iconbtn{
-  width:46px;height:46px;border:1px solid #e2e9f6;
   box-shadow:0 3px 10px #172b4d08
 }
-@media(max-width:720px){
-  #recordDialog .record-time-panel{padding:13px}
-  #recordDialog .record-panel-title{margin:-13px -13px 12px;padding:11px 13px}
-  #recordDialog .record-rate-panel{padding:13px}
-  #recordDialog .record-rate-panel:before{margin:-13px -13px 1px;padding:9px 13px}
-  #recordDialog .donebox{padding:0 13px 13px}
-  #recordDialog .donebox:before{margin:0 -13px;padding:0 13px}
-}
+
 @media(max-width:390px){
-  #recordDialog .record-time-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
-  #recordDialog .record-time-grid input{padding:10px 7px;font-size:17px}
-  #recordDialog .durchips{gap:6px}
-  #recordDialog .durchips button{min-height:43px;padding-inline:7px;font-size:12px}
-  #recordDialog .record-rate-panel{grid-template-columns:minmax(0,1fr) auto;gap:7px}
-  #recordDialog .record-rate-panel #fPaidRow{padding-left:8px;font-size:12px!important}
-  #recordDialog .dialogactions .btn{min-height:50px;font-size:13px}
+  #recordDialog .record-time-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+
+  #recordDialog .durchips button{padding-inline:7px}
+  #recordDialog .record-rate-panel{grid-template-columns:minmax(0,1fr) auto}
+  #recordDialog .record-rate-panel #fPaidRow{padding-left:8px}
+  
 }
 @media(prefers-reduced-motion:reduce){
   #recordDialog .durchips button,#recordDialog .dialogactions .btn{transition:none}
 }
 
-
 /* Final Premium New Record UI — compact, touch-first, with a contained scroll area. */
 #recordDialog{
   width:min(610px,calc(100% - 20px));
   max-height:min(92dvh,900px);
-  overflow:hidden;
   border:1px solid #e3eaf6;
   border-radius:24px;
   box-shadow:0 24px 70px #101c3340;
 }
 #recordDialog form{
-  display:flex;
-  flex-direction:column;
   max-height:min(92dvh,900px);
-  min-height:0;
   padding:15px 16px 12px;
   gap:0;
 }
-#recordDialog .dialoghead{
-  flex:none;
-  align-items:center;
-  margin:0;
-  padding:2px 0 13px;
-  background:#fff;
-  z-index:2;
-}
+
 #recordDialog .dialoghead .eyebrow{display:none}
 #recordDialog .dialoghead h2{
-  font-size:23px;
   font-weight:850;
   letter-spacing:-.045em;
 }
 #recordDialog .dialoghead .iconbtn{
-  width:43px;height:43px;
   border:1px solid #e2e9f6;
   background:#f0f4ff;color:#315ee8;
-  font-size:25px;
 }
 #recordDialog .formgrid{
   display:grid;
   grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  gap:10px;
-  min-height:0;
-  overflow-y:auto;
   overscroll-behavior:contain;
   scrollbar-width:thin;
   padding:1px 2px 12px;
 }
 #recordDialog .formgrid>.wide{grid-column:1/-1}
 #recordDialog .record-date-panel{margin-bottom:0}
-#recordDialog .record-panel{
-  padding:13px;
-  border-radius:18px;
-  box-shadow:none;
-}
+
 #recordDialog .record-time-panel{
   border-color:#d7e3ff;
-  background:#f7f9ff;
 }
-#recordDialog .record-panel-title{
-  display:flex;align-items:center;gap:8px;
-  margin:-13px -13px 12px;
-  padding:10px 13px;
-  border-radius:17px 17px 0 0;
-  background:#eaf0ff;color:#2449b5;
-  font-size:15px;font-weight:850;
+#recordDialog .record-panel-title{font-weight:850;
 }
-#recordDialog .record-panel-title:before{
-  content:"◷";display:grid;place-items:center;
-  width:25px;height:25px;border-radius:8px;
+#recordDialog .record-panel-title:before{place-items:center;
   background:#fff;color:#315ee8;font-size:16px;
 }
-#recordDialog .record-time-grid{gap:9px}
+
 #recordDialog .record-time-grid label{gap:5px}
 #recordDialog .record-time-grid input{
   min-height:51px;padding:10px 11px;
@@ -1782,41 +1506,25 @@ dialog:not([open]){display:none!important}
   font-variant-numeric:tabular-nums;
 }
 #recordDialog .record-subtitle{
-  margin:11px 0 7px;
-  color:#64738e;font-size:12px;font-weight:850;
+  color:#64738e;font-weight:850;
 }
-#recordDialog .durchips{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+#recordDialog .durchips{display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}
 #recordDialog .durchips button{
-  min-width:0;min-height:43px;padding:0 5px;
+  min-width:0;padding:0 5px;
   border:1px solid #dce5f5;border-radius:13px;
-  background:#fff;color:#34435f;
-  font-size:12px;font-weight:850;
+  background:#fff;color:#34435f;font-weight:850;
 }
-#recordDialog .durchips button.active{
-  border-color:#315ee8;background:#315ee8;color:#fff;
-  box-shadow:0 4px 10px #315ee82b;
-}
+
 #recordDialog .record-duration-summary{
-  display:flex;align-items:center;gap:8px;
-  min-height:42px;margin-top:10px;padding:9px 11px;
-  border:1px solid #dce7ff;border-radius:13px;
-  background:#eaf1ff;color:#2852d5;
-  font-size:12px;font-weight:850;
+  display:flex;align-items:center;gap:8px;border-radius:13px;
+  background:#eaf1ff;color:#2852d5;font-weight:850;
 }
-#recordDialog .record-rate-panel{
-  display:grid;grid-template-columns:minmax(0,1fr) auto;
-  align-items:end;gap:9px 12px;
-  border-color:#d5ecdf;border-radius:18px;
-  background:#f7fcf9;box-shadow:none;
-  padding:13px;
+#recordDialog .record-rate-panel{grid-template-columns:minmax(0,1fr) auto;
+  border-color:#d5ecdf;
 }
 #recordDialog .record-rate-panel:before{
   content:"Payment";
-  grid-column:1/-1;display:flex;align-items:center;
-  min-height:37px;margin:-13px -13px 0;padding:0 13px;
-  border-radius:17px 17px 0 0;
-  background:#e5f5ec;color:#176344;
-  font-size:15px;font-weight:850;
+  grid-column:1/-1;display:flex;align-items:center;color:#176344;font-weight:850;
 }
 #recordDialog .record-rate-panel .rate-field{
   min-width:0;gap:6px;font-size:12px;
@@ -1840,21 +1548,13 @@ dialog:not([open]){display:none!important}
 }
 #recordDialog .donebox{
   display:grid;gap:0;
-  padding:0 13px 12px;
-  border:1px solid #e1dcff;border-radius:18px;
-  background:#fbfaff;box-shadow:none;
 }
 #recordDialog .donebox:before{
   content:"Lesson completion";
-  display:flex;align-items:center;min-height:39px;
-  margin:0 -13px 9px;padding:0 13px;
-  border-radius:17px 17px 0 0;
-  background:#f0edff;color:#4d3eaa;
-  font-size:15px;font-weight:850;
+  display:flex;align-items:center;color:#4d3eaa;font-weight:850;
 }
 #recordDialog .donebox .checklabel{
-  display:flex;align-items:flex-start;gap:11px;
-  min-height:44px;padding:2px 1px;
+  display:flex;align-items:flex-start;gap:11px;padding:2px 1px;
 }
 #recordDialog .donebox .checklabel input{
   width:21px;height:21px;min-width:21px;min-height:21px;margin-top:2px;
@@ -1865,26 +1565,13 @@ dialog:not([open]){display:none!important}
   font-size:11px;line-height:1.4;font-weight:500;
 }
 #recordDialog .donebox .donemin{display:none!important}
-#recordDialog #fPackageRow{
-  display:flex!important;align-items:center;gap:10px;
-  min-height:48px;margin:0;padding:0 12px;
-  border:1px solid #dce5f6;border-radius:15px;
-  background:#f7f9ff;color:#34435f;
-  font-size:13px;font-weight:850;
-}
-#recordDialog #fPackageRow.hidden{display:none!important}
-#recordDialog #fPackageRow input{
-  width:21px;height:21px;min-width:21px;min-height:21px;
-}
+
 #recordDialog #fRepeatRow,
 #recordDialog .record-comment-field,
 #recordDialog .donemin{display:none!important}
-#recordDialog #recordError{flex:none;margin:0}
-#recordDialog .dialogactions{
-  flex:none;display:flex;align-items:center;gap:9px;
+#recordDialog #recordError{margin:0}
+#recordDialog .dialogactions{display:flex;align-items:center;gap:9px;
   margin:0;padding:11px 0 0;
-  border-top:1px solid #e7edf6;
-  background:#fff;
 }
 #recordDialog .dialogactions span{display:none}
 #recordDialog .dialogactions .btn{
@@ -1899,33 +1586,21 @@ dialog:not([open]){display:none!important}
   #recordDialog{width:calc(100% - 14px);max-height:94dvh;border-radius:21px}
   #recordDialog form{max-height:94dvh;padding:12px 12px 10px}
   #recordDialog .dialoghead{padding-bottom:10px}
-  #recordDialog .dialoghead h2{font-size:21px}
-  #recordDialog .formgrid{gap:8px;padding-bottom:9px}
-  #recordDialog .record-panel{padding:11px}
-  #recordDialog .record-panel-title{margin:-11px -11px 10px;padding:9px 11px}
-  #recordDialog .record-rate-panel{padding:11px;gap:8px}
-  #recordDialog .record-rate-panel:before{margin:-11px -11px 0;padding:0 11px}
-  #recordDialog .donebox{padding:0 11px 10px}
-  #recordDialog .donebox:before{margin:0 -11px 7px;padding:0 11px}
-  #recordDialog .durchips{gap:5px}
-  #recordDialog .durchips button{min-height:40px;font-size:11px}
+  
+  #recordDialog .formgrid{padding-bottom:9px}
+
   #recordDialog .dialogactions .btn{min-height:48px;font-size:13px}
 }
 @media(max-width:340px){
-  #recordDialog .record-time-grid{gap:6px}
+  
   #recordDialog .record-time-grid input{font-size:15px;padding:9px 6px}
-  #recordDialog .record-rate-panel{grid-template-columns:minmax(0,1fr) auto;gap:6px}
+  #recordDialog .record-rate-panel{grid-template-columns:minmax(0,1fr) auto}
   #recordDialog .record-rate-panel #fPaidRow{padding-left:7px;font-size:11px!important}
   #recordDialog .record-rate-panel #fPaidRow input{width:19px;height:19px;min-width:19px;min-height:19px}
 }
-@media(prefers-reduced-motion:reduce){
-  #recordDialog *{scroll-behavior:auto!important;transition:none!important}
-}
-
 
 /* Keep Use course hours as its own option, separate from the Payment card. */
-#recordDialog #fPackageRow{
-  display:flex;align-items:center;gap:11px;
+#recordDialog #fPackageRow{align-items:center;gap:11px;
   min-height:49px;margin:0;padding:0 13px;
   border:1px solid #dce5f6;border-radius:15px;
   background:#f7f9ff;color:#34435f;
@@ -1938,7 +1613,6 @@ dialog:not([open]){display:none!important}
 }
 #recordDialog #paymentMethodRow{display:none!important}
 
-
 /* Restore PR #68 course-hours presentation: payment method tiles inside Payment card;
    standalone legacy checkbox remains hidden. */
 #recordDialog #fPackageRow{display:none!important}
@@ -1947,7 +1621,7 @@ dialog:not([open]){display:none!important}
 
 /* Live student autocomplete for Calendar lesson entry (native datalist is inconsistent on iOS). */
 #recordDialog .record-student-panel{position:relative}
-#recordDialog .student-suggestions{grid-column:1/-1;display:grid;gap:4px;max-height:220px;overflow:auto;padding:5px;background:#fff;border:1px solid #dce3ef;border-radius:12px;box-shadow:0 12px 28px #14213b1c;z-index:8}
+#recordDialog .student-suggestions{grid-column:1/-1;display:grid;max-height:220px;overflow:auto;background:#fff;border:1px solid #dce3ef;border-radius:12px;box-shadow:0 12px 28px #14213b1c;z-index:8}
 #recordDialog .student-suggestions.hidden{display:none!important}
 #recordDialog .student-suggestion{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;border:0;border-radius:8px;background:#fff;color:var(--ink);text-align:left;cursor:pointer;font:inherit}
 #recordDialog .student-suggestion:hover,#recordDialog .student-suggestion.active{background:#edf1ff}
@@ -1956,7 +1630,6 @@ dialog:not([open]){display:none!important}
 #recordDialog .student-suggestion small,#recordDialog .student-suggest-arrow,#recordDialog .student-suggest-empty{font-size:11px;color:var(--muted)}
 #recordDialog .student-suggestion small{margin-top:3px}
 #recordDialog .student-suggest-empty{padding:10px 12px}
-
 
 /* WhatsApp message editor at the bottom of the Driving Log page. */
 .wa-template-settings{margin-top:22px;border:1px solid var(--line,#e3e9f2);border-radius:18px;background:var(--card,#fff);overflow:hidden}
@@ -1980,13 +1653,13 @@ dialog:not([open]){display:none!important}
 .log-settings{display:grid;gap:16px}.log-settings-head h2{margin:0 0 5px}.log-settings-head p,.settings-card-head p{margin:0;color:var(--muted);font-size:.9rem}.settings-card{padding:18px;border:1px solid var(--line,#e4e9f0);border-radius:16px;background:var(--card,#fff)}.settings-card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.settings-card-head h3{margin:0 0 4px}.settings-icon{font-size:1.35rem}.settings-toggle{display:flex;align-items:center;gap:10px;margin:4px 0 16px;font-weight:650}.settings-note{font-size:.82rem;color:var(--muted);margin:0}.prayer-preview{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:14px}.prayer-preview>div{display:flex;justify-content:space-between;gap:8px;padding:10px 12px;border-radius:10px;background:var(--soft,#f1f4f8);font-size:.88rem}.prayer-preview span{font-variant-numeric:tabular-nums;color:var(--muted)}@media(max-width:420px){.settings-card{padding:14px}.prayer-preview{grid-template-columns:1fr}}
 
 /* Custom Add Course sheet */
-dialog.course-dialog{width:min(460px,calc(100% - 20px));max-height:min(90dvh,760px);padding:0;border:1px solid var(--line);border-radius:22px;background:var(--card);color:var(--ink);box-shadow:0 24px 70px #101c3340}.course-dialog form{display:grid;gap:13px;padding:20px;max-height:min(90dvh,760px);overflow-y:auto}.course-dialog .dialoghead{margin:0 0 2px}.course-dialog label{display:grid;gap:6px;font-size:13px;font-weight:750;color:var(--ink)}.course-dialog input{width:100%;min-width:0;min-height:48px;padding:11px 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface,#fff);color:var(--ink);font:inherit;font-size:16px}.course-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.course-rate-preview{margin:0;padding:12px;border:1px solid #d7e5ff;border-radius:12px;background:#f4f7ff;color:#53627b;font-size:13px}.course-rate-preview b{color:#2449b5}.course-dialog .dialogactions{margin-top:2px}@media(max-width:390px){.course-dialog form{padding:16px;gap:11px}.course-form-grid{gap:8px}}
+dialog.course-dialog{width:min(460px,calc(100% - 20px));max-height:min(90dvh,760px);padding:0;border:1px solid var(--line);border-radius:22px;color:var(--ink);box-shadow:0 24px 70px #101c3340}.course-dialog label{display:grid;gap:6px}.course-dialog input{width:100%;min-width:0;min-height:48px;padding:11px 12px;border:1px solid var(--line);color:var(--ink);font:inherit;font-size:16px}.course-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.course-rate-preview{margin:0;padding:12px;border:1px solid #d7e5ff;border-radius:12px;background:#f4f7ff;color:#53627b;font-size:13px}.course-rate-preview b{color:#2449b5}@media(max-width:390px){.course-form-grid{gap:8px}}
 
 /* Add course sheet polish: solid card, iOS date field fit, sticky actions */
 dialog.course-dialog{background:#fff;overflow:hidden}
 dialog.course-dialog[open]{display:flex;flex-direction:column}
 .course-dialog form{display:flex;flex-direction:column;gap:14px;padding:0;overflow:hidden;max-height:inherit;min-height:0}
-.course-dialog .dialoghead{margin:0;padding:18px 20px 12px;background:transparent;border-bottom:1px solid var(--line);align-items:center}
+.course-dialog .dialoghead{margin:0;padding:18px 20px 12px;border-bottom:1px solid var(--line);align-items:center}
 .course-dialog .dialoghead h2{font-size:22px;letter-spacing:-.4px}
 .course-dialog .dialoghead .muted{margin:2px 0 0;font-size:14px}
 .course-dialog form>label,.course-dialog form>.course-form-grid,.course-dialog form>.course-rate-preview,.course-dialog form>.formerror{margin-left:20px;margin-right:20px}
@@ -2017,33 +1690,30 @@ dialog.course-dialog{height:fit-content;max-height:min(90dvh,760px)}
 .coursesum-row .unpaid,.coursesum-row .paid{font-weight:800;font-variant-numeric:tabular-nums}
 @media(max-width:360px){.pay-grid{grid-template-columns:1fr}}
 
-
 /* Direct Log Settings access from the heading overflow control */
 #log .log-heading{position:relative}
 #log .log-menu-wrap{position:relative;flex:none;align-self:flex-start}
 #log .log-menu-toggle{display:grid;place-items:center;width:42px;height:42px;border:1px solid var(--line,#e4e9f0);border-radius:12px;background:var(--card,#fff);color:var(--ink,#182338);font-family:inherit;font-size:25px;line-height:1;font-weight:700;cursor:pointer;box-shadow:0 2px 8px #14233a0a}
 #log .log-menu-toggle:hover,#log .log-menu-toggle:focus-visible{border-color:#b9c9f5;background:#f7f9ff;outline:none}
 #log .log-menu-toggle:focus-visible{box-shadow:0 0 0 3px #315ee82a}
-#log .log-settings-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:2px}
-#log .log-settings-back{flex:none;min-height:42px}
+#log .log-settings-head{justify-content:space-between;gap:14px}
+#log .log-settings-back{flex:none}
 @media(max-width:420px){
  #log .log-heading{gap:10px}
  #log .log-menu-toggle{width:40px;height:40px}
- #log .log-settings-head{align-items:flex-start;flex-wrap:wrap}
- #log .log-settings-back{min-height:42px}
+ #log .log-settings-head{flex-wrap:wrap}
+ 
 }
 
-
 /* v1.31 — Overview dashboard refresh (presentation only) */
-.topbar{background:linear-gradient(115deg,#123b91 0%,#1556c8 58%,#2478e8 100%);box-shadow:0 5px 22px #123b9126}
-.brandmark{background:#ffffff1c;border:1px solid #ffffff30;color:#fff}
-#overview.overview-panel{padding:clamp(14px,2.6vw,24px);border:1px solid #e3eaf7;border-radius:24px;background:linear-gradient(180deg,#f7faff 0%,#fff 34%);box-shadow:0 8px 28px #1c438510}
+
+#overview.overview-panel{padding:clamp(14px,2.6vw,24px);border:1px solid #e3eaf7;background:linear-gradient(180deg,#f7faff 0%,#fff 34%);box-shadow:0 8px 28px #1c438510}
 .overview-intro{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 18px}
 .overview-kicker{margin:0 0 4px;color:#3267cf;font-size:10px;font-weight:850;letter-spacing:1.25px}
 .overview-intro h1{margin:0;color:#14233e;font-size:clamp(25px,4vw,32px);line-height:1.08;letter-spacing:-1px}
 .overview-subtitle{margin:5px 0 0;color:#718096;font-size:13px}
 .overview-add{min-height:46px;padding:0 17px;border-radius:14px;box-shadow:0 7px 16px #315ee82b;white-space:nowrap}
-#overview .nextcard{margin:0 0 18px;padding:clamp(18px,3vw,25px);border:1px solid #234b91;border-radius:21px;background:radial-gradient(circle at 100% 0%,#3f78d0 0,transparent 43%),linear-gradient(125deg,#102d68,#174b9f 72%,#2367c7);box-shadow:0 12px 26px #174b9f26}
+#overview .nextcard{margin:0 0 18px;padding:clamp(18px,3vw,25px);border:1px solid #234b91;background:radial-gradient(circle at 100% 0%,#3f78d0 0,transparent 43%),linear-gradient(125deg,#102d68,#174b9f 72%,#2367c7);box-shadow:0 12px 26px #174b9f26}
 #overview .nextlabel{font-size:10px;letter-spacing:1px;color:#d8e7ff}
 #overview .nexttime{font-size:clamp(29px,5vw,40px);font-weight:850;letter-spacing:-1.1px}
 #overview .nextname{font-size:clamp(17px,2.5vw,21px)}
@@ -2052,44 +1722,38 @@ dialog.course-dialog{height:fit-content;max-height:min(90dvh,760px)}
 #overview .nextempty b{font-size:17px}
 #overview .todayhead,#overview>.sectionhead h2{font-size:19px;letter-spacing:-.45px;color:#172742}
 #overview .todayhead{display:flex;align-items:center;gap:8px;margin:0 0 11px}
-#overview .recordlist{gap:8px}
-#overview .todayrow{min-height:66px;padding:9px 10px;border:1px solid #e5ebf5;border-radius:15px;background:#fff;box-shadow:0 3px 12px #17243b08;gap:9px}
+
+#overview .todayrow{border:1px solid #e5ebf5;background:#fff;box-shadow:0 3px 12px #17243b08;gap:9px}
 #overview .tnum{width:29px;height:29px;background:#eaf1ff;color:#2459bd;font-size:11px}
 #overview .tmain{gap:3px}
 #overview .tmain b{color:#42618d;font-size:12px}
 #overview .tmain span{font-size:14px;color:#182943}
 #overview .tstat{font-size:10px}
 #overview .tdone{min-height:38px;border-radius:11px}
-#overview .todaygap{height:20px}
-#overview>.sectionhead{margin:22px 0 11px}
+
 #overview>.sectionhead .muted{font-size:12px}
 #overview .prayerline{margin-top:12px;border:1px solid #e4def7;background:#f6f3ff;color:#55418f;border-radius:14px}
-#overview .ovbox{margin-top:17px;padding:18px;border:1px solid #e3eaf7;border-radius:19px;background:linear-gradient(145deg,#fff,#f5f8ff);box-shadow:0 5px 16px #17243b0b}
+#overview .ovbox{border:1px solid #e3eaf7;background:linear-gradient(145deg,#fff,#f5f8ff);box-shadow:0 5px 16px #17243b0b}
 #overview .duaplayer{border-color:#eadfc6;background:linear-gradient(145deg,#fffdf7,#fff8e8)}
 #overview .duaplayer h2{color:#243550}
 #overview .dua-arabic{border-radius:15px}
-#overview .dpbtn{min-width:42px;min-height:42px;border-radius:13px}
-.tabbar{background:rgba(255,255,255,.96);border:1px solid #dce6f6;box-shadow:0 10px 28px #183d7624}
-.tabbar .tab{color:#64748b}
-.tabbar .tab.active{color:#245bd0}
+
 .tabbar .tab svg{stroke-width:2}
-.navpill{background:#eaf1ff;border:1px solid #d9e5ff}
+.navpill{border:1px solid #d9e5ff}
 @media(max-width:720px){
- #overview.overview-panel{padding:13px;border-radius:20px}
+ 
  .overview-intro{align-items:flex-start;margin-bottom:14px}
  .overview-add{min-height:43px;padding:0 12px;font-size:12px}
- #overview .nextcard{padding:18px;border-radius:19px}
- #overview .todayrow{min-height:62px;padding:8px}
+
  #overview .tmain span{font-size:13px}
- #overview .ovbox{padding:15px}
- .tabbar{background:rgba(255,255,255,.97)}
+
 }
 @media(max-width:380px){
  .overview-intro{gap:8px}
  .overview-intro h1{font-size:25px}
  .overview-subtitle{max-width:185px;font-size:12px}
  .overview-add{padding:0 10px;font-size:11px}
- #overview .todayrow{gap:6px}
+ 
  #overview .tnum{width:25px;height:25px}
 }
 /* Prayer-time conflict warning in the record form */
@@ -2104,15 +1768,13 @@ dialog.course-dialog{height:fit-content;max-height:min(90dvh,760px)}
 /* Overview: comfortable tap area for the Travel Dua "Open in Islamic tab" link */
 #overview #duaOpen{display:inline-flex;align-items:center;min-height:44px}
 
-
 /* New Record: quick date actions and a clear recent-completions cue. */
-#recordDialog .record-date-shortcuts{display:flex;gap:8px;margin-top:8px}
-#recordDialog .record-date-shortcuts button{min-height:38px;padding:7px 13px;border:1px solid #dce5f6;border-radius:999px;background:#f7f9ff;color:#3156b5;font:inherit;font-size:12px;font-weight:800}
+#recordDialog .record-date-shortcuts{display:flex}
+#recordDialog .record-date-shortcuts button{border:1px solid #dce5f6;border-radius:999px;background:#f7f9ff;color:#3156b5;font:inherit;font-weight:800}
 #recordDialog .record-date-shortcuts button:active{background:#eaf1ff;border-color:#a9bdf2}
-#recordDialog .recent-students-label{margin:0 0 -3px;color:#718096;font-size:11px;font-weight:800;letter-spacing:.02em}
+#recordDialog .recent-students-label{color:#718096;font-size:11px;font-weight:800;letter-spacing:.02em}
 #recordDialog .recent-students-label.hidden{display:none!important}
 @media(max-width:390px){#recordDialog .formgrid input:not([type=checkbox]),#recordDialog .formgrid select,#recordDialog .formgrid textarea{font-size:16px}}
-
 
 /* New Record modal stability: lock the dialog shell; scroll fields only. */
 #recordDialog{
@@ -2136,8 +1798,6 @@ dialog.course-dialog{height:fit-content;max-height:min(90dvh,760px)}
   box-sizing:border-box;
 }
 #recordDialog .dialoghead{
-  position:relative;
-  top:auto;
   flex:0 0 auto;
 }
 #recordDialog .formgrid{
@@ -2158,11 +1818,8 @@ dialog.course-dialog{height:fit-content;max-height:min(90dvh,760px)}
   overscroll-behavior:contain;
 }
 #recordDialog .dialogactions{
-  position:relative;
-  bottom:auto;
   flex:0 0 auto;
   margin-top:12px;
-  padding-top:12px;
   border-top:1px solid #e8edf5;
   background:#fff;
 }
@@ -2185,7 +1842,7 @@ body:has(#recordDialog[open]){
 .multi-booking-head b{display:block;color:var(--navy);font-size:14px}.multi-booking-head small{display:block;margin-top:3px;color:var(--muted);font-size:11.5px;line-height:1.4}.multi-booking-head>span{flex:none;padding:5px 9px;border-radius:20px;background:#e9efff;color:#3153b7;font-size:11px;font-weight:800}
 .multi-sessions-list{display:grid;gap:10px}.multi-session-card{min-width:0;padding:12px;border:1px solid var(--line);border-radius:13px;background:#fff}
 .multi-session-card-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}.multi-session-card-head b{font-size:13px;color:var(--navy)}
-.multi-remove{min-height:32px;padding:0 9px;border:1px solid #f0dede;border-radius:9px;background:#fff8f8;color:#a43a3a;font:inherit;font-size:11px;font-weight:700;cursor:pointer}.multi-remove:disabled{opacity:.35;cursor:not-allowed}
+.multi-remove{border:1px solid #f0dede;border-radius:9px;background:#fff8f8;color:#a43a3a;font:inherit;font-size:11px;font-weight:700;cursor:pointer}.multi-remove:disabled{opacity:.35;cursor:not-allowed}
 .multi-session-fields{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:8px}.multi-session-fields label{display:flex;min-width:0;flex-direction:column;gap:5px;color:#59677d;font-size:11px;font-weight:700}
 .multi-session-fields input{min-width:0;min-height:43px;padding:8px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);font:inherit;font-size:16px}
 .multi-payment-options{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}.multi-payment-option{min-width:0;min-height:42px;padding:7px 8px;border:1px solid var(--line);border-radius:10px;background:#fff;color:#59677d;font:inherit;font-size:11.5px;font-weight:800;cursor:pointer}
@@ -2209,7 +1866,6 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 #recordDialog .formgrid>label,#recordDialog .record-time-grid>label,#recordDialog .multi-session-fields>label,#quickDialog label,.settings-card label{min-width:0}
 @media(max-width:360px){dialog input[type=time]{padding-left:8px;padding-right:4px;letter-spacing:-.3px}dialog input[type=time]::-webkit-calendar-picker-indicator{display:none}}
 
-
 /* Payment method — compact choice chips (approved Design C). UI-only; existing selection logic and IDs stay intact. */
 #recordDialog #paymentMethodRow{
   display:grid;
@@ -2221,7 +1877,6 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 }
 #recordDialog .payment-method-label{
   color:var(--ink);
-  font-size:13px;
   line-height:1.3;
   font-weight:750;
 }
@@ -2236,8 +1891,6 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
   justify-content:center;
   gap:7px;
   min-width:0;
-  min-height:46px;
-  padding:8px 10px;
   border:1px solid var(--line);
   border-radius:999px;
   background:#fff;
@@ -2322,7 +1975,7 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 }
 @media(max-width:360px){
   #recordDialog .payment-method-options{gap:6px}
-  #recordDialog .payment-option{gap:5px;padding:8px 6px}
+  #recordDialog .payment-option{gap:5px}
   #recordDialog .payment-option-copy b{font-size:11px}
   #recordDialog .payment-icon{font-size:14px}
 }
@@ -2413,7 +2066,6 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
   #overview .todayrow{gap:6px}
 }
 
-
 /* v1.41 — Premium compact student profile (presentation only).
    Four tabs: Lessons, Course, Payments, Attendance. Legacy history stays under Course. */
 #profileDialog .dialogbody{padding:12px 14px}
@@ -2424,20 +2076,16 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 #profileDialog .profilestats .report{min-height:72px;padding:10px 11px;border-radius:13px}
 #profileDialog .profilestats .report span{font-size:11px;line-height:1.3}
 #profileDialog .profilestats .report strong{margin-top:4px;font-size:19px;line-height:1.15}
-#profileDialog .profileactions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:10px 0 12px}
-#profileDialog .profileactions .btn{display:flex;min-width:0;min-height:44px;padding:8px 7px;font-size:12px;line-height:1.2;text-align:center}
+#profileDialog .profileactions{grid-template-columns:repeat(2,minmax(0,1fr));margin:10px 0 12px}
+#profileDialog .profileactions .btn{font-size:12px;line-height:1.2}
 #profileDialog #profileAdd{grid-column:1/-1;min-height:48px;font-size:14px}
 #profileDialog #profileEdit{grid-column:1/-1}
-#profileDialog .ptabs{
-  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;
-  margin:10px 0 12px;padding:5px;overflow:visible;
-  border:1px solid #e7ecf4;border-radius:14px;background:#f5f7fb;
+#profileDialog .ptabs{grid-template-columns:repeat(4,minmax(0,1fr));
 }
 #profileDialog .ptabs button{
-  display:flex;align-items:center;justify-content:center;min-width:0;min-height:44px;
-  padding:5px 3px;border:0;border-radius:10px;background:transparent;
-  color:#64728a;font-size:clamp(10px,2.7vw,12px);font-weight:750;
-  line-height:1.1;text-align:center;white-space:normal;overflow-wrap:anywhere;
+  display:flex;align-items:center;justify-content:center;min-width:0;border:0;border-radius:10px;background:transparent;
+  color:#64728a;font-weight:750;
+  line-height:1.1;text-align:center;
 }
 #profileDialog .ptabs button.active{background:#1b315a;color:#fff;box-shadow:0 2px 7px #172d5725}
 #profileDialog .ptab{padding-top:0}
@@ -2456,20 +2104,18 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
   #profileDialog .profilestats{gap:7px;margin:9px 0}
   #profileDialog .profilestats .report{min-height:68px;padding:9px 10px}
   #profileDialog .profilestats .report strong{font-size:18px}
-  #profileDialog .profileactions{gap:7px;margin:9px 0 10px}
+  #profileDialog .profileactions{margin:9px 0 10px}
   #profileDialog .profileactions .btn{font-size:11.5px}
-  #profileDialog .ptabs{gap:4px;margin:9px 0 10px;padding:4px}
-  #profileDialog .ptabs button{min-height:44px;padding:4px 2px;font-size:11px}
+
 }
 @media(max-width:360px){
-  #profileDialog .dialogbody{padding:10px}
+  
   #profileDialog .profilestats .report{padding:8px}
   #profileDialog .profilestats .report span{font-size:10.5px}
   #profileDialog .profilestats .report strong{font-size:17px}
-  #profileDialog .profileactions .btn{padding-inline:5px;font-size:11px}
-  #profileDialog .ptabs button{font-size:10.5px}
+  #profileDialog .profileactions .btn{padding-inline:5px}
+  
 }
-
 
 #profileDialog .profile-notes{margin:0 0 10px;padding:9px 11px;border:1px solid var(--line);border-radius:12px;background:#f8faff}
 #profileDialog .profile-notes>summary{display:flex;align-items:center;min-height:40px;cursor:pointer;color:var(--navy);font-size:12.5px;font-weight:800;list-style:none}
@@ -2477,7 +2123,6 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 #profileDialog .profile-notes>summary:after{content:"＋";margin-left:auto;color:var(--muted);font-size:15px}
 #profileDialog .profile-notes[open]>summary:after{content:"−"}
 #profileDialog .profile-notes p{margin:7px 0 2px;color:#59677d;font-size:12.5px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
-
 
 /* v1.42 — Boxed section visual standard, phase 1: New Record form.
    Keep each task group visually distinct; presentation only. */
@@ -2493,17 +2138,11 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
   background:#fff;
   box-shadow:0 3px 12px #172b4d08;
 }
-#recordDialog .record-date-panel{display:grid;gap:9px}
-#recordDialog .record-student-panel{gap:10px}
-#recordDialog .record-time-panel{background:#fff}
-#recordDialog .record-rate-panel{align-items:center}
-#recordDialog .donebox{background:#f8faff}
-#recordDialog .record-panel-title{
-  display:flex;align-items:center;gap:8px;
-  margin:0 0 11px;font-size:14px;letter-spacing:-.1px;
+
+#recordDialog .record-panel-title{align-items:center;gap:8px;letter-spacing:-.1px;
 }
 #recordDialog .record-panel-title:before{
-  content:"";display:block;width:4px;height:17px;flex:0 0 4px;
+  content:"";width:4px;height:17px;flex:0 0 4px;
   border-radius:99px;background:var(--blue);
 }
 #recordDialog .record-subtitle{margin-top:11px}
@@ -2532,7 +2171,6 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
   #recordDialog .record-rate-panel,
   #recordDialog .donebox{padding:10px}
 }
-
 
 /* v1.43 — Boxed section visual standard, phase 2: primary workspace cards.
    Presentation only; keep each section independent and preserve all existing IDs/handlers. */
@@ -2563,7 +2201,6 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 #calendar .weekview,
 #calendar .timeline{padding:12px}
 #students .student{
-  padding:15px;
   text-align:left;
   transition:border-color .15s ease,box-shadow .15s ease,transform .15s ease;
 }
@@ -2578,15 +2215,14 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
   #overview #todayList,#overview #nextDayList,
   #calendar #calDayList,#calendar #upcomingList{padding:8px}
   #calendar .weekview,#calendar .timeline{padding:9px}
-  #students .student{padding:13px;border-radius:14px}
+  
   #reports .reportgrid{gap:8px}
   #reports .reportgrid .report{padding:11px}
 }
 @media(max-width:360px){
-  #students .student{padding:11px}
+  
   #reports .reportgrid .report{padding:10px}
 }
-
 
 /* v1.44 — Restore the original premium navy/blue hero colours.
    Keep the new independent cards, but do not recolour the existing highlighted cards. */
@@ -2606,14 +2242,10 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 }
 
 /* v1.48 — premium navy car brand header */
-.topbar{background:linear-gradient(115deg,#080c91 0%,#1018a8 58%,#1b35bd 100%);color:#fff;box-shadow:0 5px 22px #080c9126}
-.brand{gap:14px}
-.brandmark{width:52px;height:44px;min-width:52px;border:0;background:transparent;color:#fff;border-radius:0;display:grid;place-items:center}
-.brandmark svg{display:block;width:52px;height:42px}
-.brand b{font-size:clamp(16px,2vw,20px);letter-spacing:-.025em;color:#fff}
-.brand small{font-size:12px;color:#fff;opacity:.88}
-@media(max-width:720px){.topbar{min-height:76px;height:calc(76px + env(safe-area-inset-top));padding-left:15px;padding-right:15px}.brand{gap:10px}.brandmark{width:46px;min-width:46px;height:42px}.brandmark svg{width:46px;height:38px}.brand b{font-size:17px}.brand small{display:block;font-size:10px}}
 
+.brand b{font-size:clamp(16px,2vw,20px);letter-spacing:-.025em}
+.brand small{font-size:12px}
+@media(max-width:720px){.topbar{height:calc(76px + env(safe-area-inset-top));padding-left:15px;padding-right:15px}.brand small{display:block}}
 
 /* v1.49 — Settings mobile hierarchy and fixed-navigation clearance */
 #log .log-settings{gap:18px}
@@ -2648,7 +2280,6 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
   body.timing main{padding-bottom:calc(245px + env(safe-area-inset-bottom))}
 }
 
-
 /* v1.50 — unified New Record sheet: one continuous form, clear section dividers */
 #recordDialog .record-panel,
 #recordDialog .donebox{
@@ -2661,84 +2292,66 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
   background:transparent;
   box-shadow:none;
 }
-#recordDialog .record-date-panel{padding:0 0 16px}
+
 #recordDialog .record-time-panel{grid-column:1/-1;background:transparent}
-#recordDialog .record-rate-panel{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px 14px}
-#recordDialog .record-panel-title{margin:0 0 12px;padding:0;color:#244bd0}
-#recordDialog .record-student-panel{display:grid;gap:9px}
-#recordDialog .formgrid{gap:16px 13px}
-#recordDialog .dialoghead{position:sticky;top:-22px;z-index:6;padding:4px 0 14px;margin:0 0 14px;background:#fff}
+#recordDialog .record-rate-panel{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center}
+#recordDialog .record-panel-title{padding:0;color:#244bd0}
+#recordDialog .record-student-panel{display:grid}
+
+#recordDialog .dialoghead{position:sticky;z-index:6;background:#fff}
 #recordDialog .dialogactions{position:sticky;bottom:-1px;z-index:7}
 #recordDialog .record-comment-field{padding-top:2px}
 @media(max-width:720px){
-  #recordDialog[open]{width:100%;max-width:none;max-height:calc(100dvh - env(safe-area-inset-top));height:min(100dvh,900px);margin:auto 0 0;border-radius:24px 24px 0 0}
+  #recordDialog[open]{max-height:calc(100dvh - env(safe-area-inset-top));height:min(100dvh,900px);margin:auto 0 0;border-radius:24px 24px 0 0}
   #recordDialog form{padding:18px 18px calc(12px + env(safe-area-inset-bottom))}
-  #recordDialog .dialoghead{top:-18px}
+  
   #recordDialog .record-student-grid,#recordDialog .record-time-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-  #recordDialog .record-panel-title{font-size:15px}
+  
 }
 @media(max-width:360px){
-  #recordDialog form{padding-left:14px;padding-right:14px}
+  
   #recordDialog .record-student-grid,#recordDialog .record-time-grid{grid-template-columns:minmax(0,1fr)}
 }
 
 /* v1.51 — iPhone navigation dock clearance and compact touch-safe layout */
 @media(max-width:720px){
-  .tabbar{
-    bottom:max(8px,env(safe-area-inset-bottom));
-    padding:5px;
-    border-radius:21px;
-  }
-  .tabbar .tab{
-    min-height:52px;
-    gap:2px;
-    padding:5px 0;
-    font-size:10px;
-  }
-  .tabbar .tab svg{width:21px;height:21px}
-  .navpill{top:5px;bottom:5px}
+
   main{padding-bottom:calc(230px + env(safe-area-inset-bottom))}
   body.timing main{padding-bottom:calc(280px + env(safe-area-inset-bottom))}
 }
-@media(max-width:360px){
-  .tabbar{width:calc(100% - 12px);left:50%;bottom:max(6px,env(safe-area-inset-bottom));}
-  .tabbar .tab{min-height:50px;font-size:9.5px}
-  .tabbar .tab svg{width:20px;height:20px}
-}
 
 /* v1.52 — premium day summary, compact availability and clearer lesson timeline */
-#calendar .cal-day-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:0 0 12px}
-#calendar .cal-stat{min-width:0;padding:10px 8px;border:1px solid #e4eaf4;border-radius:13px;background:linear-gradient(180deg,#fff,#f8faff)}
-#calendar .cal-stat small{display:block;color:#7a879b;font-size:10px;font-weight:700;letter-spacing:.02em}
-#calendar .cal-stat b{display:block;margin-top:4px;color:#1b2b48;font-size:clamp(12px,3.2vw,16px);font-weight:850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
-#calendar .cal-free-slots{margin:0 0 12px;padding:13px;border:1px solid #cfe9dc;border-radius:16px;background:linear-gradient(145deg,#f5fcf8,#fff)}
-#calendar .cal-free-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px}
-#calendar .cal-free-head b{display:block;color:#176b45;font-size:14px}
-#calendar .cal-free-head small{display:block;margin-top:2px;color:#648575;font-size:11px}
-#calendar .cal-free-head>span{flex:none;padding:5px 9px;border-radius:20px;background:#e2f5e9;color:#176b45;font-size:10px;font-weight:800}
-#calendar .cal-slot-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
-#calendar .cal-slot{display:flex;align-items:center;justify-content:space-between;gap:7px;min-width:0;padding:9px 10px;border:1px solid #d7ecdf;border-radius:12px;background:#fff;color:#176b45;text-align:left;font:inherit;cursor:pointer;transition:border-color .15s,background .15s}
+#calendar .cal-day-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+#calendar .cal-stat{min-width:0;border:1px solid #e4eaf4;background:linear-gradient(180deg,#fff,#f8faff)}
+#calendar .cal-stat small{color:#7a879b}
+#calendar .cal-stat b{margin-top:4px;color:#1b2b48;overflow:hidden;text-overflow:ellipsis}
+#calendar .cal-free-slots{border:1px solid #cfe9dc;background:linear-gradient(145deg,#f5fcf8,#fff)}
+#calendar .cal-free-head{display:flex;justify-content:space-between;gap:10px}
+#calendar .cal-free-head b{display:block;color:#176b45}
+#calendar .cal-free-head small{margin-top:2px;color:#648575;font-size:11px}
+#calendar .cal-free-head>span{flex:none;border-radius:20px;background:#e2f5e9;font-weight:800}
+#calendar .cal-slot-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+#calendar .cal-slot{display:flex;align-items:center;justify-content:space-between;gap:7px;min-width:0;color:#176b45;text-align:left;font:inherit;cursor:pointer;transition:border-color .15s,background .15s}
 #calendar .cal-slot:active{background:#edf9f1;border-color:#8bcba5}
 #calendar .cal-slot>span{display:block;min-width:0}
-#calendar .cal-slot b{display:block;font-size:12px;font-variant-numeric:tabular-nums;white-space:nowrap}
-#calendar .cal-slot small{display:block;margin-top:2px;color:#6c8d7b;font-size:10px}
-#calendar .cal-slot strong{flex:none;font-size:10.5px;white-space:nowrap}
-#calendar .timeline{padding:12px 10px 12px 0;overflow:hidden}
-#calendar .tlhour{border-color:#e9eef5;color:#8491a5;font-size:10px;font-weight:650}
+#calendar .cal-slot b{display:block;font-variant-numeric:tabular-nums}
+#calendar .cal-slot small{display:block;margin-top:2px;color:#6c8d7b}
+#calendar .cal-slot strong{white-space:nowrap}
+#calendar .timeline{overflow:hidden}
+
 #calendar .tlpray{background:repeating-linear-gradient(135deg,#f3f0fb 0 7px,#ebe6f8 7px 14px);border:1px solid #e2daf5}
-#calendar .tlles{border-radius:11px;padding:6px 9px;box-shadow:0 3px 10px #17243b12}
+
 #calendar .tlles .tlrow{gap:7px}
 #calendar .tlles .tlrow b{font-size:11px;color:inherit;opacity:.8}
 #calendar .tlles .tlrow span{font-size:13px;font-weight:800}
-#calendar .tlles small{font-size:10px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+#calendar .tlles small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 #calendar .tlnow{border-color:#e24d58}
 #calendar .tlnow i{box-shadow:0 0 0 3px #e24d5822}
 #calendar .cal-slot:focus-visible,#calendar .tlles:focus-visible{outline:3px solid #315ee84a;outline-offset:2px}
-@media(max-width:420px){#calendar .cal-day-stats{gap:5px}#calendar .cal-stat{padding:9px 6px;border-radius:11px}#calendar .cal-stat small{font-size:9px}#calendar .cal-slot-list{grid-template-columns:minmax(0,1fr)}#calendar .cal-free-slots{padding:11px}#calendar .tlles{padding:5px 7px}}
-@media(max-width:360px){#calendar .cal-day-stats{grid-template-columns:repeat(2,minmax(0,1fr))}#calendar .cal-stat b{font-size:15px}}
+@media(max-width:420px){#calendar .cal-slot-list{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:360px){#calendar .cal-day-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 /* Mobile dock clearance — keep the last calendar slot and timeline actions reachable. */
-@media(max-width:720px){.tabbar{bottom:max(8px,env(safe-area-inset-bottom));padding:5px;border-radius:21px}.tabbar .tab{min-height:52px;gap:2px;padding:5px 0;font-size:10px}.tabbar .tab svg{width:21px;height:21px}.navpill{top:5px;bottom:5px}main{padding-bottom:calc(230px + env(safe-area-inset-bottom))}body.timing main{padding-bottom:calc(280px + env(safe-area-inset-bottom))}}
-@media(max-width:360px){.tabbar{width:calc(100% - 12px);bottom:max(6px,env(safe-area-inset-bottom))}.tabbar .tab{min-height:50px;font-size:9.5px}.tabbar .tab svg{width:20px;height:20px}}
+@media(max-width:720px){.tabbar{padding:5px}.navpill{bottom:5px}main{padding-bottom:calc(230px + env(safe-area-inset-bottom))}body.timing main{padding-bottom:calc(280px + env(safe-area-inset-bottom))}}
 
 /* v1.54 — compact New Record: the top part (mode switch, date, student) is tight so the real work — time, duration, payment and Save — is visible without scrolling. CSS only; IDs, behaviour and 16px inputs unchanged. */
 #recordDialog form{padding:12px 14px calc(8px + env(safe-area-inset-bottom))}
@@ -2769,7 +2382,7 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 #recordDialog .record-subtitle{margin:6px 0 4px;font-size:11px}
 #recordDialog .durchips{gap:5px}
 #recordDialog .durchips button{min-height:36px;font-size:13px}
-#recordDialog .record-duration-summary{margin-top:6px;padding:6px 10px;font-size:12px}
+#recordDialog .record-duration-summary{font-size:12px}
 /* 5. payment + completion: plain small headings instead of tall coloured bars */
 #recordDialog .record-rate-panel{padding:0 0 8px;gap:4px 10px}
 #recordDialog .record-rate-panel:before,#recordDialog .donebox:before{min-height:0;margin:0 0 4px;padding:0;border-radius:0;background:transparent;font-size:14px}
@@ -2792,7 +2405,7 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 #recordDialog .record-date-shortcuts{grid-column:2;grid-row:1}
 @media(max-width:300px){#recordDialog .record-date-panel>label{grid-column:1}#recordDialog .record-date-shortcuts{grid-column:1;grid-row:2}}
 #recordDialog .record-panel-title{display:block;background:transparent;border-radius:0}
-#recordDialog #fRate{min-height:40px;height:40px}
+
 #recordDialog .student-suggestions{padding:4px;gap:2px}
 #recordDialog .student-suggestions button{min-height:44px;padding:6px 12px}
 #recordDialog .formgrid .record-date-panel>label.wide{grid-column:1;grid-row:1}
@@ -2827,7 +2440,7 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 #recordDialog .record-toggle-row #fPaidRow,#recordDialog .record-toggle-row .record-toggle-done{flex:1 1 0;min-width:0;margin:0}
 #recordDialog .record-toggle-row .record-toggle-done{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
 #recordDialog .record-toggle-row .record-toggle-done:before{display:none}
-#recordDialog .record-toggle-row .record-toggle{display:flex!important;align-items:center;gap:10px!important;width:100%;min-height:56px;margin:0;padding:8px 14px;border:1.5px solid #d6e0f3;border-radius:16px;background:linear-gradient(180deg,#fff,#f5f8ff);box-shadow:0 1px 3px #1f3a7a12;color:#35445f!important;font-size:14px!important;font-weight:800!important;line-height:1.2;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .15s,background .15s,box-shadow .15s,color .15s}
+#recordDialog .record-toggle-row .record-toggle{display:flex!important;gap:10px!important;width:100%;min-height:56px;margin:0;padding:8px 14px;border:1.5px solid #d6e0f3;border-radius:16px;background:linear-gradient(180deg,#fff,#f5f8ff);box-shadow:0 1px 3px #1f3a7a12;color:#35445f!important;font-size:14px!important;font-weight:800!important;line-height:1.2;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .15s,background .15s,box-shadow .15s,color .15s}
 #recordDialog .record-toggle-row .record-toggle.hidden,#recordDialog .record-toggle-row .record-toggle-done.hidden{display:none!important}
 #recordDialog .record-toggle-row .record-toggle input{-webkit-appearance:none;appearance:none;display:grid;place-content:center;flex:none;width:26px;height:26px;min-width:26px;min-height:26px;margin:0;padding:0;border:2px solid #b3c0da;border-radius:9px;background:#fff;transition:background .15s,border-color .15s}
 #recordDialog .record-toggle-row .record-toggle input::after{content:"";width:12px;height:6px;border-left:3px solid #fff;border-bottom:3px solid #fff;transform:translateY(-1px) rotate(-45deg) scale(0);transition:transform .12s}
@@ -2855,7 +2468,7 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 @media(max-width:720px){
   main{padding-bottom:calc(88px + var(--dock-safe))}
   body.timing main{padding-bottom:calc(166px + var(--dock-safe))}
-  .tabbar{bottom:calc(6px + var(--dock-safe))}
+  
   .timermini{bottom:calc(76px + var(--dock-safe))}
   body.is-mini-on .timermini{bottom:calc(150px + var(--dock-safe))}
   #toast{bottom:calc(84px + var(--dock-safe))}
@@ -2872,9 +2485,8 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
   .traveldua[open]{top:auto;bottom:0;left:0;right:0;width:100%;max-width:100%;margin:0;max-height:calc(100dvh - env(safe-area-inset-top));border-radius:24px 24px 0 0}
 }
 
-
 /* v1.60 — Calendar: make the selected day's student list the first actionable section. */
-#calendar .cal-students-panel{margin:0 0 14px;padding:14px;border:1px solid #dce6f5;border-radius:16px;background:linear-gradient(155deg,#f8faff,#fff);box-shadow:0 3px 12px #172b4d08}
+#calendar .cal-students-panel{margin:0 0 14px;padding:14px;border:1px solid #dce6f5;background:linear-gradient(155deg,#f8faff,#fff)}
 #calendar .cal-students-heading{display:flex;align-items:center;justify-content:space-between;gap:10px}
 #calendar .cal-students-heading .caltitle{margin:0;color:#1b2b48;font-size:16px;font-weight:850}
 #calendar .cal-students-count{flex:none;padding:5px 9px;border-radius:20px;background:#eaf0ff;color:#3156c8;font-size:10px;font-weight:850;font-variant-numeric:tabular-nums}
@@ -2883,8 +2495,7 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 #calendar .cal-student-list>.record{margin:0;border-color:#e5ebf5;border-radius:12px;box-shadow:0 1px 4px #172b4d08}
 #calendar .cal-student-list>.record:active{border-color:#b9c9ef;background:#f8faff}
 #calendar .cal-students-empty{margin:0;padding:13px;border:1px dashed #d9e2ef;border-radius:11px;background:#fbfcfe;color:#8290a4;text-align:center;font-size:12px}
-@media(max-width:420px){#calendar .cal-students-panel{padding:11px;border-radius:14px}#calendar .cal-students-heading .caltitle{font-size:15px}#calendar .cal-student-list{gap:6px}}
-
+@media(max-width:420px){#calendar .cal-students-panel{padding:11px}#calendar .cal-students-heading .caltitle{font-size:15px}#calendar .cal-student-list{gap:6px}}
 
 /* v1.63 — Smart lesson time with manual End-time override. */
 #recordDialog .lesson-time-help{margin:7px 0 0;color:#77859a;font-size:11px;line-height:1.4}
@@ -2892,7 +2503,6 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 #recordDialog .lesson-time-error.hidden{display:none}
 #recordDialog .durchips button.active{border-color:#315de8;background:#315de8;color:#fff;box-shadow:0 2px 8px #315de82b}
 @media(max-width:420px){#recordDialog .lesson-time-help{font-size:10px}#recordDialog .lesson-time-error{font-size:11px;padding:7px 9px}}
-
 
 /* v1.64: clearer course financial and lesson-progress grouping in the student profile. */
 #profileDialog .pkgmetric-group{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
@@ -2903,13 +2513,11 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 #profileDialog .pkgmetric-group .pkggrid b{font-size:16px;overflow-wrap:anywhere}
 #profileDialog .pkgmetric-note{margin:7px 2px 0;color:var(--muted);font-size:11px;line-height:1.4}
 
-
 /* v1.65 — Golden yellow + navy brand header. Keep the rest of the app palette unchanged. */
-.topbar{background:linear-gradient(115deg,#ffd43b 0%,#ffc21a 55%,#f5a900 100%);color:#102653;box-shadow:0 5px 22px #b879001f}
-.brandmark{background:transparent;border:0;color:#102653}
+.topbar{color:#102653}
+
 .brand b{color:#102653}
 .brand small{color:#18345f;opacity:.9}
-
 
 /* v1.66 — Log page compact controls and clearer iPhone hierarchy (no Log search field). */
 #log .log-toolbar{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:10px;margin-bottom:18px}
@@ -2953,11 +2561,7 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
  #log .markpaid{min-width:62px;max-width:66px;padding:6px 4px;font-size:9px}
 }
 
-
 /* v1.67 — Professional DL monogram replaces the cartoon car header logo. */
-.brandmark{width:46px;min-width:46px;height:46px;border-radius:13px;background:transparent;border:0;color:#102653;display:grid;place-items:center}
-.brandmark svg{display:block;width:46px;height:46px}
-@media(max-width:720px){.brandmark{width:42px;min-width:42px;height:42px}.brandmark svg{width:42px;height:42px}}
 
 /* v1.69 — white sedan illustration + divider replace the DL monogram in the header. */
 .brand .brandcar{display:block;width:96px;height:auto;flex:none}
@@ -2965,7 +2569,6 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 .brand{gap:12px}
 @media(max-width:720px){.brand .brandcar{width:80px}.brand .branddiv{height:32px}.brand{gap:10px}}
 @media(max-width:360px){.brand .brandcar{width:66px}.brand .branddiv{height:28px}.brand{gap:8px}}
-
 
 /* v1.71 — Students directory: compact overview, readable student cards and practical filters. */
 #students .student-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:2px 0 14px}
@@ -3006,7 +2609,6 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
  #students .studenttext b{font-size:13px}
 }
 
-
 /* v1.72 — Minimal White bottom navigation: full-width white iOS-style bar with a slim blue active indicator. Existing navigation markup and behaviour are unchanged. */
 .tabbar{
   left:0;
@@ -3021,7 +2623,6 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
   background:rgba(255,255,255,.98);
   -webkit-backdrop-filter:blur(16px);
   backdrop-filter:blur(16px);
-  box-shadow:0 -5px 22px rgba(16,28,51,.07);
 }
 .navpill{
   top:auto;
@@ -3038,15 +2639,11 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
   gap:4px;
   padding:5px 0 7px;
   border-radius:10px;
-  color:#7c8798;
   font-size:10px;
-  font-weight:600;
   letter-spacing:0;
 }
 .tabbar .tab svg{
   flex:0 0 auto;
-  width:22px;
-  height:22px;
   transition:color .18s ease,transform .18s ease;
 }
 .tabbar .tab:not(.active){color:#7c8798}
@@ -3069,12 +2666,11 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 @media(max-width:360px){
   .tabbar{padding-inline:2px}
   .tabbar .tab{min-height:49px;font-size:8.8px;gap:2px}
-  .tabbar .tab svg{width:20px;height:20px}
+  
 }
 @media(prefers-reduced-motion:reduce){
   .navpill,.tabbar .tab svg{transition:none}
 }
-
 
 /* v1.73 — Better Forms Phase 1: clearer student form sections, field guidance, touch-friendly controls and consistent focus/error states. Presentation only; existing form IDs and save logic are preserved. */
 #studentDialog{
@@ -3145,18 +2741,7 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
   border-top:1px solid #edf0f5;
 }
 #studentDialog .form-section-title:first-child{border-top:0;padding-top:0}
-#studentDialog .form-section-icon{
-  display:grid;
-  place-items:center;
-  flex:0 0 30px;
-  width:30px;
-  height:30px;
-  border-radius:10px;
-  background:#edf2ff;
-  color:#315ee8;
-  font-size:10px;
-  font-weight:850;
-}
+
 #studentDialog .form-section-title b{
   display:block;
   color:#182338;
@@ -3180,10 +2765,8 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 }
 #studentDialog .formerror{
   padding:0;
-  line-height:1.45;
 }
 #studentDialog .dialogactions{
-  position:sticky;
   bottom:0;
   z-index:2;
   margin:16px -22px -22px;
@@ -3209,22 +2792,19 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
   }
   #studentDialog form{padding:17px 15px}
   #studentDialog .dialoghead{margin-bottom:14px}
-  #studentDialog .formgrid{gap:12px 9px}
+  
   #studentDialog .dialogactions{
-    margin:15px -15px -17px;
     padding:11px 15px max(12px,env(safe-area-inset-bottom));
   }
-  #studentDialog .dialogactions .btn{min-height:48px}
+  
 }
 @media(max-width:380px){
   #studentDialog .formgrid{grid-template-columns:minmax(0,1fr)}
-  #studentDialog .formgrid .wide{grid-column:1}
-  #studentDialog .form-section-title.wide{grid-column:1}
+
 }
 @media(prefers-reduced-motion:reduce){
   #studentDialog *,#recordDialog *{scroll-behavior:auto!important;transition:none!important}
 }
-
 
 /* v1.73 follow-up — Student form mobile sheet: content-sized when idle, scrollable when space is limited, and footer stays in normal flow (never overlays an input). */
 #studentDialog{
@@ -3314,10 +2894,9 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 #studentDialog[open]{scroll-padding-block:20px}
 #studentDialog .formgrid input{scroll-margin-block:18px}
 
-
 /* Student Profile Overview — presentation only (v1.74) */
-#profileDialog .ptabs{position:sticky;top:-1px;z-index:4;background:#fff;padding:8px 2px;margin:8px -2px 14px;border-bottom:1px solid var(--line)}
-#profileDialog .ptabs button{min-height:40px}
+#profileDialog .ptabs{top:-1px;margin:8px -2px 14px;border-bottom:1px solid var(--line)}
+
 #profileDialog .profileactions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 #profileDialog .profileactions .btn{display:flex;align-items:center;justify-content:center;min-width:0;min-height:42px;margin:0;padding:9px 10px;text-align:center;white-space:normal}
 #profileDialog .profileactions #profileAdd{grid-column:1/-1}
@@ -3339,7 +2918,7 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 #profileDialog .profile-overview-next b{font-size:14px}
 #profileDialog .profile-overview-balance>strong{display:block;font-size:24px;color:var(--orange);font-variant-numeric:tabular-nums}
 #profileDialog .profile-overview-balance>small{display:block;margin-top:3px;color:var(--muted);font-size:11px}
-@media(max-width:360px){#profileDialog .dialogbody{padding:14px}#profileDialog .profileactions{gap:6px}#profileDialog .profileactions .btn{font-size:11.5px;padding:8px 6px}#profileDialog .ptabs button{padding:0 10px;font-size:12px}}
+@media(max-width:360px){#profileDialog .dialogbody{padding:14px}#profileDialog .profileactions{gap:6px}#profileDialog .profileactions .btn{font-size:11.5px;padding:8px 6px}}
 
 /* v1.75: recoverable lesson deletion and retained activity history */
 #lessonAuditList{max-height:420px;overflow:auto;overscroll-behavior:contain}#lessonAuditList .recoveryrow{background:#fff}#deletedLessonsList .recoveryrow{background:#fff}#lessonAuditSummary{margin:0 0 8px}.data-card#lessonRecoveryCard,.data-card#lessonAuditCard{margin-top:12px}
@@ -3355,7 +2934,6 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 /* v1.77 — no content peeking above the sticky name header while scrolling a student profile. */
 #profileDialog .dialogbody{padding-top:0}
 #profileDialog .dialoghead{top:0;z-index:12;padding-top:clamp(16px,3vw,25px);background:#fff}
-
 
 /* v1.78 — remove a retained individual-lesson receipt (profile payment history). */
 #profileDialog .payment-meta:has(.payment-remove){display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
@@ -3402,7 +2980,6 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 
 /* v1.88 — a day without lessons shows one short line instead of the empty hour-by-hour timeline. */
 #calendar .timeline .tl-empty{margin:0;padding:2px 14px;color:var(--muted);font-size:13px;line-height:1.5;text-align:center}
-
 
 /* v1.91 — New expense: the bottom sheet had a fixed height and the form grid stretched its rows to fill it, so the type chips became tall ovals and the sections had huge gaps. Rows keep their natural height, and the expense sheet fits its content. */
 #recordDialog .formgrid{align-content:start;align-items:start}
@@ -3482,21 +3059,21 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 #calendar .calday.course{background:#e8eeff}
 #calendar .calday.hol{background:#fdecec}
 #calendar .calday.selected{background:#dfe8ff}
-#calendar .calstrip{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;margin:10px 0 4px}
+#calendar .calstrip{display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
 #calendar .calstrip.hidden{display:none}
-#calendar .stripday{display:flex;flex-direction:column;align-items:center;gap:2px;min-height:68px;padding:6px 0 5px;border:1px solid #eef1f6;border-radius:14px;background:#fff;color:var(--ink);font:inherit;cursor:pointer}
-#calendar .stripday small{font-size:10px;font-weight:800;color:#93a1ba;letter-spacing:.5px}
-#calendar .stripday b{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;font-size:17px}
-#calendar .stripday.past b{color:#a3adbd}
+#calendar .stripday{display:flex;flex-direction:column;align-items:center;border:1px solid #eef1f6;background:#fff;color:var(--ink);font:inherit;cursor:pointer}
+#calendar .stripday small{font-weight:800;color:#93a1ba;letter-spacing:.5px}
+#calendar .stripday b{display:grid;place-items:center;border-radius:50%}
+
 #calendar .stripday.today b{box-shadow:0 0 0 2px #fff,0 0 0 4px #b9c9ff}
-#calendar .stripday.selected b{background:var(--blue);color:#fff}
+#calendar .stripday.selected b{background:var(--blue)}
 #calendar .stripday.course{background:#e8eeff;border-color:#d3defb}
 #calendar .stripday.hol{background:#fdecec;border-color:#f4cfcf}
 #calendar .stripday.hol b{color:#c13b68}
 #calendar .stripday.hol.selected b{color:#fff}
 #calendar .stripday .calcount{display:block;min-height:14px}
 #calendar .stripday .calcount:empty{display:block;visibility:hidden}
-#calendar .callegend{display:none;flex-wrap:wrap;align-items:center;gap:6px 12px;margin:8px 2px 0;color:var(--muted);font-size:11.5px;font-weight:650}
+#calendar .callegend{display:none;flex-wrap:wrap;align-items:center;color:var(--muted);font-weight:650}
 #calendar[data-calview="month"] .callegend,#calendar[data-calview="day"] .callegend{display:flex}
 #calendar .callegend .lg{display:inline-block;width:16px;height:10px;border-radius:3px;margin-right:-6px}
 #calendar .callegend .lg.course{background:#cfdcff}
@@ -3525,7 +3102,7 @@ body{background:var(--pc-bg)}
 @media(max-width:720px){.topbar{min-height:76px!important;height:calc(76px + env(safe-area-inset-top))!important}.brand b{font-size:17px!important;letter-spacing:-.3px}.brand small{font-size:11.5px!important}.brand .brandcar{width:72px!important;height:45px!important}}
 /* Calendar page: sections are individual cards on the page background */
 #calendar.panel{background:transparent;border:0;box-shadow:none;padding:6px 0 0;min-height:0}
-#calendar .calviews{margin:0 0 10px}
+
 #calendar .calboard{padding:10px 10px 8px;border:1px solid var(--pc-line);border-radius:16px;background:var(--pc-card);box-shadow:none}
 #calendar .calhead{padding-bottom:6px}
 #calendar .caltitlebox b{color:var(--pc-navy);font-size:17px;letter-spacing:-.3px}
@@ -3549,15 +3126,15 @@ body{background:var(--pc-bg)}
 #calendar .cal-stat{padding:9px 8px;border:1px solid var(--pc-line);border-radius:13px;background:var(--pc-card);box-shadow:none}
 #calendar .cal-stat small{display:block;margin:0 0 3px;font-size:10px;font-weight:700;color:var(--pc-muted);letter-spacing:.2px;text-transform:none}
 #calendar .cal-stat b{display:block;font-size:16px;font-weight:800;color:var(--pc-navy);letter-spacing:-.3px;white-space:nowrap;font-variant-numeric:tabular-nums}
-@media(max-width:360px){#calendar .cal-day-stats{gap:4px}#calendar .cal-stat{padding:8px 5px}#calendar .cal-stat b{font-size:13px}#calendar .cal-stat small{font-size:9px}}
+@media(max-width:360px){#calendar .cal-stat small{font-size:9px}}
 /* WhatsApp reminders: compact */
 #calendar .remindbox{margin:0 0 10px;padding:10px 12px;border:1px solid #cfeadb;border-radius:14px;background:var(--pc-green-bg)}
-#calendar .remindbox p{display:flex;align-items:baseline;flex-wrap:wrap;gap:2px 8px;margin:0 0 8px}
+#calendar .remindbox p{display:flex;align-items:baseline;flex-wrap:wrap;gap:2px 8px}
 #calendar .remindbox p b{display:inline;font-size:13px;color:#0f7a4f}
 #calendar .remindbox p small{flex:1 1 100%;font-size:11px;color:#4f7f68}
 #calendar .remindbox .remindcount{display:inline-block;margin-left:2px;padding:2px 8px;border-radius:999px;background:var(--pc-green);color:#fff;font-size:10.5px;font-weight:800}
 #calendar .remindlist{display:flex;flex-wrap:wrap;gap:6px}
-#calendar .remindchip{max-width:100%;min-height:32px;padding:6px 11px;border-radius:999px;background:var(--pc-green);color:#fff;font-size:12px;font-weight:700;line-height:1.2;white-space:normal;overflow-wrap:anywhere}
+#calendar .remindchip{max-width:100%;border-radius:999px;background:var(--pc-green);color:#fff;font-weight:700;line-height:1.2;white-space:normal;overflow-wrap:anywhere}
 #calendar .remindchip.sent{background:#cfeadb;color:#2c6b4c}
 /* available time: compact slot cards */
 #calendar .cal-free-slots{margin:0 0 10px;padding:10px;border:1px solid var(--pc-line);border-radius:14px;background:var(--pc-card)}
