@@ -599,7 +599,9 @@ function renderRemind(){const iso=cal.day,today=dateISO(new Date()),box=$("calRe
  box.querySelectorAll("[data-remind]").forEach(a=>a.addEventListener("click",()=>{reminded.add(a.dataset.remind);setTimeout(renderRemind,400);}));}
 // v1.103 — day colours (no dots): blue = a course/package lesson that day, red = holiday, orange count = money still due.
 function calDayClass(iso,L){return (L.some(e=>isCourseLesson(e)||e.pkg)?" course":"")+(L.some(e=>unpaidAmt(e)>0)?" due":"")+(holidayOn(iso)?" hol":"");}
-function renderCalStrip(days,today){const box=$("calStrip");box.classList.toggle("hidden",cal.view!=="day");if(cal.view!=="day")return;
+// v1.107 — the strip shows today and the next 6 days while the selected day is inside that window (so tomorrow is always one tap away, also on Sundays); for any other day it shows that day's Monday–Sunday week.
+function calStripDays(sel,today){const t=new Date(today+"T12:00:00"),roll=[...Array(7)].map((_,i)=>dateISO(new Date(t.getFullYear(),t.getMonth(),t.getDate()+i)));return roll.includes(sel)?roll:weekDays(sel);}
+function renderCalStrip(days,today){days=calStripDays(cal.day,today);const box=$("calStrip");box.classList.toggle("hidden",cal.view!=="day");if(cal.view!=="day")return;
  box.innerHTML=days.map(iso=>{const L=lessonsOn(iso),n=L.length,d=new Date(iso+"T12:00:00"),hd=holidayOn(iso);
   return `<button type="button" class="stripday${iso===cal.day?" selected":""}${iso===today?" today":""}${iso<today?" past":""}${calDayClass(iso,L)}" data-sday="${iso}" aria-label="${esc(dayName(iso))}: ${n} lessons${hd?", "+esc(hd):""}"><small>${d.toLocaleDateString("en-GB",{weekday:"short"}).toUpperCase()}</small><b>${d.getDate()}</b><span class="calcount">${n||""}</span></button>`;}).join("");
  box.querySelectorAll("[data-sday]").forEach(b=>b.onclick=()=>{cal.day=b.dataset.sday;const d=new Date(cal.day+"T12:00:00");cal.y=d.getFullYear();cal.m=d.getMonth();renderCalendar();bindRecords();});}
@@ -1026,14 +1028,15 @@ function prayerCountdownText(min){const h=Math.floor(min/60),m=min%60;return h>0
 function renderPrayerCard(){const box=$("prayerCard");if(!box)return;const now=new Date(),today=dateISO(now),m=now.getHours()*60+now.getMinutes(),list=prayerTimesFor(today);
  if(!list.length){box.classList.add("hidden");return;}box.classList.remove("hidden");
  const tomorrow=dateISO(new Date(now.getFullYear(),now.getMonth(),now.getDate()+1)),yesterday=dateISO(new Date(now.getFullYear(),now.getMonth(),now.getDate()-1));
+ let shown=list,isTomorrow=false;
  let idx=list.findIndex(x=>toMin(x.at)>m),nextName,nextAt,nextMin,prevMin;
  if(idx>=0){nextName=list[idx].name;nextAt=list[idx].at;nextMin=toMin(nextAt);const prev=idx>0?toMin(list[idx-1].at):(()=>{const y=prayerTimesFor(yesterday);return y.length?toMin(y[y.length-1].at)-1440:nextMin-360;})();prevMin=prev;}
- else{const tm=prayerTimesFor(tomorrow),f=tm[0]||list[0];nextName=f.name;nextAt=f.at;nextMin=toMin(f.at)+1440;prevMin=toMin(list[list.length-1].at);}
+ else{const tm=prayerTimesFor(tomorrow),f=tm[0]||list[0];nextName=f.name;nextAt=f.at;nextMin=toMin(f.at)+1440;prevMin=toMin(list[list.length-1].at);if(tm.length){shown=tm;isTomorrow=true;idx=0;}}
  const left=Math.max(0,nextMin-m),pct=Math.max(0,Math.min(100,Math.round((m-prevMin)/Math.max(1,nextMin-prevMin)*100))),p=prayerCfg(),src=p.manual&&p.manual.on?"Your own times":mawaqitDay(today)?"Mosque timetable":"Calculated times";
- box.innerHTML=`<div class="pc-top"><div><small>🕌 PRAYER TIMES</small><b>${esc(now.toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long"}))}</b></div><button type="button" class="pc-edit" id="prayerCardEdit">Edit</button></div>
+ box.innerHTML=`<div class="pc-top"><div><small>🕌 PRAYER TIMES</small><b>${isTomorrow?"Tomorrow · ":""}${esc(new Date((isTomorrow?tomorrow:today)+"T12:00:00").toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long"}))}</b></div><button type="button" class="pc-edit" id="prayerCardEdit">Edit</button></div>
  <div class="pc-hero"><div><small>NEXT PRAYER</small><b>${esc(nextName)}</b></div><div class="pc-at"><b>${esc(nextAt)}</b><span>in ${prayerCountdownText(left)}</span></div></div>
  <div class="pc-bar" aria-hidden="true"><i data-w="${pct}"></i></div>
- <div class="pc-row">${list.map((x,i)=>`<div class="pc-item${i===idx?" next":""}${toMin(x.at)<=m?" past":""}"><small>${esc(x.name)}</small><b>${esc(x.at)}</b></div>`).join("")}</div>
+ <div class="pc-row">${shown.map((x,i)=>`<div class="pc-item${i===idx?" next":""}${!isTomorrow&&toMin(x.at)<=m?" past":""}"><small>${esc(x.name)}</small><b>${esc(x.at)}</b></div>`).join("")}</div>
  <p class="pc-foot">${esc(src)}${p.on?` · booking protection ${p.minutes} min`:" · booking protection off"}</p>`;
  box.querySelectorAll("[data-w]").forEach(i=>i.style.width=i.dataset.w+"%");const ed=$("prayerCardEdit");if(ed)ed.onclick=()=>{document.querySelector('.tab[data-tab="log"]').click();showLogSettings();$("pManualOn").scrollIntoView({block:"center"});};}
 setInterval(()=>{if(document.visibilityState==="visible"&&$("overview")&&!$("overview").classList.contains("hidden"))renderPrayerCard();},20000);
