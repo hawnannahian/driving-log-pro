@@ -4,6 +4,9 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs for review, Claude's own-PR merge authority under §3a, no student data in the repo).
 
 ## Recent handover entries
+### 2026-11-15 — Claude: lesson confirmation card (v1.108, cache v171) — owner approved
+- Overview asks "Did these lessons happen?" for ended, unconfirmed lessons of the last 3 days; Yes/No write the existing `done` fields. `isDone` rule unchanged. See PROJECT_STATE v1.108. **Note for agents: code appended at the end of app.js must not declare top-level `const` used by `render()` — the first render runs before the end of the file (TDZ error). Keep such constants inside the function.**
+
 ### 2026-11-15 — Claude: whole-app audit + v1.107 (cache v170)
 - Audit of main v1.106: no functional bug found (133 tests, smoke sweep). Fixed two small display issues (prayer card after Isha, Calendar strip on Sundays); see PROJECT_STATE v1.107. Relaxed the version pin in `tests/expense-history.test.js` (pinning the exact version breaks every later release — please do not pin versions in tests). Next, owner-approved: an end-of-day "did these lessons happen?" confirmation, and a styles.css clean-up, each in its own PR.
 
