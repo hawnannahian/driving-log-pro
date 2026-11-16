@@ -4,6 +4,8 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs for review, Claude's own-PR merge authority under §3a, no student data in the repo).
 
 ## Recent handover entries
+### 2026-11-16 — Claude: owner's recorded timer voices (v1.110, cache v173)
+- Lesson timer now plays the owner's three mp3 files (start / 50 min / finish) via Web Audio instead of Bengali speech; speech remains only as fallback if a file fails. Files live in the persistent audio cache list in `sw.js`. See PROJECT_STATE v1.110. Not verified on a real iPhone.
 ### 2026-11-15 — Claude: styles.css clean-up (v1.109, cache v172)
 - Removed provably dead rules and overridden declarations with `tools/css-clean.py` (dry run: `python3 tools/css-clean.py .`; apply with `--write`; keep `"--protect=.brand .brandcar"`). 138-state screenshot sweep pixel-identical. See PROJECT_STATE v1.109. If a visual regression appears in a state outside the sweep (legacy package cards, cloud panels, print), compare with the previous `styles.css` first.
 
