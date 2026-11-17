@@ -234,6 +234,22 @@
         </div>
         <p class="student-report-note">Earned value uses completed lesson records. Lifetime due includes the student’s outstanding lesson and course/package balances.</p>
       </section>
+      <section class="chartbox dashcard attendance-insights" id="attendanceInsights" aria-labelledby="attendanceInsightsTitle">
+        <div class="dashcardhead"><div><h3 id="attendanceInsightsTitle">Attendance insights</h3><p class="muted">Only lessons explicitly confirmed as happened or not happened are included in the attendance rate</p></div></div>
+        <div class="attendance-kpis" aria-live="polite">
+          <article><span>Confirmed completed</span><strong id="attendanceDone">0</strong></article>
+          <article><span>Marked not completed</span><strong id="attendanceMissed">0</strong></article>
+          <article><span>Not explicitly confirmed</span><strong id="attendanceUnconfirmed">0</strong></article>
+          <article><span>Confirmed attendance</span><strong id="attendanceRate">–</strong></article>
+        </div>
+        <div class="student-report-table-wrap">
+          <table class="student-report-table attendance-table">
+            <thead><tr><th scope="col">Student</th><th scope="col">Attended</th><th scope="col">Not completed</th><th scope="col">Rate</th></tr></thead>
+            <tbody id="attendanceRows"><tr><td colspan="4">No attendance records in this period.</td></tr></tbody>
+          </table>
+        </div>
+        <p class="student-report-note">Unconfirmed lessons are shown separately and are excluded from the attendance rate. A booking is never treated as an absence automatically.</p>
+      </section>
       <section class="chartbox dashcard" id="insightBox"><h3>Insights</h3><ul class="insightlist" id="insightList"></ul></section>
       <section class="finreports" id="finReports">
         <button type="button" class="finhead" id="finToggle" aria-expanded="false" aria-controls="finBody"><span class="fintitle"><b>Financial Reports</b><small>Charts, student payments, comparisons, calendar</small></span><svg class="finchev" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
