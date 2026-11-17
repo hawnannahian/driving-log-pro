@@ -222,6 +222,18 @@
         <article class="report"><span>Distance (odometer)</span><strong id="rKm">–</strong></article>
         <article class="report"><span>Fuel cost per km</span><strong id="rFuelKm">–</strong></article>
       </div>
+      <section class="chartbox dashcard student-report" id="studentReportBox" aria-labelledby="studentReportTitle">
+        <div class="dashcardhead"><div><h3 id="studentReportTitle">Student performance</h3><p class="muted">Completed lessons in the selected reporting period</p></div><span id="studentReportCount" class="student-report-count">0 students</span></div>
+        <label class="student-report-search" for="studentReportSearch">Find a student</label>
+        <input id="studentReportSearch" type="search" placeholder="Search by student name" autocomplete="off">
+        <div class="student-report-table-wrap">
+          <table class="student-report-table">
+            <thead><tr><th scope="col">Student</th><th scope="col">Lessons</th><th scope="col">Hours</th><th scope="col">Earned</th><th scope="col">Lifetime due</th></tr></thead>
+            <tbody id="studentReportRows"><tr><td colspan="5">No completed lessons in this period.</td></tr></tbody>
+          </table>
+        </div>
+        <p class="student-report-note">Earned value uses completed lesson records. Lifetime due includes the student’s outstanding lesson and course/package balances.</p>
+      </section>
       <section class="chartbox dashcard" id="insightBox"><h3>Insights</h3><ul class="insightlist" id="insightList"></ul></section>
       <section class="finreports" id="finReports">
         <button type="button" class="finhead" id="finToggle" aria-expanded="false" aria-controls="finBody"><span class="fintitle"><b>Financial Reports</b><small>Charts, student payments, comparisons, calendar</small></span><svg class="finchev" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>

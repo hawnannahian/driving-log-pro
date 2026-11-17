@@ -46,8 +46,23 @@ function renderDashboard(){
  dashCount($("rIncome"),s.rev,euro);dashCount($("rExpenses"),s.exp,euro);dashCount($("rProfit"),s.net,euro);dashCount($("rCollected"),s.col,euro);dashCount($("rUnpaid"),s.out,euro);
  $("rProfit").classList.toggle("neg",s.net<0);
  $("rHours").textContent=fmtH(s.hours)+" h";$("rCount").textContent=String(s.lessons);$("rStudents").textContent=String(s.students);$("rAvg").textContent=s.hours>0?euro(s.rev/s.hours):"–";
- dashInsights(p,v,s);dashDonut(s);dashWeeks();dashHealth(p,v,s);dashHeat(p,v);}
+ dashInsights(p,v,s);dashStudentPerformance(p,v);dashDonut(s);dashWeeks();dashHealth(p,v,s);dashHeat(p,v);}
 
+// Student-level performance for the currently selected reporting period.
+function dashStudentPerformance(p,v){
+ const query=($("studentReportSearch")?.value||"").trim().toLocaleLowerCase();
+ const rows=state.students.map(student=>{
+  const lessons=state.entries.filter(e=>e.type==="Lesson"&&isDone(e)&&inSel(e.date,p,v)&&sameName(e.student,student.name));
+  if(!lessons.length)return null;
+  const hoursTotal=lessons.reduce((sum,e)=>sum+hours(e),0);
+  const earned=lessons.reduce((sum,e)=>sum+income(e),0);
+  const lifetime=studentStats(student);
+  return {name:student.name,count:lessons.length,hours:hoursTotal,earned:earned,due:lifetime.unpaid};
+ }).filter(Boolean).filter(row=>!query||row.name.toLocaleLowerCase().includes(query))
+ .sort((a,b)=>b.hours-a.hours||b.count-a.count||a.name.localeCompare(b.name));
+ $("studentReportCount").textContent=rows.length+" student"+(rows.length===1?"":"s");
+ $("studentReportRows").innerHTML=rows.length?rows.map(row=>`<tr><th scope="row">${esc(row.name)}</th><td>${row.count}</td><td>${fmtH(row.hours)} h</td><td>${euro(row.earned)}</td><td>${euro(row.due)}</td></tr>`).join(""):'<tr><td colspan="5">No matching completed lessons in this period.</td></tr>';
+}
 function dashInsights(p,v,cur){
  const out=[],pv=dashPrev(p,v),sp=dashSpan(p,v),today=dateISO(new Date()),soFar=sp&&today>=sp[0]&&today<=sp[1]?" so far":"",name={week:"last week",month:"last month",year:"last year"}[p];
  if(pv){const pr=dashStats(p,pv),ch=(a,b)=>b>0?Math.round((a-b)/b*100):null,add=(cls,txt)=>out.push([cls,txt]);
@@ -121,6 +136,7 @@ function dashPdfExtra(cur,y,p,v,c){const s=dashStats(p,v),total=s.cats.reduce((a
  monthRows(6).forEach(r=>{cur.push({x:300,y:yr,text:r.long,size:8.5,color:c.NAVY},{x:400,y:yr,text:`${c.m(r.income)} / ${c.m(r.expenses)} / ${c.m(r.profit)}`,size:8.5,color:c.NAVY});yr-=13;});
  cur.push({x:300,y:yr,text:"Revenue / Expenses / Net (EUR)",size:7.5,color:c.GREY});return Math.min(yl,yr-13)-14;}
 
+$("studentReportSearch").addEventListener("input",()=>dashStudentPerformance($("period").value,$("periodValue").value));
 $("dashCsv").onclick=dashCsv;$("dashShare").onclick=dashShare;$("dashPrint").onclick=()=>window.print();
 $("heatPrev").onclick=()=>dashHeatMove(-1);$("heatNext").onclick=()=>dashHeatMove(1);
 document.querySelectorAll("[data-range]").forEach(b=>b.onclick=()=>{dashRange=b.dataset.range;document.querySelectorAll("[data-range]").forEach(x=>x.classList.toggle("active",x===b));renderChart();});
