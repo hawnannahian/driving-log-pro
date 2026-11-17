@@ -3310,3 +3310,18 @@ body{background:var(--pc-bg)}
 #recordDialog .lesson-booking-preview.is-ready{border-color:#c9e8d8;background:#f1faf5}
 #recordDialog .lesson-booking-preview.is-ready .lesson-booking-preview-icon{background:#d9f1e4;color:#16845b}
 @media(prefers-reduced-motion:reduce){#recordDialog .lesson-booking-preview{transition:none}}
+
+
+/* v1.118 — Student overview activity chart: six-month learning progress at a glance. */
+#profileDialog .profile-activity-panel{margin-top:12px;padding:15px;border:1px solid var(--line);border-radius:16px;background:var(--white)}
+#profileDialog .profile-activity-panel>header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+#profileDialog .profile-activity-panel h3{margin:0;font-size:14px}
+#profileDialog .profile-activity-panel header small{display:block;margin-top:3px;color:var(--muted);font-size:11px}
+#profileDialog .profile-activity-panel header>strong{font-size:18px;color:var(--blue);white-space:nowrap}
+#profileDialog .profile-activity-chart{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px;align-items:end;height:112px;margin-top:13px}
+#profileDialog .profile-activity-month{display:flex;flex-direction:column;align-items:center;justify-content:end;gap:4px;min-width:0;height:100%}
+#profileDialog .profile-activity-track{display:flex;align-items:end;justify-content:center;width:100%;height:76px;border-radius:7px 7px 4px 4px;background:#f0f3f9;overflow:hidden}
+#profileDialog .profile-activity-track i{display:block;width:min(22px,70%);min-height:3px;border-radius:6px 6px 2px 2px;background:var(--blue)}
+#profileDialog .profile-activity-month b{font-size:10px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+#profileDialog .profile-activity-month small{font-size:10px;color:var(--muted)}
+#profileDialog .profile-activity-foot{display:flex;justify-content:space-between;gap:10px;margin-top:11px;padding-top:10px;border-top:1px solid var(--line);color:var(--muted);font-size:11px}
