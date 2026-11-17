@@ -4,6 +4,11 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs for review, Claude's own-PR merge authority under §3a, no student data in the repo).
 
 ## Recent handover entries
+### 2026-11-17 — Claude: minimum text size 11px (v1.112, cache v175, PR #197)
+- 71 `font-size` values below 11px in `styles.css` raised to 11px in place (selectors/cascade unchanged). Deliberately left smaller: week-view `.wkles`, calendar `.calday`/`.wkday`/`.calcount` cells, and the bottom tab-bar labels at narrow widths (11px made "Overview Calendar" touch at 320px). Text wraps slightly more in tight spots (e.g. Students stat labels at 320px).
+- Tests: 142 node tests, smoke suite, 138-state screenshot sweep before/after, clipped/overflow text detector (4 findings before and after, none new). Not tested: real iPhone, Dynamic Type. Phase 3+ (type scale, tokens, dark mode) not started. PROJECT_STATE has the v1.112 entry.
+- Note for the other agent: PR #73 (Calendar/WhatsApp settings, ChatGPT's) still shows merge conflicts against main; Claude has not touched it.
+
 ### 2026-11-17 — Claude: touch targets v1.111 (PR #193) and optional Graphify (PR #194)
 - **v1.111 (PR #193, `e2ecdc9`, cache v174):** every interactive control on Overview/Calendar/Log/Students/Reports/Islamic has a >=44x44 CSS px hit area via an invisible `::after` (styles.css, last block), visible size unchanged. Student-card action buttons are now 34px wide with 10px gaps (32px + 12px at <=380px) so enlarged areas do not overlap. Known exceptions: week-view `.wkles` blocks (42x31) and ~41px calendar cells at 320px width. Tests: 142 node tests, smoke suite, `elementFromPoint` hit-area probe at 390x844; not tested on a real iPhone. PROJECT_STATE has the v1.111 entry.
 - **Optional Graphify (PR #194, `a9a3a3a`, owner-approved merge):** `.claude/skills/graphify/` + CLAUDE.md **§15** + `graphify-out/` in `.gitignore` + `tools/setup-dev-env.sh`. Graphify is an optional navigation aid only: **CLAUDE.md §2 still applies** (read the complete PROJECT_STATE.md and the real source; graph output is never a source of truth), do not run it automatically after every change, no Graphify hooks are installed, never commit `graphify-out/`. The setup script was only tested with mock stubs, not in a real environment. That Pages does not publish `.claude/` is an assumption, not verified. The old branch `chore/graphify-install` was left untouched (not merged, can be ignored).
@@ -178,8 +183,8 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 
 
 ## Latest verified project state
-- **main `ba89f12`** (merge of PR #195, docs only; before it `a9a3a3a` = PR #194, `e2ecdc9` = PR #193): footer **v1.111**, Service Worker cache **`nahians-schedule-cache-v174`**. GitHub Pages runs "pages build and deployment" for `6cab184`, `e2ecdc9`, `a9a3a3a` and `ba89f12` all completed successfully (checked 2026-11-17 via the Actions API). That proves the Pages build/deploy only; the live site was not fetched (proxy 403) and real-iPhone behaviour is not verified by any agent.
-- Latest releases: v1.110 owner's recorded timer voices (PR #192), v1.111 touch targets (PR #193); PR #194 is tooling/docs only.
+- **main `5b1af2f`** (merge of PR #197; before it `d477b17` = PR #196 docs, `ba89f12` = PR #195 docs, `a9a3a3a` = PR #194, `e2ecdc9` = PR #193): footer **v1.112**, Service Worker cache **`nahians-schedule-cache-v175`**. GitHub Pages "pages build and deployment" runs for `e2ecdc9`, `a9a3a3a`, `ba89f12`, `d477b17` and `5b1af2f` all completed successfully (checked 2026-11-17 via the Actions API). That proves the Pages build/deploy only; the live site was not fetched (proxy 403) and real-iPhone behaviour is not verified by any agent.
+- Latest releases: v1.110 owner's recorded timer voices (PR #192), v1.111 touch targets (PR #193), v1.112 minimum text size (PR #197); PR #194 is tooling/docs only.
 - Other recent releases: v1.68 daily cloud backup, v1.70 realistic car header image, v1.71-v1.74 (ChatGPT) Students/Forms/bottom-nav/profile UX.
 - **Open PRs:** #73 and #13 only (old, untouched; verified 2026-11-17). Older "DRAFT" labels on earlier ChatGPT entries below are historical wording; check GitHub for the real state.
 - `push-config.js` API URL remains empty; Cloudflare Worker not deployed/configured. Prayer times use the Mawaqit snapshot; overlap warns and does not block booking.
