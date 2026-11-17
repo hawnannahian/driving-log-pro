@@ -4,6 +4,11 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs for review, Claude's own-PR merge authority under §3a, no student data in the repo).
 
 ## Recent handover entries
+### 2026-11-17 — Claude: touch targets v1.111 (PR #193) and optional Graphify (PR #194)
+- **v1.111 (PR #193, `e2ecdc9`, cache v174):** every interactive control on Overview/Calendar/Log/Students/Reports/Islamic has a >=44x44 CSS px hit area via an invisible `::after` (styles.css, last block), visible size unchanged. Student-card action buttons are now 34px wide with 10px gaps (32px + 12px at <=380px) so enlarged areas do not overlap. Known exceptions: week-view `.wkles` blocks (42x31) and ~41px calendar cells at 320px width. Tests: 142 node tests, smoke suite, `elementFromPoint` hit-area probe at 390x844; not tested on a real iPhone. PROJECT_STATE has the v1.111 entry.
+- **Optional Graphify (PR #194, `a9a3a3a`, owner-approved merge):** `.claude/skills/graphify/` + CLAUDE.md **§15** + `graphify-out/` in `.gitignore` + `tools/setup-dev-env.sh`. Graphify is an optional navigation aid only: **CLAUDE.md §2 still applies** (read the complete PROJECT_STATE.md and the real source; graph output is never a source of truth), do not run it automatically after every change, no Graphify hooks are installed, never commit `graphify-out/`. The setup script was only tested with mock stubs, not in a real environment. That Pages does not publish `.claude/` is an assumption, not verified. The old branch `chore/graphify-install` was left untouched (not merged, can be ignored).
+- No app asset changed in PR #194, so no cache/footer bump.
+
 ### 2026-11-16 — Claude: owner's recorded timer voices (v1.110, cache v173)
 - Lesson timer now plays the owner's three mp3 files (start / 50 min / finish) via Web Audio instead of Bengali speech; speech remains only as fallback if a file fails. Files live in the persistent audio cache list in `sw.js`. See PROJECT_STATE v1.110. Not verified on a real iPhone.
 ### 2026-11-15 — Claude: styles.css clean-up (v1.109, cache v172)
@@ -173,10 +178,10 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 
 
 ## Latest verified project state
-- **main `df510f4`** (merge of PR #155, merged by the owner 2026-11-10 16:06 UTC): footer **v1.75**, Service Worker cache **`nahians-schedule-cache-v138`**. GitHub Pages workflow run #207 for `df510f4` completed successfully (checked 2026-11-10). That proves the Pages build only; real-iPhone behaviour is not verified by any agent.
-- **v1.75 Recoverable Lesson Deletion + Hybrid Audit is live in source and deployed**: deleted lessons are restorable for 30 days (Reports -> Backup & restore -> Deleted lessons), append-only Lesson activity history, cloud/backup compatible, Full-Time Students isolated. CI run #80 (head `69c0d10`) passed; 60 node tests. Real iPhone and real GitHub API not tested.
+- **main `a9a3a3a`** (merge of PR #194; before it `e2ecdc9` = PR #193): footer **v1.111**, Service Worker cache **`nahians-schedule-cache-v174`**. Pages run for `e2ecdc9` completed successfully (checked 2026-11-17); the run for `a9a3a3a` was still in progress when checked. Pages success proves the build only; real-iPhone behaviour is not verified by any agent.
+- Latest releases: v1.110 owner's recorded timer voices (PR #192), v1.111 touch targets (PR #193); PR #194 is tooling/docs only.
 - Other recent releases: v1.68 daily cloud backup, v1.70 realistic car header image, v1.71-v1.74 (ChatGPT) Students/Forms/bottom-nav/profile UX.
-- **Open PRs:** #73 and #13 only (old, untouched). Older "DRAFT" labels on earlier ChatGPT entries below are historical wording; check GitHub for the real state.
+- **Open PRs:** #73 and #13 only (old, untouched; verified 2026-11-17). Older "DRAFT" labels on earlier ChatGPT entries below are historical wording; check GitHub for the real state.
 - `push-config.js` API URL remains empty; Cloudflare Worker not deployed/configured. Prayer times use the Mawaqit snapshot; overlap warns and does not block booking.
 - Known unrelated issue: 2 console CSP "inline style" errors appear in older scratch smoke runs on main (source not yet located).
 
