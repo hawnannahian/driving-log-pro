@@ -3280,3 +3280,160 @@ body{background:var(--pc-bg)}
 @media(prefers-reduced-motion:reduce){
  #overview .tabpanel,.tabpanel{animation:none!important;transition:none!important}
 }
+
+
+/* v1.116 — Active lesson timer: clearer schedule context and accessible progress. */
+.timerdetail{display:block;margin-top:4px;color:#c0cce0;font-size:12px;font-weight:550;letter-spacing:.1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.timerbar .timerhead{align-items:flex-start}
+.timerbar .timerstatus{flex:none;margin-top:1px}
+.timerbar .timerfill{pointer-events:none}
+.timerbar .timeractions .timerbtn{min-height:48px;font-size:14px;font-weight:750;letter-spacing:-.1px}
+.timerbar .timeractions .timerbtn:focus-visible{outline:3px solid #f2c96b;outline-offset:3px}
+.timerbar .timeractions .timerend{background:linear-gradient(135deg,#477cf1,#315ee8);box-shadow:0 5px 14px #315ee83d}
+.timerbar .timerring{box-shadow:0 0 0 1px #ffffff12,0 0 32px #315ee82b}
+@media(max-width:380px){
+ .timerbar .timerhead b{font-size:14px}
+ .timerdetail{font-size:11px}
+ .timerbar .timeractions{gap:7px}
+ .timerbar .timeractions .timerbtn{min-height:46px;padding-inline:8px;font-size:13px}
+}
+@media(prefers-reduced-motion:reduce){.timerbar .timerfill{transition:none!important}}
+
+
+/* v1.117 — Lesson booking summary: a compact live confirmation of student, date, time and duration. */
+#recordDialog .lesson-booking-preview{display:flex;align-items:center;gap:10px;min-width:0;margin:-3px 0 1px;padding:11px 13px;border:1px solid #dce6f5;border-radius:14px;background:#f6f8fc;transition:background .18s,border-color .18s}
+#recordDialog .lesson-booking-preview.hidden{display:none}
+#recordDialog .lesson-booking-preview-icon{display:grid;place-items:center;flex:0 0 30px;width:30px;height:30px;border-radius:10px;background:#e8edf6;color:#64748b;font-size:14px;font-weight:900}
+#recordDialog .lesson-booking-preview-copy{display:grid;gap:2px;min-width:0}
+#recordDialog .lesson-booking-preview-copy b{overflow:hidden;color:#1d2c45;font-size:13px;font-weight:800;text-overflow:ellipsis;white-space:nowrap}
+#recordDialog .lesson-booking-preview-copy small{color:#68778d;font-size:11.5px;line-height:1.35}
+#recordDialog .lesson-booking-preview.is-ready{border-color:#c9e8d8;background:#f1faf5}
+#recordDialog .lesson-booking-preview.is-ready .lesson-booking-preview-icon{background:#d9f1e4;color:#16845b}
+@media(prefers-reduced-motion:reduce){#recordDialog .lesson-booking-preview{transition:none}}
+
+
+/* v1.118 — Student overview activity chart: six-month learning progress at a glance. */
+#profileDialog .profile-activity-panel{margin-top:12px;padding:15px;border:1px solid var(--line);border-radius:16px;background:var(--white)}
+#profileDialog .profile-activity-panel>header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+#profileDialog .profile-activity-panel h3{margin:0;font-size:14px}
+#profileDialog .profile-activity-panel header small{display:block;margin-top:3px;color:var(--muted);font-size:11px}
+#profileDialog .profile-activity-panel header>strong{font-size:18px;color:var(--blue);white-space:nowrap}
+#profileDialog .profile-activity-chart{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px;align-items:end;height:112px;margin-top:13px}
+#profileDialog .profile-activity-month{display:flex;flex-direction:column;align-items:center;justify-content:end;gap:4px;min-width:0;height:100%}
+#profileDialog .profile-activity-track{display:flex;align-items:end;justify-content:center;width:100%;height:76px;border-radius:7px 7px 4px 4px;background:#f0f3f9;overflow:hidden}
+#profileDialog .profile-activity-track i{display:block;width:min(22px,70%);min-height:3px;border-radius:6px 6px 2px 2px;background:var(--blue)}
+#profileDialog .profile-activity-month b{font-size:10px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+#profileDialog .profile-activity-month small{font-size:10px;color:var(--muted)}
+#profileDialog .profile-activity-foot{display:flex;justify-content:space-between;gap:10px;margin-top:11px;padding-top:10px;border-top:1px solid var(--line);color:var(--muted);font-size:11px}
+
+
+/* v1.119 — Period-aware student performance table. */
+.student-report{margin:14px 0}
+.student-report .dashcardhead{align-items:flex-start}
+.student-report .dashcardhead p{margin:4px 0 0;font-size:12px}
+.student-report-count{flex:none;padding:5px 9px;border-radius:999px;background:#eef2ff;color:#315ee8;font-size:11px;font-weight:750}
+.student-report-search{display:block;margin:12px 0 5px;color:var(--muted);font-size:12px;font-weight:650}
+#studentReportSearch{width:100%;min-height:44px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--white);color:var(--ink);font:inherit;font-size:14px}
+#studentReportSearch:focus-visible{outline:3px solid #315ee855;outline-offset:2px}
+.student-report-table-wrap{width:100%;overflow-x:auto;margin-top:10px}
+.student-report-table{width:100%;border-collapse:collapse;font-size:12px;font-variant-numeric:tabular-nums}
+.student-report-table th,.student-report-table td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+.student-report-table thead th{color:var(--muted);font-size:10px;font-weight:750}
+.student-report-table th:first-child,.student-report-table td:first-child{text-align:left}
+.student-report-table tbody th{max-width:130px;overflow:hidden;text-overflow:ellipsis;color:var(--ink);font-weight:700}
+.student-report-table tbody td{color:var(--ink-2)}
+.student-report-table tbody tr:last-child th,.student-report-table tbody tr:last-child td{border-bottom:0}
+.student-report-table tbody td[colspan]{padding:18px 8px;text-align:center;color:var(--muted)}
+.student-report-note{margin:9px 0 0;color:var(--muted);font-size:11px;line-height:1.5}
+@media(max-width:390px){.student-report-table{font-size:11px}.student-report-table th,.student-report-table td{padding:9px 6px}.student-report-table thead th{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.student-report *{scroll-behavior:auto}}
+
+
+/* v1.120 — Attendance insights with explicit-confirmation accounting. */
+.attendance-insights{margin:14px 0}
+.attendance-insights .dashcardhead{align-items:flex-start}
+.attendance-insights .dashcardhead p{max-width:520px;margin:4px 0 0;font-size:12px;line-height:1.45}
+.attendance-kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:13px 0}
+.attendance-kpis article{display:flex;flex-direction:column;gap:5px;min-width:0;padding:12px;border:1px solid var(--line);border-radius:13px;background:var(--white)}
+.attendance-kpis span{color:var(--muted);font-size:11px;font-weight:650}
+.attendance-kpis strong{color:var(--ink);font-size:22px;font-weight:800;font-variant-numeric:tabular-nums}
+.attendance-table tbody td:nth-child(n+2){font-variant-numeric:tabular-nums}
+@media(min-width:520px){.attendance-kpis{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){.attendance-insights *{scroll-behavior:auto}}
+
+
+/* Premium iOS visual system — visual-only refinement; preserves existing app behaviour. */
+:root{
+ --premium-blue:#155eef;--premium-navy:#10213d;--premium-surface:#f7f9fd;
+ --premium-border:#e5eaf2;--premium-card-shadow:0 5px 18px rgba(20,39,72,.055);
+}
+body{background:#f3f6fb}
+.topbar{
+ background:rgba(255,255,255,.94);
+ border-bottom:1px solid #e8edf5;
+ box-shadow:0 2px 12px rgba(16,33,61,.035);
+ backdrop-filter:saturate(160%) blur(16px);
+ -webkit-backdrop-filter:saturate(160%) blur(16px);
+}
+.brand b{font-size:16px;letter-spacing:-.035em;color:var(--premium-navy)}
+.brand small{color:#718096}
+.tabbar{
+ background:rgba(255,255,255,.94);
+ border:1px solid #e7ecf4;
+ box-shadow:0 8px 28px rgba(16,33,61,.12);
+ backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+}
+.tabbar .tab{border-radius:15px;transition:background .18s ease,color .18s ease}
+.tabbar .tab.active{background:#edf3ff;color:#155eef}
+.tabbar .tab span{font-weight:700;letter-spacing:-.02em}
+.tabpanel{border-color:#e8edf5;box-shadow:0 8px 30px rgba(16,33,61,.045)}
+#overview .overview-intro{align-items:center;gap:14px}
+#overview .overview-intro h1{font-size:clamp(26px,4vw,34px);letter-spacing:-.055em;color:#10213d}
+#overview .overview-kicker{font-size:10px;letter-spacing:.13em;color:#718096}
+#overview .overview-subtitle{color:#718096;font-size:13px}
+#overview .overview-add{border-radius:14px;min-height:46px;padding-inline:18px}
+#overview .overviewstats{gap:11px;margin:18px 0}
+#overview .overviewstat{
+ border:1px solid #e5eaf2;border-radius:18px;padding:16px 12px;
+ background:linear-gradient(180deg,#fff,#f8faff);
+ box-shadow:var(--premium-card-shadow);
+}
+#overview .overviewstat b{font-size:clamp(25px,4vw,32px);letter-spacing:-.055em}
+#overview .overviewstat span{font-size:12px;font-weight:650;color:#64748b}
+#overview .overviewstat.completed{background:linear-gradient(180deg,#f1fbf5,#fff);border-color:#d9f0e2}
+#overview .overviewstat.upcoming{background:linear-gradient(180deg,#fff8ed,#fff);border-color:#f6e8d2}
+#overview .nextcard{border-radius:21px;box-shadow:0 12px 26px rgba(16,33,61,.14)}
+#overview .prayercard{border-radius:20px;box-shadow:var(--premium-card-shadow)}
+#overview .todayhead{margin-top:24px}
+#overview .record{border-radius:15px;box-shadow:var(--premium-card-shadow)}
+#students .student-summary-item,.student,.student-card{
+ border-radius:17px;
+}
+#students .student-summary-item{box-shadow:var(--premium-card-shadow)}
+#students .student{border-color:#e6ebf3;box-shadow:var(--premium-card-shadow);padding:15px}
+#reports .dashhero{border-radius:21px;box-shadow:0 12px 28px rgba(16,33,61,.12)}
+#reports .report,#reports .chartbox,#reports .attendance-insights,
+#reports .student-performance{border-radius:17px;box-shadow:var(--premium-card-shadow)}
+#reports .report{padding:17px}
+#reports .report strong{font-size:clamp(19px,2.5vw,24px);letter-spacing:-.04em}
+#reports .toolbar select{border-radius:13px;font-weight:650}
+#reports .dashactions .chipbtn{border-radius:12px;min-height:42px}
+:where(button,a,input,select,textarea,[tabindex]):focus-visible{
+ outline:3px solid rgba(21,94,239,.38);outline-offset:3px;
+}
+@media(max-width:720px){
+ .topbar{background:rgba(255,255,255,.96)}
+ #overview .overview-intro{align-items:flex-start}
+ #overview .overview-intro h1{font-size:28px}
+ #overview .overview-add{min-height:44px;padding-inline:13px}
+ #overview .overviewstats{gap:8px}
+ #overview .overviewstat{padding:13px 8px;border-radius:15px}
+ #overview .overviewstat b{font-size:26px}
+ #overview .overviewstat span{font-size:11px}
+ #reports .report{padding:13px}
+ .tabbar{padding:6px 7px}
+ .tabbar .tab{min-width:0}
+}
+@media(prefers-reduced-motion:reduce){
+ .tabbar .tab{transition:none}
+}
