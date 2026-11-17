@@ -46,8 +46,28 @@ function renderDashboard(){
  dashCount($("rIncome"),s.rev,euro);dashCount($("rExpenses"),s.exp,euro);dashCount($("rProfit"),s.net,euro);dashCount($("rCollected"),s.col,euro);dashCount($("rUnpaid"),s.out,euro);
  $("rProfit").classList.toggle("neg",s.net<0);
  $("rHours").textContent=fmtH(s.hours)+" h";$("rCount").textContent=String(s.lessons);$("rStudents").textContent=String(s.students);$("rAvg").textContent=s.hours>0?euro(s.rev/s.hours):"–";
- dashInsights(p,v,s);dashStudentPerformance(p,v);dashDonut(s);dashWeeks();dashHealth(p,v,s);dashHeat(p,v);}
+ dashInsights(p,v,s);dashStudentPerformance(p,v);dashAttendanceInsights(p,v);dashDonut(s);dashWeeks();dashHealth(p,v,s);dashHeat(p,v);}
 
+// Attendance is based only on explicit user confirmation; undefined status is never counted as absence.
+function dashAttendanceInsights(p,v){
+ const lessons=state.entries.filter(e=>e.type==="Lesson"&&inSel(e.date,p,v));
+ const done=lessons.filter(e=>e.done===true),missed=lessons.filter(e=>e.done===false),unconfirmed=lessons.filter(e=>e.done===undefined);
+ const confirmed=done.length+missed.length;
+ $("attendanceDone").textContent=String(done.length);
+ $("attendanceMissed").textContent=String(missed.length);
+ $("attendanceUnconfirmed").textContent=String(unconfirmed.length);
+ $("attendanceRate").textContent=confirmed?Math.round(done.length/confirmed*100)+"%":"–";
+ const byStudent=new Map();
+ for(const e of lessons){
+  const name=(e.student||"").trim()||"Unnamed student";
+  const row=byStudent.get(name)||{done:0,missed:0,unconfirmed:0};
+  if(e.done===true)row.done++;else if(e.done===false)row.missed++;else row.unconfirmed++;
+  byStudent.set(name,row);
+ }
+ const rows=[...byStudent.entries()].map(([name,x])=>({name,...x,rate:x.done+x.missed?Math.round(x.done/(x.done+x.missed)*100):null}))
+ .sort((a,b)=>b.done-a.done||b.missed-a.missed||a.name.localeCompare(b.name));
+ $("attendanceRows").innerHTML=rows.length?rows.map(x=>`<tr><th scope="row">${esc(x.name)}</th><td>${x.done}</td><td>${x.missed}</td><td>${x.rate===null?"–":x.rate+"%"}</td></tr>`).join(""):'<tr><td colspan="4">No attendance records in this period.</td></tr>';
+}
 // Student-level performance for the currently selected reporting period.
 function dashStudentPerformance(p,v){
  const query=($("studentReportSearch")?.value||"").trim().toLocaleLowerCase();
