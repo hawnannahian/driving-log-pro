@@ -3360,3 +3360,80 @@ body{background:var(--pc-bg)}
 .attendance-table tbody td:nth-child(n+2){font-variant-numeric:tabular-nums}
 @media(min-width:520px){.attendance-kpis{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(prefers-reduced-motion:reduce){.attendance-insights *{scroll-behavior:auto}}
+
+
+/* Premium iOS visual system — visual-only refinement; preserves existing app behaviour. */
+:root{
+ --premium-blue:#155eef;--premium-navy:#10213d;--premium-surface:#f7f9fd;
+ --premium-border:#e5eaf2;--premium-card-shadow:0 5px 18px rgba(20,39,72,.055);
+}
+body{background:#f3f6fb}
+.topbar{
+ background:rgba(255,255,255,.94);
+ border-bottom:1px solid #e8edf5;
+ box-shadow:0 2px 12px rgba(16,33,61,.035);
+ backdrop-filter:saturate(160%) blur(16px);
+ -webkit-backdrop-filter:saturate(160%) blur(16px);
+}
+.brand b{font-size:16px;letter-spacing:-.035em;color:var(--premium-navy)}
+.brand small{color:#718096}
+.tabbar{
+ background:rgba(255,255,255,.94);
+ border:1px solid #e7ecf4;
+ box-shadow:0 8px 28px rgba(16,33,61,.12);
+ backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+}
+.tabbar .tab{border-radius:15px;transition:background .18s ease,color .18s ease}
+.tabbar .tab.active{background:#edf3ff;color:#155eef}
+.tabbar .tab span{font-weight:700;letter-spacing:-.02em}
+.tabpanel{border-color:#e8edf5;box-shadow:0 8px 30px rgba(16,33,61,.045)}
+#overview .overview-intro{align-items:center;gap:14px}
+#overview .overview-intro h1{font-size:clamp(26px,4vw,34px);letter-spacing:-.055em;color:#10213d}
+#overview .overview-kicker{font-size:10px;letter-spacing:.13em;color:#718096}
+#overview .overview-subtitle{color:#718096;font-size:13px}
+#overview .overview-add{border-radius:14px;min-height:46px;padding-inline:18px}
+#overview .overviewstats{gap:11px;margin:18px 0}
+#overview .overviewstat{
+ border:1px solid #e5eaf2;border-radius:18px;padding:16px 12px;
+ background:linear-gradient(180deg,#fff,#f8faff);
+ box-shadow:var(--premium-card-shadow);
+}
+#overview .overviewstat b{font-size:clamp(25px,4vw,32px);letter-spacing:-.055em}
+#overview .overviewstat span{font-size:12px;font-weight:650;color:#64748b}
+#overview .overviewstat.completed{background:linear-gradient(180deg,#f1fbf5,#fff);border-color:#d9f0e2}
+#overview .overviewstat.upcoming{background:linear-gradient(180deg,#fff8ed,#fff);border-color:#f6e8d2}
+#overview .nextcard{border-radius:21px;box-shadow:0 12px 26px rgba(16,33,61,.14)}
+#overview .prayercard{border-radius:20px;box-shadow:var(--premium-card-shadow)}
+#overview .todayhead{margin-top:24px}
+#overview .record{border-radius:15px;box-shadow:var(--premium-card-shadow)}
+#students .student-summary-item,.student,.student-card{
+ border-radius:17px;
+}
+#students .student-summary-item{box-shadow:var(--premium-card-shadow)}
+#students .student{border-color:#e6ebf3;box-shadow:var(--premium-card-shadow);padding:15px}
+#reports .dashhero{border-radius:21px;box-shadow:0 12px 28px rgba(16,33,61,.12)}
+#reports .report,#reports .chartbox,#reports .attendance-insights,
+#reports .student-performance{border-radius:17px;box-shadow:var(--premium-card-shadow)}
+#reports .report{padding:17px}
+#reports .report strong{font-size:clamp(19px,2.5vw,24px);letter-spacing:-.04em}
+#reports .toolbar select{border-radius:13px;font-weight:650}
+#reports .dashactions .chipbtn{border-radius:12px;min-height:42px}
+:where(button,a,input,select,textarea,[tabindex]):focus-visible{
+ outline:3px solid rgba(21,94,239,.38);outline-offset:3px;
+}
+@media(max-width:720px){
+ .topbar{background:rgba(255,255,255,.96)}
+ #overview .overview-intro{align-items:flex-start}
+ #overview .overview-intro h1{font-size:28px}
+ #overview .overview-add{min-height:44px;padding-inline:13px}
+ #overview .overviewstats{gap:8px}
+ #overview .overviewstat{padding:13px 8px;border-radius:15px}
+ #overview .overviewstat b{font-size:26px}
+ #overview .overviewstat span{font-size:11px}
+ #reports .report{padding:13px}
+ .tabbar{padding:6px 7px}
+ .tabbar .tab{min-width:0}
+}
+@media(prefers-reduced-motion:reduce){
+ .tabbar .tab{transition:none}
+}
