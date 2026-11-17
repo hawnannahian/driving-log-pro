@@ -203,3 +203,13 @@ Every PR description or final task report must state:
 - If requirements are ambiguous or a change could affect money, bookings or existing records, ask one focused question instead of guessing.
 - Do not claim success until the relevant checks have actually passed.
 - **Owner preference (2026-11-13):** send only ONE message per task, when it is finished: what changed, what was tested, what the owner should check on the phone. Do not send progress or waiting messages ("PR opened, waiting for CI", "CI is running", "will merge when green"). Do not reply to automatic background-task or monitor notifications at all (no "old event, nothing to do" messages); wait silently. Merge own PRs without asking (§3a) and report the result once.
+
+## 15. Graphify — optional development assistant
+
+Graphify (`.claude/skills/graphify/`, CLI `graphify`) builds a local code knowledge graph. It is an optional helper, never a requirement.
+
+- It never replaces or bypasses §2. Always still read this entire `CLAUDE.md` and the complete `PROJECT_STATE.md`, and inspect the relevant source, before changing code.
+- Graph output is a navigation aid only, never a source of truth. Before relying on or changing anything the graph points to, read the real file on current `main`. Graph output can be stale or incomplete (it parses JavaScript only; CSS, HTML and data files are not modelled).
+- Use it only when it is installed and only when it helps (e.g. `graphify query "<question>"`, `graphify update .` to refresh). Do not run it automatically after every code change. No Graphify hooks are installed in this repository.
+- Generated output (`graphify-out/`) is git-ignored. Never commit graph databases, caches, reports or temporary output, and never publish them through GitHub Pages.
+- If `graphify` is not installed, carry on normally; nothing in the project workflow depends on it. A reproducible setup for temporary containers is in `tools/setup-dev-env.sh` (review before running; it changes the machine's global tools).

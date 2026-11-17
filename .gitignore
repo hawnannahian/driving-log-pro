@@ -12,3 +12,6 @@ migration/
 # Cloudflare Worker local secrets and dependencies
 push-worker/.dev.vars
 push-worker/node_modules/
+
+# Graphify generated output (local only; never commit or publish)
+graphify-out/
