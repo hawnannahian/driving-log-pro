@@ -3222,3 +3222,14 @@ body{background:var(--pc-bg)}
 .cl-yes,.cl-no{flex:none;min-width:52px;min-height:40px;border-radius:11px;font:inherit;font-size:13px;font-weight:800}
 .cl-yes{border:0;background:#e8f6ee;color:#0f7a4f}
 .cl-no{border:1px solid #f0d2d2;background:#fff;color:#b93838}
+
+/* v1.111 — touch targets: every interactive control gets a >=44x44 CSS px hit area (Apple HIG) without changing how it looks.
+   The enlarged area is an invisible ::after; it only grows an axis that is smaller than 44px. Not applied to inputs (they cannot have ::after). */
+:is(#prayerCardEdit,#overview .tmain,.tdone,.tpay,.actbtn,.remindchip,#calPrev,#calNext,button[data-view],#logMenuToggle,#regularStudentsTab,#fullTimeStudentsTab,#ftCsv,summary,.dashactions .chipbtn,button[data-isview],.isplay,.isfav,.isback,.istools button,.isskip,button[data-tzt]){position:relative}
+:is(#prayerCardEdit,#overview .tmain,.tdone,.tpay,.actbtn,.remindchip,#calPrev,#calNext,button[data-view],#logMenuToggle,#regularStudentsTab,#fullTimeStudentsTab,#ftCsv,summary,.dashactions .chipbtn,button[data-isview],.isplay,.isfav,.isback,.istools button,.isskip,button[data-tzt])::after{content:"";position:absolute;top:min(0px,calc((100% - 44px)/2));bottom:min(0px,calc((100% - 44px)/2));left:min(0px,calc((100% - 44px)/2));right:min(0px,calc((100% - 44px)/2))}
+#cloudRepo,#cloudToken{min-height:44px}
+#duaSeek,.isseek{height:44px;margin-top:-4px;margin-bottom:-12px}
+/* Student card actions: wider gap so the three enlarged hit areas never overlap (34px buttons + 10px gaps = 44px pitch; 32px + 12px on narrow phones, so the row stays about as wide as before). */
+#students .studentacts{gap:10px}#students .studentacts .actbtn{width:34px;min-width:34px}
+@media(max-width:380px){#students .studentacts{gap:12px}#students .studentacts .actbtn{width:32px;min-width:32px}}
+.tztargets{row-gap:8px}
