@@ -3280,3 +3280,21 @@ body{background:var(--pc-bg)}
 @media(prefers-reduced-motion:reduce){
  #overview .tabpanel,.tabpanel{animation:none!important;transition:none!important}
 }
+
+
+/* v1.116 — Active lesson timer: clearer schedule context and accessible progress. */
+.timerdetail{display:block;margin-top:4px;color:#c0cce0;font-size:12px;font-weight:550;letter-spacing:.1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.timerbar .timerhead{align-items:flex-start}
+.timerbar .timerstatus{flex:none;margin-top:1px}
+.timerbar .timerfill{pointer-events:none}
+.timerbar .timeractions .timerbtn{min-height:48px;font-size:14px;font-weight:750;letter-spacing:-.1px}
+.timerbar .timeractions .timerbtn:focus-visible{outline:3px solid #f2c96b;outline-offset:3px}
+.timerbar .timeractions .timerend{background:linear-gradient(135deg,#477cf1,#315ee8);box-shadow:0 5px 14px #315ee83d}
+.timerbar .timerring{box-shadow:0 0 0 1px #ffffff12,0 0 32px #315ee82b}
+@media(max-width:380px){
+ .timerbar .timerhead b{font-size:14px}
+ .timerdetail{font-size:11px}
+ .timerbar .timeractions{gap:7px}
+ .timerbar .timeractions .timerbtn{min-height:46px;padding-inline:8px;font-size:13px}
+}
+@media(prefers-reduced-motion:reduce){.timerbar .timerfill{transition:none!important}}
