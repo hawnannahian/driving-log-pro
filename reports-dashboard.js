@@ -136,6 +136,7 @@ function dashPdfExtra(cur,y,p,v,c){const s=dashStats(p,v),total=s.cats.reduce((a
  monthRows(6).forEach(r=>{cur.push({x:300,y:yr,text:r.long,size:8.5,color:c.NAVY},{x:400,y:yr,text:`${c.m(r.income)} / ${c.m(r.expenses)} / ${c.m(r.profit)}`,size:8.5,color:c.NAVY});yr-=13;});
  cur.push({x:300,y:yr,text:"Revenue / Expenses / Net (EUR)",size:7.5,color:c.GREY});return Math.min(yl,yr-13)-14;}
 
+$("studentReportSearch").addEventListener("input",()=>dashStudentPerformance($("period").value,$("periodValue").value));
 $("dashCsv").onclick=dashCsv;$("dashShare").onclick=dashShare;$("dashPrint").onclick=()=>window.print();
 $("heatPrev").onclick=()=>dashHeatMove(-1);$("heatNext").onclick=()=>dashHeatMove(1);
 document.querySelectorAll("[data-range]").forEach(b=>b.onclick=()=>{dashRange=b.dataset.range;document.querySelectorAll("[data-range]").forEach(x=>x.classList.toggle("active",x===b));renderChart();});
