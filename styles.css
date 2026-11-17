@@ -3325,3 +3325,25 @@ body{background:var(--pc-bg)}
 #profileDialog .profile-activity-month b{font-size:10px;color:var(--ink-2);font-variant-numeric:tabular-nums}
 #profileDialog .profile-activity-month small{font-size:10px;color:var(--muted)}
 #profileDialog .profile-activity-foot{display:flex;justify-content:space-between;gap:10px;margin-top:11px;padding-top:10px;border-top:1px solid var(--line);color:var(--muted);font-size:11px}
+
+
+/* v1.119 — Period-aware student performance table. */
+.student-report{margin:14px 0}
+.student-report .dashcardhead{align-items:flex-start}
+.student-report .dashcardhead p{margin:4px 0 0;font-size:12px}
+.student-report-count{flex:none;padding:5px 9px;border-radius:999px;background:#eef2ff;color:#315ee8;font-size:11px;font-weight:750}
+.student-report-search{display:block;margin:12px 0 5px;color:var(--muted);font-size:12px;font-weight:650}
+#studentReportSearch{width:100%;min-height:44px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--white);color:var(--ink);font:inherit;font-size:14px}
+#studentReportSearch:focus-visible{outline:3px solid #315ee855;outline-offset:2px}
+.student-report-table-wrap{width:100%;overflow-x:auto;margin-top:10px}
+.student-report-table{width:100%;border-collapse:collapse;font-size:12px;font-variant-numeric:tabular-nums}
+.student-report-table th,.student-report-table td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+.student-report-table thead th{color:var(--muted);font-size:10px;font-weight:750}
+.student-report-table th:first-child,.student-report-table td:first-child{text-align:left}
+.student-report-table tbody th{max-width:130px;overflow:hidden;text-overflow:ellipsis;color:var(--ink);font-weight:700}
+.student-report-table tbody td{color:var(--ink-2)}
+.student-report-table tbody tr:last-child th,.student-report-table tbody tr:last-child td{border-bottom:0}
+.student-report-table tbody td[colspan]{padding:18px 8px;text-align:center;color:var(--muted)}
+.student-report-note{margin:9px 0 0;color:var(--muted);font-size:11px;line-height:1.5}
+@media(max-width:390px){.student-report-table{font-size:11px}.student-report-table th,.student-report-table td{padding:9px 6px}.student-report-table thead th{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.student-report *{scroll-behavior:auto}}
