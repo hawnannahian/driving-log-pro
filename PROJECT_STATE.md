@@ -1,3 +1,9 @@
+## v1.112 — Minimum text size 11px (2026-11-17; owner request, Phase 2 of UI/UX review)
+- 71 `font-size` declarations in `styles.css` that were below 11px (8.8/9/9.5/10/10.5px) are raised to 11px (Apple HIG minimum). Values only; selectors, cascade order and all other properties unchanged. No JS/HTML/data change.
+- Deliberate exceptions that stay smaller because the space is physically tight: week-view lesson blocks `.wkles`, calendar day/week cells (`.calday`, `.wkday`, `.calcount`), and the bottom tab bar labels at narrow widths (they were restored to the previous 9.5px / 8.8px after "Overview Calendar" touched at 320px). Remaining sub-11px declarations: tab bar + those calendar cells.
+- Verification (Chromium, synthetic data): 138-state screenshot sweep before/after at 390×844, 320×568 and 1024×768 reviewed; clipped/overflowing-text detector over all tabs, calendar views and profile tabs at 390 and 320: 4 findings before, 4 after, none new; 142 node tests; smoke suite passes. Layout grows slightly where text wraps (e.g. Students stat labels at 320px). Not tested: real iPhone, Dynamic Type.
+- Files: `styles.css`, `index.html` (v1.112), `sw.js` (cache v175), this file.
+
 ## v1.111 — Touch targets: 44×44 hit areas, same look (2026-11-17; owner request, Phase 1 of UI/UX review)
 - Every interactive control on Overview, Calendar (day/week/month), Log, Students, Reports and Islamic now has a hit area of at least 44×44 CSS px (Apple HIG). Done with an invisible `::after` on the control that only grows an axis smaller than 44px (`top/bottom/left/right:min(0px,calc((100% - 44px)/2))`); the visible size is unchanged. Range sliders (`#duaSeek`, `.isseek`) are 44px tall with negative margins; `#cloudRepo`/`#cloudToken` inputs have `min-height:44px`.
 - Overlap prevention: Student-card action buttons are 34px wide with 10px gaps (32px + 12px at ≤380px) so the three enlarged areas tile exactly; `.tztargets` row-gap 8px.
