@@ -4,6 +4,11 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs for review, Claude's own-PR merge authority under §3a, no student data in the repo).
 
 ## Recent handover entries
+### 2026-11-17 — Claude: tab bar `aria-current` from first paint (v1.114, cache v177, PR #201)
+- `switchTab()` already set `aria-current="page"` on the active tab, but the Overview tab active on first paint had none until the user switched tabs; `index.html` now carries it. No visual/JS/CSS/data change. New test `tests/nav-aria.test.js` (144 node tests pass); Chromium 390x844 check; not tested with a real iPhone/VoiceOver. PROJECT_STATE has the v1.114 entry.
+- Correction: an earlier UI review note said the tab bar had no `aria-current`; the gap was only the initial markup.
+- **Owner decision pending:** the bottom bar has 6 tabs (Apple HIG suggests at most 5). Not changed: it alters navigation structure, so the owner must choose which tab (if any) moves into a "More" screen. Phases 5+ (dark mode, unified radius/type scale) not started.
+
 ### 2026-11-17 — Claude: design tokens v1.113 (cache v176, PR #199)
 - New first `:root` in `styles.css` with `--white`, `--ink-2`, `--ink-3`, `--faint`, `--ok`, `--danger`, `--line-2`, `--tint`, `--panel`, `--radius-sm/md/lg/xl` (10/12/14/16px). Literals were replaced by `var()` only where the value is identical (291 colours, 135 radii). Odd radii (9/11/13/15/18/20px) left on purpose for a later owner decision.
 - **Gotcha for the other agent:** `--navy`, `--ink`, `--muted`, `--line`, `--bg` are redefined by the later "Premium design foundation" `:root` (~line 717). Replacing their old literal values with `var()` changes colours, so do not. Before adding a token for a literal, check its effective (last) value; verify with a computed-style before/after comparison.
@@ -188,8 +193,8 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 
 
 ## Latest verified project state
-- **main `0333db8`** (merge of PR #199; before it `c4fecf2` = PR #198 docs, `5b1af2f` = PR #197): footer **v1.113**, Service Worker cache **`nahians-schedule-cache-v176`**. GitHub Pages "pages build and deployment" runs for `e2ecdc9`, `a9a3a3a`, `ba89f12`, `d477b17`, `5b1af2f`, `c4fecf2` and `0333db8` all completed successfully (checked 2026-11-17 via the Actions API). That proves the Pages build/deploy only; the live site was not fetched (proxy 403) and real-iPhone behaviour is not verified by any agent.
-- Latest releases: v1.110 owner's recorded timer voices (PR #192), v1.111 touch targets (PR #193), v1.112 minimum text size (PR #197), v1.113 design tokens (PR #199); PR #194 is tooling/docs only.
+- **main `4c49ee5`** (merge of PR #201; before it `f634512` = PR #200 docs, `0333db8` = PR #199): footer **v1.114**, Service Worker cache **`nahians-schedule-cache-v177`**. GitHub Pages "pages build and deployment" runs for `e2ecdc9`, `a9a3a3a`, `ba89f12`, `d477b17`, `5b1af2f`, `c4fecf2`, `0333db8`, `f634512` and `4c49ee5` all completed successfully (checked 2026-11-17 via the Actions API). That proves the Pages build/deploy only; the live site was not fetched (proxy 403) and real-iPhone behaviour is not verified by any agent.
+- Latest releases: v1.110 owner's recorded timer voices (PR #192), v1.111 touch targets (PR #193), v1.112 minimum text size (PR #197), v1.113 design tokens (PR #199), v1.114 tab-bar aria-current (PR #201); PR #194 is tooling/docs only.
 - Other recent releases: v1.68 daily cloud backup, v1.70 realistic car header image, v1.71-v1.74 (ChatGPT) Students/Forms/bottom-nav/profile UX.
 - **Open PRs:** #73 and #13 only (old, untouched; verified 2026-11-17). Older "DRAFT" labels on earlier ChatGPT entries below are historical wording; check GitHub for the real state.
 - `push-config.js` API URL remains empty; Cloudflare Worker not deployed/configured. Prayer times use the Mawaqit snapshot; overlap warns and does not block booking.
