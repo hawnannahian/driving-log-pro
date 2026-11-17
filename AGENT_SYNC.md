@@ -4,6 +4,9 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs for review, Claude's own-PR merge authority under §3a, no student data in the repo).
 
 ## Recent handover entries
+### 2026-11-17 — Owner decision: keep the 6-tab bottom bar
+- The owner decided to **keep all 6 tabs** (Overview, Calendar, Log, Students, Reports, Islamic). Apple HIG suggests at most 5, but no "More" screen will be built. This closes the pending decision noted in the v1.114 entry; do not reduce or restructure the tab bar unless the owner asks again. The narrow-screen tab labels therefore stay at their small sizes (see v1.112 exceptions).
+
 ### 2026-11-17 — Claude: PR #73 closed (superseded)
 - PR #73 (ChatGPT's "Move Calendar and WhatsApp controls into Driving Log Settings", branch `fix/log-settings-subtab-followup-2026-11-07`) was **closed at the owner's request**. Reason: `main` already has Working hours, Prayer time settings and WhatsApp Message Settings in the Log -> Settings panel (`logSettingsPanel`, opened from the ⋮ button); the branch was 452 commits behind and conflicted in `app.js`, `index.html`, `styles.css`, `sw.js` and `PROJECT_STATE.md`. Re-applying its Records/Settings sub-tab markup would duplicate IDs such as `wStart` and `pOn`.
 - The branch itself was **not deleted** (owner decision pending); the closed PR still references its 5 commits. Only PR #13 remains open. Do not revive #73; if sub-tabs in Log are wanted, design them on top of the current `logSettingsPanel`.
