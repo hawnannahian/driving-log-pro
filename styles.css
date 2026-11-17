@@ -3234,3 +3234,49 @@ body{background:var(--pc-bg)}
 #students .studentacts{gap:10px}#students .studentacts .actbtn{width:34px;min-width:34px}
 @media(max-width:380px){#students .studentacts{gap:12px}#students .studentacts .actbtn{width:32px;min-width:32px}}
 .tztargets{row-gap:8px}
+
+
+/* v1.115 — Premium dashboard polish. Presentation-only additions; existing records and workflows stay unchanged. */
+#overview.overview-panel{padding:clamp(14px,2.4vw,24px);border-radius:22px}
+#overview .overview-intro{margin-bottom:14px;align-items:center}
+#overview .overview-kicker{font-size:10px;letter-spacing:1.5px}
+#overview .overview-subtitle{font-size:13px}
+#overview .overview-add{min-height:48px;border-radius:15px;font-weight:750}
+.overviewstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0 0 16px}
+.overviewstat{min-width:0;padding:12px 14px;border:1px solid #e5ebf5;border-radius:15px;background:linear-gradient(180deg,#fff,#f8faff);display:flex;flex-direction:column;gap:3px}
+.overviewstat b{font-size:25px;line-height:1.05;letter-spacing:-.7px;color:#172943;font-variant-numeric:tabular-nums}
+.overviewstat span{font-size:11px;font-weight:650;color:#718096}
+.overviewstat.completed b{color:#16845b}
+.overviewstat.upcoming b{color:#315ee8}
+#overview .nextcard{margin-bottom:16px;border-radius:21px}
+#overview .nextactions .nextbtn{min-height:48px;border-radius:15px;font-weight:750}
+#overview .prayercard{margin:0 0 18px;border-radius:21px}
+#overview .todayhead{margin-top:2px;margin-bottom:10px}
+#overview .todayrow{min-height:66px;border-radius:16px;padding:10px 11px}
+#overview .tmain b{font-size:12px;font-variant-numeric:tabular-nums}
+#overview .tmain span{font-size:14px;font-weight:650}
+#overview .actbtn{width:42px;height:42px;border-radius:13px}
+#overview .todaygap{height:16px}
+#overview .duaplayer{border-radius:20px}
+.topbar{min-height:calc(62px + env(safe-area-inset-top));}
+.brand .brandcar{width:82px;max-height:52px;object-fit:contain}
+.brand b{font-size:17px;letter-spacing:-.35px;color:#14294c}
+.brand small{display:block;font-size:12px;color:#29466f;margin-top:2px}
+.tabbar{padding:7px 6px calc(7px + env(safe-area-inset-bottom))}
+.tabbar .tab{min-height:54px;gap:4px;font-size:11px;font-weight:700}
+.tabbar .tab svg{width:23px;height:23px}
+@media(max-width:420px){
+ #overview.overview-panel{padding:13px;border-radius:19px}
+ #overview .overview-intro{gap:9px}
+ #overview .overview-add{min-height:44px;padding:0 11px;font-size:12px}
+ .overviewstats{gap:7px;margin-bottom:13px}
+ .overviewstat{padding:10px 9px;border-radius:13px}
+ .overviewstat b{font-size:22px}
+ .overviewstat span{font-size:10.5px}
+ .brand .brandcar{width:70px}
+ .brand b{font-size:15px}
+ .brand small{font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){
+ #overview .tabpanel,.tabpanel{animation:none!important;transition:none!important}
+}

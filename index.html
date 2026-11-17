@@ -29,6 +29,11 @@
 
     <section class="panel tabpanel overview-panel" id="overview">
       <div class="overview-intro"><div><p class="overview-kicker">DRIVING LOG PRO</p><h1>Overview</h1><p class="overview-subtitle">Your lessons and schedule at a glance</p></div><button type="button" class="btn primary overview-add" id="overviewAddLesson">＋ Add lesson</button></div>
+      <section class="overviewstats" aria-label="Today's lesson summary">
+        <article class="overviewstat"><b id="overviewLessonCount">0</b><span>Lessons</span></article>
+        <article class="overviewstat completed"><b id="overviewCompletedCount">0</b><span>Completed</span></article>
+        <article class="overviewstat upcoming"><b id="overviewUpcomingCount">0</b><span>Upcoming</span></article>
+      </section>
       <div id="nextCard" class="nextcard"></div>
       <section class="prayercard hidden" id="prayerCard" aria-label="Prayer times"></section>
       <section class="timerbar hidden" id="timerBar" role="timer" aria-live="off"><div class="timerfill" id="timerFill"></div><div class="timerhead"><div><small class="timerkicker">DRIVING LESSON</small><b id="timerLabel">Student</b></div><span id="timerStatus" class="timerstatus live">LIVE</span></div><div class="timercenter"><div class="timerring" id="timerRing"><div class="timerringinner"><small>TIME REMAINING</small><b id="timerDigits">55:00</b><small id="timerSub">00:00 elapsed</small></div></div></div><div class="timeractions"><button type="button" class="timerbtn" id="timerPause">Pause</button><button type="button" class="timerbtn timerend" id="timerEnd">End lesson</button></div></section>
