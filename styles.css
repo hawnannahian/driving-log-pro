@@ -3298,3 +3298,15 @@ body{background:var(--pc-bg)}
  .timerbar .timeractions .timerbtn{min-height:46px;padding-inline:8px;font-size:13px}
 }
 @media(prefers-reduced-motion:reduce){.timerbar .timerfill{transition:none!important}}
+
+
+/* v1.117 — Lesson booking summary: a compact live confirmation of student, date, time and duration. */
+#recordDialog .lesson-booking-preview{display:flex;align-items:center;gap:10px;min-width:0;margin:-3px 0 1px;padding:11px 13px;border:1px solid #dce6f5;border-radius:14px;background:#f6f8fc;transition:background .18s,border-color .18s}
+#recordDialog .lesson-booking-preview.hidden{display:none}
+#recordDialog .lesson-booking-preview-icon{display:grid;place-items:center;flex:0 0 30px;width:30px;height:30px;border-radius:10px;background:#e8edf6;color:#64748b;font-size:14px;font-weight:900}
+#recordDialog .lesson-booking-preview-copy{display:grid;gap:2px;min-width:0}
+#recordDialog .lesson-booking-preview-copy b{overflow:hidden;color:#1d2c45;font-size:13px;font-weight:800;text-overflow:ellipsis;white-space:nowrap}
+#recordDialog .lesson-booking-preview-copy small{color:#68778d;font-size:11.5px;line-height:1.35}
+#recordDialog .lesson-booking-preview.is-ready{border-color:#c9e8d8;background:#f1faf5}
+#recordDialog .lesson-booking-preview.is-ready .lesson-booking-preview-icon{background:#d9f1e4;color:#16845b}
+@media(prefers-reduced-motion:reduce){#recordDialog .lesson-booking-preview{transition:none}}
