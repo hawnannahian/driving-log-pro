@@ -3347,3 +3347,16 @@ body{background:var(--pc-bg)}
 .student-report-note{margin:9px 0 0;color:var(--muted);font-size:11px;line-height:1.5}
 @media(max-width:390px){.student-report-table{font-size:11px}.student-report-table th,.student-report-table td{padding:9px 6px}.student-report-table thead th{font-size:9px}}
 @media(prefers-reduced-motion:reduce){.student-report *{scroll-behavior:auto}}
+
+
+/* v1.120 — Attendance insights with explicit-confirmation accounting. */
+.attendance-insights{margin:14px 0}
+.attendance-insights .dashcardhead{align-items:flex-start}
+.attendance-insights .dashcardhead p{max-width:520px;margin:4px 0 0;font-size:12px;line-height:1.45}
+.attendance-kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:13px 0}
+.attendance-kpis article{display:flex;flex-direction:column;gap:5px;min-width:0;padding:12px;border:1px solid var(--line);border-radius:13px;background:var(--white)}
+.attendance-kpis span{color:var(--muted);font-size:11px;font-weight:650}
+.attendance-kpis strong{color:var(--ink);font-size:22px;font-weight:800;font-variant-numeric:tabular-nums}
+.attendance-table tbody td:nth-child(n+2){font-variant-numeric:tabular-nums}
+@media(min-width:520px){.attendance-kpis{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){.attendance-insights *{scroll-behavior:auto}}
