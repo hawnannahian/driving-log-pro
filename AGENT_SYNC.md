@@ -178,7 +178,7 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 
 
 ## Latest verified project state
-- **main `a9a3a3a`** (merge of PR #194; before it `e2ecdc9` = PR #193): footer **v1.111**, Service Worker cache **`nahians-schedule-cache-v174`**. Pages run for `e2ecdc9` completed successfully (checked 2026-11-17); the run for `a9a3a3a` was still in progress when checked. Pages success proves the build only; real-iPhone behaviour is not verified by any agent.
+- **main `ba89f12`** (merge of PR #195, docs only; before it `a9a3a3a` = PR #194, `e2ecdc9` = PR #193): footer **v1.111**, Service Worker cache **`nahians-schedule-cache-v174`**. GitHub Pages runs "pages build and deployment" for `6cab184`, `e2ecdc9`, `a9a3a3a` and `ba89f12` all completed successfully (checked 2026-11-17 via the Actions API). That proves the Pages build/deploy only; the live site was not fetched (proxy 403) and real-iPhone behaviour is not verified by any agent.
 - Latest releases: v1.110 owner's recorded timer voices (PR #192), v1.111 touch targets (PR #193); PR #194 is tooling/docs only.
 - Other recent releases: v1.68 daily cloud backup, v1.70 realistic car header image, v1.71-v1.74 (ChatGPT) Students/Forms/bottom-nav/profile UX.
 - **Open PRs:** #73 and #13 only (old, untouched; verified 2026-11-17). Older "DRAFT" labels on earlier ChatGPT entries below are historical wording; check GitHub for the real state.
