@@ -3521,3 +3521,7 @@ body{background:#f3f6fb}
 #profileDialog .profile-activity-track i.activity-pct-90{height:90%}
 #profileDialog .profile-activity-track i.activity-pct-95{height:95%}
 #profileDialog .profile-activity-track i.activity-pct-100{height:100%}
+
+/* v1.124 — Settings: the On/Off toggle never shrinks (its label text was spilling out of the card), and a disabled action looks disabled. */
+#logSettingsPanel .settings-card .settings-toggle{flex:none;white-space:nowrap}
+#logSettingsPanel .settings-card .btn:disabled{background:var(--line-2);color:var(--muted);box-shadow:none;cursor:not-allowed;opacity:1}
