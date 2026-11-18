@@ -3650,3 +3650,7 @@ main #overview.overview-panel{padding:0;border:0;background:transparent;box-shad
 #overview .todayall{position:relative;min-height:32px}
 #overview .todayall::after{content:"";position:absolute;top:-6px;bottom:-6px;left:-6px;right:-6px}
 #overview .todaygap{height:6px}
+
+/* v1.129 — the "Overview" heading and the date line are no longer shown (owner request). They stay in the page, visually hidden, so screen readers still get the page heading and today's date. */
+#overview .overview-intro{justify-content:flex-end;margin:0 0 8px}
+#overview .overview-intro h1,#overview .overview-intro .overview-date{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
