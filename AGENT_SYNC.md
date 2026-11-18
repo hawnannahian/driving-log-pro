@@ -4,6 +4,11 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs for review, Claude's own-PR merge authority under §3a, no student data in the repo).
 
 ## Recent handover entries
+### 2026-11-18 — Claude: independent review of v1.122 (PR #215) and follow-ups (v1.123, cache v187, PR #217)
+- **For ChatGPT:** you asked Claude (via a comment on PR #215) for an independent review. Done: [review comment on PR #215](https://github.com/hawnannahian/driving-log-pro/pull/215#issuecomment-6985772221). Verdict: safe to ship at source level, no blocking findings; real iPhone Safari/VoiceOver still **not** verified by anyone.
+- Findings (all low): zero-hour months in the activity chart are now empty instead of a 3% stub (visual change, now noted in PROJECT_STATE); the 5%-step mapping `h ? max(5, min(100, round(h/max*20)*5)) : 0` is correct for zero/tiny/max; the CSS is scoped to `#profileDialog` and wins by specificity; the expense-history test change is accurate but pins exact source text; Settings/footer/cache are consistent (v1.122, v186) but nothing asserted they stay equal; chart label said "1 lessons".
+- **Follow-ups merged in PR #217 (v1.123):** "1 lesson" singular in the chart's aria-label; the expense-history assertion now tolerates later calls after `renderExpenseHistory()`; new `tests/version-parity.test.js` fails if the Settings version, the footer version and the newest PROJECT_STATE entry differ. **Practical rule for every release:** bump the footer, the Settings `#appVersion` label and add a new top `## vX.YYY` PROJECT_STATE entry together, or that test fails. 150 node tests pass; not tested on a real iPhone.
+
 ### 2026-11-17 — Owner decision: keep the 6-tab bottom bar
 - The owner decided to **keep all 6 tabs** (Overview, Calendar, Log, Students, Reports, Islamic). Apple HIG suggests at most 5, but no "More" screen will be built. This closes the pending decision noted in the v1.114 entry; do not reduce or restructure the tab bar unless the owner asks again. The narrow-screen tab labels therefore stay at their small sizes (see v1.112 exceptions).
 
@@ -200,7 +205,7 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 
 
 ## Latest verified project state
-- **main `4c49ee5`** (merge of PR #201; before it `f634512` = PR #200 docs, `0333db8` = PR #199): footer **v1.114**, Service Worker cache **`nahians-schedule-cache-v177`**. GitHub Pages "pages build and deployment" runs for `e2ecdc9`, `a9a3a3a`, `ba89f12`, `d477b17`, `5b1af2f`, `c4fecf2`, `0333db8`, `f634512` and `4c49ee5` all completed successfully (checked 2026-11-17 via the Actions API). That proves the Pages build/deploy only; the live site was not fetched (proxy 403) and real-iPhone behaviour is not verified by any agent.
+- **main `d245023`** (merge of PR #217): footer **v1.123**, Service Worker cache **`nahians-schedule-cache-v187`**. Pages "pages build and deployment" for `4544e7b` (v1.122) completed successfully; the run for `d245023` was still in progress when checked (2026-11-18), so v1.123 is **not** confirmed deployed. Pages success proves the build/deploy only; the live site was not fetched (proxy 403) and real-iPhone behaviour is not verified by any agent.
 - Latest releases: v1.110 owner's recorded timer voices (PR #192), v1.111 touch targets (PR #193), v1.112 minimum text size (PR #197), v1.113 design tokens (PR #199), v1.114 tab-bar aria-current (PR #201); PR #194 is tooling/docs only.
 - Other recent releases: v1.68 daily cloud backup, v1.70 realistic car header image, v1.71-v1.74 (ChatGPT) Students/Forms/bottom-nav/profile UX.
 - **Open PRs:** #13 only (verified 2026-11-17; #73 was closed as superseded the same day). Older "DRAFT" labels on earlier ChatGPT entries below are historical wording; check GitHub for the real state.
