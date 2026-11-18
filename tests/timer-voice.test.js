@@ -6,13 +6,13 @@ test("v1.110: the three recorded timer voices exist, are small and are cached of
 test("v1.110: start / 50 min / 55 min use cue 1 / 2 / 3 and keep the old timer logic",()=>{
   assert.match(app,/TIMER_CUES=\{start:"timer-start\.mp3",warn:"timer-warning\.mp3",end:"timer-end\.mp3"\}/);
   assert.match(app,/el>=50\*60000&&!timer\.spoken50\)\{timer\.spoken50=true;timerSave\(\);playCue\("warn",/);
-  assert.match(app,/timerSave\(\);playCue\("end",[^)]*\);timer=null;/);
-  assert.match(app,/renderNext\(\);bindRecords\(\);playCue\("start",/);
+  assert.match(app,/timerSave\(\);if\(sessionActive\(\)\)sessFinishing=true;playCue\("end",[^)]*\);timer=null;/);
+  assert.match(app,/renderNext\(\);bindRecords\(\);sessFinishing=false;sessionPlay\(\)\.then\(ok=>\{if\(!ok\)playCue\("start",/);
   assert.match(app,/if\(el>=55\*60000\)\{finishTimerAt55\(\);return;\}/);
 });
 test("v1.110/v1.125: HTML audio first (ignores the iPhone silent switch), then Web Audio, then speech; on/off switch; settings text",()=>{
-  const fn=app.match(/async function playCue\(name,fallback\)\{[^\n]*\}/)[0],web=app.match(/async function playWebCue\(name\)\{[^\n]*\}/)[0];
-  assert.ok(fn.includes("if(!voiceOn())return;")&&fn.includes("await playHtmlCue(name);return;")&&fn.includes("await playWebCue(name);")&&fn.includes("catch{if(fallback)speakBn(fallback);}"));
+  const fn=app.match(/async function playCue\(name,fallback,force\)\{[^\n]*\}/)[0],web=app.match(/async function playWebCue\(name\)\{[^\n]*\}/)[0];
+  assert.ok(fn.includes("if(!voiceOn()||(sessionActive()&&!force))return;")&&fn.includes("await playHtmlCue(name);return;")&&fn.includes("await playWebCue(name);")&&fn.includes("catch{if(fallback)speakBn(fallback);}"));
   assert.ok(web.includes("createBufferSource"));
   assert.ok(html.includes("Play your recorded voice")&&html.includes("Test the 3 voices"));
 });
@@ -22,4 +22,14 @@ test("v1.125: iPhone fix — audio session is playback, the Start tap unlocks au
   assert.match(app,/function unlockAudio\(\)\{[^\n]*createBuffer\(1,1,22050\)/);
   assert.match(app,/function beginLessonTimer\(id\)\{[^\n]*try\{unlockAudio\(\);\}catch\{\}/);
   assert.match(app,/if\(audioCtx\.state!=="running"\)throw Error\("suspended"\)/,"a context that never starts must reach the catch (speech fallback), not stay silent");
+});
+test("v1.126: one 55-minute session file keeps the cues going when the phone is locked; single cues are only the fallback",()=>{
+  const sw=fs.readFileSync(__dirname+"/../sw.js","utf8");
+  assert.ok(fs.existsSync(__dirname+"/../timer-session.mp3"),"session file exists");
+  assert.ok(fs.statSync(__dirname+"/../timer-session.mp3").size<6e6,"session file stays small");
+  assert.ok(sw.includes('"./timer-session.mp3"'),"cached for offline use");
+  assert.match(app,/function sessionStop\(\)\{if\(sessFinishing\)return;/,"finishing at 55 lets the last cue play out");
+  assert.match(app,/sessionPlay\(\)\.then\(ok=>\{if\(!ok\)playCue\("start"/,"Start tap starts the file; the single start cue is the fallback");
+  assert.match(app,/sessionStop\(\);\}else\{timer\.runFrom=Date\.now\(\);keepAwake\(\);pushTimerSync\("schedule"\);sessionPlay\(\);\}/,"pause stops it, resume restarts at the elapsed time");
+  assert.match(app,/if\(!on\)\{clearInterval\(timerTick\);timerTick=null;sessionStop\(\);return;\}/,"cancel / end / delete stop it");
 });
