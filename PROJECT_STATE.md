@@ -1,3 +1,9 @@
+## v1.123 — Review follow-ups for v1.122 (2026-11-18; owner request)
+- Learning-activity chart label now says "1 lesson" instead of "1 lessons" (`app.js`, aria-label only).
+- Behaviour note for v1.122 (not mentioned there): zero-hour months in the student activity chart are now empty (`activity-pct-0` is `display:none`); before, they showed a 3% stub. The "–" label under the bar is unchanged.
+- Tests: the expense-history assertion now tolerates later calls after `renderExpenseHistory()` (it still pins the call order); new `tests/version-parity.test.js` fails if the Settings version, the footer version and the newest PROJECT_STATE entry differ, and pins the singular/plural label. 150 tests pass.
+- Files: `app.js`, `index.html` (v1.123), `sw.js` (cache v187), `tests/expense-history.test.js`, `tests/version-parity.test.js`, this file. No data/logic change. Not tested: real iPhone/VoiceOver.
+
 ## v1.122 — Fix regression workflow: version parity and CSP-safe activity chart (2026-11-18)
 - GitHub Actions run #124 (Multiple Booking regression) checked out merged main commit `811a719`. The run found 11 failures: 9 legacy version-parity assertions, 1 stale expense-history source assertion, and 1 real CSP violation in the student activity chart.
 - Fixed Settings version text to match footer at v1.122 (footer was v1.121 while Settings still displayed v1.114).
