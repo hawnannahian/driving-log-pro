@@ -694,3 +694,10 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 ### 2026-11-11 — Claude: expense form showed Hourly rate (v1.90, my v1.80 regression)
 - PR #170 (v1.89) was already merged by the owner before this request. The reported bug is not from #170: my v1.80 `updateCourseField()` un-hid the lesson-only Hourly rate on non-lesson records. One-condition fix + regression test; see PROJECT_STATE v1.90. Opened as a new PR from latest `main` (a merged branch is not reused); not merged, waiting for the owner.
 
+
+
+### 2026-11-18 — ChatGPT: Compact Overview lesson + prayer cards (v1.121)
+- Owner approved native iOS direction, compact header and keeping all six tabs; then requested the Next Lesson and Prayer Times sections be more compact.
+- Implemented on fresh branch `ui/compact-overview-next-prayer-v1-121` from latest `main`. CSS-only: Next Lesson uses a two-column layout with existing Start Timer action alongside lesson details; Prayer Times uses tighter hero/tile spacing; stats and Today's rows are slightly denser. Existing IDs, actions, prayer calculations, timer logic and six-tab navigation are unchanged.
+- Updated `sw.js` cache v184→v185 and footer v1.114→v1.121. Updated `PROJECT_STATE.md` and this handover.
+- Source-level validation only; browser/iPhone/VoiceOver QA is still required. Do not claim this is deployed until the PR is merged and Pages succeeds.
