@@ -1,3 +1,12 @@
+## v1.122 — Fix regression workflow: version parity and CSP-safe activity chart (2026-11-18)
+- GitHub Actions run #124 (Multiple Booking regression) checked out merged main commit `811a719`. The run found 11 failures: 9 legacy version-parity assertions, 1 stale expense-history source assertion, and 1 real CSP violation in the student activity chart.
+- Fixed Settings version text to match footer at v1.122 (footer was v1.121 while Settings still displayed v1.114).
+- Replaced the student activity chart's generated inline `style="height:…"` with a bounded 5%-step class (`activity-pct-0…100`) and matching CSS rules. This keeps the chart data-driven while respecting the app's `style-src 'self'` Content Security Policy.
+- Updated the expense-history regression assertion to account for the already-existing `updateLessonBookingPreview()` call after `renderExpenseHistory()`; no runtime behavior changed there.
+- Bumped service-worker shell cache v185 → v186. Updated both visible version labels to v1.122.
+- Validation before CI: source-level replacement checks only. Full Node regression workflow must pass before release; real iPhone/Safari QA remains separate.
+- Files: `app.js`, `styles.css`, `index.html`, `sw.js`, `tests/expense-history.test.js`, this file, `AGENT_SYNC.md`.
+
 ## v1.121 — Compact Overview lesson and prayer cards (2026-11-18; owner-approved design direction)
 - Refines the Overview only: compact Next Lesson card with the existing Start Timer action aligned beside the lesson details; tighter Prayer Times card with a smaller next-prayer summary and denser five-prayer row; reduces statistics and Today's lesson row spacing to reveal more useful content above the fold.
 - Preserves the six-tab navigation, existing white native-iOS header, brand identity, card colour identity, all existing element IDs, timer actions, prayer-time source selection, countdown calculation, booking-protection status and Edit action.
