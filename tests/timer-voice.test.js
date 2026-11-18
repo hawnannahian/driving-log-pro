@@ -10,8 +10,16 @@ test("v1.110: start / 50 min / 55 min use cue 1 / 2 / 3 and keep the old timer l
   assert.match(app,/renderNext\(\);bindRecords\(\);playCue\("start",/);
   assert.match(app,/if\(el>=55\*60000\)\{finishTimerAt55\(\);return;\}/);
 });
-test("v1.110: Web Audio playback, the on/off switch, speech fallback; settings text updated",()=>{
-  const fn=app.match(/async function playCue\(name,fallback\)\{[^\n]*\}/)[0];
-  assert.ok(fn.includes("if(!voiceOn())return;")&&fn.includes("createBufferSource")&&fn.includes("catch{if(fallback)speakBn(fallback);}"));
+test("v1.110/v1.125: HTML audio first (ignores the iPhone silent switch), then Web Audio, then speech; on/off switch; settings text",()=>{
+  const fn=app.match(/async function playCue\(name,fallback\)\{[^\n]*\}/)[0],web=app.match(/async function playWebCue\(name\)\{[^\n]*\}/)[0];
+  assert.ok(fn.includes("if(!voiceOn())return;")&&fn.includes("await playHtmlCue(name);return;")&&fn.includes("await playWebCue(name);")&&fn.includes("catch{if(fallback)speakBn(fallback);}"));
+  assert.ok(web.includes("createBufferSource"));
   assert.ok(html.includes("Play your recorded voice")&&html.includes("Test the 3 voices"));
+});
+
+test("v1.125: iPhone fix — audio session is playback, the Start tap unlocks audio, a stuck context falls back to speech",()=>{
+  assert.match(app,/navigator\.audioSession\)navigator\.audioSession\.type="playback"/);
+  assert.match(app,/function unlockAudio\(\)\{[^\n]*createBuffer\(1,1,22050\)/);
+  assert.match(app,/function beginLessonTimer\(id\)\{[^\n]*try\{unlockAudio\(\);\}catch\{\}/);
+  assert.match(app,/if\(audioCtx\.state!=="running"\)throw Error\("suspended"\)/,"a context that never starts must reach the catch (speech fallback), not stay silent");
 });
