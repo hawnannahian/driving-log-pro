@@ -15,3 +15,9 @@ test("v1.110: Web Audio playback, the on/off switch, speech fallback; settings t
   assert.ok(fn.includes("if(!voiceOn())return;")&&fn.includes("createBufferSource")&&fn.includes("catch{if(fallback)speakBn(fallback);}"));
   assert.ok(html.includes("Play your recorded voice")&&html.includes("Test the 3 voices"));
 });
+test("v1.125: iPhone fix — audio session is playback, the Start tap unlocks audio, a stuck context falls back to speech",()=>{
+  assert.match(app,/navigator\.audioSession\)navigator\.audioSession\.type="playback"/);
+  assert.match(app,/function unlockAudio\(\)\{[^\n]*createBuffer\(1,1,22050\)/);
+  assert.match(app,/function beginLessonTimer\(id\)\{[^\n]*try\{unlockAudio\(\);\}catch\{\}/);
+  assert.match(app,/if\(audioCtx\.state!=="running"\)throw Error\("suspended"\)/,"a context that never starts must reach the catch (speech fallback), not stay silent");
+});

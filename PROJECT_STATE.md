@@ -1,3 +1,9 @@
+## v1.125 — Timer voice: iPhone silent-switch fix (2026-11-18; owner report "voice did not come when I press Start")
+- Likely cause (not yet confirmed on the owner's phone): on iOS, Web Audio output is muted by the ringer/silent switch, while HTML audio and speech are not. The recorded cues (v1.110) use Web Audio, and a muted context raises no error, so the Bengali fallback never ran either.
+- Fix (`app.js` only): `cueCtx()` sets `navigator.audioSession.type="playback"` (Safari 16.4+) before creating the `AudioContext`; `unlockAudio()` resumes the context and plays a 1-sample silent buffer inside the Start tap (`beginLessonTimer`) and on the first tap after a reload; `playCue()` now waits up to 0.8 s for the context to run and, if it still is not running, falls back to the Bengali speech instead of staying silent.
+- Verification: Chromium with a fake clock and a Web Audio spy — cues 1.88 s / 3.08 s / 2.35 s still play at start / 50 min / 55 min, lesson still completes with 55 min; a context stuck in "suspended" now speaks the fallback; new test in `tests/timer-voice.test.js`. **Not tested on a real iPhone** — the owner should try with the silent switch on and off. If it is still silent, the next step is HTML `<audio>` elements for the cues (they ignore the silent switch) unlocked in the Start tap.
+- Files: `app.js`, `index.html` (v1.125), `sw.js` (cache v189), `tests/timer-voice.test.js`, this file.
+
 ## v1.124 — Settings: Voice card polish (2026-11-18; owner request after an iPhone screenshot)
 - **Toggle overflow:** in Voice Announcements the "On" text spilled outside the card's right border (the toggle label shrank to the checkbox width). `.settings-toggle` is now `flex:none` + `nowrap` inside `#logSettingsPanel`.
 - **Stale text:** the list of the three Bengali sentences is replaced by one line saying the Bengali message is only spoken if a recorded voice cannot load (the owner's mp3 files play since v1.110).
