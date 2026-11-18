@@ -1048,3 +1048,8 @@ Suggested next features (owner to choose): exam tracking and document expiry fir
 - Verification (Chromium, synthetic data, 393×852, 320×568, desktop 1024×768; screenshots reviewed): sheet flush with the bottom, bar visible before and after scrolling the text to the end, no overflow, Start closes the popup and starts the lesson timer (running-timer Overview screenshot also looks correct, which closes the open item from v1.58), Skip closes, X closes and the closed popup stays hidden, 0 console errors; smoke sweep, all 5 profiles, `t_delc`/`t_pool`, Paid/Completed toggle suite, 21 node tests pass. Not tested on a real iPhone.
 - Reminder for the sales preparation: the popup's audio card streams `https://www.hisnmuslim.com/audio/ar/207.mp3` (third-party, needs internet) — owner's audio decision (remove all / keep) is still open.
 
+## v1.122 — Regression workflow verified (2026-11-18)
+- GitHub Actions: `Multiple Booking regression`, run #125, commit `a49dd18328aea67988bcda7f0e9735dccae4bd88` (PR #215).
+- Result: **success**. JavaScript syntax check passed; all 148 Node tests passed (148 passed, 0 failed).
+- Confirms the v1.122 fixes: Settings/footer version parity, CSP-safe student activity chart, and updated expense-history regression assertion.
+- Live GitHub Pages deployment and real iPhone Safari/VoiceOver QA were not verified by this workflow.
