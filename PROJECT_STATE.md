@@ -1,3 +1,12 @@
+## v1.121 — Compact Overview lesson and prayer cards (2026-11-18; owner-approved design direction)
+- Refines the Overview only: compact Next Lesson card with the existing Start Timer action aligned beside the lesson details; tighter Prayer Times card with a smaller next-prayer summary and denser five-prayer row; reduces statistics and Today's lesson row spacing to reveal more useful content above the fold.
+- Preserves the six-tab navigation, existing white native-iOS header, brand identity, card colour identity, all existing element IDs, timer actions, prayer-time source selection, countdown calculation, booking-protection status and Edit action.
+- CSS-only presentation change. No JavaScript, HTML structure, database, lesson/payment calculations, scheduling rules or prayer settings changed.
+- Service worker shell cache: v184 → v185. Footer version: v1.114 → v1.121.
+- Validation performed for this change: source-level checks only (CSS block added, cache and footer versions updated, no JS/HTML structure changes). Browser screenshot sweep, real iPhone Safari and VoiceOver validation remain to be run.
+- Files: `styles.css`, `sw.js`, `index.html`, `PROJECT_STATE.md`, `AGENT_SYNC.md`.
+- Status: implemented on `ui/compact-overview-next-prayer-v1-121`; pending PR review/merge and device QA.
+
 ## v1.114 — Tab bar: current page announced from first paint (2026-11-17; owner request, Phase 4 of UI/UX review)
 - `switchTab()` already set `aria-current="page"` on the active tab, but the Overview tab that is active on first paint had no `aria-current` until the user switched tabs. `index.html` now carries `aria-current="page"` on that button, so VoiceOver announces the current page from the start. No visual change, no JS/CSS/data change.
 - Correction of an earlier review note: it said the tab bar had no `aria-current`; it did, set by JS after a switch (the initial markup was the gap).
