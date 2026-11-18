@@ -1,3 +1,9 @@
+## v1.124 — Settings: Voice card polish (2026-11-18; owner request after an iPhone screenshot)
+- **Toggle overflow:** in Voice Announcements the "On" text spilled outside the card's right border (the toggle label shrank to the checkbox width). `.settings-toggle` is now `flex:none` + `nowrap` inside `#logSettingsPanel`.
+- **Stale text:** the list of the three Bengali sentences is replaced by one line saying the Bengali message is only spoken if a recorded voice cannot load (the owner's mp3 files play since v1.110).
+- **Disabled look:** a disabled button in a Settings card (e.g. "Notifications setup pending") is grey instead of the blue primary style. The push logic and backend are untouched (still not configured).
+- Files: `index.html` (v1.124), `styles.css`, `sw.js` (cache v188), this file. No JS/data change. Not tested: real iPhone.
+
 ## v1.123 — Review follow-ups for v1.122 (2026-11-18; owner request)
 - Learning-activity chart label now says "1 lesson" instead of "1 lessons" (`app.js`, aria-label only).
 - Behaviour note for v1.122 (not mentioned there): zero-hour months in the student activity chart are now empty (`activity-pct-0` is `display:none`); before, they showed a 3% stub. The "–" label under the bar is unchanged.
