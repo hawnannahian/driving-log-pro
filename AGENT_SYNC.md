@@ -708,3 +708,9 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 - Fix branch: `fix/v1-121-regression-workflow-v1-122`. Both version labels now v1.122. Activity bars now use 5%-step CSS classes (0–100), no inline style. Expense-history test updated to expect the current preview-update call after history rendering. Service-worker cache v186.
 - Files changed: app.js, styles.css, index.html, sw.js, tests/expense-history.test.js, PROJECT_STATE.md, AGENT_SYNC.md.
 - Run CI before considering complete; do not claim deployed until Pages succeeds. Real iPhone Safari/VoiceOver QA still required.
+
+
+### 2026-11-18 — ChatGPT: v1.122 regression workflow passed
+- PR #215 merged. Actions run #125 (`Multiple Booking regression`) completed successfully: JS syntax check passed; 148/148 Node tests passed.
+- Confirmed on main: footer and Settings both show v1.122, service-worker cache v186, student activity chart contains no inline style attributes.
+- Live Pages deployment and real iPhone Safari/VoiceOver QA remain unverified.
