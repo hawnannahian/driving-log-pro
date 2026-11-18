@@ -701,3 +701,10 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 - Implemented on fresh branch `ui/compact-overview-next-prayer-v1-121` from latest `main`. CSS-only: Next Lesson uses a two-column layout with existing Start Timer action alongside lesson details; Prayer Times uses tighter hero/tile spacing; stats and Today's rows are slightly denser. Existing IDs, actions, prayer calculations, timer logic and six-tab navigation are unchanged.
 - Updated `sw.js` cache v184→v185 and footer v1.114→v1.121. Updated `PROJECT_STATE.md` and this handover.
 - Source-level validation only; browser/iPhone/VoiceOver QA is still required. Do not claim this is deployed until the PR is merged and Pages succeeds.
+
+
+### 2026-11-18 — ChatGPT: fix v1.121 regression workflow failures (v1.122)
+- Investigated Actions run #124 from the v1.121 PR head. 148 tests: 137 passed, 11 failed. Root causes: Settings still showed v1.114 while footer showed v1.121 (9 parity assertions); expense-history test expected the older end of toggleLessonFields despite the existing lesson-booking-preview update; profile activity chart emitted an inline `style="height:…"` attribute blocked by the app CSP.
+- Fix branch: `fix/v1-121-regression-workflow-v1-122`. Both version labels now v1.122. Activity bars now use 5%-step CSS classes (0–100), no inline style. Expense-history test updated to expect the current preview-update call after history rendering. Service-worker cache v186.
+- Files changed: app.js, styles.css, index.html, sw.js, tests/expense-history.test.js, PROJECT_STATE.md, AGENT_SYNC.md.
+- Run CI before considering complete; do not claim deployed until Pages succeeds. Real iPhone Safari/VoiceOver QA still required.

@@ -8,7 +8,7 @@ test("v1.106: expense dialog has an expense history section inside the form grid
 test("v1.106: history lists non-lesson, non-note records newest first and is read-only",()=>{
   assert.match(app,/function renderExpenseHistory\(\)/);
   assert.match(app,/e\.type!=="Lesson"&&e\.type!=="Note"\)\.sort\(\(a,b\)=>String\(b\.date\)\.localeCompare\(String\(a\.date\)\)\)/);
-  assert.match(app,/updateCourseField\(\);syncBookingModeUI\(\);renderExpenseHistory\(\);\}/);
+  assert.match(app,/updateCourseField\(\);syncBookingModeUI\(\);renderExpenseHistory\(\);updateLessonBookingPreview\(\);\}/);
   assert.doesNotMatch(app.match(/function renderExpenseHistory[^\n]*/)[0],/state\.entries\.(push|splice)|save\(\)/);
 });
 test("v1.106: no inline styles and closed-dialog safeguard kept",()=>{
