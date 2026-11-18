@@ -3525,3 +3525,129 @@ body{background:#f3f6fb}
 /* v1.124 — Settings: the On/Off toggle never shrinks (its label text was spilling out of the card), and a disabled action looks disabled. */
 #logSettingsPanel .settings-card .settings-toggle{flex:none;white-space:nowrap}
 #logSettingsPanel .settings-card .btn:disabled{background:var(--line-2);color:var(--muted);box-shadow:none;cursor:not-allowed;opacity:1}
+
+/* ═══ v1.127 — Overview dashboard redesign (owner reference screenshot) ═══════════════════════════════════════════
+   Yellow + navy header with a curved navy accent and bell / settings icons; flat Overview page; icon stat cards; white Next-lesson
+   and Prayer cards; compact Today list. Scoped to the header and #overview so other tabs are untouched. Brief palette is used as
+   local tokens (no new global colours). Timer, prayer, lesson and payment logic are unchanged. */
+.topbar,#overview{--ov-yellow:#ffd34e;--ov-yellow-2:#ffc629;--ov-navy:#142b50;--ov-blue:#2563eb;--ov-text:#14213d;--ov-text-2:#64748b;--ov-line:#e2e8f0;--ov-soft:#edf3ff;--ov-ok:#16a34a;--ov-amber:#d97706}
+.topbar{position:sticky;overflow:hidden;background:linear-gradient(105deg,#ffd75a 0%,#ffc629 100%)}
+.topbar::after{content:"";position:absolute;right:-8%;bottom:-70%;width:52%;height:130%;background:var(--ov-navy);border-radius:58% 0 0 0/100% 0 0 0;pointer-events:none}
+.topbar .brand,.topbar .topactions{position:relative;z-index:1}
+.topbar .brand b{color:var(--ov-navy)}
+.topbar .brand small{color:#4a5f86}
+.topactions{display:flex;align-items:center;gap:10px}
+.topicon{display:grid;place-items:center;width:44px;height:44px;min-width:44px;padding:0;border:0;border-radius:50%;background:#ffffffeb;color:var(--ov-navy);box-shadow:0 2px 8px #142b5029;cursor:pointer}
+.topicon svg{width:22px;height:22px}
+.topicon:focus-visible{outline:3px solid var(--ov-navy);outline-offset:2px}
+@media(max-width:360px){.topactions{gap:6px}.topicon{width:44px;height:44px}.topbar .brand small{display:none}}
+
+/* flat page: no big white panel around the Overview content */
+main #overview.overview-panel{padding:0;border:0;background:transparent;box-shadow:none}
+#overview .overview-intro{align-items:flex-start;margin:4px 0 16px}
+#overview .overview-intro h1{margin:0;color:var(--ov-navy);font-size:clamp(28px,8vw,34px);line-height:1.05;letter-spacing:-1px}
+#overview .overview-date{display:flex;align-items:center;gap:8px;margin:10px 0 0;color:var(--ov-text);font-size:16px;font-weight:600}
+#overview .overview-date svg{flex:none;color:var(--ov-navy)}
+#overview .overview-add{min-height:50px;padding:0 20px;border-radius:14px;background:var(--ov-blue);font-size:17px;font-weight:700;box-shadow:0 6px 16px #2563eb33}
+
+/* stat cards */
+#overview .overviewstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 16px}
+#overview .overviewstat{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto;column-gap:10px;align-content:center;align-items:center;min-height:84px;padding:12px;border:1px solid #d6e2fb;border-radius:16px;background:var(--ov-soft);box-shadow:none}
+#overview .overviewstat .ovicon{grid-row:1/3;display:grid;place-items:center;color:var(--ov-blue)}
+#overview .overviewstat b{display:block;margin:0;color:var(--ov-text);font-size:28px;font-weight:800;line-height:1;letter-spacing:-.5px}
+#overview .overviewstat span{display:block;margin-top:3px;color:#33415c;font-size:13px;font-weight:500}
+#overview .overviewstat.completed{background:#effaf3;border-color:#cdeedb}
+#overview .overviewstat.completed .ovicon{color:var(--ov-ok)}
+#overview .overviewstat.upcoming{background:#fff7ec;border-color:#f5dfbd}
+#overview .overviewstat.upcoming .ovicon{color:var(--ov-amber)}
+@media(max-width:380px){#overview .overviewstat{column-gap:6px;padding:10px 8px}#overview .overviewstat .ovicon svg{width:22px;height:22px}#overview .overviewstat b{font-size:24px}#overview .overviewstat span{font-size:12px}}
+
+/* Next lesson card */
+#overview #nextCard{position:relative;display:block;margin:0 0 16px;padding:16px 16px 14px 20px;border:1px solid var(--ov-line);border-radius:20px;background:#fff;color:var(--ov-text);box-shadow:0 6px 18px #142b5012;overflow:hidden}
+#overview #nextCard::before{content:"";position:absolute;left:0;top:18px;width:5px;height:64px;border-radius:0 4px 4px 0;background:#ffb81c}
+#overview #nextCard::after{content:"";position:absolute;right:12px;top:12px;width:92px;height:92px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='43' fill='none' stroke='%23d3e0f8' stroke-width='9'/%3E%3Ccircle cx='50' cy='50' r='9' fill='%23d3e0f8'/%3E%3Cpath d='M9 46h27M64 46h27M50 59v32' stroke='%23d3e0f8' stroke-width='9' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;pointer-events:none}
+#overview .nextcard .nextlabel{display:flex;align-items:center;gap:10px;margin:0 0 6px;color:var(--ov-text);font-size:16px;font-weight:700;letter-spacing:0;text-transform:none}
+#overview .nextcard .nextlabel svg{flex:none;color:var(--ov-navy)}
+#overview .nextcard .nextmain{display:block;position:relative;z-index:1}
+#overview .nextcard .nexttime{display:block;color:var(--ov-navy);font-size:clamp(28px,8.4vw,34px);font-weight:800;letter-spacing:-.8px;line-height:1.1;font-variant-numeric:tabular-nums}
+#overview .nextcard .nextname{display:flex;align-items:center;gap:8px;margin:8px 0 10px;color:var(--ov-navy);font-size:20px;font-weight:700}
+#overview .nextcard .nextname svg{flex:none;color:var(--ov-navy)}
+#overview .nextcard .nextmain small{display:flex;flex-wrap:wrap;align-items:center;gap:6px 0;color:var(--ov-text-2);font-size:15px;font-weight:500}
+#overview .nextcard .nextmain small>span{display:inline-flex;align-items:center;gap:7px;color:#33415c}
+#overview .nextcard .nextmain small>span svg{flex:none;width:18px;height:18px;color:var(--ov-navy)}
+#overview .nextcard .nextmain small>*+*{margin-left:12px;padding-left:12px;border-left:1px solid #cbd5e1}
+#overview .nextcard .nextmain small em{padding:3px 12px;border-radius:999px;background:#e7efff;color:var(--ov-blue);font-style:normal;font-weight:700;font-size:14px}
+#overview .nextcard .nextmain small em.paid{background:#e6f7ee;color:var(--ov-ok)}
+#overview .nextcard .nextmain small em.unpaid{background:#fff1dc;color:var(--ov-amber)}
+#overview .nextcard .nextactions{margin-top:14px}
+#overview .nextcard .nextbtn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:52px;border:0;border-radius:14px;background:linear-gradient(90deg,#142b50 0%,#1d4ed8 100%);color:#fff;font-size:18px;font-weight:700;box-shadow:0 6px 14px #1d4ed82e}
+#overview .nextcard .nextbtn.running{background:linear-gradient(90deg,#0f6b3d,#16a34a)}
+@media(max-width:380px){#overview #nextCard::after{width:70px;height:70px}#overview .nextcard .nextname{font-size:18px}#overview .nextcard .nextmain small{font-size:14px}}
+
+/* Prayer Times card */
+#overview .prayercard{margin:0 0 16px;padding:16px;border:1px solid var(--ov-line);border-radius:20px;background:#fff;color:var(--ov-text);box-shadow:0 6px 18px #142b5010}
+#overview .prayercard small{letter-spacing:0;text-transform:none}
+#overview .pc-top{align-items:flex-start}
+#overview .pc-top small{display:flex;align-items:center;gap:10px;color:var(--ov-navy);font-size:22px;font-weight:800;letter-spacing:-.4px}
+#overview .pc-top small svg{flex:none;width:34px;height:34px;color:#f5a800}
+#overview .pc-top b{margin:2px 0 0 44px;color:var(--ov-text-2);font-size:15px;font-weight:500}
+#overview .pc-edit{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 16px;border:1px solid #cbd5e1;border-radius:12px;background:#fff;color:var(--ov-navy);font-size:15px;font-weight:700}
+#overview .pc-edit::before{content:"✎";font-size:15px}
+#overview .pc-hero{position:relative;align-items:center;gap:16px;margin:12px 0 12px;padding:14px 106px 14px 16px;border-radius:16px;background:var(--ov-soft);overflow:hidden}
+#overview .pc-hero::after{content:"";position:absolute;right:10px;bottom:0;width:84px;height:57px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 92 62'%3E%3Cpath d='M10 62V44c0-12 14-20 28-26 14 6 28 14 28 26v18z' fill='%23b8cdf2'/%3E%3Crect x='72' y='14' width='9' height='48' rx='3' fill='%23c9d8f5'/%3E%3Cpath d='M76.500 4l4 8h-8z' fill='%23f0b429'/%3E%3Cpath d='M52 8a7 7 0 1 0 5 11 5.500 5.500 0 1 1-5-11z' fill='%23f6c453'/%3E%3C/svg%3E") center/contain no-repeat;pointer-events:none}
+#overview .pc-hero>div:first-child small{color:var(--ov-text-2);font-size:15px;font-weight:500}
+#overview .pc-hero>div:first-child b{margin-top:2px;color:var(--ov-navy);font-size:clamp(26px,7.4vw,32px);font-weight:800;letter-spacing:-.6px}
+#overview .pc-at{position:relative;z-index:1;text-align:left;padding-left:16px;border-left:1px solid #cbd5e1}
+#overview .pc-at b{color:var(--ov-navy);font-size:clamp(30px,9vw,38px);letter-spacing:-.8px}
+#overview .pc-at span{margin-top:2px;color:var(--ov-text-2);font-size:15px;font-weight:500}
+#overview .pc-bar{height:6px;background:#dfe5ee;margin-bottom:0}
+#overview .pc-bar i{background:#f5a800}
+#overview .pc-row{gap:8px;margin-top:14px}
+#overview .pc-item{padding:10px 2px 9px;border-radius:14px;background:#f1f4f9}
+#overview .pc-item small{color:var(--ov-text-2);font-size:14px;font-weight:600;letter-spacing:0}
+#overview .pc-item b{margin-top:3px;color:var(--ov-text);font-size:clamp(17px,5vw,21px);font-weight:800;letter-spacing:-.4px}
+#overview .pc-item.past{opacity:1}
+#overview .pc-item.past small,#overview .pc-item.past b{opacity:.6}
+#overview .pc-item.next{background:#fff4d4;box-shadow:none;border:1.5px solid #f2b705;padding:8.5px 2px 7.5px}
+#overview .pc-item.next small,#overview .pc-item.next b{color:var(--ov-text)}
+#overview .pc-foot{display:flex;align-items:center;justify-content:center;gap:8px;margin:14px 0 0;color:#33415c;font-size:14px;font-weight:500}
+#overview .pc-foot svg{flex:none;color:var(--ov-navy)}
+@media(max-width:420px){#overview .pc-hero{padding-right:78px;gap:12px}#overview .pc-hero::after{width:58px;height:40px;right:8px}#overview .pc-at{padding-left:12px}}
+@media(max-width:380px){#overview .pc-hero{padding-right:14px}#overview .pc-hero::after{display:none}#overview .pc-top small{font-size:19px}#overview .pc-top small svg{width:28px;height:28px}#overview .pc-top b{margin-left:38px}#overview .pc-row{gap:5px}#overview .pc-item small{font-size:12px}#overview .pc-foot{font-size:12.5px}}
+
+/* Today's lessons */
+#overview .todayheadrow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:6px 0 10px}
+#overview .todayheadrow .todayhead{display:flex;align-items:center;gap:10px;margin:0;color:var(--ov-navy);font-size:20px;font-weight:800;letter-spacing:-.3px}
+#overview .todayheadrow .todayhead::before{content:"";flex:none;width:24px;height:24px;background:var(--ov-navy);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m12 3 9 5-9 5-9-5z'/%3E%3Cpath d='m3 12.500 9 5 9-5'/%3E%3Cpath d='m3 17 9 5 9-5'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m12 3 9 5-9 5-9-5z'/%3E%3Cpath d='m3 12.500 9 5 9-5'/%3E%3Cpath d='m3 17 9 5 9-5'/%3E%3C/svg%3E") center/contain no-repeat}
+#overview .todayall{min-height:44px;padding:0 4px;color:var(--ov-blue);font-size:17px;font-weight:700}
+#overview #todayList{padding:4px 14px;border:1px solid var(--ov-line);border-radius:20px;background:#fff;box-shadow:0 6px 18px #142b5010}
+#overview #todayList.empty{padding:16px;color:var(--ov-text-2)}
+#overview #todayList .todayrow{display:flex;align-items:center;gap:10px;padding:12px 0;border:0;border-radius:0;background:transparent;box-shadow:none}
+#overview #todayList .todayrow+.todayrow{border-top:1px solid var(--ov-line)}
+#overview #todayList .tnum{display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:50%;background:var(--ov-soft);color:var(--ov-blue);font-size:17px;font-weight:700}
+#overview #todayList .tmain b{color:var(--ov-text);font-size:19px;font-weight:700;letter-spacing:-.2px}
+#overview #todayList .tmain span{color:#33415c;font-size:15px}
+#overview #todayList .tstat{flex:none;padding:5px 14px;border-radius:999px;background:#e7efff;color:var(--ov-blue);font-size:15px;font-weight:700}
+#overview #todayList .tstat.paid{background:#e6f7ee;color:var(--ov-ok)}
+#overview #todayList .tstat.unpaid{background:#fff1dc;color:var(--ov-amber)}
+#overview #todayList .actbtn.wa{flex:none;width:46px;height:44px;border-radius:999px;background:#e6f7ee;color:var(--ov-ok)}
+#overview #todayList .todayrow::after{content:"›";flex:none;margin-left:2px;color:#8b98ad;font-size:26px;line-height:1}
+#overview #todayList .tmain b{white-space:nowrap}
+#overview #todayList .tdone{flex:none;display:grid;place-items:center;width:40px;min-width:40px;height:40px;min-height:40px;padding:0;border-radius:50%;font-size:0;line-height:0}
+#overview #todayList .tdone::before{content:"✓";font-size:19px;line-height:1;font-weight:800}
+#overview #todayList .tpay{flex:none;min-height:36px;padding:0 10px;border-radius:10px;font-size:13px}
+#overview #todayList .tmain{flex:1 1 auto;min-width:0}
+#overview #todayList .tmain span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(max-width:430px){#overview #todayList .todayrow{gap:8px}#overview #todayList .tnum{width:36px;height:36px;font-size:16px}#overview #todayList .tmain b{font-size:17px}#overview #todayList .tstat{padding:4px 10px;font-size:14px}#overview #todayList .actbtn.wa{width:40px;height:40px}#overview #todayList .tdone{width:36px;min-width:36px;height:36px;min-height:36px}#overview #todayList .todayrow::after{margin-left:0;font-size:22px}}
+@media(max-width:380px){#overview #todayList{padding:2px 10px}#overview #todayList .todayrow{gap:5px}#overview #todayList .todayrow::after{display:none}#overview #todayList .tnum{width:30px;height:30px;font-size:14px}#overview #todayList .tmain b{font-size:15px}#overview #todayList .tmain span{font-size:13px}#overview #todayList .tstat{padding:3px 8px;font-size:12px}#overview #todayList .actbtn.wa{width:36px;height:36px}#overview #todayList .tdone{width:34px;min-width:34px;height:34px;min-height:34px}}
+
+/* narrow phones: keep header text, stat labels and the date line inside their boxes */
+.topbar .brand{min-width:0}
+.topbar .brand>div{min-width:0}
+.topbar .brand small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(max-width:420px){.topbar .brandcar{width:78px;height:auto}.topbar .brand b{font-size:15px}.topbar .brand small{font-size:12px;max-width:150px}#overview .overview-add{padding:0 16px;font-size:16px}
+ #overview .overviewstat{grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto;min-height:92px;padding:10px 10px;column-gap:8px;row-gap:4px;align-content:center}
+ #overview .overviewstat .ovicon{grid-row:1;grid-column:1}#overview .overviewstat b{grid-row:1;grid-column:2}#overview .overviewstat span{grid-row:2;grid-column:1/3;margin:0;font-size:13px;white-space:nowrap}}
+@media(max-width:360px){.topbar .brandcar{width:64px}.topbar .brand b{font-size:14px}.topbar .brand small{display:none}#overview .overview-intro h1{font-size:26px}#overview .overview-date{font-size:14px;gap:6px}#overview .overview-date svg{width:18px;height:18px}#overview .overview-add{min-height:44px;padding:0 12px;font-size:14px}#overview .overviewstat span{font-size:12px}}
+/* the earlier ≤720px header rule uses !important, so the 320px sizes need it too */
+@media(max-width:360px){.topbar .brand b{white-space:nowrap;font-size:14.5px!important}.topbar .brand .brandcar{width:56px!important;height:35px!important}}
