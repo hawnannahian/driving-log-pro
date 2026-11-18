@@ -3497,3 +3497,27 @@ body{background:#f3f6fb}
 @media(prefers-reduced-motion:reduce){
   #overview .nextcard,#overview .prayercard{transition:none}
 }
+
+
+/* v1.122 — CSP-safe activity chart bars; use classes instead of inline style attributes. */
+#profileDialog .profile-activity-track i.activity-pct-0{display:none}
+#profileDialog .profile-activity-track i.activity-pct-5{height:5%}
+#profileDialog .profile-activity-track i.activity-pct-10{height:10%}
+#profileDialog .profile-activity-track i.activity-pct-15{height:15%}
+#profileDialog .profile-activity-track i.activity-pct-20{height:20%}
+#profileDialog .profile-activity-track i.activity-pct-25{height:25%}
+#profileDialog .profile-activity-track i.activity-pct-30{height:30%}
+#profileDialog .profile-activity-track i.activity-pct-35{height:35%}
+#profileDialog .profile-activity-track i.activity-pct-40{height:40%}
+#profileDialog .profile-activity-track i.activity-pct-45{height:45%}
+#profileDialog .profile-activity-track i.activity-pct-50{height:50%}
+#profileDialog .profile-activity-track i.activity-pct-55{height:55%}
+#profileDialog .profile-activity-track i.activity-pct-60{height:60%}
+#profileDialog .profile-activity-track i.activity-pct-65{height:65%}
+#profileDialog .profile-activity-track i.activity-pct-70{height:70%}
+#profileDialog .profile-activity-track i.activity-pct-75{height:75%}
+#profileDialog .profile-activity-track i.activity-pct-80{height:80%}
+#profileDialog .profile-activity-track i.activity-pct-85{height:85%}
+#profileDialog .profile-activity-track i.activity-pct-90{height:90%}
+#profileDialog .profile-activity-track i.activity-pct-95{height:95%}
+#profileDialog .profile-activity-track i.activity-pct-100{height:100%}
