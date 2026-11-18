@@ -532,19 +532,19 @@ function speakBn(text){try{if(!voiceOn()||!("speechSynthesis" in window))return;
 const TIMER_CUES={start:"timer-start.mp3",warn:"timer-warning.mp3",end:"timer-end.mp3"},cueBuf={};
 // v1.125 — iPhone: Web Audio is muted by the ringer switch unless the audio session is "playback"; the context must be resumed (and unlocked with a silent tick) inside the Start tap.
 function cueCtx(){try{if(navigator.audioSession)navigator.audioSession.type="playback";}catch{}audioCtx=audioCtx||new AudioContext();return audioCtx;}
-function unlockAudio(){unlockCueAudio();const c=cueCtx();c.resume?.();try{const s=c.createBufferSource();s.buffer=c.createBuffer(1,1,22050);s.connect(c.destination);s.start(0);}catch{}}
+function unlockAudio(){const c=cueCtx();c.resume?.();try{const s=c.createBufferSource();s.buffer=c.createBuffer(1,1,22050);s.connect(c.destination);s.start(0);}catch{}}
 // v1.125 — Cues are first played with real HTML <audio> elements: on iPhone they ignore the silent switch (Web Audio does not).
-// Each element is "unlocked" once inside a tap (muted play+pause) so the 50- and 55-minute cues can play later without another tap.
+// (v1.131: the old "unlock" that played the warning/end elements muted inside the Start tap was removed — on iPhone it could be audible, so all three voices sounded at once.)
 const cueEl={};
 function cueAudio(name){return cueEl[name]||(cueEl[name]=(()=>{const a=new Audio(TIMER_CUES[name]);a.preload="auto";a.setAttribute("playsinline","");return a;})());}
-function unlockCueAudio(){["warn","end"].forEach(n=>{const a=cueAudio(n);if(a.dataset.unlocked||!a.paused)return;a.muted=true;const p=a.play();if(p&&p.then)p.then(()=>{a.pause();a.currentTime=0;a.muted=false;a.dataset.unlocked="1";}).catch(()=>{a.muted=false;});else a.muted=false;});}
-function playHtmlCue(name){const a=cueAudio(name);return new Promise((resolve,reject)=>{a.muted=false;try{a.currentTime=0;}catch{}let done=false;const fin=ok=>{if(done)return;done=true;a.removeEventListener("ended",onEnd);a.removeEventListener("error",onErr);clearTimeout(t);ok?resolve():reject(Error("audio"));};const onEnd=()=>fin(true),onErr=()=>fin(false),t=setTimeout(()=>fin(true),20000);a.addEventListener("ended",onEnd);a.addEventListener("error",onErr);const p=a.play();if(p&&p.catch)p.catch(()=>fin(false));});}
+function stopSingleCues(except){Object.keys(cueEl).forEach(k=>{if(k!==except){const a=cueEl[k];try{if(!a.paused)a.pause();a.muted=false;}catch{}}});}
+function playHtmlCue(name){const a=cueAudio(name);stopSingleCues(name);return new Promise((resolve,reject)=>{a.muted=false;try{a.currentTime=0;}catch{}let done=false;const fin=ok=>{if(done)return;done=true;a.removeEventListener("ended",onEnd);a.removeEventListener("error",onErr);clearTimeout(t);ok?resolve():reject(Error("audio"));};const onEnd=()=>fin(true),onErr=()=>fin(false),t=setTimeout(()=>fin(true),20000);a.addEventListener("ended",onEnd);a.addEventListener("error",onErr);const p=a.play();if(p&&p.catch)p.catch(()=>fin(false));});}
 // v1.126 — one ~55-minute media file (timer-session.mp3: start cue at 0:00, "5 minutes left" at 50:00, "finished" at 55:00).
 // The Start tap starts it and it plays like a podcast, so on iPhone the cues can keep sounding when the phone is locked or another app is open.
 // The single cues above are only the fallback while this file is not playing. Built by tools/make-timer-session.sh.
 let sessAudio=null,sessFinishing=false;
 const sessionActive=()=>!!sessAudio&&!sessAudio.paused&&!sessAudio.ended;
-async function sessionPlay(){if(!timer||!timer.runFrom||!voiceOn())return false;try{const off=elapsedMs()/1000;if(off>=55*60)return false;
+async function sessionPlay(){if(!timer||!timer.runFrom||!voiceOn())return false;stopSingleCues();try{const off=elapsedMs()/1000;if(off>=55*60)return false;
   if(!sessAudio){sessAudio=new Audio("timer-session.mp3");sessAudio.preload="auto";sessAudio.setAttribute("playsinline","");sessAudio.addEventListener("ended",()=>{sessFinishing=false;try{sessAudio.currentTime=0;}catch{}});}
   if(Math.abs((sessAudio.currentTime||0)-off)>2)try{sessAudio.currentTime=off;}catch{}
   await sessAudio.play();if(Math.abs(sessAudio.currentTime-off)>2)try{sessAudio.currentTime=off;}catch{}

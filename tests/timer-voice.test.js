@@ -33,3 +33,10 @@ test("v1.126: one 55-minute session file keeps the cues going when the phone is 
   assert.match(app,/sessionStop\(\);\}else\{timer\.runFrom=Date\.now\(\);keepAwake\(\);pushTimerSync\("schedule"\);sessionPlay\(\);\}/,"pause stops it, resume restarts at the elapsed time");
   assert.match(app,/if\(!on\)\{clearInterval\(timerTick\);timerTick=null;sessionStop\(\);return;\}/,"cancel / end / delete stop it");
 });
+test("v1.131: Start plays only the first voice — no 'unlock' playback of the warning / end cues, and single cues never overlap",()=>{
+  assert.doesNotMatch(app,/unlockCueAudio/,"the muted play of the warning/end elements was removed");
+  assert.match(app,/function unlockAudio\(\)\{const c=cueCtx\(\);c\.resume\?\.\(\);/);
+  assert.match(app,/function stopSingleCues\(except\)/);
+  assert.match(app,/function playHtmlCue\(name\)\{const a=cueAudio\(name\);stopSingleCues\(name\);/);
+  assert.match(app,/async function sessionPlay\(\)\{if\(!timer\|\|!timer\.runFrom\|\|!voiceOn\(\)\)return false;stopSingleCues\(\);/);
+});
