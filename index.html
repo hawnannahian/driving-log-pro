@@ -29,6 +29,7 @@
 
     <section class="panel tabpanel overview-panel" id="overview">
       <div class="overview-intro"><div><h1>Overview</h1><p class="overview-date" id="overviewDate"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="3"/><path d="M3 9.5h18M8 3v3M16 3v3"/></svg><span></span></p></div><button type="button" class="btn primary overview-add" id="overviewAddLesson" aria-label="Add lesson"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div>
+      <section class="timerbar hidden" id="timerBar" role="region" aria-label="Active driving lesson timer"><div class="timerfill" id="timerFill" role="progressbar" aria-label="Lesson time elapsed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0 percent elapsed"></div><div class="timerhead"><div><small class="timerkicker">DRIVING LESSON</small><b id="timerLabel">Student</b><small class="timerdetail" id="timerDetail">Scheduled lesson</small></div><span id="timerStatus" class="timerstatus live" aria-live="polite">LIVE</span></div><div class="timercenter"><div class="timerring" id="timerRing"><div class="timerringinner"><small>TIME REMAINING</small><b id="timerDigits" role="timer" aria-live="off">55:00</b><small id="timerSub">00:00 elapsed</small></div></div></div><div class="timeractions"><button type="button" class="timerbtn" id="timerPause">Pause</button><button type="button" class="timerbtn timerend" id="timerEnd" aria-label="End and save lesson">End lesson</button></div></section>
       <section class="overviewstats" aria-label="Today's lesson summary">
         <article class="overviewstat"><i class="ovicon"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="3"/><path d="M3 9.5h18M8 3v3M16 3v3"/></svg></i><b id="overviewLessonCount">0</b><span>Lessons</span></article>
         <article class="overviewstat completed"><i class="ovicon"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.3 2.8 2.8L16 9.5"/></svg></i><b id="overviewCompletedCount">0</b><span>Completed</span></article>
@@ -36,7 +37,6 @@
       </section>
       <div id="nextCard" class="nextcard"></div>
       <section class="prayercard hidden" id="prayerCard" aria-label="Prayer times"></section>
-      <section class="timerbar hidden" id="timerBar" role="region" aria-label="Active driving lesson timer"><div class="timerfill" id="timerFill" role="progressbar" aria-label="Lesson time elapsed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0 percent elapsed"></div><div class="timerhead"><div><small class="timerkicker">DRIVING LESSON</small><b id="timerLabel">Student</b><small class="timerdetail" id="timerDetail">Scheduled lesson</small></div><span id="timerStatus" class="timerstatus live" aria-live="polite">LIVE</span></div><div class="timercenter"><div class="timerring" id="timerRing"><div class="timerringinner"><small>TIME REMAINING</small><b id="timerDigits" role="timer" aria-live="off">55:00</b><small id="timerSub">00:00 elapsed</small></div></div></div><div class="timeractions"><button type="button" class="timerbtn" id="timerPause">Pause</button><button type="button" class="timerbtn timerend" id="timerEnd" aria-label="End and save lesson">End lesson</button></div></section>
       <section class="confirmlessons hidden" id="confirmLessons" aria-label="Confirm completed lessons"></section>
       <div class="todayheadrow"><h2 class="todayhead" id="todayTitle">Today</h2><button type="button" class="linkbtn todayall" id="todayViewAll">View All ›</button></div>
       <div id="todayList" class="recordlist empty">No lessons today.</div>
@@ -184,7 +184,7 @@
           <p class="hint">With this on, these times are used for every day instead of the mosque or calculated times. Friday uses the Jum'a time above. A blank time falls back to the automatic time. Change them whenever the mosque changes.</p>
           <div id="prayerPreview" class="prayer-preview" aria-live="polite"></div>
         </section>
-        <p class="app-version" id="appVersion">Driving Log Pro · Version v1.132</p>
+        <p class="app-version" id="appVersion">Driving Log Pro · Version v1.133</p>
         <p class="settings-note">These settings are saved with your app data and included in backup and sync. Lesson timer and completed-hour accounting are not affected.</p>
       </section>
     </section>
@@ -507,7 +507,7 @@
     <button class="tab" data-tab="islamic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M6.5 20v-6.5c0-3 2.5-5 5.5-6.5 3 1.5 5.5 3.5 5.5 6.5V20"/><path d="M12 4.5v2.5"/><path d="M10 20v-3a2 2 0 0 1 4 0v3"/><path d="M3.5 20v-8M20.5 20v-8"/></svg><span>Islamic</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.132</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.133</span></footer>
   <script src="push-config.js"></script>
   <script src="prayer-times.js"></script>
   <script src="mawaqit-times.js"></script>
