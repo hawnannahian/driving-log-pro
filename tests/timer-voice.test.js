@@ -7,7 +7,7 @@ test("v1.110: start / 50 min / 55 min use cue 1 / 2 / 3 and keep the old timer l
   assert.match(app,/TIMER_CUES=\{start:"timer-start\.mp3",warn:"timer-warning\.mp3",end:"timer-end\.mp3"\}/);
   assert.match(app,/el>=50\*60000&&!timer\.spoken50\)\{timer\.spoken50=true;timerSave\(\);playCue\("warn",/);
   assert.match(app,/timerSave\(\);if\(sessionActive\(\)\)sessFinishing=true;playCue\("end",[^)]*\);timer=null;/);
-  assert.match(app,/render\(\);bindRecords\(\);sessFinishing=false;sessionPlay\(\)\.then\(ok=>\{if\(!ok\)playCue\("start",/);
+  assert.match(app,/renderNext\(\);bindRecords\(\);sessFinishing=false;sessionPlay\(\)\.then\(ok=>\{if\(!ok\)playCue\("start",/);
   assert.match(app,/if\(el>=55\*60000\)\{finishTimerAt55\(\);return;\}/);
 });
 test("v1.110/v1.125: HTML audio first (ignores the iPhone silent switch), then Web Audio, then speech; on/off switch; settings text",()=>{
