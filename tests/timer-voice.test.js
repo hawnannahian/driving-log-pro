@@ -38,5 +38,5 @@ test("v1.131: Start plays only the first voice — no 'unlock' playback of the w
   assert.match(app,/function unlockAudio\(\)\{const c=cueCtx\(\);c\.resume\?\.\(\);/);
   assert.match(app,/function stopSingleCues\(except\)/);
   assert.match(app,/function playHtmlCue\(name\)\{const a=cueAudio\(name\);stopSingleCues\(name\);/);
-  assert.match(app,/async function sessionPlay\(\)\{if\(!timer\|\|!timer\.runFrom\|\|!voiceOn\(\)\)return false;stopSingleCues\(\);/);
+  assert.match(app,/async function sessionPlay\(fromStart\)\{if\(!timer\|\|!timer\.runFrom\|\|!voiceOn\(\)\)return false;stopSingleCues\(\);/);
 });

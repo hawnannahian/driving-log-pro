@@ -4,6 +4,10 @@ Both agents work on this repository for the same owner. We cannot talk to each o
 Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs for review, Claude's own-PR merge authority under §3a, no student data in the repo).
 
 ## Recent handover entries
+
+### 2026-11-19 — v1.138–v1.140 (Claude)
+- v1.138 lesson progress road (PR #241), v1.139 next-prayer-only card (PR #242), v1.140 chained hourly timer sessions for 2h/3h bookings (see PROJECT_STATE.md). Booking stays one entry; additive `sessions[]`; accounting/hours unchanged. Tests: 161 node tests; Chromium fake clock for 1h/2h/3h, reopen catch-up, prayer before Fajr/midday/after Isha at 390 and 320. Not tested: real iPhone, background/locked audio, deployment of v1.140.
+
 ### 2026-11-19 — Claude: timer end time after the app was closed (v1.137, cache v201, PR #239)
 - Owner report: the timer "did not count time properly while I close the app". Checked: the timer counts real time (`elapsed + (Date.now() − runFrom)`, state in localStorage), so closing the app does not stop it (verified: 20 min closed → 34:58 left; a paused timer stays paused). Sound / alerts cannot work while the app is closed (iOS suspends the page; only Web Push can, backend not deployed — owner decision still pending).
 - **Real defect fixed:** if the 55th minute passed while the app was closed, reopening auto-finished the lesson but stored the **reopen time as the end time** (start 10:00, reopened 11:30 → end 11:30). `finishTimerAt55()` now stores `runFrom + 55 min − elapsed-before-this-run` (never later than now), i.e. start 10:00 → end 10:55, also after pauses. Live finishing is unchanged. Completion hours, payments and accounting are untouched (hours still use the scheduled Start–End duration). New test `tests/timer-finish.test.js` (158 node tests); not tested on a real iPhone.
