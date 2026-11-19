@@ -1,3 +1,7 @@
+## v1.142 — Compact iOS-style Overview (2026-11-19; owner approved the sample)
+- Progress card: the road and flag are gone; today's lessons are small step dots joined by a thin line (green ✓ done, yellow current, grey upcoming) under "Today · N of M completed". Next-lesson card: one compact row (label, time, name; Start Timer button on the right). Prayer card: compact grid (label + Edit, name, remaining time; time pill on the right). Same markup/IDs/logic; CSS only.
+- Files: `index.html` (v1.142), `styles.css`, `sw.js` (cache v206), this file.
+
 ## v1.141 — Overview tidy (2026-11-19; owner: "looks ugly… remove the bar with 5 lessons / 4 completed / 01 upcoming")
 - The three-card stats bar is hidden (elements and IDs kept, CSS `display:none`); the counts now appear as one small caption in the progress card: "Today · 4 of 5 completed".
 - Progress road made slimmer and calmer: 44 px markers (was 56), thinner road, smaller tick/flag, flat white card with the same border/radius as the Next-lesson and Prayer cards (no heavy shadow). No logic, data or accounting change.
