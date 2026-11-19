@@ -613,6 +613,7 @@ let lpKey=null;
 function renderLessonProgress(list){const box=$("lessonProgress"),track=$("lpTrack");if(!box||!track)return;box.classList.toggle("hidden",!list.length);if(!list.length){track.innerHTML="";return;}
  const states=list.map(lpState),n={done:0,active:0,next:0};states.forEach(s=>n[s]++);
  box.setAttribute("aria-label",`Today's lessons: ${n.done} completed${n.active?`, ${n.active} in progress`:""}, ${n.next} upcoming`);
+ {const cap=$("lpCap");if(cap)cap.textContent=`Today · ${n.done} of ${list.length} completed`;}
  const have=[...track.querySelectorAll(".lp-car")],same=have.length===list.length&&have.every((el,i)=>el.dataset.lid===list[i].id);
  if(!same){track.innerHTML=list.map((e,i)=>`<span class="lp-car lp-${states[i]}" data-lid="${esc(e.id)}"><i class="lp-disc">${LP_CAR}</i><b class="lp-tick">${LP_TICK}</b></span>`).join("")+`<span class="lp-flag">${LP_FLAG}</span>`;}
  else have.forEach((el,i)=>{el.classList.remove("lp-done","lp-active","lp-next");el.classList.add("lp-"+states[i]);});

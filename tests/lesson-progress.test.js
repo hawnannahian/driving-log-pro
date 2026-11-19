@@ -1,7 +1,7 @@
 const test=require("node:test"),assert=require("node:assert"),fs=require("fs");
 const app=fs.readFileSync(__dirname+"/../app.js","utf8"),html=fs.readFileSync(__dirname+"/../index.html","utf8"),css=fs.readFileSync(__dirname+"/../styles.css","utf8");
-test("v1.138: the lesson progress road has no text and is described only by an aria-label",()=>{
-  assert.match(html,/<section class="lprog hidden" id="lessonProgress" role="img" aria-label=""><div class="lp-scroll" id="lpScroll"><div class="lp-track" id="lpTrack"><\/div><\/div><\/section>/);
+test("v1.138: the lesson progress road markers have no text; a small caption shows the count and an aria-label describes it",()=>{
+  assert.match(html,/<section class="lprog hidden" id="lessonProgress" role="img" aria-label=""><p class="lp-cap" id="lpCap" aria-hidden="true"><\/p><div class="lp-scroll" id="lpScroll"><div class="lp-track" id="lpTrack"><\/div><\/div><\/section>/);
   const i=app.indexOf("function renderLessonProgress(list){"),fn=app.slice(i,app.indexOf("const lessonsOn = iso",i));
   const markup=fn.match(/`<span class="lp-car[^`]*`/)[0]+fn.match(/<span class="lp-flag">[^`]*`/)[0];
   assert.doesNotMatch(markup.replace(/<svg[\s\S]*?<\/svg>/g,""),/>[^<${}]*[A-Za-z0-9]/,"the markers contain no visible text (only the SVG icons)");
