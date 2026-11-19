@@ -3712,3 +3712,34 @@ body.timing #overview #nextCard{display:none}
 #doneDialog .dialogactions span{display:none}
 #doneDialog .dialogactions #doneWa,#doneDialog .dialogactions #doneCopy{order:-2;grid-column:1/3;min-height:50px;font-size:16px}
 #doneDialog .dialogactions [data-close]{order:-1}
+
+/* v1.138 — Lesson progress road (no text): road, round car markers, finish flag. Completed = green + tick, active = yellow, upcoming = white. */
+.lprog{margin:0 0 10px;padding:10px 6px;border:1px solid #e6ebf3;border-radius:20px;background:linear-gradient(180deg,#fff,#f7f9fd);box-shadow:0 8px 22px #1d2a5a14,0 1px 0 #fff inset}
+.lprog.hidden{display:none}
+.lp-scroll{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:14px 4px 10px;scroll-snap-type:x proximity}
+.lp-scroll::-webkit-scrollbar{display:none}
+.lp-track{position:relative;display:flex;align-items:center;gap:14px;width:max-content;min-width:100%;padding:0 12px;justify-content:space-around}
+.lp-track::before{content:"";position:absolute;left:0;right:0;top:50%;height:30px;margin-top:-6px;border-radius:15px;background:repeating-linear-gradient(90deg,#fff 0 18px,transparent 18px 34px) 6px 50%/auto 3px no-repeat,linear-gradient(180deg,#667289,#4d586f);box-shadow:0 6px 10px #28324a33,inset 0 2px 0 #ffffff33}
+.lp-car{position:relative;flex:none;display:grid;place-items:center;width:56px;height:56px;scroll-snap-align:center;transition:transform .35s cubic-bezier(.2,.9,.3,1.2)}
+.lp-disc{position:relative;display:grid;place-items:center;width:56px;height:56px;border-radius:50%;transition:background .35s ease,box-shadow .35s ease,transform .35s ease}
+.lp-carico{width:36px;height:26px;overflow:visible}
+.lp-carico .lp-body{fill:var(--lp-car,#17376e)}
+.lp-carico .lp-glass{fill:#fff;opacity:.88}
+.lp-carico .lp-sheen{fill:#fff;opacity:.5}
+.lp-carico .lp-mirror{fill:var(--lp-car,#17376e)}
+.lp-carico .lp-lamp{fill:#fff}
+.lp-carico .lp-grille{fill:#fff;opacity:.92}
+.lp-carico .lp-grille-line{stroke:var(--lp-car,#17376e);stroke-width:1.2;opacity:.6}
+.lp-next{--lp-car:#17376e}
+.lp-next .lp-disc{background:radial-gradient(circle at 35% 28%,#fff,#eef1f7);box-shadow:0 4px 10px #28324a33,0 0 0 2px #fff,0 0 0 3px #dfe5ef}
+.lp-done{--lp-car:#14803c}
+.lp-done .lp-disc{background:radial-gradient(circle at 35% 28%,#f3fff6,#bff0cc);box-shadow:0 4px 12px #1fa85555,0 0 0 2px #fff,0 0 0 3px #7ddc9a}
+.lp-active{--lp-car:#17376e;transform:translateY(-3px) scale(1.12)}
+.lp-active .lp-disc{background:radial-gradient(circle at 35% 28%,#fff1a0,#ffc800);box-shadow:0 6px 16px #f5a80080,0 0 0 2px #fff4c2,0 0 0 4px #ffd84d}
+.lp-tick{position:absolute;right:-6px;top:-6px;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#15803d;box-shadow:0 2px 6px #0b4a2255,0 0 0 2px #fff;opacity:0;transform:scale(.4);transition:opacity .3s ease,transform .35s cubic-bezier(.2,.9,.3,1.4)}
+.lp-tick svg{width:14px;height:14px}
+.lp-done .lp-tick{opacity:1;transform:scale(1)}
+.lp-flag{position:relative;z-index:1;flex:none;width:34px;height:54px;margin:-6px 0 0 10px}
+.lp-flag svg{width:100%;height:100%;overflow:visible}
+.lp-flagcloth{fill:#ffc61a;stroke:#e8a600;stroke-width:1}
+@media(prefers-reduced-motion:reduce){.lp-car,.lp-disc,.lp-tick{transition:none}}
