@@ -1,3 +1,8 @@
+## v1.135 — App (Home Screen) icon restored; the new logo stays inside the app (2026-11-19; owner request)
+- The owner wanted the new car logo **inside the app only**. The phone's app picture (Home Screen icon, launch picture, favicon, notification icon) is back to the previous blue "F" icon: `icon-192.png`, `icon-512.png`, `icon-maskable-512.png`, `apple-touch-icon.png` and `icon.svg` were restored byte-for-byte from `178cc30` (the commit before v1.134). The new logo remains in `brand-car.png` (the header badge).
+- Note for the other agent: v1.134 changed all of these files; do not put the car logo back into the icon files unless the owner asks. iOS caches the Home Screen icon, so a phone that already took the v1.134 icon keeps showing it until the app is deleted from the Home Screen and added again.
+- Files: the five icon files, `index.html` (v1.135), `sw.js` (cache v199), this file. No JS/CSS/data change. Not tested on a real iPhone.
+
 ## v1.134 — New brand logo (2026-11-19; owner-supplied image)
 - The owner's blue car logo with a yellow/orange swoosh replaces the old white-car header image and the old "D" app icon. Source: the owner's image (1868×842, white background), cropped to its content; the near-white background (253) was normalised to pure white (only the part connected to the border), so it merges cleanly with white.
 - **Files:** `brand-car.png` (480×235, header), `icon-192.png`, `icon-512.png`, `apple-touch-icon.png` (180, iOS Home Screen), `icon-maskable-512.png` (car at 72% width inside the safe zone), and `icon.svg` (the 256 px icon embedded as a PNG, used as the favicon and the manifest's `any` SVG). All keep their old file names, so `manifest.webmanifest`, the `<link>` tags and `sw.js` `FILES` needed no change.
