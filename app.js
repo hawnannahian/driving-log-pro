@@ -1077,22 +1077,19 @@ $("profileDialog").addEventListener("close",()=>{try{if(!$("students").classList
 function prayerTimesFor(iso){const p=prayerCfg(),mq=mawaqitDay(iso),man=p.manual&&p.manual.on?p.manual:null,base=mq||prayerDay(iso);if(!base)return[];
  const t=man?{fajr:man.fajr||base.fajr,duhr:man.dhuhr||base.duhr,asr:man.asr||base.asr,maghrib:man.maghrib||base.maghrib,isha:man.isha||base.isha}:base,friday=new Date(iso+"T12:00:00").getDay()===5,jumua=man?p.jumua:(mq&&cleanTime(window.MAWAQIT_TIMES.jumua)||p.jumua);
  return[["Fajr",t.fajr],friday?["Jum'a",jumua]:["Dhuhr",t.duhr],["Asr",t.asr],["Maghrib",t.maghrib],["Isha",t.isha]].filter(x=>x[1]&&/^\d{1,2}:\d{2}$/.test(x[1])).map(([name,at])=>({name,at:fromMin(toMin(at))}));}
-function prayerCountdownText(min){const h=Math.floor(min/60),m=min%60;return h>0?`${h} h ${m} m`:`${m} m`;}
+function prayerCountdownText(min){const h=Math.floor(min/60),m=min%60,p=n=>String(n).padStart(2,"0");return h>0?`${p(h)}h ${p(m)}m`:`${p(m)}m`;}
 function renderPrayerCard(){const box=$("prayerCard");if(!box)return;const now=new Date(),today=dateISO(now),m=now.getHours()*60+now.getMinutes(),list=prayerTimesFor(today);
  if(!list.length){box.classList.add("hidden");return;}box.classList.remove("hidden");
- const tomorrow=dateISO(new Date(now.getFullYear(),now.getMonth(),now.getDate()+1)),yesterday=dateISO(new Date(now.getFullYear(),now.getMonth(),now.getDate()-1));
- let shown=list,isTomorrow=false;
- let idx=list.findIndex(x=>toMin(x.at)>m),nextName,nextAt,nextMin,prevMin;
- if(idx>=0){nextName=list[idx].name;nextAt=list[idx].at;nextMin=toMin(nextAt);const prev=idx>0?toMin(list[idx-1].at):(()=>{const y=prayerTimesFor(yesterday);return y.length?toMin(y[y.length-1].at)-1440:nextMin-360;})();prevMin=prev;}
- else{const tm=prayerTimesFor(tomorrow),f=tm[0]||list[0];nextName=f.name;nextAt=f.at;nextMin=toMin(f.at)+1440;prevMin=toMin(list[list.length-1].at);if(tm.length){shown=tm;isTomorrow=true;idx=0;}}
- const left=Math.max(0,nextMin-m),pct=Math.max(0,Math.min(100,Math.round((m-prevMin)/Math.max(1,nextMin-prevMin)*100))),p=prayerCfg(),src=p.manual&&p.manual.on?"Your own times":mawaqitDay(today)?"Mosque timetable":"Calculated times";
- box.innerHTML=`<div class="pc-top"><div><small>${OVI.mosque}<span>Prayer Times</span></small><b>${isTomorrow?"Tomorrow · ":""}${esc(new Date((isTomorrow?tomorrow:today)+"T12:00:00").toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long"}))}</b></div><button type="button" class="pc-edit" id="prayerCardEdit">Edit</button></div>
- <div class="pc-hero"><div><small>Next Prayer</small><b>${esc(nextName)}</b></div><div class="pc-at"><b>${esc(nextAt)}</b><span>in ${prayerCountdownText(left)}</span></div></div>
- <div class="pc-bar" aria-hidden="true"><i data-w="${pct}"></i></div>
- <div class="pc-row">${shown.map((x,i)=>`<div class="pc-item${i===idx?" next":""}${!isTomorrow&&toMin(x.at)<=m?" past":""}"><small>${esc(x.name)}</small><b>${esc(x.at)}</b></div>`).join("")}</div>
- <p class="pc-foot">${OVI.shield}<span>${esc(src)}${p.on?` · booking protection ${p.minutes} min`:" · booking protection off"}</span></p>`;
- box.querySelectorAll("[data-w]").forEach(i=>i.style.width=i.dataset.w+"%");const ed=$("prayerCardEdit");if(ed)ed.onclick=()=>{document.querySelector('.tab[data-tab="log"]').click();showLogSettings();$("pManualOn").scrollIntoView({block:"center"});};}
-setInterval(()=>{if(document.visibilityState==="visible"&&$("overview")&&!$("overview").classList.contains("hidden"))renderPrayerCard();},20000);
+ const tomorrow=dateISO(new Date(now.getFullYear(),now.getMonth(),now.getDate()+1));
+ let isTomorrow=false,nextName,nextAt,nextMin;const nx=list.find(x=>toMin(x.at)>m);
+ if(nx){nextName=nx.name;nextAt=nx.at;nextMin=toMin(nx.at);}
+ else{const tm=prayerTimesFor(tomorrow),f=tm[0]||list[0];nextName=f.name;nextAt=f.at;nextMin=toMin(f.at)+1440;isTomorrow=!!tm.length;}
+ const left=Math.max(0,nextMin-m);
+ box.innerHTML=`<div class="pc-top"><small>${OVI.mosque}<span>Next Prayer</span></small><button type="button" class="pc-edit" id="prayerCardEdit">Edit</button></div>
+ <div class="pc-hero"><b class="pc-name">${esc(nextName)}${isTomorrow?" <em>tomorrow</em>":""}</b><b class="pc-time">${esc(nextAt)}</b></div>
+ <p class="pc-left">Time remaining: <b>${prayerCountdownText(left)}</b></p>`;
+ const ed=$("prayerCardEdit");if(ed)ed.onclick=()=>{document.querySelector('.tab[data-tab="log"]').click();showLogSettings();$("pManualOn").scrollIntoView({block:"center"});};}
+setInterval(()=>{if(document.visibilityState==="visible"&&$("overview")&&!$("overview").classList.contains("hidden"))renderPrayerCard();},15000);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"){try{renderPrayerCard();}catch{}}});
 
 
 // v1.108 — "Did these lessons happen?" The app counts a lesson as completed once its end time has passed (unchanged rule).

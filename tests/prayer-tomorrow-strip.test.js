@@ -11,7 +11,7 @@ test("v1.107: week strip rolls from today while the selected day is within the n
   assert.deepStrictEqual(f("2026-11-10","2026-11-15")[0],"2026-11-09"); // past day: its own week
 });
 test("v1.107: after Isha the prayer card shows tomorrow's times with a Tomorrow label",()=>{
-  assert.match(app,/if\(tm\.length\)\{shown=tm;isTomorrow=true;idx=0;\}/);
-  assert.match(app,/\$\{isTomorrow\?"Tomorrow · ":""\}/);
-  assert.match(app,/!isTomorrow&&toMin\(x\.at\)<=m\?" past":""/);
+  assert.match(app,/isTomorrow=!!tm\.length/);
+  assert.match(app,/nextMin=toMin\(f\.at\)\+1440/);
+  assert.match(app,/\$\{isTomorrow\?" <em>tomorrow<\/em>":""\}/);
 });

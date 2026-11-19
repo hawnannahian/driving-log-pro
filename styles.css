@@ -3743,3 +3743,11 @@ body.timing #overview #nextCard{display:none}
 .lp-flag svg{width:100%;height:100%;overflow:visible}
 .lp-flagcloth{fill:#ffc61a;stroke:#e8a600;stroke-width:1}
 @media(prefers-reduced-motion:reduce){.lp-car,.lp-disc,.lp-tick{transition:none}}
+
+/* v1.139 — Next-prayer-only card */
+#overview .pc-hero{margin:4px 0 4px}
+#overview .pc-name{color:var(--ov-navy);font-size:26px;font-weight:800;letter-spacing:-.5px;line-height:1.1}
+#overview .pc-name em{margin-left:6px;font-size:13px;font-style:normal;font-weight:600;color:var(--ov-text-2)}
+#overview .pc-time{padding:4px 12px;border-radius:999px;background:#f5a800;color:var(--ov-navy);font-size:22px;font-weight:800;letter-spacing:-.3px;font-variant-numeric:tabular-nums}
+#overview .pc-left{margin:2px 0 0;color:var(--ov-text-2);font-size:14px;font-weight:500}
+#overview .pc-left b{color:var(--ov-navy);font-weight:800;font-variant-numeric:tabular-nums}
