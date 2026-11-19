@@ -1,3 +1,8 @@
+## v1.141 — Overview tidy (2026-11-19; owner: "looks ugly… remove the bar with 5 lessons / 4 completed / 01 upcoming")
+- The three-card stats bar is hidden (elements and IDs kept, CSS `display:none`); the counts now appear as one small caption in the progress card: "Today · 4 of 5 completed".
+- Progress road made slimmer and calmer: 44 px markers (was 56), thinner road, smaller tick/flag, flat white card with the same border/radius as the Next-lesson and Prayer cards (no heavy shadow). No logic, data or accounting change.
+- Files: `index.html` (v1.141), `app.js` (caption text), `styles.css`, `sw.js` (cache v205), `tests/lesson-progress.test.js`, this file. Verified in Chromium at 390×844 and 320×568; real iPhone not verified.
+
 ## v1.140 — Two/three-hour bookings: the next hour starts automatically (2026-11-19; Task 2 + 3 of the UI/bug brief)
 - **Root cause:** the lesson timer is one fixed 55-minute session, and finishing it completed the whole booking. A 2-hour booking (e.g. 14:30–16:30) therefore ended after the first hour and the second hour needed a new manual Start.
 - **Fix:** a booking of N whole hours (`floor(scheduled minutes / 60)`) runs as N chained 55-minute sessions. When a session ends and more remain, the next starts by itself at the exact end moment (no tap): toast "The first hour is completed. The second hour has started.", recorded "finished" then "start" voice cues, and a system Notification only if the page is hidden and permission was already granted. The booking is completed once, after the last session. One-hour bookings behave exactly as before.
