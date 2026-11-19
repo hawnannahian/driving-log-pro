@@ -3826,3 +3826,6 @@ body.timing #overview #nextCard{display:none}
 #overview #prayerCard .pc-time{padding:7px 16px;background:linear-gradient(180deg,#ffc933,#f5a800);box-shadow:0 5px 12px #f5a80040;font-size:21px}
 #overview #prayerCard .pc-left{margin-top:1px}
 @media(prefers-reduced-motion:reduce){#overview .lp-active .lp-disc{animation:none}#overview .nextcard .nextbtn{transition:none}}
+
+/* v1.144 — lock-screen notification controls are hidden until the push backend exists (elements and IDs kept) */
+#hdrBell,#pushBox{display:none!important}

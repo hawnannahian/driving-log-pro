@@ -1,3 +1,9 @@
+## v1.144 — Settings gear toggles; notification controls hidden; lighter load (2026-11-19; owner: pre-release clean-up)
+- **Bug:** tapping the header gear again re-opened Settings logic via the Log tab, so it did not close. Now the gear toggles: second tap closes Settings and returns to the screen it was opened from (Overview/Calendar/…); from the Log tab it returns to the records. "Back to Records" unchanged.
+- The Lock-screen Notifications card (`#pushBox`) and the header bell (`#hdrBell`, which only led to that card) are hidden by CSS; elements, IDs and push code are kept for when the Web Push backend is deployed.
+- **Performance audit** (Chromium, synthetic 1,500 lessons / 120 students): every tab opens in 4–36 ms, full `render()` 113 ms, ~4,200 DOM nodes, 12 requests, ~0.6 MB text before compression. No slow JS path found. Changes: `brand-car.png` 168 KB → 17 KB (same look); the service worker now waits 15 s before filling the ~11 MB audio cache so it does not compete with opening the app. Remaining known load costs (not changed, owner decision / larger work): the audio files are downloaded once in the background on first install; `styles.css` (260 KB) contains layered per-release overrides that could be consolidated in a dedicated, carefully tested clean-up; cloud sync runs on open when configured.
+- Files: `app.js`, `styles.css`, `index.html` (v1.144), `sw.js` (cache v208), `brand-car.png`, `tests/settings-toggle.test.js` (new), this file.
+
 ## v1.143 — Smoother Overview polish (2026-11-19; owner: "I want it to look nice and smooth")
 - CSS only: soft layered shadows without borders, gentle blue/amber tints on the Next-lesson / Prayer cards, gradient step dots (the current lesson has a slow pulsing ring, off with reduced-motion), gradient Start/time buttons with a pressed state, borderless Edit link. No markup, logic or data change.
 - Files: `styles.css`, `index.html` (v1.143), `sw.js` (cache v207), this file.
