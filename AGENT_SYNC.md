@@ -247,7 +247,7 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 
 
 ## Latest verified project state
-- **main `2a67d5b`** (merge of PR #239): footer **v1.137**, Service Worker cache **`nahians-schedule-cache-v201`**. GitHub Pages "pages build and deployment" completed successfully for `5e06556` (v1.136) (checked 2026-11-19 via the Actions API); the run for `2a67d5b` (v1.137) is checked in the next entry or was in progress when this was written, so v1.137 is **not** confirmed deployed here. That proves the Pages build/deploy only; the live site was not fetched (proxy 403) and real-iPhone behaviour is not verified by any agent.
+- **main `230e010`** (merge of PR #243): footer **v1.140**, Service Worker cache **`nahians-schedule-cache-v204`**. GitHub Pages "pages build and deployment" completed successfully for `230e010` (checked 2026-11-19 via the Actions API). Releases since v1.137: v1.138 lesson progress road (#241), v1.139 next-prayer-only card (#242), v1.140 chained hourly timer sessions for 2h/3h bookings (#243). Real iPhone not verified; Web Push backend still not deployed.
 - Latest releases: v1.110 owner's recorded timer voices (PR #192), v1.111 touch targets (PR #193), v1.112 minimum text size (PR #197), v1.113 design tokens (PR #199), v1.114 tab-bar aria-current (PR #201); PR #194 is tooling/docs only.
 - Other recent releases: v1.68 daily cloud backup, v1.70 realistic car header image, v1.71-v1.74 (ChatGPT) Students/Forms/bottom-nav/profile UX.
 - **Open PRs:** #13 only (verified 2026-11-17; #73 was closed as superseded the same day). Older "DRAFT" labels on earlier ChatGPT entries below are historical wording; check GitHub for the real state.
