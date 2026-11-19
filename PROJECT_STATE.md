@@ -1,3 +1,7 @@
+## v1.143 — Smoother Overview polish (2026-11-19; owner: "I want it to look nice and smooth")
+- CSS only: soft layered shadows without borders, gentle blue/amber tints on the Next-lesson / Prayer cards, gradient step dots (the current lesson has a slow pulsing ring, off with reduced-motion), gradient Start/time buttons with a pressed state, borderless Edit link. No markup, logic or data change.
+- Files: `styles.css`, `index.html` (v1.143), `sw.js` (cache v207), this file.
+
 ## v1.142 — Compact iOS-style Overview (2026-11-19; owner approved the sample)
 - Progress card: the road and flag are gone; today's lessons are small step dots joined by a thin line (green ✓ done, yellow current, grey upcoming) under "Today · N of M completed". Next-lesson card: one compact row (label, time, name; Start Timer button on the right). Prayer card: compact grid (label + Edit, name, remaining time; time pill on the right). Same markup/IDs/logic; CSS only.
 - Files: `index.html` (v1.142), `styles.css`, `sw.js` (cache v206), this file.
