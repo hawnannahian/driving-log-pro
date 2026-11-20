@@ -1,3 +1,8 @@
+## v1.149 — Editable "lesson completed" WhatsApp message (2026-11-20; owner: wants to customise WhatsApp message texts in Settings)
+- Settings → WhatsApp Message Settings already let the owner edit the lesson reminder, multi-lesson and payment messages. The message sent after completing a lesson (the thank-you text) was hard-coded. It is now a fourth template, "Lesson completed (thank-you message)", with `{{hours}}` = total completed hours, a live preview, Save and Reset. The default wording is exactly the old text, so nothing changes until the owner edits it.
+- Storage: same device-only key (`…-whatsapp-templates`) gets one optional extra field `done`; no student/lesson/payment record, schema, backup or sync change.
+- Files: `app.js`, `index.html` (v1.149), `sw.js` (cache v213), `tests/wa-done-template.test.js`, this file.
+
 ## v1.148 — Fix: "Reload" button hung after an update (2026-11-20; owner: tapping Reload froze the screen)
 - **Cause (my own v1.144 change):** the service worker's `activate` step waited for the audio-cache fill, and v1.144 added a 15-second delay inside it. A page reload cannot be served until activation finishes, so Reload (and any open right after an update) stalled ~15 s. Measured in Chromium: reload 15,230 ms before, 117 ms after.
 - **Fix:** activation no longer waits for audio; the audio cache is still filled (delayed, non-blocking) by the first page request. No other behaviour changed.

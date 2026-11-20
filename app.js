@@ -82,11 +82,12 @@ const WA_MULTI_DEFAULT="আসসালামু আলাইকুম ওয়
 const WA_DEFAULTS={
  lesson:"আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ ভাই।\nআপনার পরবর্তী ড্রাইভিং লেসন {{day}}, {{time}}। অনুগ্রহ করে নির্ধারিত সময়ের কয়েক মিনিট আগে উপস্থিত থাকবেন।\nধন্যবাদ।",
  payment:"আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ ভাই।\nআপনার ড্রাইভিং লেসন বাবদ {{amount}} পরিশোধ বাকি রয়েছে। অনুগ্রহ করে আপনার সুবিধামতো সময়ে পরিশোধ করবেন।\nধন্যবাদ।",
- multi:WA_MULTI_DEFAULT,days:7
+ multi:WA_MULTI_DEFAULT,days:7,
+ done:"আসসালামু আলাইকুম স্যার,\n\nআজকের লেসনে আপনার আন্তরিক প্রচেষ্টার জন্য ধন্যবাদ। ইনশাআল্লাহ, পরবর্তী লেসনে আপনি আরও ভালো করবেন।\n\nআজকের লেসনে যে ভুলগুলো হয়েছে, সেগুলো একটু মনে রাখবেন এবং পরবর্তী লেসনে সেগুলো সংশোধন করার দিকে বিশেষভাবে মনোযোগ দেবেন।\n\nআপনার পরবর্তী লেসনের সময়টি অনুগ্রহ করে নিশ্চিত করবেন।\n\n*এ পর্যন্ত আপনার সম্পন্ন মোট ড্রাইভিং সময়: {{hours}} ঘণ্টা।*\n\nধন্যবাদ। আপনার জন্য শুভকামনা রইল।"
 };
-function getWaTemplates(){try{const x=JSON.parse(localStorage.getItem(WA_TEMPLATE_KEY)||"{}");return{lesson:typeof x.lesson==="string"?x.lesson:WA_DEFAULTS.lesson,payment:typeof x.payment==="string"?x.payment:WA_DEFAULTS.payment,multi:typeof x.multi==="string"&&x.multi.trim()?x.multi:WA_DEFAULTS.multi,days:WA_DAYS_ALLOWED.includes(Number(x.days))?Number(x.days):WA_DEFAULTS.days};}catch{return{...WA_DEFAULTS};}}
+function getWaTemplates(){try{const x=JSON.parse(localStorage.getItem(WA_TEMPLATE_KEY)||"{}");return{lesson:typeof x.lesson==="string"?x.lesson:WA_DEFAULTS.lesson,payment:typeof x.payment==="string"?x.payment:WA_DEFAULTS.payment,multi:typeof x.multi==="string"&&x.multi.trim()?x.multi:WA_DEFAULTS.multi,done:typeof x.done==="string"&&x.done.trim()?x.done:WA_DEFAULTS.done,days:WA_DAYS_ALLOWED.includes(Number(x.days))?Number(x.days):WA_DEFAULTS.days};}catch{return{...WA_DEFAULTS};}}
 let waTemplates=getWaTemplates();
-const fillWaTemplate=(template,vars)=>String(template||"").replace(/{{\s*(day|time|amount|lessons)\s*}}/g,(_,k)=>vars[k]??"");
+const fillWaTemplate=(template,vars)=>String(template||"").replace(/{{\s*(day|time|amount|lessons|hours)\s*}}/g,(_,k)=>vars[k]??"");
 // When the same student has more than one not-yet-completed lesson within the chosen window (e.g. a multiple booking), one message lists all of them.
 // The window (0 = that day only, 3, 7 or 14 more days) and the wording ({{lessons}}) are set in Log -> Settings -> WhatsApp Message Settings.
 const upcomingLessonsFor=e=>{const[y,m,d]=String(e.date).split("-").map(Number),limit=dateISO(new Date(y,m-1,d+Number(waTemplates.days||0)));return state.entries.filter(x=>x.type==="Lesson"&&x.start&&sameName(x.student,e.student)&&!isDone(x)&&x.date>=e.date&&x.date<=limit).sort((p,q)=>(p.date+p.start).localeCompare(q.date+q.start));};
@@ -94,24 +95,25 @@ const waLessonLines=list=>list.map(x=>"• "+dayName(x.date)+", "+timeText(x)).j
 const lessonMsg=e=>{const list=upcomingLessonsFor(e);if(list.length<2||!list.some(x=>x.id===e.id))return fillWaTemplate(waTemplates.lesson,{day:dayName(e.date),time:timeText(e)});const lines=waLessonLines(list),t=String(waTemplates.multi||WA_MULTI_DEFAULT);return /{{\s*lessons\s*}}/.test(t)?fillWaTemplate(t,{lessons:lines}):t.replace(/\s+$/,"")+"\n"+lines;};
 const payMsg=amount=>fillWaTemplate(waTemplates.payment,{amount:euro(amount)});
 function renderWaTemplatePreviews(){
- const lesson= $("waLessonTemplate"),payment=$("waPaymentTemplate"),multi=$("waMultiTemplate");
+ const lesson= $("waLessonTemplate"),payment=$("waPaymentTemplate"),multi=$("waMultiTemplate"),done=$("waDoneTemplate");
  if(!lesson||!payment)return;
  $("waLessonPreview").textContent=fillWaTemplate(lesson.value,{day:"Monday, 10 November",time:"10:00–11:00"});
  $("waPaymentPreview").textContent=fillWaTemplate(payment.value,{amount:"€40,00"});
+ if(done&&$("waDonePreview"))$("waDonePreview").textContent=fillWaTemplate(done.value,{hours:"5"});
  if(multi&&$("waMultiPreview")){const sample="• Mon 10 Nov, 10:00–11:00\n• Tue 11 Nov, 15:30–16:30",t=multi.value||WA_MULTI_DEFAULT;$("waMultiPreview").textContent=/{{\s*lessons\s*}}/.test(t)?fillWaTemplate(t,{lessons:sample}):t.replace(/\s+$/,"")+"\n"+sample;}
 }
 function initWaTemplateSettings(){
- const lesson=$("waLessonTemplate"),payment=$("waPaymentTemplate"),multi=$("waMultiTemplate"),days=$("waMultiDays");
+ const lesson=$("waLessonTemplate"),payment=$("waPaymentTemplate"),multi=$("waMultiTemplate"),days=$("waMultiDays"),done=$("waDoneTemplate");
  if(!lesson||!payment)return;
- lesson.value=waTemplates.lesson;payment.value=waTemplates.payment;if(multi)multi.value=waTemplates.multi;if(days)days.value=String(waTemplates.days);
- [lesson,payment,multi].filter(Boolean).forEach(el=>el.addEventListener("input",renderWaTemplatePreviews));
+ lesson.value=waTemplates.lesson;payment.value=waTemplates.payment;if(multi)multi.value=waTemplates.multi;if(done)done.value=waTemplates.done;if(days)days.value=String(waTemplates.days);
+ [lesson,payment,multi,done].filter(Boolean).forEach(el=>el.addEventListener("input",renderWaTemplatePreviews));
  $("waTemplateSave").onclick=()=>{
-  const next={lesson:lesson.value,payment:payment.value,multi:multi&&multi.value.trim()?multi.value:WA_DEFAULTS.multi,days:days&&WA_DAYS_ALLOWED.includes(Number(days.value))?Number(days.value):WA_DEFAULTS.days};
+  const next={lesson:lesson.value,payment:payment.value,multi:multi&&multi.value.trim()?multi.value:WA_DEFAULTS.multi,done:done&&done.value.trim()?done.value:WA_DEFAULTS.done,days:days&&WA_DAYS_ALLOWED.includes(Number(days.value))?Number(days.value):WA_DEFAULTS.days};
   try{localStorage.setItem(WA_TEMPLATE_KEY,JSON.stringify(next));waTemplates=next;toast("WhatsApp messages saved on this device.");}
   catch{toast("Could not save WhatsApp messages. Check device storage.");}
  };
  $("waTemplateReset").onclick=()=>{
-  lesson.value=WA_DEFAULTS.lesson;payment.value=WA_DEFAULTS.payment;if(multi)multi.value=WA_DEFAULTS.multi;if(days)days.value=String(WA_DEFAULTS.days);renderWaTemplatePreviews();
+  lesson.value=WA_DEFAULTS.lesson;payment.value=WA_DEFAULTS.payment;if(multi)multi.value=WA_DEFAULTS.multi;if(done)done.value=WA_DEFAULTS.done;if(days)days.value=String(WA_DEFAULTS.days);renderWaTemplatePreviews();
  };
  renderWaTemplatePreviews();
 }
@@ -591,7 +593,7 @@ function timerCancel(){if(!timer)return;if(!confirm("Cancel the timer? Nothing i
 // Mark a lesson completed with its actual length. A timer session can complete its lesson only once.
 function completeLesson(id,o){const e=state.entries.find(x=>x.id===id);if(!e||e.type!=="Lesson")return false;if(o.session&&e.timerSession===o.session)return false;
  e.done=true;e.actualMin=Math.max(1,Math.round(o.min));if(o.start)e.actualStart=o.start;if(o.end)e.actualEnd=o.end;e.completedAt=new Date().toISOString();if(o.session)e.timerSession=o.session;if(o.sessions)e.sessions=o.sessions;save();openDone(id);return true;}
-const doneMsg=h=>`আসসালামু আলাইকুম স্যার,\n\nআজকের লেসনে আপনার আন্তরিক প্রচেষ্টার জন্য ধন্যবাদ। ইনশাআল্লাহ, পরবর্তী লেসনে আপনি আরও ভালো করবেন।\n\nআজকের লেসনে যে ভুলগুলো হয়েছে, সেগুলো একটু মনে রাখবেন এবং পরবর্তী লেসনে সেগুলো সংশোধন করার দিকে বিশেষভাবে মনোযোগ দেবেন।\n\nআপনার পরবর্তী লেসনের সময়টি অনুগ্রহ করে নিশ্চিত করবেন।\n\n*এ পর্যন্ত আপনার সম্পন্ন মোট ড্রাইভিং সময়: ${fmtH(h)} ঘণ্টা।*\n\nধন্যবাদ। আপনার জন্য শুভকামনা রইল।`;
+const doneMsg=h=>fillWaTemplate(waTemplates.done,{hours:fmtH(h)});
 let doneNumber=null,doneEntryId=null;
 function undoLessonCompletion(id){const e=state.entries.find(x=>x.id===id);if(!e||!isDone(e))return;if(!confirm("Undo this lesson completion? The lesson will return to not completed and its recorded duration will be cleared."))return;e.done=false;for(const k of ["actualMin","actualStart","actualEnd","completedAt","timerSession","sessions","businessHours"])delete e[k];save();$("doneDialog").close();toast("Lesson completion undone. The lesson is not completed.");}
 // After a lesson is completed: show the totals and a prepared WhatsApp message to review, edit and send.
