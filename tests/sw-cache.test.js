@@ -20,3 +20,7 @@ test("v1.98: the app opens from the cache first (no network wait) and checks for
   assert.match(fs.readFileSync(root+"/app.js","utf8"),/register\("\.\/sw\.js"\)\.then\(reg=>\{reg\.update\(\)/);
 });
 test("v1.98: cache version is a v<number>",()=>{assert.match(sw,/^const CACHE="nahians-schedule-cache-v\d+";/);});
+test("v1.148: the service worker activation never waits for the audio download (it made Reload hang)",()=>{
+  const sw=require("fs").readFileSync(__dirname+"/../sw.js","utf8"),act=sw.slice(sw.indexOf('addEventListener("activate"'),sw.indexOf("// The app opens from the cached shell"));
+  assert.ok(!act.includes("ensureAudio")&&!act.includes("setTimeout"),"activate does not wait for audio");
+});

@@ -1,3 +1,8 @@
+## v1.148 — Fix: "Reload" button hung after an update (2026-11-20; owner: tapping Reload froze the screen)
+- **Cause (my own v1.144 change):** the service worker's `activate` step waited for the audio-cache fill, and v1.144 added a 15-second delay inside it. A page reload cannot be served until activation finishes, so Reload (and any open right after an update) stalled ~15 s. Measured in Chromium: reload 15,230 ms before, 117 ms after.
+- **Fix:** activation no longer waits for audio; the audio cache is still filled (delayed, non-blocking) by the first page request. No other behaviour changed.
+- Files: `sw.js` (cache v212), `index.html` (v1.148), `tests/sw-cache.test.js`, this file.
+
 ## v1.147 — Timer audio: no lesson name on the iPhone audio card (2026-11-20; experiment, owner: tapping the Dynamic Island audio card opened another app)
 - Removed the `navigator.mediaSession.metadata` (title "Lesson timer · <student>", artist "Driving Log Pro") set when the timer audio starts. Audio playback and timer logic are unchanged. Whether iOS then stops opening the wrong app is **not verified** (needs the owner's iPhone); iOS decides what the card opens.
 - Files: `app.js`, `index.html` (v1.147), `sw.js` (cache v211), this file.

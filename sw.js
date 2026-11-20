@@ -1,4 +1,4 @@
-const CACHE="nahians-schedule-cache-v211";
+const CACHE="nahians-schedule-cache-v212";
 // The app shell (pages, scripts, styles, icons) is versioned: bump CACHE on every release.
 const FILES=["./", "./index.html", "./push-config.js", "./styles.css", "./app.js", "./reports-dashboard.js", "./islamic-content.js", "./islamic.js", "./full-time-students.js", "./lesson-recovery.js", "./prayer-times.js", "./mawaqit-times.js", "./manifest.webmanifest", "./icon.svg", "./brand-car.png", "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png", "./apple-touch-icon.png"];
 // The Islamic audio files never change between releases, so they live in their own cache that survives version bumps
@@ -36,7 +36,7 @@ self.addEventListener("activate",event=>{
     caches.keys()
       .then(keys=>Promise.all(keys.filter(key=>key!==CACHE&&key!==AUDIO_CACHE).map(key=>caches.delete(key))))
       .then(()=>self.clients.claim())
-      .then(()=>{audioChecked=true;return new Promise(r=>setTimeout(r,15000)).then(ensureAudio);})
+      // the audio cache is filled by the first page request (below); activation must never wait for it, or the update/reload hangs
   );
 });
 
