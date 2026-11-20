@@ -548,7 +548,6 @@ async function sessionPlay(fromStart){if(!timer||!timer.runFrom||!voiceOn())retu
   if(!sessAudio){sessAudio=new Audio("timer-session.mp3");sessAudio.preload="auto";sessAudio.setAttribute("playsinline","");sessAudio.addEventListener("ended",()=>{sessFinishing=false;try{sessAudio.currentTime=0;}catch{}if(sessChain){sessChain=false;sessionPlay(true);}});}
   if(Math.abs((sessAudio.currentTime||0)-off)>2)try{sessAudio.currentTime=off;}catch{}
   await sessAudio.play();if(Math.abs(sessAudio.currentTime-off)>2)try{sessAudio.currentTime=off;}catch{}
-  try{if("mediaSession" in navigator&&timer)navigator.mediaSession.metadata=new MediaMetadata({title:"Lesson timer · "+(timer.label||"Lesson"),artist:"Driving Log Pro"});}catch{}
   return true;}catch{return false;}}
 function sessionStop(){if(sessFinishing)return;if(sessAudio)try{sessAudio.pause();}catch{}}
 function loadCue(name){if(!cueBuf[name]){cueCtx();cueBuf[name]=fetch(TIMER_CUES[name]).then(r=>{if(!r.ok)throw Error("cue");return r.arrayBuffer();}).then(b=>audioCtx.decodeAudioData(b)).catch(err=>{delete cueBuf[name];throw err;});}return cueBuf[name];}
