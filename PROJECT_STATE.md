@@ -1,3 +1,7 @@
+## v1.147 — Timer audio: no lesson name on the iPhone audio card (2026-11-20; experiment, owner: tapping the Dynamic Island audio card opened another app)
+- Removed the `navigator.mediaSession.metadata` (title "Lesson timer · <student>", artist "Driving Log Pro") set when the timer audio starts. Audio playback and timer logic are unchanged. Whether iOS then stops opening the wrong app is **not verified** (needs the owner's iPhone); iOS decides what the card opens.
+- Files: `app.js`, `index.html` (v1.147), `sw.js` (cache v211), this file.
+
 ## v1.146 — End-lesson dialog wording (2026-11-20; owner: the "full 1-hour credit unless 55 minutes" line is wrong)
 - The confirmation now says: "End this lesson now? It will be marked as completed and counted as a full lesson (the booked Start–End time)." This matches the existing rule (completion hours = scheduled Start–End, CLAUDE.md §6); only the text changed, no calculation, data or button label.
 - Files: `app.js`, `index.html` (v1.146), `sw.js` (cache v210), this file.
