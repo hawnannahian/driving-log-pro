@@ -1,3 +1,9 @@
+## v1.145 — Timer: no pile-up of voices when the app is reopened late (2026-11-20; owner: all voices played together at the end of the lesson, none at 50/55)
+- **Cause:** if the app is closed/locked, iPhone suspends it and nothing can play at 50 and 55 minutes. On reopening, the timer caught up and played the missed "5 minutes left" and "finished" cues one after the other (plus the session audio), so they sounded together.
+- **Fix:** a cue is played only if it is on time (within 20 s of its moment). A late catch-up completes the lesson silently (the completion dialog still opens). Live behaviour is unchanged: with the app open the 50-minute and 55-minute voices play once each (verified with a fake clock).
+- **Not fixable in the web app:** voices at 50/55 while the phone is locked or the app is closed. iOS only keeps playing audio that is already playing; reliable alerts need Web Push (backend not deployed) or keeping the app open on screen.
+- Files: `app.js`, `index.html` (v1.145), `sw.js` (cache v209), `tests/timer-voice.test.js`, this file.
+
 ## v1.144 — Settings gear toggles; notification controls hidden; lighter load (2026-11-19; owner: pre-release clean-up)
 - **Bug:** tapping the header gear again re-opened Settings logic via the Log tab, so it did not close. Now the gear toggles: second tap closes Settings and returns to the screen it was opened from (Overview/Calendar/…); from the Log tab it returns to the records. "Back to Records" unchanged.
 - The Lock-screen Notifications card (`#pushBox`) and the header bell (`#hdrBell`, which only led to that card) are hidden by CSS; elements, IDs and push code are kept for when the Web Push backend is deployed.

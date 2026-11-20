@@ -5,8 +5,8 @@ test("v1.110: the three recorded timer voices exist, are small and are cached of
 });
 test("v1.110: start / 50 min / 55 min use cue 1 / 2 / 3 and keep the old timer logic",()=>{
   assert.match(app,/TIMER_CUES=\{start:"timer-start\.mp3",warn:"timer-warning\.mp3",end:"timer-end\.mp3"\}/);
-  assert.match(app,/el>=50\*60000&&!timer\.spoken50\)\{timer\.spoken50=true;timerSave\(\);playCue\("warn",/);
-  assert.match(app,/timerSave\(\);if\(sessionActive\(\)\)sessFinishing=true;playCue\("end",[^)]*\);timer=null;/);
+  assert.match(app,/el>=50\*60000&&!timer\.spoken50\)\{timer\.spoken50=true;timerSave\(\);if\(el-50\*6e4<20000\)playCue\("warn",/);
+  assert.match(app,/if\(sessionActive\(\)\)sessFinishing=true;playCue\("end",[^)]*\);\}timer=null;/);
   assert.match(app,/render\(\);bindRecords\(\);sessFinishing=false;sessionPlay\(\)\.then\(ok=>\{if\(!ok\)playCue\("start",/);
   assert.match(app,/if\(el>=55\*60000\)\{finishTimerAt55\(\);return;\}/);
 });
@@ -39,4 +39,8 @@ test("v1.131: Start plays only the first voice — no 'unlock' playback of the w
   assert.match(app,/function stopSingleCues\(except\)/);
   assert.match(app,/function playHtmlCue\(name\)\{const a=cueAudio\(name\);stopSingleCues\(name\);/);
   assert.match(app,/async function sessionPlay\(fromStart\)\{if\(!timer\|\|!timer\.runFrom\|\|!voiceOn\(\)\)return false;stopSingleCues\(\);/);
+});
+test("v1.145: late (catch-up) timer cues are not played, so reopening the app does not sound every voice at once",()=>{
+  assert.match(app,/if\(el-50\*6e4<20000\)playCue\("warn"/);
+  assert.match(app,/if\(Date\.now\(\)-endAt<20000\)\{if\(sessionActive\(\)\)sessFinishing=true;playCue\("end"/);
 });
