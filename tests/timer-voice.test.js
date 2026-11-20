@@ -40,3 +40,7 @@ test("v1.131: Start plays only the first voice — no 'unlock' playback of the w
   assert.match(app,/function playHtmlCue\(name\)\{const a=cueAudio\(name\);stopSingleCues\(name\);/);
   assert.match(app,/async function sessionPlay\(fromStart\)\{if\(!timer\|\|!timer\.runFrom\|\|!voiceOn\(\)\)return false;stopSingleCues\(\);/);
 });
+test("v1.145: late (catch-up) timer cues are not played, so reopening the app does not sound every voice at once",()=>{
+  assert.match(app,/if\(el-50\*6e4<20000\)playCue\("warn"/);
+  assert.match(app,/if\(Date\.now\(\)-endAt<20000\)\{if\(sessionActive\(\)\)sessFinishing=true;playCue\("end"/);
+});
