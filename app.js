@@ -120,17 +120,17 @@ function initWaTemplateSettings(){
 const waLink=(n,text)=>`https://wa.me/${n}?text=${encodeURIComponent(text)}`;
 let profileId=null;
 let profileTab="overview";
-const PROFILE_TABS=["overview","lessons","course","payments","attendance"];
+const PROFILE_TABS=["overview","lessons","course","payments"];
 function renderProfile(){const s=state.students.find(x=>x.id===profileId);if(!s){$("profileDialog").close();return;}if(!PROFILE_TABS.includes(profileTab))profileTab="overview";const st=studentStats(s),L=lessonsOf(s.name),today=dateISO(new Date()),byT=(a,b)=>(a.date+(a.start||"")).localeCompare(b.date+(b.start||"")),up=L.filter(e=>!isDone(e)).sort(byT),done=L.filter(isDone).sort(byT).reverse(),C=courses().filter(c=>sameName(c.student,s.name)).sort((a,b)=>(b.date||"").localeCompare(a.date||"")),P=pkgs().filter(p=>sameName(p.student,s.name)).sort((a,b)=>(a.date||"").localeCompare(b.date||""));
  $("profileName").textContent=s.name;$("profileName").title=s.name;const contact=[s.phone&&s.phone!==s.name?s.phone:"",s.whatsapp&&s.whatsapp!==s.phone?"WhatsApp "+s.whatsapp:"",joinDate(s,st)?"Joined "+fmtDate(joinDate(s,st)):""].filter(Boolean).join(" · ");$("profilePhone").textContent=contact||"No phone number";
  $("pHours").textContent=fmtH(st.hours)+" h";$("pLeft").textContent=st.hasCourse?fmtH(st.courseLeft)+" h":"–";$("pUnpaid").textContent=euro(st.unpaid);$("pCount").textContent=st.done;
  $("profileCourse").classList.remove("hidden");
  const n=waNumber(s),next=up[0],tel=String(s.phone||"").replace(/[^\d+]/g,"");$("waLesson").classList.toggle("hidden",!n||!next);$("waPay").classList.toggle("hidden",!n||st.unpaid<=0);if(n&&next)$("waLesson").href=waLink(n,lessonMsg(next));if(n&&st.unpaid>0)$("waPay").href=waLink(n,payMsg(st.unpaid));$("pCall").classList.toggle("hidden",!tel);if(tel)$("pCall").href="tel:"+tel;
  // Lessons starts with upcoming bookings, followed by completed individual lessons.
- const indiv=done.filter(e=>!isCourseLesson(e));
+ const indiv=done; // v1.155: one list with every completed lesson (course and individual)
  const notesHTML=s.notes?`<details class="profile-notes"><summary>Student notes</summary><p>${esc(s.notes)}</p></details>`:"";
  const upcomingHTML=up.length?`<section class="profile-upcoming"><h3>Upcoming lessons (${up.length})</h3><div class="recordlist">${up.map(e=>bookingHTML(e,true)).join("")}</div></section>`:"";
- const completedHTML=indiv.length?`<section class="profile-history"><h3>Completed individual lessons</h3><div class="recordlist">${indiv.map(e=>bookingHTML(e,true)).join("")}</div></section>`:up.length?"":done.length?`<p class="emptynote">No individual lessons. The ${done.length} completed lesson${done.length>1?"s":""} ${done.length>1?"are":"is"} part of the course.</p><button type="button" class="btn ghost" data-gocourse>Open Courses</button>`:`<p class="emptynote">No lessons yet.</p>`;
+ const completedHTML=indiv.length?`<section class="profile-history"><h3>Completed lessons (${indiv.length})</h3><div class="recordlist">${indiv.map(e=>bookingHTML(e,true)).join("")}</div></section>`:up.length?"":done.length?`<p class="emptynote">No individual lessons. The ${done.length} completed lesson${done.length>1?"s":""} ${done.length>1?"are":"is"} part of the course.</p><button type="button" class="btn ghost" data-gocourse>Open Courses</button>`:`<p class="emptynote">No lessons yet.</p>`;
  $("ptab-lessons").innerHTML=notesHTML+upcomingHTML+completedHTML;const goC=$("ptab-lessons").querySelector("[data-gocourse]");if(goC)goC.onclick=()=>{profileTab="course";renderProfile();bindRecords();};
  $("ptab-course").innerHTML=`<div class="pkghead"><h3>Courses</h3></div>`+(C.map(c=>courseCardHTML(c,true)).join("")||`<p class="emptynote">No course yet. Add a custom course with this student’s hours and price.</p>`)+(P.length?`<details class="profile-legacy"><summary>Legacy Archive · ${P.length} package${P.length===1?"":"s"}</summary>${legacyHTML(P,L)}</details>`:"");
  // Payments: every course payment as its own line, plus individual lessons with their paid state.

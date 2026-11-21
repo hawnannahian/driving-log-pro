@@ -2925,7 +2925,7 @@ dialog input[type=date]::-webkit-date-and-time-value,dialog input[type=time]::-w
 #lessonAuditList{max-height:420px;overflow:auto;overscroll-behavior:contain}#lessonAuditList .recoveryrow{background:var(--white)}#deletedLessonsList .recoveryrow{background:var(--white)}#lessonAuditSummary{margin:0 0 8px}.data-card#lessonRecoveryCard,.data-card#lessonAuditCard{margin-top:12px}
 
 /* v1.77 — Student profile tabs: five tabs fit one row (Attendance no longer wraps alone) and the tab strip no longer sticks underneath the sticky name header. */
-#profileDialog .ptabs{position:static;z-index:auto;backdrop-filter:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;padding:5px;overflow:visible;border:1px solid #e7ecf4;border-radius:var(--radius-lg);background:var(--panel)}
+#profileDialog .ptabs{position:static;z-index:auto;backdrop-filter:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:5px;overflow:visible;border:1px solid #e7ecf4;border-radius:var(--radius-lg);background:var(--panel)}
 #profileDialog .ptabs button{min-height:44px;padding:5px 2px;font-size:11px;letter-spacing:-.1px;white-space:nowrap;overflow-wrap:normal}
 @media(max-width:360px){
  #profileDialog .ptabs{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:max-content;overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
@@ -3847,3 +3847,7 @@ body.timing #overview #nextCard{display:none}
 /* v1.153 — newer Safari showed the native disclosure marker as a stray "›" at the left of the Next Day card; the card draws its own arrow on the right */
 #overview .nextday summary{list-style-type:none}
 #overview .nextday summary::marker{content:"";font-size:0;color:transparent}
+
+/* v1.155 — profile has 4 tabs (Attendance removed, Courses lessons shown in Lessons): equal columns, readable size, no sideways scrolling */
+#profileDialog .ptabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-flow:row;grid-auto-columns:auto;overflow:visible}
+#profileDialog .ptabs button{padding:5px 2px;font-size:13px}

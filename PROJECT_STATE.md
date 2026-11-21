@@ -1,3 +1,8 @@
+## v1.155 — Student profile: fewer tabs, one lesson list (2026-11-21; owner: "lots of tabs make it noisy")
+- The profile now has **4 tabs: Overview, Lessons, Courses, Payments** (Attendance removed — its numbers are already in the Overview stats/"Learning activity"; its panel is still rendered but hidden, so nothing is lost in the code or data). The **Lessons** tab lists every completed lesson (course and individual) under "Completed lessons (N)", plus upcoming bookings. Tab strip uses 4 equal columns (13 px text).
+- Display only: no accounting, storage or course-allocation change.
+- Files: `app.js`, `index.html` (v1.155), `styles.css`, `sw.js` (cache v219), `tests/profile-render.test.js` (unchanged, still passes), this file.
+
 ## v1.154 — Student profile "Lessons" tab no longer says "No lessons yet" when lessons are in the course (2026-11-21; owner screenshot: 7 completed lessons but "No lessons yet.")
 - The Lessons tab lists upcoming bookings and completed *individual* lessons only; completed lessons that belong to a course are listed under Courses. For a student whose lessons are all course lessons the tab therefore said "No lessons yet." although the header showed 7 completed. It now says "No individual lessons. The N completed lessons are part of the course." with an "Open Courses" button. Nothing is counted differently; no data change.
 - Files: `app.js`, `index.html` (v1.154), `sw.js` (cache v218), this file.
