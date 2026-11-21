@@ -546,6 +546,8 @@ function playHtmlCue(name){const a=cueAudio(name);stopSingleCues(name);return ne
 // The single cues above are only the fallback while this file is not playing. Built by tools/make-timer-session.sh.
 let sessAudio=null,sessFinishing=false;
 const sessionActive=()=>!!sessAudio&&!sessAudio.paused&&!sessAudio.ended;
+// v1.160 — the session file only counts as "will sound the cue itself" while it really plays in step with the timer. If it is paused, stalled or out of sync (iPhone interruption, slow load), the single cues are played by the app instead, so 50 / 55 minutes are never silent.
+const sessionHealthy=()=>sessionActive()&&!!timer&&sessAudio.readyState>=2&&Math.abs((sessAudio.currentTime||0)-elapsedMs()/1000)<5;
 async function sessionPlay(fromStart){if(!timer||!timer.runFrom||!voiceOn())return false;stopSingleCues();try{const off=fromStart?0:elapsedMs()/1000;if(off>=55*60)return false;
   if(!sessAudio){sessAudio=new Audio("timer-session.mp3");sessAudio.preload="auto";sessAudio.setAttribute("playsinline","");sessAudio.addEventListener("ended",()=>{sessFinishing=false;try{sessAudio.currentTime=0;}catch{}if(sessChain){sessChain=false;sessionPlay(true);}});}
   if(Math.abs((sessAudio.currentTime||0)-off)>2)try{sessAudio.currentTime=off;}catch{}
@@ -554,7 +556,7 @@ async function sessionPlay(fromStart){if(!timer||!timer.runFrom||!voiceOn())retu
 function sessionStop(){if(sessFinishing)return;if(sessAudio)try{sessAudio.pause();}catch{}}
 function loadCue(name){if(!cueBuf[name]){cueCtx();cueBuf[name]=fetch(TIMER_CUES[name]).then(r=>{if(!r.ok)throw Error("cue");return r.arrayBuffer();}).then(b=>audioCtx.decodeAudioData(b)).catch(err=>{delete cueBuf[name];throw err;});}return cueBuf[name];}
 async function playWebCue(name){cueCtx();try{await Promise.race([audioCtx.resume(),new Promise(r=>setTimeout(r,800))]);}catch{}if(audioCtx.state!=="running")throw Error("suspended");const buf=await loadCue(name);await new Promise(res=>{const s=audioCtx.createBufferSource();s.buffer=buf;s.connect(audioCtx.destination);s.onended=res;s.start();});}
-async function playCue(name,fallback,force){try{if(!voiceOn()||(sessionActive()&&!force))return;document.querySelectorAll("audio").forEach(a=>{try{a.pause();}catch{}});try{speechSynthesis.cancel();}catch{}try{await playHtmlCue(name);return;}catch{}await playWebCue(name);}catch{if(fallback)speakBn(fallback);}}
+async function playCue(name,fallback,force){try{if(!voiceOn()||(sessionHealthy()&&!force))return;document.querySelectorAll("audio").forEach(a=>{try{a.pause();}catch{}});try{speechSynthesis.cancel();}catch{}try{await playHtmlCue(name);return;}catch{}await playWebCue(name);}catch{if(fallback)speakBn(fallback);}}
 // After a page reload a running timer needs one tap to unlock sound again.
 document.addEventListener("pointerdown",()=>{if(timer){try{unlockAudio();["start","warn","end"].forEach(n=>loadCue(n).catch(()=>{}));if(!sessionActive())sessionPlay();}catch{}}},{passive:true});
 async function keepAwake(){try{if(timer&&timer.runFrom&&"wakeLock" in navigator&&!wake){wake=await navigator.wakeLock.request("screen");wake.addEventListener("release",()=>{wake=null;});}}catch{}}

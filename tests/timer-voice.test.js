@@ -12,7 +12,7 @@ test("v1.110: start / 50 min / 55 min use cue 1 / 2 / 3 and keep the old timer l
 });
 test("v1.110/v1.125: HTML audio first (ignores the iPhone silent switch), then Web Audio, then speech; on/off switch; settings text",()=>{
   const fn=app.match(/async function playCue\(name,fallback,force\)\{[^\n]*\}/)[0],web=app.match(/async function playWebCue\(name\)\{[^\n]*\}/)[0];
-  assert.ok(fn.includes("if(!voiceOn()||(sessionActive()&&!force))return;")&&fn.includes("await playHtmlCue(name);return;")&&fn.includes("await playWebCue(name);")&&fn.includes("catch{if(fallback)speakBn(fallback);}"));
+  assert.ok(fn.includes("if(!voiceOn()||(sessionHealthy()&&!force))return;")&&fn.includes("await playHtmlCue(name);return;")&&fn.includes("await playWebCue(name);")&&fn.includes("catch{if(fallback)speakBn(fallback);}"));
   assert.ok(web.includes("createBufferSource"));
   assert.ok(html.includes("Play your recorded voice")&&html.includes("Test the 3 voices"));
 });
@@ -43,4 +43,8 @@ test("v1.131: Start plays only the first voice — no 'unlock' playback of the w
 test("v1.145: late (catch-up) timer cues are not played, so reopening the app does not sound every voice at once",()=>{
   assert.match(app,/if\(el-50\*6e4<20000\)playCue\("warn"/);
   assert.match(app,/if\(Date\.now\(\)-endAt<20000\)\{if\(sessionActive\(\)\)sessFinishing=true;playCue\("end"/);
+});
+test("v1.160: single 50/55-minute cues play unless the session file really plays in step with the timer",()=>{
+  assert.match(app,/const sessionHealthy=\(\)=>sessionActive\(\)&&!!timer&&sessAudio\.readyState>=2&&Math\.abs\(\(sessAudio\.currentTime\|\|0\)-elapsedMs\(\)\/1000\)<5;/);
+  assert.match(app,/if\(!voiceOn\(\)\|\|\(sessionHealthy\(\)&&!force\)\)return;/);
 });
