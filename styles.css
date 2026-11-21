@@ -4211,3 +4211,29 @@ body{--ios-bg:#f2f2f7}
 #deletedLessonsList .dl-more{display:block;width:100%;min-height:46px;padding:10px 16px;border:0;border-top:.5px solid #e5e5ea;background:#fff;color:#007aff;font:inherit;font-size:16px;font-weight:600;cursor:pointer}
 #lessonRecoveryCard .recoverylist{width:auto;max-width:none;margin-right:-16px}
 #deletedLessonsList .recoveryrow{width:auto;max-width:none;box-sizing:border-box}
+
+/* ===== v1.168 — Calendar: "Free for a 1-hour lesson" chips and tidy WhatsApp reminders ===== */
+#calendar .cal-free-slots{padding:14px 16px}
+#calendar .cal-free-slots .cal-free-head{display:block;margin:0}
+#calendar .cal-free-slots .cal-free-head b{font-size:17px;color:#1c1c1e}
+#calendar .cal-free-slots .cal-free-head small{display:block;margin-top:2px;color:#6e6e73;font-size:13px}
+#calendar .cf-g{margin:12px 0 6px;color:#6e6e73;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase}
+#calendar .cf-chips{display:flex;flex-wrap:wrap;gap:8px}
+#calendar .cal-chip{min-height:40px;padding:8px 14px;border:0;border-radius:12px;background:#eaf2ff;color:#1d4ed8;font:inherit;font-size:16px;font-weight:700;font-variant-numeric:tabular-nums;cursor:pointer}
+#calendar .cal-chip:active{transform:scale(.96)}
+#calendar .cal-chip.s{background:#fff3e2;color:#b45309}
+#calendar .cf-more{display:block;width:100%;margin-top:12px;padding:6px 0;border:0;background:none;color:#007aff;font:inherit;font-size:15px;font-weight:600;text-align:left;cursor:pointer}
+#calendar .remindbox{padding:0;border:0;background:transparent;box-shadow:none}
+#calendar .rm-head{display:flex;justify-content:space-between;margin:0 6px 8px;color:#6e6e73;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase}
+#calendar .rm-head em{font-style:normal;color:#16a34a}
+#calendar .rm-list{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 1px 2px #1018280a}
+#calendar .rm-row{display:flex;align-items:center;gap:12px;min-height:58px;padding:8px 14px;border-top:.5px solid #e5e5ea}
+#calendar .rm-row:first-child{border-top:0}
+#calendar .rm-tm{flex:none;width:52px;color:#1c1c1e;font-weight:700;font-variant-numeric:tabular-nums}
+#calendar .rm-t{flex:1;min-width:0}
+#calendar .rm-t b{display:block;overflow:hidden;color:#1c1c1e;font-weight:600;text-overflow:ellipsis;white-space:nowrap}
+#calendar .rm-t small{color:#6e6e73;font-size:13px}
+#calendar .rm-send{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#22a559;color:#fff;font-size:18px;font-weight:700;text-decoration:none}
+#calendar .rm-send svg{width:22px;height:22px;fill:currentColor}
+#calendar .rm-row.sent .rm-send{background:#e5e5ea;color:#8e8e93}
+#calendar .rm-foot{margin:8px 8px 0;color:#6e6e73;font-size:13px;line-height:1.4}

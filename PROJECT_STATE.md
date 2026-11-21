@@ -1,3 +1,9 @@
+## v1.168 — Calendar: "Free for a 1-hour lesson" and tidy WhatsApp reminders (2026-11-22; owner approved the suggestions: "Do both")
+- **Available time** is now "Free for a 1-hour lesson": the free gaps are split into 1-hour start times (chips grouped Morning / Afternoon / Evening, 1-hour steps); tapping a chip opens a new lesson at that time with 1 hour (same `data-free` handler). Gaps under 1 hour are hidden behind "Short gaps (under 1 hour) · N" (orange chips). Gap calculation, working hours and prayer blocks are unchanged (`freeSlots`); only the display changed.
+- **WhatsApp reminders** are a grouped list "Send lesson reminders · N to send": time, name, "2 h", and a round green WhatsApp button (same `waLink`/`lessonMsg`); after a tap the button turns grey ✓ ("Sent"). The sent marks are now remembered on this device (`localStorage` key `driving-log-pro-v1-reminded`, ids only, pruned to existing lessons); no lesson, payment or backup data changed.
+- Not asked/done: choosing 2-hour starts in the chips (only 1-hour starts are listed; longer lessons can still be set in the form).
+- Files: `app.js`, `index.html` (v1.168), `styles.css`, `sw.js` (cache v232), `tests/premium-calendar.test.js`, this file.
+
 ## v1.167 — Reports bottom: Data list and tidy Deleted lessons (2026-11-22; owner: "looks funny", approved sample)
 - The cards at the bottom of Reports (Import, Backup & restore, Safety copies, Deleted lessons, Lesson recovery history, Cloud sync) are now behind one **Data** list: each row (with a one-line status such as "Last backup: today" / "Connected" / "N waiting") opens its card in place (accordion); Settings → Data shortcuts open the right card. The cards, buttons and handlers are unchanged.
 - **Deleted lessons** are compact rows (name, date · time, "Deleted … · N days left") with a small blue **Restore** (same `data-restore-lesson` action, same 30-day rule); the first 3 are shown, "Show all N" expands. No data or restore-rule change.
