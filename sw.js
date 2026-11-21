@@ -1,4 +1,4 @@
-const CACHE="nahians-schedule-cache-v220";
+const CACHE="nahians-schedule-cache-v221";
 // The app shell (pages, scripts, styles, icons) is versioned: bump CACHE on every release.
 const FILES=["./", "./index.html", "./push-config.js", "./styles.css", "./app.js", "./reports-dashboard.js", "./islamic-content.js", "./islamic.js", "./full-time-students.js", "./lesson-recovery.js", "./prayer-times.js", "./mawaqit-times.js", "./manifest.webmanifest", "./icon.svg", "./brand-car.png", "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png", "./apple-touch-icon.png"];
 // The Islamic audio files never change between releases, so they live in their own cache that survives version bumps
@@ -24,7 +24,12 @@ let audioChecked=false;
 self.addEventListener("install",event=>{
   event.waitUntil(
     caches.open(CACHE)
-      .then(cache=>cache.addAll(FILES.map(file=>new Request(file,{cache:"reload"}))))
+      .then(cache=>Promise.all(FILES.map(async file=>{
+        // v1.157: fetched with a per-release query string so a stale copy in the CDN or the browser's HTTP cache can never end up in the new shell cache (a new index.html with an old styles.css); stored under the plain URL.
+        const url=new URL(file,self.location);url.searchParams.set("v",CACHE);
+        const res=await fetch(url,{cache:"reload"});if(!res.ok)throw new Error("shell file "+file+" "+res.status);
+        await cache.put(new Request(file),res);
+      })))
       // Reuse audio already stored by an older version; downloading the rest never blocks the update.
       .then(()=>caches.open(AUDIO_CACHE).then(async audio=>{for(const url of AUDIO){if(await audio.match(url))continue;try{const old=await caches.match(url);if(old)await audio.put(url,old.clone());}catch{}}}))
       .then(()=>self.skipWaiting())
