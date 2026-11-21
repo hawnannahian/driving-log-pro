@@ -191,26 +191,34 @@
           <div class="formgrid"><label>Start<input type="time" id="wStart"></label><label>End<input type="time" id="wEnd"></label></div>
           <p class="hint">New lessons outside these hours are blocked. Existing lessons remain unchanged.</p>
         </section>
-        <section class="settings-card" data-spane="prayer">
-          <div class="settings-card-head"><div><h3>Prayer Time</h3><p>Calculated automatically for Lisbon, Portugal.</p></div><span class="settings-icon">🕌</span></div>
-          <label class="checklabel settings-toggle"><input type="checkbox" id="pOn"> Enable prayer-time booking protection</label>
-          <div class="formgrid prayer-config">
-            <label>Location<select id="pLocation"><option value="lisbon">Lisbon / Amadora, Portugal</option><option value="porto">Porto, Portugal</option><option value="faro">Faro, Portugal</option></select></label>
-            <label>Calculation method<select id="pMethod"><option value="mwl">Muslim World League</option><option value="isna">ISNA</option><option value="umm">Umm al-Qura</option></select></label>
-            <label>Booking block before prayer<input type="number" id="pMinutes" min="5" max="60" step="5"></label>
-            <label>Jum'a (Friday)<input type="time" id="p_jumua"></label>
+        <div class="pr-screen" data-spane="prayer">
+          <p class="set-group">Booking protection</p>
+          <div class="set-list">
+            <label class="pr-row" for="pOn"><span class="pr-t"><b>Block bookings near prayer</b><small>Lessons can’t be booked over a prayer</small></span><input type="checkbox" id="pOn" class="pr-switch"></label>
+            <label class="pr-row" for="pMinutes"><span class="pr-t"><b>Block before prayer</b></span><span class="pr-in"><input type="number" id="pMinutes" min="5" max="60" step="5" inputmode="numeric"> <em>min</em></span></label>
           </div>
-          <p class="hint">Prayer times update daily using the selected city and calculation method. A 15-minute booking block is placed immediately before each prayer. Friday uses your Jum'a time.</p>
-          <label class="checklabel settings-toggle" id="pManualRow"><input type="checkbox" id="pManualOn"> Set prayer times manually (my own times for every day)</label>
-          <div class="formgrid prayer-manual-grid hidden" id="pManualGrid">
-            <label>Fajr<input type="time" id="pmFajr"></label><label>Dhuhr<input type="time" id="pmDhuhr"></label>
-            <label>Asr<input type="time" id="pmAsr"></label><label>Maghrib<input type="time" id="pmMaghrib"></label>
-            <label>Isha<input type="time" id="pmIsha"></label>
+          <div id="prayerPreview" class="pr-status" aria-live="polite"></div>
+          <p class="set-group">Prayer times</p>
+          <div class="pr-seg" role="group" aria-label="Prayer times source"><button type="button" id="pSrcMosque">Mosque timetable</button><button type="button" id="pSrcOwn">My own times</button></div>
+          <div class="set-list">
+            <label class="pr-row" for="pLocation"><span class="pr-t"><b>Location</b></span><select id="pLocation"><option value="lisbon">Lisbon / Amadora</option><option value="porto">Porto</option><option value="faro">Faro</option></select></label>
+            <label class="pr-row" for="pMethod"><span class="pr-t"><b>Calculation method</b><small>Used when a day is missing</small></span><select id="pMethod"><option value="mwl">Muslim World League</option><option value="isna">ISNA</option><option value="umm">Umm al-Qura</option></select></label>
+            <label class="pr-row" for="p_jumua"><span class="pr-t"><b>Jum’a (Friday)</b></span><input type="time" id="p_jumua"></label>
           </div>
-          <p class="hint">With this on, these times are used for every day instead of the mosque or calculated times. Friday uses the Jum'a time above. A blank time falls back to the automatic time. Change them whenever the mosque changes.</p>
-          <div id="prayerPreview" class="prayer-preview" aria-live="polite"></div>
-        </section>
-        <p class="app-version" data-spane="menu" id="appVersion">Driving Log Pro · Version v1.161</p>
+          <label class="pr-hidden" id="pManualRow"><input type="checkbox" id="pManualOn"> Set prayer times manually</label>
+          <div id="pManualGrid" class="pr-manual hidden">
+            <p class="set-group">My own times</p>
+            <div class="set-list">
+              <label class="pr-row" for="pmFajr"><span class="pr-t"><b>Fajr</b></span><input type="time" id="pmFajr"></label>
+              <label class="pr-row" for="pmDhuhr"><span class="pr-t"><b>Dhuhr</b></span><input type="time" id="pmDhuhr"></label>
+              <label class="pr-row" for="pmAsr"><span class="pr-t"><b>Asr</b></span><input type="time" id="pmAsr"></label>
+              <label class="pr-row" for="pmMaghrib"><span class="pr-t"><b>Maghrib</b></span><input type="time" id="pmMaghrib"></label>
+              <label class="pr-row" for="pmIsha"><span class="pr-t"><b>Isha</b></span><input type="time" id="pmIsha"></label>
+            </div>
+            <p class="pr-foot">Used every day instead of the mosque or calculated times. Friday uses the Jum’a time. A blank time falls back to the automatic time.</p>
+          </div>
+        </div>
+        <p class="app-version" data-spane="menu" id="appVersion">Driving Log Pro · Version v1.162</p>
         <p class="settings-note" data-spane="menu">These settings are saved with your app data and included in backup and sync. Lesson timer and completed-hour accounting are not affected.</p>
       </section>
     </section>
@@ -533,7 +541,7 @@
     <button class="tab" data-tab="islamic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M6.5 20v-6.5c0-3 2.5-5 5.5-6.5 3 1.5 5.5 3.5 5.5 6.5V20"/><path d="M12 4.5v2.5"/><path d="M10 20v-3a2 2 0 0 1 4 0v3"/><path d="M3.5 20v-8M20.5 20v-8"/></svg><span>Islamic</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.161</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.162</span></footer>
   <script src="push-config.js"></script>
   <script src="prayer-times.js"></script>
   <script src="mawaqit-times.js"></script>
