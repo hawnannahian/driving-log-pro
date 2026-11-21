@@ -1,3 +1,7 @@
+## v1.152 — Today row "›" made visible and separated; layout rules cover large iPhones (2026-11-21; owner: version 1.151 showed "no changes")
+- v1.151's compact layout applied only up to 420 px, but large iPhones (≈430 px) are wider, and the new "›" button looked identical to the old decoration, so nothing seemed to change. Now: the layout rules apply up to 440 px, and the "›" is drawn as a light rounded button with an 18 px gap from the WhatsApp/Paid/Done buttons (verified at 430, 393, 390 and 320 px: tap point lands on the button, times not clipped).
+- Files: `styles.css`, `index.html` (v1.152), `sw.js` (cache v216), this file.
+
 ## v1.151 — Today list: tappable "›" (2026-11-21; owner: the arrow at the right of each student could not be tapped; taps landed on WhatsApp)
 - The "›" was only a CSS decoration (`::after`), so a tap on it hit the neighbouring WhatsApp button. It is now a real button (`.tchev`, 28×44 px, opens the same lesson editor as tapping the row text, with an aria-label) and the decoration is removed. To make room the row number circle is hidden at ≤420 px, and the "Unpaid" chip is icon-only (hidden at ≤360 px; the "Paid" button beside it shows the state), so the lesson time is never clipped. No data or logic change.
 - Files: `app.js`, `styles.css`, `index.html` (v1.151), `sw.js` (cache v215), this file.
