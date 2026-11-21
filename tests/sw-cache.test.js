@@ -24,3 +24,6 @@ test("v1.148: the service worker activation never waits for the audio download (
   const sw=require("fs").readFileSync(__dirname+"/../sw.js","utf8"),act=sw.slice(sw.indexOf('addEventListener("activate"'),sw.indexOf("// The app opens from the cached shell"));
   assert.ok(!act.includes("ensureAudio")&&!act.includes("setTimeout"),"activate does not wait for audio");
 });
+test("v1.157: the shell is fetched with a per-release query string and checked before it enters the cache",()=>{
+  assert.ok(sw.includes('url.searchParams.set("v",CACHE)')&&sw.includes("if(!res.ok)throw")&&sw.includes("cache.put(new Request(file),res)"));
+});

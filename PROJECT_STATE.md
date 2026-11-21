@@ -1,3 +1,7 @@
+## v1.157 — Service worker: fresh files only (2026-11-21; owner: Settings showed v1.156 but the Log page still looked old)
+- Symptom: new `index.html` (v1.156) with an old-looking Log page, i.e. the new shell cache held a stale copy of `styles.css` (a CDN / HTTP-cache copy served for the plain URL). The cause could not be confirmed from here (no access to the phone or the CDN); the install step is now hardened: each shell file is fetched with a per-release query string (`?v=<cache name>`) plus `cache:"reload"`, checked for `res.ok`, and stored under its plain URL, so a stale cached copy cannot enter the new cache. If any file fails, the install fails and the previous version keeps running.
+- Files: `sw.js` (cache v221), `index.html` (v1.157), `tests/sw-cache.test.js`, this file. No app logic or data change.
+
 ## v1.156 — Log page visual polish (PR #260 by ChatGPT) with Claude's review fixes (2026-11-21)
 - ChatGPT's CSS-only polish of the Log page (everything scoped to `#log`): softer cards, summary and record styling, focus rings. Claude's review fixes, applied on the same branch at the owner's request: filter/sort controls are 16 px on phones (no iOS focus zoom); KPI labels at least 11 px; the stray native disclosure marker on "Payment & expense totals" removed and the "Sort & more" arrow placed at the right; the filter select uses the full row on ≤380 px so its 16 px text is not cut; service-worker cache and footer version bumped.
 - No HTML/JS, calculation, data or storage change.
