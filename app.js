@@ -1015,16 +1015,28 @@ function renderSettingsMenu(){const set=(id,t)=>{const e=$(id);if(e)e.textConten
  set("smVoice",voiceOn()?"On":"Off");
  let last=0;try{last=Number(localStorage.getItem(BACKUP_KEY))||0;}catch{}const d=last?Math.floor((Date.now()-last)/864e5):null;set("smBackup",d===null?"No backup yet":d===0?"Last backup: today":`Last backup: ${d} day${d>1?"s":""} ago`);
  set("smCloud",cloudCfg()?"Connected":"Not connected");set("smUpdate","Version "+appVer());}
-function setSettingsView(v){const panel=$("logSettingsPanel"),menu=v==="menu";$("settingsMenu").classList.toggle("sview-off",!menu);
+let curSetView="menu";
+function setSettingsView(v){curSetView=v;const panel=$("logSettingsPanel"),menu=v==="menu";$("settingsMenu").classList.toggle("sview-off",!menu);
  panel.querySelectorAll("[data-spane]").forEach(p=>p.classList.toggle("sview-off",p.dataset.spane!==v));
  $("settingsDetailBack").classList.toggle("hidden",menu);$("logSettingsBack").classList.toggle("hidden",!menu);
  $("settingsTitle").textContent=menu?"Settings":SET_TITLES[v][0];$("settingsSub").textContent=menu?"Manage lesson announcements, booking preferences and messages.":SET_TITLES[v][1];
- if(menu)renderSettingsMenu();else{if(v==="msgs")$("waTemplateSettings").open=true;panel.scrollIntoView({block:"start"});}}
+ if(menu)renderSettingsMenu();else{if(v==="msgs"){$("waTemplateSettings").open=true;setWaView("list");}panel.scrollIntoView({block:"start"});}}
+
+// v1.163 — WhatsApp messages: a list of the four messages; each opens its own editor (same fields, same Save).
+const WA_VIEWS={lesson:{ta:"waLessonTemplate",title:"Lesson reminder"},multi:{ta:"waMultiTemplate",title:"Several lessons"},payment:{ta:"waPaymentTemplate",title:"Payment reminder"},done:{ta:"waDoneTemplate",title:"Lesson completed"}};
+let waView="list";
+function waSummary(){const one=t=>{const x=String(t||"").replace(/\s+/g," ").trim();return x.length>46?x.slice(0,46)+"…":x;};$("waSmLesson").textContent=one($("waLessonTemplate").value);$("waSmMulti").textContent=one($("waMultiTemplate").value);$("waSmPayment").textContent=one($("waPaymentTemplate").value);$("waSmDone").textContent=one($("waDoneTemplate").value);}
+function setWaView(k){waView=k;const list=k==="list";$("waList").classList.toggle("sview-off",!list);$("waActions").classList.toggle("sview-off",list);document.querySelectorAll("#waTemplateSettings [data-wa]").forEach(e=>e.classList.toggle("sview-off",e.dataset.wa!==k));
+ if(list){waSummary();$("settingsTitle").textContent=SET_TITLES.msgs[0];$("settingsSub").textContent=SET_TITLES.msgs[1];}else{$("settingsTitle").textContent=WA_VIEWS[k].title;$("settingsSub").textContent="Edit the message. Tap a tag to insert it.";}
+ if(typeof renderWaTemplatePreviews==="function")renderWaTemplatePreviews();}
+document.querySelectorAll("[data-waopen]").forEach(b=>b.onclick=()=>{setWaView(b.dataset.waopen);$("logSettingsPanel").scrollIntoView({block:"start"});});
+document.querySelectorAll(".wa-tag").forEach(b=>b.onclick=()=>{const ta=$(WA_VIEWS[waView].ta),st=ta.selectionStart??ta.value.length,en=ta.selectionEnd??st;ta.value=ta.value.slice(0,st)+b.dataset.ins+ta.value.slice(en);ta.focus();ta.selectionStart=ta.selectionEnd=st+b.dataset.ins.length;ta.dispatchEvent(new Event("input"));});
+$("waResetOne").onclick=()=>{if(waView==="list")return;const k=waView;$(WA_VIEWS[k].ta).value=WA_DEFAULTS[k];if(k==="multi"&&$("waMultiDays"))$("waMultiDays").value=String(WA_DEFAULTS.days);$(WA_VIEWS[k].ta).dispatchEvent(new Event("input"));toast("Default restored — tap Save to keep it");};
 document.querySelectorAll("[data-sopen]").forEach(b=>b.onclick=()=>setSettingsView(b.dataset.sopen));
 document.querySelectorAll("[data-sgo]").forEach(b=>b.onclick=()=>{showLogRecords();document.querySelector('.tab[data-tab="reports"]').click();setTimeout(()=>{const t=$(b.dataset.sgo);if(t)t.scrollIntoView({block:"start"});},80);});
 const appVer=()=>((($("appVersion")||{}).textContent||"").match(/v\d+\.\d+/)||[""])[0];
 $("settingsUpdate").onclick=async()=>{const t=$("smUpdate");t.textContent="Checking…";try{const reg=await navigator.serviceWorker.getRegistration();if(!reg)throw Error("no sw");await reg.update();await new Promise(r=>setTimeout(r,3000));t.textContent=reg.installing||reg.waiting?"Update found — it will install now. Tap Reload when it appears.":"You have the latest version ("+appVer()+")";}catch{t.textContent="Could not check — are you online?";}};
-$("settingsDetailBack").onclick=()=>{setSettingsView("menu");$("settingsDetailBack").blur();};
+$("settingsDetailBack").onclick=()=>{if(curSetView==="msgs"&&waView!=="list"){setWaView("list");}else{setSettingsView("menu");}$("settingsDetailBack").blur();};
 logMenuToggle.onclick=showLogSettings;
 let settingsFrom=null;
 const settingsOpen=()=>document.querySelector(".tab.active")?.dataset.tab==="log"&&!$("logSettingsPanel").classList.contains("hidden");

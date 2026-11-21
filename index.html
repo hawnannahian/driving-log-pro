@@ -144,53 +144,85 @@
           </div>
         </div>
 
-        <details class="wa-template-settings" id="waTemplateSettings" data-spane="msgs">
+        <details class="wa-template-settings" id="waTemplateSettings" data-spane="msgs" open>
         <summary><span>WhatsApp Message Settings</span><small>Edit your lesson and payment reminder messages</small></summary>
         <div class="wa-template-body">
-          <label for="waLessonTemplate">Lesson Reminder</label>
-          <textarea id="waLessonTemplate" rows="5" spellcheck="false"></textarea>
-          <p class="wa-template-hint">Dynamic placeholders: <code>{{day}}</code> = lesson day, <code>{{time}}</code> = lesson time.</p>
-          <div class="wa-template-preview"><b>Preview</b><p id="waLessonPreview"></p></div>
-          <label for="waMultiTemplate">Several lessons (multiple booking)</label>
-          <textarea id="waMultiTemplate" rows="6" spellcheck="false"></textarea>
-          <p class="wa-template-hint">Used when the same student has 2 or more lessons not yet completed in the period below. <code>{{lessons}}</code> = the list of lessons (one line each). If you remove it, the list is added at the end.</p>
-          <label for="waMultiDays">Which lessons to include</label>
-          <select id="waMultiDays"><option value="0">Only the lessons of that day</option><option value="3">That day and the next 3 days</option><option value="7">That day and the next 7 days</option><option value="14">That day and the next 14 days</option></select>
-          <div class="wa-template-preview"><b>Preview</b><p id="waMultiPreview"></p></div>
-          <label for="waPaymentTemplate">Payment Reminder</label>
-          <textarea id="waPaymentTemplate" rows="5" spellcheck="false"></textarea>
-          <p class="wa-template-hint">Dynamic placeholder: <code>{{amount}}</code> = outstanding amount.</p>
-          <div class="wa-template-preview"><b>Preview</b><p id="waPaymentPreview"></p></div>
-          <label for="waDoneTemplate">Lesson completed (thank-you message)</label>
-          <textarea id="waDoneTemplate" rows="8" spellcheck="false"></textarea>
-          <p class="wa-template-hint">Sent after you complete a lesson. <code>{{hours}}</code> = the student's total completed hours.</p>
-          <div class="wa-template-preview"><b>Preview</b><p id="waDonePreview"></p></div>
-          <div class="wa-template-actions">
-            <button class="btn primary" type="button" id="waTemplateSave">Save messages</button>
-            <button class="btn secondary" type="button" id="waTemplateReset">Reset defaults</button>
+          <div id="waList">
+            <p class="set-group">Messages</p>
+            <div class="set-list">
+              <button type="button" class="set-row" data-waopen="lesson"><span class="set-txt"><b>Lesson reminder</b><small id="waSmLesson"></small></span><span class="set-chev" aria-hidden="true">›</span></button>
+              <button type="button" class="set-row" data-waopen="multi"><span class="set-txt"><b>Several lessons</b><small id="waSmMulti"></small></span><span class="set-chev" aria-hidden="true">›</span></button>
+              <button type="button" class="set-row" data-waopen="payment"><span class="set-txt"><b>Payment reminder</b><small id="waSmPayment"></small></span><span class="set-chev" aria-hidden="true">›</span></button>
+              <button type="button" class="set-row" data-waopen="done"><span class="set-txt"><b>Lesson completed</b><small id="waSmDone"></small></span><span class="set-chev" aria-hidden="true">›</span></button>
+            </div>
+            <p class="pr-foot">Saved on this device. Student and payment records are not changed.</p>
           </div>
-          <p class="wa-template-footnote">Saved on this device. Existing student and payment records are not changed.</p>
+          <div class="wa-edit sview-off" data-wa="lesson">
+            <label for="waLessonTemplate" class="set-group">Message</label>
+            <textarea id="waLessonTemplate" rows="6" spellcheck="false"></textarea>
+            <div class="wa-tags" aria-label="Insert a tag"><button type="button" class="wa-tag" data-ins="{{day}}">{{day}}</button><button type="button" class="wa-tag" data-ins="{{time}}">{{time}}</button></div>
+            <p class="wa-template-hint">Tags are replaced when the message is sent: <code>{{day}}</code> = lesson day, <code>{{time}}</code> = lesson time.</p>
+            <p class="set-group">Preview</p><div class="wa-template-preview"><p id="waLessonPreview"></p></div>
+          </div>
+          <div class="wa-edit sview-off" data-wa="multi">
+            <label for="waMultiTemplate" class="set-group">Message</label>
+            <textarea id="waMultiTemplate" rows="7" spellcheck="false"></textarea>
+            <div class="wa-tags" aria-label="Insert a tag"><button type="button" class="wa-tag" data-ins="{{lessons}}">{{lessons}}</button></div>
+            <p class="wa-template-hint">Used when the same student has 2 or more lessons not yet completed in the period below. <code>{{lessons}}</code> = the list of lessons (one line each). If you remove it, the list is added at the end.</p>
+            <label for="waMultiDays" class="set-group">Which lessons to include</label>
+            <select id="waMultiDays"><option value="0">Only the lessons of that day</option><option value="3">That day and the next 3 days</option><option value="7">That day and the next 7 days</option><option value="14">That day and the next 14 days</option></select>
+            <p class="set-group">Preview</p><div class="wa-template-preview"><p id="waMultiPreview"></p></div>
+          </div>
+          <div class="wa-edit sview-off" data-wa="payment">
+            <label for="waPaymentTemplate" class="set-group">Message</label>
+            <textarea id="waPaymentTemplate" rows="6" spellcheck="false"></textarea>
+            <div class="wa-tags" aria-label="Insert a tag"><button type="button" class="wa-tag" data-ins="{{amount}}">{{amount}}</button></div>
+            <p class="wa-template-hint">Tag: <code>{{amount}}</code> = outstanding amount.</p>
+            <p class="set-group">Preview</p><div class="wa-template-preview"><p id="waPaymentPreview"></p></div>
+          </div>
+          <div class="wa-edit sview-off" data-wa="done">
+            <label for="waDoneTemplate" class="set-group">Message</label>
+            <textarea id="waDoneTemplate" rows="9" spellcheck="false"></textarea>
+            <div class="wa-tags" aria-label="Insert a tag"><button type="button" class="wa-tag" data-ins="{{hours}}">{{hours}}</button></div>
+            <p class="wa-template-hint">Sent after you complete a lesson. <code>{{hours}}</code> = the student's total completed hours.</p>
+            <p class="set-group">Preview</p><div class="wa-template-preview"><p id="waDonePreview"></p></div>
+          </div>
+          <div class="wa-template-actions sview-off" id="waActions">
+            <button class="btn primary" type="button" id="waTemplateSave">Save</button>
+            <button class="wa-resetone" type="button" id="waResetOne">Reset to default</button>
+            <button class="btn secondary pr-hidden" type="button" id="waTemplateReset">Reset defaults</button>
+          </div>
         </div>
       </details>
-        <section class="settings-card" id="voiceBox" aria-labelledby="voiceTitle" data-spane="voice">
-          <div class="settings-card-head">
-            <div><h3 id="voiceTitle">Voice Announcements</h3><p>Play your recorded voice at lesson start, 5 minutes before the end and when the lesson is finished.</p></div>
-            <label class="checklabel settings-toggle"><input type="checkbox" id="voiceOn"> On</label>
+        <div class="pr-screen" id="voiceBox" data-spane="voice">
+          <p class="set-group">Sound</p>
+          <div class="set-list">
+            <label class="pr-row" for="voiceOn"><span class="pr-t"><b>Voice announcements</b></span><input type="checkbox" id="voiceOn" class="pr-switch"></label>
+            <button type="button" class="pr-row pr-btn" id="voiceTest"><span class="pr-t"><b>▶ Test the 3 voices</b></span></button>
           </div>
-          <p class="hint" id="voiceStatus" aria-live="polite"></p>
-          <p class="hint">If a recorded voice cannot load, the app speaks the same message in Bengali instead.</p>
-          <button type="button" class="btn ghost" id="voiceTest">▶ Test the 3 voices</button>
-        </section>
+          <p class="pr-foot">Play your recorded voice at lesson start, 5 minutes before the end and when the lesson is finished.</p>
+          <p class="set-group">What you will hear</p>
+          <div class="set-list">
+            <div class="pr-row"><i class="pr-num" aria-hidden="true">1</i><span class="pr-t"><b>Lesson start</b></span><span class="pr-val">0 min</span></div>
+            <div class="pr-row"><i class="pr-num" aria-hidden="true">2</i><span class="pr-t"><b>5 minutes left</b></span><span class="pr-val">50 min</span></div>
+            <div class="pr-row"><i class="pr-num" aria-hidden="true">3</i><span class="pr-t"><b>Lesson finished</b></span><span class="pr-val">55 min</span></div>
+          </div>
+          <p class="pr-foot" id="voiceStatus" aria-live="polite"></p>
+          <p class="pr-foot">If a recorded voice cannot load, the app speaks the same message in Bengali instead. Keep the app open and the screen on during the lesson: sound cannot play when the phone is locked.</p>
+        </div>
         <section class="settings-card" id="pushBox" aria-labelledby="pushTitle" data-spane="voice">
           <div class="settings-card-head"><div><h3 id="pushTitle">Lock-screen Notifications</h3><p>Get a reminder 5 minutes before the timer ends and another when it finishes.</p></div><span class="settings-icon">🔔</span></div>
           <p class="hint" id="pushStatus" aria-live="polite">Checking notification support…</p>
           <button type="button" class="btn primary" id="pushEnable">Enable lock-screen notifications</button>
         </section>
-        <section class="settings-card" data-spane="work">
-          <div class="settings-card-head"><div><h3>Working Hours</h3><p>Set the hours when students can book lessons.</p></div><span class="settings-icon">◷</span></div>
-          <div class="formgrid"><label>Start<input type="time" id="wStart"></label><label>End<input type="time" id="wEnd"></label></div>
-          <p class="hint">New lessons outside these hours are blocked. Existing lessons remain unchanged.</p>
-        </section>
+        <div class="pr-screen" data-spane="work">
+          <p class="set-group">Booking window</p>
+          <div class="set-list">
+            <label class="pr-row" for="wStart"><span class="pr-t"><b>Start</b></span><input type="time" id="wStart"></label>
+            <label class="pr-row" for="wEnd"><span class="pr-t"><b>End</b></span><input type="time" id="wEnd"></label>
+          </div>
+          <p class="pr-foot">New lessons outside these hours are blocked. Existing lessons remain unchanged.</p>
+        </div>
         <div class="pr-screen" data-spane="prayer">
           <p class="set-group">Booking protection</p>
           <div class="set-list">
@@ -218,7 +250,7 @@
             <p class="pr-foot">Used every day instead of the mosque or calculated times. Friday uses the Jum’a time. A blank time falls back to the automatic time.</p>
           </div>
         </div>
-        <p class="app-version" data-spane="menu" id="appVersion">Driving Log Pro · Version v1.162</p>
+        <p class="app-version" data-spane="menu" id="appVersion">Driving Log Pro · Version v1.163</p>
         <p class="settings-note" data-spane="menu">These settings are saved with your app data and included in backup and sync. Lesson timer and completed-hour accounting are not affected.</p>
       </section>
     </section>
@@ -541,7 +573,7 @@
     <button class="tab" data-tab="islamic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M6.5 20v-6.5c0-3 2.5-5 5.5-6.5 3 1.5 5.5 3.5 5.5 6.5V20"/><path d="M12 4.5v2.5"/><path d="M10 20v-3a2 2 0 0 1 4 0v3"/><path d="M3.5 20v-8M20.5 20v-8"/></svg><span>Islamic</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.162</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.163</span></footer>
   <script src="push-config.js"></script>
   <script src="prayer-times.js"></script>
   <script src="mawaqit-times.js"></script>

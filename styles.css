@@ -4100,3 +4100,23 @@ body{--ios-bg:#f2f2f7}
 #logSettingsPanel .pr-manual.hidden{display:none}
 #logSettingsPanel .pr-t b{white-space:normal}
 #logSettingsPanel .pr-row select{max-width:60%;text-overflow:ellipsis}
+
+/* v1.163 — Working hours, Voice announcements and WhatsApp messages in the same iOS style */
+#logSettingsPanel .pr-btn{width:100%;border:0;border-top:.5px solid #e8ecf3;font:inherit;text-align:left}
+#logSettingsPanel .pr-btn b{color:#007aff;font-weight:600}
+#logSettingsPanel .pr-num{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#e8f0ff;color:#2563eb;font-style:normal;font-size:15px;font-weight:700}
+#logSettingsPanel .pr-val{color:#6e6e73;font-size:16px}
+#waTemplateSettings{margin:0;padding:0;border:0;background:transparent;box-shadow:none}
+#waTemplateSettings .wa-template-body{padding:0}
+#waTemplateSettings .wa-edit label.set-group{display:block}
+#waTemplateSettings .wa-edit textarea{display:block;width:calc(100% - 32px);margin:0 16px;padding:14px 16px;border:0;border-radius:16px;background:#fff;color:#1c1c1e;font:inherit;font-size:16px;line-height:1.45;resize:vertical;min-height:140px}
+#waTemplateSettings .wa-edit select{display:block;width:calc(100% - 32px);margin:0 16px;min-height:48px;padding:10px 14px;border:0;border-radius:14px;background:#fff;color:#1c1c1e;font:inherit;font-size:16px}
+#waTemplateSettings .wa-tags{display:flex;flex-wrap:wrap;gap:8px;margin:8px 16px 0}
+#waTemplateSettings .wa-tag{min-height:36px;padding:6px 14px;border:0;border-radius:999px;background:#e8f0ff;color:#2563eb;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+#waTemplateSettings .wa-template-hint{margin:8px 20px 0;color:#6e6e73;font-size:13px;line-height:1.4}
+#waTemplateSettings .wa-template-hint code{font-size:12px}
+#waTemplateSettings .wa-template-preview{margin:0 16px;padding:12px 14px;border:0;border-radius:16px 16px 4px 16px;background:#dcf8c6;color:#1c1c1e;font-size:15px;line-height:1.4}
+#waTemplateSettings .wa-template-preview p{margin:0;white-space:pre-wrap}
+#waTemplateSettings .wa-template-actions{display:block;margin:16px 16px 0}
+#waTemplateSettings .wa-template-actions .btn.primary{display:grid;place-items:center;width:100%;min-height:50px;border:0;border-radius:14px;background:#007aff;color:#fff;font-size:16px;font-weight:700}
+#waTemplateSettings .wa-resetone{display:block;width:100%;min-height:44px;margin-top:6px;border:0;background:none;color:#ff3b30;font:inherit;font-size:16px;font-weight:600;cursor:pointer}
