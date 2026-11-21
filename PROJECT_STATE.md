@@ -1,3 +1,7 @@
+## v1.165 — Calendar tab in the iOS style (2026-11-22; part of the approved tab redesign)
+- Large "Calendar" title with a blue "+" (calls the same handler as the hidden "Add lesson" button), a segmented Month | Week | Day control, the four summary tiles hidden (the "N lessons · X h · € " caption already shows them), flat white rounded cards (date board, reminders, available time, timeline). No logic, data or handler changed.
+- Files: `index.html` (v1.165), `app.js` (title button), `styles.css`, `sw.js` (cache v229), this file.
+
 ## v1.164 — Students tab in the iOS style (2026-11-22; owner approved the proposal: "Go")
 - Large "Students" title with a blue "+" (`addStudentBtn`), iOS search field, a segmented filter **All | Owes money · N | Course · N** that drives the same `studentFilter` select (hidden), the sort select as a blue text control, and one grouped list: avatar, name, "N completed lessons · X h", orange "€ due" and grey "Course · N h left", `›` (opens the profile as before). **Call and WhatsApp are revealed by swiping a row left** (same swipe code as the Overview list, now shared: `swipeList`) or by keyboard focus. The three summary boxes are hidden (counts are in the segments).
 - Same data, handlers (`data-student`), search/filter/sort logic. Display only.

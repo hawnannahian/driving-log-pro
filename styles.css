@@ -4158,3 +4158,18 @@ body{--ios-bg:#f2f2f7}
 #students #studentList .tact>.actbtn svg{width:22px;height:22px;color:#fff;fill:currentColor}
 @media(prefers-reduced-motion:reduce){#students #studentList .tfg{transition:none}}
 #students #studentList .student{min-height:0!important;height:auto}
+
+/* ===== v1.165 — Calendar tab, iOS style ===== */
+#calendar.panel{padding:0;border:0;background:transparent;box-shadow:none}
+#calendar .cal-title{display:flex;align-items:flex-end;justify-content:space-between;margin:0 0 8px;padding:2px 2px 0}
+#calendar .cal-title h1{margin:0;color:#1c1c1e;font-size:34px;line-height:1.1;letter-spacing:.3px;font-weight:800}
+#calendar .stu-plus{flex:none;width:40px;height:40px;margin-bottom:4px;border:0;border-radius:50%;background:#007aff;color:#fff;font:inherit;font-size:28px;line-height:1;display:grid;place-items:center;box-shadow:0 4px 12px #007aff44;cursor:pointer}
+#calendar #calAddBtn,#calendar #calDayStats{display:none!important}
+#calendar .calviews{margin:0 0 10px;padding:3px;border:0;border-radius:10px;background:#e3e3e8;box-shadow:none}
+#calendar .calviews button{min-height:34px;border-radius:8px;font-size:15px;font-weight:600;color:#1c1c1e;background:transparent;box-shadow:none}
+#calendar .calviews button.active,#calendar .calviews button[aria-pressed="true"],#calendar .calviews button.on{background:#fff;color:#1c1c1e;box-shadow:0 1px 3px #0002}
+#calendar .calboard,#calendar .remindbox,#calendar .cal-free-slots,#calendar .timeline,#calendar .cal-students-panel{border:0;border-radius:18px;background:#fff;box-shadow:0 1px 2px #1018280a}
+#calendar .remindbox{background:#fff}
+#calendar .remindbox>b,#calendar .remindbox .remindtitle{color:#1c1c1e}
+#calendar .cal-free-slots .cal-slot{border:0;border-radius:12px;background:#f2f2f7}
+#calendar .callegend{margin:6px 4px 0;font-size:12px}
