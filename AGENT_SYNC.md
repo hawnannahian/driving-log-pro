@@ -5,6 +5,12 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 
 ## Recent handover entries
 
+### 2026-11-22 — v1.157–v1.167 (Claude), all merged
+- v1.157 service worker fetches fresh shell files (`?v=<cache>`, `res.ok` check) after a stale-CSS report; v1.158 + v1.159 + v1.162 + v1.163 Settings as an iOS-style grouped list with its own screens (Working hours, Prayer times with switch + segmented source, Voice announcements, WhatsApp messages list with per-message editors), "Check for updates" row; v1.160 timer: 50/55-minute cues played by the app when the long session file is stalled (`sessionHealthy`); v1.161 Overview redesign (large title, hero "Up next", slim prayer row, grouped Today list with swipe actions WhatsApp/Paid/Done via shared `swipeList`); v1.164 Students (search, All | Owes money | Course segments, swipe Call/WhatsApp); v1.165 Calendar and v1.166 Reports/Islamic restyled (CSS + large titles); v1.167 Reports bottom: one "Data" accordion list + compact Deleted lessons.
+- Rules kept: no accounting/storage/handler changes (IDs, `data-record`/`data-pay`/`data-done`, backup/sync cards untouched); every release bumped footer, `sw.js` cache and PROJECT_STATE. Owner rule recorded: for big design changes show a sample first and wait for the owner's OK.
+- Not tested: real iPhone (swipe feel, WebKit), backup/restore/cloud flows after the Reports change (cards unchanged).
+
+
 ### 2026-11-21 — v1.141–v1.156 (Claude), all merged and deployed
 - Overview: stats bar removed, compact iOS-style progress/next-lesson/prayer cards, softer styling (v1.141–v1.143). Settings gear toggles and returns to the previous screen; lock-screen notification card and header bell hidden (push backend not deployed); lighter load (v1.144). Timer: no pile-up of voices when reopened late (v1.145), End-lesson dialog wording (v1.146), media-session metadata removed (v1.147). **v1.148 fixes a Reload hang I caused in v1.144** (service-worker activate must never wait for audio). Editable "lesson completed" WhatsApp template `{{hours}}` (v1.149). Dashboard: "Cash after expenses" = Collected − Expenses plus clearer labels; Net profit definition unchanged (v1.150). Today list: tappable "›" button, layouts for 430 px iPhones (v1.151–v1.152); Next Day marker (v1.153). Student profile: empty-Lessons explanation (v1.154), then 4 tabs (Attendance removed; Lessons lists all completed lessons) (v1.155). v1.156 = ChatGPT's Log polish (PR #260) plus Claude review fixes (16 px controls, 11 px labels, arrow, cache/version bump).
 - Rules applied: no accounting/data/storage change except additive display fields; each release bumped footer + cache + PROJECT_STATE. PR #13 was closed by the owner (already fixed on main). Not tested: real iPhone/WebKit.
@@ -253,7 +259,7 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 
 
 ## Latest verified project state
-- **main `68b5dab`** (merge of PR #260): footer **v1.156**, Service Worker cache **`nahians-schedule-cache-v220`**. GitHub Pages "pages build and deployment" completed successfully for `68b5dab` (checked 2026-11-21 via the Actions API). No open PRs. Real iPhone not verified; Web Push backend still not deployed.
+- **main `7d7de1e`** (merge of PR #272): footer **v1.167**, Service Worker cache **`nahians-schedule-cache-v231`**. Pages deployment for this commit was not yet verified when this entry was written (check the Actions run). No open PRs. Real iPhone not verified; Web Push backend still not deployed.
 - Latest releases: v1.110 owner's recorded timer voices (PR #192), v1.111 touch targets (PR #193), v1.112 minimum text size (PR #197), v1.113 design tokens (PR #199), v1.114 tab-bar aria-current (PR #201); PR #194 is tooling/docs only.
 - Other recent releases: v1.68 daily cloud backup, v1.70 realistic car header image, v1.71-v1.74 (ChatGPT) Students/Forms/bottom-nav/profile UX.
 - **Open PRs:** #13 only (verified 2026-11-17; #73 was closed as superseded the same day). Older "DRAFT" labels on earlier ChatGPT entries below are historical wording; check GitHub for the real state.
