@@ -4120,3 +4120,41 @@ body{--ios-bg:#f2f2f7}
 #waTemplateSettings .wa-template-actions{display:block;margin:16px 16px 0}
 #waTemplateSettings .wa-template-actions .btn.primary{display:grid;place-items:center;width:100%;min-height:50px;border:0;border-radius:14px;background:#007aff;color:#fff;font-size:16px;font-weight:700}
 #waTemplateSettings .wa-resetone{display:block;width:100%;min-height:44px;margin-top:6px;border:0;background:none;color:#ff3b30;font:inherit;font-size:16px;font-weight:600;cursor:pointer}
+
+/* ===== v1.164 — Students tab, iOS style ===== */
+#students.panel{padding:0;border:0;background:transparent;box-shadow:none}
+#students .stu-head{display:flex;align-items:flex-end;justify-content:space-between;margin:0 0 8px;padding:2px 2px 0}
+#students .stu-head h2{margin:0;color:#1c1c1e;font-size:34px;line-height:1.1;letter-spacing:.3px;font-weight:800}
+#students .stu-plus{flex:none;width:40px;height:40px;margin-bottom:4px;border:0;border-radius:50%;background:#007aff;color:#fff;font:inherit;font-size:28px;line-height:1;display:grid;place-items:center;box-shadow:0 4px 12px #007aff44;cursor:pointer}
+#students .student-summary{display:none}
+#students .student-toolbar{display:block;margin:0 0 6px}
+#students .student-toolbar #studentSearch{display:block;width:100%;min-height:40px;margin:0;padding:8px 12px;border:0;border-radius:10px;background:#e3e3e8;color:#1c1c1e;font-size:17px}
+#students .stu-seg{display:flex;margin:10px 0 0;padding:3px;background:#e3e3e8;border-radius:10px}
+#students .stu-seg button{flex:1;min-height:34px;padding:5px 4px;border:0;border-radius:8px;background:transparent;color:#1c1c1e;font:inherit;font-size:14px;font-weight:600;white-space:nowrap;cursor:pointer}
+#students .stu-seg button.on{background:#fff;box-shadow:0 1px 3px #0002}
+#students .stu-seg button span{color:#6e6e73;font-weight:500}
+#students .student-toolbar #studentFilter{display:none}
+#students .student-toolbar #studentSort{display:block;width:auto;max-width:100%;min-height:34px;margin:8px 0 0 auto;padding:4px 8px;border:0;background:transparent;color:#007aff;font-size:16px;font-weight:600;text-align:right}
+#students .listhead{margin:12px 4px 6px;color:#6e6e73;font-size:13px;font-weight:700;letter-spacing:.4px;text-transform:uppercase}
+#students #studentList.studentgrid{display:block;padding:0;border:0;border-radius:16px;background:#fff;overflow:hidden;box-shadow:0 1px 2px #1018280a}
+#students #studentList.empty{padding:20px 16px;color:#6e6e73;text-align:center}
+#students #studentList .student{position:relative;display:block;margin:0;padding:0;border:0;border-radius:0;background:#fff;box-shadow:none;overflow:hidden}
+#students #studentList .student+.student{border-top:.5px solid #e5e5ea}
+#students #studentList .tfg{position:relative;z-index:1;display:flex;align-items:center;gap:6px;min-height:68px;padding:8px 6px 8px 14px;background:#fff;transition:transform .22s ease}
+#students #studentList .studentmain{flex:1;min-width:0;display:flex;align-items:center;gap:12px;padding:0;border:0;background:none;text-align:left}
+#students #studentList .avatar{flex:none;width:40px;height:40px}
+#students #studentList .studenttext{flex:1;min-width:0}
+#students #studentList .studenttext b{display:block;color:#1c1c1e;font-size:17px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#students #studentList .studenttext>small{display:none}
+#students #studentList .studentmetrics{display:block;margin-top:1px;color:#6e6e73;font-size:13px}
+#students #studentList .stchips{display:flex;flex-wrap:wrap;gap:2px 10px;margin-top:1px}
+#students #studentList .stchips .chip{padding:0;border:0;background:none;font-size:13px;font-weight:600;font-style:normal}
+#students #studentList .stchips .chip.owed{color:#ff9500}
+#students #studentList .stchips .chip.pkg{color:#6e6e73;font-weight:500}
+#students #studentList .profile-open{flex:none;display:grid;place-items:center;width:30px;height:44px;margin:0;padding:0;border:0;border-radius:8px;background:none;color:#c7c7cc;font-size:24px;box-shadow:none}
+#students #studentList .tact{position:absolute;z-index:0;top:0;right:0;bottom:0;display:flex}
+#students #studentList .tact>.actbtn{display:grid;place-items:center;align-content:center;gap:2px;width:72px;height:100%;min-height:0;margin:0;padding:0;border:0;border-radius:0;background:#007aff;color:#fff;font:inherit;font-size:12px;font-weight:600;text-decoration:none;box-shadow:none}
+#students #studentList .tact>.actbtn.wa{background:#22a559}
+#students #studentList .tact>.actbtn svg{width:22px;height:22px;color:#fff;fill:currentColor}
+@media(prefers-reduced-motion:reduce){#students #studentList .tfg{transition:none}}
+#students #studentList .student{min-height:0!important;height:auto}
