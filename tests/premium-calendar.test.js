@@ -15,8 +15,8 @@ test("v1.104: four equal stat cards, reminder count, slot cards and timeline sta
   for(const s of [".tlles.paid",".tlles.unpaid",".tlles.pkg"])assert.ok(block.includes("#calendar "+s),s);
 });
 test("v1.104: presentation only - the reminder count is the single JS change and all links/handlers are kept",()=>{
-  assert.match(app,/<span class="remindcount">\$\{list\.filter\(x=>!reminded\.has\(x\.e\.id\)\)\.length\} pending<\/span>/);
-  assert.match(app,/class="remindchip\$\{reminded\.has\(e\.id\)\?" sent":""\}" data-remind="\$\{esc\(e\.id\)\}" href="\$\{esc\(waLink\(n,lessonMsg\(e\)\)\)\}"/);
+  assert.match(app,/<em>\$\{list\.filter\(x=>!reminded\.has\(x\.e\.id\)\)\.length\} to send<\/em>/);
+  assert.match(app,/class="rm-send" data-remind="\$\{esc\(e\.id\)\}" href="\$\{esc\(waLink\(n,lessonMsg\(e\)\)\)\}"/);
   assert.match(app,/\$\("calAddBtn"\)\.onclick=addLessonOnSelectedDay;/);
   assert.ok(!/style="/.test(block),"no inline styles in the css block");
 });
