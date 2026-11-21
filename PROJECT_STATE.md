@@ -1,3 +1,7 @@
+## v1.151 — Today list: tappable "›" (2026-11-21; owner: the arrow at the right of each student could not be tapped; taps landed on WhatsApp)
+- The "›" was only a CSS decoration (`::after`), so a tap on it hit the neighbouring WhatsApp button. It is now a real button (`.tchev`, 28×44 px, opens the same lesson editor as tapping the row text, with an aria-label) and the decoration is removed. To make room the row number circle is hidden at ≤420 px, and the "Unpaid" chip is icon-only (hidden at ≤360 px; the "Paid" button beside it shows the state), so the lesson time is never clipped. No data or logic change.
+- Files: `app.js`, `styles.css`, `index.html` (v1.151), `sw.js` (cache v215), this file.
+
 ## v1.150 — Dashboard: "Cash after expenses" and clearer labels (2026-11-21; owner: a student paid but Net profit did not change)
 - Net profit keeps its definition (Revenue earned − Expenses; a payment received for an already-counted or advance lesson does not change it). Added clarity only: note "Completed lessons − expenses" under Net profit; "Collected · money received"; a new line **Cash after expenses = Collected − Expenses** (changes when a payment is received), also in the CSV and the Share text. No accounting calculation, storage or existing report definition changed.
 - Files: `reports-dashboard.js`, `index.html` (v1.150), `styles.css`, `sw.js` (cache v214), `tests/dashboard-cash-after.test.js`, this file.
