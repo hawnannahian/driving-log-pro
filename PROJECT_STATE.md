@@ -1,3 +1,8 @@
+## v1.160 — Timer: 50 / 55-minute voices when the session audio is stalled (2026-11-22; owner: only the start voice played during a lesson)
+- Cause (as far as it can be known without the phone): the app skipped the single 50/55-minute cues whenever the long session file looked "playing", trusting it to sound them itself. If iOS had paused, stalled or desynchronised that file without marking it paused, neither sounded. Now the cues are skipped only when the file is truly in step with the timer (playing, loaded, within 5 s of the elapsed time); otherwise the app plays the single cues. Verified in Chromium with a fake clock: stalled session file → warning and end cue play once each.
+- **Unchanged limit:** if the app is closed, the phone is locked or iOS suspends the app, no sound can play at 50/55 minutes (needs Web Push; backend not deployed). Keep the app open and the screen on during the lesson.
+- Files: `app.js`, `index.html` (v1.160), `sw.js` (cache v224), `tests/timer-voice.test.js`, this file.
+
 ## v1.159 — Settings polish: no repeated headings, "Check for updates" (2026-11-21)
 - On the Working hours, Prayer times and WhatsApp messages screens the card's own heading (already shown in the page title) is hidden. New **About → Check for updates** row on the Settings menu: asks the service worker to look for a newer version, then reports "latest version (vX)" or "update found"; the existing "new version ready → Reload" banner appears when an update installs. Display/update-check only; no data change.
 - Files: `index.html` (v1.159), `app.js`, `styles.css`, `sw.js` (cache v223), this file.
