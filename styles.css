@@ -4237,3 +4237,40 @@ body{--ios-bg:#f2f2f7}
 #calendar .rm-send svg{width:22px;height:22px;fill:currentColor}
 #calendar .rm-row.sent .rm-send{background:#e5e5ea;color:#8e8e93}
 #calendar .rm-foot{margin:8px 8px 0;color:#6e6e73;font-size:13px;line-height:1.4}
+
+/* ===== v1.169 — Reports: segments, change vs previous period, coloured tiles, Collect money ===== */
+#reports .rep-seg{display:flex;margin:0 0 8px;padding:3px;background:#e3e3e8;border-radius:10px}
+#reports .rep-seg button{flex:1;min-height:34px;padding:5px 4px;border:0;border-radius:8px;background:transparent;color:#1c1c1e;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+#reports .rep-seg button.on{background:#fff;box-shadow:0 1px 3px #0002}
+#reports .toolbar{display:block;margin:0 0 10px}
+#reports .toolbar #period{display:none}
+#reports .toolbar #periodValue{display:inline-block;width:auto;max-width:100%;min-height:38px;padding:6px 14px;border:0;border-radius:999px;background-color:#fff;color:#1c1c1e;font-size:16px;font-weight:600;box-shadow:0 1px 2px #1018280a}
+#reports .toolbar #periodValue.hidden{display:none}
+#reports .rep-delta{display:inline-block;margin:4px 0 0;padding:3px 10px;border-radius:999px;background:#34c75933;color:#7ee2a0;font-size:13px;font-weight:700}
+#reports .rep-delta.down{background:#ff3b3033;color:#ffb4ad}
+#reports .rep-delta.hidden,#reports .rep-spark.hidden{display:none}
+#reports .rep-spark{display:flex;align-items:flex-end;gap:6px;height:44px;margin-top:14px}
+#reports .rep-spark i{flex:1;border-radius:4px;background:#ffffff40}
+#reports .rep-spark i.n{background:#f5a800}
+#reports .dashmini{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:12px 0 0}
+#reports .dashmini .report{grid-column:span 3;padding:14px;border:0;border-radius:16px;background:#fff;box-shadow:0 1px 2px #1018280a}
+#reports .dashmini .report:nth-child(n+5){grid-column:span 2;padding:10px 12px}
+#reports .dashmini .report:nth-child(n+5) strong{font-size:16px}
+#reports .dashmini .rep-t{position:relative;padding-left:62px}
+#reports .dashmini .rep-t::before{content:attr(data-ico);position:absolute;left:14px;top:50%;width:38px;height:38px;margin-top:-19px;border-radius:11px;display:grid;place-items:center;color:#fff;font-size:18px;font-weight:700}
+#reports .dashmini .rep-t:nth-child(1)::before{background:#2563eb}#reports .dashmini .rep-t:nth-child(2)::before{background:#16a34a}#reports .dashmini .rep-t:nth-child(3)::before{background:#7c3aed}#reports .dashmini .rep-t:nth-child(4)::before{background:#f5a800}
+#reports .dashmini .rep-t span{display:block;font-size:12px}
+#reports .dashmini .rep-t strong{font-size:20px;letter-spacing:-.3px}
+#reports .rep-due{margin:14px 0 0}
+#reports .rep-due-head{display:flex;justify-content:space-between;margin:0 6px 8px;color:#6e6e73;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase}
+#reports .rep-due-head em{font-style:normal;color:#ea580c}
+#reports .rep-due-list{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 1px 2px #1018280a}
+#reports .rep-due-row{display:flex;align-items:center;gap:6px;border-top:.5px solid #e5e5ea}
+#reports .rep-due-row:first-child{border-top:0}
+#reports .rep-due-main{flex:1;min-width:0;display:flex;align-items:center;gap:12px;min-height:56px;padding:8px 6px 8px 16px;border:0;background:none;color:#1c1c1e;font:inherit;text-align:left;cursor:pointer}
+#reports .rep-av{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#e8f0ff;color:#2563eb;font-style:normal;font-weight:700}
+#reports .rep-due-name{flex:1;min-width:0;overflow:hidden;font-weight:600;text-overflow:ellipsis;white-space:nowrap}
+#reports .rep-due-main b{color:#ea580c;font-weight:700;font-variant-numeric:tabular-nums}
+#reports .rep-due-wa{flex:none;display:grid;place-items:center;width:36px;height:36px;margin-right:12px;border-radius:50%;background:#22a559;color:#fff}
+#reports .rep-due-wa svg{width:20px;height:20px;fill:currentColor}
+#reports .rep-due-more{margin:0;padding:10px 16px;border-top:.5px solid #e5e5ea;color:#6e6e73;font-size:13px}

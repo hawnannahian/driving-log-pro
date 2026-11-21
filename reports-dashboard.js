@@ -47,6 +47,7 @@ function renderDashboard(){
  dashCount($("rIncome"),s.rev,euro);dashCount($("rExpenses"),s.exp,euro);dashCount($("rProfit"),s.net,euro);dashCount($("rCashAfter"),dashRound(s.col-s.exp),euro);dashCount($("rCollected"),s.col,euro);dashCount($("rUnpaid"),s.out,euro);
  $("rProfit").classList.toggle("neg",s.net<0);
  $("rHours").textContent=fmtH(s.hours)+" h";$("rCount").textContent=String(s.lessons);$("rStudents").textContent=String(s.students);$("rAvg").textContent=s.hours>0?euro(s.rev/s.hours):"–";
+ try{dashSeg(p);dashDelta(p,v,s);dashDue();}catch(err){}
  dashInsights(p,v,s);dashStudentPerformance(p,v);dashAttendanceInsights(p,v);dashDonut(s);dashWeeks();dashHealth(p,v,s);dashHeat(p,v);}
 
 // Attendance is based only on explicit user confirmation; undefined status is never counted as absence.
@@ -168,3 +169,15 @@ renderDashboard();
 function finSet(open){$("finBody").classList.toggle("open",open);$("finToggle").setAttribute("aria-expanded",String(open));$("finBody").inert=!open;}
 $("finToggle").onclick=()=>finSet($("finToggle").getAttribute("aria-expanded")!=="true");
 document.querySelector('.tab[data-tab="reports"]')?.addEventListener("click",()=>finSet(false));
+
+// v1.169 — Reports polish: period segments, change vs the previous period with a 6-month bar strip, and a "Collect money" list. Display only: every figure comes from the existing calculations.
+function dashSeg(p){document.querySelectorAll("[data-rp]").forEach(b=>{const on=b.dataset.rp===p;b.classList.toggle("on",on);b.setAttribute("aria-pressed",String(on));});}
+document.querySelectorAll("[data-rp]").forEach(b=>b.onclick=()=>{const sel=$("period");if(sel.value!==b.dataset.rp){sel.value=b.dataset.rp;sel.dispatchEvent(new Event("input"));}});
+function dashDelta(p,v,s){const d=$("rDelta"),sp=$("rSpark");d.classList.add("hidden");sp.classList.add("hidden");d.className="rep-delta hidden";
+ const prev=dashPrev(p,v);if(prev){const ps=dashStats(p,prev);if(ps.rev>0){const pct=Math.round((s.rev-ps.rev)/ps.rev*100),up=pct>=0,label=p==="month"?new Date(Number(prev.slice(0,4)),Number(prev.slice(5,7))-1,1).toLocaleDateString("en-GB",{month:"long"}):p==="year"?prev:"last week";d.textContent=(up?"▲ ":"▼ ")+Math.abs(pct)+"% vs "+label;d.className="rep-delta"+(up?"":" down");}}
+ if(p==="month"&&v){const[y,m]=v.split("-").map(Number),vals=[];for(let i=5;i>=0;i--){const k=dateISO(new Date(y,m-1-i,1)).slice(0,7);vals.push(dashStats("month",k).rev);}const max=Math.max(...vals,1);sp.innerHTML="";vals.forEach((x,i)=>{const b=document.createElement("i");b.style.height=Math.max(6,Math.round(x/max*100))+"%";if(i===5)b.className="n";sp.append(b);});sp.classList.remove("hidden");}}
+function dashDue(){const box=$("repDue"),list=$("repDueList");const rows=state.students.map(s=>({s,st:studentStats(s)})).filter(x=>x.st.unpaid>0).sort((a,b)=>b.st.unpaid-a.st.unpaid);
+ box.classList.toggle("hidden",!rows.length);if(!rows.length){list.innerHTML="";return;}
+ $("repDueTotal").textContent=euro(rows.reduce((a,x)=>a+x.st.unpaid,0));
+ list.innerHTML=rows.slice(0,5).map(({s,st})=>{const n=waNumber(s);return `<div class="rep-due-row"><button type="button" class="rep-due-main" data-duestu="${esc(s.id)}"><i class="rep-av">${esc(initial(s.name))}</i><span class="rep-due-name">${esc(s.name)}</span><b>${euro(st.unpaid)}</b></button>${n?`<a class="rep-due-wa" href="${esc(waLink(n,payMsg(st.unpaid)))}" target="_blank" rel="noopener" aria-label="Payment reminder to ${esc(s.name)}">${ICON_WA}</a>`:""}</div>`;}).join("")+(rows.length>5?`<p class="rep-due-more">+ ${rows.length-5} more in Students → Owes money</p>`:"");
+ list.querySelectorAll("[data-duestu]").forEach(b=>b.onclick=()=>openProfile(b.dataset.duestu));}
