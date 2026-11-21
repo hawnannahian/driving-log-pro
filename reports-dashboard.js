@@ -6,6 +6,7 @@
 // - Outstanding       = completed lessons not paid yet + course/package amounts still due (packages bought in the period).
 // - Expenses          = cost of Fuel, Maintenance, Insurance, Refund and other expense records (totals().expenses).
 // - Net profit        = Revenue − Expenses.
+// - Cash after expenses = Collected − Expenses (money actually in hand; changes when a payment is received).
 
 const DASH_CATS=["Fuel","Maintenance","Insurance","Other (incl. refunds)"];
 const dashCatOf=e=>e.type==="Fuel"?0:e.type==="Repair"?1:e.type==="Insurance"?2:3;
@@ -43,7 +44,7 @@ function dashCount(el,val,fmt){if(!el)return;const from=Number(el.dataset.v),sho
 
 function renderDashboard(){
  const p=$("period")?.value||"month",v=$("periodValue")?.value||"",s=dashStats(p,v);
- dashCount($("rIncome"),s.rev,euro);dashCount($("rExpenses"),s.exp,euro);dashCount($("rProfit"),s.net,euro);dashCount($("rCollected"),s.col,euro);dashCount($("rUnpaid"),s.out,euro);
+ dashCount($("rIncome"),s.rev,euro);dashCount($("rExpenses"),s.exp,euro);dashCount($("rProfit"),s.net,euro);dashCount($("rCashAfter"),dashRound(s.col-s.exp),euro);dashCount($("rCollected"),s.col,euro);dashCount($("rUnpaid"),s.out,euro);
  $("rProfit").classList.toggle("neg",s.net<0);
  $("rHours").textContent=fmtH(s.hours)+" h";$("rCount").textContent=String(s.lessons);$("rStudents").textContent=String(s.students);$("rAvg").textContent=s.hours>0?euro(s.rev/s.hours):"–";
  dashInsights(p,v,s);dashStudentPerformance(p,v);dashAttendanceInsights(p,v);dashDonut(s);dashWeeks();dashHealth(p,v,s);dashHeat(p,v);}
@@ -141,12 +142,12 @@ function dashHeatMove(k){const [y,m]=dashMonth.split("-").map(Number);dashMonth=
 // Exports. The CSV and the shared summary contain business totals only, never student names or contact details.
 function dashLabel(){const p=$("period").value;return p==="all"?"All time":$("periodValue").selectedOptions[0]?.textContent||"";}
 function dashCsv(){const p=$("period").value,v=$("periodValue").value,s=dashStats(p,v),rows=[["Section","Item","Value"],["Period","Report",dashLabel()],
- ["Results","Revenue (earned)",s.rev],["Results","Expenses",s.exp],["Results","Net profit",s.net],["Results","Collected",s.col],["Results","Outstanding",s.out],
+ ["Results","Revenue (earned)",s.rev],["Results","Expenses",s.exp],["Results","Net profit",s.net],["Results","Collected",s.col],["Results","Cash after expenses",dashRound(s.col-s.exp)],["Results","Outstanding",s.out],
  ["Activity","Completed lessons",s.lessons],["Activity","Driving hours",dashRound(s.hours)],["Activity","Active students",s.students],
  ...DASH_CATS.map((c,i)=>["Expenses by category",c,s.cats[i]]),...monthRows(12).map(r=>["Monthly",r.long,`Revenue ${dashRound(r.income)} / Expenses ${dashRound(r.expenses)} / Net ${dashRound(r.profit)}`])];
  download(`DrivingLogPro_Report_${dashLabel().replace(/[^\w-]+/g,"_")}.csv`,"﻿"+rows.map(r=>r.map(csvCell).join(",")).join("\r\n"),"text/csv;charset=utf-8");}
 function dashSummaryText(){const s=dashStats($("period").value,$("periodValue").value);
- return `Driving Log Pro · ${dashLabel()}\nRevenue: ${euro(s.rev)}\nExpenses: ${euro(s.exp)}\nNet profit: ${euro(s.net)}\nCollected: ${euro(s.col)}\nOutstanding: ${euro(s.out)}\nCompleted lessons: ${s.lessons} · ${fmtH(s.hours)} h`;}
+ return `Driving Log Pro · ${dashLabel()}\nRevenue: ${euro(s.rev)}\nExpenses: ${euro(s.exp)}\nNet profit: ${euro(s.net)}\nCollected: ${euro(s.col)}\nCash after expenses: ${euro(s.col-s.exp)}\nOutstanding: ${euro(s.out)}\nCompleted lessons: ${s.lessons} · ${fmtH(s.hours)} h`;}
 async function dashShare(){const text=dashSummaryText();try{if(navigator.share){await navigator.share({title:"Business summary",text});return;}}catch(err){if(err&&err.name==="AbortError")return;}
  try{await navigator.clipboard.writeText(text);toast("Summary copied");}catch{toast("Sharing is not available here");}}
 // Extra PDF section: expense breakdown and the last 6 months.
@@ -161,7 +162,7 @@ $("dashCsv").onclick=dashCsv;$("dashShare").onclick=dashShare;$("dashPrint").onc
 $("heatPrev").onclick=()=>dashHeatMove(-1);$("heatNext").onclick=()=>dashHeatMove(1);
 document.querySelectorAll("[data-range]").forEach(b=>b.onclick=()=>{dashRange=b.dataset.range;document.querySelectorAll("[data-range]").forEach(x=>x.classList.toggle("active",x===b));renderChart();});
 // Opening Reports counts the main figures up from zero.
-document.querySelector('.tab[data-tab="reports"]')?.addEventListener("click",()=>{["rIncome","rExpenses","rProfit","rCollected","rUnpaid"].forEach(id=>{$(id).dataset.v="0";});setTimeout(renderDashboard,30);});
+document.querySelector('.tab[data-tab="reports"]')?.addEventListener("click",()=>{["rIncome","rExpenses","rProfit","rCollected","rCashAfter","rUnpaid"].forEach(id=>{$(id).dataset.v="0";});setTimeout(renderDashboard,30);});
 renderDashboard();
 // Financial Reports: collapsed by default (also each time Reports is opened); the summary above stays visible.
 function finSet(open){$("finBody").classList.toggle("open",open);$("finToggle").setAttribute("aria-expanded",String(open));$("finBody").inert=!open;}
