@@ -1,3 +1,8 @@
+## v1.156 — Log page visual polish (PR #260 by ChatGPT) with Claude's review fixes (2026-11-21)
+- ChatGPT's CSS-only polish of the Log page (everything scoped to `#log`): softer cards, summary and record styling, focus rings. Claude's review fixes, applied on the same branch at the owner's request: filter/sort controls are 16 px on phones (no iOS focus zoom); KPI labels at least 11 px; the stray native disclosure marker on "Payment & expense totals" removed and the "Sort & more" arrow placed at the right; the filter select uses the full row on ≤380 px so its 16 px text is not cut; service-worker cache and footer version bumped.
+- No HTML/JS, calculation, data or storage change.
+- Files: `styles.css`, `index.html` (v1.156), `sw.js` (cache v220), this file.
+
 ## v1.155 — Student profile: fewer tabs, one lesson list (2026-11-21; owner: "lots of tabs make it noisy")
 - The profile now has **4 tabs: Overview, Lessons, Courses, Payments** (Attendance removed — its numbers are already in the Overview stats/"Learning activity"; its panel is still rendered but hidden, so nothing is lost in the code or data). The **Lessons** tab lists every completed lesson (course and individual) under "Completed lessons (N)", plus upcoming bookings. Tab strip uses 4 equal columns (13 px text).
 - Display only: no accounting, storage or course-allocation change.
