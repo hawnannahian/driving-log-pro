@@ -1,3 +1,7 @@
+## v1.153 — Next Day card: stray "›" at the left (2026-11-21; owner screenshot)
+- The screenshot showed a "›" before the calendar icon of the Next Day card while the card's own arrow was missing at the right: the native `<details>` marker rendered as a flex item in the iPhone's Safari. Added `summary::marker{content:""}` and `list-style-type:none` (the existing hide rules only covered the older `-webkit-details-marker`). **Not reproduced here** (no WebKit in this environment; Chromium shows no stray marker) — to be confirmed on the owner's iPhone.
+- Files: `styles.css`, `index.html` (v1.153), `sw.js` (cache v217), this file.
+
 ## v1.152 — Today row "›" made visible and separated; layout rules cover large iPhones (2026-11-21; owner: version 1.151 showed "no changes")
 - v1.151's compact layout applied only up to 420 px, but large iPhones (≈430 px) are wider, and the new "›" button looked identical to the old decoration, so nothing seemed to change. Now: the layout rules apply up to 440 px, and the "›" is drawn as a light rounded button with an 18 px gap from the WhatsApp/Paid/Done buttons (verified at 430, 393, 390 and 320 px: tap point lands on the button, times not clipped).
 - Files: `styles.css`, `index.html` (v1.152), `sw.js` (cache v216), this file.
