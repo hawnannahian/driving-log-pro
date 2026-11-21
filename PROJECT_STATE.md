@@ -1,3 +1,6 @@
+## v1.166 — Reports and Islamic tabs in the iOS style (2026-11-22; part of the approved tab redesign)
+- **Reports:** large "Reports" title (was "Business dashboard"), the period and month selects side by side, a slim PDF / CSV / Share / Print row, flat rounded cards; the navy summary card and all calculations/definitions unchanged. **Islamic:** transparent page, shorter banner, flat segmented Duas | Tasbih control; lists/players unchanged.
+- Files: `index.html` (v1.166), `styles.css`, `sw.js` (cache v230), this file. No logic or data change.
 ## v1.165 — Calendar tab in the iOS style (2026-11-22; part of the approved tab redesign)
 - Large "Calendar" title with a blue "+" (calls the same handler as the hidden "Add lesson" button), a segmented Month | Week | Day control, the four summary tiles hidden (the "N lessons · X h · € " caption already shows them), flat white rounded cards (date board, reminders, available time, timeline). No logic, data or handler changed.
 - Files: `index.html` (v1.165), `app.js` (title button), `styles.css`, `sw.js` (cache v229), this file.
