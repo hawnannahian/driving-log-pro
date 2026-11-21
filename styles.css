@@ -3832,3 +3832,14 @@ body.timing #overview #nextCard{display:none}
 
 /* v1.150 — dashboard: small explanatory notes under Net profit and Cash after expenses */
 .dashhero .hero-note{display:block;margin-top:3px;font-size:12px;font-weight:500;line-height:1.3;opacity:.75}
+
+/* v1.151 — the "›" at the end of each Today row is now a real, tappable button (it was only decoration, so taps fell on the WhatsApp button next to it) */
+#overview #todayList .todayrow::after{content:none;display:none}
+#overview #todayList .tchev{flex:none;display:grid;place-items:center;width:28px;height:44px;margin:0 -4px 0 2px;padding:0;border:0;border-radius:10px;background:transparent;color:#8b98ad;font:inherit;font-size:24px;line-height:1;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#overview #todayList .tchev:active{background:#eef1f7}
+#overview #todayList .todayrow>.actbtn,#overview #todayList .todayrow>.tpay,#overview #todayList .todayrow>.tdone{margin-right:2px}
+#overview #todayList .tmain{min-width:0;overflow:hidden}
+@media(max-width:360px){#overview #todayList .todayrow>.tstat{font-size:0;gap:0;padding:6px 8px}}
+#overview #todayList .todayrow>.tstat.unpaid{font-size:0;gap:0;padding:6px 8px}
+@media(max-width:360px){#overview #todayList .todayrow>.tstat.unpaid{display:none}#overview #todayList .tmain b{font-size:15px}}
+@media(max-width:420px){#overview #todayList .tnum{display:none}#overview #todayList .tmain{flex:1 0 auto}}
