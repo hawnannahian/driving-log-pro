@@ -15,7 +15,7 @@ test("v1.105: the card is read-only and does not change the booking guard",()=>{
 test("v1.105: render hook, countdown and progress bar use script-driven width (CSP safe)",()=>{
   assert.match(app,/renderPrayerLine\(todayISO\);renderPrayerCard\(\);renderNext\(\);/);
   assert.ok(!app.includes("pc-row")&&!app.includes("pc-bar"),"only the next prayer is shown");
-  assert.match(app,/Time remaining: <b>/);
+  assert.match(app,/<span class="pc-meta"><b class="pc-time">\$\{esc\(nextAt\)\}<\/b> · in \$\{prayerCountdownText\(left\)\}<\/span>/);
   assert.ok(!/<[^>]+ style="/.test(app.slice(app.indexOf("function renderPrayerCard"),app.indexOf("setInterval(()=>{if(document.visibilityState"))),"no inline style attributes");
 });
 test("v1.105: footer and Settings version match",()=>{

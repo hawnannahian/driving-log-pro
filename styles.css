@@ -3994,3 +3994,80 @@ body.timing #overview #nextCard{display:none}
 #logSettingsPanel [data-spane="work"] .settings-card-head,#logSettingsPanel [data-spane="prayer"] .settings-card-head{display:none}
 #logSettingsPanel #waTemplateSettings>summary{display:none}
 #logSettingsPanel .set-txt small{white-space:normal}
+
+/* ===== v1.161 — iOS-style Overview ===== */
+body{--ios-bg:#f2f2f7}
+#overview .overview-intro{display:flex;align-items:flex-end;justify-content:space-between;height:auto;margin:0 0 6px;padding:2px 2px 0}
+#overview .overview-intro>div{min-width:0}
+#overview .overview-intro h1,#overview .overview-intro .overview-date{position:static;width:auto;height:auto;margin:0;padding:0;overflow:visible;clip:auto;white-space:normal;border:0}
+#overview .overview-intro h1{color:#1c1c1e;font-size:34px;line-height:1.1;letter-spacing:.3px;font-weight:800}
+#overview .overview-intro .overview-date{order:-1;display:block;color:#6e6e73;font-size:13px;font-weight:600;letter-spacing:.4px;text-transform:uppercase}
+#overview .overview-intro .overview-date svg{display:none}
+#overview .ovplus{flex:none;width:40px;height:40px;margin-bottom:4px;border:0;border-radius:50%;background:#007aff;color:#fff;font:inherit;font-size:28px;line-height:1;display:grid;place-items:center;box-shadow:0 4px 12px #007aff44;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#overview .ovplus:active{transform:scale(.94)}
+#overviewAddLesson{display:none!important}
+/* progress dots: no line, soft colour halos */
+#overview .lprog{padding:12px 16px 14px;border:0;border-radius:20px;background:linear-gradient(135deg,#fff 50%,#eef6ff)}
+#overview .lp-cap{margin:0 0 10px;color:#1c1c1e;font-size:15px;font-weight:700}
+#overview .lp-track{justify-content:space-evenly;gap:10px;padding:0}
+#overview .lp-track::before{display:none}
+#overview .lp-done .lp-disc{background:linear-gradient(145deg,#4ade80,#16a34a);box-shadow:0 0 0 5px #22c55e26,0 3px 8px #16a34a44}
+#overview .lp-active .lp-disc{background:linear-gradient(145deg,#ffd54a,#f5a800);box-shadow:0 0 0 5px #f5a80033,0 3px 10px #f5a80066}
+#overview .lp-next .lp-disc{background:linear-gradient(145deg,#eaf2ff,#d6e6ff);box-shadow:0 0 0 5px #3b82f61f}
+/* Up next hero */
+#overview #nextCard{display:block;padding:16px;border:0;border-radius:20px;background:linear-gradient(135deg,#14284b,#1d3d78);color:#fff;box-shadow:0 8px 22px #14284b40}
+#overview .nextcard .nextlabel{margin:0;color:#ffffffbf;font-size:12.5px;font-weight:700;letter-spacing:.5px}
+#overview .nextcard .nexttime{margin-top:4px;color:#fff;font-size:38px;letter-spacing:-.6px}
+#overview .nextcard .nextname{margin:2px 0 0;color:#ffffffe6;font-size:17px;font-weight:500}
+#overview .nextcard .nextactions{display:flex;gap:10px;margin:14px 0 0}
+#overview .nextcard .nextbtn{flex:1;min-height:48px;border-radius:14px;background:#f5a800;color:#14284b;box-shadow:none;font-weight:700}
+#overview .nextcard .nextbtn.running{background:#16a34a;color:#fff}
+#overview .nextcard .nextwa{flex:1;display:grid;place-items:center;min-height:48px;border-radius:14px;background:#ffffff26;color:#fff;font-weight:600;text-decoration:none}
+/* prayer: one slim row */
+#overview #prayerCard{display:flex;align-items:center;gap:12px;padding:10px 14px;border:0;border-radius:16px;background:#fff;box-shadow:0 1px 2px #1018280a}
+#overview #prayerCard .pc-ico{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:#0d9488;color:#fff}
+#overview #prayerCard .pc-ico svg{width:20px;height:20px}
+#overview #prayerCard .pc-name{flex:1;margin:0;color:#1c1c1e;font-size:17px;font-weight:700;letter-spacing:0}
+#overview #prayerCard .pc-name em{margin-left:6px;font-size:13px;font-style:normal;font-weight:600;color:#6e6e73}
+#overview #prayerCard .pc-meta{color:#6e6e73;font-size:15px;white-space:nowrap}
+#overview #prayerCard .pc-time{padding:0;background:none;box-shadow:none;color:#1c1c1e;font-size:15px;font-weight:700}
+#overview #prayerCard .pc-edit{flex:none;width:30px;height:30px;min-height:0;padding:0;border:0;border-radius:50%;background:#f2f2f7;color:#6e6e73;font-size:14px}
+/* Today list: grouped, with swipe actions */
+#overview .todayheadrow{margin:20px 4px 6px}
+#overview .todayheadrow .todayhead{color:#6e6e73;font-size:13px;font-weight:700;letter-spacing:.4px;text-transform:uppercase}
+#overview .todayheadrow .todayhead::before{display:none}
+#overview .todayheadrow .todayall{font-size:15px;font-weight:600;color:#007aff}
+#overview #todayList{padding:0;border:0;border-radius:16px;background:#fff;overflow:hidden;box-shadow:0 1px 2px #1018280a}
+#overview #todayList .todayrow{position:relative;display:block;min-height:0;padding:0;gap:0;overflow:hidden}
+#overview #todayList .todayrow+.todayrow{border-top:.5px solid #e5e5ea}
+#overview #todayList .tfg{position:relative;z-index:1;display:flex;align-items:center;gap:12px;min-height:62px;padding:8px 6px 8px 16px;background:#fff;transition:transform .22s ease}
+#overview #todayList .tdot{flex:none;width:10px;height:10px;border-radius:50%;background:#c7c7cc}
+#overview #todayList .tdot.ok{background:#34c759}#overview #todayList .tdot.due{background:#ff9500}#overview #todayList .tdot.run{background:#007aff}
+#overview #todayList .tmain{flex:1;min-width:0;padding:0;border:0;background:none;text-align:left}
+#overview #todayList .tmain b{display:block;font-size:17px;font-weight:600;color:#1c1c1e;font-variant-numeric:tabular-nums}
+#overview #todayList .tmain span{display:block;margin-top:1px;color:#6e6e73;font-size:14px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#overview #todayList .tstat{flex:none;padding:0;border:0;background:none;color:#6e6e73;font-size:15px;font-weight:500}
+#overview #todayList .tstat svg{display:none}
+#overview #todayList .tstat.unpaid{color:#ff9500}
+#overview #todayList .tchev{flex:none;display:grid;place-items:center;width:30px;height:44px;margin:0;padding:0;border:0;border-radius:8px;background:none;color:#c7c7cc;font-size:24px}
+#overview #todayList .todayrow.done .tmain b{color:#6e6e73}
+#overview #todayList .todayrow.done{opacity:1}
+#overview #todayList .tact{position:absolute;z-index:0;top:0;right:0;bottom:0;display:flex}
+#overview #todayList .tact>*{display:grid;place-items:center;align-content:center;gap:2px;width:72px;height:100%;min-height:0;margin:0;padding:0;border:0;border-radius:0;color:#fff;font:inherit;font-size:13px;font-weight:600;text-decoration:none}
+#overview #todayList .tact .actbtn{background:#22a559}#overview #todayList .tact .actbtn svg{width:22px;height:22px}
+#overview #todayList .tact .actbtn span{font-size:11px}
+#overview #todayList .tact .tpay{background:#ff9500}#overview #todayList .tact .tdone{background:#007aff}
+@media(prefers-reduced-motion:reduce){#overview #todayList .tfg{transition:none}}
+/* Tomorrow */
+#overview .nextday{border:0;border-radius:16px;background:#fff;box-shadow:0 1px 2px #1018280a}
+#overview .nextday summary{min-height:60px}
+#overview .nextday summary::after{position:static;margin-top:-4px;color:#c7c7cc}
+#overview .nextday .nd-ico{display:none}
+#overview .nextday .nd-txt b{color:#1c1c1e;font-size:17px;font-weight:600}
+#overview #nextDayList .todayrow{display:flex;align-items:center;gap:10px;padding:8px 0}
+#overview #nextDayList .tnum{display:none}
+#overview #prayerCard .pc-edit::before{content:none}
+#overview #todayList .todayrow>.tfg>.tstat{background:none;border:0;box-shadow:none;padding:0}
+#overview #todayList .todayrow>.tact>.actbtn{display:grid;place-items:center;align-content:center;gap:2px;width:72px;height:100%;min-height:0;border:0;border-radius:0;background:#22a559;box-shadow:none;color:#fff}
+#overview #todayList .todayrow>.tact>.actbtn span{font-size:11px;font-weight:600}
+#overview #todayList .todayrow>.tact>.actbtn svg{width:22px;height:22px;color:#fff;fill:currentColor}
