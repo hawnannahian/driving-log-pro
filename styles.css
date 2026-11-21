@@ -3829,3 +3829,6 @@ body.timing #overview #nextCard{display:none}
 
 /* v1.144 — lock-screen notification controls are hidden until the push backend exists (elements and IDs kept) */
 #hdrBell,#pushBox{display:none!important}
+
+/* v1.150 — dashboard: small explanatory notes under Net profit and Cash after expenses */
+.dashhero .hero-note{display:block;margin-top:3px;font-size:12px;font-weight:500;line-height:1.3;opacity:.75}

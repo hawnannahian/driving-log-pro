@@ -1,3 +1,7 @@
+## v1.150 — Dashboard: "Cash after expenses" and clearer labels (2026-11-21; owner: a student paid but Net profit did not change)
+- Net profit keeps its definition (Revenue earned − Expenses; a payment received for an already-counted or advance lesson does not change it). Added clarity only: note "Completed lessons − expenses" under Net profit; "Collected · money received"; a new line **Cash after expenses = Collected − Expenses** (changes when a payment is received), also in the CSV and the Share text. No accounting calculation, storage or existing report definition changed.
+- Files: `reports-dashboard.js`, `index.html` (v1.150), `styles.css`, `sw.js` (cache v214), `tests/dashboard-cash-after.test.js`, this file.
+
 ## v1.149 — Editable "lesson completed" WhatsApp message (2026-11-20; owner: wants to customise WhatsApp message texts in Settings)
 - Settings → WhatsApp Message Settings already let the owner edit the lesson reminder, multi-lesson and payment messages. The message sent after completing a lesson (the thank-you text) was hard-coded. It is now a fourth template, "Lesson completed (thank-you message)", with `{{hours}}` = total completed hours, a live preview, Save and Reset. The default wording is exactly the old text, so nothing changes until the owner edits it.
 - Storage: same device-only key (`…-whatsapp-templates`) gets one optional extra field `done`; no student/lesson/payment record, schema, backup or sync change.
