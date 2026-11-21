@@ -1,3 +1,8 @@
+## v1.167 — Reports bottom: Data list and tidy Deleted lessons (2026-11-22; owner: "looks funny", approved sample)
+- The cards at the bottom of Reports (Import, Backup & restore, Safety copies, Deleted lessons, Lesson recovery history, Cloud sync) are now behind one **Data** list: each row (with a one-line status such as "Last backup: today" / "Connected" / "N waiting") opens its card in place (accordion); Settings → Data shortcuts open the right card. The cards, buttons and handlers are unchanged.
+- **Deleted lessons** are compact rows (name, date · time, "Deleted … · N days left") with a small blue **Restore** (same `data-restore-lesson` action, same 30-day rule); the first 3 are shown, "Show all N" expands. No data or restore-rule change.
+- Files: `index.html` (v1.167), `app.js`, `styles.css`, `sw.js` (cache v231), this file.
+
 ## v1.166 — Reports and Islamic tabs in the iOS style (2026-11-22; part of the approved tab redesign)
 - **Reports:** large "Reports" title (was "Business dashboard"), the period and month selects side by side, a slim PDF / CSV / Share / Print row, flat rounded cards; the navy summary card and all calculations/definitions unchanged. **Islamic:** transparent page, shorter banner, flat segmented Duas | Tasbih control; lists/players unchanged.
 - Files: `index.html` (v1.166), `styles.css`, `sw.js` (cache v230), this file. No logic or data change.

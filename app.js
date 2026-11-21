@@ -75,7 +75,7 @@ function ensureStudents(){const known=new Set(state.students.map(s=>s.name.trim(
 const payWrap=(e,html)=>e.type==="Lesson"&&lessonStatus(e)==="unpaid"?`<div class="payrow">${html}<button class="markpaid" data-pay="${esc(e.id)}">Mark paid</button></div>`:html;
 function markPaid(id){const e=state.entries.find(x=>x.id===id);if(!e)return;e.paid=true;save();toast("Marked as paid");}
 function renderBackup(){let last=0;try{last=Number(localStorage.getItem(BACKUP_KEY))||0;}catch{}const days=last?Math.floor((Date.now()-last)/864e5):null,show=state.entries.length>0&&(days===null||days>=7);$("backupBanner").classList.toggle("hidden",!show);if(show)$("backupText").textContent=days===null?"You have no backup yet.":`Your last backup was ${days} days ago.`;}
-async function backupNow(){const done=await download("DrivingLogPro_Backup.json",JSON.stringify({...state,fullTime:window.DrivingLogFullTime?.getAll()||[],backupCreated:new Date().toISOString()},null,2),"application/json");if(done){try{localStorage.setItem(BACKUP_KEY,String(Date.now()));}catch{}renderBackup();toast("Backup created");}}
+async function backupNow(){const done=await download("DrivingLogPro_Backup.json",JSON.stringify({...state,fullTime:window.DrivingLogFullTime?.getAll()||[],backupCreated:new Date().toISOString()},null,2),"application/json");if(done){try{localStorage.setItem(BACKUP_KEY,String(Date.now()));}catch{}renderBackup();try{renderDataMenu();}catch{}toast("Backup created");}}
 const waNumber=s=>{const raw=cleanPhone(s.whatsapp||s.phone||s.name||""),d=raw.replace(/\D/g,"");if(raw.startsWith("+")&&d.length>=9)return d;if(/^9\d{8}$/.test(d))return "351"+d;return null;};
 const WA_TEMPLATE_KEY=DB_KEY+"-whatsapp-templates";
 const WA_MULTI_DEFAULT="আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ ভাই।\nআপনার আসন্ন ড্রাইভিং লেসনগুলো:\n{{lessons}}\nঅনুগ্রহ করে প্রতিটি লেসনের নির্ধারিত সময়ের কয়েক মিনিট আগে উপস্থিত থাকবেন।\nধন্যবাদ।",WA_DAYS_ALLOWED=[0,3,7,14];
@@ -770,7 +770,7 @@ function render(){recomputeAlloc();doneByName={};state.entries.forEach(e=>{if(is
  $("studentList").className="studentgrid"+(students.length?"":" empty");$("studentList").innerHTML=listHTML||(state.students.length?"No students match your search or filter.":"No students yet.");
  $("studentOptions").innerHTML=state.students.map(s=>`<option value="${esc(s.name)}"${s.phone&&s.phone!==s.name?` label="${esc(s.phone)}"`:""}></option>`).join("");
  const p=$("period")?.value||"month",pv=periodChoices(p),rep=state.entries.filter(e=>inSel(e.date,p,pv)),r=totals(rep),pkgOwed=dueInPeriod(p,pv);if(typeof renderDashboard==="function")renderDashboard();$("deleteLegacy").classList.toggle("hidden",!hasLegacy());if(typeof renderIslamic==="function")renderIslamic();const km=kmStats(rep);$("rKm").textContent=km?`${Math.round(km.dist).toLocaleString("pt-PT")} km`:"–";$("rFuelKm").textContent=km?euro(km.perKm):"–";$("rPrepaid").textContent=euro(prepaidBalance());renderChart();renderHoursChart();renderPayChart();renderCompare();
- renderCalendar();renderBackup();if($("profileDialog").open)renderProfile();bindRecords();
+ renderCalendar();renderBackup();try{renderDataMenu();}catch{}if($("profileDialog").open)renderProfile();bindRecords();
  document.querySelectorAll("[data-student]").forEach(b=>b.onclick=()=>openProfile(b.dataset.student));
 }
 const initial=name=>{const t=String(name||"").trim();if(!t||isPhone(t))return "#";const seg=window.Intl?.Segmenter?[...new Intl.Segmenter().segment(t)][0]?.segment:[...t][0];return (seg||"#").toUpperCase();};
@@ -982,13 +982,15 @@ function renderRecovery(){
  renderLessonRecovery();
 }
 function restoreDeletedLesson(id){const result=window.DrivingLogRecovery?.restore(state,id,new Date().toISOString(),"Owner");if(!result?.ok){toast("This lesson is no longer available to restore.");return;}save();renderRecovery();toast("Lesson restored");}
+let delExpanded=false;
 function renderLessonRecovery(){
  const R=window.DrivingLogRecovery;if(!R)return;
  const deleted=R.deleted(state,new Date()),history=[...(state.lessonAudit||[])].sort((a,b)=>b.at.localeCompare(a.at)),shown=lessonAuditExpanded?history:history.slice(0,50);
  $("deletedLessonsList").innerHTML=deleted.length?deleted.map(row=>{
   const e=row.lesson,days=Math.max(0,Math.ceil(30-(Date.now()-Date.parse(row.deletedAt))/86400000));
-  return '<div class="recoveryrow"><span><b>'+esc(e.student||"Lesson")+'</b><br><small>'+esc(fmtDate(e.date))+' · '+esc(e.start||"")+'–'+esc(e.end||"")+' · Deleted '+esc(new Date(row.deletedAt).toLocaleString("en-GB"))+' · '+days+' day(s) left</small></span><button type="button" class="btn secondary" data-restore-lesson="'+esc(row.id)+'">Restore lesson</button></div>';
- }).join(""):'<p class="hint">No lessons waiting to be restored.</p>';
+  return '<div class="recoveryrow"><span><b>'+esc(e.student||"Lesson")+'</b><small>'+esc(fmtDate(e.date))+' · '+esc(e.start||"")+'–'+esc(e.end||"")+'</small><small>Deleted '+esc(new Date(row.deletedAt).toLocaleString("en-GB",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}))+' · '+days+' day'+(days===1?'':'s')+' left</small></span><button type="button" class="dl-restore" data-restore-lesson="'+esc(row.id)+'" aria-label="Restore lesson of '+esc(e.student||"student")+'">Restore</button></div>';
+ }).slice(0,delExpanded?deleted.length:3).join("")+(deleted.length>3?'<button type="button" class="dl-more" id="delShowAll">'+(delExpanded?'Show fewer':'Show all '+deleted.length+' ›')+'</button>':''):'<p class="hint">No lessons waiting to be restored.</p>';
+ {const sa=$("delShowAll");if(sa)sa.onclick=()=>{delExpanded=!delExpanded;renderLessonRecovery();};const dd=$("dmDeleted");if(dd)dd.textContent=deleted.length?`${deleted.length} waiting · restore within 30 days`:"None";}
  $("lessonAuditSummary").textContent=history.length?(lessonAuditExpanded?"Showing all "+history.length+" retained events.":"Showing newest "+shown.length+" of "+history.length+" retained events."):"No lesson recovery events recorded yet.";
  $("lessonAuditToggle").classList.toggle("hidden",history.length<=50);$("lessonAuditToggle").textContent=lessonAuditExpanded?"Show latest 50":"Show all "+history.length+" events";$("lessonAuditToggle").onclick=()=>{lessonAuditExpanded=!lessonAuditExpanded;renderLessonRecovery();};
  $("lessonAuditList").innerHTML=shown.length?shown.map(event=>{
@@ -1034,7 +1036,7 @@ document.querySelectorAll("[data-waopen]").forEach(b=>b.onclick=()=>{setWaView(b
 document.querySelectorAll(".wa-tag").forEach(b=>b.onclick=()=>{const ta=$(WA_VIEWS[waView].ta),st=ta.selectionStart??ta.value.length,en=ta.selectionEnd??st;ta.value=ta.value.slice(0,st)+b.dataset.ins+ta.value.slice(en);ta.focus();ta.selectionStart=ta.selectionEnd=st+b.dataset.ins.length;ta.dispatchEvent(new Event("input"));});
 $("waResetOne").onclick=()=>{if(waView==="list")return;const k=waView;$(WA_VIEWS[k].ta).value=WA_DEFAULTS[k];if(k==="multi"&&$("waMultiDays"))$("waMultiDays").value=String(WA_DEFAULTS.days);$(WA_VIEWS[k].ta).dispatchEvent(new Event("input"));toast("Default restored — tap Save to keep it");};
 document.querySelectorAll("[data-sopen]").forEach(b=>b.onclick=()=>setSettingsView(b.dataset.sopen));
-document.querySelectorAll("[data-sgo]").forEach(b=>b.onclick=()=>{showLogRecords();document.querySelector('.tab[data-tab="reports"]').click();setTimeout(()=>{const t=$(b.dataset.sgo);if(t)t.scrollIntoView({block:"start"});},80);});
+document.querySelectorAll("[data-sgo]").forEach(b=>b.onclick=()=>{showLogRecords();document.querySelector('.tab[data-tab="reports"]').click();setTimeout(()=>{openDataCard(b.dataset.sgo,true);},80);});
 const appVer=()=>((($("appVersion")||{}).textContent||"").match(/v\d+\.\d+/)||[""])[0];
 $("settingsUpdate").onclick=async()=>{const t=$("smUpdate");t.textContent="Checking…";try{const reg=await navigator.serviceWorker.getRegistration();if(!reg)throw Error("no sw");await reg.update();await new Promise(r=>setTimeout(r,3000));t.textContent=reg.installing||reg.waiting?"Update found — it will install now. Tap Reload when it appears.":"You have the latest version ("+appVer()+")";}catch{t.textContent="Could not check — are you online?";}};
 $("settingsDetailBack").onclick=()=>{if(curSetView==="msgs"&&waView!=="list"){setWaView("list");}else{setSettingsView("menu");}$("settingsDetailBack").blur();};
@@ -1061,6 +1063,12 @@ async function askPersist(){try{if(!navigator.storage?.persist)return;let ok=awa
 let shownDay=dateISO(new Date());function checkDay(){const t=dateISO(new Date());if(t===shownDay){renderNext();renderPrayerLine(t);bindRecords();return;}if(cal.day===shownDay){const n=new Date();cal.y=n.getFullYear();cal.m=n.getMonth();cal.day=t;}shownDay=t;render();}
 
 // v1.161 — swipe a Today row left to reveal WhatsApp / Paid / Done (touch only; keyboard focus reveals them too).
+
+// v1.167 — Reports → Data: one list; each row opens its card (accordion). The cards and their buttons are unchanged.
+function openDataCard(id,scroll){document.querySelectorAll("[data-dm]").forEach(c=>c.classList.toggle("dm-off",c.dataset.dm!==id));
+ document.querySelectorAll("[data-dopen]").forEach(b=>b.setAttribute("aria-expanded",String(b.dataset.dopen===id)));if(scroll){const t=$(id);if(t)t.scrollIntoView({block:"start",behavior:"smooth"});}}
+function renderDataMenu(){let last=0;try{last=Number(localStorage.getItem(BACKUP_KEY))||0;}catch{}const d=last?Math.floor((Date.now()-last)/864e5):null,set=(id,t)=>{const e=$(id);if(e)e.textContent=t;};set("dmBackup",d===null?"No backup yet":d===0?"Last backup: today":`Last backup: ${d} day${d>1?"s":""} ago`);set("dmCloud",cloudCfg()?"Connected":"Not connected");}
+document.querySelectorAll("[data-dopen]").forEach(b=>b.onclick=()=>{const open=b.getAttribute("aria-expanded")==="true";if(open){document.querySelectorAll("[data-dm]").forEach(c=>c.classList.add("dm-off"));document.querySelectorAll("[data-dopen]").forEach(x=>x.setAttribute("aria-expanded","false"));}else openDataCard(b.dataset.dopen,true);});
 const swipeList=(list,rowCls)=>{if(!list)return;let row=null,fg=null,w=0,x0=0,y0=0,dx=0,drag=false,lock=null;
  const close=(except)=>list.querySelectorAll("."+rowCls+".open").forEach(r=>{if(r!==except){r.classList.remove("open");const f=r.querySelector(".tfg");if(f)f.style.transform="";}});
  list.addEventListener("touchstart",e=>{const r=e.target.closest("."+rowCls+".hasact");if(!r){close();return;}row=r;fg=r.querySelector(".tfg");w=r.querySelector(".tact").offsetWidth;const t=e.touches[0];x0=t.clientX;y0=t.clientY;dx=0;drag=false;lock=null;close(r);fg.style.transition="none";},{passive:true});
