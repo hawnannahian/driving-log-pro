@@ -5,6 +5,12 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 
 ## Recent handover entries
 
+### 2026-11-21 — v1.141–v1.156 (Claude), all merged and deployed
+- Overview: stats bar removed, compact iOS-style progress/next-lesson/prayer cards, softer styling (v1.141–v1.143). Settings gear toggles and returns to the previous screen; lock-screen notification card and header bell hidden (push backend not deployed); lighter load (v1.144). Timer: no pile-up of voices when reopened late (v1.145), End-lesson dialog wording (v1.146), media-session metadata removed (v1.147). **v1.148 fixes a Reload hang I caused in v1.144** (service-worker activate must never wait for audio). Editable "lesson completed" WhatsApp template `{{hours}}` (v1.149). Dashboard: "Cash after expenses" = Collected − Expenses plus clearer labels; Net profit definition unchanged (v1.150). Today list: tappable "›" button, layouts for 430 px iPhones (v1.151–v1.152); Next Day marker (v1.153). Student profile: empty-Lessons explanation (v1.154), then 4 tabs (Attendance removed; Lessons lists all completed lessons) (v1.155). v1.156 = ChatGPT's Log polish (PR #260) plus Claude review fixes (16 px controls, 11 px labels, arrow, cache/version bump).
+- Rules applied: no accounting/data/storage change except additive display fields; each release bumped footer + cache + PROJECT_STATE. PR #13 was closed by the owner (already fixed on main). Not tested: real iPhone/WebKit.
+- For ChatGPT: when you change app assets, bump `sw.js` cache, the footer/Settings version and PROJECT_STATE (version-parity test enforces it).
+
+
 ### 2026-11-19 — v1.138–v1.140 (Claude)
 - v1.138 lesson progress road (PR #241), v1.139 next-prayer-only card (PR #242), v1.140 chained hourly timer sessions for 2h/3h bookings (see PROJECT_STATE.md). Booking stays one entry; additive `sessions[]`; accounting/hours unchanged. Tests: 161 node tests; Chromium fake clock for 1h/2h/3h, reopen catch-up, prayer before Fajr/midday/after Isha at 390 and 320. Not tested: real iPhone, background/locked audio, deployment of v1.140.
 
@@ -247,7 +253,7 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 
 
 ## Latest verified project state
-- **main `230e010`** (merge of PR #243): footer **v1.140**, Service Worker cache **`nahians-schedule-cache-v204`**. GitHub Pages "pages build and deployment" completed successfully for `230e010` (checked 2026-11-19 via the Actions API). Releases since v1.137: v1.138 lesson progress road (#241), v1.139 next-prayer-only card (#242), v1.140 chained hourly timer sessions for 2h/3h bookings (#243). Real iPhone not verified; Web Push backend still not deployed.
+- **main `68b5dab`** (merge of PR #260): footer **v1.156**, Service Worker cache **`nahians-schedule-cache-v220`**. GitHub Pages "pages build and deployment" completed successfully for `68b5dab` (checked 2026-11-21 via the Actions API). No open PRs. Real iPhone not verified; Web Push backend still not deployed.
 - Latest releases: v1.110 owner's recorded timer voices (PR #192), v1.111 touch targets (PR #193), v1.112 minimum text size (PR #197), v1.113 design tokens (PR #199), v1.114 tab-bar aria-current (PR #201); PR #194 is tooling/docs only.
 - Other recent releases: v1.68 daily cloud backup, v1.70 realistic car header image, v1.71-v1.74 (ChatGPT) Students/Forms/bottom-nav/profile UX.
 - **Open PRs:** #13 only (verified 2026-11-17; #73 was closed as superseded the same day). Older "DRAFT" labels on earlier ChatGPT entries below are historical wording; check GitHub for the real state.
