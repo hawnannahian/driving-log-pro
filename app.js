@@ -1008,7 +1008,7 @@ function renderSettingsMenu(){const set=(id,t)=>{const e=$(id);if(e)e.textConten
  const p=prayerCfg();set("smPrayer",(p.manual&&p.manual.on?"Your own times":"Mosque timetable")+" · "+(p.on?`${p.minutes} min booking block`:"booking protection off"));
  set("smVoice",voiceOn()?"On":"Off");
  let last=0;try{last=Number(localStorage.getItem(BACKUP_KEY))||0;}catch{}const d=last?Math.floor((Date.now()-last)/864e5):null;set("smBackup",d===null?"No backup yet":d===0?"Last backup: today":`Last backup: ${d} day${d>1?"s":""} ago`);
- set("smCloud",cloudCfg()?"Connected":"Not connected");}
+ set("smCloud",cloudCfg()?"Connected":"Not connected");set("smUpdate","Version "+appVer());}
 function setSettingsView(v){const panel=$("logSettingsPanel"),menu=v==="menu";$("settingsMenu").classList.toggle("sview-off",!menu);
  panel.querySelectorAll("[data-spane]").forEach(p=>p.classList.toggle("sview-off",p.dataset.spane!==v));
  $("settingsDetailBack").classList.toggle("hidden",menu);$("logSettingsBack").classList.toggle("hidden",!menu);
@@ -1016,6 +1016,8 @@ function setSettingsView(v){const panel=$("logSettingsPanel"),menu=v==="menu";$(
  if(menu)renderSettingsMenu();else{if(v==="msgs")$("waTemplateSettings").open=true;panel.scrollIntoView({block:"start"});}}
 document.querySelectorAll("[data-sopen]").forEach(b=>b.onclick=()=>setSettingsView(b.dataset.sopen));
 document.querySelectorAll("[data-sgo]").forEach(b=>b.onclick=()=>{showLogRecords();document.querySelector('.tab[data-tab="reports"]').click();setTimeout(()=>{const t=$(b.dataset.sgo);if(t)t.scrollIntoView({block:"start"});},80);});
+const appVer=()=>((($("appVersion")||{}).textContent||"").match(/v\d+\.\d+/)||[""])[0];
+$("settingsUpdate").onclick=async()=>{const t=$("smUpdate");t.textContent="Checking…";try{const reg=await navigator.serviceWorker.getRegistration();if(!reg)throw Error("no sw");await reg.update();await new Promise(r=>setTimeout(r,3000));t.textContent=reg.installing||reg.waiting?"Update found — it will install now. Tap Reload when it appears.":"You have the latest version ("+appVer()+")";}catch{t.textContent="Could not check — are you online?";}};
 $("settingsDetailBack").onclick=()=>{setSettingsView("menu");$("settingsDetailBack").blur();};
 logMenuToggle.onclick=showLogSettings;
 let settingsFrom=null;
