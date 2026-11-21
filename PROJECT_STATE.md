@@ -1,3 +1,7 @@
+## v1.159 — Settings polish: no repeated headings, "Check for updates" (2026-11-21)
+- On the Working hours, Prayer times and WhatsApp messages screens the card's own heading (already shown in the page title) is hidden. New **About → Check for updates** row on the Settings menu: asks the service worker to look for a newer version, then reports "latest version (vX)" or "update found"; the existing "new version ready → Reload" banner appears when an update installs. Display/update-check only; no data change.
+- Files: `index.html` (v1.159), `app.js`, `styles.css`, `sw.js` (cache v223), this file.
+
 ## v1.158 — Settings as an iOS-style list (2026-11-21; owner approved the sample)
 - Settings now opens as a grouped menu: **Lessons & booking** (Working hours, Prayer times), **Sound & messages** (Voice announcements, WhatsApp messages), **Data** (Backup & restore, Cloud sync — shortcuts that close Settings and scroll to the existing cards in Reports). Each row has a one-line summary and opens its own screen with the existing form (unchanged IDs/handlers) and a "← Settings" back button; version and the saved-with-backup note stay on the menu. The prayer card's Edit button opens the Prayer screen directly. The hidden Lock-screen Notifications card stays hidden.
 - Display only: no setting, storage, backup or sync behaviour changed. Added ids `backupCard`, `cloudCard`, `settingsMenu`, `settingsTitle`, `settingsSub`, `settingsDetailBack`; `data-spane` marks each screen.

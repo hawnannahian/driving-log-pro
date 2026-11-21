@@ -3988,3 +3988,9 @@ body.timing #overview #nextCard{display:none}
 #logSettingsPanel .set-txt b{display:block;font-size:16px;font-weight:650}
 #logSettingsPanel .set-txt small{display:block;margin-top:1px;font-size:13px;color:#6b778c;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #logSettingsPanel .set-chev{flex:none;color:#b3bccb;font-size:24px;line-height:1}
+
+/* v1.159 — Settings screens: no repeated headings; "Check for updates" row */
+#logSettingsPanel .set-ico-v{background:#7c3aed}
+#logSettingsPanel [data-spane="work"] .settings-card-head,#logSettingsPanel [data-spane="prayer"] .settings-card-head{display:none}
+#logSettingsPanel #waTemplateSettings>summary{display:none}
+#logSettingsPanel .set-txt small{white-space:normal}
