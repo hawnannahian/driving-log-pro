@@ -3843,3 +3843,7 @@ body.timing #overview #nextCard{display:none}
 #overview #todayList .todayrow>.tstat.unpaid{font-size:0;gap:0;padding:6px 8px}
 @media(max-width:360px){#overview #todayList .todayrow>.tstat.unpaid{display:none}#overview #todayList .tmain b{font-size:15px}}
 @media(max-width:440px){#overview #todayList .tnum{display:none}#overview #todayList .tmain{flex:1 0 auto}}
+
+/* v1.153 — newer Safari showed the native disclosure marker as a stray "›" at the left of the Next Day card; the card draws its own arrow on the right */
+#overview .nextday summary{list-style-type:none}
+#overview .nextday summary::marker{content:"";font-size:0;color:transparent}
