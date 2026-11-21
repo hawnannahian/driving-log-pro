@@ -3942,14 +3942,14 @@ body.timing #overview #nextCard{display:none}
   #log .log-action-row{margin-bottom:12px}
   #log .log-add{min-height:43px;border-radius:13px}
   #log .log-toolbar{gap:8px;margin-bottom:15px}
-  #log .log-toolbar input,#log .log-toolbar select{min-height:44px;border-radius:13px;font-size:12px}
+  #log .log-toolbar input,#log .log-toolbar select{min-height:44px;border-radius:13px;font-size:16px}
   #log .log-summary{border-radius:17px;margin-bottom:16px}
   #log .log-summary-title{padding:14px 14px 10px;font-size:13px}
   #log .log-summary-main{padding:0 7px 9px}
   #log .log-kpi{min-height:78px;padding:10px 7px;gap:6px}
   #log .log-kpi-icon{width:32px;height:32px;border-radius:11px;font-size:18px}
   #log .log-kpi b{font-size:16px}
-  #log .log-kpi small{font-size:10px;text-align:center}
+  #log .log-kpi small{font-size:11px;text-align:center}
   #log .log-payment-details summary{padding:11px 13px;font-size:11px}
   #log .log-payment-summary{padding:10px 12px 13px}
   #log .log-list-heading{margin:17px 1px 9px}
@@ -3960,10 +3960,17 @@ body.timing #overview #nextCard{display:none}
 @media(max-width:380px){
   #log .log-kpi{padding:9px 4px}
   #log .log-kpi b{font-size:14px}
-  #log .log-kpi small{font-size:9px}
+  #log .log-kpi small{font-size:11px}
   #log .log-payment-summary{gap:6px}
   #log .log-payment-summary b{font-size:11px}
 }
 @media(prefers-reduced-motion:reduce){
   #log .log-add,#log .record{transition:none}
 }
+
+/* v1.156 review fixes: the "Sort & more" / "Payment & expense totals" summaries draw no native marker (it floated above the text in newer browsers) */
+#log .log-extra-filter summary,#log .log-payment-details summary{list-style-type:none}
+#log .log-extra-filter summary::marker,#log .log-payment-details summary::marker{content:"";font-size:0}
+#log .log-extra-filter summary{display:flex;align-items:center;justify-content:space-between;gap:8px}
+#log .log-extra-filter summary::after{position:static;margin-top:-5px}
+@media(max-width:380px){#log .log-toolbar #logFilter{grid-column:1/-1}}
