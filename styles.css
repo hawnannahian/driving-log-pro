@@ -4173,3 +4173,17 @@ body{--ios-bg:#f2f2f7}
 #calendar .remindbox>b,#calendar .remindbox .remindtitle{color:#1c1c1e}
 #calendar .cal-free-slots .cal-slot{border:0;border-radius:12px;background:#f2f2f7}
 #calendar .callegend{margin:6px 4px 0;font-size:12px}
+/* ===== v1.166 — Reports and Islamic tabs, iOS style ===== */
+#reports.panel,#islamic.panel{padding:0;border:0;background:transparent;box-shadow:none}
+#reports .rep-head{margin:0 0 8px;padding:2px 2px 0}
+#reports .rep-head h2{margin:0;color:#1c1c1e;font-size:34px;line-height:1.1;letter-spacing:.3px;font-weight:800}
+#reports .toolbar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 10px}
+#reports .toolbar select{display:block;width:100%;min-width:0;min-height:44px;margin:0;padding:8px 12px;border:0;border-radius:10px;background-color:#e3e3e8;color:#1c1c1e;font-size:16px;font-weight:600}
+#reports .dashactions{display:flex;gap:8px;margin:0 0 12px}
+#reports .dashactions .chipbtn{flex:1;min-height:40px;padding:6px 4px;border:0;border-radius:10px;background:#fff;color:#007aff;font-size:14px;font-weight:600;box-shadow:0 1px 2px #1018280a}
+#reports .dashmini .report,#reports .chartbox,#reports .dashcard,#reports .data-card{border:0;border-radius:16px;background:#fff;box-shadow:0 1px 2px #1018280a}
+#islamic .isbanner{margin:0 0 10px;border-radius:18px;overflow:hidden}
+#islamic .isbanner svg{max-height:120px}
+#islamic .isbanner h2{font-size:26px}
+#islamic .isseg{padding:3px;border:0;border-radius:10px;background:#e3e3e8;box-shadow:none}
+#islamic .isseg button{min-height:36px;border-radius:8px;font-size:15px;font-weight:600}
