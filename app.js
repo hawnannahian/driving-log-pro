@@ -999,12 +999,29 @@ function switchTab(id){if(document.querySelector("dialog[open]"))return false;se
 document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>b.closest("dialog").close());
 ["pOn","pMinutes","p_jumua","pLocation","pMethod","pManualOn","pmFajr","pmDhuhr","pmAsr","pmMaghrib","pmIsha"].forEach(id=>$(id).addEventListener("change",savePrayer));
 ["wStart","wEnd"].forEach(id=>$(id).addEventListener("change",saveWork));
-const logMenuToggle=$("logMenuToggle"),showLogSettings=()=>{$("logRecordsPanel").classList.add("hidden");$("logSettingsPanel").classList.remove("hidden");renderPrayerPreview();$("logSettingsBack").focus();},showLogRecords=()=>{$("logSettingsPanel").classList.add("hidden");$("logRecordsPanel").classList.remove("hidden");};
+const logMenuToggle=$("logMenuToggle"),showLogSettings=()=>{$("logRecordsPanel").classList.add("hidden");$("logSettingsPanel").classList.remove("hidden");renderPrayerPreview();setSettingsView("menu");$("logSettingsBack").focus();},showLogRecords=()=>{$("logSettingsPanel").classList.add("hidden");$("logRecordsPanel").classList.remove("hidden");};
+// v1.158 — Settings as an iOS-style list: a menu of rows, each opening its own screen (the existing forms, unchanged), with a back button. Display only.
+const SET_TITLES={work:["Working hours","Set the hours when students can book lessons."],prayer:["Prayer times","Booking protection and prayer times."],voice:["Voice announcements","Your recorded voice at lesson start, 5 minutes before the end and when it finishes."],msgs:["WhatsApp messages","Edit your lesson, payment and completion messages."]};
+const time12=t=>{const m=/^(\d{1,2}):(\d{2})/.exec(t||"");if(!m)return"–";const h=Number(m[1]);return(h%12||12)+":"+m[2]+(h<12?" AM":" PM");};
+function renderSettingsMenu(){const set=(id,t)=>{const e=$(id);if(e)e.textContent=t;};
+ set("smWork",`Students can book ${time12($("wStart").value)} – ${time12($("wEnd").value)}`);
+ const p=prayerCfg();set("smPrayer",(p.manual&&p.manual.on?"Your own times":"Mosque timetable")+" · "+(p.on?`${p.minutes} min booking block`:"booking protection off"));
+ set("smVoice",voiceOn()?"On":"Off");
+ let last=0;try{last=Number(localStorage.getItem(BACKUP_KEY))||0;}catch{}const d=last?Math.floor((Date.now()-last)/864e5):null;set("smBackup",d===null?"No backup yet":d===0?"Last backup: today":`Last backup: ${d} day${d>1?"s":""} ago`);
+ set("smCloud",cloudCfg()?"Connected":"Not connected");}
+function setSettingsView(v){const panel=$("logSettingsPanel"),menu=v==="menu";$("settingsMenu").classList.toggle("sview-off",!menu);
+ panel.querySelectorAll("[data-spane]").forEach(p=>p.classList.toggle("sview-off",p.dataset.spane!==v));
+ $("settingsDetailBack").classList.toggle("hidden",menu);$("logSettingsBack").classList.toggle("hidden",!menu);
+ $("settingsTitle").textContent=menu?"Settings":SET_TITLES[v][0];$("settingsSub").textContent=menu?"Manage lesson announcements, booking preferences and messages.":SET_TITLES[v][1];
+ if(menu)renderSettingsMenu();else{if(v==="msgs")$("waTemplateSettings").open=true;panel.scrollIntoView({block:"start"});}}
+document.querySelectorAll("[data-sopen]").forEach(b=>b.onclick=()=>setSettingsView(b.dataset.sopen));
+document.querySelectorAll("[data-sgo]").forEach(b=>b.onclick=()=>{showLogRecords();document.querySelector('.tab[data-tab="reports"]').click();setTimeout(()=>{const t=$(b.dataset.sgo);if(t)t.scrollIntoView({block:"start"});},80);});
+$("settingsDetailBack").onclick=()=>{setSettingsView("menu");$("settingsDetailBack").blur();};
 logMenuToggle.onclick=showLogSettings;
 let settingsFrom=null;
 const settingsOpen=()=>document.querySelector(".tab.active")?.dataset.tab==="log"&&!$("logSettingsPanel").classList.contains("hidden");
 // The header gear toggles: the second tap closes Settings and returns to the screen it was opened from.
-const openSettings=()=>{if(settingsOpen()){showLogRecords();const back=settingsFrom&&settingsFrom!=="log"?settingsFrom:null;settingsFrom=null;if(back)document.querySelector(`.tab[data-tab="${back}"]`).click();return;}settingsFrom=document.querySelector(".tab.active")?.dataset.tab||null;document.querySelector('.tab[data-tab="log"]').click();showLogSettings();};$("hdrSettings").onclick=openSettings;$("hdrBell").onclick=()=>{openSettings();$("pushBox")?.scrollIntoView({block:"center"});};$("todayViewAll").onclick=()=>{document.querySelector('.tab[data-tab="calendar"]').click();setCalView("day");};$("prayerEdit").onclick=()=>{document.querySelector('.tab[data-tab="log"]').click();showLogSettings();$("pManualOn").scrollIntoView({block:"center"});};
+const openSettings=()=>{if(settingsOpen()){showLogRecords();const back=settingsFrom&&settingsFrom!=="log"?settingsFrom:null;settingsFrom=null;if(back)document.querySelector(`.tab[data-tab="${back}"]`).click();return;}settingsFrom=document.querySelector(".tab.active")?.dataset.tab||null;document.querySelector('.tab[data-tab="log"]').click();showLogSettings();};$("hdrSettings").onclick=openSettings;$("hdrBell").onclick=()=>{openSettings();$("pushBox")?.scrollIntoView({block:"center"});};$("todayViewAll").onclick=()=>{document.querySelector('.tab[data-tab="calendar"]').click();setCalView("day");};$("prayerEdit").onclick=()=>{document.querySelector('.tab[data-tab="log"]').click();showLogSettings();setSettingsView("prayer");$("pManualOn").scrollIntoView({block:"center"});};
 $("logSettingsBack").onclick=()=>{showLogRecords();logMenuToggle.focus();};
 initWaTemplateSettings();$("addRecordBtn").onclick=newExpense;$("overviewAddLesson").onclick=()=>newRecord();$("calAddBtn").onclick=addLessonOnSelectedDay;$("calPrev").onclick=()=>calMove(-1);$("calNext").onclick=()=>calMove(1);document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>setCalView(b.dataset.view));$("addStudentBtn").onclick=newStudent;$("fType").onchange=toggleLessonFields;
 ["logFilter","logSort","studentSearch","studentFilter","studentSort","period","periodValue"].forEach(id=>$(id).addEventListener("input",render));
@@ -1105,7 +1122,7 @@ function renderPrayerCard(){const box=$("prayerCard");if(!box)return;const now=n
  box.innerHTML=`<div class="pc-top"><small>${OVI.mosque}<span>Next Prayer</span></small><button type="button" class="pc-edit" id="prayerCardEdit">Edit</button></div>
  <div class="pc-hero"><b class="pc-name">${esc(nextName)}${isTomorrow?" <em>tomorrow</em>":""}</b><b class="pc-time">${esc(nextAt)}</b></div>
  <p class="pc-left">Time remaining: <b>${prayerCountdownText(left)}</b></p>`;
- const ed=$("prayerCardEdit");if(ed)ed.onclick=()=>{document.querySelector('.tab[data-tab="log"]').click();showLogSettings();$("pManualOn").scrollIntoView({block:"center"});};}
+ const ed=$("prayerCardEdit");if(ed)ed.onclick=()=>{document.querySelector('.tab[data-tab="log"]').click();showLogSettings();setSettingsView("prayer");$("pManualOn").scrollIntoView({block:"center"});};}
 setInterval(()=>{if(document.visibilityState==="visible"&&$("overview")&&!$("overview").classList.contains("hidden"))renderPrayerCard();},15000);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"){try{renderPrayerCard();}catch{}}});
 
 
