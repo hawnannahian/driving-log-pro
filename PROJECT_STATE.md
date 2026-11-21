@@ -1,3 +1,7 @@
+## v1.154 — Student profile "Lessons" tab no longer says "No lessons yet" when lessons are in the course (2026-11-21; owner screenshot: 7 completed lessons but "No lessons yet.")
+- The Lessons tab lists upcoming bookings and completed *individual* lessons only; completed lessons that belong to a course are listed under Courses. For a student whose lessons are all course lessons the tab therefore said "No lessons yet." although the header showed 7 completed. It now says "No individual lessons. The N completed lessons are part of the course." with an "Open Courses" button. Nothing is counted differently; no data change.
+- Files: `app.js`, `index.html` (v1.154), `sw.js` (cache v218), this file.
+
 ## v1.153 — Next Day card: stray "›" at the left (2026-11-21; owner screenshot)
 - The screenshot showed a "›" before the calendar icon of the Next Day card while the card's own arrow was missing at the right: the native `<details>` marker rendered as a flex item in the iPhone's Safari. Added `summary::marker{content:""}` and `list-style-type:none` (the existing hide rules only covered the older `-webkit-details-marker`). **Not reproduced here** (no WebKit in this environment; Chromium shows no stray marker) — to be confirmed on the owner's iPhone.
 - Files: `styles.css`, `index.html` (v1.153), `sw.js` (cache v217), this file.
