@@ -1,3 +1,8 @@
+## v1.176 — Timer: a missed "5 minutes left" voice still plays when you reopen the app before the lesson ends (2026-11-22; owner: no voice at 50 minutes)
+- If the phone was locked or the app in the background at the 50th minute (iOS suspends it), the warning could not play then, and v1.145 dropped it when the app was reopened more than 20 seconds late. Now the missed "5 minutes left" voice plays once when you return, as long as the lesson is still running (before minute 55). After minute 55 the lesson still ends silently (no pile-up of voices). Timing itself is unchanged (it counts real elapsed time, so a late start does not matter).
+- Unchanged limit: nothing can sound while the app is suspended; keep the app open and the screen on during the lesson.
+- Files: `app.js`, `index.html` (v1.176), `sw.js` (cache v240), `tests/timer-voice.test.js`, this file.
+
 ## v1.175 — Fix: lesson sheet said "Save fuel record" (2026-11-22; owner screenshot)
 - v1.174 changed the Save button to "Save fuel record" on the Fuel sheet but did not restore it, so a lesson opened afterwards still showed it. The label is now restored to "Save record" whenever the sheet is not a Fuel record. Label only; the button's action is unchanged.
 - Files: `app.js`, `index.html` (v1.175), `sw.js` (cache v239), this file.
