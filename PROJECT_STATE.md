@@ -1,3 +1,8 @@
+## v1.179 — Calendar 7-day strip counts lesson hours (2026-11-22; found while checking v1.177/v1.178 for missed places)
+- The number under each date in the Calendar's 7-day strip still counted bookings (it showed 6 while the day summary said 7). It now uses `unitsOf` (1 hour = 1 lesson) like the rest of the Calendar. Display only.
+- Known remaining place that still counts bookings (outside the agreed scope, awaiting the owner): the Log tab's "Lessons done today" tile; Reports and student profiles also count bookings by design.
+- Files: `app.js`, `index.html` (v1.179), `sw.js` (cache v243), this file.
+
 ## v1.178 — Overview "Next Day" count uses lesson hours too (2026-11-22; owner: tomorrow has 5 hours, the card said 4 lessons)
 - v1.177 counted a 2-hour booking as 2 lessons in the Calendar and Overview but missed the Next Day card. It now says "N lessons scheduled" with N = lesson hours (display only; the list below still shows bookings).
 - Files: `app.js`, `index.html` (v1.178), `sw.js` (cache v242), this file.
