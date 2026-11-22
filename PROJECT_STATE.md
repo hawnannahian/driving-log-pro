@@ -1,3 +1,7 @@
+## v1.173 — Odometer typo warning (2026-11-22; owner: "Yes do the warning")
+- Cause of the empty Reports distance: an odometer reading with an extra digit (2 421 870 instead of ≈242 187) made the later reading look lower. Now, when saving a **Fuel** record with a reading, the app compares it with the neighbouring readings and asks once ("Is X km correct? Save anyway?") if it is lower than the previous reading, far above it for the days between (2,000 km + 150 km per day), or higher than a later reading. Saving anyway is still possible; nothing is changed or deleted.
+- Files: `app.js` (`odoWarning`), `index.html` (v1.173), `sw.js` (cache v237), `tests/odometer-warning.test.js` (new), this file.
+
 ## v1.172 — Odometer: show why the distance is empty and list the saved readings (2026-11-22; owner: "I did enter odometer values")
 - The Reports distance/fuel-per-km tiles are computed (unchanged) from the odometer values of the records **inside the chosen period** (needs ≥2 readings, increasing). Because the owner's real data cannot be read from here, two diagnostics were added: a small hint under the Distance tile ("1 reading in this period · needs 2" / "Readings must increase"), and Reports → Data → **Odometer readings**, listing every saved reading (date, type, fuel €, km, change from the previous reading) so the owner can see exactly what is stored. No calculation or data change.
 - Not changed (needs the owner's approval as a report definition): using the last reading before the period as the starting point.
