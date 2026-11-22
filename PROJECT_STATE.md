@@ -1,3 +1,7 @@
+## v1.178 — Overview "Next Day" count uses lesson hours too (2026-11-22; owner: tomorrow has 5 hours, the card said 4 lessons)
+- v1.177 counted a 2-hour booking as 2 lessons in the Calendar and Overview but missed the Next Day card. It now says "N lessons scheduled" with N = lesson hours (display only; the list below still shows bookings).
+- Files: `app.js`, `index.html` (v1.178), `sw.js` (cache v242), this file.
+
 ## v1.177 — A 2-hour booking counts as 2 lessons in the Calendar and Overview day counts (2026-11-22; owner: did 7 lessons, the app said 6; chose "Calendar + Overview")
 - The Calendar summaries (day / week / month: "7 lessons · 7 h · €…"), the number under each date, the "N lessons" count of the day list and the Overview "Today · N lessons" now count **1 hour = 1 lesson** (`lessonUnits` = booking hours rounded, minimum 1). The Overview progress dots show one dot per lesson hour ("5 of 7 lessons done"; a 2-hour booking has two dots in the same state). The Today list itself still lists bookings.
 - **Not changed:** Reports "Completed lessons", student profile counts, hours, revenue, payments and every accounting calculation (they still count bookings / hours as before).
