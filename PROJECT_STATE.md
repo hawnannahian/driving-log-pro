@@ -1,3 +1,7 @@
+## v1.175 — Fix: lesson sheet said "Save fuel record" (2026-11-22; owner screenshot)
+- v1.174 changed the Save button to "Save fuel record" on the Fuel sheet but did not restore it, so a lesson opened afterwards still showed it. The label is now restored to "Save record" whenever the sheet is not a Fuel record. Label only; the button's action is unchanged.
+- Files: `app.js`, `index.html` (v1.175), `sw.js` (cache v239), this file.
+
 ## v1.174 — Fuel sheet: live odometer helper (2026-11-22; owner approved the suggested design: "Do it")
 - On the "New expense" sheet with **Fuel**: under the Odometer field a panel shows the **last reading** (value and date), **Since last fill +N km** and **Cost per km** (amount ÷ distance), updating as you type, and either "✓ Looks right" or an orange warning ("That is N km more than the last reading") with a tappable **Use 242 187 km** suggestion (the typed number with one digit removed that fits the plausible range). The Save button reads "Save fuel record" for Fuel. The pre-save confirmation from v1.173 stays.
 - Display/validation helper only; no data or calculation change.

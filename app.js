@@ -819,7 +819,7 @@ function renderExpenseHistory(){const box=$("expenseHistory");if(!box)return;con
 $("expenseHistoryList").addEventListener("click",ev=>{const b=ev.target.closest("[data-record]");if(!b)return;const id=b.dataset.record;$("recordDialog").close();openRecord(id);});
 $("expenseHistoryMore").addEventListener("click",()=>{expenseHistoryLimit+=10;renderExpenseHistory();});
 // v1.174 — Fuel sheet: show the previous odometer reading, the distance since it and the cost per km while typing, and catch a typo (with a "Did you mean …?" suggestion) before saving.
-function renderOdoLive(){const box=$("odoLive");if(!box)return;const fuel=$("fType").value==="Fuel"&&$("recordDialog").dataset.mode==="expense";box.classList.toggle("hidden",!fuel);const sv=$("saveRecord");if(sv&&$("fType").value!=="Lesson"&&!sv.dataset.keep)sv.textContent=fuel?"Save fuel record":"Save record";if(!fuel)return;
+function renderOdoLive(){const box=$("odoLive");if(!box)return;const fuel=$("fType").value==="Fuel"&&$("recordDialog").dataset.mode==="expense";box.classList.toggle("hidden",!fuel);const sv=$("saveRecord");if(sv){if(fuel)sv.textContent="Save fuel record";else if(sv.textContent==="Save fuel record")sv.textContent="Save record";}if(!fuel)return;
  const f=n=>Math.round(n).toLocaleString("pt-PT")+" km",km=num($("fKm").value),date=$("fDate").value,cost=num($("fCost").value),id=$("recordId").value,r=state.entries.filter(x=>x.id!==id&&Number(x.km)>0).sort((a,b)=>(a.date||"").localeCompare(b.date||"")),prev=[...r].reverse().find(x=>x.date<=date);
  $("odoLast").textContent=prev?`Last reading: ${f(prev.km)} · ${fmtDate(prev.date)}`:"No earlier reading saved yet.";
  const diff=prev&&km>0?km-Number(prev.km):null;
