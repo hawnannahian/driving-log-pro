@@ -1,3 +1,8 @@
+## v1.177 — A 2-hour booking counts as 2 lessons in the Calendar and Overview day counts (2026-11-22; owner: did 7 lessons, the app said 6; chose "Calendar + Overview")
+- The Calendar summaries (day / week / month: "7 lessons · 7 h · €…"), the number under each date, the "N lessons" count of the day list and the Overview "Today · N lessons" now count **1 hour = 1 lesson** (`lessonUnits` = booking hours rounded, minimum 1). The Overview progress dots show one dot per lesson hour ("5 of 7 lessons done"; a 2-hour booking has two dots in the same state). The Today list itself still lists bookings.
+- **Not changed:** Reports "Completed lessons", student profile counts, hours, revenue, payments and every accounting calculation (they still count bookings / hours as before).
+- Files: `app.js`, `index.html` (v1.177), `sw.js` (cache v241), this file.
+
 ## v1.176 — Timer: a missed "5 minutes left" voice still plays when you reopen the app before the lesson ends (2026-11-22; owner: no voice at 50 minutes)
 - If the phone was locked or the app in the background at the 50th minute (iOS suspends it), the warning could not play then, and v1.145 dropped it when the app was reopened more than 20 seconds late. Now the missed "5 minutes left" voice plays once when you return, as long as the lesson is still running (before minute 55). After minute 55 the lesson still ends silently (no pile-up of voices). Timing itself is unchanged (it counts real elapsed time, so a late start does not matter).
 - Unchanged limit: nothing can sound while the app is suspended; keep the app open and the screen on during the lesson.
