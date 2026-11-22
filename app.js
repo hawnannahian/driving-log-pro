@@ -677,7 +677,7 @@ function calDayClass(iso,L){return (L.some(e=>isCourseLesson(e)||e.pkg)?" course
 // v1.107 — the strip shows today and the next 6 days while the selected day is inside that window (so tomorrow is always one tap away, also on Sundays); for any other day it shows that day's Monday–Sunday week.
 function calStripDays(sel,today){const t=new Date(today+"T12:00:00"),roll=[...Array(7)].map((_,i)=>dateISO(new Date(t.getFullYear(),t.getMonth(),t.getDate()+i)));return roll.includes(sel)?roll:weekDays(sel);}
 function renderCalStrip(days,today){days=calStripDays(cal.day,today);const box=$("calStrip");box.classList.toggle("hidden",cal.view!=="day");if(cal.view!=="day")return;
- box.innerHTML=days.map(iso=>{const L=lessonsOn(iso),n=L.length,d=new Date(iso+"T12:00:00"),hd=holidayOn(iso);
+ box.innerHTML=days.map(iso=>{const L=lessonsOn(iso),n=unitsOf(L),d=new Date(iso+"T12:00:00"),hd=holidayOn(iso);
   return `<button type="button" class="stripday${iso===cal.day?" selected":""}${iso===today?" today":""}${iso<today?" past":""}${calDayClass(iso,L)}" data-sday="${iso}" aria-label="${esc(dayName(iso))}: ${n} lessons${hd?", "+esc(hd):""}"><small>${d.toLocaleDateString("en-GB",{weekday:"short"}).toUpperCase()}</small><b>${d.getDate()}</b><span class="calcount">${n||""}</span></button>`;}).join("");
  box.querySelectorAll("[data-sday]").forEach(b=>b.onclick=()=>{cal.day=b.dataset.sday;const d=new Date(cal.day+"T12:00:00");cal.y=d.getFullYear();cal.m=d.getMonth();renderCalendar();bindRecords();});}
 function renderCalendar(){const today=dateISO(new Date()),v=cal.view,days=weekDays(cal.day),first=new Date(cal.y,cal.m,1);$("calendar").dataset.calview=v;renderCalStrip(days,today);
