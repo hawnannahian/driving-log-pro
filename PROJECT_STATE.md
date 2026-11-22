@@ -1,3 +1,7 @@
+## v1.171 — Reports: small tiles aligned (2026-11-22; owner screenshot of the three small tiles)
+- Course prepaid balance / Distance / Fuel cost per km had labels of different length (2 vs 1 lines), so their values sat at different heights. All three tiles now have the same height, a two-line label area and the value on the same baseline at the bottom. CSS only.
+- Files: `styles.css`, `index.html` (v1.171), `sw.js` (cache v235), this file.
+
 ## v1.170 — Smoother iOS-style swipe rows (2026-11-22; owner approved the interactive sample: "Do it in the app")
 - Swipe rows on **Overview (Today)** and **Students** now use pointer events with a custom physics: the action tray grows with the finger (buttons widen, icons scale, labels fade in), iOS-style rubber-band resistance past the edge, a spring settle (response ≈0.35 s), velocity flick to open/close, a soft shadow edge, press highlight, one open row at a time, and a light haptic "tick" via a hidden `input[switch]` where the browser allows it (iOS 18 Safari; not guaranteed). On the Today list a **long swipe runs "Lesson done"** after a 2-second **Undo** snackbar (it clicks the normal Done button, so completion logic is unchanged). Reduced-motion = no animation.
 - Button names: **Done → "Lesson done"**, **Paid → "Got paid"** (with icons); WhatsApp/Call unchanged. The same `data-done` / `data-pay` actions.
