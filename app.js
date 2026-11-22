@@ -755,7 +755,7 @@ function render(){recomputeAlloc();doneByName={};state.entries.forEach(e=>{if(is
  const logCollected=logCompleted.reduce((sum,e)=>sum+(lessonStatus(e)==="paid"?income(e):0),0);
  const logOutstanding=logCompleted.reduce((sum,e)=>sum+unpaidAmt(e),0);
  if($("logTodayDate"))$("logTodayDate").textContent=new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"});
- $("logRecordsToday").textContent=logCompleted.length;$("logExpensesToday").textContent=euro(totals(state.entries.filter(e=>e.date===dateISO(new Date()))).expenses);
+ $("logRecordsToday").textContent=unitsOf(logCompleted);$("logExpensesToday").textContent=euro(totals(state.entries.filter(e=>e.date===dateISO(new Date()))).expenses);
  $("logHoursToday").textContent=fmtH(logToday.reduce((sum,e)=>sum+hours(e),0))+" h";
  $("logRevenueToday").textContent=euro(logRevenue);
  $("logCollectedToday").textContent=euro(logCollected);
