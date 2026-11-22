@@ -1,3 +1,7 @@
+## v1.180 — Log "Lessons done today" counts lesson hours (2026-11-22; owner: "Yes do it for log")
+- The Log tab's "Lessons done today" tile now counts 1 hour = 1 lesson (`unitsOf`), like the Calendar and Overview. Reports and student profiles still count bookings. Display only.
+- Files: `app.js`, `index.html` (v1.180), `sw.js` (cache v244), this file.
+
 ## v1.179 — Calendar 7-day strip counts lesson hours (2026-11-22; found while checking v1.177/v1.178 for missed places)
 - The number under each date in the Calendar's 7-day strip still counted bookings (it showed 6 while the day summary said 7). It now uses `unitsOf` (1 hour = 1 lesson) like the rest of the Calendar. Display only.
 - Known remaining place that still counts bookings (outside the agreed scope, awaiting the owner): the Log tab's "Lessons done today" tile; Reports and student profiles also count bookings by design.
