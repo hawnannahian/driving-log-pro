@@ -1,3 +1,8 @@
+## v1.174 — Fuel sheet: live odometer helper (2026-11-22; owner approved the suggested design: "Do it")
+- On the "New expense" sheet with **Fuel**: under the Odometer field a panel shows the **last reading** (value and date), **Since last fill +N km** and **Cost per km** (amount ÷ distance), updating as you type, and either "✓ Looks right" or an orange warning ("That is N km more than the last reading") with a tappable **Use 242 187 km** suggestion (the typed number with one digit removed that fits the plausible range). The Save button reads "Save fuel record" for Fuel. The pre-save confirmation from v1.173 stays.
+- Display/validation helper only; no data or calculation change.
+- Files: `index.html` (v1.174), `app.js` (`renderOdoLive`), `styles.css`, `sw.js` (cache v238), this file.
+
 ## v1.173 — Odometer typo warning (2026-11-22; owner: "Yes do the warning")
 - Cause of the empty Reports distance: an odometer reading with an extra digit (2 421 870 instead of ≈242 187) made the later reading look lower. Now, when saving a **Fuel** record with a reading, the app compares it with the neighbouring readings and asks once ("Is X km correct? Save anyway?") if it is lower than the previous reading, far above it for the days between (2,000 km + 150 km per day), or higher than a later reading. Saving anyway is still possible; nothing is changed or deleted.
 - Files: `app.js` (`odoWarning`), `index.html` (v1.173), `sw.js` (cache v237), `tests/odometer-warning.test.js` (new), this file.

@@ -4307,3 +4307,19 @@ body{--ios-bg:#f2f2f7}
 #kmList .kmrow small{display:block;color:#6e6e73;font-size:12px}
 #kmList .kmval{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
 #kmList{display:block;width:100%}#kmList .kmrow{width:100%}
+
+/* ===== v1.174 — Fuel sheet: live odometer helper ===== */
+#recordDialog .odo-live{margin:2px 0 4px;padding:12px 14px;border-radius:14px;background:#f6f8ff;border:1px solid #e3e9f7}
+#recordDialog .odo-live.hidden{display:none}
+#recordDialog .odo-last{margin:0 0 6px;color:#6e6e73;font-size:13px;font-weight:600}
+#recordDialog .odo-calc{display:flex;flex-direction:column;gap:6px}
+#recordDialog .odo-calc:empty{display:none}
+#recordDialog .odo-calc div{display:flex;align-items:center;justify-content:space-between;font-size:15px}
+#recordDialog .odo-calc span{color:#6e6e73}
+#recordDialog .odo-calc b{color:#1c1c1e;font-variant-numeric:tabular-nums}
+#recordDialog .odo-status{margin:8px 0 0;font-size:14px;font-weight:700}
+#recordDialog .odo-status:empty{display:none}
+#recordDialog .odo-status.ok{color:#16a34a}
+#recordDialog .odo-status.warn{padding:9px 12px;border-radius:10px;background:#fff3e2;color:#b45309}
+#recordDialog .odo-fix{margin-top:8px;min-height:40px;padding:0 14px;border:0;border-radius:999px;background:#007aff;color:#fff;font:inherit;font-size:15px;font-weight:700;cursor:pointer}
+#recordDialog .odo-fix.hidden{display:none}
