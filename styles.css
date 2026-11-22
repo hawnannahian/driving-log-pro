@@ -4274,3 +4274,21 @@ body{--ios-bg:#f2f2f7}
 #reports .rep-due-wa{flex:none;display:grid;place-items:center;width:36px;height:36px;margin-right:12px;border-radius:50%;background:#22a559;color:#fff}
 #reports .rep-due-wa svg{width:20px;height:20px;fill:currentColor}
 #reports .rep-due-more{margin:0;padding:10px 16px;border-top:.5px solid #e5e5ea;color:#6e6e73;font-size:13px}
+
+/* ===== v1.170 — smoother iOS-style swipe rows ===== */
+#overview #todayList .tfg,#students #studentList .tfg{transition:none;touch-action:pan-y;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;will-change:transform}
+#overview #todayList .tfg.pressed,#students #studentList .tfg.pressed{background:#f2f2f7}
+#overview #todayList .tfg.lift,#students #studentList .tfg.lift{box-shadow:-8px 0 14px -8px #00000047}
+#overview #todayList .tact,#students #studentList .tact{width:0;overflow:hidden}
+#overview #todayList .tact>*,#students #studentList .tact>*,#overview #todayList .todayrow>.tact>.actbtn,#students #studentList .tact>.actbtn{flex:1 1 0;width:auto;min-width:0;overflow:hidden;display:grid;place-items:center;align-content:center;gap:3px;padding:0;font-size:12.5px}
+#overview #todayList .tact>* span,#students #studentList .tact>* span{white-space:nowrap;opacity:var(--lp,1)}
+#overview #todayList .tact>* svg,#students #studentList .tact>* svg{flex:none;width:22px;height:22px;transform:scale(var(--ip,1))}
+#overview #todayList .tact .tact-ico{fill:none;stroke:currentColor}
+#overview #todayList .tact .actbtn svg{fill:currentColor;stroke:none}
+.swipe-gone{display:none!important}
+.hap{position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none}
+.swipe-undo{position:fixed;left:50%;bottom:calc(88px + env(safe-area-inset-bottom,0px));z-index:60;display:flex;align-items:center;gap:16px;max-width:calc(100vw - 32px);padding:10px 8px 10px 18px;border-radius:999px;background:#14284b;color:#fff;font-size:15px;font-weight:600;box-shadow:0 8px 24px #14284b66;transform:translateX(-50%)}
+.swipe-undo button{min-height:36px;padding:0 14px;border:0;border-radius:999px;background:#ffffff26;color:#ffd54a;font:inherit;font-weight:700;cursor:pointer}
+#overview #todayList .tact .tdone::before{content:none}
+#overview #todayList .tact .tdone,#overview #todayList .tact .tpay{width:auto;height:100%;min-width:0;min-height:0;border-radius:0;font-size:12.5px;line-height:1.2;font-weight:600}
+@media(max-width:360px){#overview #todayList .tact>* span,#students #studentList .tact>* span{white-space:normal;text-align:center;line-height:1.1;font-size:11.5px}}
