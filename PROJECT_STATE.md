@@ -1,3 +1,8 @@
+## v1.172 — Odometer: show why the distance is empty and list the saved readings (2026-11-22; owner: "I did enter odometer values")
+- The Reports distance/fuel-per-km tiles are computed (unchanged) from the odometer values of the records **inside the chosen period** (needs ≥2 readings, increasing). Because the owner's real data cannot be read from here, two diagnostics were added: a small hint under the Distance tile ("1 reading in this period · needs 2" / "Readings must increase"), and Reports → Data → **Odometer readings**, listing every saved reading (date, type, fuel €, km, change from the previous reading) so the owner can see exactly what is stored. No calculation or data change.
+- Not changed (needs the owner's approval as a report definition): using the last reading before the period as the starting point.
+- Files: `index.html` (v1.172), `app.js`, `styles.css`, `sw.js` (cache v236), this file.
+
 ## v1.171 — Reports: small tiles aligned (2026-11-22; owner screenshot of the three small tiles)
 - Course prepaid balance / Distance / Fuel cost per km had labels of different length (2 vs 1 lines), so their values sat at different heights. All three tiles now have the same height, a two-line label area and the value on the same baseline at the bottom. CSS only.
 - Files: `styles.css`, `index.html` (v1.171), `sw.js` (cache v235), this file.
