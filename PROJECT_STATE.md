@@ -1,3 +1,7 @@
+## v1.188 — Profile tab labels cannot be selected (2026-11-23; owner: highlight still appears when pressing a tab)
+- user-select:none (v1.184/185) and a `selectstart` handler (v1.186) did not stop iOS painting an inverted highlight on the tab labels. The four profile tab labels are now drawn with `::before{content:attr(data-l)}` (text in a pseudo-element cannot be selected); each button keeps `aria-label`, `data-ptab` and its handler.
+- Not verified on a real iPhone. Files: `index.html` (v1.188), `styles.css`, `sw.js` (cache v252), this file.
+
 ## v1.187 — Record payment choice rows layout fix (2026-11-23; found in own QA)
 - The "What is this payment for?" rows stacked the radio above centred text. They are now radio-left / text-left rows. CSS only; no data change.
 - Files: `index.html` (v1.187), `styles.css`, `sw.js` (cache v251), this file.

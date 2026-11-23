@@ -4394,3 +4394,8 @@ body{--ios-bg:#f2f2f7}
 #receiveDialog #receiveFor label{display:flex!important;flex-direction:row!important;align-items:center;justify-content:flex-start;text-align:left;gap:12px;min-height:56px;padding:8px 14px}
 #receiveDialog #receiveFor input[type=radio]{flex:none;width:22px;height:22px;margin:0}
 #receiveDialog #receiveFor label span{flex:1;min-width:0;align-items:flex-start;text-align:left}
+
+/* v1.188 — profile tab labels are drawn by ::before so iOS cannot select them (the selection highlight still appeared on the owner's iPhone) */
+#profileDialog .ptabs button::before{content:attr(data-l);pointer-events:none}
+#profileDialog .dialogbody{--pp:12px;padding-inline:var(--pp)}
+#profileDialog .dialogbody>.ptabs{margin-inline:calc(-1*var(--pp))}
