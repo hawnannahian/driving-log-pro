@@ -1,3 +1,7 @@
+## v1.184 — Profile fixes after the v1.183 phone check (2026-11-23)
+- Tab bar: removed the extra bottom gap (safe-area padding was counted inside the dialog), stopped iOS text-selection highlight on tabs/buttons, and the start-time chip in lesson rows no longer wraps ("14:0 / 0").
+- Display only. Files: `index.html` (v1.184), `styles.css`, `sw.js` (cache v248), this file.
+
 ## v1.183 — Student profile redesign (2026-11-23; owner approved the sample: "Do it")
 - Profile header: initials avatar and status chips ("✓ Nothing owed" / "€ owed", "Next: today 14:00"). Main actions are now three: **＋ Lesson**, **€ Record payment**, **⋯**. The "⋯" opens an iOS-style bottom sheet with WhatsApp lesson/payment, Call, Add course and Edit student (same buttons and handlers, only moved).
 - A progress ring shows course hours used; the four stats are one list; the Overview/Lessons/Courses/Payments tabs are a sticky bar at the bottom of the profile.
