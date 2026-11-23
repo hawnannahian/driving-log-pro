@@ -4437,3 +4437,7 @@ body{--ios-bg:#f2f2f7}
 .dashhero .hero-tip{margin:12px 0 0;padding:12px 14px;border-radius:14px;background:#ffffff14;color:#dbe4f7;font-size:13px;line-height:1.45}
 .dashhero .hero-tip b{display:block;margin-bottom:2px;color:#fff;font-size:13.5px}
 .dashhero .herogrid .hero-note{font-size:12px;line-height:1.35;opacity:.8}
+
+/* v1.195 — "⋯" sheet is positioned inside the dialog (not the screen) so its Cancel button is never clipped */
+#profileDialog .psheet{position:absolute;inset:0;z-index:20}
+#profileDialog .psheet-box{margin:8px 8px calc(8px + env(safe-area-inset-bottom))}
