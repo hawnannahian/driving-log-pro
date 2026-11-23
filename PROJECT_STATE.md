@@ -1,3 +1,8 @@
+## v1.191 — Small polish from QA (2026-11-23; owner: "Do both")
+- Log: the filter dropdown is now full width (its text was clipped). Bottom tab bar labels fit at 320px width.
+- Student profile: the "+ Add payment" button in the Payments tab header was removed because "€ Record payment" now covers paying a course balance; "+ Add payment" is still available on the Courses tab card/summary.
+- Display only. Files: `app.js`, `index.html` (v1.191), `styles.css`, `sw.js` (cache v255), this file.
+
 ## v1.190 — Profile tabs: constant label colour (2026-11-23; the flashing box was still reported after v1.189)
 - The owner still saw a wrong-coloured box around tab labels on the iPhone. WebKit cannot be run in this environment, so the glitch was not reproduced. The tabs now keep one label colour in every state and show the active tab with a light pill behind it; with no colour change on the text, a repaint glitch cannot show an inverted label.
 - Design note: the active tab changes from a dark navy pill to a light blue pill. Not verified on a real iPhone. Files: `index.html` (v1.190), `styles.css`, `sw.js` (cache v254), this file.
