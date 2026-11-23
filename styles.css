@@ -4336,3 +4336,40 @@ body{--ios-bg:#f2f2f7}
 #receiveFor label{min-height:58px;padding:8px 14px}
 #receiveFor label span{display:flex;flex-direction:column;gap:2px;font-weight:600}
 #receiveFor label small{font-size:13px;font-weight:400;color:var(--muted)}
+
+/* v1.183 — Student profile: avatar + status chips, 3 main actions with a "⋯" sheet, progress ring, bottom tab bar */
+#profileDialog .dialoghead{align-items:center;gap:12px}
+#profileDialog .pavatar{flex:none;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#5b7cfa,#3b5bdb);color:#fff;font-weight:800;font-size:19px}
+#profileDialog .dialoghead .eyebrow{display:none}
+#profileDialog .pchips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}
+#profileDialog .pchip{padding:6px 12px;border-radius:999px;background:#eaf1ff;color:#2f4fc4;font-size:13px;font-weight:700}
+#profileDialog .pchip.ok{background:#e6f6ec;color:#1e7a3c}
+#profileDialog .pchip.warn{background:#fff3e2;color:#b45309}
+#profileDialog .profileactions{display:flex;flex-wrap:nowrap;gap:8px;margin:12px 0}
+#profileDialog .profileactions .btn{flex:1 1 0;min-width:0;min-height:50px;padding:0 8px;white-space:nowrap}
+#profileDialog .profileactions .pmore{flex:none;width:52px;font-size:22px}
+#profileDialog .phero{display:flex;align-items:center;gap:16px;margin:0 0 12px;padding:14px 16px;border-radius:20px;background:linear-gradient(160deg,#f5f8ff,#eef2fb)}
+#profileDialog .phero.hidden{display:none}
+#profileDialog .pring{flex:none;width:76px;height:76px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#3b5bdb 0 var(--pc,0%),#dfe5f3 0)}
+#profileDialog .pring i{width:58px;height:58px;border-radius:50%;background:#f3f6fd;display:grid;place-items:center;font-style:normal;font-weight:800;font-size:17px}
+#profileDialog .phero b{display:block;font-size:19px}
+#profileDialog .phero small{color:var(--muted)}
+#profileDialog .profilestats{grid-template-columns:1fr;gap:0;border:1px solid #e8ebf2;border-radius:18px;overflow:hidden;margin-bottom:12px}
+#profileDialog .profilestats .report{display:flex;flex-direction:row;justify-content:space-between;align-items:center;border:0;border-bottom:1px solid #eef0f5;border-radius:0;background:#fff;padding:13px 14px}
+#profileDialog .profilestats .report:last-child{border-bottom:0}
+#profileDialog .profilestats .report strong{margin:0;font-size:17px}
+#profileDialog .ptabs{position:sticky;bottom:0;z-index:3;margin:12px -4px 0;padding:6px 4px calc(8px + env(safe-area-inset-bottom));background:linear-gradient(to top,#fff 80%,#fff0)}
+#profileDialog .psheet{position:fixed;inset:0;z-index:20;display:flex;flex-direction:column;justify-content:flex-end}
+#profileDialog .psheet.hidden{display:none}
+#profileDialog .psheet-back{position:absolute;inset:0;background:rgba(0,0,0,.4)}
+#profileDialog .psheet-box{position:relative;margin:8px;padding:8px;border-radius:24px;background:#f2f2f7;display:flex;flex-direction:column;gap:8px}
+#profileDialog .psheet-grp{display:flex;flex-direction:column;background:#fff;border-radius:16px;overflow:hidden}
+#profileDialog .psheet-grp .btn{min-height:54px;border:0;border-radius:0;border-bottom:1px solid #eee;background:#fff;color:#111;justify-content:flex-start;padding:0 16px;font-size:17px;font-weight:600;box-shadow:none}
+#profileDialog .psheet-grp .btn.hidden{display:none}
+#profileDialog .psheet-grp .btn:last-child{border-bottom:0}
+#profileDialog .psheet-cancel{min-height:54px;border:0;border-radius:16px;background:#fff;color:#007aff;font:inherit;font-size:17px;font-weight:700;cursor:pointer}
+#profileDialog .profilestats .report{min-height:0;height:auto;padding:10px 14px}
+#profileDialog .profilestats .report span{margin:0}
+#profileDialog .ptabs{background:#fff;border-radius:16px;box-shadow:0 -6px 16px rgba(20,30,60,.08);border-top:1px solid #eef0f5}
+@media(max-width:360px){#profileDialog .profileactions .btn{font-size:14px;padding:0 4px}#profileDialog .profileactions .pmore{width:44px}}
+@media(max-width:360px){#profileDialog #profileAdd{flex:.7 1 0}#profileDialog #profileReceive{flex:1.3 1 0}}

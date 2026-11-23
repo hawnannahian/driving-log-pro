@@ -1,3 +1,9 @@
+## v1.183 — Student profile redesign (2026-11-23; owner approved the sample: "Do it")
+- Profile header: initials avatar and status chips ("✓ Nothing owed" / "€ owed", "Next: today 14:00"). Main actions are now three: **＋ Lesson**, **€ Record payment**, **⋯**. The "⋯" opens an iOS-style bottom sheet with WhatsApp lesson/payment, Call, Add course and Edit student (same buttons and handlers, only moved).
+- A progress ring shows course hours used; the four stats are one list; the Overview/Lessons/Courses/Payments tabs are a sticky bar at the bottom of the profile.
+- Display only: no storage, data or calculation change. Existing element ids kept.
+- Files: `app.js`, `index.html` (v1.183), `styles.css`, `sw.js` (cache v247), this file.
+
 ## v1.182 — "Record payment": clearer wording and an overpay split (2026-11-23; owner: "Do what you think best")
 - "Receive payment" is now "Record payment". The choice rows read "Course balance · <course> · € still due" and "Advance for new lessons" (with a one-line explanation).
 - Paying more than the course balance no longer errors: the balance is paid off and the rest becomes a new advance-credit course at the entered price per hour (two ordinary `coursePayments`/one course; no data shape change). Safety copy kept.
