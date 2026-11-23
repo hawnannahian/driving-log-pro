@@ -1,3 +1,7 @@
+## v1.195 — "⋯" sheet Cancel no longer clipped (2026-11-23; owner screen recording)
+- The profile "⋯" action sheet was `position:fixed` inside the scrolling dialog body; on the iPhone the dialog clipped its bottom edge and cut the Cancel button in half. The sheet now sits directly in the dialog (absolute, full size) with a safe-area bottom margin. Markup moved only; ids, buttons and handlers unchanged.
+- Files: `index.html` (v1.195), `styles.css`, `sw.js` (cache v259), this file.
+
 ## v1.194 — PDF, CSV and Share use the same plain names (2026-11-23; owner: "Do it for PDF CSV Share too")
 - The exports now say Lessons you taught / Money spent / Profit from lessons / Money received / Cash left (and "Taught / Spent / Profit" in the monthly lines), matching the Reports card from v1.193. Values and formulas are unchanged; "Outstanding" keeps its name.
 - Files: `reports-dashboard.js`, `app.js` (PDF summary cards), `index.html` (v1.194), `sw.js` (cache v258), this file.
