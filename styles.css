@@ -4389,3 +4389,8 @@ body{--ios-bg:#f2f2f7}
 
 /* v1.186 — block iOS text selection painted on tab/button labels */
 #profileDialog ::selection,.tabbar ::selection,button ::selection{background:transparent;color:inherit}
+
+/* v1.187 — Record payment: choice rows laid out as radio-left / text-left (they stacked and centred) */
+#receiveDialog #receiveFor label{display:flex!important;flex-direction:row!important;align-items:center;justify-content:flex-start;text-align:left;gap:12px;min-height:56px;padding:8px 14px}
+#receiveDialog #receiveFor input[type=radio]{flex:none;width:22px;height:22px;margin:0}
+#receiveDialog #receiveFor label span{flex:1;min-width:0;align-items:flex-start;text-align:left}

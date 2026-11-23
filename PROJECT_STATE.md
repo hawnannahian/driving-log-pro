@@ -1,3 +1,7 @@
+## v1.187 — Record payment choice rows layout fix (2026-11-23; found in own QA)
+- The "What is this payment for?" rows stacked the radio above centred text. They are now radio-left / text-left rows. CSS only; no data change.
+- Files: `index.html` (v1.187), `styles.css`, `sw.js` (cache v251), this file.
+
 ## v1.186 — Stop iOS text selection on tab/button labels (2026-11-23; owner phone screenshot)
 - CSS `user-select:none` (v1.184/v1.185) was not enough on the owner's iPhone: a quick double-tap still painted an inverted selection on tab labels. A `selectstart` handler now cancels selection that starts on buttons, tab bars and summaries, and `::selection` is made transparent there.
 - Display/interaction only; no data change. Not verified on a real iPhone. Files: `app.js`, `index.html` (v1.186), `styles.css`, `sw.js` (cache v250), this file.
