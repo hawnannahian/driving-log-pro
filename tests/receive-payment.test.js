@@ -29,3 +29,8 @@ test("v1.99: hours = amount / price per hour, and ticked lessons may not exceed 
 test("v1.99: footer and Settings version match",()=>{
   const v=html.match(/Version (v[\d.]+)</)[1];assert.ok(html.includes("manager · "+v+"</span></footer>"));
 });
+test("v1.181: Receive payment offers course balance vs prepay, and the course path adds only a payment",()=>{
+  assert.ok(html.includes('id="receiveFor"')&&html.includes('name="receiveFor"'));
+  const code=app.slice(app.indexOf("const rc=receiveCourse(s);if(rc&&receiveForCourse())"),app.indexOf("if(rateRaw===\"\"||!Number.isFinite(rate)"));
+  assert.match(code,/amount>courseDue\(rc\)\+\.001/);assert.match(code,/state\.coursePayments=\[/);assert.ok(!/state\.courses=/.test(code));
+});

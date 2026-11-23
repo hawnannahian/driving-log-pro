@@ -251,7 +251,7 @@
             <p class="pr-foot">Used every day instead of the mosque or calculated times. Friday uses the Jum’a time. A blank time falls back to the automatic time.</p>
           </div>
         </div>
-        <p class="app-version" data-spane="menu" id="appVersion">Driving Log Pro · Version v1.180</p>
+        <p class="app-version" data-spane="menu" id="appVersion">Driving Log Pro · Version v1.181</p>
         <p class="settings-note" data-spane="menu">These settings are saved with your app data and included in backup and sync. Lesson timer and completed-hour accounting are not affected.</p>
       </section>
     </section>
@@ -495,9 +495,11 @@
 <div class="receive-body">
 <label>Amount received (€)<input id="receiveAmount" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="e.g. 48" autocomplete="off"></label>
 <p class="hint receive-hint">Enter everything the student handed over. A lesson of that day already marked Paid can be covered by this payment instead (tick it below).</p>
-<label>Price per hour (€)<input id="receiveRate" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="e.g. 22" autocomplete="off"></label>
+<fieldset class="receive-for hidden" id="receiveFor"><legend>What is this payment for?</legend><label><input type="radio" name="receiveFor" value="course" checked><span id="receiveForCourse">Pay the course balance</span></label><label><input type="radio" name="receiveFor" value="prepay"><span>Prepay new lesson hours</span></label></fieldset>
+<div id="receivePrepay"><label>Price per hour (€)<input id="receiveRate" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="e.g. 22" autocomplete="off"></label>
 <p class="course-rate-preview" id="receivePreview" aria-live="polite">Enter the amount received.</p>
 <section class="receive-lessons hidden" id="receiveLessons" aria-label="Scheduled lessons"><b>Use it for these scheduled lessons</b><div id="receiveLessonList"></div><p class="hint" id="receiveLessonNote"></p></section>
+</div>
 <label>Date received<input id="receiveDate" type="date"></label>
 </div>
 <p id="receiveError" class="formerror" role="alert"></p><div class="dialogactions"><button type="button" class="btn ghost" id="receiveCancel">Cancel</button><span></span><button type="submit" class="btn primary">Confirm</button></div></form></dialog>
@@ -590,7 +592,7 @@
     <button class="tab" data-tab="islamic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M6.5 20v-6.5c0-3 2.5-5 5.5-6.5 3 1.5 5.5 3.5 5.5 6.5V20"/><path d="M12 4.5v2.5"/><path d="M10 20v-3a2 2 0 0 1 4 0v3"/><path d="M3.5 20v-8M20.5 20v-8"/></svg><span>Islamic</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.180</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.181</span></footer>
   <script src="push-config.js"></script>
   <script src="prayer-times.js"></script>
   <script src="mawaqit-times.js"></script>

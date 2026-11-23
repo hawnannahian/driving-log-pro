@@ -1,3 +1,8 @@
+## v1.181 — Receive payment asks what the money is for (2026-11-23; owner approved the proposal)
+- Receive payment now shows "What is this payment for?" when the student has a course with an amount still due: **Pay the course balance** (default; adds a payment to the oldest course with a balance, no new course, rejects more than the amount due) or **Prepay new lesson hours** (the previous behaviour, unchanged). Students without a balance see no change.
+- No data shape change: the course choice writes a normal `coursePayments` entry. Safety copy is kept as before.
+- Files: `app.js`, `index.html` (v1.181), `styles.css`, `sw.js` (cache v245), `tests/receive-payment.test.js`, this file.
+
 ## v1.180 — Log "Lessons done today" counts lesson hours (2026-11-22; owner: "Yes do it for log")
 - The Log tab's "Lessons done today" tile now counts 1 hour = 1 lesson (`unitsOf`), like the Calendar and Overview. Reports and student profiles still count bookings. Display only.
 - Files: `app.js`, `index.html` (v1.180), `sw.js` (cache v244), this file.
