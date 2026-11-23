@@ -1,3 +1,8 @@
+## v1.193 — Reports hero card in plain words (2026-11-23; owner: "Do it for the report card")
+- On-screen names only: Revenue (earned) → "Lessons you taught", Expenses → "Money spent", Net profit → "Profit from lessons", Collected → "Money received", Cash after expenses → "Cash left". Each has a one-line meaning, plus a tip explaining why received differs from taught (advance payments).
+- **No calculation changed** (same ids and formulas). PDF/CSV/Share exports keep the original accounting names (unchanged; owner can decide whether to rename them too).
+- Files: `index.html` (v1.193), `styles.css`, `sw.js` (cache v257), this file.
+
 ## v1.192 — Add/Edit student form layout (2026-11-23; owner approved the sample, without Status/Notes)
 - Phones: the form is a bottom sheet with an initials avatar, Cancel/Save pinned at the bottom, and Delete moved to its own button under the form. New "WhatsApp number is the same as the phone" switch hides the WhatsApp field (checked for new students and for students whose WhatsApp is empty or equals the phone).
 - Data: **no new fields** (no Status/Notes; the owner declined them). Saving with the switch on keeps an existing WhatsApp value only if it still equals the phone number, otherwise stores it empty (the app already falls back to the phone). All ids kept.
