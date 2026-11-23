@@ -1,3 +1,7 @@
+## v1.189 — Profile tabs: stop the flashing box around the label (2026-11-23; owner screen recording)
+- The recording showed the highlight is not a text selection: on every tab switch a wrong-coloured box flashed around the label (iOS paint glitch while the button scaled/transitioned). The profile tab buttons now have no transition/transform, no shadow on the active tab, and tapping a tab no longer calls `scrollIntoView` on the bar.
+- This is a diagnosis from the video; not reproducible in Chromium and not verified on a real iPhone. Files: `app.js`, `index.html` (v1.189), `styles.css`, `sw.js` (cache v253), this file.
+
 ## v1.188 — Profile tab labels cannot be selected (2026-11-23; owner: highlight still appears when pressing a tab)
 - user-select:none (v1.184/185) and a `selectstart` handler (v1.186) did not stop iOS painting an inverted highlight on the tab labels. The four profile tab labels are now drawn with `::before{content:attr(data-l)}` (text in a pseudo-element cannot be selected); each button keeps `aria-label`, `data-ptab` and its handler.
 - Not verified on a real iPhone. Files: `index.html` (v1.188), `styles.css`, `sw.js` (cache v252), this file.
