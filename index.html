@@ -251,7 +251,7 @@
             <p class="pr-foot">Used every day instead of the mosque or calculated times. Friday uses the Jum’a time. A blank time falls back to the automatic time.</p>
           </div>
         </div>
-        <p class="app-version" data-spane="menu" id="appVersion">Driving Log Pro · Version v1.181</p>
+        <p class="app-version" data-spane="menu" id="appVersion">Driving Log Pro · Version v1.182</p>
         <p class="settings-note" data-spane="menu">These settings are saved with your app data and included in backup and sync. Lesson timer and completed-hour accounting are not affected.</p>
       </section>
     </section>
@@ -479,7 +479,7 @@
         <article class="report"><span>Outstanding</span><strong id="pUnpaid">€0.00</strong></article>
         <article class="report"><span>Completed lessons</span><strong id="pCount">0</strong></article>
       </div>
-      <div class="profileactions"><button type="button" class="btn primary" id="profileAdd">＋ Add lesson</button><button type="button" class="btn receive" id="profileReceive">€ Receive payment</button><button type="button" class="btn secondary hidden" id="profileCourse">🎓 Add course</button><a class="btn wa hidden" id="waLesson" target="_blank" rel="noopener">WhatsApp: lesson</a><a class="btn wa hidden" id="waPay" target="_blank" rel="noopener">WhatsApp: payment</a><a class="btn ghost hidden" id="pCall">Call</a><button type="button" class="btn ghost" id="profileEdit">Edit student</button></div>
+      <div class="profileactions"><button type="button" class="btn primary" id="profileAdd">＋ Add lesson</button><button type="button" class="btn receive" id="profileReceive">€ Record payment</button><button type="button" class="btn secondary hidden" id="profileCourse">🎓 Add course</button><a class="btn wa hidden" id="waLesson" target="_blank" rel="noopener">WhatsApp: lesson</a><a class="btn wa hidden" id="waPay" target="_blank" rel="noopener">WhatsApp: payment</a><a class="btn ghost hidden" id="pCall">Call</a><button type="button" class="btn ghost" id="profileEdit">Edit student</button></div>
       <div class="ptabs" role="tablist" aria-label="Student sections"><button type="button" data-ptab="overview">Overview</button><button type="button" data-ptab="lessons">Lessons</button><button type="button" data-ptab="course">Courses</button><button type="button" data-ptab="payments">Payments</button></div>
       <div class="ptab hidden" id="ptab-overview"></div>
       <div class="ptab recordlist" id="ptab-lessons"></div>
@@ -491,11 +491,11 @@
 
 
 <dialog id="receiveDialog" class="course-dialog"><form id="receiveForm" novalidate>
-<div class="dialoghead"><div><p class="eyebrow">STUDENT PAYMENT</p><h2>Receive payment</h2><p class="muted" id="receiveStudentName"></p></div><button type="button" class="iconbtn" id="receiveClose" aria-label="Close">×</button></div>
+<div class="dialoghead"><div><p class="eyebrow">STUDENT PAYMENT</p><h2>Record payment</h2><p class="muted" id="receiveStudentName"></p></div><button type="button" class="iconbtn" id="receiveClose" aria-label="Close">×</button></div>
 <div class="receive-body">
 <label>Amount received (€)<input id="receiveAmount" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="e.g. 48" autocomplete="off"></label>
 <p class="hint receive-hint">Enter everything the student handed over. A lesson of that day already marked Paid can be covered by this payment instead (tick it below).</p>
-<fieldset class="receive-for hidden" id="receiveFor"><legend>What is this payment for?</legend><label><input type="radio" name="receiveFor" value="course" checked><span id="receiveForCourse">Pay the course balance</span></label><label><input type="radio" name="receiveFor" value="prepay"><span>Prepay new lesson hours</span></label></fieldset>
+<fieldset class="receive-for hidden" id="receiveFor"><legend>What is this payment for?</legend><label><input type="radio" name="receiveFor" value="course" checked><span id="receiveForCourse">Course balance</span></label><label><input type="radio" name="receiveFor" value="prepay"><span>Advance for new lessons<small>Money stays as credit and is used up lesson by lesson</small></span></label></fieldset>
 <div id="receivePrepay"><label>Price per hour (€)<input id="receiveRate" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="e.g. 22" autocomplete="off"></label>
 <p class="course-rate-preview" id="receivePreview" aria-live="polite">Enter the amount received.</p>
 <section class="receive-lessons hidden" id="receiveLessons" aria-label="Scheduled lessons"><b>Use it for these scheduled lessons</b><div id="receiveLessonList"></div><p class="hint" id="receiveLessonNote"></p></section>
@@ -592,7 +592,7 @@
     <button class="tab" data-tab="islamic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M6.5 20v-6.5c0-3 2.5-5 5.5-6.5 3 1.5 5.5 3.5 5.5 6.5V20"/><path d="M12 4.5v2.5"/><path d="M10 20v-3a2 2 0 0 1 4 0v3"/><path d="M3.5 20v-8M20.5 20v-8"/></svg><span>Islamic</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.181</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.182</span></footer>
   <script src="push-config.js"></script>
   <script src="prayer-times.js"></script>
   <script src="mawaqit-times.js"></script>

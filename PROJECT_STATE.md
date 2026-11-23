@@ -1,3 +1,9 @@
+## v1.182 — "Record payment": clearer wording and an overpay split (2026-11-23; owner: "Do what you think best")
+- "Receive payment" is now "Record payment". The choice rows read "Course balance · <course> · € still due" and "Advance for new lessons" (with a one-line explanation).
+- Paying more than the course balance no longer errors: the balance is paid off and the rest becomes a new advance-credit course at the entered price per hour (two ordinary `coursePayments`/one course; no data shape change). Safety copy kept.
+- Not done (suggested, not approved): merging "+ Add payment" into this button; Undo after saving.
+- Files: `app.js`, `index.html` (v1.182), `styles.css`, `sw.js` (cache v246), `tests/receive-payment.test.js`, this file.
+
 ## v1.181 — Receive payment asks what the money is for (2026-11-23; owner approved the proposal)
 - Receive payment now shows "What is this payment for?" when the student has a course with an amount still due: **Pay the course balance** (default; adds a payment to the oldest course with a balance, no new course, rejects more than the amount due) or **Prepay new lesson hours** (the previous behaviour, unchanged). Students without a balance see no change.
 - No data shape change: the course choice writes a normal `coursePayments` entry. Safety copy is kept as before.
