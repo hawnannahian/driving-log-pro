@@ -4432,3 +4432,8 @@ body{--ios-bg:#f2f2f7}
  #studentDialog[open]{position:fixed;top:auto;left:0;right:0;bottom:0;margin:0;width:100%;max-width:100%;box-sizing:border-box;border-left:0;border-right:0;border-bottom:0}
  #studentDialog .dialoghead>div{text-align:left}
 }
+
+/* v1.193 — Reports hero card: plain-language names, one-line meanings, and a tip about advance payments */
+.dashhero .hero-tip{margin:12px 0 0;padding:12px 14px;border-radius:14px;background:#ffffff14;color:#dbe4f7;font-size:13px;line-height:1.45}
+.dashhero .hero-tip b{display:block;margin-bottom:2px;color:#fff;font-size:13.5px}
+.dashhero .herogrid .hero-note{font-size:12px;line-height:1.35;opacity:.8}
