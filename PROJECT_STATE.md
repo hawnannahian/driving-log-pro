@@ -1,3 +1,7 @@
+## v1.194 — PDF, CSV and Share use the same plain names (2026-11-23; owner: "Do it for PDF CSV Share too")
+- The exports now say Lessons you taught / Money spent / Profit from lessons / Money received / Cash left (and "Taught / Spent / Profit" in the monthly lines), matching the Reports card from v1.193. Values and formulas are unchanged; "Outstanding" keeps its name.
+- Files: `reports-dashboard.js`, `app.js` (PDF summary cards), `index.html` (v1.194), `sw.js` (cache v258), this file.
+
 ## v1.193 — Reports hero card in plain words (2026-11-23; owner: "Do it for the report card")
 - On-screen names only: Revenue (earned) → "Lessons you taught", Expenses → "Money spent", Net profit → "Profit from lessons", Collected → "Money received", Cash after expenses → "Cash left". Each has a one-line meaning, plus a tip explaining why received differs from taught (advance payments).
 - **No calculation changed** (same ids and formulas). PDF/CSV/Share exports keep the original accounting names (unchanged; owner can decide whether to rename them too).

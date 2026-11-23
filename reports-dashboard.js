@@ -143,20 +143,20 @@ function dashHeatMove(k){const [y,m]=dashMonth.split("-").map(Number);dashMonth=
 // Exports. The CSV and the shared summary contain business totals only, never student names or contact details.
 function dashLabel(){const p=$("period").value;return p==="all"?"All time":$("periodValue").selectedOptions[0]?.textContent||"";}
 function dashCsv(){const p=$("period").value,v=$("periodValue").value,s=dashStats(p,v),rows=[["Section","Item","Value"],["Period","Report",dashLabel()],
- ["Results","Revenue (earned)",s.rev],["Results","Expenses",s.exp],["Results","Net profit",s.net],["Results","Collected",s.col],["Results","Cash after expenses",dashRound(s.col-s.exp)],["Results","Outstanding",s.out],
+ ["Results","Lessons you taught",s.rev],["Results","Money spent",s.exp],["Results","Profit from lessons",s.net],["Results","Money received",s.col],["Results","Cash left",dashRound(s.col-s.exp)],["Results","Outstanding",s.out],
  ["Activity","Completed lessons",s.lessons],["Activity","Driving hours",dashRound(s.hours)],["Activity","Active students",s.students],
- ...DASH_CATS.map((c,i)=>["Expenses by category",c,s.cats[i]]),...monthRows(12).map(r=>["Monthly",r.long,`Revenue ${dashRound(r.income)} / Expenses ${dashRound(r.expenses)} / Net ${dashRound(r.profit)}`])];
+ ...DASH_CATS.map((c,i)=>["Money spent by category",c,s.cats[i]]),...monthRows(12).map(r=>["Monthly",r.long,`Taught ${dashRound(r.income)} / Spent ${dashRound(r.expenses)} / Profit ${dashRound(r.profit)}`])];
  download(`DrivingLogPro_Report_${dashLabel().replace(/[^\w-]+/g,"_")}.csv`,"﻿"+rows.map(r=>r.map(csvCell).join(",")).join("\r\n"),"text/csv;charset=utf-8");}
 function dashSummaryText(){const s=dashStats($("period").value,$("periodValue").value);
- return `Driving Log Pro · ${dashLabel()}\nRevenue: ${euro(s.rev)}\nExpenses: ${euro(s.exp)}\nNet profit: ${euro(s.net)}\nCollected: ${euro(s.col)}\nCash after expenses: ${euro(s.col-s.exp)}\nOutstanding: ${euro(s.out)}\nCompleted lessons: ${s.lessons} · ${fmtH(s.hours)} h`;}
+ return `Driving Log Pro · ${dashLabel()}\nLessons you taught: ${euro(s.rev)}\nMoney spent: ${euro(s.exp)}\nProfit from lessons: ${euro(s.net)}\nMoney received: ${euro(s.col)}\nCash left: ${euro(s.col-s.exp)}\nOutstanding: ${euro(s.out)}\nCompleted lessons: ${s.lessons} · ${fmtH(s.hours)} h`;}
 async function dashShare(){const text=dashSummaryText();try{if(navigator.share){await navigator.share({title:"Business summary",text});return;}}catch(err){if(err&&err.name==="AbortError")return;}
  try{await navigator.clipboard.writeText(text);toast("Summary copied");}catch{toast("Sharing is not available here");}}
 // Extra PDF section: expense breakdown and the last 6 months.
 function dashPdfExtra(cur,y,p,v,c){const s=dashStats(p,v),total=s.cats.reduce((a,x)=>a+x,0);
- cur.push({x:40,y,text:"Expenses by category",size:10,bold:true,color:c.NAVY},{x:300,y,text:"Revenue trend · last 6 months",size:10,bold:true,color:c.NAVY});let yl=y-15,yr=y-15;
+ cur.push({x:40,y,text:"Money spent by category",size:10,bold:true,color:c.NAVY},{x:300,y,text:"Lessons taught · last 6 months",size:10,bold:true,color:c.NAVY});let yl=y-15,yr=y-15;
  DASH_CATS.forEach((k,i)=>{cur.push({x:40,y:yl,text:k,size:8.5,color:c.NAVY},{x:190,y:yl,text:c.m(s.cats[i])+" EUR"+(total?"  ("+Math.round(s.cats[i]/total*100)+"%)":""),size:8.5,color:c.NAVY});yl-=13;});
  monthRows(6).forEach(r=>{cur.push({x:300,y:yr,text:r.long,size:8.5,color:c.NAVY},{x:400,y:yr,text:`${c.m(r.income)} / ${c.m(r.expenses)} / ${c.m(r.profit)}`,size:8.5,color:c.NAVY});yr-=13;});
- cur.push({x:300,y:yr,text:"Revenue / Expenses / Net (EUR)",size:7.5,color:c.GREY});return Math.min(yl,yr-13)-14;}
+ cur.push({x:300,y:yr,text:"Taught / Spent / Profit (EUR)",size:7.5,color:c.GREY});return Math.min(yl,yr-13)-14;}
 
 $("studentReportSearch").addEventListener("input",()=>dashStudentPerformance($("period").value,$("periodValue").value));
 $("dashCsv").onclick=dashCsv;$("dashShare").onclick=dashShare;$("dashPrint").onclick=()=>window.print();
