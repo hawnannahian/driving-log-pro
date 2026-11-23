@@ -4412,3 +4412,23 @@ body{--ios-bg:#f2f2f7}
 /* v1.191 — polish found in QA: Log filter full width (text was clipped), tab bar labels fit at 320px */
 #log .log-toolbar #logFilter{grid-column:1/-1;font-size:16px;text-overflow:ellipsis}
 @media(max-width:340px){.tabbar .tab{font-size:10px;letter-spacing:-.2px}.tabbar{padding-inline:2px}}
+
+/* v1.192 — Edit/Add student: bottom sheet on phones, avatar, "WhatsApp same as phone" switch, rate help, delete separate, actions pinned */
+#studentDialog .dialoghead{align-items:center;gap:12px}
+#studentDialog .dialoghead .eyebrow{display:none}
+#studentDialog .pavatar{flex:none;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#5b7cfa,#3b5bdb);color:#fff;font-weight:800;font-size:18px}
+#studentDialog .formgrid label.sw-same{flex-direction:row;align-items:center;gap:12px;min-height:50px;padding:0 14px;border:1px solid #dfe6f1;border-radius:13px;background:#f7f9fd;font-size:15px;font-weight:600;color:#17233a;cursor:pointer}
+#studentDialog .formgrid label.sw-same input{flex:none;width:22px;height:22px;min-height:0;margin:0;accent-color:#3b5bdb;box-shadow:none}
+#studentDialog #sWhatsWrap.hidden{display:none}
+#studentDialog .student-delete{align-self:stretch;margin-top:16px;min-height:50px;border-radius:14px;background:#fff;color:#d92d20;border:1px solid #f3c9c5;font-weight:700}
+#studentDialog .student-delete.hidden{display:none}
+#studentDialog .dialogactions{position:sticky;bottom:0;z-index:2;margin:14px -22px -22px;padding:12px 22px calc(14px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid #eef0f5}
+@media(max-width:560px){
+ #studentDialog[open]{width:100%;max-width:100%;margin:auto 0 0;border-radius:24px 24px 0 0;max-height:92dvh}
+ #studentDialog form{padding:16px}
+ #studentDialog .dialogactions{margin:14px -16px -16px;padding:12px 16px calc(14px + env(safe-area-inset-bottom))}
+}
+@media(max-width:560px){
+ #studentDialog[open]{position:fixed;top:auto;left:0;right:0;bottom:0;margin:0;width:100%;max-width:100%;box-sizing:border-box;border-left:0;border-right:0;border-bottom:0}
+ #studentDialog .dialoghead>div{text-align:left}
+}
