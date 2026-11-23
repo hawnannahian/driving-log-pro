@@ -4408,3 +4408,7 @@ body{--ios-bg:#f2f2f7}
 #profileDialog .ptabs button,#profileDialog .ptabs button.active,#profileDialog .ptabs button:active{color:#1b315a;font-weight:700;background-clip:padding-box}
 #profileDialog .ptabs button{background:transparent;border-color:transparent}
 #profileDialog .ptabs button.active{background:#dfe8ff;border-color:#c5d5fb}
+
+/* v1.191 — polish found in QA: Log filter full width (text was clipped), tab bar labels fit at 320px */
+#log .log-toolbar #logFilter{grid-column:1/-1;font-size:16px;text-overflow:ellipsis}
+@media(max-width:340px){.tabbar .tab{font-size:10px;letter-spacing:-.2px}.tabbar{padding-inline:2px}}
