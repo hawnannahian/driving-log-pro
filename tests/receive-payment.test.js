@@ -31,6 +31,10 @@ test("v1.99: footer and Settings version match",()=>{
 });
 test("v1.181: Receive payment offers course balance vs prepay, and the course path adds only a payment",()=>{
   assert.ok(html.includes('id="receiveFor"')&&html.includes('name="receiveFor"'));
-  const code=app.slice(app.indexOf("const rc=receiveCourse(s);if(rc&&receiveForCourse())"),app.indexOf("if(rateRaw===\"\"||!Number.isFinite(rate)"));
-  assert.match(code,/amount>courseDue\(rc\)\+\.001/);assert.match(code,/state\.coursePayments=\[/);assert.ok(!/state\.courses=/.test(code));
+  const code=app.slice(app.indexOf("const rc=receiveCourse(s);if(rc&&receiveForCourse())"),app.indexOf("const total=round4(amount/rate)"));
+  assert.match(code,/over=amount>due\+\.001/);assert.match(code,/state\.coursePayments=/);
+});
+test("v1.182: overpaying the course balance pays it off and adds the rest as advance credit",()=>{
+  assert.match(app,/const due=courseDue\(rc\),over=amount>due\+\.001,rest=round2\(amount-due\)/);
+  assert.ok(html.includes("Record payment"));
 });

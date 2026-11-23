@@ -4331,3 +4331,8 @@ body{--ios-bg:#f2f2f7}
 #receiveFor label{display:flex;align-items:center;gap:10px;min-height:48px;padding:0 14px;border:1px solid var(--line);border-radius:14px;background:#fff;font-size:16px;cursor:pointer}
 #receiveFor input{width:20px;height:20px;margin:0}
 #receivePrepay{display:flex;flex-direction:column;gap:12px}
+
+/* v1.182 — Record payment: choice rows with a second line, extra advance split */
+#receiveFor label{min-height:58px;padding:8px 14px}
+#receiveFor label span{display:flex;flex-direction:column;gap:2px;font-weight:600}
+#receiveFor label small{font-size:13px;font-weight:400;color:var(--muted)}
