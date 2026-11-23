@@ -1,3 +1,8 @@
+## v1.196 — Student hourly rate is the starting rate for new lessons (2026-11-23; owner: "Do number 1")
+- The "Hourly rate" saved on a student was never used anywhere. It now pre-fills the rate field when a NEW lesson is booked for that student (and again if the student name is chosen/changed, until the owner types a rate). The owner can still change it; students without a rate behave as before.
+- **No existing lesson, course or payment is touched.** Existing lessons keep their stored rate, course lessons keep the course rate (course price ÷ hours). The student form text now says so.
+- Files: `app.js`, `index.html` (v1.196), `sw.js` (cache v260), `tests/student-rate.test.js`, this file.
+
 ## v1.195 — "⋯" sheet Cancel no longer clipped (2026-11-23; owner screen recording)
 - The profile "⋯" action sheet was `position:fixed` inside the scrolling dialog body; on the iPhone the dialog clipped its bottom edge and cut the Cancel button in half. The sheet now sits directly in the dialog (absolute, full size) with a safe-area bottom margin. Markup moved only; ids, buttons and handlers unchanged.
 - Files: `index.html` (v1.195), `styles.css`, `sw.js` (cache v259), this file.
