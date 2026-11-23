@@ -1,3 +1,7 @@
+## v1.186 — Stop iOS text selection on tab/button labels (2026-11-23; owner phone screenshot)
+- CSS `user-select:none` (v1.184/v1.185) was not enough on the owner's iPhone: a quick double-tap still painted an inverted selection on tab labels. A `selectstart` handler now cancels selection that starts on buttons, tab bars and summaries, and `::selection` is made transparent there.
+- Display/interaction only; no data change. Not verified on a real iPhone. Files: `app.js`, `index.html` (v1.186), `styles.css`, `sw.js` (cache v250), this file.
+
 ## v1.185 — Profile tab bar flush at the bottom (2026-11-23; owner phone screenshot)
 - The sticky tab bar floated ~22px above the dialog's bottom edge (the dialog's own bottom padding), so lesson content showed underneath it. The dialog body now has no bottom padding and the bar carries its own, flush with the edge.
 - Text-selection highlight blocked on all profile buttons (it still appeared on the tab labels).

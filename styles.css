@@ -4386,3 +4386,6 @@ body{--ios-bg:#f2f2f7}
 #profileDialog button,#profileDialog .btn,#profileDialog .ptabs *{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
 #profileDialog button::selection,#profileDialog button *::selection{background:transparent}
 #profileDialog .dialogbody>.ptabs{margin-inline:calc(-1*clamp(16px,3vw,24px));width:auto;max-width:none;box-sizing:border-box}
+
+/* v1.186 — block iOS text selection painted on tab/button labels */
+#profileDialog ::selection,.tabbar ::selection,button ::selection{background:transparent;color:inherit}
