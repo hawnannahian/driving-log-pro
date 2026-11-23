@@ -1,3 +1,8 @@
+## v1.192 — Add/Edit student form layout (2026-11-23; owner approved the sample, without Status/Notes)
+- Phones: the form is a bottom sheet with an initials avatar, Cancel/Save pinned at the bottom, and Delete moved to its own button under the form. New "WhatsApp number is the same as the phone" switch hides the WhatsApp field (checked for new students and for students whose WhatsApp is empty or equals the phone).
+- Data: **no new fields** (no Status/Notes; the owner declined them). Saving with the switch on keeps an existing WhatsApp value only if it still equals the phone number, otherwise stores it empty (the app already falls back to the phone). All ids kept.
+- Files: `app.js`, `index.html` (v1.192), `styles.css`, `sw.js` (cache v256), this file.
+
 ## v1.191 — Small polish from QA (2026-11-23; owner: "Do both")
 - Log: the filter dropdown is now full width (its text was clipped). Bottom tab bar labels fit at 320px width.
 - Student profile: the "+ Add payment" button in the Payments tab header was removed because "€ Record payment" now covers paying a course balance; "+ Add payment" is still available on the Courses tab card/summary.
