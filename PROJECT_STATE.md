@@ -1,3 +1,8 @@
+## v1.185 — Profile tab bar flush at the bottom (2026-11-23; owner phone screenshot)
+- The sticky tab bar floated ~22px above the dialog's bottom edge (the dialog's own bottom padding), so lesson content showed underneath it. The dialog body now has no bottom padding and the bar carries its own, flush with the edge.
+- Text-selection highlight blocked on all profile buttons (it still appeared on the tab labels).
+- Display only. Files: `index.html` (v1.185), `styles.css`, `sw.js` (cache v249), this file.
+
 ## v1.184 — Profile fixes after the v1.183 phone check (2026-11-23)
 - Tab bar: removed the extra bottom gap (safe-area padding was counted inside the dialog), stopped iOS text-selection highlight on tabs/buttons, and the start-time chip in lesson rows no longer wraps ("14:0 / 0").
 - Display only. Files: `index.html` (v1.184), `styles.css`, `sw.js` (cache v248), this file.
