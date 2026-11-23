@@ -4399,3 +4399,7 @@ body{--ios-bg:#f2f2f7}
 #profileDialog .ptabs button::before{content:attr(data-l);pointer-events:none}
 #profileDialog .dialogbody{--pp:12px;padding-inline:var(--pp)}
 #profileDialog .dialogbody>.ptabs{margin-inline:calc(-1*var(--pp))}
+
+/* v1.189 — profile tabs: iOS painted a wrong-coloured box around the label while the tab button animated (scale/background transition); no animation on these buttons now, and tapping a tab no longer scrolls the bar */
+#profileDialog .ptabs button,#profileDialog .ptabs button:active,#profileDialog .ptabs button:focus{transition:none!important;animation:none!important;transform:none!important;will-change:auto;outline:none}
+#profileDialog .ptabs button.active{box-shadow:none}
