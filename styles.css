@@ -4373,3 +4373,8 @@ body{--ios-bg:#f2f2f7}
 #profileDialog .ptabs{background:#fff;border-radius:16px;box-shadow:0 -6px 16px rgba(20,30,60,.08);border-top:1px solid #eef0f5}
 @media(max-width:360px){#profileDialog .profileactions .btn{font-size:14px;padding:0 4px}#profileDialog .profileactions .pmore{width:44px}}
 @media(max-width:360px){#profileDialog #profileAdd{flex:.7 1 0}#profileDialog #profileReceive{flex:1.3 1 0}}
+
+/* v1.184 — profile fixes: no extra safe-area gap in the tab bar, no text-selection highlight on tabs, time chip never wraps */
+#profileDialog .ptabs{padding:6px 4px 8px;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+#profileDialog .ptabs button,#profileDialog .profileactions .btn{-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+#profileDialog .recordicon.booktime{white-space:nowrap;min-width:64px;width:auto;padding:0 8px;font-variant-numeric:tabular-nums}
