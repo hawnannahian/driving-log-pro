@@ -993,6 +993,8 @@ $("profileCourse").onclick=startCourse;$("fPaid").addEventListener("change",upda
 document.querySelectorAll("[data-ptab]").forEach(b=>b.onclick=()=>{profileTab=b.dataset.ptab;renderProfile();bindRecords();b.scrollIntoView({block:"nearest",inline:"nearest"});});
 $("cloudConnect").onclick=cloudConnect;$("snapShow").onclick=showSnapshots;$("cloudNow").onclick=()=>cloudSync();$("cloudDisconnect").onclick=()=>{if(confirm("Stop syncing on this device? Your records stay here and in the cloud."))cloudOff();};
 window.addEventListener("online",()=>scheduleSync());document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")cloudSync();});
+// iOS Safari ignores user-select:none on buttons after a quick double-tap and paints a selection (inverted colours) on the label; cancelling selectstart on buttons/tab bars stops it.
+document.addEventListener("selectstart",ev=>{const t=ev.target&&(ev.target.nodeType===1?ev.target:ev.target.parentElement);if(t&&t.closest&&t.closest("button,.ptabs,.tabbar,summary,[role=tab]"))ev.preventDefault();});
 $("profileMore").onclick=()=>$("profileSheet").classList.remove("hidden");$("profileSheet").addEventListener("click",ev=>{if(ev.target.closest("[data-psheet-close],a,button:not(.psheet-cancel)"))$("profileSheet").classList.add("hidden");});$("profileDialog").addEventListener("close",()=>$("profileSheet").classList.add("hidden"));
 $("profileEdit").onclick=()=>{const id=profileId;$("profileDialog").close();openStudent(id);};
 $("profileAdd").onclick=()=>{const s=state.students.find(x=>x.id===profileId);newRecord(undefined,s?.name);};
