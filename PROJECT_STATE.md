@@ -1,3 +1,7 @@
+## v1.190 — Profile tabs: constant label colour (2026-11-23; the flashing box was still reported after v1.189)
+- The owner still saw a wrong-coloured box around tab labels on the iPhone. WebKit cannot be run in this environment, so the glitch was not reproduced. The tabs now keep one label colour in every state and show the active tab with a light pill behind it; with no colour change on the text, a repaint glitch cannot show an inverted label.
+- Design note: the active tab changes from a dark navy pill to a light blue pill. Not verified on a real iPhone. Files: `index.html` (v1.190), `styles.css`, `sw.js` (cache v254), this file.
+
 ## v1.189 — Profile tabs: stop the flashing box around the label (2026-11-23; owner screen recording)
 - The recording showed the highlight is not a text selection: on every tab switch a wrong-coloured box flashed around the label (iOS paint glitch while the button scaled/transitioned). The profile tab buttons now have no transition/transform, no shadow on the active tab, and tapping a tab no longer calls `scrollIntoView` on the bar.
 - This is a diagnosis from the video; not reproducible in Chromium and not verified on a real iPhone. Files: `app.js`, `index.html` (v1.189), `styles.css`, `sw.js` (cache v253), this file.

@@ -4403,3 +4403,8 @@ body{--ios-bg:#f2f2f7}
 /* v1.189 — profile tabs: iOS painted a wrong-coloured box around the label while the tab button animated (scale/background transition); no animation on these buttons now, and tapping a tab no longer scrolls the bar */
 #profileDialog .ptabs button,#profileDialog .ptabs button:active,#profileDialog .ptabs button:focus{transition:none!important;animation:none!important;transform:none!important;will-change:auto;outline:none}
 #profileDialog .ptabs button.active{box-shadow:none}
+
+/* v1.190 — profile tabs: the label colour never changes (only the pill behind it), so an iOS repaint glitch has nothing wrong-coloured to draw */
+#profileDialog .ptabs button,#profileDialog .ptabs button.active,#profileDialog .ptabs button:active{color:#1b315a;font-weight:700;background-clip:padding-box}
+#profileDialog .ptabs button{background:transparent;border-color:transparent}
+#profileDialog .ptabs button.active{background:#dfe8ff;border-color:#c5d5fb}
