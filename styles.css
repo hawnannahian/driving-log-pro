@@ -4441,3 +4441,20 @@ body{--ios-bg:#f2f2f7}
 /* v1.195 — "⋯" sheet is positioned inside the dialog (not the screen) so its Cancel button is never clipped */
 #profileDialog .psheet{position:absolute;inset:0;z-index:20}
 #profileDialog .psheet-box{margin:8px 8px calc(8px + env(safe-area-inset-bottom))}
+
+/* v1.198 — Reports "Fuel" card (replaces seven loose tiles) and a calmer Fuel form */
+#reports .fuelcard{margin:0 0 16px;padding:16px;border-radius:22px;background:var(--white);box-shadow:0 1px 3px rgba(20,30,60,.06)}
+#reports .fuelhead{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+#reports .fuelhead h3{margin:0;font-size:18px}#reports .fuelhead span{color:#6e6e73;font-size:13px}
+#reports .fuelbig{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:6px}
+#reports .fuelbig>div{padding:14px;border-radius:16px;background:#f3f6fd}
+#reports .fuelbig span{display:block;color:#53627a;font-size:12.5px;font-weight:700}
+#reports .fuelbig strong{display:block;margin-top:4px;font-size:22px;letter-spacing:-.4px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+#reports .fuelrows>div{display:flex;justify-content:space-between;align-items:center;min-height:46px;border-bottom:1px solid #eef0f5}
+#reports .fuelrows>div:last-child{border-bottom:0}
+#reports .fuelrows span{color:#53627a;font-size:14.5px}#reports .fuelrows b{font-size:16px;font-variant-numeric:tabular-nums}
+#reports .fuelcard .rep-hint{margin:6px 2px 0}
+@media(max-width:340px){#reports .fuelbig{grid-template-columns:1fr}}
+#recordDialog #fLitres,#recordDialog #fCost,#recordDialog #fKm{-moz-appearance:textfield;appearance:textfield}
+#recordDialog #fLitres::-webkit-outer-spin-button,#recordDialog #fLitres::-webkit-inner-spin-button,#recordDialog #fCost::-webkit-outer-spin-button,#recordDialog #fCost::-webkit-inner-spin-button,#recordDialog #fKm::-webkit-outer-spin-button,#recordDialog #fKm::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+#reports .dashmini .rep-wide{grid-column:1/-1}

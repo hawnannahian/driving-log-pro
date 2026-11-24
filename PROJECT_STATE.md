@@ -1,3 +1,8 @@
+## v1.198 — Fuel card in Reports and calmer Fuel form (2026-11-24; owner: "Do it directly")
+- Reports: the seven loose fuel tiles are one **Fuel** card: Consumption (L/100 km) and Average price (€/L) as the two big figures; Litres filled, Distance per litre, Distance (odometer) and Fuel cost per km as rows; plain-language hints when litres are missing. All element ids are unchanged; no calculation changed.
+- Fuel form: "Litres (L)" label, no number-spinner arrows on Amount/Odometer/Litres.
+- Files: `app.js`, `index.html` (v1.198), `styles.css`, `sw.js` (cache v262), this file.
+
 ## v1.197 — Litres on Fuel records (2026-11-24; owner approved the sample)
 - Fuel records have a new **optional** `litres` field (number, 2 decimals). The Fuel form shows "Litres (optional)" and, when both amount and litres are entered, the live panel shows the price per litre (flagged "check litres" below 0,80 or above 4 €/L).
 - Reports (fuel tiles): Litres filled, Average price per litre, Consumption (L per 100 km), Distance per litre. Totals and price use only Fuel records that have litres. Consumption and distance-per-litre are shown only when **every** fill-up between the first and last odometer reading of the period has litres (otherwise they would be too low). Older records without litres are untouched and behave as before; no value is guessed.
