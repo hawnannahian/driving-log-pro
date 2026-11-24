@@ -1,3 +1,9 @@
+## v1.197 — Litres on Fuel records (2026-11-24; owner approved the sample)
+- Fuel records have a new **optional** `litres` field (number, 2 decimals). The Fuel form shows "Litres (optional)" and, when both amount and litres are entered, the live panel shows the price per litre (flagged "check litres" below 0,80 or above 4 €/L).
+- Reports (fuel tiles): Litres filled, Average price per litre, Consumption (L per 100 km), Distance per litre. Totals and price use only Fuel records that have litres. Consumption and distance-per-litre are shown only when **every** fill-up between the first and last odometer reading of the period has litres (otherwise they would be too low). Older records without litres are untouched and behave as before; no value is guessed.
+- Storage: only the new optional `litres` on Fuel entries (data shape +1 optional field; backups/sync carry it with the entry). The Log CSV export/import format was NOT changed (no litres column yet).
+- Files: `app.js`, `index.html` (v1.197), `sw.js` (cache v261), `tests/litres.test.js`, this file.
+
 ## v1.196 — Student hourly rate is the starting rate for new lessons (2026-11-23; owner: "Do number 1")
 - The "Hourly rate" saved on a student was never used anywhere. It now pre-fills the rate field when a NEW lesson is booked for that student (and again if the student name is chosen/changed, until the owner types a rate). The owner can still change it; students without a rate behave as before.
 - **No existing lesson, course or payment is touched.** Existing lessons keep their stored rate, course lessons keep the course rate (course price ÷ hours). The student form text now says so.
