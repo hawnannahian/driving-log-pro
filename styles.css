@@ -4458,3 +4458,9 @@ body{--ios-bg:#f2f2f7}
 #recordDialog #fLitres,#recordDialog #fCost,#recordDialog #fKm{-moz-appearance:textfield;appearance:textfield}
 #recordDialog #fLitres::-webkit-outer-spin-button,#recordDialog #fLitres::-webkit-inner-spin-button,#recordDialog #fCost::-webkit-outer-spin-button,#recordDialog #fCost::-webkit-inner-spin-button,#recordDialog #fKm::-webkit-outer-spin-button,#recordDialog #fKm::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 #reports .dashmini .rep-wide{grid-column:1/-1}
+
+/* v1.199 — faster tab switch: the long Reports page renders only the sections near the screen (content-visibility), and tabs answer a tap immediately (no double-tap wait) */
+#reports>*:not(.dashhero):not(.toolbar):not(.dashactions){content-visibility:auto;contain-intrinsic-size:auto 420px}
+.tabbar .tab{touch-action:manipulation}
+#reports .dashmini .report.rep-wide:nth-child(n+5){grid-column:1/-1}
+#reports .fuelcard{margin-top:12px}
