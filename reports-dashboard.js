@@ -71,6 +71,7 @@ function dashAttendanceInsights(p,v){
  $("attendanceRows").innerHTML=rows.length?rows.map(x=>`<tr><th scope="row">${esc(x.name)}</th><td>${x.done}</td><td>${x.missed}</td><td>${x.rate===null?"–":x.rate+"%"}</td></tr>`).join(""):'<tr><td colspan="4">No attendance records in this period.</td></tr>';
 }
 // Student-level performance for the currently selected reporting period.
+let dashStudentsAll=false;
 function dashStudentPerformance(p,v){
  const query=($("studentReportSearch")?.value||"").trim().toLocaleLowerCase();
  const rows=state.students.map(student=>{
@@ -83,7 +84,9 @@ function dashStudentPerformance(p,v){
  }).filter(Boolean).filter(row=>!query||row.name.toLocaleLowerCase().includes(query))
  .sort((a,b)=>b.hours-a.hours||b.count-a.count||a.name.localeCompare(b.name));
  $("studentReportCount").textContent=rows.length+" student"+(rows.length===1?"":"s");
- $("studentReportRows").innerHTML=rows.length?rows.map(row=>`<tr><th scope="row">${esc(row.name)}</th><td>${row.count}</td><td>${fmtH(row.hours)} h</td><td>${euro(row.earned)}</td><td>${euro(row.due)}</td></tr>`).join(""):'<tr><td colspan="5">No matching completed lessons in this period.</td></tr>';
+ const full=!!query||dashStudentsAll,shown=full?rows:rows.slice(0,8);
+ $("studentReportRows").innerHTML=rows.length?shown.map(row=>`<div class="srrow" role="listitem"><div class="srtop"><b>${esc(row.name)}</b><strong>${euro(row.earned)}</strong></div><div class="srmeta"><span>${row.count} lesson${row.count===1?"":"s"}</span><span>${fmtH(row.hours)} h</span>${row.due>0?`<span class="due">Due ${euro(row.due)}</span>`:`<span class="clear">No balance</span>`}</div></div>`).join(""):`<p class="emptynote">${query?"No matching completed lessons in this period.":"No completed lessons in this period."}</p>`;
+ const more=$("studentReportMore");if(more){more.classList.toggle("hidden",full||rows.length<=8);more.textContent=`Show all ${rows.length} students`;}
 }
 function dashInsights(p,v,cur){
  const out=[],pv=dashPrev(p,v),sp=dashSpan(p,v),today=dateISO(new Date()),soFar=sp&&today>=sp[0]&&today<=sp[1]?" so far":"",name={week:"last week",month:"last month",year:"last year"}[p];
@@ -158,6 +161,7 @@ function dashPdfExtra(cur,y,p,v,c){const s=dashStats(p,v),total=s.cats.reduce((a
  monthRows(6).forEach(r=>{cur.push({x:300,y:yr,text:r.long,size:8.5,color:c.NAVY},{x:400,y:yr,text:`${c.m(r.income)} / ${c.m(r.expenses)} / ${c.m(r.profit)}`,size:8.5,color:c.NAVY});yr-=13;});
  cur.push({x:300,y:yr,text:"Taught / Spent / Profit (EUR)",size:7.5,color:c.GREY});return Math.min(yl,yr-13)-14;}
 
+$("studentReportMore")?.addEventListener("click",()=>{dashStudentsAll=true;dashStudentPerformance($("period").value,$("periodValue").value);});
 $("studentReportSearch").addEventListener("input",()=>dashStudentPerformance($("period").value,$("periodValue").value));
 $("dashCsv").onclick=dashCsv;$("dashShare").onclick=dashShare;$("dashPrint").onclick=()=>window.print();
 $("heatPrev").onclick=()=>dashHeatMove(-1);$("heatNext").onclick=()=>dashHeatMove(1);

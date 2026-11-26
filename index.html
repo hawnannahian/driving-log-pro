@@ -251,7 +251,7 @@
             <p class="pr-foot">Used every day instead of the mosque or calculated times. Friday uses the Jum’a time. A blank time falls back to the automatic time.</p>
           </div>
         </div>
-        <p class="app-version" data-spane="menu" id="appVersion">Driving Log Pro · Version v1.202</p>
+        <p class="app-version" data-spane="menu" id="appVersion">Driving Log Pro · Version v1.203</p>
         <p class="settings-note" data-spane="menu">These settings are saved with your app data and included in backup and sync. Lesson timer and completed-hour accounting are not affected.</p>
       </section>
     </section>
@@ -305,12 +305,8 @@
         <div class="dashcardhead"><div><h3 id="studentReportTitle">Student performance</h3><p class="muted">Completed lessons in the selected reporting period</p></div><span id="studentReportCount" class="student-report-count">0 students</span></div>
         <label class="student-report-search" for="studentReportSearch">Find a student</label>
         <input id="studentReportSearch" type="search" placeholder="Search by student name" autocomplete="off">
-        <div class="student-report-table-wrap">
-          <table class="student-report-table">
-            <thead><tr><th scope="col">Student</th><th scope="col">Lessons</th><th scope="col">Hours</th><th scope="col">Earned</th><th scope="col">Lifetime due</th></tr></thead>
-            <tbody id="studentReportRows"><tr><td colspan="5">No completed lessons in this period.</td></tr></tbody>
-          </table>
-        </div>
+        <div class="srlist" id="studentReportRows" role="list" aria-live="polite"></div>
+        <button type="button" class="btn secondary hidden" id="studentReportMore">Show all students</button>
         <p class="student-report-note">Earned value uses completed lesson records. Lifetime due includes the student’s outstanding lesson and course/package balances.</p>
       </section>
       <section class="chartbox dashcard attendance-insights" id="attendanceInsights" aria-labelledby="attendanceInsightsTitle">
@@ -617,7 +613,7 @@
     <button class="tab" data-tab="islamic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M6.5 20v-6.5c0-3 2.5-5 5.5-6.5 3 1.5 5.5 3.5 5.5 6.5V20"/><path d="M12 4.5v2.5"/><path d="M10 20v-3a2 2 0 0 1 4 0v3"/><path d="M3.5 20v-8M20.5 20v-8"/></svg><span>Islamic</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.202</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.203</span></footer>
   <script src="push-config.js"></script>
   <script src="prayer-times.js"></script>
   <script src="mawaqit-times.js"></script>

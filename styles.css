@@ -4476,3 +4476,31 @@ body{--ios-bg:#f2f2f7}
 #reports .ds-rows b.ok{color:#1e7a3c}#reports .ds-rows b.warn{color:#b45309}
 #reports .datasafe .btn{width:100%;margin-top:10px;min-height:50px}
 #reports .datasafe{margin-top:12px}
+
+/* v1.203 — Reports: one card system. Tokens below are used by every Reports card so spacing, radius, shadow and type stay consistent. */
+#reports{--rc-radius:20px;--rc-pad:16px;--rc-gap:12px;--rc-shadow:0 1px 3px rgba(20,30,60,.06);--rc-ink:#111827;--rc-sub:#53627a}
+#reports .fuelcard,#reports .datasafe,#reports .student-report,#reports .dashmini .report.rep-wide{border:0;border-radius:var(--rc-radius);background:#fff;box-shadow:var(--rc-shadow);padding:var(--rc-pad);margin:var(--rc-gap) 0 0}
+/* Prepaid balance: one compact row (label left, value right) instead of a tall mostly-empty tile */
+#reports .dashmini .report.rep-wide:nth-child(n+5){display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;padding:12px var(--rc-pad)}
+#reports .dashmini .report.rep-wide span{font-size:14.5px;color:var(--rc-sub);font-weight:600}
+#reports .dashmini .report.rep-wide strong{margin:0;font-size:18px;font-variant-numeric:tabular-nums}
+/* Fuel rows a little tighter */
+#reports .fuelrows>div{min-height:42px}
+/* Student performance: a readable list instead of a five-column table */
+#reports .student-report .dashcardhead h3{font-size:18px}
+#reports .srlist{margin-top:6px}
+#reports .srrow{padding:12px 0;border-top:1px solid #eef0f5}
+#reports .srrow:first-child{border-top:0}
+#reports .srtop{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+#reports .srtop b{min-width:0;font-size:16px;color:var(--rc-ink);overflow-wrap:anywhere}
+#reports .srtop strong{flex:none;font-size:16px;font-variant-numeric:tabular-nums}
+#reports .srmeta{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:3px;font-size:13.5px;color:var(--rc-sub)}
+#reports .srmeta .due{color:#b45309;font-weight:700}
+#reports .srmeta .clear{color:#1e7a3c}
+#reports #studentReportMore{width:100%;min-height:48px;margin-top:8px}
+#reports #studentReportMore.hidden{display:none}
+#reports .student-report .emptynote{margin:14px 0;text-align:center;color:var(--rc-sub)}
+#reports .dashmini .report.rep-wide:nth-child(n+5){flex-direction:row!important;align-items:center!important;text-align:left!important;min-height:56px;height:auto}
+#reports .dashmini .report.rep-wide span{text-align:left;margin:0}
+#reports .dashmini .report.rep-wide span,#reports .dashmini .report.rep-wide strong{display:block;margin:0!important;line-height:1.2;align-self:center}
+#reports .dashmini .report.rep-wide span{min-height:0!important;height:auto!important}
