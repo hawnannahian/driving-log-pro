@@ -11,3 +11,9 @@ test("v1.197: consumption needs litres on every fill-up in the odometer span",()
   assert.match(app,/lAll=fe\.length>0&&fe\.every\(e=>Number\(e\.litres\)>0\)/);
   assert.match(app,/l100:km&&km\.lAll&&km\.litres>0/);
 });
+test("v1.202: Log CSV has a trailing Litres column and the importer still accepts older files",()=>{
+  assert.match(app,/"Km","Comment","Litres"\]\.join/);
+  assert.match(app,/e\.comment,Number\(e\.litres\)>0\?e\.litres:""\]/);
+  assert.match(app,/if\(c\.length<11\|\|/);
+  assert.match(app,/if\(e\.type==="Fuel"&&num\(c\[12\]\)>0\)e\.litres=round2\(num\(c\[12\]\)\);/);
+});

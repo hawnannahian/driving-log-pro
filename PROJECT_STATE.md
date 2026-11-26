@@ -1,3 +1,7 @@
+## v1.202 — Litres column in the Log CSV (2026-11-26; owner: "do all")
+- Log CSV export has a new last column **Litres** (empty when not entered). Log CSV import reads it for Fuel rows when present; CSV files without that column (all older exports) import exactly as before. Existing columns, their order and the duplicate check are unchanged.
+- Files: `app.js`, `index.html` (v1.202), `sw.js` (cache v266), `tests/litres.test.js`, this file.
+
 ## v1.201 — Reports and student profiles count lesson hours (2026-11-26; owner: "do all")
 - "Completed lessons" now follows the same rule as the Calendar/Overview/Log: 1 hour = 1 lesson (`unitsOf`). Changed: Reports tile, the Reports student-performance table, CSV/Share/PDF summaries, the student profile (stat list, Overview footer, Attendance "Lessons completed") and the Students list line. The Attendance done/missed table and the profile "Completed lessons (n)" list heading still count bookings (they list records).
 - **Display only: no money, hours or booking data changed.** Old months will show larger lesson counts if they contained multi-hour bookings.
