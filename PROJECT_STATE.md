@@ -1,3 +1,7 @@
+## v1.200 — "Data safety" summary in Reports → Data (2026-11-26; owner: "do all" except Active/Paused/Finished)
+- New read-only card at the top of the Data section: whether the backup file is recent (<= 7 days), whether cloud sync is connected, and the date of the last daily cloud copy, with one verdict line and a "Back up now" button that calls the existing `backupNow()`. It only reads existing state; **backup, restore and cloud-sync behaviour are unchanged**.
+- Files: `app.js`, `index.html` (v1.200), `styles.css`, `sw.js` (cache v264), this file.
+
 ## v1.199 — Faster tab switching (2026-11-26; owner: tapping a tab sometimes takes long)
 - Measured with a synthetic 25-student / 600-lesson dataset under 4x CPU throttle in Chromium: the script part of a tab switch is ~10 ms; the time is browser layout/paint after the panel appears, and Reports was the slowest (~240 ms vs ~100 ms for the other tabs). Reports now uses `content-visibility:auto` on the sections below the summary, which roughly halved its switch time (median ~125 ms). Tabs also get `touch-action:manipulation` so a tap is handled at once.
 - The slow taps on the owner's iPhone were not reproduced (no WebKit here); other causes such as iOS waking the page after being in the background cannot be excluded. Display/performance only; no data change.

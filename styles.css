@@ -4464,3 +4464,15 @@ body{--ios-bg:#f2f2f7}
 .tabbar .tab{touch-action:manipulation}
 #reports .dashmini .report.rep-wide:nth-child(n+5){grid-column:1/-1}
 #reports .fuelcard{margin-top:12px}
+
+/* v1.200 — Data safety summary card (Reports → Data) */
+#reports .datasafe{margin:0 0 14px;padding:16px;border-radius:22px;background:var(--white);box-shadow:0 1px 3px rgba(20,30,60,.06)}
+#reports .ds-head{display:flex;gap:12px;align-items:center;margin-bottom:8px}
+#reports .ds-head h3{margin:0;font-size:18px}#reports .ds-head p{margin:2px 0 0;color:#53627a;font-size:14px;line-height:1.35}
+#reports .ds-ico{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#e6f6ec;color:#1e7a3c;font-size:20px;font-weight:800}
+#reports .datasafe.ds-warn .ds-ico{background:#fff3e2;color:#b45309}
+#reports .ds-rows>div{display:flex;justify-content:space-between;align-items:center;min-height:44px;border-top:1px solid #eef0f5}
+#reports .ds-rows span{color:#53627a;font-size:14.5px}#reports .ds-rows b{font-size:15px}
+#reports .ds-rows b.ok{color:#1e7a3c}#reports .ds-rows b.warn{color:#b45309}
+#reports .datasafe .btn{width:100%;margin-top:10px;min-height:50px}
+#reports .datasafe{margin-top:12px}
