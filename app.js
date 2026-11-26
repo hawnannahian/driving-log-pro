@@ -1111,7 +1111,14 @@ let shownDay=dateISO(new Date());function checkDay(){const t=dateISO(new Date())
 // v1.167 — Reports → Data: one list; each row opens its card (accordion). The cards and their buttons are unchanged.
 function openDataCard(id,scroll){document.querySelectorAll("[data-dm]").forEach(c=>c.classList.toggle("dm-off",c.dataset.dm!==id));
  document.querySelectorAll("[data-dopen]").forEach(b=>b.setAttribute("aria-expanded",String(b.dataset.dopen===id)));if(scroll){const t=$(id);if(t)t.scrollIntoView({block:"start",behavior:"smooth"});}}
-function renderDataMenu(){let last=0;try{last=Number(localStorage.getItem(BACKUP_KEY))||0;}catch{}const d=last?Math.floor((Date.now()-last)/864e5):null,set=(id,t)=>{const e=$(id);if(e)e.textContent=t;};set("dmBackup",d===null?"No backup yet":d===0?"Last backup: today":`Last backup: ${d} day${d>1?"s":""} ago`);set("dmCloud",cloudCfg()?"Connected":"Not connected");}
+function renderDataMenu(){let last=0;try{last=Number(localStorage.getItem(BACKUP_KEY))||0;}catch{}const d=last?Math.floor((Date.now()-last)/864e5):null,set=(id,t)=>{const e=$(id);if(e)e.textContent=t;};set("dmBackup",d===null?"No backup yet":d===0?"Last backup: today":`Last backup: ${d} day${d>1?"s":""} ago`);set("dmCloud",cloudCfg()?"Connected":"Not connected");renderDataSafe(d);}
+// v1.200 — read-only summary of where the data is protected. It only reads existing state (backup date, cloud settings, daily cloud copy) and reuses backupNow(); no backup/sync behaviour changed.
+function renderDataSafe(d){const box=$("dataSafe");if(!box)return;const cloud=!!cloudCfg(),snap=cloud?lastSnap():"",today=dateISO(new Date()),snapOk=cloud&&snap&&(Date.parse(today)-Date.parse(snap))/864e5<=2,fileOk=d!==null&&d<=7,fileTxt=d===null?"Never":d===0?"Today":`${d} day${d>1?"s":""} ago`;
+ const set=(id,t,cls)=>{const e=$(id);if(!e)return;e.textContent=t;e.className=cls||"";};
+ set("dsBackup",fileTxt,fileOk?"ok":"warn");set("dsCloud",cloud?"Connected":"Not connected",cloud?"ok":"warn");set("dsSnap",!cloud?"Needs cloud sync":snap?(snap===today?"Today":snap):"Not yet",snapOk?"ok":"warn");
+ const safe=fileOk||(cloud&&snapOk),icon=$("dsIco");icon.textContent=safe?"✓":"!";box.classList.toggle("ds-warn",!safe);
+ $("dsVerdict").textContent=safe?(fileOk&&cloud&&snapOk?"Your data is backed up in more than one place.":"Your data has a recent copy."):"No recent copy. If this phone is lost or reset, your records are lost. Back up now.";}
+const dsBtn=$("dsBackupNow");if(dsBtn)dsBtn.onclick=()=>backupNow();
 document.querySelectorAll("[data-dopen]").forEach(b=>b.onclick=()=>{const open=b.getAttribute("aria-expanded")==="true";if(open){document.querySelectorAll("[data-dm]").forEach(c=>c.classList.add("dm-off"));document.querySelectorAll("[data-dopen]").forEach(x=>x.setAttribute("aria-expanded","false"));}else openDataCard(b.dataset.dopen,true);});
 const swipeList=(list,rowCls,opts)=>{if(!list)return;opts=opts||{};
  // v1.170 — iOS-style swipe: the tray grows with the finger, rubber-band resistance, spring settle, flick to open/close, a light tick when crossing the open point, and (Today list) a long swipe runs "Lesson done" with a 2-second Undo.
