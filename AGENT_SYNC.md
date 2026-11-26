@@ -5,6 +5,15 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 
 ## Recent handover entries
 
+### 2026-11-26 — v1.192–v1.202 (Claude), all merged (PRs up to #310)
+- v1.192 Add/Edit student form: bottom sheet on phones, "WhatsApp number is the same as the phone" switch, pinned Cancel/Save, Delete as its own button. No new fields (Status/Notes were declined by the owner). v1.196: the student's saved hourly rate now pre-fills the rate of a NEW lesson only (it was unused before); existing lessons keep their stored rate and course lessons use the course rate (course price / hours).
+- v1.193–v1.194 Reports hero card and PDF/CSV/Share use plain names (Lessons you taught / Money spent / Profit from lessons / Money received / Cash left) with one-line meanings and an advance-payment tip. Labels only; formulas unchanged; "Outstanding" keeps its name. Older CSVs have different label text.
+- v1.195 profile "..." sheet moved into the dialog so Cancel is not clipped on iPhone. v1.198/v1.199 Reports Fuel card; v1.199 `content-visibility:auto` on the lower Reports sections to speed up the Reports tab (measured under CPU throttle; not verified on a real iPhone).
+- v1.197 litres: optional `litres` (number) on Fuel entries; Fuel form field and live price-per-litre; Reports Fuel card shows litres filled, average price per litre, consumption and distance per litre (consumption needs litres on every fill-up between the first and last odometer reading of the period). v1.202: Log CSV export has a trailing "Litres" column; import reads it, and older 12-column files import unchanged. Sync merge and JSON backup carry the field with the entry (checked with synthetic data).
+- v1.200 Reports -> Data has a read-only "Data safety" card (backup file age, cloud sync connected, last daily cloud copy, "Back up now" reusing `backupNow()`); backup/restore/sync logic unchanged. v1.201 "Completed lessons" now counts lesson hours (1 hour = 1 lesson) in Reports, CSV/Share/PDF and student profiles, matching the Calendar/Overview/Log; Attendance done/missed table and list headings still count bookings.
+- Tests: `node --test tests/*.test.js` 179 pass at v1.202; Chromium 390x844 and 320x568 checks. Not tested: real iPhone / WebKit, a full cloud-sync / restore round trip through the UI, opening the PDF/CSV in other apps.
+- Still open: Web Push backend for lock-screen timer alerts (needs the owner's Cloudflare setup and approval; not deployed); fixing one course's rate (needs the owner's student/course/hours); WhatsApp multi-lesson message usability (requirement unclear).
+
 ### 2026-11-23 — v1.177–v1.191 (Claude), all merged (PRs up to #298)
 - v1.177–v1.180 lesson counting: a booking now counts as one lesson per hour (`lessonUnits`/`unitsOf`) in the Calendar (day/week/month, 7-day strip), Overview (Today, Next Day) and the Log "Lessons done today" tile. Reports "Completed lessons" and student profiles still count bookings (not changed, owner decision pending).
 - v1.181–v1.182 payments: "Receive payment" is now "Record payment". If the student has a course balance it asks "What is this payment for?": course balance (adds an ordinary course payment to the oldest course with a balance) or advance for new lessons (previous behaviour). Paying more than the balance pays it off and adds the rest as a new advance-credit course at the entered price per hour. No data shape change; safety copy kept.
@@ -274,7 +283,7 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 
 
 ## Latest verified project state
-- **main** after PR #298: footer **v1.191**, Service Worker cache **`nahians-schedule-cache-v255`**. GitHub Pages deployments were checked successful up to v1.188 (run for `e570b44`); re-check Actions for later runs before claiming deployment.
+- **main** after PR #310: footer **v1.202**, Service Worker cache **`nahians-schedule-cache-v266`**. GitHub Pages deployments were checked successful up to v1.201 (run for `858326d`; v1.202 was still building when written); re-check Actions for later runs before claiming deployment.
 - Latest releases: v1.110 owner's recorded timer voices (PR #192), v1.111 touch targets (PR #193), v1.112 minimum text size (PR #197), v1.113 design tokens (PR #199), v1.114 tab-bar aria-current (PR #201); PR #194 is tooling/docs only.
 - Other recent releases: v1.68 daily cloud backup, v1.70 realistic car header image, v1.71-v1.74 (ChatGPT) Students/Forms/bottom-nav/profile UX.
 - **Open PRs:** #13 only (verified 2026-11-17; #73 was closed as superseded the same day). Older "DRAFT" labels on earlier ChatGPT entries below are historical wording; check GitHub for the real state.
