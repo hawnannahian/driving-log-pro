@@ -1,3 +1,9 @@
+## v1.199 — Faster tab switching (2026-11-26; owner: tapping a tab sometimes takes long)
+- Measured with a synthetic 25-student / 600-lesson dataset under 4x CPU throttle in Chromium: the script part of a tab switch is ~10 ms; the time is browser layout/paint after the panel appears, and Reports was the slowest (~240 ms vs ~100 ms for the other tabs). Reports now uses `content-visibility:auto` on the sections below the summary, which roughly halved its switch time (median ~125 ms). Tabs also get `touch-action:manipulation` so a tap is handled at once.
+- The slow taps on the owner's iPhone were not reproduced (no WebKit here); other causes such as iOS waking the page after being in the background cannot be excluded. Display/performance only; no data change.
+- Also fixed: the "Course prepaid balance" tile did not span the full row (a more specific rule overrode v1.198's), and the Fuel card now has space above it.
+- Files: `styles.css`, `index.html` (v1.199), `sw.js` (cache v263), this file.
+
 ## v1.198 — Fuel card in Reports and calmer Fuel form (2026-11-24; owner: "Do it directly")
 - Reports: the seven loose fuel tiles are one **Fuel** card: Consumption (L/100 km) and Average price (€/L) as the two big figures; Litres filled, Distance per litre, Distance (odometer) and Fuel cost per km as rows; plain-language hints when litres are missing. All element ids are unchanged; no calculation changed.
 - Fuel form: "Litres (L)" label, no number-spinner arrows on Amount/Odometer/Litres.
