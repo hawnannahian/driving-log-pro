@@ -27,7 +27,7 @@ function dashStats(p,v){
  const rep=state.entries.filter(e=>inSel(e.date,p,v)),t=totals(rep),done=rep.filter(e=>e.type==="Lesson"&&isDone(e)),cats=[0,0,0,0];
  rep.filter(e=>e.type!=="Lesson"&&!isBooking(e)).forEach(e=>{cats[dashCatOf(e)]+=Number(e.cost||0);});
  const owedPk=dueInPeriod(p,v);
- return {rev:dashRound(t.income),exp:dashRound(t.expenses),net:dashRound(t.income-t.expenses),col:dashCollected(p,v),out:dashRound(t.unpaid+owedPk),hours:t.hours,lessons:done.length,
+ return {rev:dashRound(t.income),exp:dashRound(t.expenses),net:dashRound(t.income-t.expenses),col:dashCollected(p,v),out:dashRound(t.unpaid+owedPk),hours:t.hours,lessons:unitsOf(done),
   students:new Set(done.map(e=>(e.student||"").trim().toLowerCase()).filter(Boolean)).size,cats:cats.map(dashRound)};}
 
 function dashPrev(p,v){if(p==="all"||!v)return null;if(p==="year")return String(Number(v)-1);
@@ -79,7 +79,7 @@ function dashStudentPerformance(p,v){
   const hoursTotal=lessons.reduce((sum,e)=>sum+hours(e),0);
   const earned=lessons.reduce((sum,e)=>sum+income(e),0);
   const lifetime=studentStats(student);
-  return {name:student.name,count:lessons.length,hours:hoursTotal,earned:earned,due:lifetime.unpaid};
+  return {name:student.name,count:unitsOf(lessons),hours:hoursTotal,earned:earned,due:lifetime.unpaid};
  }).filter(Boolean).filter(row=>!query||row.name.toLocaleLowerCase().includes(query))
  .sort((a,b)=>b.hours-a.hours||b.count-a.count||a.name.localeCompare(b.name));
  $("studentReportCount").textContent=rows.length+" student"+(rows.length===1?"":"s");

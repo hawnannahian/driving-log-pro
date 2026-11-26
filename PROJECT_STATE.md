@@ -1,3 +1,8 @@
+## v1.201 — Reports and student profiles count lesson hours (2026-11-26; owner: "do all")
+- "Completed lessons" now follows the same rule as the Calendar/Overview/Log: 1 hour = 1 lesson (`unitsOf`). Changed: Reports tile, the Reports student-performance table, CSV/Share/PDF summaries, the student profile (stat list, Overview footer, Attendance "Lessons completed") and the Students list line. The Attendance done/missed table and the profile "Completed lessons (n)" list heading still count bookings (they list records).
+- **Display only: no money, hours or booking data changed.** Old months will show larger lesson counts if they contained multi-hour bookings.
+- Files: `app.js`, `reports-dashboard.js`, `index.html` (v1.201), `sw.js` (cache v265), `tests/lesson-hours-reports.test.js`, this file.
+
 ## v1.200 — "Data safety" summary in Reports → Data (2026-11-26; owner: "do all" except Active/Paused/Finished)
 - New read-only card at the top of the Data section: whether the backup file is recent (<= 7 days), whether cloud sync is connected, and the date of the last daily cloud copy, with one verdict line and a "Back up now" button that calls the existing `backupNow()`. It only reads existing state; **backup, restore and cloud-sync behaviour are unchanged**.
 - Files: `app.js`, `index.html` (v1.200), `styles.css`, `sw.js` (cache v264), this file.
