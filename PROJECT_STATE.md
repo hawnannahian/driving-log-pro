@@ -1,3 +1,10 @@
+## v1.203 — Reports polish pass: one card system, student list (2026-11-26; owner: "Do all")
+- Reports cards (Fuel, Data safety, Student performance, Prepaid balance row) now share one set of tokens (radius, padding, gap, shadow) declared once on `#reports`, instead of each release adding its own values.
+- "Course prepaid balance" is a compact one-line row (label left, value right) instead of a tall, mostly empty tile.
+- "Student performance" is a list, not a five-column table: name (wraps, never truncated) and earned on the first line; lessons, hours and "Due €" / "No balance" below. Shows the top 8 with a "Show all N students" button; searching shows every match. Same data and calculations as before.
+- Honest scope: this consolidates the Reports page only. The 300 KB stylesheet still contains older overlapping rules for other screens; they are not rewritten.
+- Files: `reports-dashboard.js`, `index.html` (v1.203), `styles.css`, `sw.js` (cache v267), this file.
+
 ## v1.202 — Litres column in the Log CSV (2026-11-26; owner: "do all")
 - Log CSV export has a new last column **Litres** (empty when not entered). Log CSV import reads it for Fuel rows when present; CSV files without that column (all older exports) import exactly as before. Existing columns, their order and the duplicate check are unchanged.
 - Files: `app.js`, `index.html` (v1.202), `sw.js` (cache v266), `tests/litres.test.js`, this file.
