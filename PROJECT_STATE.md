@@ -1,3 +1,8 @@
+## CI — browser smoke test (2026-11-27; owner: "Do all")
+- No app asset changed (no footer/cache bump). New `tests/browser/smoke.mjs` (real Chromium via Playwright, synthetic data only) opens all six tabs, the four Reports views, the student profile (+ "⋯" sheet), Receive payment, Edit student and New record at 390x844 and 320x568, and fails on any uncaught error, console error, horizontal overflow, or a Reports view showing another view's sections. Verified locally that it passes on clean code and fails on a deliberately injected error.
+- The workflow now runs it after the node tests, and its `paths` filter was widened to `*.js` and `manifest.webmanifest` (before, changes to files such as `reports-dashboard.js` did not trigger CI at all).
+- Run locally: `node tests/browser/smoke.mjs` (needs Playwright with Chromium).
+
 ## v1.205 — Self-audit fixes (2026-11-27; owner: an expert said issues remain)
 - Accessibility: the Reports sub-tab buttons were marked `role="tab"` without linked tab panels or arrow-key behaviour (incorrect ARIA). They are now a plain group of toggle buttons (`aria-pressed`), like the period selector. Hygiene: 23 buttons without `type` now have `type="button"` (none were in a form, so no behaviour change).
 - Audit findings that were checked and are fine: no duplicate ids, no inline `style` attributes, no images without alt, all JS files pass `node --check`, user-entered text inserted with innerHTML goes through `esc()` (the three remaining template uses are PDF text, `textContent` and a `confirm` dialog).
