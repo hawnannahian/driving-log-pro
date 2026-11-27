@@ -35,3 +35,5 @@ jobs:
         run: node tests/browser/flows.mjs
       - name: Malformed-data robustness check
         run: node tests/browser/malformed.mjs
+      - name: Timer voice-cue timing check
+        run: node tests/browser/timer-cues.mjs

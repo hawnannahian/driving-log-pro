@@ -1,3 +1,8 @@
+## v1.208 — Timer: no late "5 minutes left", never both announcements together (2026-11-27; owner: reopening near the end sometimes plays both messages)
+- Reproduced with a fake clock in Chromium: reopening the app at 54:30 or 54:55 played the missed "5 minutes left" cue immediately and then the "lesson ended" cue 30 s / 5 s later, i.e. both messages together. The missed warning is now spoken only if the app is open within 30 s of the 50:00 mark; otherwise it is skipped (the end cue keeps its own rule: only within 20 s of 55:00).
+- New `tests/browser/timer-cues.mjs` (real Chromium, fake clock, synthetic data) checks 8 reopen times and runs in CI. Not covered: the long session audio file path (needs a real audio unlock), iOS suspend/resume behaviour on a real iPhone.
+- Files: `app.js`, `index.html` (v1.208), `sw.js` (cache v272), `tests/timer-voice.test.js`, `tests/browser/timer-cues.mjs`, the CI workflow, this file.
+
 ## v1.207 — Hardening against corrupt records (2026-11-27; owner relayed an expert's request to keep re-checking)
 - A fuzz run (random, partly invalid synthetic datasets: null/blank/impossible dates, null names, text where numbers belong, unknown course ids, unusual types) found three places that threw on malformed data: `ensureStudents` (a student with a null name), `inSel` and `key` (an entry with a null date). They now treat a missing value as an empty string when **reading**; stored records are never rewritten or "fixed".
 - Single-field corruptions of money fields (price/hours/amount/cost/rate as text, null, zero, negative, unknown course id) were checked and show no NaN/undefined/errors.
