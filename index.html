@@ -251,7 +251,7 @@
             <p class="pr-foot">Used every day instead of the mosque or calculated times. Friday uses the Jum’a time. A blank time falls back to the automatic time.</p>
           </div>
         </div>
-        <p class="app-version" data-spane="menu" id="appVersion">Driving Log Pro · Version v1.203</p>
+        <p class="app-version" data-spane="menu" id="appVersion">Driving Log Pro · Version v1.204</p>
         <p class="settings-note" data-spane="menu">These settings are saved with your app data and included in backup and sync. Lesson timer and completed-hour accounting are not affected.</p>
       </section>
     </section>
@@ -274,23 +274,35 @@
 
     <section class="panel tabpanel hidden" id="reports">
       <div class="sectionhead rep-head"><div><h2>Reports</h2></div></div>
-      <div class="rep-seg" role="group" aria-label="Report period"><button type="button" data-rp="week">Week</button><button type="button" data-rp="month">Month</button><button type="button" data-rp="year">Year</button><button type="button" data-rp="all">All</button></div>
-      <div class="toolbar"><select id="period" aria-label="Report type"><option value="week">Weekly</option><option value="month" selected>Monthly</option><option value="year">Yearly</option><option value="all">All time</option></select><select id="periodValue" aria-label="Report period"></select></div>
-      <div class="dashactions"><button type="button" class="chipbtn" id="exportPdf">⇩ PDF</button><button type="button" class="chipbtn" id="dashCsv">⇩ CSV</button><button type="button" class="chipbtn" id="dashShare">↗ Share</button><button type="button" class="chipbtn" id="dashPrint">⎙ Print</button></div>
-      <section class="dashhero" aria-label="Business results">
-        <div class="herorev"><span>Lessons you taught</span><strong id="rIncome">€0.00</strong><span class="rep-delta hidden" id="rDelta"></span><div class="rep-spark hidden" id="rSpark" aria-hidden="true"></div><small>Value of the lessons you completed. A lesson counts when it is taught, not when it is paid.</small></div>
-        <div class="herogrid"><div><span>Money spent</span><b id="rExpenses" class="exp">€0.00</b><small class="hero-note">Fuel, repairs and other costs</small></div><div><span>Profit from lessons</span><b id="rProfit">€0.00</b><small class="hero-note">Lessons taught − money spent</small></div><div class="hero-wide"><span>Money received</span><b id="rCollected">€0.00</b><small class="hero-note">Cash that came in, including advance payments for future lessons</small></div><div class="hero-wide"><span>Cash left</span><b id="rCashAfter">€0.00</b><small class="hero-note">Money received − money spent</small></div><div class="hero-hidden" hidden><span>Outstanding</span><b id="rUnpaid" class="owe">€0.00</b></div></div>
-        <p class="hero-tip"><b>Why is “received” different from “taught”?</b> Students often pay in advance. Money for lessons you have not driven yet is already received, but it only becomes profit when the lesson is taught.</p>
+      <div class="rep-views" role="tablist" aria-label="Report sections"><button type="button" role="tab" data-rview-go="summary" aria-selected="true">Summary</button><button type="button" role="tab" data-rview-go="fuel" aria-selected="false">Fuel</button><button type="button" role="tab" data-rview-go="students" aria-selected="false">Students</button><button type="button" role="tab" data-rview-go="data" aria-selected="false">Data</button></div>
+      <div class="rep-seg rep-period" role="group" aria-label="Report period"><button type="button" data-rp="week">Week</button><button type="button" data-rp="month">Month</button><button type="button" data-rp="year">Year</button><button type="button" data-rp="all">All</button></div>
+      <div class="toolbar rep-period"><select id="period" aria-label="Report type"><option value="week">Weekly</option><option value="month" selected>Monthly</option><option value="year">Yearly</option><option value="all">All time</option></select><select id="periodValue" aria-label="Report period"></select></div>
+      <section class="rsum" data-rview="summary" aria-label="Business results">
+        <p class="rs-lab">Lessons you taught</p>
+        <strong class="rs-num" id="rIncome">€0.00</strong>
+        <span class="rep-delta hidden" id="rDelta"></span>
+        <div class="rep-spark hidden" id="rSpark" aria-hidden="true"></div>
+        <p class="rs-note">The value of the lessons you completed. A lesson counts when it is taught, not when it is paid.</p>
+        <p class="rs-cap">Money</p>
+        <div class="rs-grp">
+          <div class="rs-row"><i class="rs-ic ic-g" aria-hidden="true">↓</i><span>Money received</span><b id="rCollected">€0.00</b></div>
+          <div class="rs-row"><i class="rs-ic ic-o" aria-hidden="true">↑</i><span>Money spent</span><b id="rExpenses" class="exp">€0.00</b></div>
+          <div class="rs-row"><i class="rs-ic ic-b" aria-hidden="true">＋</i><span>Profit from lessons</span><b id="rProfit">€0.00</b></div>
+          <div class="rs-row"><i class="rs-ic ic-p" aria-hidden="true">€</i><span>Cash left</span><b id="rCashAfter">€0.00</b></div>
+        </div>
+        <p class="rs-foot">Profit = lessons taught − money spent. Cash left = money received − money spent. Received can be higher than taught because students often pay in advance, and that money only becomes profit when the lesson is taught.</p>
+        <div class="dashactions" data-rview="summary"><button type="button" class="chipbtn" id="exportPdf">⇩ PDF</button><button type="button" class="chipbtn" id="dashCsv">⇩ CSV</button><button type="button" class="chipbtn" id="dashShare">↗ Share</button><button type="button" class="chipbtn" id="dashPrint">⎙ Print</button></div>
+        <div class="hero-hidden" hidden><span>Outstanding</span><b id="rUnpaid" class="owe">€0.00</b></div>
       </section>
-      <section class="rep-due hidden" id="repDue" aria-labelledby="repDueTitle"><div class="rep-due-head"><span id="repDueTitle">Collect money</span><em id="repDueTotal"></em></div><div class="rep-due-list" id="repDueList"></div></section>
-      <div class="reportgrid dashmini">
+      <section class="rep-due hidden" data-rview="summary" id="repDue" aria-labelledby="repDueTitle"><div class="rep-due-head"><span id="repDueTitle">Collect money</span><em id="repDueTotal"></em></div><div class="rep-due-list" id="repDueList"></div></section>
+      <div class="reportgrid dashmini" data-rview="summary">
         <article class="report rep-t" data-ico="◷" data-col="2563eb"><span>Driving hours</span><strong id="rHours">0 h</strong></article>
         <article class="report rep-t" data-ico="✓" data-col="16a34a"><span>Completed lessons</span><strong id="rCount">0</strong></article>
         <article class="report rep-t" data-ico="☺" data-col="7c3aed"><span>Active students</span><strong id="rStudents">0</strong></article>
         <article class="report rep-t" data-ico="€" data-col="f5a800"><span>Avg value / hour</span><strong id="rAvg">–</strong></article>
         <article class="report rep-wide"><span>Course prepaid balance</span><strong id="rPrepaid">€0.00</strong></article>
       </div>
-      <section class="fuelcard" id="fuelCard" aria-labelledby="fuelCardTitle">
+      <section class="fuelcard" data-rview="fuel" id="fuelCard" aria-labelledby="fuelCardTitle">
         <div class="fuelhead"><h3 id="fuelCardTitle">Fuel</h3><span>This period</span></div>
         <div class="fuelbig"><div><span>Consumption</span><strong id="rL100">–</strong></div><div><span>Average price</span><strong id="rPricePerL">–</strong></div></div>
         <div class="fuelrows">
@@ -301,7 +313,7 @@
         </div>
         <p class="rep-hint" id="rKmWhy"></p><p class="rep-hint" id="rLitresWhy"></p>
       </section>
-      <section class="chartbox dashcard student-report" id="studentReportBox" aria-labelledby="studentReportTitle">
+      <section class="chartbox dashcard student-report" data-rview="students" id="studentReportBox" aria-labelledby="studentReportTitle">
         <div class="dashcardhead"><div><h3 id="studentReportTitle">Student performance</h3><p class="muted">Completed lessons in the selected reporting period</p></div><span id="studentReportCount" class="student-report-count">0 students</span></div>
         <label class="student-report-search" for="studentReportSearch">Find a student</label>
         <input id="studentReportSearch" type="search" placeholder="Search by student name" autocomplete="off">
@@ -309,7 +321,7 @@
         <button type="button" class="btn secondary hidden" id="studentReportMore">Show all students</button>
         <p class="student-report-note">Earned value uses completed lesson records. Lifetime due includes the student’s outstanding lesson and course/package balances.</p>
       </section>
-      <section class="chartbox dashcard attendance-insights" id="attendanceInsights" aria-labelledby="attendanceInsightsTitle">
+      <section class="chartbox dashcard attendance-insights" data-rview="students" id="attendanceInsights" aria-labelledby="attendanceInsightsTitle">
         <div class="dashcardhead"><div><h3 id="attendanceInsightsTitle">Attendance insights</h3><p class="muted">Only lessons explicitly confirmed as happened or not happened are included in the attendance rate</p></div></div>
         <div class="attendance-kpis" aria-live="polite">
           <article><span>Confirmed completed</span><strong id="attendanceDone">0</strong></article>
@@ -325,8 +337,8 @@
         </div>
         <p class="student-report-note">Unconfirmed lessons are shown separately and are excluded from the attendance rate. A booking is never treated as an absence automatically.</p>
       </section>
-      <section class="chartbox dashcard" id="insightBox"><h3>Insights</h3><ul class="insightlist" id="insightList"></ul></section>
-      <section class="finreports" id="finReports">
+      <section class="chartbox dashcard" data-rview="summary" id="insightBox"><h3>Insights</h3><ul class="insightlist" id="insightList"></ul></section>
+      <section class="finreports" data-rview="data" id="finReports">
         <button type="button" class="finhead" id="finToggle" aria-expanded="false" aria-controls="finBody"><span class="fintitle"><b>Financial Reports</b><small>Charts, student payments, comparisons, calendar</small></span><svg class="finchev" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
         <div class="finbody" id="finBody" inert><div class="fininner">
       <div class="chartbox hidden" id="chartBox">
@@ -347,7 +359,7 @@
       <div class="comparebox" id="compareBox"></div>
         </div></div>
       </section>
-      <section class="datasafe" id="dataSafe" aria-labelledby="dataSafeTitle">
+      <section class="datasafe" data-rview="data" id="dataSafe" aria-labelledby="dataSafeTitle">
         <div class="ds-head"><span class="ds-ico" id="dsIco" aria-hidden="true">✓</span><div><h3 id="dataSafeTitle">Data safety</h3><p id="dsVerdict">Checking…</p></div></div>
         <div class="ds-rows">
           <div><span>Backup file</span><b id="dsBackup">–</b></div>
@@ -356,7 +368,7 @@
         </div>
         <button type="button" class="btn primary" id="dsBackupNow">Back up now</button>
       </section>
-      <div class="dm" id="dataMenu">
+      <div class="dm" data-rview="data" id="dataMenu">
         <p class="set-group">Data</p>
         <div class="set-list">
           <button type="button" class="set-row" data-dopen="backupCard" aria-expanded="false"><span class="set-txt"><b>Backup &amp; restore</b><small id="dmBackup"></small></span><span class="set-chev" aria-hidden="true">›</span></button>
@@ -367,7 +379,7 @@
           <button type="button" class="set-row" data-dopen="lessonAuditCard" aria-expanded="false"><span class="set-txt"><b>Lesson recovery history</b></span><span class="set-chev" aria-hidden="true">›</span></button>
         </div>
       </div>
-      <div class="dataactions">
+      <div class="dataactions" data-rview="data">
         <div class="data-card dm-off" id="kmCard" data-dm="kmCard"><h3>Odometer readings</h3><p>Every odometer value saved on a Fuel record, oldest first. The Reports distance needs two readings inside the chosen period.</p><div id="kmList" class="kmlist"></div></div>
         <div class="data-card dm-off" id="importCard" data-dm="importCard"><h3>Import workbook data</h3><p>Import Log and Students CSV files separately. Duplicate records are skipped.</p>
           <label class="btn secondary">Import Log CSV<input type="file" id="importLog" accept=".csv,text/csv"></label>
@@ -388,7 +400,7 @@
         <div class="data-card dm-off" id="lessonRecoveryCard" data-dm="lessonRecoveryCard"><h3>Deleted lessons</h3><p>Deleted lessons can be restored for 30 days. After that, the lesson details are removed while the audit event remains.</p><div id="deletedLessonsList" class="recoverylist"></div></div>
         <div class="data-card dm-off" id="lessonAuditCard" data-dm="lessonAuditCard"><h3>Lesson recovery history</h3><p>Deletion, restoration and expiry events are retained in this app’s backup and private cloud sync. The history has no automatic expiry.</p><p class="hint" id="lessonAuditSummary"></p><button type="button" class="btn ghost hidden" id="lessonAuditToggle">Show all events</button><div id="lessonAuditList" class="recoverylist"></div></div>
       </div>
-      <div class="data-card cloudcard dm-off" id="cloudCard" data-dm="cloudCard">
+      <div class="data-card cloudcard dm-off" data-rview="data" id="cloudCard" data-dm="cloudCard">
         <h3>Cloud sync</h3>
         <p id="cloudStatus">Not connected.</p>
         <div id="cloudForm" class="cloudform">
@@ -400,7 +412,7 @@
         <div id="cloudOn" class="cloudform hidden"><button class="btn secondary" id="cloudNow">Sync now</button><button class="btn ghost" id="cloudDisconnect">Disconnect this device</button></div>
         <div id="snapBox" class="cloudform hidden"><p class="hint" id="snapStatus"></p><button type="button" class="btn secondary" id="snapShow">Show cloud backups</button><div id="snapList" class="recoverylist"></div></div>
       </div>
-      <p class="notice"><b>Privacy note:</b> Records are stored in this browser. With Cloud sync on, a copy is also kept in your private GitHub repository. Keep exporting backups.</p>
+      <p class="notice" data-rview="data"><b>Privacy note:</b> Records are stored in this browser. With Cloud sync on, a copy is also kept in your private GitHub repository. Keep exporting backups.</p>
     </section>
     <section class="panel tabpanel hidden islamicpanel" id="islamic" aria-label="Islamic Companion">
       <div class="isbanner">
@@ -613,7 +625,7 @@
     <button class="tab" data-tab="islamic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M6.5 20v-6.5c0-3 2.5-5 5.5-6.5 3 1.5 5.5 3.5 5.5 6.5V20"/><path d="M12 4.5v2.5"/><path d="M10 20v-3a2 2 0 0 1 4 0v3"/><path d="M3.5 20v-8M20.5 20v-8"/></svg><span>Islamic</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.203</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.204</span></footer>
   <script src="push-config.js"></script>
   <script src="prayer-times.js"></script>
   <script src="mawaqit-times.js"></script>
