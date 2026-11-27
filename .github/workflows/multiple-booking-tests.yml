@@ -5,10 +5,10 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - "app.js"
+      - "*.js"
       - "index.html"
       - "styles.css"
-      - "sw.js"
+      - "manifest.webmanifest"
       - "tests/**"
       - ".github/workflows/multiple-booking-tests.yml"
 permissions:
@@ -25,3 +25,9 @@ jobs:
         run: find . -type f -name '*.js' -not -path './.git/*' -print0 | xargs -0 -n1 node --check
       - name: Run all node tests (Multiple Booking, Mawaqit, profile render)
         run: node --test tests/*.test.js
+      - name: Install Playwright (Chromium) for the browser smoke test
+        run: |
+          npm install --no-save --no-package-lock playwright@1.63.0
+          npx playwright install --with-deps chromium
+      - name: Browser smoke test (six tabs, Reports views, main dialogs)
+        run: node tests/browser/smoke.mjs
