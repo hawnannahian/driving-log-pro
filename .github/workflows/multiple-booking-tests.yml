@@ -31,3 +31,5 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Browser smoke test (six tabs, Reports views, main dialogs)
         run: node tests/browser/smoke.mjs
+      - name: Browser flow test (student, booking, payment, litres, backup restore, CSV)
+        run: node tests/browser/flows.mjs
