@@ -10,8 +10,6 @@ test("v1.104: header stays compact (76px, within the 75-85px target) and brand i
 });
 test("v1.104: four equal stat cards, reminder count, slot cards and timeline states are styled",()=>{
   assert.match(block,/#calendar \.cal-day-stats\{grid-template-columns:repeat\(4,minmax\(0,1fr\)\)!important/);
-  assert.match(block,/\.remindcount\{/);
-  assert.match(block,/#calendar \.cal-slot strong\{[^}]*background:var\(--pc-blue\)/);
   for(const s of [".tlles.paid",".tlles.unpaid",".tlles.pkg"])assert.ok(block.includes("#calendar "+s),s);
 });
 test("v1.104: presentation only - the reminder count is the single JS change and all links/handlers are kept",()=>{

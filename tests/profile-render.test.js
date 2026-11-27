@@ -47,7 +47,7 @@ test("Students tab 'Recently joined' lists newest students first without a 3-les
 });
 test("the Outstanding tile of the Business dashboard hero is hidden but its id is kept (v1.83)",()=>{
  const html=fs.readFileSync(path.join(__dirname,"..","index.html"),"utf8"),css=fs.readFileSync(path.join(__dirname,"..","styles.css"),"utf8");
- assert.ok(html.includes('<div class="hero-hidden" hidden><span>Outstanding</span><b id="rUnpaid"'));assert.ok(css.includes("#reports .herogrid .hero-hidden{display:none!important}"));
+ assert.ok(html.includes('<div class="hero-hidden" hidden><span>Outstanding</span><b id="rUnpaid"'));assert.ok(css.includes("#reports .rsum .hero-hidden{display:none!important}"));
 });
 test("WhatsApp several-lessons message: editable wording and period, older saved settings stay valid (v1.85)",()=>{
  const app=fs.readFileSync(path.join(__dirname,"..","app.js"),"utf8"),html=fs.readFileSync(path.join(__dirname,"..","index.html"),"utf8");
