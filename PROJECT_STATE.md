@@ -1,3 +1,9 @@
+## v1.204 — Reports sub-tabs and an iOS-style Summary (2026-11-27; owner: "Do it", after expert feedback that Reports was too crowded)
+- Reports has a segmented control: **Summary** (money summary, activity tiles, Collect money, insights), **Fuel**, **Students** (student list + attendance) and **Data** (financial reports/charts, Data safety, backup/import/cloud, odometer, deleted lessons). Sections carry `data-rview`; CSS shows only the selected one. Every element id, render function, calculation and button (PDF/CSV/Share/Print, period selectors) is unchanged. The period selectors are hidden on the Data tab.
+- Summary: one large "Lessons you taught" number with the change chip and 6-month bars, then a grouped list (Money received, Money spent, Profit from lessons, Cash left) with coloured icons and the explanatory note. The segmented labels keep one colour in every state (lesson from the v1.184-v1.190 iPhone repaint glitch).
+- Navigating from Settings to a Data card (`data-sgo`) switches to the Data tab first. The selected tab resets to Summary on app start.
+- Files: `app.js`, `index.html` (v1.204), `styles.css`, `sw.js` (cache v268), this file.
+
 ## v1.203 — Reports polish pass: one card system, student list (2026-11-26; owner: "Do all")
 - Reports cards (Fuel, Data safety, Student performance, Prepaid balance row) now share one set of tokens (radius, padding, gap, shadow) declared once on `#reports`, instead of each release adding its own values.
 - "Course prepaid balance" is a compact one-line row (label left, value right) instead of a tall, mostly empty tile.

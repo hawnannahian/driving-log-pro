@@ -4504,3 +4504,35 @@ body{--ios-bg:#f2f2f7}
 #reports .dashmini .report.rep-wide span{text-align:left;margin:0}
 #reports .dashmini .report.rep-wide span,#reports .dashmini .report.rep-wide strong{display:block;margin:0!important;line-height:1.2;align-self:center}
 #reports .dashmini .report.rep-wide span{min-height:0!important;height:auto!important}
+
+/* v1.204 — Reports sub-tabs and an iOS-style Summary. Sections are shown by data-view; the segmented labels never change colour (only the pill behind them), the lesson from the iPhone repaint glitch. */
+#reports:not([data-view="summary"]) [data-rview="summary"],
+#reports:not([data-view="fuel"]) [data-rview="fuel"],
+#reports:not([data-view="students"]) [data-rview="students"],
+#reports:not([data-view="data"]) [data-rview="data"],
+#reports[data-view="data"] .rep-period{display:none!important}
+#reports .rep-views{display:flex;gap:2px;margin:6px 0 14px;padding:2px;border-radius:11px;background:#e3e3e8;-webkit-user-select:none;user-select:none}
+#reports .rep-views button{flex:1;min-height:36px;padding:0 4px;border:0;border-radius:9px;background:transparent;color:#1c1c1e;font:inherit;font-size:14px;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:none}
+#reports .rep-views button.on{background:#fff;box-shadow:0 3px 8px rgba(0,0,0,.1),0 1px 1px rgba(0,0,0,.12)}
+#reports .rsum{margin:4px 0 0}
+#reports .rs-lab{margin:0;color:#6c6c70;font-size:13px;font-weight:700;letter-spacing:.03em;text-transform:uppercase}
+#reports .rs-num{display:block;margin:2px 0 6px;color:#0b0f1a;font-size:clamp(38px,11vw,48px);font-weight:800;letter-spacing:-1.6px;line-height:1.05;font-variant-numeric:tabular-nums}
+#reports .rsum .rep-delta{margin:0;background:#e3f6ea;color:#1c8b4a}
+#reports .rsum .rep-delta.down{background:#ffe9e6;color:#c0392b}
+#reports .rsum .rep-spark{height:46px;margin:14px 0 8px}
+#reports .rsum .rep-spark i{background:#c9d4f6}
+#reports .rsum .rep-spark i.n{background:#007aff}
+#reports .rs-note{margin:6px 0 18px;color:#6c6c70;font-size:13px;line-height:1.4}
+#reports .rs-cap{margin:0 6px 6px;color:#6c6c70;font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+#reports .rs-grp{margin:0 0 10px;border-radius:14px;background:#fff;overflow:hidden}
+#reports .rs-row{display:flex;align-items:center;gap:12px;min-height:52px;padding:0 14px;border-bottom:.5px solid #e5e5ea}
+#reports .rs-row:last-child{border-bottom:0}
+#reports .rs-row span{flex:1;min-width:0;font-size:16px;color:#0b0f1a}
+#reports .rs-row b{font-size:16px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+#reports .rs-ic{flex:none;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;color:#fff;font-style:normal;font-size:15px;font-weight:700}
+#reports .ic-g{background:#34c759}#reports .ic-o{background:#ff9500}#reports .ic-b{background:#007aff}#reports .ic-p{background:#5856d6}
+#reports .rs-foot{margin:0 8px 16px;color:#6c6c70;font-size:12.5px;line-height:1.4}
+#reports .rsum .hero-hidden{display:none!important}
+#reports .rs-row b,#reports .rs-row b.exp{color:#0b0f1a!important}
+#reports .rsum .dashactions{margin:4px 0 14px}
+#reports .rep-period.rep-seg{margin-top:0}
