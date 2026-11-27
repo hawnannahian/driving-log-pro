@@ -5,6 +5,13 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 
 ## Recent handover entries
 
+### 2026-11-27 — v1.203–v1.206 and CI (Claude), all merged (PRs up to #316)
+- v1.203 Reports polish: one set of card tokens on `#reports`; Student performance is a list (top 8 + "Show all N students"); the prepaid balance is a one-line row. v1.204 Reports sub-tabs **Summary / Fuel / Students / Data** (sections carry `data-rview`, CSS shows one; every id, render function and button unchanged; period selectors hide on Data; Settings -> data shortcuts switch to Data). The Summary is an iOS-style grouped list. v1.205 self-audit fixes: Reports tab buttons use `aria-pressed` (not `role=tab`), 23 buttons got `type="button"`.
+- CI: `tests/browser/smoke.mjs` (real Chromium via Playwright, synthetic data) now runs in the workflow after the node tests: six tabs, four Reports views, profile + "..." sheet, Receive payment, Edit student, New record at 390x844 and 320x568; fails on uncaught/console errors, horizontal overflow or a Reports view showing another view's sections. The workflow `paths` filter now includes `*.js` and `manifest.webmanifest` (before, edits to files like `reports-dashboard.js` did not trigger CI).
+- v1.206 `styles.css` 329 KB -> 316 KB: 172 selectors that cannot match anything were removed. Verified with 68 then 300 screenshots (four widths, full/empty data, dialogs, error messages, timer, print, dark scheme, focus) that old and new CSS render identically; a first attempt wrongly dropped class names built by string concatenation (`"av"+n`, `dc${n}`) and the comparison caught it. Four tests that pinned CSS for elements that no longer exist were updated. Tools: `tools/css-audit/`. A further pass dropping overridden declarations was NOT adopted (it broke 10 tests that pin older rule text).
+- Not tested: real iPhone / WebKit (cloud container cannot install it), hover states, a screen reader, the full cloud-sync UI round trip.
+- Still open: Web Push backend (needs the owner's Cloudflare setup and approval), fixing one course's rate (needs the owner's student/course/hours), WhatsApp multi-lesson message usability (requirement unclear), a real rewrite of the old overlapping CSS rules.
+
 ### 2026-11-26 — v1.192–v1.202 (Claude), all merged (PRs up to #310)
 - v1.192 Add/Edit student form: bottom sheet on phones, "WhatsApp number is the same as the phone" switch, pinned Cancel/Save, Delete as its own button. No new fields (Status/Notes were declined by the owner). v1.196: the student's saved hourly rate now pre-fills the rate of a NEW lesson only (it was unused before); existing lessons keep their stored rate and course lessons use the course rate (course price / hours).
 - v1.193–v1.194 Reports hero card and PDF/CSV/Share use plain names (Lessons you taught / Money spent / Profit from lessons / Money received / Cash left) with one-line meanings and an advance-payment tip. Labels only; formulas unchanged; "Outstanding" keeps its name. Older CSVs have different label text.
@@ -283,7 +290,7 @@ Rules from `CLAUDE.md` still apply (fresh branches from latest `main`, draft PRs
 
 
 ## Latest verified project state
-- **main** after PR #310: footer **v1.202**, Service Worker cache **`nahians-schedule-cache-v266`**. GitHub Pages deployments were checked successful up to v1.201 (run for `858326d`; v1.202 was still building when written); re-check Actions for later runs before claiming deployment.
+- **main** after PR #316: footer **v1.206**, Service Worker cache **`nahians-schedule-cache-v270`**. GitHub Pages deployments were checked successful up to v1.202 (run for `58daff3`); re-check Actions for later runs before claiming deployment.
 - Latest releases: v1.110 owner's recorded timer voices (PR #192), v1.111 touch targets (PR #193), v1.112 minimum text size (PR #197), v1.113 design tokens (PR #199), v1.114 tab-bar aria-current (PR #201); PR #194 is tooling/docs only.
 - Other recent releases: v1.68 daily cloud backup, v1.70 realistic car header image, v1.71-v1.74 (ChatGPT) Students/Forms/bottom-nav/profile UX.
 - **Open PRs:** #13 only (verified 2026-11-17; #73 was closed as superseded the same day). Older "DRAFT" labels on earlier ChatGPT entries below are historical wording; check GitHub for the real state.
