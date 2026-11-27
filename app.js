@@ -1112,7 +1112,7 @@ let shownDay=dateISO(new Date());function checkDay(){const t=dateISO(new Date())
 function openDataCard(id,scroll){document.querySelectorAll("[data-dm]").forEach(c=>c.classList.toggle("dm-off",c.dataset.dm!==id));
  document.querySelectorAll("[data-dopen]").forEach(b=>b.setAttribute("aria-expanded",String(b.dataset.dopen===id)));if(scroll){const t=$(id);if(t)t.scrollIntoView({block:"start",behavior:"smooth"});}}
 // v1.204 — Reports sub-tabs (Summary / Fuel / Students / Data). Sections carry data-rview; CSS shows only the chosen one, so every id, render function and handler is unchanged.
-function setReportsView(v){const r=$("reports");if(!r)return;if(!["summary","fuel","students","data"].includes(v))v="summary";r.dataset.view=v;document.querySelectorAll("[data-rview-go]").forEach(b=>{const on=b.dataset.rviewGo===v;b.classList.toggle("on",on);b.setAttribute("aria-selected",String(on));});}
+function setReportsView(v){const r=$("reports");if(!r)return;if(!["summary","fuel","students","data"].includes(v))v="summary";r.dataset.view=v;document.querySelectorAll("[data-rview-go]").forEach(b=>{const on=b.dataset.rviewGo===v;b.classList.toggle("on",on);b.setAttribute("aria-pressed",String(on));});}
 document.querySelectorAll("[data-rview-go]").forEach(b=>b.onclick=()=>{setReportsView(b.dataset.rviewGo);window.scrollTo(0,0);});
 setReportsView("summary");
 function renderDataMenu(){let last=0;try{last=Number(localStorage.getItem(BACKUP_KEY))||0;}catch{}const d=last?Math.floor((Date.now()-last)/864e5):null,set=(id,t)=>{const e=$(id);if(e)e.textContent=t;};set("dmBackup",d===null?"No backup yet":d===0?"Last backup: today":`Last backup: ${d} day${d>1?"s":""} ago`);set("dmCloud",cloudCfg()?"Connected":"Not connected");renderDataSafe(d);}

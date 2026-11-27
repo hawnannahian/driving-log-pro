@@ -19,13 +19,13 @@
 <body>
   <header class="topbar">
     <div class="brand"><img class="brandcar" src="brand-car.png" alt="" width="96" height="60"><span class="branddiv" aria-hidden="true"></span><div><b>Driving Log Pro</b><small>Driving Lesson Management</small></div></div>
-    <div class="topactions"><button id="installBtn" class="btn ghost hidden">Install app</button><button type="button" class="topicon" id="hdrBell" aria-label="Notification settings"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9a6 6 0 0 1 12 0c0 6 2.5 7.5 2.5 7.5h-17S6 15 6 9"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></button><button type="button" class="topicon" id="hdrSettings" aria-label="Settings"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button></div>
+    <div class="topactions"><button type="button" id="installBtn" class="btn ghost hidden">Install app</button><button type="button" class="topicon" id="hdrBell" aria-label="Notification settings"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9a6 6 0 0 1 12 0c0 6 2.5 7.5 2.5 7.5h-17S6 15 6 9"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></button><button type="button" class="topicon" id="hdrSettings" aria-label="Settings"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button></div>
   </header>
   <main>
-    <section class="backupbanner savebanner hidden" id="saveBanner" role="alert"><span>Your last change could not be saved on this device (storage is full or blocked). Download a backup now so nothing is lost.</span><button class="btn danger" id="saveBannerBtn">Download backup</button></section>
-    <section class="backupbanner updatebanner hidden" id="updateBanner"><span>A new version of the app is ready.</span><button class="btn primary" id="updateBtn">Reload</button></section>
-    <section class="backupbanner overviewonly hidden" id="iosBanner"><span>On iPhone, add this app to the Home Screen (Share → Add to Home Screen). Otherwise Safari may erase your records if you do not open the app for 7 days.</span><button class="btn ghost" id="iosBannerClose">OK</button></section>
-    <section class="backupbanner overviewonly hidden" id="backupBanner"><span id="backupText"></span><button class="btn primary" id="backupNowBtn">Back up now</button></section>
+    <section class="backupbanner savebanner hidden" id="saveBanner" role="alert"><span>Your last change could not be saved on this device (storage is full or blocked). Download a backup now so nothing is lost.</span><button type="button" class="btn danger" id="saveBannerBtn">Download backup</button></section>
+    <section class="backupbanner updatebanner hidden" id="updateBanner"><span>A new version of the app is ready.</span><button type="button" class="btn primary" id="updateBtn">Reload</button></section>
+    <section class="backupbanner overviewonly hidden" id="iosBanner"><span>On iPhone, add this app to the Home Screen (Share → Add to Home Screen). Otherwise Safari may erase your records if you do not open the app for 7 days.</span><button type="button" class="btn ghost" id="iosBannerClose">OK</button></section>
+    <section class="backupbanner overviewonly hidden" id="backupBanner"><span id="backupText"></span><button type="button" class="btn primary" id="backupNowBtn">Back up now</button></section>
 
     <section class="panel tabpanel overview-panel" id="overview">
       <div class="overview-intro"><div><h1>Today</h1><p class="overview-date" id="overviewDate"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="3"/><path d="M3 9.5h18M8 3v3M16 3v3"/></svg><span></span></p></div><button type="button" class="btn primary overview-add" id="overviewAddLesson" aria-label="Add lesson"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><button type="button" class="ovplus" id="ovTitleAdd" aria-label="Add lesson">+</button></div>
@@ -63,7 +63,7 @@
       <div class="cal-title"><div><h1>Calendar</h1></div><button type="button" class="stu-plus" id="calTitleAdd" aria-label="Add lesson">+</button></div>
       <div class="calviews" role="group" aria-label="Calendar view"><button type="button" data-view="month">Month</button><button type="button" data-view="week">Week</button><button type="button" data-view="day">Day</button></div>
       <div class="calboard" id="calBoard">
-        <div class="calhead"><button class="iconbtn" id="calPrev" aria-label="Previous">‹</button><div class="caltitlebox"><b id="calTitle"></b><button type="button" class="caltoday hidden" id="calToday">Back to today</button></div><button class="iconbtn" id="calNext" aria-label="Next">›</button></div>
+        <div class="calhead"><button type="button" class="iconbtn" id="calPrev" aria-label="Previous">‹</button><div class="caltitlebox"><b id="calTitle"></b><button type="button" class="caltoday hidden" id="calToday">Back to today</button></div><button type="button" class="iconbtn" id="calNext" aria-label="Next">›</button></div>
         <p class="calsum" id="calSum"></p>
         <div class="calstrip hidden" id="calStrip" role="group" aria-label="Days of this week"></div>
         <div id="calMonth">
@@ -73,7 +73,7 @@
         <p class="callegend" id="calLegend"><span class="lg course"></span>Course/package <span class="lg hol"></span>Holiday <span class="lgnum">2</span>Money due</p>
       </div>
       <div id="calWeek" class="weekview hidden"></div>
-      <div class="sectionhead caltitle" id="calDayHead"><h3 id="calDayTitle"></h3><button class="btn primary" id="calAddBtn">＋ Add lesson</button></div>
+      <div class="sectionhead caltitle" id="calDayHead"><h3 id="calDayTitle"></h3><button type="button" class="btn primary" id="calAddBtn">＋ Add lesson</button></div>
       <p class="daysum" id="calDaySum"></p>
       <section class="cal-students-panel" aria-labelledby="calListHead">
         <div class="cal-students-heading"><h3 class="caltitle" id="calListHead">Today's students</h3><span id="calStudentsCount" class="cal-students-count">0 lessons</span></div>
@@ -98,7 +98,7 @@
         </div>
       </div>
       <div class="log-action-row">
-        <button class="btn primary log-add" id="addRecordBtn"><span aria-hidden="true">＋</span> Add expense</button>
+        <button type="button" class="btn primary log-add" id="addRecordBtn"><span aria-hidden="true">＋</span> Add expense</button>
       </div>
       <div class="toolbar log-toolbar">
         <select id="logFilter" aria-label="Filter records"><option value="today">Today's lessons</option><option value="all">All records</option><option value="Lesson">Lessons</option><option value="expense">Expenses</option><option value="paid">Paid</option><option value="unpaid">Unpaid</option><option value="prepaid">Courses</option></select>
@@ -251,7 +251,7 @@
             <p class="pr-foot">Used every day instead of the mosque or calculated times. Friday uses the Jum’a time. A blank time falls back to the automatic time.</p>
           </div>
         </div>
-        <p class="app-version" data-spane="menu" id="appVersion">Driving Log Pro · Version v1.204</p>
+        <p class="app-version" data-spane="menu" id="appVersion">Driving Log Pro · Version v1.205</p>
         <p class="settings-note" data-spane="menu">These settings are saved with your app data and included in backup and sync. Lesson timer and completed-hour accounting are not affected.</p>
       </section>
     </section>
@@ -274,7 +274,7 @@
 
     <section class="panel tabpanel hidden" id="reports">
       <div class="sectionhead rep-head"><div><h2>Reports</h2></div></div>
-      <div class="rep-views" role="tablist" aria-label="Report sections"><button type="button" role="tab" data-rview-go="summary" aria-selected="true">Summary</button><button type="button" role="tab" data-rview-go="fuel" aria-selected="false">Fuel</button><button type="button" role="tab" data-rview-go="students" aria-selected="false">Students</button><button type="button" role="tab" data-rview-go="data" aria-selected="false">Data</button></div>
+      <div class="rep-views" role="group" aria-label="Report sections"><button type="button" data-rview-go="summary" aria-pressed="true">Summary</button><button type="button" data-rview-go="fuel" aria-pressed="false">Fuel</button><button type="button" data-rview-go="students" aria-pressed="false">Students</button><button type="button" data-rview-go="data" aria-pressed="false">Data</button></div>
       <div class="rep-seg rep-period" role="group" aria-label="Report period"><button type="button" data-rp="week">Week</button><button type="button" data-rp="month">Month</button><button type="button" data-rp="year">Year</button><button type="button" data-rp="all">All</button></div>
       <div class="toolbar rep-period"><select id="period" aria-label="Report type"><option value="week">Weekly</option><option value="month" selected>Monthly</option><option value="year">Yearly</option><option value="all">All time</option></select><select id="periodValue" aria-label="Report period"></select></div>
       <section class="rsum" data-rview="summary" aria-label="Business results">
@@ -388,12 +388,12 @@
           <p class="hint">Files stay on this device. Nothing is uploaded. Use only Log_Import.csv and Students_Import.csv, not the old archive.</p>
         </div>
         <div class="data-card dm-off" id="backupCard" data-dm="backupCard"><h3>Backup & restore</h3><p>Download backups regularly. Records are stored in this browser on this device.</p>
-          <button class="btn secondary" id="exportAll">Export full backup (JSON)</button>
+          <button type="button" class="btn secondary" id="exportAll">Export full backup (JSON)</button>
           <label class="btn secondary">Restore backup<input type="file" id="restoreBackup" accept=".json,application/json"></label>
-          <button class="btn secondary" id="exportLog">Export Log CSV</button>
-          <button class="btn secondary" id="exportStudents">Export Students CSV</button>
-          <button class="btn danger hidden" id="deleteLegacy">Delete Legacy Archive</button>
-          <button class="btn danger" id="clearData">Delete all app data</button>
+          <button type="button" class="btn secondary" id="exportLog">Export Log CSV</button>
+          <button type="button" class="btn secondary" id="exportStudents">Export Students CSV</button>
+          <button type="button" class="btn danger hidden" id="deleteLegacy">Delete Legacy Archive</button>
+          <button type="button" class="btn danger" id="clearData">Delete all app data</button>
           <p class="hint" id="storageNote"></p>
         </div>
         <div class="data-card hidden dm-off" id="recoveryBox" data-dm="backupCard"><h3>Safety copies</h3><p>Copies the app kept automatically before a restore or the first cloud sync.</p><div id="recoveryList" class="recoverylist"></div></div>
@@ -407,9 +407,9 @@
           <label>Private repository<input id="cloudRepo" placeholder="your-name/driving-log-data" autocomplete="off" autocapitalize="off" spellcheck="false"></label>
           <label>GitHub token<input id="cloudToken" type="password" autocomplete="off" autocapitalize="off" spellcheck="false"></label>
           <p class="hint">Use a fine-grained token that can only reach this one private repository, with "Contents: Read and write" and nothing else. The token is kept in this browser.</p>
-          <button class="btn primary" id="cloudConnect">Connect</button>
+          <button type="button" class="btn primary" id="cloudConnect">Connect</button>
         </div>
-        <div id="cloudOn" class="cloudform hidden"><button class="btn secondary" id="cloudNow">Sync now</button><button class="btn ghost" id="cloudDisconnect">Disconnect this device</button></div>
+        <div id="cloudOn" class="cloudform hidden"><button type="button" class="btn secondary" id="cloudNow">Sync now</button><button type="button" class="btn ghost" id="cloudDisconnect">Disconnect this device</button></div>
         <div id="snapBox" class="cloudform hidden"><p class="hint" id="snapStatus"></p><button type="button" class="btn secondary" id="snapShow">Show cloud backups</button><div id="snapList" class="recoverylist"></div></div>
       </div>
       <p class="notice" data-rview="data"><b>Privacy note:</b> Records are stored in this browser. With Cloud sync on, a copy is also kept in your private GitHub repository. Keep exporting backups.</p>
@@ -617,15 +617,15 @@
   <button type="button" class="timermini hidden" id="timerMini" aria-label="Lesson timer running – open Overview"></button>
   <nav class="tabbar" aria-label="Main navigation">
     <span class="navpill" id="navPill"></span>
-    <button class="tab active" data-tab="overview" aria-current="page"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5"/><path d="M6 10v9h12v-9"/><path d="M10 19v-5h4v5"/></svg><span>Overview</span></button>
-    <button class="tab" data-tab="calendar"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5.5" width="16" height="14.5" rx="3"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4"/></svg><span>Calendar</span></button>
-    <button class="tab" data-tab="log"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6.5h11M9 12h11M9 17.5h11"/><path d="M4.5 6.5h.01M4.5 12h.01M4.5 17.5h.01"/></svg><span>Log</span></button>
-    <button class="tab" data-tab="students"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="8.5" r="3.5"/><path d="M3.5 19.5c.6-3.4 3-5.2 6-5.2s5.400 1.800 6 5.200"/><path d="M16 5.400a3.300 3.300 0 0 1 0 6.200M18 14.800c1.500.8 2.300 2.300 2.600 4.300"/></svg><span>Students</span></button>
-    <button class="tab" data-tab="reports"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20v-7M12 20V5M19 20v-10"/></svg><span>Reports</span></button>
-    <button class="tab" data-tab="islamic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M6.5 20v-6.5c0-3 2.5-5 5.5-6.5 3 1.5 5.5 3.5 5.5 6.5V20"/><path d="M12 4.5v2.5"/><path d="M10 20v-3a2 2 0 0 1 4 0v3"/><path d="M3.5 20v-8M20.5 20v-8"/></svg><span>Islamic</span></button>
+    <button type="button" class="tab active" data-tab="overview" aria-current="page"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5"/><path d="M6 10v9h12v-9"/><path d="M10 19v-5h4v5"/></svg><span>Overview</span></button>
+    <button type="button" class="tab" data-tab="calendar"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5.5" width="16" height="14.5" rx="3"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4"/></svg><span>Calendar</span></button>
+    <button type="button" class="tab" data-tab="log"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6.5h11M9 12h11M9 17.5h11"/><path d="M4.5 6.5h.01M4.5 12h.01M4.5 17.5h.01"/></svg><span>Log</span></button>
+    <button type="button" class="tab" data-tab="students"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="8.5" r="3.5"/><path d="M3.5 19.5c.6-3.4 3-5.2 6-5.2s5.400 1.800 6 5.200"/><path d="M16 5.400a3.300 3.300 0 0 1 0 6.200M18 14.800c1.500.8 2.300 2.300 2.600 4.300"/></svg><span>Students</span></button>
+    <button type="button" class="tab" data-tab="reports"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20v-7M12 20V5M19 20v-10"/></svg><span>Reports</span></button>
+    <button type="button" class="tab" data-tab="islamic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M6.5 20v-6.5c0-3 2.5-5 5.5-6.5 3 1.5 5.5 3.5 5.5 6.5V20"/><path d="M12 4.5v2.5"/><path d="M10 20v-3a2 2 0 0 1 4 0v3"/><path d="M3.5 20v-8M20.5 20v-8"/></svg><span>Islamic</span></button>
   </nav>
   <div id="toast" role="status" aria-live="polite"></div>
-  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.204</span></footer>
+  <footer><span>Driving Log Pro</span><span>Personal business manager · v1.205</span></footer>
   <script src="push-config.js"></script>
   <script src="prayer-times.js"></script>
   <script src="mawaqit-times.js"></script>
