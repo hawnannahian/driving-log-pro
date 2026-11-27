@@ -133,7 +133,7 @@ function dashHealth(p,v,s){
 function dashHeat(p,v){
  if(!dashMonth||dashPrevTab!==p+"|"+v){dashMonth=p==="month"&&v?v:dateISO(new Date()).slice(0,7);dashPrevTab=p+"|"+v;dashDay=null;}
  const [y,m]=dashMonth.split("-").map(Number),first=new Date(y,m-1,1),days=new Date(y,m,0).getDate(),lead=(first.getDay()+6)%7,info={};
- for(const e of state.entries){if(!e.date.startsWith(dashMonth)||isBooking(e))continue;const d=info[e.date]||={n:0,h:0,rev:0,exp:0};if(e.type==="Lesson"){d.n++;d.h+=hours(e);d.rev+=income(e);}else d.exp+=Number(e.cost||0);}
+ for(const e of state.entries){if(!String(e.date||"").startsWith(dashMonth)||isBooking(e))continue;const d=info[e.date]||={n:0,h:0,rev:0,exp:0};if(e.type==="Lesson"){d.n++;d.h+=hours(e);d.rev+=income(e);}else d.exp+=Number(e.cost||0);}
  $("heatTitle").textContent=first.toLocaleDateString("en-GB",{month:"long",year:"numeric"});
  let html=["M","T","W","T","F","S","S"].map(x=>`<span class="heatwd">${x}</span>`).join("")+"<span></span>".repeat(lead);
  for(let i=1;i<=days;i++){const iso=`${dashMonth}-${String(i).padStart(2,"0")}`,d=info[iso],lvl=!d||!d.h?0:d.h<=1?1:d.h<=3?2:3;html+=`<button type="button" class="heatday h${lvl}${iso===dashDay?" sel":""}" data-heat="${iso}" aria-label="${esc(fmtDate(iso))}"><span>${i}</span><i>${d&&d.rev>0?'<em class="hrev"></em>':""}${d&&d.exp>0?'<em class="hexp"></em>':""}</i></button>`;}

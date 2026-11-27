@@ -33,3 +33,5 @@ jobs:
         run: node tests/browser/smoke.mjs
       - name: Browser flow test (student, booking, payment, litres, backup restore, CSV)
         run: node tests/browser/flows.mjs
+      - name: Malformed-data robustness check
+        run: node tests/browser/malformed.mjs
