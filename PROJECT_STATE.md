@@ -1,3 +1,7 @@
+## v1.209 — Booking error no longer hides the control that fixes it (2026-11-28; owner screenshot, no text)
+- When a course lesson needs more hours than the student's courses have left ("only 0.55 h are available…"), the message appeared in the dialog's fixed bottom area and the form had scrolled so that the Payment method buttons (Individual / Course hours) were hidden under it. The form now scrolls the Payment method row into view when that error is shown, so "Individual" can be tapped straight away.
+- No rule changed: a lesson still cannot take more course hours than are left (no automatic split between course and individual). Files: `app.js`, `index.html` (v1.209), `sw.js` (cache v273), this file.
+
 ## v1.208 — Timer: no late "5 minutes left", never both announcements together (2026-11-27; owner: reopening near the end sometimes plays both messages)
 - Reproduced with a fake clock in Chromium: reopening the app at 54:30 or 54:55 played the missed "5 minutes left" cue immediately and then the "lesson ended" cue 30 s / 5 s later, i.e. both messages together. The missed warning is now spoken only if the app is open within 30 s of the 50:00 mark; otherwise it is skipped (the end cue keeps its own rule: only within 20 s of 55:00).
 - New `tests/browser/timer-cues.mjs` (real Chromium, fake clock, synthetic data) checks 8 reopen times and runs in CI. Not covered: the long session audio file path (needs a real audio unlock), iOS suspend/resume behaviour on a real iPhone.
